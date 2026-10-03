@@ -24,6 +24,7 @@ import {
   isValidEmail,
   validateHoneypot,
   checkRateLimit,
+  detectMaliciousPayload,
 } from '@/lib/security'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
@@ -154,6 +155,15 @@ export default function JoinTeamPage() {
     const rateCheck = checkRateLimit('career_form_submit', 3)
     if (!rateCheck.allowed) {
       setErrorMsg('Please wait a moment before submitting another application.')
+      return
+    }
+
+    if (
+      detectMaliciousPayload(formData.name) ||
+      detectMaliciousPayload(formData.email) ||
+      detectMaliciousPayload(formData.whyJoin)
+    ) {
+      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
       return
     }
 

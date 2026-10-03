@@ -166,3 +166,53 @@ export function safeJsonParse<T>(jsonStr: string, fallback: T): T {
     return fallback
   }
 }
+
+/**
+ * Cryptographically random anti-CSRF token generator (Web Crypto API).
+ */
+export function generateCsrfToken(): string {
+  if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
+    const array = new Uint8Array(24)
+    window.crypto.getRandomValues(array)
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`
+}
+
+/**
+ * Validates CSRF token with constant-time equality check to prevent timing attacks.
+ */
+export function validateCsrfToken(tokenA: string, tokenB: string): boolean {
+  if (!tokenA || !tokenB || typeof tokenA !== 'string' || typeof tokenB !== 'string') {
+    return false
+  }
+  if (tokenA.length !== tokenB.length) return false
+  let result = 0
+  for (let i = 0; i < tokenA.length; i++) {
+    result |= tokenA.charCodeAt(i) ^ tokenB.charCodeAt(i)
+  }
+  return result === 0
+}
+
+/**
+ * Detects common malicious injection vectors in input text (SQLi, XSS, Path Traversal, Command Injection, Prototype Pollution).
+ */
+export function detectMaliciousPayload(input: string): boolean {
+  if (!input || typeof input !== 'string') return false
+  const suspiciousPatterns = [
+    /<script\b/i,
+    /javascript:/i,
+    /vbscript:/i,
+    /on\w+\s*=/i,
+    /union\s+select/i,
+    /\bselect\b.+\bfrom\b/i,
+    /\binsert\b.+\binto\b/i,
+    /\bdrop\b\s+\btable\b/i,
+    /\bexec(?:ute)?\b/i,
+    /\.\.[\\/]/,
+    /%2e%2e[\\/]/i,
+    /__proto__/i,
+    /constructor\s*\[/i,
+  ]
+  return suspiciousPatterns.some((pattern) => pattern.test(input))
+}

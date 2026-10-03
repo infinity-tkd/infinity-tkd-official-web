@@ -26,6 +26,7 @@ import { AnimatedCounter } from '@/components/AnimatedCounter'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
 import { Card3D } from '@/components/ui/Card3D'
+import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function HomePage() {
@@ -144,7 +145,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text Content */}
-            <div className="order-2 md:order-1">
+            <ScrollReveal direction="left" className="order-2 md:order-1">
               <div className="flex items-center gap-3 mb-6">
                 <Flame className="w-5 h-5 text-brand-red drop-shadow-[0_0_8px_rgba(239,47,56,0.8)]" />
                 <span className="font-bold uppercase tracking-widest text-xs text-brand-red">
@@ -184,10 +185,10 @@ export default function HomePage() {
                 <span>{t.dojang.btn}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </Link>
-            </div>
+            </ScrollReveal>
 
             {/* Visual with Brand Red Glow */}
-            <div className="order-1 md:order-2 relative group perspective-1000">
+            <ScrollReveal direction="right" className="order-1 md:order-2 relative group perspective-1000">
               <Card3D maxTilt={4} className="w-full">
                 <div className="relative group">
                   <div className="absolute -inset-2 bg-gradient-to-tr from-brand-red/30 to-transparent blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 rounded-xl" />
@@ -198,7 +199,7 @@ export default function HomePage() {
                   />
                 </div>
               </Card3D>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -206,7 +207,9 @@ export default function HomePage() {
       {/* Interactive Belt Progression Showcase */}
       <section className="py-20 sm:py-24 bg-white dark:bg-black transition-colors duration-500">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <BeltProgressionGuide />
+          <ScrollReveal direction="up">
+            <BeltProgressionGuide />
+          </ScrollReveal>
         </div>
       </section>
 
@@ -215,7 +218,7 @@ export default function HomePage() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-          <div className="mb-14 sm:mb-16 text-center max-w-3xl mx-auto">
+          <ScrollReveal direction="up" className="mb-14 sm:mb-16 text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md mb-6">
               <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">
@@ -228,126 +231,134 @@ export default function HomePage() {
             <p className="text-zinc-400 text-sm sm:text-base md:text-lg font-light leading-relaxed">
               {t.pillars.subtitle}
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Grid (14px radius) with Interactive 3D Spatial Tilt */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[340px] sm:auto-rows-[360px] md:auto-rows-[390px]">
             {/* 1. Recognized Poomsae */}
-            <Card3D maxTilt={6} className="h-full">
-              <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-red/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-red transition-all duration-500 hover:shadow-brand-glow">
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="p-3 bg-brand-red/10 rounded-xl border border-brand-red/30 text-brand-red group-hover:scale-110 transition-transform duration-500">
-                    <Scroll className="w-5 h-5" />
+            <ScrollReveal direction="up" delay={50} className="h-full">
+              <Card3D maxTilt={6} className="h-full">
+                <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-red/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-red transition-all duration-500 hover:shadow-brand-glow">
+                  <div className="absolute inset-0 bg-gradient-to-b from-brand-red/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute top-6 right-6 z-20">
+                    <div className="p-3 bg-brand-red/10 rounded-xl border border-brand-red/30 text-brand-red group-hover:scale-110 transition-transform duration-500">
+                      <Scroll className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
+                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
+                      {t.pillars.p1Title}
+                    </h3>
+                    <p className="text-brand-red text-xs font-bold uppercase tracking-widest mb-2">
+                      {t.pillars.p1Subtitle}
+                    </p>
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                      {t.pillars.p1Desc}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                    <SafeImage
+                      src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2940&auto=format&fit=crop"
+                      className="w-full h-full object-cover grayscale mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700"
+                      alt="Recognized Poomsae"
+                    />
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
-                    {t.pillars.p1Title}
-                  </h3>
-                  <p className="text-brand-red text-xs font-bold uppercase tracking-widest mb-2">
-                    {t.pillars.p1Subtitle}
-                  </p>
-                  <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
-                    {t.pillars.p1Desc}
-                  </p>
-                </div>
-                <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                  <SafeImage
-                    src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2940&auto=format&fit=crop"
-                    className="w-full h-full object-cover grayscale mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700"
-                    alt="Recognized Poomsae"
-                  />
-                </div>
-              </div>
-            </Card3D>
+              </Card3D>
+            </ScrollReveal>
 
             {/* 2. Freestyle Tricking */}
-            <Card3D maxTilt={6} className="h-full">
-              <div className="group relative h-full overflow-hidden rounded-[14px] border border-white/20 bg-zinc-900/60 backdrop-blur-xl hover:border-white/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]">
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="p-3 bg-white/10 rounded-xl border border-white/20 text-white group-hover:scale-110 transition-transform duration-500">
-                    <Zap className="w-5 h-5" />
+            <ScrollReveal direction="up" delay={100} className="h-full">
+              <Card3D maxTilt={6} className="h-full">
+                <div className="group relative h-full overflow-hidden rounded-[14px] border border-white/20 bg-zinc-900/60 backdrop-blur-xl hover:border-white/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+                  <div className="absolute top-6 right-6 z-20">
+                    <div className="p-3 bg-white/10 rounded-xl border border-white/20 text-white group-hover:scale-110 transition-transform duration-500">
+                      <Zap className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
+                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
+                      {t.pillars.p2Title}
+                    </h3>
+                    <p className="text-zinc-300 text-xs font-bold uppercase tracking-widest mb-2">
+                      {t.pillars.p2Subtitle}
+                    </p>
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                      {t.pillars.p2Desc}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 z-0 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
+                    <SafeImage
+                      src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2938&auto=format&fit=crop"
+                      className="w-full h-full object-cover grayscale"
+                      alt="Freestyle Tricking"
+                    />
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
-                    {t.pillars.p2Title}
-                  </h3>
-                  <p className="text-zinc-300 text-xs font-bold uppercase tracking-widest mb-2">
-                    {t.pillars.p2Subtitle}
-                  </p>
-                  <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
-                    {t.pillars.p2Desc}
-                  </p>
-                </div>
-                <div className="absolute inset-0 z-0 opacity-30 group-hover:opacity-50 transition-opacity duration-700">
-                  <SafeImage
-                    src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2938&auto=format&fit=crop"
-                    className="w-full h-full object-cover grayscale"
-                    alt="Freestyle Tricking"
-                  />
-                </div>
-              </div>
-            </Card3D>
+              </Card3D>
+            </ScrollReveal>
 
             {/* 3. Sport Science Lab */}
-            <Card3D maxTilt={6} className="h-full">
-              <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-green/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-green transition-all duration-500 hover:shadow-[0_0_30px_rgba(9,187,0,0.3)]">
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="p-3 bg-brand-green/10 rounded-xl border border-brand-green/30 text-brand-green group-hover:scale-110 transition-transform duration-500">
-                    <Activity className="w-5 h-5" />
+            <ScrollReveal direction="up" delay={150} className="h-full">
+              <Card3D maxTilt={6} className="h-full">
+                <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-green/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-green transition-all duration-500 hover:shadow-[0_0_30px_rgba(9,187,0,0.3)]">
+                  <div className="absolute top-6 right-6 z-20">
+                    <div className="p-3 bg-brand-green/10 rounded-xl border border-brand-green/30 text-brand-green group-hover:scale-110 transition-transform duration-500">
+                      <Activity className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
+                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
+                      {t.pillars.p3Title}
+                    </h3>
+                    <p className="text-brand-green text-xs font-bold uppercase tracking-widest mb-2">
+                      {t.pillars.p3Subtitle}
+                    </p>
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                      {t.pillars.p3Desc}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                    <SafeImage
+                      src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2940&auto=format&fit=crop"
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                      alt="Sport Science"
+                    />
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
-                    {t.pillars.p3Title}
-                  </h3>
-                  <p className="text-brand-green text-xs font-bold uppercase tracking-widest mb-2">
-                    {t.pillars.p3Subtitle}
-                  </p>
-                  <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
-                    {t.pillars.p3Desc}
-                  </p>
-                </div>
-                <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                  <SafeImage
-                    src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2940&auto=format&fit=crop"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    alt="Sport Science"
-                  />
-                </div>
-              </div>
-            </Card3D>
+              </Card3D>
+            </ScrollReveal>
 
             {/* 4. Creative Media Studio */}
-            <Card3D maxTilt={6} className="h-full">
-              <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-orange/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-orange transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,51,0.3)]">
-                <div className="absolute top-6 right-6 z-20">
-                  <div className="p-3 bg-brand-orange/10 rounded-xl border border-brand-orange/30 text-brand-orange group-hover:scale-110 transition-transform duration-500">
-                    <Camera className="w-5 h-5" />
+            <ScrollReveal direction="up" delay={200} className="h-full">
+              <Card3D maxTilt={6} className="h-full">
+                <div className="group relative h-full overflow-hidden rounded-[14px] border border-brand-orange/30 bg-zinc-900/60 backdrop-blur-xl hover:border-brand-orange transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,51,0.3)]">
+                  <div className="absolute top-6 right-6 z-20">
+                    <div className="p-3 bg-brand-orange/10 rounded-xl border border-brand-orange/30 text-brand-orange group-hover:scale-110 transition-transform duration-500">
+                      <Camera className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
+                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
+                      {t.pillars.p4Title}
+                    </h3>
+                    <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-2">
+                      {t.pillars.p4Subtitle}
+                    </p>
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                      {t.pillars.p4Desc}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
+                    <SafeImage
+                      src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2942&auto=format&fit=crop"
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                      alt="Creative Studio"
+                    />
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 p-6 sm:p-8 w-full z-20">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tighter mb-1 text-white">
-                    {t.pillars.p4Title}
-                  </h3>
-                  <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-2">
-                    {t.pillars.p4Subtitle}
-                  </p>
-                  <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
-                    {t.pillars.p4Desc}
-                  </p>
-                </div>
-                <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                  <SafeImage
-                    src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2942&auto=format&fit=crop"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                    alt="Creative Studio"
-                  />
-                </div>
-              </div>
-            </Card3D>
+              </Card3D>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -355,65 +366,71 @@ export default function HomePage() {
       {/* Interactive Pathfinder Quiz */}
       <section className="py-20 sm:py-24 bg-white dark:bg-black transition-colors duration-500">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <ProgramPathfinder />
+          <ScrollReveal direction="up">
+            <ProgramPathfinder />
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Featured Championship Records */}
       <section className="py-16 sm:py-20 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-500">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 sm:mb-12">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
-                {t.achievements.badge}
-              </span>
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                {t.community.recentVictories}
-              </h2>
+          <ScrollReveal direction="up">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 sm:mb-12">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
+                  {t.achievements.badge}
+                </span>
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                  {t.community.recentVictories}
+                </h2>
+              </div>
+
+              <Link
+                href="/achievements"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline"
+              >
+                {t.community.viewTrophyWall} <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            <Link
-              href="/achievements"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline"
-            >
-              {t.community.viewTrophyWall} <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <SafeGrid className="grid grid-cols-1 md:grid-cols-3 gap-6" isolateItems>
-            {tournamentAchievements.slice(0, 3).map((ach) => (
-              <div
-                key={ach.id}
-                className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold text-zinc-400 uppercase">{ach.year}</span>
-                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase bg-amber-500/10 text-amber-500 border border-amber-500/30">
-                      {ach.medal} Medal
-                    </span>
+            <SafeGrid className="grid grid-cols-1 md:grid-cols-3 gap-6" isolateItems>
+              {tournamentAchievements.slice(0, 3).map((ach) => (
+                <div
+                  key={ach.id}
+                  className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-bold text-zinc-400 uppercase">{ach.year}</span>
+                      <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase bg-amber-500/10 text-amber-500 border border-amber-500/30">
+                        {ach.medal} Medal
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-black uppercase text-zinc-900 dark:text-white mb-1">
+                      {ach.tournament}
+                    </h3>
+                    <p className="text-xs text-brand-red font-bold uppercase mb-3">{ach.division}</p>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+                      {ach.description}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-black uppercase text-zinc-900 dark:text-white mb-1">
-                    {ach.tournament}
-                  </h3>
-                  <p className="text-xs text-brand-red font-bold uppercase mb-3">{ach.division}</p>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
-                    {ach.description}
-                  </p>
-                </div>
 
-                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  <span className="truncate">{ach.athleteOrTeam}</span>
+                  <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-brand-red shrink-0" />
+                    <span className="truncate">{ach.athleteOrTeam}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </SafeGrid>
+              ))}
+            </SafeGrid>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Community Testimonials */}
-      <TestimonialsSection />
+      <ScrollReveal direction="up">
+        <TestimonialsSection />
+      </ScrollReveal>
     </div>
   )
 }

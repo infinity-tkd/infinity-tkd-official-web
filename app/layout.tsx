@@ -7,6 +7,8 @@ import { MobileBottomNav } from '@/components/MobileBottomNav'
 import { Footer } from '@/components/Footer'
 import { ScrollNavProvider } from '@/context/ScrollNavContext'
 import { AutoErrorHandler } from '@/components/AutoErrorHandler'
+import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
+import { BackToTop } from '@/components/ui/BackToTop'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -103,6 +105,7 @@ export default function RootLayout({
           <LanguageProvider>
             <ScrollNavProvider>
               <AutoErrorHandler />
+              <ScrollProgressBar />
               <Navbar />
               <main
                 id="main-content"
@@ -112,6 +115,7 @@ export default function RootLayout({
               </main>
               <Footer />
               <MobileBottomNav />
+              <BackToTop />
             </ScrollNavProvider>
           </LanguageProvider>
         </ThemeProvider>

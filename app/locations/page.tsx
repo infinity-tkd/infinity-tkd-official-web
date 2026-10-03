@@ -137,7 +137,7 @@ export default function LocationsPage() {
               <a
                 href={activeBranch.mapEmbedUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-brand-red hover:text-white transition-all shadow-lg flex items-center gap-2 touch-press"
               >
                 <Navigation className="w-3.5 h-3.5" /> Open in Google Maps

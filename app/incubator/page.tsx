@@ -31,6 +31,7 @@ import {
   isValidEmail,
   validateHoneypot,
   checkRateLimit,
+  detectMaliciousPayload,
 } from '@/lib/security'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
@@ -318,6 +319,16 @@ export default function IncubatorPage() {
     const rateCheck = checkRateLimit('incubator_pitch_submit', 3)
     if (!rateCheck.allowed) {
       setErrorMsg('Please wait a moment before submitting another pitch.')
+      return
+    }
+
+    if (
+      detectMaliciousPayload(formData.studentName) ||
+      detectMaliciousPayload(formData.email) ||
+      detectMaliciousPayload(formData.title) ||
+      detectMaliciousPayload(formData.summary)
+    ) {
+      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
       return
     }
 

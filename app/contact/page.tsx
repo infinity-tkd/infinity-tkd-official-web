@@ -24,6 +24,7 @@ import {
   isValidEmail,
   validateHoneypot,
   checkRateLimit,
+  detectMaliciousPayload,
 } from '@/lib/security'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
@@ -87,7 +88,17 @@ export default function ContactPage() {
       return
     }
 
-    // 3. Strict Input Sanitization
+    // 3. Proactive Malicious Payload Detection
+    if (
+      detectMaliciousPayload(formData.name) ||
+      detectMaliciousPayload(formData.email) ||
+      detectMaliciousPayload(formData.message)
+    ) {
+      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
+      return
+    }
+
+    // 4. Strict Input Sanitization
     const cleanName = sanitizeInput(formData.name, 100)
     const cleanEmail = sanitizeEmail(formData.email)
     const cleanBranch = sanitizeInput(formData.branch, 100)
@@ -232,7 +243,7 @@ export default function ContactPage() {
                         key={social.name}
                         href={social.link}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-brand-red hover:text-white transition-all duration-300 group min-w-[44px] min-h-[44px] flex items-center justify-center touch-press"
                         aria-label={social.name}
                       >
