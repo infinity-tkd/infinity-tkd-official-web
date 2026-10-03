@@ -203,7 +203,7 @@ export function AutoErrorHandler() {
             {notice.type === 'offline' && (
               <button
                 onClick={() => window.location.reload()}
-                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center touch-press"
                 aria-label="Retry connection"
                 title="Retry connection"
               >
@@ -212,7 +212,7 @@ export function AutoErrorHandler() {
             )}
             <button
               onClick={() => removeNotice(notice.id)}
-              className="p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+              className="p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center touch-press"
               aria-label="Dismiss notification"
             >
               <X className="w-3.5 h-3.5" />

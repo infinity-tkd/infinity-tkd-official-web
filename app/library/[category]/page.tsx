@@ -28,6 +28,7 @@ import { KickingMasterExplorer } from '@/components/library/KickingMasterExplore
 import { AdvancedKickingMasterExplorer } from '@/components/library/AdvancedKickingMasterExplorer'
 import { InfinityDifficultyBadge } from '@/components/library/InfinityBadge'
 import { SafeImage } from '@/components/SafeImage'
+import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
 import {
   BookOpen,
@@ -100,7 +101,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         <div className="flex items-center justify-between gap-4 mb-6">
           <Link
             href="/library"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors touch-press"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>
@@ -249,7 +250,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
               <div className="flex items-center gap-1.5 p-1 bg-zinc-200 dark:bg-zinc-900 rounded-xl border border-zinc-300 dark:border-zinc-800 self-start sm:self-auto">
                 <button
                   onClick={() => setViewMode('detailed')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer touch-press ${
                     viewMode === 'detailed'
                       ? 'bg-brand-red text-white shadow-brand-glow'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
@@ -260,7 +261,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
 
                 <button
                   onClick={() => setViewMode('highlight')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer touch-press ${
                     viewMode === 'highlight'
                       ? 'bg-brand-red text-white shadow-brand-glow'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
@@ -314,176 +315,177 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                     : 'Common Errors & Technical Corrections'
 
                   return (
-                    <div
-                      key={item.id}
-                      id={item.slug}
-                      className="p-6 sm:p-8 md:p-10 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
-                    >
-                      {/* Background Watermark for Poomsae */}
-                      {isPoomsae && item.diagramSymbol && (
-                        <div className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40">
-                          {item.diagramSymbol}
-                        </div>
-                      )}
+                    <Card3D key={item.id} maxTilt={2} scale={1.005} className="w-full">
+                      <div
+                        id={item.slug}
+                        className="p-6 sm:p-8 md:p-10 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
+                      >
+                        {/* Background Watermark for Poomsae */}
+                        {isPoomsae && item.diagramSymbol && (
+                          <div className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40">
+                            {item.diagramSymbol}
+                          </div>
+                        )}
 
-                      <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
-                        {/* Left Media & Metadata Column */}
-                        <div className="lg:col-span-5 space-y-4">
-                          <div className="relative h-56 sm:h-64 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">
-                            <SafeImage
-                              src={item.image}
-                              alt={item.name}
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
+                          {/* Left Media & Metadata Column */}
+                          <div className="lg:col-span-5 space-y-4">
+                            <div className="relative h-56 sm:h-64 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">
+                              <SafeImage
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                            <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-10">
-                              <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
-                                {item.beltLevel}
-                              </span>
+                              <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-10">
+                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
+                                  {item.beltLevel}
+                                </span>
+                              </div>
+
+                              <div className="absolute bottom-3 left-3 right-3 text-white">
+                                <span className="text-[10px] font-mono text-zinc-300 font-bold block">
+                                  {item.koreanName}
+                                </span>
+                                <h3 className="text-xl font-black uppercase tracking-tight">
+                                  {item.name}
+                                </h3>
+                              </div>
                             </div>
 
-                            <div className="absolute bottom-3 left-3 right-3 text-white">
-                              <span className="text-[10px] font-mono text-zinc-300 font-bold block">
-                                {item.koreanName}
-                              </span>
-                              <h3 className="text-xl font-black uppercase tracking-tight">
+                            {/* Stance Weight Distribution Meter */}
+                            {isStance && item.weightDistribution && (
+                              <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                                <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase">
+                                  <span className="text-zinc-400">Rear Leg: <strong className="text-amber-500">{rearPercent}%</strong></span>
+                                  <span className="text-zinc-400">Front Leg: <strong className="text-emerald-500">{frontPercent}%</strong></span>
+                                </div>
+                                <div className="w-full h-3 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden flex shadow-inner">
+                                  <div
+                                    className="h-full bg-amber-500 transition-all duration-500"
+                                    style={{ width: `${rearPercent}%` }}
+                                  />
+                                  <div
+                                    className="h-full bg-emerald-500 transition-all duration-500"
+                                    style={{ width: `${frontPercent}%` }}
+                                  />
+                                </div>
+                                <p className="text-[10px] text-zinc-400 font-light text-center">
+                                  {item.weightDistribution}
+                                </p>
+                              </div>
+                            )}
+
+                            {/* Philosophical Meaning / Origin */}
+                            {item.meaning && (
+                              <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-1">
+                                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-red block">
+                                  {isHistory ? 'Historical Significance' : 'Martial Philosophy & Meaning'}
+                                </span>
+                                <p className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+                                  {item.meaning}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Right Curriculum Technical Breakdown Column */}
+                          <div className="lg:col-span-7 space-y-5">
+                            <div>
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-xs font-mono font-bold uppercase text-brand-red">
+                                  {item.romanized || item.koreanName}
+                                </span>
+                                <span className="text-zinc-400">&bull;</span>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  {item.difficulty} Level
+                                </span>
+                              </div>
+                              <h3 className="text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                                 {item.name}
                               </h3>
-                            </div>
-                          </div>
-
-                          {/* Stance Weight Distribution Meter */}
-                          {isStance && item.weightDistribution && (
-                            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                              <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase">
-                                <span className="text-zinc-400">Rear Leg: <strong className="text-amber-500">{rearPercent}%</strong></span>
-                                <span className="text-zinc-400">Front Leg: <strong className="text-emerald-500">{frontPercent}%</strong></span>
-                              </div>
-                              <div className="w-full h-3 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden flex shadow-inner">
-                                <div
-                                  className="h-full bg-amber-500 transition-all duration-500"
-                                  style={{ width: `${rearPercent}%` }}
-                                />
-                                <div
-                                  className="h-full bg-emerald-500 transition-all duration-500"
-                                  style={{ width: `${frontPercent}%` }}
-                                />
-                              </div>
-                              <p className="text-[10px] text-zinc-400 font-light text-center">
-                                {item.weightDistribution}
+                              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed mt-2">
+                                {item.summary}
                               </p>
                             </div>
-                          )}
 
-                          {/* Philosophical Meaning / Origin */}
-                          {item.meaning && (
-                            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-1">
-                              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-red block">
-                                {isHistory ? 'Historical Significance' : 'Martial Philosophy & Meaning'}
-                              </span>
-                              <p className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
-                                {item.meaning}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Right Curriculum Technical Breakdown Column */}
-                        <div className="lg:col-span-7 space-y-5">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-mono font-bold uppercase text-brand-red">
-                                {item.romanized || item.koreanName}
-                              </span>
-                              <span className="text-zinc-400">&bull;</span>
-                              <span className="text-xs font-mono text-zinc-500">
-                                {item.difficulty} Level
-                              </span>
-                            </div>
-                            <h3 className="text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                              {item.name}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed mt-2">
-                              {item.summary}
-                            </p>
-                          </div>
-
-                          {/* Step-by-Step Execution Sequence */}
-                          {item.steps && item.steps.length > 0 && (
-                            <div>
-                              <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3 flex items-center gap-1.5">
-                                <StepIcon className="w-3.5 h-3.5 text-brand-red" /> {stepSectionTitle}
-                              </h4>
-                              <div className="space-y-2.5">
-                                {item.steps.map((step, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 flex items-start gap-2.5"
-                                  >
-                                    <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-black text-[10px] shrink-0 mt-0.5">
-                                      {idx + 1}
-                                    </span>
-                                    <span className="leading-relaxed font-medium">{step}</span>
-                                  </div>
-                                ))}
+                            {/* Step-by-Step Execution Sequence */}
+                            {item.steps && item.steps.length > 0 && (
+                              <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3 flex items-center gap-1.5">
+                                  <StepIcon className="w-3.5 h-3.5 text-brand-red" /> {stepSectionTitle}
+                                </h4>
+                                <div className="space-y-2.5">
+                                  {item.steps.map((step, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 flex items-start gap-2.5"
+                                    >
+                                      <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-black text-[10px] shrink-0 mt-0.5">
+                                        {idx + 1}
+                                      </span>
+                                      <span className="leading-relaxed font-medium">{step}</span>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          )}
+                            )}
 
-                          {/* Key Biomechanics / Archival Evidence */}
-                          {item.keyDetails && item.keyDetails.length > 0 && (
-                            <div>
-                              <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2.5 flex items-center gap-1.5">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {cuesSectionTitle}
-                              </h4>
-                              <div className="space-y-1.5">
-                                {item.keyDetails.map((detail, idx) => (
-                                  <div key={idx} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                                    <span>{detail}</span>
-                                  </div>
-                                ))}
+                            {/* Key Biomechanics / Archival Evidence */}
+                            {item.keyDetails && item.keyDetails.length > 0 && (
+                              <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2.5 flex items-center gap-1.5">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {cuesSectionTitle}
+                                </h4>
+                                <div className="space-y-1.5">
+                                  {item.keyDetails.map((detail, idx) => (
+                                    <div key={idx} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                                      <span>{detail}</span>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          )}
+                            )}
 
-                          {/* Common Mistakes / Notes */}
-                          {item.commonMistakes && item.commonMistakes.length > 0 && (
-                            <div>
-                              <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2.5 flex items-center gap-1.5">
-                                <XCircle className="w-3.5 h-3.5 text-brand-red" /> {errorsSectionTitle}
-                              </h4>
-                              <div className="space-y-1.5">
-                                {item.commonMistakes.map((mistake, idx) => (
-                                  <div key={idx} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                                    <XCircle className="w-3.5 h-3.5 text-brand-red shrink-0 mt-0.5" />
-                                    <span>{mistake}</span>
-                                  </div>
-                                ))}
+                            {/* Common Mistakes / Notes */}
+                            {item.commonMistakes && item.commonMistakes.length > 0 && (
+                              <div>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2.5 flex items-center gap-1.5">
+                                  <XCircle className="w-3.5 h-3.5 text-brand-red" /> {errorsSectionTitle}
+                                </h4>
+                                <div className="space-y-1.5">
+                                  {item.commonMistakes.map((mistake, idx) => (
+                                    <div key={idx} className="flex items-start gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                                      <XCircle className="w-3.5 h-3.5 text-brand-red shrink-0 mt-0.5" />
+                                      <span>{mistake}</span>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
+                            )}
+
+                            {/* Actions */}
+                            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-3">
+                              <Link
+                                href={`/library/${item.category}/${item.slug}`}
+                                className="text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors inline-flex items-center gap-1 touch-press"
+                              >
+                                Dedicated Page <ArrowRight className="w-3 h-3" />
+                              </Link>
+
+                              <Link
+                                href={`/contact?subject=Trial%20Booking%20for%20${encodeURIComponent(item.name)}`}
+                                className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors inline-flex items-center gap-1 shadow-brand-glow touch-press"
+                              >
+                                Book Trial Class <ArrowRight className="w-3 h-3" />
+                              </Link>
                             </div>
-                          )}
-
-                          {/* Actions */}
-                          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-3">
-                            <Link
-                              href={`/library/${item.category}/${item.slug}`}
-                              className="text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors inline-flex items-center gap-1"
-                            >
-                              Dedicated Page <ArrowRight className="w-3 h-3" />
-                            </Link>
-
-                            <Link
-                              href={`/contact?subject=Trial%20Booking%20for%20${encodeURIComponent(item.name)}`}
-                              className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors inline-flex items-center gap-1 shadow-brand-glow"
-                            >
-                              Book Trial Class <ArrowRight className="w-3 h-3" />
-                            </Link>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Card3D>
                   )
                 })}
               </div>

@@ -18,6 +18,7 @@ import { dojangBranches, type DojangBranch } from '@/data/locations'
 import { useLanguage } from '@/context/LanguageContext'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
+import { Card3D } from '@/components/ui/Card3D'
 
 export default function LocationsPage() {
   const { t, localizeList } = useLanguage()
@@ -60,47 +61,48 @@ export default function LocationsPage() {
           {localizedBranches.map((branch) => {
             const isSelected = activeBranch?.id === branch.id
             return (
-              <button
-                key={branch.id}
-                onClick={() => setActiveBranchId(branch.id)}
-                className={`p-5 sm:p-6 rounded-[14px] border transition-all duration-300 text-left flex flex-col justify-between cursor-pointer touch-press ${
-                  isSelected
-                    ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20 scale-[1.01]'
-                    : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/40 hover:border-zinc-400 dark:hover:border-zinc-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span
-                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${
-                        branch.isHeadquarters
-                          ? 'bg-brand-red text-white'
-                          : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                      }`}
-                    >
-                      {branch.isHeadquarters ? t.common.headquarters : t.common.branch02}
-                    </span>
-                    {isSelected && (
-                      <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-                    )}
+              <Card3D key={branch.id} maxTilt={4} scale={1.01} className="h-full">
+                <button
+                  onClick={() => setActiveBranchId(branch.id)}
+                  className={`w-full h-full p-5 sm:p-6 rounded-[14px] border transition-all duration-300 text-left flex flex-col justify-between cursor-pointer touch-press ${
+                    isSelected
+                      ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20'
+                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/40 hover:border-zinc-400 dark:hover:border-zinc-700'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span
+                        className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${
+                          branch.isHeadquarters
+                            ? 'bg-brand-red text-white'
+                            : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                        }`}
+                      >
+                        {branch.isHeadquarters ? t.common.headquarters : t.common.branch02}
+                      </span>
+                      {isSelected && (
+                        <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
+                      )}
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mt-1">
+                      {branch.name}
+                    </h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-light">
+                      {branch.tagline}
+                    </p>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mt-1">
-                    {branch.name}
-                  </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-light">
-                    {branch.tagline}
-                  </p>
-                </div>
 
-                <div className="mt-4 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" /> {branch.address.district}
-                  </span>
-                  <span className="font-bold text-brand-red uppercase text-[10px]">
-                    {isSelected ? 'Viewing' : 'Select Branch'}
-                  </span>
-                </div>
-              </button>
+                  <div className="mt-4 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" /> {branch.address.district}
+                    </span>
+                    <span className="font-bold text-brand-red uppercase text-[10px]">
+                      {isSelected ? 'Viewing' : 'Select Branch'}
+                    </span>
+                  </div>
+                </button>
+              </Card3D>
             )
           })}
         </SafeGrid>
@@ -236,26 +238,28 @@ export default function LocationsPage() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
-                    Free Trial Booking
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-                    Train At {activeBranch.name.split(' (')[0]}
-                  </h3>
-                  <p className="text-xs text-zinc-400 font-light mt-1">
-                    Experience our martial arts training, meet the Master faculty, and tour the facility.
-                  </p>
-                </div>
+              <Card3D maxTilt={5} scale={1.01} className="w-full">
+                <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+                      Free Trial Booking
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+                      Train At {activeBranch.name.split(' (')[0]}
+                    </h3>
+                    <p className="text-xs text-zinc-400 font-light mt-1">
+                      Experience our martial arts training, meet the Master faculty, and tour the facility.
+                    </p>
+                  </div>
 
-                <Link
-                  href={`/contact?subject=Trial%20Booking%20at%20${encodeURIComponent(activeBranch.name)}`}
-                  className="w-full py-3.5 sm:py-4 rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
-                >
-                  {t.locations.bookTrialAtBranch} <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+                  <Link
+                    href={`/contact?subject=Trial%20Booking%20at%20${encodeURIComponent(activeBranch.name)}`}
+                    className="w-full py-3.5 sm:py-4 rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
+                  >
+                    {t.locations.bookTrialAtBranch} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </Card3D>
             </div>
           </div>
         </div>

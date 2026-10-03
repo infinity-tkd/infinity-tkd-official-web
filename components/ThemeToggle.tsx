@@ -31,7 +31,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="relative p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/70 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 focus:outline-none ring-1 ring-zinc-200 dark:ring-zinc-800 cursor-pointer overflow-hidden group shadow-sm hover:shadow-brand-glow flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11"
+      className="relative p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/70 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 focus:outline-none ring-1 ring-zinc-200 dark:ring-zinc-800 cursor-pointer overflow-hidden group shadow-sm hover:shadow-brand-glow flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 touch-press"
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
       <div

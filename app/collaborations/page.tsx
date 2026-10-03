@@ -2,6 +2,7 @@ import * as React from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CollaborationShowcase } from '@/components/collaborations/CollaborationShowcase'
+import { Card3D } from '@/components/ui/Card3D'
 import {
   Shield,
   GraduationCap,
@@ -26,8 +27,9 @@ export default function CollaborationsPage() {
         {/* ------------------------------------------------------------------ */}
         {/* HERO SECTION (14px radius) */}
         {/* ------------------------------------------------------------------ */}
-        <div className="p-8 sm:p-12 md:p-16 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl mb-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[130px] rounded-full pointer-events-none" />
+        <Card3D maxTilt={3} scale={1.008} className="mb-12">
+          <div className="p-8 sm:p-12 md:p-16 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[130px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl">
             <div className="flex items-center gap-2 mb-3">
@@ -67,6 +69,7 @@ export default function CollaborationsPage() {
             </div>
           </div>
         </div>
+        </Card3D>
 
         {/* ------------------------------------------------------------------ */}
         {/* INTERACTIVE COLLABORATIONS SHOWCASE & MODAL */}
@@ -76,26 +79,28 @@ export default function CollaborationsPage() {
         {/* ------------------------------------------------------------------ */}
         {/* PARTNER LEAD GENERATION CTA (14px radius) */}
         {/* ------------------------------------------------------------------ */}
-        <div className="mt-16 p-8 sm:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-          <div className="space-y-2 max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
-              Institutional Synergy
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight">
-              Partner With Infinity Taekwondo
-            </h3>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
-              We collaborate with international schools, sports academies, universities, corporate wellness programs, and philanthropic foundations. Inquire about creating a custom program.
-            </p>
-          </div>
+        <Card3D maxTilt={4} scale={1.01} className="mt-16">
+          <div className="p-8 sm:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div className="space-y-2 max-w-xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
+                Institutional Synergy
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight">
+                Partner With Infinity Taekwondo
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                We collaborate with international schools, sports academies, universities, corporate wellness programs, and philanthropic foundations. Inquire about creating a custom program.
+              </p>
+            </div>
 
-          <Link
-            href="/contact?subject=New%20Institutional%20Partnership%20Proposal"
-            className="px-8 py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow whitespace-nowrap inline-flex items-center gap-2 touch-press"
-          >
-            Submit Partnership Proposal <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+            <Link
+              href="/contact?subject=New%20Institutional%20Partnership%20Proposal"
+              className="px-8 py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow whitespace-nowrap inline-flex items-center gap-2 touch-press"
+            >
+              Submit Partnership Proposal <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </Card3D>
       </div>
     </div>
   )

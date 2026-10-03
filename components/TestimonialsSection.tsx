@@ -5,6 +5,7 @@ import { Quote, Star, Award, Sparkles } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
+import { Card3D } from '@/components/ui/Card3D'
 
 interface Testimonial {
   name: string
@@ -67,43 +68,42 @@ export function TestimonialsSection() {
 
         <SafeGrid isolateItems className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((item) => (
-            <div
-              key={item.name}
-              className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-brand-glow hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                {/* Rating stars & Quote Icon */}
-                <div className="flex justify-between items-center mb-6">
-                  <div className="flex gap-1 text-brand-red">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-brand-red" />
-                    ))}
-                  </div>
-                  <Quote className="w-8 h-8 text-zinc-200 dark:text-zinc-800" />
-                </div>
-
-                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-light mb-6">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-              </div>
-
-              {/* Author Info */}
-              <div className="flex items-center gap-3.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                <SafeImage
-                  src={item.avatar}
-                  alt={item.name}
-                  className="w-11 h-11 rounded-xl object-cover border border-brand-red/30 shadow-sm"
-                />
+            <Card3D key={item.name} maxTilt={6} scale={1.015} className="h-full">
+              <div className="h-full p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-brand-glow hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between">
                 <div>
-                  <h4 className="text-sm font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-none">
-                    {item.name}
-                  </h4>
-                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
-                    {item.role}
+                  {/* Rating stars & Quote Icon */}
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex gap-1 text-brand-red">
+                      {[...Array(item.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-brand-red" />
+                      ))}
+                    </div>
+                    <Quote className="w-8 h-8 text-zinc-200 dark:text-zinc-800" />
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-light mb-6">
+                    &ldquo;{item.quote}&rdquo;
                   </p>
                 </div>
+
+                {/* Author Info */}
+                <div className="flex items-center gap-3.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                  <SafeImage
+                    src={item.avatar}
+                    alt={item.name}
+                    className="w-11 h-11 rounded-xl object-cover border border-brand-red/30 shadow-sm"
+                  />
+                  <div>
+                    <h4 className="text-sm font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-none">
+                      {item.name}
+                    </h4>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
+                      {item.role}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Card3D>
           ))}
         </SafeGrid>
       </div>

@@ -247,14 +247,14 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
           {reset ? (
             <button
               onClick={() => reset()}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all shadow-brand-glow flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" /> Try Again
             </button>
           ) : (
             <Link
               href="/"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
             >
               <Home className="w-4 h-4" /> Return to Homepage
             </Link>
@@ -262,7 +262,7 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
 
           <Link
             href="/academy"
-            className="w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white font-bold uppercase tracking-widest text-xs hover:border-brand-red hover:text-brand-red transition-all flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white font-bold uppercase tracking-widest text-xs hover:border-brand-red hover:text-brand-red transition-all flex items-center justify-center gap-2 touch-press"
           >
             Explore Academy <ArrowRight className="w-4 h-4" />
           </Link>
@@ -274,25 +274,25 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
             Quick Dojang Navigation
           </span>
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs">
-            <Link href="/about" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/about" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Philosophy &amp; Team
             </Link>
-            <Link href="/academy" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/academy" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Curriculum &amp; Belts
             </Link>
-            <Link href="/community" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/community" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Coaches &amp; Students
             </Link>
-            <Link href="/achievements" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/achievements" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Trophy Wall
             </Link>
-            <Link href="/locations" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/locations" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Branch Map
             </Link>
-            <Link href="/pricing" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/pricing" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Memberships
             </Link>
-            <Link href="/contact" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center">
+            <Link href="/contact" className="px-3.5 py-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 hover:text-brand-red transition-colors min-h-[40px] inline-flex items-center touch-press">
               Contact Dojang
             </Link>
           </div>

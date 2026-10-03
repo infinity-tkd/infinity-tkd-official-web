@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Sparkles, ArrowRight, CheckCircle2, RotateCcw, Target } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
+import { Card3D } from '@/components/ui/Card3D'
 
 type AgeGroupId = 'kids' | 'teens' | 'adults'
 type GoalId = 'poomsae' | 'tricking' | 'strength' | 'cinema'
@@ -238,7 +239,7 @@ export function ProgramPathfinder() {
                   setAgeGroup(item.id)
                   setStep(2)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red"
+                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red touch-press"
               >
                 <span className="font-bold text-sm text-white group-hover:text-brand-red transition-colors">
                   {getLocalizedLabel(item)}
@@ -268,7 +269,7 @@ export function ProgramPathfinder() {
                   setGoal(item.id)
                   setStep(3)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-left flex items-center justify-between cursor-pointer group focus:outline-none focus:ring-2 focus:ring-brand-red min-h-[80px]"
+                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-left flex items-center justify-between cursor-pointer group focus:outline-none focus:ring-2 focus:ring-brand-red min-h-[80px] touch-press"
               >
                 <div>
                   <span className="font-bold text-xs sm:text-sm text-white group-hover:text-brand-red transition-colors block">
@@ -301,7 +302,7 @@ export function ProgramPathfinder() {
                   setExperience(item.id)
                   setStep(4)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red"
+                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red touch-press"
               >
                 <span className="font-bold text-xs sm:text-sm text-white group-hover:text-brand-red transition-colors">
                   {getLocalizedLabel(item)}
@@ -319,62 +320,64 @@ export function ProgramPathfinder() {
 
       {/* Step 4: Output Recommendation Result */}
       {step === 4 && (
-        <div className="max-w-2xl mx-auto bg-zinc-900/90 border border-brand-red/40 rounded-xl p-6 md:p-8 animate-fade-in space-y-6 shadow-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
-            <div>
-              <span
-                className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-lg text-white inline-block mb-1 shadow-sm"
-                style={{ backgroundColor: rec.badgeColor }}
+        <Card3D maxTilt={4} scale={1.01} className="max-w-2xl mx-auto">
+          <div className="w-full bg-zinc-900/90 border border-brand-red/40 rounded-xl p-6 md:p-8 animate-fade-in space-y-6 shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
+              <div>
+                <span
+                  className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-lg text-white inline-block mb-1 shadow-sm"
+                  style={{ backgroundColor: rec.badgeColor }}
+                >
+                  {rec.division}
+                </span>
+                <h4 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-white tracking-tight leading-tight">
+                  {rec.title}
+                </h4>
+                <span className="text-xs text-zinc-400 font-mono mt-0.5 block">
+                  {rec.level}
+                </span>
+              </div>
+
+              <button
+                onClick={handleReset}
+                className="text-xs text-zinc-400 hover:text-white flex items-center gap-1.5 self-start sm:self-auto cursor-pointer px-3 py-2 min-h-[44px] rounded-lg hover:bg-zinc-800 transition-colors touch-press"
+                aria-label="Retake pathfinder assessment"
               >
-                {rec.division}
-              </span>
-              <h4 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-white tracking-tight leading-tight">
-                {rec.title}
-              </h4>
-              <span className="text-xs text-zinc-400 font-mono mt-0.5 block">
-                {rec.level}
-              </span>
+                <RotateCcw className="w-3.5 h-3.5" /> {t.pathfinder.retake}
+              </button>
             </div>
 
-            <button
-              onClick={handleReset}
-              className="text-xs text-zinc-400 hover:text-white flex items-center gap-1.5 self-start sm:self-auto cursor-pointer px-3 py-2 min-h-[44px] rounded-lg hover:bg-zinc-800 transition-colors"
-              aria-label="Retake pathfinder assessment"
-            >
-              <RotateCcw className="w-3.5 h-3.5" /> {t.pathfinder.retake}
-            </button>
-          </div>
+            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
+              {rec.description}
+            </p>
 
-          <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
-            {rec.description}
-          </p>
+            <div className="p-4 bg-black/60 rounded-xl border border-zinc-800 flex items-center gap-3 text-xs">
+              <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
+              <div>
+                <span className="text-zinc-400 uppercase font-bold text-[10px] block">
+                  {t.pathfinder.recommendedRhythm}
+                </span>
+                <span className="font-semibold text-white">{rec.pathway}</span>
+              </div>
+            </div>
 
-          <div className="p-4 bg-black/60 rounded-xl border border-zinc-800 flex items-center gap-3 text-xs">
-            <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
-            <div>
-              <span className="text-zinc-400 uppercase font-bold text-[10px] block">
-                {t.pathfinder.recommendedRhythm}
-              </span>
-              <span className="font-semibold text-white">{rec.pathway}</span>
+            <div className="pt-2 flex flex-col sm:flex-row gap-3">
+              <Link
+                href={`/contact?subject=Enrollment%20Pathfinder%20Result%3A%20${encodeURIComponent(rec.title)}`}
+                className="flex-1 py-3.5 px-6 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow text-center flex items-center justify-center gap-2 touch-press"
+              >
+                {t.pathfinder.claimTrial} <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                href="/academy"
+                className="py-3.5 px-6 rounded-xl border border-zinc-700 text-white text-xs font-bold uppercase tracking-widest hover:border-brand-red hover:text-brand-red transition-all text-center touch-press"
+              >
+                {t.pathfinder.viewSyllabus}
+              </Link>
             </div>
           </div>
-
-          <div className="pt-2 flex flex-col sm:flex-row gap-3">
-            <Link
-              href={`/contact?subject=Enrollment%20Pathfinder%20Result%3A%20${encodeURIComponent(rec.title)}`}
-              className="flex-1 py-3.5 px-6 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow text-center flex items-center justify-center gap-2"
-            >
-              {t.pathfinder.claimTrial} <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <Link
-              href="/academy"
-              className="py-3.5 px-6 rounded-xl border border-zinc-700 text-white text-xs font-bold uppercase tracking-widest hover:border-brand-red hover:text-brand-red transition-all text-center"
-            >
-              {t.pathfinder.viewSyllabus}
-            </Link>
-          </div>
-        </div>
+        </Card3D>
       )}
     </div>
   )

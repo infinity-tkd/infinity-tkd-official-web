@@ -35,7 +35,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
             key={lang.code}
             onClick={() => setLanguage(lang.code)}
             className={cn(
-              'min-h-[44px] py-2 px-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer',
+              'min-h-[44px] py-2 px-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer touch-press',
               language === lang.code
                 ? 'bg-white dark:bg-zinc-800 text-brand-red shadow-sm'
                 : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
@@ -60,7 +60,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
             key={lang.code}
             onClick={() => setLanguage(lang.code)}
             className={cn(
-              'px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-1',
+              'px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-1 cursor-pointer touch-press',
               language === lang.code
                 ? 'bg-brand-red text-white shadow-brand-glow'
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-brand-red'
@@ -79,7 +79,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
     <div className={cn('relative inline-block text-left', className)} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80 hover:border-brand-red/40 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-300 text-xs font-bold text-zinc-700 dark:text-zinc-300 shadow-sm cursor-pointer"
+        className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80 hover:border-brand-red/40 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-300 text-xs font-bold text-zinc-700 dark:text-zinc-300 shadow-sm cursor-pointer touch-press"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label="Select Language / ជ្រើសរើសភាសា / 选择语言 / 언어 선택"
