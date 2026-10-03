@@ -1,0 +1,349 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-fallback-english: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-fallback-khmer: var(--font-kantumruy), 'Kantumruy Pro', 'Hanuman', 'Khmer OS Battambang', 'Khmer OS', system-ui, sans-serif;
+    --font-fallback-chinese: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'SimHei', sans-serif;
+    --font-fallback-korean: 'Pretendard', var(--font-noto-sans-kr), 'Noto Sans KR', 'Apple SD Gothic Neo', 'NanumSquare', 'Malgun Gothic', sans-serif;
+
+    /* Light Theme Custom Variables (Configurable via siteSettings.ts) */
+    --color-bg: #FFFFFF;
+    --color-surface: #FAFAFA;
+    --color-surface-elevated: #F4F4F5;
+    --color-card: #FFFFFF;
+    --color-sub-box: #FAFAFA;
+    --color-border: #E4E4E7;
+    --color-border-muted: #F4F4F5;
+    --color-text-primary: #09090B;
+    --color-text-secondary: #52525B;
+    --color-text-muted: #71717A;
+    --color-brand-primary: #EF2F38;
+    --color-brand-hover: #D0272F;
+    --color-brand-muted: rgba(239, 47, 56, 0.1);
+    --color-brand-glow: rgba(239, 47, 56, 0.35);
+  }
+
+  .dark {
+    /* Dark Theme Custom Variables (Configurable via siteSettings.ts) */
+    --color-bg: #000000;
+    --color-surface: #09090B;
+    --color-surface-elevated: #18181B;
+    --color-card: rgba(24, 24, 27, 0.6);
+    --color-sub-box: #09090B;
+    --color-border: #27272A;
+    --color-border-muted: #18181B;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #A1A1AA;
+    --color-text-muted: #71717A;
+    --color-brand-primary: #EF2F38;
+    --color-brand-hover: #D0272F;
+    --color-brand-muted: rgba(239, 47, 56, 0.15);
+    --color-brand-glow: rgba(239, 47, 56, 0.5);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-white text-zinc-900 dark:bg-black dark:text-zinc-50 antialiased selection:bg-brand-red selection:text-white;
+    font-family: var(--font-montserrat), var(--font-fallback-korean), var(--font-fallback-khmer), var(--font-fallback-chinese), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* WCAG 2.2 AA Compliance: Ensure text-zinc-400 in light mode meets 4.5:1 contrast against white surfaces */
+  html:not(.dark) .text-zinc-400 {
+    color: #71717a !important; /* Zinc-500: 4.54:1 contrast ratio against #FFFFFF */
+  }
+
+  html:not(.dark) .text-zinc-500 {
+    color: #52525b !important; /* Zinc-600: 5.74:1 contrast ratio against #FFFFFF */
+  }
+
+  /* Universal Accessible Keyboard Focus Rings (WCAG 2.4.7 / 2.4.11) */
+  :focus-visible {
+    outline: 2px solid #ef2f38 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Universal Fast & Smooth Dark/Light Mode Theme Switch Animation */
+  html.dark body,
+  html.light body,
+  header,
+  footer,
+  nav,
+  section {
+    transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1), border-color 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* English / Latin Signature Montserrat Typography */
+  [lang='en'] body {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+  }
+
+  /* Khmer Clean, Modern, Elegant Typography (Eye-Friendly Breathing Room) */
+  [lang='km'] body,
+  [lang='km'] h1,
+  [lang='km'] h2,
+  [lang='km'] h3,
+  [lang='km'] h4,
+  [lang='km'] h5,
+  [lang='km'] p,
+  [lang='km'] span,
+  [lang='km'] a,
+  [lang='km'] button,
+  [lang='km'] input,
+  [lang='km'] select,
+  [lang='km'] textarea {
+    font-family: var(--font-kantumruy), 'Kantumruy Pro', var(--font-fallback-khmer), sans-serif !important;
+    letter-spacing: 0.018em;
+    line-height: 1.75;
+    word-break: break-word;
+  }
+
+  /* Chinese High-Legibility Modern Typography */
+  [lang='zh'] body,
+  [lang='zh'] h1,
+  [lang='zh'] h2,
+  [lang='zh'] h3,
+  [lang='zh'] h4,
+  [lang='zh'] h5,
+  [lang='zh'] p,
+  [lang='zh'] span,
+  [lang='zh'] a,
+  [lang='zh'] button,
+  [lang='zh'] input,
+  [lang='zh'] select,
+  [lang='zh'] textarea {
+    font-family: var(--font-fallback-chinese), sans-serif !important;
+    letter-spacing: 0.025em;
+    line-height: 1.7;
+    word-break: break-all;
+  }
+
+  /* Korean Authentic, Clean, Dynamic Hangul Typography (Pretendard First) */
+  [lang='ko'] body,
+  [lang='ko'] h1,
+  [lang='ko'] h2,
+  [lang='ko'] h3,
+  [lang='ko'] h4,
+  [lang='ko'] h5,
+  [lang='ko'] p,
+  [lang='ko'] span,
+  [lang='ko'] a,
+  [lang='ko'] button,
+  [lang='ko'] input,
+  [lang='ko'] select,
+  [lang='ko'] textarea {
+    font-family: var(--font-fallback-korean), sans-serif !important;
+    letter-spacing: -0.02em;
+    line-height: 1.62;
+    word-break: keep-all;
+  }
+}
+
+/* Custom Scrollbar - Cross Browser */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-300 dark:bg-zinc-800 rounded-full hover:bg-brand-red transition-colors;
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(150, 150, 150, 0.4) transparent;
+}
+
+/* Universal Cross-Platform Keyframe Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+
+/* Universal Layout & Touch Safety */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.break-word-safe {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Performance & Perspective */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Centralized Glassmorphism & Surface Tokens */
+.card-glass {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .card-glass {
+  background-color: rgba(18, 18, 21, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5);
+}
+
+.card-glass-hover {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-glass-hover:hover {
+  border-color: rgba(239, 47, 56, 0.5);
+  box-shadow: 0 0 30px -5px rgba(239, 47, 56, 0.35);
+  transform: translateY(-3px);
+}
+
+.touch-press {
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.touch-press:active {
+  transform: scale(0.98);
+}
+
+/* Hide scrollbar for carousels */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Legal Layout Typography */
+.legal-article h2 {
+  @apply text-2xl md:text-3xl font-black uppercase tracking-tight mt-12 md:mt-16 mb-6 md:mb-8 text-zinc-900 dark:text-white flex items-center gap-3 md:gap-4;
+}
+.legal-article h2::before {
+  content: '';
+  @apply block w-1.5 md:w-2 h-6 md:h-8 bg-brand-red rounded-full shrink-0;
+}
+.legal-article h3 {
+  @apply text-lg md:text-xl font-bold mt-8 md:mt-10 mb-3 md:mb-4 text-zinc-800 dark:text-zinc-100;
+}
+.legal-article p {
+  @apply leading-relaxed md:leading-8 text-zinc-600 dark:text-zinc-400 mb-5 md:mb-6 font-light text-base md:text-lg;
+}
+.legal-article ul {
+  @apply list-none ml-0 mb-6 md:mb-8 space-y-3 md:space-y-4;
+}
+.legal-article li {
+  @apply relative pl-6 md:pl-8 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm md:text-base;
+}
+.legal-article li::before {
+  content: '→';
+  @apply absolute left-0 top-0 text-brand-red font-bold;
+}
+.legal-article a {
+  @apply text-brand-red hover:underline font-medium;
+}
+
+.sidebar-link {
+  @apply block text-xs md:text-sm font-medium py-2 pl-3 md:pl-4 border-l-2 border-transparent text-zinc-500 hover:text-brand-red hover:border-brand-red transition-all duration-300;
+}
+.sidebar-link.active {
+  @apply text-zinc-900 dark:text-white border-brand-red font-bold;
+}
