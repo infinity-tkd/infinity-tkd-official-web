@@ -1,4 +1,5 @@
 import * as React from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
@@ -50,6 +51,45 @@ interface TechniquePageProps {
   params: {
     category: string
     slug: string
+  }
+}
+
+export function generateMetadata({ params }: TechniquePageProps): Metadata {
+  const item = libraryItems.find(
+    (i) => i.category === params.category && i.slug === params.slug
+  )
+
+  if (!item) {
+    return {
+      title: 'Technique Not Found | Infinity Taekwondo',
+    }
+  }
+
+  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === item.category)
+  const categoryTitle = categoryMeta?.title || item.category
+  const title = `${item.name} (${item.koreanName}) - ${categoryTitle}`
+  const description = item.meaning
+    ? `${item.meaning}. ${item.summary}`.slice(0, 160)
+    : item.summary.slice(0, 160)
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/library/${item.category}/${item.slug}`,
+    },
+    openGraph: {
+      title: `${title} | Infinity Taekwondo Curriculum`,
+      description,
+      type: 'article',
+      url: `/library/${item.category}/${item.slug}`,
+      images: item.image ? [item.image] : ['/logo.svg'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | Infinity Taekwondo Curriculum`,
+      description,
+    },
   }
 }
 

@@ -412,6 +412,7 @@ export interface SiteSettings {
         imgSrc: string[]
         fontSrc: string[]
         connectSrc: string[]
+        frameSrc: string[]
         frameAncestors: string[]
         baseUri: string[]
         formAction: string[]
@@ -932,10 +933,11 @@ export const siteSettings: SiteSettings = {
       contentSecurityPolicy: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        imgSrc: ["'self'", 'data:', 'blob:', 'https://images.unsplash.com', 'https://source.unsplash.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
-        connectSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://cdn.jsdelivr.net'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://images.unsplash.com', 'https://source.unsplash.com', 'https://i.ytimg.com', 'https://img.youtube.com'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'https://cdn.jsdelivr.net', 'data:'],
+        connectSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://cdn.jsdelivr.net'],
+        frameSrc: ["'self'", 'https://www.youtube-nocookie.com', 'https://www.youtube.com', 'https://www.google.com', 'https://maps.google.com'],
         frameAncestors: ["'none'"],
         baseUri: ["'self'"],
         formAction: ["'self'"],
@@ -1073,6 +1075,7 @@ export function buildCspHeader(): string {
     `img-src ${csp.imgSrc.join(' ')}`,
     `font-src ${csp.fontSrc.join(' ')}`,
     `connect-src ${csp.connectSrc.join(' ')}`,
+    `frame-src ${csp.frameSrc.join(' ')}`,
     `frame-ancestors ${csp.frameAncestors.join(' ')}`,
     `base-uri ${csp.baseUri.join(' ')}`,
     `form-action ${csp.formAction.join(' ')}`,

@@ -42,9 +42,25 @@ export const metadata: Metadata = {
   },
   description:
     'To provide world-class training that blends athletic science with the artistry of freestyle Taekwondo, empowering students to achieve limitless potential.',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
     description: 'Empowering boundless potential from white belt to black belt mastery.',
+    url: 'https://infinitytaekwondo.com',
+    siteName: 'Infinity Taekwondo',
     type: 'website',
     images: ['/logo.svg'],
   },
@@ -72,9 +88,8 @@ export default function RootLayout({
       className={`${montserrat.variable} ${kantumruy.variable}`}
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
       </head>
       <body className="min-h-screen flex flex-col font-sans selection:bg-brand-red selection:text-white">
         {/* Skip to Main Content Link (WCAG 2.4.1 Bypass Blocks) */}
