@@ -208,7 +208,7 @@ export function detectMaliciousPayload(input: string): boolean {
     /\bselect\b.+\bfrom\b/i,
     /\binsert\b.+\binto\b/i,
     /\bdrop\b\s+\btable\b/i,
-    /\bexec(?:ute)?\b/i,
+    /\b(?:exec|execute)\b/i,
     /\.\.[\\/]/,
     /%2e%2e[\\/]/i,
     /__proto__/i,

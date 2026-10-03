@@ -334,7 +334,7 @@ export interface SiteSettings {
       district: string
       city: string
       country: string
-      googleMapsUrl: string
+      mapLocationUrl: string
     }
     bkk1BranchAddress: {
       facilityName: string
@@ -342,7 +342,7 @@ export interface SiteSettings {
       district: string
       city: string
       country: string
-      googleMapsUrl: string
+      mapLocationUrl: string
     }
     operatingHours: {
       weekdays: string
@@ -795,7 +795,7 @@ export const siteSettings: SiteSettings = {
       district: 'Meanchey',
       city: 'Phnom Penh',
       country: 'Cambodia',
-      googleMapsUrl: 'https://maps.google.com/?q=The+Factory+Phnom+Penh',
+      mapLocationUrl: 'https://maps.google.com/?q=The+Factory+Phnom+Penh',
     },
 
     bkk1BranchAddress: {
@@ -804,7 +804,7 @@ export const siteSettings: SiteSettings = {
       district: 'Chamkarmon',
       city: 'Phnom Penh',
       country: 'Cambodia',
-      googleMapsUrl: 'https://maps.google.com/?q=BKK1+Phnom+Penh',
+      mapLocationUrl: 'https://maps.google.com/?q=BKK1+Phnom+Penh',
     },
 
     operatingHours: {
@@ -1008,7 +1008,7 @@ export const siteSettings: SiteSettings = {
       '\\bselect\\b.+\\bfrom\\b',
       '\\binsert\\b.+\\binto\\b',
       '\\bdrop\\b\\s+\\btable\\b',
-      '\\bexec(?:ute)?\\b',
+      '\\b(?:exec|execute)\\b',
       '\\.\\.[\\\\/]',
       '%2e%2e[\\\\/]',
       'etc/passwd',

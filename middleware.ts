@@ -11,6 +11,9 @@ const MALICIOUS_QUERY_PATTERNS = siteSettings.security.maliciousQueryPatterns.ma
   (pattern) => new RegExp(pattern, 'i')
 )
 
+// Allowed standard HTTP methods (prevents verb tampering, TRACE/XST, arbitrary DELETE)
+const ALLOWED_METHODS = new Set(['GET', 'POST', 'HEAD', 'OPTIONS'])
+
 // Known automated exploit scanners and vulnerability probe user-agents
 const SCANNER_USER_AGENT_PATTERN =
   /(?:sqlmap|nikto|dirbuster|nuclei|masscan|wpscan|acunetix|havij|nmap|zgrab|gobuster|ffuf|curl-security)/i
@@ -22,7 +25,70 @@ export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl
   const userAgent = request.headers.get('user-agent') || ''
 
-  // 1. Block automated malicious vulnerability scanners by User-Agent (403 Forbidden)
+  // 1. Enforce allowed HTTP methods (blocks HTTP verb tampering & XST)
+  if (!ALLOWED_METHODS.has(request.method)) {
+    return new NextResponse(
+      JSON.stringify({ error: `Method ${request.method} Not Allowed`, status: 405 }),
+      {
+        status: 405,
+        headers: {
+          'Content-Type': 'application/json',
+          'Allow': 'GET, POST, HEAD, OPTIONS',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      }
+    )
+  }
+
+  // 2. Reject proxy header override manipulation (prevents Next.js path spoofing bypasses)
+  if (request.headers.get('x-rewrite-url') || request.headers.get('x-original-url')) {
+    return new NextResponse(
+      JSON.stringify({ error: 'Proxy header manipulation prohibited', status: 400 }),
+      {
+        status: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      }
+    )
+  }
+
+  // 3. Strict CSRF Origin Verification on state-changing requests
+  if (request.method === 'POST') {
+    const origin = request.headers.get('origin')
+    const host = request.headers.get('host')
+    if (origin && host) {
+      try {
+        const originHost = new URL(origin).host
+        if (originHost !== host && !origin.includes('infinitytaekwondo.com')) {
+          return new NextResponse(
+            JSON.stringify({ error: 'Cross-origin submission rejected', status: 403 }),
+            {
+              status: 403,
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Content-Type-Options': 'nosniff',
+              },
+            }
+          )
+        }
+      } catch {
+        return new NextResponse(
+          JSON.stringify({ error: 'Invalid Origin Header', status: 400 }),
+          {
+            status: 400,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Content-Type-Options': 'nosniff',
+            },
+          }
+        )
+      }
+    }
+  }
+
+  // 4. Block automated malicious vulnerability scanners by User-Agent (403 Forbidden)
   if (userAgent && SCANNER_USER_AGENT_PATTERN.test(userAgent)) {
     return new NextResponse(
       JSON.stringify({ error: 'Automated vulnerability scanning forbidden', status: 403 }),
@@ -36,7 +102,7 @@ export function middleware(request: NextRequest) {
     )
   }
 
-  // 2. Block path traversal attempts in pathname (400 Bad Request)
+  // 5. Block path traversal attempts in pathname (400 Bad Request)
   if (TRAVERSAL_PATTERN.test(pathname)) {
     return new NextResponse(
       JSON.stringify({ error: 'Directory Traversal Detected', status: 400 }),
@@ -50,7 +116,7 @@ export function middleware(request: NextRequest) {
     )
   }
 
-  // 3. Block probe scanners and sensitive configuration path access (403 Forbidden)
+  // 6. Block probe scanners and sensitive configuration path access (403 Forbidden)
   for (const pattern of BLOCKED_PATH_PATTERNS) {
     if (pattern.test(pathname)) {
       return new NextResponse(
@@ -66,7 +132,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 4. Detect & block malicious query payload attempts (XSS, SQLi, Prototype Pollution) (400 Bad Request)
+  // 7. Detect & block malicious query payload attempts (XSS, SQLi, Prototype Pollution) (400 Bad Request)
   if (search) {
     try {
       const decodedQuery = decodeURIComponent(search)
@@ -106,7 +172,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 5. Prepare response with full HTTP Security Headers derived from siteSettings
+  // 8. Prepare response with full HTTP Security Headers derived from siteSettings
   const response = NextResponse.next()
   const secHeaders = siteSettings.security.headers
 
