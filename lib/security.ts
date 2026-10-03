@@ -201,18 +201,28 @@ export function detectMaliciousPayload(input: string): boolean {
   if (!input || typeof input !== 'string') return false
   const suspiciousPatterns = [
     /<script\b/i,
+    /<iframe\b/i,
+    /<embed\b/i,
+    /<object\b/i,
     /javascript:/i,
     /vbscript:/i,
-    /on\w+\s*=/i,
+    /data:text\/html/i,
+    /\bon[a-z]{3,15}\s*=/i,
+    /document\.(?:cookie|domain)/i,
     /union\s+select/i,
     /\bselect\b.+\bfrom\b/i,
     /\binsert\b.+\binto\b/i,
     /\bdrop\b\s+\btable\b/i,
     /\b(?:exec|execute)\b/i,
+    /waitfor\s+delay/i,
+    /sleep\(\s*\d+\s*\)/i,
     /\.\.[\\/]/,
     /%2e%2e[\\/]/i,
     /__proto__/i,
-    /constructor\s*\[/i,
+    /constructor\s*[.\[]/i,
+    /prototype\s*[.\[]/i,
+    /__defineGetter__/i,
+    /__lookupGetter__/i,
   ]
   return suspiciousPatterns.some((pattern) => pattern.test(input))
 }

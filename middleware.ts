@@ -16,7 +16,7 @@ const ALLOWED_METHODS = new Set(['GET', 'POST', 'HEAD', 'OPTIONS'])
 
 // Known automated exploit scanners and vulnerability probe user-agents
 const SCANNER_USER_AGENT_PATTERN =
-  /(?:sqlmap|nikto|dirbuster|nuclei|masscan|wpscan|acunetix|havij|nmap|zgrab|gobuster|ffuf|curl-security)/i
+  /(?:sqlmap|nikto|dirbuster|nuclei|masscan|wpscan|acunetix|havij|nmap|zgrab|gobuster|ffuf|curl-security|nessus|openvas|qualys|arachni|whatweb)/i
 
 // Suspicious path traversal encodings (e.g. double encoded, slash variations)
 const TRAVERSAL_PATTERN = /(?:\.\.[\\/]|%2e%2e[\\/]|%252e%252e|\.\.%2f|\.\.%5c)/i
@@ -54,30 +54,58 @@ export function middleware(request: NextRequest) {
     )
   }
 
-  // 3. Strict CSRF Origin Verification on state-changing requests
+  // 3. Strict CSRF Origin/Referer Verification on state-changing requests (CWE-346 immune)
   if (request.method === 'POST') {
     const origin = request.headers.get('origin')
+    const referer = request.headers.get('referer')
     const host = request.headers.get('host')
-    if (origin && host) {
+
+    let sourceHost: string | null = null
+    if (origin && origin !== 'null') {
       try {
-        const originHost = new URL(origin).host
-        if (originHost !== host && !origin.includes('infinitytaekwondo.com')) {
-          return new NextResponse(
-            JSON.stringify({ error: 'Cross-origin submission rejected', status: 403 }),
-            {
-              status: 403,
-              headers: {
-                'Content-Type': 'application/json',
-                'X-Content-Type-Options': 'nosniff',
-              },
-            }
-          )
-        }
+        sourceHost = new URL(origin).host
       } catch {
         return new NextResponse(
           JSON.stringify({ error: 'Invalid Origin Header', status: 400 }),
           {
             status: 400,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Content-Type-Options': 'nosniff',
+            },
+          }
+        )
+      }
+    } else if (referer) {
+      try {
+        sourceHost = new URL(referer).host
+      } catch {
+        return new NextResponse(
+          JSON.stringify({ error: 'Invalid Referer Header', status: 400 }),
+          {
+            status: 400,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Content-Type-Options': 'nosniff',
+            },
+          }
+        )
+      }
+    }
+
+    if (sourceHost && host) {
+      const isSelfHost = sourceHost === host
+      const isAllowedDomain =
+        sourceHost === 'infinitytaekwondo.com' ||
+        sourceHost.endsWith('.infinitytaekwondo.com') ||
+        sourceHost.startsWith('localhost') ||
+        sourceHost.startsWith('127.0.0.1')
+
+      if (!isSelfHost && !isAllowedDomain) {
+        return new NextResponse(
+          JSON.stringify({ error: 'Cross-origin submission rejected', status: 403 }),
+          {
+            status: 403,
             headers: {
               'Content-Type': 'application/json',
               'X-Content-Type-Options': 'nosniff',
