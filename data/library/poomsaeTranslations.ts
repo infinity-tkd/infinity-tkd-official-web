@@ -1292,7 +1292,259 @@ export interface WhatIsTaegeukData {
   palgweComparison?: PalgweComparisonData
 }
 
-export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
+export const DEFAULT_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
+  title: 'The 4 Core Elements of Poomsae Execution',
+  subtitle: 'Pattern, Direction, Stance, and Technique (품새의 4대 구성 요소)',
+  summary:
+    'Classical World Taekwondo poomsae theory (Ronald A. Southwick, 2005) dictates that every form is executed through four fundamental, interdependent elements: the floor Pattern, spatial Direction, foundational Stance, and kinetic Technique.',
+  elements: [
+    {
+      id: 'pattern',
+      title: '1. Pattern (도형 / Pattern)',
+      koreanTitle: '도형 (Floor Trajectory & Character)',
+      concept: 'The geometric shape drawn by the practitioner’s feet on the dojang floor.',
+      details: [
+        'All eight Taegeuk poomsae follow the Chinese character "王" (Wang / King).',
+        'Each of the three horizontal lines of "王" corresponds directly to one line of that form’s trigram (Top = Heaven, Middle = Man, Bottom = Earth).',
+        'Palgwe forms vary by character: Palgwe 1–4 & 6 use "工" (Gong / Work), Palgwe 5 uses "干" (Gan / Shield), Palgwe 7 uses "下" (Ha / Below), and Palgwe 8 uses "土" (Tu / Earth).',
+        'Black Belt forms each follow unique Hanja characters (士, 山, 工, 一, 十, 上, 下, 水, 卍).',
+      ],
+      practicalApplication:
+        'Return to the exact origin spot (Joon-bi line) upon completion; deviations indicate faulty stance lengths or imprecise pivot axes.',
+    },
+    {
+      id: 'direction',
+      title: '2. Direction (방향 / Direction - The Clock Method)',
+      koreanTitle: '방향 (The 4-Point Clock Method)',
+      concept: 'Spatial orientation governing which angle the practitioner faces throughout the form.',
+      details: [
+        '12 o’clock (Front / Buk - 북): Direct engagement with imaginary forward opponent.',
+        '3 o’clock (Right / Dong - 동): 90-degree lateral flank defense and counter-attack.',
+        '6 o’clock (Rear / Nam - 남): Return path, retrogression, and rear threat neutralization.',
+        '9 o’clock (Left / Seo - 서): Initial 90-degree pivot initiating all horizontal lines.',
+      ],
+      practicalApplication:
+        'All Taegeuk and Palgwe forms require the student to face only these four cardinal compass points, eliminating oblique guesswork.',
+    },
+    {
+      id: 'stance',
+      title: '3. Stance (서기 / Stance)',
+      koreanTitle: '서기 (Weight Distribution & Center of Gravity)',
+      concept: 'Positioning and spacing of feet, knee flexion, and body weight distribution.',
+      details: [
+        'Ap-seogi (Walking Stance): 50/50 equal balance, 1 foot-length step, naturally upright.',
+        'Ap-kubi (Forward Stance): 70% front leg / 30% rear leg, 4–4.5 foot-lengths, deep power root.',
+        'Dwit-kubi (Back Stance / L-Stance): 70% rear leg / 30% front leg, heels aligned on single line at 90° angle.',
+        'Beom-seogi (Tiger Stance): 90–100% rear leg weight, front heel elevated, coiled spring readiness.',
+        'Juchum-seogi (Riding Stance): 50/50 balance, 2 foot-lengths wide, parallel feet, hips lowered.',
+      ],
+      practicalApplication:
+        'Proper stance is the foundation of kinetic force transmission. A flawed stance bleeds power and breaks balance during strikes.',
+    },
+    {
+      id: 'technique',
+      title: '4. Technique (기술 / Technique)',
+      koreanTitle: '기술 (Chambering, Trajectory & Impact)',
+      concept: 'Methods of blocking, striking, thrusting, and kicking with maximum biomechanical efficiency.',
+      details: [
+        'Chambering: Every block and strike starts from an origin point (e.g. opposite shoulder, hip, ear) to generate rotational momentum.',
+        'Hip Torque: Rotational snap of the pelvis aligns with the final 10% of technique delivery.',
+        'Striking Weapons: Fists (Joomeok), Knife-hands (Sonnal), Spear-hands (Pyon-sonkkeut), Elbows (Palkoop), and Foot-blades (Balnal).',
+        'Kicking Dynamics: Chamber -> Extend -> Strike with dedicated weapon (Ap-chook / Balnal) -> Re-chamber before controlled landing.',
+      ],
+      practicalApplication:
+        'Technique must look crisp and authentic—not pantomime. Deliver every movement as if encountering an actual opponent.',
+    },
+  ],
+  wangFloorRule: {
+    title: 'The "王" (King) Floor Plan & The Trigram Stepping Law',
+    chineseCharacter: '王',
+    definition:
+      'In Taegeuk forms, the three horizontal lines of the Chinese character "王" directly represent the three lines of the I Ching trigram. The top line represents Heaven, the middle line represents Man, and the bottom line represents Earth.',
+    yangRule:
+      'Solid Line (Yang —–): If the practitioner advances (takes a step forward) along the horizontal line, that line manifests as a solid, unbroken Yang line.',
+    umRule:
+      'Broken Line (Um – –): If the practitioner does not take a step forward along the horizontal line (e.g., executing in place, retreating, or turning without forward advance), that line manifests as a broken Um line.',
+    philosophicalSignificance:
+      'This direct correlation allows the martial artist to literally write the cosmological trigram across the dojang floor through their physical footsteps.',
+  },
+  clockSystem: {
+    title: 'The Classical 4-Point Clock System',
+    description:
+      'To eliminate directional ambiguity during practice and grading, classical poomsae treatises assign clock hours to all four quadrants.',
+    directions: [
+      { hour: '12:00', direction: 'Front (북 / North)', koreanName: '전방 (Jeon-bang)', tacticalRole: 'Initial line of sight and primary offensive progression' },
+      { hour: '3:00', direction: 'Right (동 / East)', koreanName: '우측 (Woo-cheuk)', tacticalRole: 'Right lateral flank engagements and return crossings' },
+      { hour: '6:00', direction: 'Rear (남 / South)', koreanName: '후방 (Hoo-bang)', tacticalRole: 'Return center line and climactic finishing combinations' },
+      { hour: '9:00', direction: 'Left (서 / West)', koreanName: '좌측 (Jwa-cheuk)', tacticalRole: 'Opening pivot initiating the horizontal trigram lines' },
+    ],
+  },
+}
+
+export const DEFAULT_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
+  title: 'The 8 Pillars of Poomse Performance',
+  subtitle: 'Developing the Soul of Taekwondo Practice (Ronald A. Southwick Treatise)',
+  summary:
+    'A skilled master can discern a student’s technical maturity, mental focus, balance, and inner spirit by observing a single poomsae. Mastery requires balancing these eight classical dimensions.',
+  pillars: [
+    {
+      number: 1,
+      title: 'Technique (기술 / Gisul)',
+      koreanTitle: '정확한 기본기 (Technical Accuracy)',
+      summary: 'Blocks start and stop where effective; strikes originate from the hip with full follow-through; kicks display balance and proper foot formation.',
+      executionGuide: 'Never sacrifice precision for flashiness. Every block must have an authentic protective angle, and every strike must penetrate the intended anatomical target.',
+      masterCue: 'Chamber completely, snap explosively, lock at impact.',
+    },
+    {
+      number: 2,
+      title: 'Knowledge of the Poomse (지식 / Ji)',
+      koreanTitle: '품새에 대한 이해 (Pattern & Lineage Knowledge)',
+      summary: 'Knowing the floor pattern, stances, techniques, Hanja character shapes, and trigram philosophy in microscopic detail.',
+      executionGuide: 'Understand why a technique is placed where it is. Know which trigram line you are walking and the cosmic element it expresses.',
+      masterCue: 'A student who knows the meaning moves with conviction.',
+    },
+    {
+      number: 3,
+      title: 'Attitude & Spirit (태도 / Taedo)',
+      koreanTitle: '수련 태도와 백절불굴 (Indomitable Attitude)',
+      summary: 'Fostering perseverance (Innae), patience, and humility. Displaying complete undivided attention and solemn martial presence.',
+      executionGuide: 'Approach the poomsae with reverent seriousness. From the initial Charyeut bow to the final Ba-ro return, your gaze must remain unbroken.',
+      masterCue: 'The inner spirit shines through the eyes and posture.',
+    },
+    {
+      number: 4,
+      title: 'Eye Focus & Precision (시선 / Shi-seon)',
+      koreanTitle: '시선과 가상 대전 (Gaze & Simulated Combat)',
+      summary: 'Looking directly at imaginary opponents; placing attacks and blocks at exact target heights (solar plexus, philtrum, groin).',
+      executionGuide: 'Before turning your body, turn your eyes. Look where your imaginary opponent stands, verify the target, then execute with pinpoint accuracy.',
+      masterCue: 'Turn the eyes first, then the feet, then deliver the blow.',
+    },
+    {
+      number: 5,
+      title: 'Grace, Rhythm & Fluidity (부드러움 / Yuyeonseong)',
+      koreanTitle: '동작의 유연성과 흐름 (Fluidity & Continuity)',
+      summary: 'Executing without stiffness; chaining motions with rhythmic continuity so movements look purposeful, controlled, and visually majestic.',
+      executionGuide: 'Avoid robotic stops and starts. Stances flow into the next technique like waves crashing onto shore, absorbing and redirecting momentum.',
+      masterCue: 'Smooth like flowing water, sharp like cutting jade.',
+    },
+    {
+      number: 6,
+      title: 'Balance & Center of Gravity (균형 / Gyunhyeong)',
+      koreanTitle: '신체 균형과 중심 유지 (Equilibrium & Weight Distribution)',
+      summary: 'Staying rooted in the stance without wobbling or leaning; maintaining upright spine alignment throughout transitions and high kicks.',
+      executionGuide: 'Keep your center of gravity low and stable (Danjeon). Do not rise or drop your head during horizontal steps unless mandated by the stance transition.',
+      masterCue: 'A master’s head stays on a level plane throughout the stepping lines.',
+    },
+    {
+      number: 7,
+      title: 'Power: Tension & Relaxation (힘과 유강 / Him & Yu-Gang)',
+      koreanTitle: '유강의 조화 (Tension & Relaxation Dynamic)',
+      summary: 'Relaxation during the preparatory chambering stage grants speed; instantaneous muscular tension at impact creates crushing power.',
+      executionGuide: 'Muscles kept rigid throughout a form cause slow, stiff movements. Stay relaxed like water until the microsecond of impact, then lock like iron.',
+      masterCue: 'Speed comes from relaxation; destructive force comes from impact tension.',
+    },
+    {
+      number: 8,
+      title: 'Breathing & Kihop (호흡과 기합 / Hohup & Kihap)',
+      koreanTitle: '단전호흡과 기합 (Danjeon Breath & Spirit Shout)',
+      summary: 'Inhaling smoothly during preparation; exhaling sharply on delivery. The spirit shout (Kihap) erupts from the lower abdomen (Danjeon), not the throat.',
+      executionGuide: 'Breathe silently through the nose during slow chambers, and exhale with a short breath through the teeth on impact. The Kihap focuses all internal energy (Qi).',
+      masterCue: 'The exhalation is the strongest moment of the action.',
+    },
+  ],
+}
+
+export const DEFAULT_PALGWE_COMPARISON: PalgweComparisonData = {
+  title: 'The 1967 Palgwe vs 1971 Taegeuk Historical Matrix',
+  subtitle: 'Evolution from Traditional Kwan Kata to Modern WT Olympic Curriculum',
+  historicalTimeline: 'Adopted January 30, 1967 (KTA) & Transitioned 1971 (Kukkiwon)',
+  summary:
+    'On January 30, 1967, the Korea Taekwondo Association adopted standard sets of 8 Palgwe (八卦) and 8 Taegeuk (太極) forms for Gup holders. In 1971, Kukkiwon established the Taegeuk series as the official international standard, preserving the 8 I Ching trigrams while modernizing footwork and kicking combinations.',
+  forms: [
+    {
+      number: 1,
+      name: 'Palgwe Il Jang (1)',
+      trigram: '☰ Keon (Heaven)',
+      floorPattern: '工 (Gong / Work)',
+      patternDefinition: 'Work / Craftsmanship',
+      element: 'Heaven & Light',
+      taegeukCounterpart: 'Taegeuk 1 (Il Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 1 uses deep forward stance (Ap-kubi) and middle blocks; Taegeuk 1 uses natural walking stances (Ap-seogi) with crisp low blocks and front kicks.',
+    },
+    {
+      number: 2,
+      name: 'Palgwe Ee Jang (2)',
+      trigram: '☱ Tae (Lake)',
+      floorPattern: '工 (Gong / Work)',
+      patternDefinition: 'Work / Craftsmanship',
+      element: 'Lake & Joy',
+      taegeukCounterpart: 'Taegeuk 2 (Ee Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 2 repeats outside-to-inside middle blocks; Taegeuk 2 introduces high facial punches (Olgul-jireugi) and dynamic chest blocks.',
+    },
+    {
+      number: 3,
+      name: 'Palgwe Sam Jang (3)',
+      trigram: '☲ Ri (Fire)',
+      floorPattern: '工 (Gong / Work)',
+      patternDefinition: 'Work / Craftsmanship',
+      element: 'Fire & Clarity',
+      taegeukCounterpart: 'Taegeuk 3 (Sam Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 3 repeats double knifehand middle blocks along 6:00 and upper punches; Taegeuk 3 introduces single knifehand neck strikes (Hansonnal Mok-chigi) and rapid 1-2 punches.',
+    },
+    {
+      number: 4,
+      name: 'Palgwe Sa Jang (4)',
+      trigram: '☳ Jin (Thunder)',
+      floorPattern: '工 (Gong / Work)',
+      patternDefinition: 'Work / Craftsmanship',
+      element: 'Thunder & Awe',
+      taegeukCounterpart: 'Taegeuk 4 (Sa Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 4 features 360-degree spinning hammerfist strikes and Keumgang diamond mountain blocks; Taegeuk 4 introduces spearhand thrusts, swallow-form neck strikes, and consecutive side kicks.',
+    },
+    {
+      number: 5,
+      name: 'Palgwe Oh Jang (5)',
+      trigram: '☴ Seon (Wind)',
+      floorPattern: '干 (Gan / Shield)',
+      patternDefinition: 'Shield / Defense',
+      element: 'Wind & Penetration',
+      taegeukCounterpart: 'Taegeuk 5 (Oh Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 5 uses the unique "干" (Shield) floor shape, 35 movements, and crane stances (Haktari-seogi); Taegeuk 5 streamlines to 20 movements with target elbow strikes and crossed-stance stomps.',
+    },
+    {
+      number: 6,
+      name: 'Palgwe Yook Jang (6)',
+      trigram: '☵ Gam (Water)',
+      floorPattern: '工 (Gong / Work)',
+      patternDefinition: 'Work / Craftsmanship',
+      element: 'Water & Constant Flow',
+      taegeukCounterpart: 'Taegeuk 6 (Yuk Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 6 employs palm outward wedge blocks and jumping crossed stances; Taegeuk 6 introduces roundhouse kicks (Dollyo-chagi), palm heel parries, and 5-second Danjeon breath control.',
+    },
+    {
+      number: 7,
+      name: 'Palgwe Chil Jang (7)',
+      trigram: '☶ Gan (Mountain)',
+      floorPattern: '下 (Ha / Below)',
+      patternDefinition: 'Below / Grounding',
+      element: 'Mountain & Stability',
+      taegeukCounterpart: 'Taegeuk 7 (Chil Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 7 uses the "下" pattern, down wedge blocks, and high X-blocks; Taegeuk 7 introduces repeated Tiger Stances (Beom-seogi), scissors blocks, knee strikes, and covered-fist breath control.',
+    },
+    {
+      number: 8,
+      name: 'Palgwe Pal Jang (8)',
+      trigram: '☷ Gon (Earth)',
+      floorPattern: '土 (Tu / Earth)',
+      patternDefinition: 'Earth / Soil',
+      element: 'Earth & Completion',
+      taegeukCounterpart: 'Taegeuk 8 (Pal Jang) — Floor: 王',
+      keyDivergence: 'Palgwe 8 follows the "土" pattern with rear grab escapes (Meonge Paegi) and crane stances; Taegeuk 8 introduces aerial jumping double front kicks (Dubal-dangsang-chagi), single mountain blocks, and pulling uppercuts.',
+    },
+  ],
+}
+
+function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
   switch (lang) {
     case 'km':
       return {
@@ -1500,6 +1752,9 @@ export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
+        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: DEFAULT_PALGWE_COMPARISON,
       }
     case 'zh':
       return {
@@ -1707,6 +1962,9 @@ export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
+        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: DEFAULT_PALGWE_COMPARISON,
       }
     case 'ko':
       return {
@@ -1914,6 +2172,9 @@ export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
+        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: DEFAULT_PALGWE_COMPARISON,
       }
     default:
       return {
@@ -2383,6 +2644,16 @@ export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
           ],
         },
       }
+  }
+}
+
+export function getLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
+  const data = getRawLocalizedWhatIsTaegeuk(lang)
+  return {
+    ...data,
+    fourExecutionElements: data.fourExecutionElements || DEFAULT_FOUR_EXECUTION_ELEMENTS,
+    eightPerformancePillars: data.eightPerformancePillars || DEFAULT_EIGHT_PERFORMANCE_PILLARS,
+    palgweComparison: data.palgweComparison || DEFAULT_PALGWE_COMPARISON,
   }
 }
 

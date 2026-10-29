@@ -38,6 +38,10 @@ import {
 } from 'lucide-react'
 import { getSafeVideoEmbedUrl } from '@/lib/videoHelper'
 import { BlackBeltStripesBadge } from '@/components/library/BlackBeltStripesBadge'
+import {
+  WangFloorPlanVisualizer,
+  ClockCompassDial,
+} from '@/components/library/WangFloorPlanVisualizer'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
 
@@ -530,7 +534,7 @@ export default function TechniquePage({ params }: TechniquePageProps) {
 
               {/* Wang (王) Floor Line & Stepping Law Matrix */}
               {item.taegeukPhilosophy.wangFloorPlanLines && (
-                <div className="p-5 rounded-xl bg-white/5 border border-white/10 space-y-3 font-mono">
+                <div className="p-5 rounded-xl bg-white/5 border border-white/10 space-y-4 font-mono">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
                       <Footprints className="w-4 h-4 text-brand-red" />
@@ -541,71 +545,84 @@ export default function TechniquePage({ params }: TechniquePageProps) {
                     </span>
                   </div>
 
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs">
-                    {/* Line 1 Top */}
-                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-brand-red">Line 1 (Top / Heaven)</span>
-                        <span
-                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
-                            item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
-                              ? 'bg-emerald-500/20 text-emerald-300'
-                              : 'bg-blue-500/20 text-blue-300'
-                          }`}
-                        >
-                          {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang ? 'Yang (—–)' : 'Um (– –)'}
-                        </span>
-                      </div>
-                      <span className="text-[10px] text-zinc-400 block">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
-                      </span>
-                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
-                      </p>
+                  <div className="grid lg:grid-cols-12 gap-5 items-start">
+                    <div className="lg:col-span-5">
+                      <WangFloorPlanVisualizer
+                        compact
+                        trigramLines={item.taegeukPhilosophy.trigramLines}
+                        wangFloorPlanLines={item.taegeukPhilosophy.wangFloorPlanLines}
+                        formName={item.name}
+                        trigramSymbol={item.taegeukPhilosophy.trigramSymbol}
+                        elementName={item.taegeukPhilosophy.naturalElement}
+                      />
                     </div>
 
-                    {/* Line 2 Middle */}
-                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-amber-400">Line 2 (Middle / Man)</span>
-                        <span
-                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
-                            item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
-                              ? 'bg-emerald-500/20 text-emerald-300'
-                              : 'bg-blue-500/20 text-blue-300'
-                          }`}
-                        >
-                          {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                    <div className="lg:col-span-7 space-y-3">
+                      {/* Line 1 Top */}
+                      <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-brand-red">Line 1 (Top / Heaven)</span>
+                          <span
+                            className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                              item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
+                                ? 'bg-emerald-500/20 text-emerald-300'
+                                : 'bg-blue-500/20 text-blue-300'
+                            }`}
+                          >
+                            {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-zinc-400 block">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
                         </span>
+                        <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
+                        </p>
                       </div>
-                      <span className="text-[10px] text-zinc-400 block">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
-                      </span>
-                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
-                      </p>
-                    </div>
 
-                    {/* Line 3 Bottom */}
-                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-blue-400">Line 3 (Bottom / Earth)</span>
-                        <span
-                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
-                            item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
-                              ? 'bg-emerald-500/20 text-emerald-300'
-                              : 'bg-blue-500/20 text-blue-300'
-                          }`}
-                        >
-                          {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                      {/* Line 2 Middle */}
+                      <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-amber-400">Line 2 (Middle / Man)</span>
+                          <span
+                            className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                              item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
+                                ? 'bg-emerald-500/20 text-emerald-300'
+                                : 'bg-blue-500/20 text-blue-300'
+                            }`}
+                          >
+                            {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-zinc-400 block">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
                         </span>
+                        <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
+                        </p>
                       </div>
-                      <span className="text-[10px] text-zinc-400 block">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
-                      </span>
-                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
-                        {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
-                      </p>
+
+                      {/* Line 3 Bottom */}
+                      <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-blue-400">Line 3 (Bottom / Earth)</span>
+                          <span
+                            className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                              item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
+                                ? 'bg-emerald-500/20 text-emerald-300'
+                                : 'bg-blue-500/20 text-blue-300'
+                            }`}
+                          >
+                            {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-zinc-400 block">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
+                        </span>
+                        <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -613,7 +630,7 @@ export default function TechniquePage({ params }: TechniquePageProps) {
 
               {/* Clock Trajectory & Kihap Indicator */}
               {(item.taegeukPhilosophy.clockTrajectory || item.taegeukPhilosophy.kihapSteps) && (
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2.5 font-mono">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3 font-mono">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
                       <Compass className="w-4 h-4 text-blue-400" />
@@ -628,12 +645,10 @@ export default function TechniquePage({ params }: TechniquePageProps) {
                   </div>
 
                   {item.taegeukPhilosophy.clockTrajectory && (
-                    <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300 flex items-center gap-1.5 overflow-x-auto">
-                      <span className="text-zinc-500 uppercase font-bold text-[10px] shrink-0">Vector Path:</span>
-                      <span className="text-amber-300 font-bold whitespace-nowrap">
-                        {item.taegeukPhilosophy.clockTrajectory}
-                      </span>
-                    </div>
+                    <ClockCompassDial
+                      compact
+                      trajectory={item.taegeukPhilosophy.clockTrajectory}
+                    />
                   )}
                 </div>
               )}
