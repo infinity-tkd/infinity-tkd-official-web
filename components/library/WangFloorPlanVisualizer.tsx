@@ -25,6 +25,109 @@ export interface WangFloorPlanVisualizerProps {
   compact?: boolean
   selectedLine?: 1 | 2 | 3 | null
   onSelectLine?: (line: 1 | 2 | 3 | null) => void
+  language?: string
+}
+
+const WANG_I18N: Record<string, {
+  characterWangFloor: string
+  dir12: string
+  dir3: string
+  dir9: string
+  dir6: string
+  line1Top: (yang: boolean) => string
+  line2Mid: (yang: boolean) => string
+  line3Bot: (yang: boolean) => string
+  originJoonbi: string
+  solidYang: string
+  brokenUm: string
+  clockVector: string
+  facing: string
+  trajectory: string
+  frontDir: string
+  rightDir: string
+  rearDir: string
+  leftDir: string
+}> = {
+  en: {
+    characterWangFloor: 'Character 王 Floor',
+    dir12: '12:00 (Front)',
+    dir3: '3:00 (R)',
+    dir9: '9:00 (L)',
+    dir6: '6:00 (Rear)',
+    line1Top: (y) => `Line 1 (Top / Heaven): ${y ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}`,
+    line2Mid: (y) => `Line 2 (Middle / Man): ${y ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}`,
+    line3Bot: (y) => `Line 3 (Bottom / Earth): ${y ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}`,
+    originJoonbi: 'Origin (Joonbi)',
+    solidYang: 'Solid Yang (Advances)',
+    brokenUm: 'Broken Um (Stationary / Pivot)',
+    clockVector: '4-Point Clock Vector',
+    facing: 'Facing',
+    trajectory: 'Standardized Trajectory:',
+    frontDir: 'Front (전방)',
+    rightDir: 'Right (우측)',
+    rearDir: 'Rear (후방)',
+    leftDir: 'Left (좌측)',
+  },
+  km: {
+    characterWangFloor: 'គន្លងកម្រាល "王"',
+    dir12: '12:00 (មុខ)',
+    dir3: '3:00 (ស្តាំ)',
+    dir9: '9:00 (ឆ្វេង)',
+    dir6: '6:00 (ក្រោយ)',
+    line1Top: (y) => `ខ្សែ ១ (លើ/មេឃ)៖ ${y ? 'Yang —– (បោះជំហាន)' : 'Um – – (នៅនឹងកន្លែង/បង្វិល)'}`,
+    line2Mid: (y) => `ខ្សែ ២ (កណ្តាល/មនុស្ស)៖ ${y ? 'Yang —– (បោះជំហាន)' : 'Um – – (នៅនឹងកន្លែង/បង្វិល)'}`,
+    line3Bot: (y) => `ខ្សែ ៣ (ក្រោម/ដី)៖ ${y ? 'Yang —– (បោះជំហាន)' : 'Um – – (នៅនឹងកន្លែង/បង្វិល)'}`,
+    originJoonbi: 'ចំណុចដើម (Joonbi)',
+    solidYang: 'បន្ទាត់រឹង Yang (បោះជំហាន)',
+    brokenUm: 'បន្ទាត់ដាច់ Um (នៅនឹងកន្លែង / បង្វិល)',
+    clockVector: 'វ៉ិចទ័រនាឡិកា ៤ ទិស',
+    facing: 'បែរមុខ',
+    trajectory: 'គន្លងក្បាច់ស្តង់ដារ៖',
+    frontDir: 'ខាងមុខ (전방)',
+    rightDir: 'ខាងស្តាំ (우측)',
+    rearDir: 'ខាងក្រោយ (후방)',
+    leftDir: 'ខាងឆ្វេង (좌측)',
+  },
+  zh: {
+    characterWangFloor: '“王”字演武线',
+    dir12: '12:00 (正前)',
+    dir3: '3:00 (右侧)',
+    dir9: '9:00 (左侧)',
+    dir6: '6:00 (正后)',
+    line1Top: (y) => `第一线 (上/天爻)：${y ? '阳爻 —– (前进步法)' : '阴爻 – – (原地/旋转)'}`,
+    line2Mid: (y) => `第二线 (中/人爻)：${y ? '阳爻 —– (前进步法)' : '阴爻 – – (原地/旋转)'}`,
+    line3Bot: (y) => `第三线 (下/地爻)：${y ? '阳爻 —– (前进步法)' : '阴爻 – – (原地/旋转)'}`,
+    originJoonbi: '原点 (准备 / Joonbi)',
+    solidYang: '连贯阳爻 (前进步法)',
+    brokenUm: '断裂阴爻 (原地守势 / 转身)',
+    clockVector: '四向时钟矢量系统',
+    facing: '朝向',
+    trajectory: '公认演武轨迹：',
+    frontDir: '正前 (전방)',
+    rightDir: '右侧 (우측)',
+    rearDir: '正后 (후방)',
+    leftDir: '左侧 (좌측)',
+  },
+  ko: {
+    characterWangFloor: '王자 품새선',
+    dir12: '12:00 (전방)',
+    dir3: '3:00 (우측)',
+    dir9: '9:00 (좌측)',
+    dir6: '6:00 (후방)',
+    line1Top: (y) => `1선 (상효 / 하늘)：${y ? '양효 —– (전진 보법)' : '음효 – – (제자리/방향전환)'}`,
+    line2Mid: (y) => `2선 (중효 / 사람)：${y ? '양효 —– (전진 보법)' : '음효 – – (제자리/방향전환)'}`,
+    line3Bot: (y) => `3선 (하효 / 땅)：${y ? '양효 —– (전진 보법)' : '음효 – – (제자리/방향전환)'}`,
+    originJoonbi: '원점 (준비선 / Joonbi)',
+    solidYang: '양효 (전진 보법)',
+    brokenUm: '음효 (제자리 / 방향전환)',
+    clockVector: '4방향 시계좌표 벡터',
+    facing: '시선 방향',
+    trajectory: '공인 이동 궤적:',
+    frontDir: '전방 (Jeon-bang)',
+    rightDir: '우측 (Woo-cheuk)',
+    rearDir: '후방 (Hoo-bang)',
+    leftDir: '좌측 (Jwa-cheuk)',
+  },
 }
 
 /**
@@ -44,7 +147,9 @@ export function WangFloorPlanVisualizer({
   compact = false,
   selectedLine = null,
   onSelectLine,
+  language = 'en',
 }: WangFloorPlanVisualizerProps) {
+  const t = WANG_I18N[language] || WANG_I18N.en
   const [hoveredLine, setHoveredLine] = React.useState<1 | 2 | 3 | null>(null)
   const activeHighlight = selectedLine ?? hoveredLine
 
@@ -65,7 +170,7 @@ export function WangFloorPlanVisualizer({
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse shrink-0" />
             <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider shrink-0">
-              Character 王 Floor
+              {t.characterWangFloor}
             </span>
             {formName && (
               <>
@@ -97,16 +202,16 @@ export function WangFloorPlanVisualizer({
 
             {/* Direction Labels around Floor */}
             <text x="170" y="16" textAnchor="middle" fill="#71717a" fontSize="10" fontFamily="monospace" fontWeight="bold">
-              12:00 (Front)
+              {t.dir12}
             </text>
             <text x="325" y="120" textAnchor="middle" fill="#71717a" fontSize="10" fontFamily="monospace" fontWeight="bold">
-              3:00 (R)
+              {t.dir3}
             </text>
             <text x="15" y="120" textAnchor="middle" fill="#71717a" fontSize="10" fontFamily="monospace" fontWeight="bold">
-              9:00 (L)
+              {t.dir9}
             </text>
             <text x="170" y="235" textAnchor="middle" fill="#71717a" fontSize="10" fontFamily="monospace" fontWeight="bold">
-              6:00 (Rear)
+              {t.dir6}
             </text>
 
             {/* Central Vertical Spine (connecting all horizontal bars) */}
@@ -175,7 +280,7 @@ export function WangFloorPlanVisualizer({
                 fontFamily="monospace"
                 fontWeight="bold"
               >
-                Line 1 (Top / Heaven): {isLine1Yang ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}
+                {t.line1Top(isLine1Yang)}
               </text>
             </g>
 
@@ -228,7 +333,7 @@ export function WangFloorPlanVisualizer({
                 fontFamily="monospace"
                 fontWeight="bold"
               >
-                Line 2 (Middle / Man): {isLine2Yang ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}
+                {t.line2Mid(isLine2Yang)}
               </text>
             </g>
 
@@ -281,14 +386,14 @@ export function WangFloorPlanVisualizer({
                 fontFamily="monospace"
                 fontWeight="bold"
               >
-                Line 3 (Bottom / Earth): {isLine3Yang ? 'Yang —– (Advances)' : 'Um – – (In Place/Turn)'}
+                {t.line3Bot(isLine3Yang)}
               </text>
             </g>
 
             {/* Origin Stance Marker (Center Base) */}
             <circle cx="170" cy="205" r="5" fill="#EF2F38" />
             <text x="170" y="218" textAnchor="middle" fill="#EF2F38" fontSize="8" fontFamily="monospace" fontWeight="bold">
-              Origin (Joonbi)
+              {t.originJoonbi}
             </text>
           </svg>
         </div>
@@ -297,12 +402,12 @@ export function WangFloorPlanVisualizer({
         <div className="flex items-center justify-center gap-2 sm:gap-4 pt-2 border-t border-zinc-800/80 w-full text-[10px] text-zinc-400 flex-wrap">
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-3.5 h-1.5 rounded-sm bg-emerald-500" />
-            <span>Solid Yang (Advances)</span>
+            <span>{t.solidYang}</span>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-1.5 h-1.5 rounded-sm bg-blue-500" />
             <span className="w-1.5 h-1.5 rounded-sm bg-blue-500" />
-            <span>Broken Um (Stationary / Pivot)</span>
+            <span>{t.brokenUm}</span>
           </div>
         </div>
       </div>
@@ -365,16 +470,19 @@ export function ClockCompassDial({
   trajectory,
   currentDirection,
   compact = false,
+  language = 'en',
 }: {
   trajectory?: string
   currentDirection?: string
   compact?: boolean
+  language?: string
 }) {
+  const t = WANG_I18N[language] || WANG_I18N.en
   const directions = [
-    { hour: '12:00', label: 'Front (전방)', x: 60, y: 16, anchor: 'middle' },
-    { hour: '3:00', label: 'Right (우측)', x: 105, y: 64, anchor: 'end' },
-    { hour: '6:00', label: 'Rear (후방)', x: 60, y: 110, anchor: 'middle' },
-    { hour: '9:00', label: 'Left (좌측)', x: 15, y: 64, anchor: 'start' },
+    { hour: '12:00', label: t.frontDir, x: 60, y: 16, anchor: 'middle' },
+    { hour: '3:00', label: t.rightDir, x: 105, y: 64, anchor: 'end' },
+    { hour: '6:00', label: t.rearDir, x: 60, y: 110, anchor: 'middle' },
+    { hour: '9:00', label: t.leftDir, x: 15, y: 64, anchor: 'start' },
   ]
 
   return (
@@ -382,11 +490,11 @@ export function ClockCompassDial({
       <div className="flex items-center justify-between pb-2 border-b border-zinc-800 text-xs">
         <div className="flex items-center gap-1.5 text-zinc-300">
           <Compass className="w-3.5 h-3.5 text-brand-red" />
-          <span className="text-[10px] uppercase font-bold text-zinc-400">4-Point Clock Vector</span>
+          <span className="text-[10px] uppercase font-bold text-zinc-400">{t.clockVector}</span>
         </div>
         {currentDirection && (
           <span className="px-2 py-0.5 rounded bg-brand-red/20 text-brand-red font-bold text-[10px]">
-            Facing: {currentDirection}
+            {t.facing}: {currentDirection}
           </span>
         )}
       </div>
@@ -433,7 +541,7 @@ export function ClockCompassDial({
 
       {trajectory && (
         <div className="pt-2 border-t border-zinc-800 text-[10px] text-zinc-400 space-y-1">
-          <span className="uppercase text-[9px] text-zinc-500 block font-bold">Standardized Trajectory:</span>
+          <span className="uppercase text-[9px] text-zinc-500 block font-bold">{t.trajectory}</span>
           <p className="text-zinc-300 font-bold overflow-x-auto whitespace-nowrap">
             {trajectory}
           </p>

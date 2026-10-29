@@ -44,6 +44,162 @@ export interface PoomsaeI18nDictionary {
   governingStandardLabel: string
   scoringMetricLabel: string
   allSeriesCount: string
+
+  // Master Navigation & General Badges
+  sectionBadge: string
+  patternsCountSuffix: string
+  catalogKoreanNav: string
+  foundationsKoreanNav: string
+  foundationsNavSubtitle: string
+  taegeukKoreanNav: string
+  taegeukNavSubtitle: string
+  yudanjaKoreanNav: string
+  yudanjaNavSubtitle: string
+
+  // Tab 2 Foundations
+  foundationsBadge: string
+  partnerlessCombatTitle: string
+  mindBodyUnityTitle: string
+  pillarPrefix: string
+  errorPrefix: string
+  flawLabel: string
+  grandmasterCorrectionLabel: string
+  focusLabel: string
+
+  // Tab 3 Taegeuk
+  cosmologyBadge: string
+  yangRedEumBlue: string
+  taegeukgiConnectionTitle: string
+  fourCoreElementsBadge: string
+  elementLabel: string
+  keyPrinciplesLabel: string
+  coordinateSystemBadge: string
+  wangFloorPlanTitle: string
+  wangFloorPlanSubtitle: string
+  floorGeometryBadge: string
+  steppingLawTitle: string
+  steppingLawDesc: string
+  solidYangDesc: string
+  brokenUmDesc: string
+  selectTaegeukToInspect: string
+  inspectFullDossierBtn: string
+  trigramPrefix: string
+  elementPrefix: string
+  solidYangBadge: string
+  brokenUmBadge: string
+  eightPillarsBadge: string
+  masterCuePrefix: string
+  historicalMatrixBadge: string
+  viewTableBtn: string
+  viewCardsBtn: string
+  thPalgweNumber: string
+  thPalgweForm: string
+  thPalgwePattern: string
+  thPatternMeaning: string
+  thTrigram: string
+  thTaegeukForm: string
+  thTaegeukPattern: string
+  thNaturalElement: string
+  thTacticalNuance: string
+  allFormsWangNote: string
+  fiveIdealsTitle: string
+  fiveIdealsBadge: string
+  fiveIdealsIntro: string
+  idealPrefix: string
+  metaphysicalOriginsBadge: string
+  lineageFuhHiLabel: string
+  taegukkiIntegrationTitle: string
+  pre1971KtaBadge: string
+  keyEvolutionsLabel: string
+  fourPairsTitle: string
+  fourPairsDesc: string
+  oppositesInBalanceBadge: string
+  inspectPairBtn: string
+
+  // Tab 4 Yudanja
+  yudanjaCurriculumBadge: string
+  historicalClarificationsTitle: string
+  kupVsDanBadge: string
+  thDimension: string
+  thTaegeukSeriesCol: string
+  thYudanjaSeriesCol: string
+  danMasteryMatrixTitle: string
+  danMasteryMatrixSubtitle: string
+  thDanLevel: string
+  thDanBelt: string
+  thDanFormName: string
+  thDanMeaningOfName: string
+  thDanFloorPattern: string
+  thDanMeaningOfSymbol: string
+  thDanHanjaSymbol: string
+  thDanMasterCharacteristic: string
+  thDanAction: string
+  footnotesTitle: string
+  fnGeumgangTitle: string
+  fnGeumgangDesc: string
+  fnTaebaekTitle: string
+  fnTaebaekDesc: string
+  fnSipjinTitle: string
+  fnSipjinDesc: string
+  cardMeaningLabel: string
+  cardSymbolLabel: string
+  cardFloorLabel: string
+  cardCharacteristicLabel: string
+  cardPhilosophicalLabel: string
+  cardKeyTechLabel: string
+  nonLinearDanProgressionTitle: string
+  competitionDynamicsTitle: string
+  selfDefenseBunkaiTitle: string
+
+  // Dossier Modal & Deep Detail Keys
+  dualityPairTitle: string
+  oppositeCounterpartLabel: string
+  switchToOppositeBtn: string
+  jooyeokTrigramLineage: string
+  rankPrefix: string
+  taegukkiTrigramBadge: string
+  coreUniversalConceptTitle: string
+  cosmicDialecticTitle: string
+  philosophicalDirectiveTitle: string
+  wangFloorDynamicsTitle: string
+  fourPointClockTitle: string
+  kihapStepPrefix: string
+  wtCompetitionScoringTitle: string
+  targetDurationPrefix: string
+  majorDeductionsTitle: string
+  minorDeductionsTitle: string
+  eightPillarsCuesTitle: string
+  danMasteryOfficialTitle: string
+  danMasteryDoctrineTitle: string
+  junbiSeogiTitle: string
+  introducedKeyTechTitle: string
+  dynamicMovementCharsTitle: string
+  classicalLineageTitle: string
+  etymologyNoteLabel: string
+  newPoomsaeBadge: string
+  targetAgeRationaleTitle: string
+  officialKukkiwonMeaningTitle: string
+  floorLineSymbolTitle: string
+  technicalArsenalTitle: string
+  signatureKicksTitle: string
+  signatureHandsTitle: string
+  philosophicalMeaningTitle: string
+  yinYangDynamicsTitle: string
+  movementSequenceTitle: string
+  stepBreakdownTitle: string
+  mandatoryKihapLabel: string
+  kihapRequiredBadge: string
+  completedLabel: string
+  curriculumStandardFooter: string
+  lineSymbolPrefix: string
+  termsDocumentedSuffix: string
+  officialPracticalPointers: string
+  coachingInsightPrefix: string
+  stepsCuratedNotice: string
+  termsCuratedNotice: string
+  tipsCuratedNotice: string
+  ringGeometryDescPrefix: string
+  ringGeometryDescSuffix: string
 }
 
 export const poomsaeI18n: Record<string, PoomsaeI18nDictionary> = {
@@ -85,6 +241,157 @@ export const poomsaeI18n: Record<string, PoomsaeI18nDictionary> = {
     governingStandardLabel: 'Governing Standard',
     scoringMetricLabel: 'Scoring Metric',
     allSeriesCount: '27 Official Patterns Across 3 Suites',
+
+    sectionBadge: 'Section',
+    patternsCountSuffix: 'Patterns',
+    catalogKoreanNav: '공인 27개 품새 도감 (3대 시리즈)',
+    foundationsKoreanNav: '품새의 본질·기원 및 3대 수련 요결',
+    foundationsNavSubtitle: 'Why Poomsae Matters, Mistakes & 10th Kup',
+    taegeukKoreanNav: '주역 8괘와 4대 대립쌍 (1971년 전환)',
+    taegeukNavSubtitle: 'Eum-Yang Unity, Trigram Pairs & History',
+    yudanjaKoreanNav: '유단자 품새 (한자선·승단·실전 공방)',
+    yudanjaNavSubtitle: 'Unique Hanja Lines, Grading & Bunkai',
+
+    foundationsBadge: 'Martial Foundations & Origins',
+    partnerlessCombatTitle: 'Partnerless Combat Simulation:',
+    mindBodyUnityTitle: 'Mind & Body Unity Without Pressure:',
+    pillarPrefix: 'Pillar #',
+    errorPrefix: 'Error #',
+    flawLabel: 'Flaw:',
+    grandmasterCorrectionLabel: 'Grandmaster Correction:',
+    focusLabel: 'Focus:',
+
+    cosmologyBadge: 'Cosmology & Core Philosophy',
+    yangRedEumBlue: 'Yang (Red) • Eum (Blue)',
+    taegeukgiConnectionTitle: 'Taegeukgi Flag Connection (태극기):',
+    fourCoreElementsBadge: '4 Core Elements',
+    elementLabel: 'Element',
+    keyPrinciplesLabel: 'Key Principles:',
+    coordinateSystemBadge: 'Standardized Coordinate System',
+    wangFloorPlanTitle: 'The Wang (王) Floor Plan & Trigram Stepping Law',
+    wangFloorPlanSubtitle: '王자 품새선과 주역 3효(三爻) 운족의 법칙 (Step Forward = Yang • Stationary/Retreat = Um)',
+    floorGeometryBadge: 'Floor Geometry',
+    steppingLawTitle: 'The Stepping Law of the 3 Horizontal Lines:',
+    steppingLawDesc: 'The 3 horizontal lines of the Chinese character 王 (Wang) correspond directly to the 3 lines of that form’s I Ching trigram (Top = Heaven, Middle = Man, Bottom = Earth).',
+    solidYangDesc: 'Solid Yang Line (—–): If the practitioner advances (takes a step forward) along that horizontal line, it is a solid line.',
+    brokenUmDesc: 'Broken Um Line (– –): If the practitioner executes in place, retreats, or turns without advancing along that horizontal line, it is a broken line.',
+    selectTaegeukToInspect: 'Select Taegeuk Form to Inspect Floor Line Stepping Laws:',
+    inspectFullDossierBtn: 'Inspect Full Dossier →',
+    trigramPrefix: 'Trigram:',
+    elementPrefix: 'Element:',
+    solidYangBadge: 'Solid Yang Line (Advances)',
+    brokenUmBadge: 'Broken Um Line (No Advance)',
+    eightPillarsBadge: '8 Performance Pillars',
+    masterCuePrefix: 'Master Cue:',
+    historicalMatrixBadge: 'Historical Matrix • 1967 Palgwe vs. 1971 Taegeuk',
+    viewTableBtn: 'Table',
+    viewCardsBtn: 'Cards',
+    thPalgweNumber: '#',
+    thPalgweForm: '1967 Palgwe Form',
+    thPalgwePattern: 'Palgwe Floor Pattern',
+    thPatternMeaning: 'Pattern Meaning',
+    thTrigram: 'Trigram',
+    thTaegeukForm: '1971 Taegeuk Form',
+    thTaegeukPattern: 'Taegeuk Floor Pattern',
+    thNaturalElement: 'Natural Element',
+    thTacticalNuance: 'Tactical Nuance',
+    allFormsWangNote: '王 (All Forms)',
+    fiveIdealsTitle: 'The 5 Core Ideals of Taekwondo in Taegeuk Poomsae',
+    fiveIdealsBadge: 'Peace • Unity • Creation • Indomitable • Eternity',
+    fiveIdealsIntro: 'The Taegeuk Poomsae represent the ideals of the martial art of Taekwondo: pacifism, unity, creative spirit, indomitable spirit, and eternity. As well as containing the basic physical movements which must be mastered to become proficient in Taekwondo, the poomsae also contain the thoughts which accompany the practice of Taekwondo. It is from these thoughts that Taekwondo gains its ideals.',
+    idealPrefix: 'Ideal',
+    metaphysicalOriginsBadge: 'Ancient Metaphysical Origins',
+    lineageFuhHiLabel: 'Lineage: Fuh Hi (3,300 BP) • Jooyeok (주역 / 周易)',
+    taegukkiIntegrationTitle: 'Taeguk-ki Flag & Poomsae Integration:',
+    pre1971KtaBadge: '1971 KTA Resolution',
+    keyEvolutionsLabel: 'Key Evolutions from Palgwe to Taegeuk:',
+    fourPairsTitle: 'The 4 Universal Opposition Pairs (태극 4대 대립쌍)',
+    fourPairsDesc: 'Every Taegeuk pattern has an opposite counterpart, mirroring the eternal equilibrium of nature.',
+    oppositesInBalanceBadge: 'Opposites in Balance',
+    inspectPairBtn: 'Inspect Form',
+
+    yudanjaCurriculumBadge: 'Official WT & Kukkiwon Black Belt Curriculum',
+    historicalClarificationsTitle: 'Authoritative Historical Etymology & Clarifications:',
+    kupVsDanBadge: 'Kup vs Dan Architecture',
+    thDimension: 'Architectural Dimension',
+    thTaegeukSeriesCol: 'Taegeuk Series (Kup Grades)',
+    thYudanjaSeriesCol: 'Yudanja Series (Dan Grades)',
+    danMasteryMatrixTitle: 'The Official Black Belt Dan Mastery Matrix (1st to 9th Dan)',
+    danMasteryMatrixSubtitle: 'The Official WT & Kukkiwon Master Curriculum: Level, Belt with Gold Stripes, Meaning of Name, Hanja Floor Patterns, Meaning of Symbol, and Characteristic of a Master.',
+    thDanLevel: 'Level',
+    thDanBelt: 'Belt',
+    thDanFormName: 'Form Name',
+    thDanMeaningOfName: 'Meaning of Name',
+    thDanFloorPattern: 'Floor Pattern',
+    thDanMeaningOfSymbol: 'Meaning of Symbol',
+    thDanHanjaSymbol: 'Symbol',
+    thDanMasterCharacteristic: 'Characteristic of a Master',
+    thDanAction: 'Action',
+    footnotesTitle: 'Historical Etymology & Mythological Footnotes:',
+    fnGeumgangTitle: '¹ Diamond Mountain (Geumgangsan):',
+    fnGeumgangDesc: 'Named after Mount Keumgang and the Buddhist concept of the Vajra (indestructible diamond), symbolizing adamantine hardness, spiritual moral clarity, and towering mountain majesty.',
+    fnTaebaekTitle: '² Ultimate Brightness:',
+    fnTaebaekDesc: 'Sacred Mount Baekdu (Taebaeksan) where Dangun founded ancient Gojoseon under the humanitarian doctrine of Hongik Ingan (홍익인간 — broadly benefiting all humanity).',
+    fnSipjinTitle: '³ The ten eternal entities (Sipjangsaeng / 십장생):',
+    fnSipjinDesc: 'Traditional Korean symbols of perpetual longevity and cosmic harmony: sun, moon, mountain, water, rock, pine tree, herb of eternal youth (bulnocho), tortoise, crane, and deer.',
+    cardMeaningLabel: 'Meaning:',
+    cardSymbolLabel: 'Symbol Concept:',
+    cardFloorLabel: 'Floor Geometry:',
+    cardCharacteristicLabel: 'Characteristic:',
+    cardPhilosophicalLabel: 'Philosophical Mandate:',
+    cardKeyTechLabel: 'Key Techniques:',
+    nonLinearDanProgressionTitle: 'Non-Linear Dan Progression:',
+    competitionDynamicsTitle: 'Competition Floor Spatial Challenge:',
+    selfDefenseBunkaiTitle: 'Self-Defense (Hosinsul Bunkai):',
+
+    dualityPairTitle: 'Philosophical Duality Pair:',
+    oppositeCounterpartLabel: 'Opposite Counterpart:',
+    switchToOppositeBtn: 'Switch to Opposite Form →',
+    jooyeokTrigramLineage: 'Jooyeok Trigram Lineage',
+    rankPrefix: 'Rank:',
+    taegukkiTrigramBadge: 'Taeguk-ki Trigram (태극기 4대 괘)',
+    coreUniversalConceptTitle: 'Core Universal Concept:',
+    cosmicDialecticTitle: 'Cosmic Dialectic & Balance:',
+    philosophicalDirectiveTitle: 'Philosophical Execution Directive (수련 요결):',
+    wangFloorDynamicsTitle: 'Wang (王) Floor Line Stepping Dynamics:',
+    fourPointClockTitle: '4-Point Clock Trajectory & Kihap Placement:',
+    kihapStepPrefix: 'Kihap: Step',
+    wtCompetitionScoringTitle: 'WT Competition Scoring & Deduction Criteria:',
+    targetDurationPrefix: 'Target:',
+    majorDeductionsTitle: 'Major Deductions (-0.3 points each):',
+    minorDeductionsTitle: 'Minor Deductions (-0.1 points each):',
+    eightPillarsCuesTitle: '8 Performance Pillars Execution Cues:',
+    danMasteryOfficialTitle: 'Official WT & Kukkiwon Dan Mastery',
+    danMasteryDoctrineTitle: 'Dan Mastery Doctrine & Philosophical Mandate:',
+    junbiSeogiTitle: 'Ready Stance (준비서기) & Danjeon Respiration:',
+    introducedKeyTechTitle: 'Introduced Key Techniques (신규 도입 기술):',
+    dynamicMovementCharsTitle: 'Dynamic Movement Characteristics (동작 특성):',
+    classicalLineageTitle: 'Classical Lineage & Historical Background (역사적 유래):',
+    etymologyNoteLabel: 'Etymology Note:',
+    newPoomsaeBadge: 'Kukkiwon Official New Poomsae (새 품새)',
+    targetAgeRationaleTitle: 'Age Division & Rationale',
+    officialKukkiwonMeaningTitle: 'Official Kukkiwon Meaning',
+    floorLineSymbolTitle: 'Floor Pattern & Line Symbol',
+    technicalArsenalTitle: 'Technical Arsenal & Signature Movements:',
+    signatureKicksTitle: 'Signature Kicking Techniques:',
+    signatureHandsTitle: 'Signature Hand & Blocking Systems:',
+    philosophicalMeaningTitle: 'Philosophical Meaning & Concept',
+    yinYangDynamicsTitle: 'Yin-Yang Dynamics & Martial Spirit',
+    movementSequenceTitle: 'Movement Sequence',
+    stepBreakdownTitle: 'Step Execution Breakdown',
+    mandatoryKihapLabel: 'Mandatory Vocalization (Kihap)',
+    kihapRequiredBadge: 'Kihap Required',
+    completedLabel: 'Completed',
+    curriculumStandardFooter: 'Official World Taekwondo & Kukkiwon Curriculum Standards',
+    lineSymbolPrefix: 'Line Symbol:',
+    termsDocumentedSuffix: 'Terms Documented',
+    officialPracticalPointers: 'Official Practical Pointers',
+    coachingInsightPrefix: 'Coaching Insight',
+    stepsCuratedNotice: 'Official step-by-step movement breakdown is currently being curated for this pattern.',
+    termsCuratedNotice: 'Terminology glossary is currently being updated for this pattern.',
+    tipsCuratedNotice: 'Coaching tips are currently being updated for this pattern.',
+    ringGeometryDescPrefix: 'Competitors must follow the strict geometric path',
+    ringGeometryDescSuffix: 'across the 10m x 10m ring, starting and returning to the exact initial coordinate within a 1-foot allowance.',
   },
   km: {
     catalogTab: '១. បញ្ជីមេគុន (Catalog)',
@@ -124,6 +431,157 @@ export const poomsaeI18n: Record<string, PoomsaeI18nDictionary> = {
     governingStandardLabel: 'ស្តង់ដារគ្រប់គ្រង',
     scoringMetricLabel: 'ប្រព័ន្ធកំណត់ពិន្ទុ',
     allSeriesCount: '២៧ មេគុនផ្លូវការ ក្នុង ៣ កម្រិត',
+
+    sectionBadge: 'ផ្នែក',
+    patternsCountSuffix: 'មេគុន',
+    catalogKoreanNav: 'បញ្ជីមេគុនផ្លូវការទាំង ២៧ (៣ ស៊េរីធំៗ)',
+    foundationsKoreanNav: 'ខ្លឹមសារ ប្រភពដើម និងគោលការណ៍មេគុនទាំង ៣',
+    foundationsNavSubtitle: 'សារៈសំខាន់មេគុន, កំហុសទូទៅ & ខ្សែក្រវាត់ស 10th Kup',
+    taegeukKoreanNav: 'ត្រីក្រាមទាំង ៨ និងគូប្រឆាំងទាំង ៤ (ការវិវត្ត ១៩៧១)',
+    taegeukNavSubtitle: 'ឯកភាពយិន-យ៉ាង, គូត្រីក្រាម និងប្រវត្តិសាស្ត្រ',
+    yudanjaKoreanNav: 'មេគុន Yudanja (គន្លងអក្សរចិន, ការឡើង Dan & ការការពារខ្លួន)',
+    yudanjaNavSubtitle: 'គន្លងអក្សរចិន Hanja, ការប្រឡង Dan & Bunkai',
+
+    foundationsBadge: 'មូលដ្ឋានគ្រឹះគុន & ប្រភពដើម',
+    partnerlessCombatTitle: 'ការហ្វឹកហាត់ប្រយុទ្ធក្លែងធ្វើគ្មានដៃគូ៖',
+    mindBodyUnityTitle: 'ការរួបរួមចិត្ត និងកាយដោយគ្មានសម្ពាធ៖',
+    pillarPrefix: 'សសរស្តម្ភទី #',
+    errorPrefix: 'កំហុសទី #',
+    flawLabel: 'ចំណុចខ្វះខាត៖',
+    grandmasterCorrectionLabel: 'ការកែតម្រូវពីមេគ្រូ៖',
+    focusLabel: 'ការផ្តោតសំខាន់៖',
+
+    cosmologyBadge: 'ចក្រវាលវិទ្យា & ទស្សនវិជ្ជាស្នូល',
+    yangRedEumBlue: 'យ៉ាង (ក្រហម) • យិន (ខៀវ)',
+    taegeukgiConnectionTitle: 'ទំនាក់ទំនងជាមួយទង់ជាតិកូរ៉េ (Taeguk-ki)៖',
+    fourCoreElementsBadge: 'ធាតុស្នូលទាំង ៤',
+    elementLabel: 'ធាតុផ្សំ',
+    keyPrinciplesLabel: 'គោលការណ៍សំខាន់ៗ៖',
+    coordinateSystemBadge: 'ប្រព័ន្ធកូអរដោនេស្តង់ដារ',
+    wangFloorPlanTitle: 'គន្លងអក្សរស្តេច (王) & ច្បាប់បោះជំហានត្រីក្រាម',
+    wangFloorPlanSubtitle: '王자 품새선과 주역 3효(三爻) 운족의 법칙 (បោះជំហានមុខ = យ៉ាង • នៅនឹងកន្លែង/បត់ = យិន)',
+    floorGeometryBadge: 'ធរណីមាត្រកម្រាល',
+    steppingLawTitle: 'ច្បាប់បោះជំហាននៃបន្ទាត់ផ្តេកទាំង ៣៖',
+    steppingLawDesc: 'បន្ទាត់ផ្តេកទាំង ៣ នៃអក្សរចិន 王 (Wang) ត្រូវគ្នានឹងបន្ទាត់ទាំង ៣ នៃត្រីក្រាម I Ching (ខាងលើ = មេឃ, កណ្តាល = មនុស្ស, ខាងក្រោម = ផែនដី)។',
+    solidYangDesc: 'បន្ទាត់រឹងយ៉ាង (—–)៖ ប្រសិនបើសិស្សបោះជំហានទៅមុខតាមបន្ទាត់ផ្តេក នោះវាបង្កើតជាបន្ទាត់រឹង Yang។',
+    brokenUmDesc: 'បន្ទាត់ដាច់យិន (– –)៖ ប្រសិនបើសិស្សធ្វើចលនានៅនឹងកន្លែង ថយក្រោយ ឬបង្វិលខ្លួនដោយមិនបោះទៅមុខ នោះវាបង្កើតជាបន្ទាត់ដាច់ Um។',
+    selectTaegeukToInspect: 'ជ្រើសរើសមេគុន Taegeuk ដើម្បីពិនិត្យច្បាប់បោះជំហានលើកម្រាល៖',
+    inspectFullDossierBtn: 'ពិនិត្យឯកសារលម្អិតពេញលេញ →',
+    trigramPrefix: 'ត្រីក្រាម៖',
+    elementPrefix: 'ធាតុធម្មជាតិ៖',
+    solidYangBadge: 'បន្ទាត់យ៉ាងរឹង (បោះជំហានមុខ)',
+    brokenUmBadge: 'បន្ទាត់យិនដាច់ (មិនបោះជំហាន)',
+    eightPillarsBadge: 'សសរស្តម្ភទាំង ៨ នៃការសម្តែង',
+    masterCuePrefix: 'គន្លឹះមេគ្រូ៖',
+    historicalMatrixBadge: 'តារាងប្រៀបធៀបប្រវត្តិសាស្ត្រ • Palgwe ១៩៦៧ និង Taegeuk ១៩៧១',
+    viewTableBtn: 'តារាង',
+    viewCardsBtn: 'កាត',
+    thPalgweNumber: '#',
+    thPalgweForm: 'មេគុន Palgwe ១៩៦៧',
+    thPalgwePattern: 'គន្លងកម្រាល Palgwe',
+    thPatternMeaning: 'អត្ថន័យគន្លង',
+    thTrigram: 'ត្រីក្រាម',
+    thTaegeukForm: 'មេគុន Taegeuk ១៩៧១',
+    thTaegeukPattern: 'គន្លងកម្រាល Taegeuk',
+    thNaturalElement: 'ធាតុធម្មជាតិ',
+    thTacticalNuance: 'ភាពខុសប្លែកគ្នានៃបច្ចេកទេស',
+    allFormsWangNote: '王 (គ្រប់មេគុន)',
+    fiveIdealsTitle: 'ឧត្តមគតិស្នូលទាំង ៥ នៃតេក្វាន់ដូក្នុងមេគុន Taegeuk',
+    fiveIdealsBadge: 'សន្តិភាព • ឯកភាព • ការច្នៃប្រឌិត • មិនចុះចាញ់ • និរន្តរភាព',
+    fiveIdealsIntro: 'មេគុន Taegeuk តំណាងឱ្យឧត្តមគតិនៃក្បាច់គុនតេក្វាន់ដូ៖ សន្តិភាពនិយម, ឯកភាព, ស្មារតីច្នៃប្រឌិត, ស្មារតីមិនចុះចាញ់ និងនិរន្តរភាព។ ក្រៅពីការផ្ទុកនូវចលនារាងកាយជាមូលដ្ឋានដែលត្រូវតែស្ទាត់ជំនាញ មេគុនក៏រួមបញ្ចូលនូវទស្សនវិជ្ជាដែលអមដំណើរការហ្វឹកហាត់ផងដែរ។',
+    idealPrefix: 'ឧត្តមគតិ',
+    metaphysicalOriginsBadge: 'ប្រភពដើមទស្សនវិជ្ជាបុរាណ',
+    lineageFuhHiLabel: 'ប្រភពដើម៖ Fuh Hi (៣,៣០០ ឆ្នាំមុន) • Jooyeok (주역 / 周易)',
+    taegukkiIntegrationTitle: 'ការរួមបញ្ចូលរវាងទង់ជាតិកូរ៉េ និងមេគុន៖',
+    pre1971KtaBadge: 'ដំណោះស្រាយ KTA ឆ្នាំ ១៩៧១',
+    keyEvolutionsLabel: 'ការវិវត្តសំខាន់ៗពី Palgwe ទៅ Taegeuk៖',
+    fourPairsTitle: 'គូប្រឆាំងសកលទាំង ៤ នៃ Taegeuk (태극 4대 대립쌍)',
+    fourPairsDesc: 'មេគុន Taegeuk នីមួយៗសុទ្ធតែមានគូប្រឆាំងដែលឆ្លុះបញ្ចាំងពីតុល្យភាពនៃធម្មជាតិ។',
+    oppositesInBalanceBadge: 'តុល្យភាពនៃភាពផ្ទុយគ្នា',
+    inspectPairBtn: 'ពិនិត្យមេគុន',
+
+    yudanjaCurriculumBadge: 'កម្មវិធីសិក្សាផ្លូវការខ្សែក្រវាត់ខ្មៅ WT & Kukkiwon',
+    historicalClarificationsTitle: 'ការបញ្ជាក់ប្រវត្តិសាស្ត្រផ្លូវការ និងការកែតម្រូវឈ្មោះ៖',
+    kupVsDanBadge: 'រចនាសម្ព័ន្ធ Kup ប្រៀបធៀប Dan',
+    thDimension: 'ទិដ្ឋភាពរចនាសម្ព័ន្ធ',
+    thTaegeukSeriesCol: 'មេគុន Taegeuk (កម្រិត Kup)',
+    thYudanjaSeriesCol: 'មេគុន Yudanja (កម្រិត Dan)',
+    danMasteryMatrixTitle: 'តារាងកម្រិតខ្សែក្រវាត់ខ្មៅ Yudanja ផ្លូវការ (1st ដល់ 9th Dan)',
+    danMasteryMatrixSubtitle: 'កម្មវិធីផ្លូវការ WT & Kukkiwon៖ កម្រិត, ខ្សែក្រវាត់ឆ្នូតមាស, អត្ថន័យឈ្មោះ, គន្លងអក្សរចិន, អត្ថន័យនិមិត្តសញ្ញា និងចរិតលក្ខណៈមេគ្រូ។',
+    thDanLevel: 'កម្រិត',
+    thDanBelt: 'ខ្សែក្រវាត់',
+    thDanFormName: 'ឈ្មោះមេគុន',
+    thDanMeaningOfName: 'អត្ថន័យឈ្មោះ',
+    thDanFloorPattern: 'គន្លងកម្រាល',
+    thDanMeaningOfSymbol: 'អត្ថន័យនិមិត្តសញ្ញា',
+    thDanHanjaSymbol: 'អក្សរចិន',
+    thDanMasterCharacteristic: 'ចរិតលក្ខណៈមេគ្រូ',
+    thDanAction: 'សកម្មភាព',
+    footnotesTitle: 'កំណត់សម្គាល់ប្រវត្តិសាស្ត្រ & ទស្សនវិជ្ជា៖',
+    fnGeumgangTitle: '¹ ភ្នំពេជ្រ (Geumgangsan)៖',
+    fnGeumgangDesc: 'ដាក់ឈ្មោះតាមភ្នំ Keumgang និងគោលគំនិតពុទ្ធសាសនានៃ Vajra (ពេជ្រដែលមិនអាចកម្ទេចបាន) តំណាងឱ្យភាពរឹងមាំ សីលធម៌បរិសុទ្ធ និងភាពអស្ចារ្យនៃភ្នំខ្ពស់។',
+    fnTaebaekTitle: '² ពន្លឺដ៏ឧត្តុង្គឧត្តម (Taebaek)៖',
+    fnTaebaekDesc: 'ភ្នំពិសិដ្ឋ Baekdu ជាកន្លែងដែលស្តេច Dangun បង្កើតរដ្ឋ Gojoseon ក្រោមទស្សនវិជ្ជា Hongik Ingan (បម្រើមនុស្សជាតិ)។',
+    fnSipjinTitle: '³ និមិត្តសញ្ញាអាយុយឺនយូរទាំង ១០ (Sipjangsaeng)៖',
+    fnSipjinDesc: 'និមិត្តសញ្ញាប្រពៃណីកូរ៉េនៃភាពស្ថិតស្ថេរយូរអង្វែង និងភាពសុខដុមនៃសកលលោក៖ ព្រះអាទិត្យ ព្រះច័ន្ទ ភ្នំ ទឹក ថ្ម ដើមស្រល់ ឱសថទិព្វ អណ្តើក សត្វក្រៀល និងក្តាន់។',
+    cardMeaningLabel: 'អត្ថន័យឈ្មោះ៖',
+    cardSymbolLabel: 'គោលគំនិតនិមិត្តសញ្ញា៖',
+    cardFloorLabel: 'គន្លងលើកម្រាល៖',
+    cardCharacteristicLabel: 'ចរិតលក្ខណៈ៖',
+    cardPhilosophicalLabel: 'គោលការណ៍ទស្សនវិជ្ជា៖',
+    cardKeyTechLabel: 'បច្ចេកទេសសំខាន់ៗ៖',
+    nonLinearDanProgressionTitle: 'ការវិវត្តមិនមែនលីនេអ៊ែរនៃកម្រិត Dan៖',
+    competitionDynamicsTitle: 'បញ្ហាប្រឈមនៃទីលានប្រកួត៖',
+    selfDefenseBunkaiTitle: 'ការការពារខ្លួនជាក់ស្តែង (Hosinsul Bunkai)៖',
+
+    dualityPairTitle: 'គូទស្សនវិជ្ជាផ្ទុយគ្នាស៊ីសង្វាក់ (Duality Pair)៖',
+    oppositeCounterpartLabel: 'ដៃគូទស្សនវិជ្ជាផ្ទុយ៖',
+    switchToOppositeBtn: 'ប្តូរទៅកាន់មេគុនផ្ទុយ →',
+    jooyeokTrigramLineage: 'ខ្សែស្រឡាយត្រីក្រាមជូយ៉ក (Jooyeok Lineage)',
+    rankPrefix: 'កម្រិតថ្នាក់៖',
+    taegukkiTrigramBadge: 'ត្រីក្រាមទង់ជាតិតេកុកគី (태극기 4대 괘)',
+    coreUniversalConceptTitle: 'គោលគំនិតចក្រវាលស្នូល៖',
+    cosmicDialecticTitle: 'តុល្យភាព និងវិចារវិទ្យាចក្រវាល៖',
+    philosophicalDirectiveTitle: 'ការណែនាំអនុវត្តតាមទស្សនវិជ្ជា (수련 요결)៖',
+    wangFloorDynamicsTitle: 'ចលនាបោះជំហានលើខ្សែគន្លង "王" (Wang Dynamics)៖',
+    fourPointClockTitle: 'គន្លងទិសដៅនាឡិកា ៤ ទិស & ទីតាំងស្រែក Kihap៖',
+    kihapStepPrefix: 'Kihap៖ ជំហានទី',
+    wtCompetitionScoringTitle: 'លក្ខណៈវិនិច្ឆ័យដាក់ពិន្ទុ និងកាត់ពិន្ទុក្នុងការប្រកួត WT៖',
+    targetDurationPrefix: 'គោលដៅ៖',
+    majorDeductionsTitle: 'ការកាត់ពិន្ទុធ្ងន់ (-0.3 ពិន្ទុក្នុងមួយកំហុស)៖',
+    minorDeductionsTitle: 'ការកាត់ពិន្ទុស្រាល (-0.1 ពិន្ទុក្នុងមួយកំហុស)៖',
+    eightPillarsCuesTitle: 'គោលការណ៍អនុវត្តទាំង ៨ សសរស្ដម្ភ៖',
+    danMasteryOfficialTitle: 'កម្រិតដាន់ជាន់ខ្ពស់ផ្លូវការ WT & គុកគីវ៉ុន (WT & Kukkiwon Dan Mastery)',
+    danMasteryDoctrineTitle: 'ទស្សនវិជ្ជា និងគោលលទ្ធិកម្រិតដាន់ (Dan Doctrine)៖',
+    junbiSeogiTitle: 'ជំហរត្រៀម (Junbi-seogi) និងដង្ហើមដាន់ចន (Danjeon)៖',
+    introducedKeyTechTitle: 'បច្ចេកទេសគន្លឹះដែលបានណែនាំថ្មី (신규 도입 기술)៖',
+    dynamicMovementCharsTitle: 'លក្ខណៈចលនា និងកម្លាំងឌីណាមិក (동작 특성)៖',
+    classicalLineageTitle: 'ប្រវត្តិសាស្ត្រ និងប្រភពដើមបុរាណ (역사적 유래)៖',
+    etymologyNoteLabel: 'កំណត់សម្គាល់និរុត្តិសាស្ត្រ៖',
+    newPoomsaeBadge: 'ពូស៊ីថ្មីផ្លូវការគុកគីវ៉ុន (새 품새 / New Poomsae)',
+    targetAgeRationaleTitle: 'ផ្នែកអាយុ និងមូលដ្ឋានវិទ្យាសាស្ត្រ',
+    officialKukkiwonMeaningTitle: 'អត្ថន័យផ្លូវការគុកគីវ៉ុន (Kukkiwon Meaning)',
+    floorLineSymbolTitle: 'គន្លងកម្រាល និងនិមិត្តសញ្ញាខ្សែ',
+    technicalArsenalTitle: 'ប្រព័ន្ធបច្ចេកទេស និងក្បាច់សម្គាល់៖',
+    signatureKicksTitle: 'បច្ចេកទេសទាត់សម្គាល់ (Signature Kicks)៖',
+    signatureHandsTitle: 'បច្ចេកទេសដៃ និងប្រព័ន្ធរារាំង (Signature Hands)៖',
+    philosophicalMeaningTitle: 'អត្ថន័យទស្សនវិជ្ជា និងគោលគំនិត',
+    yinYangDynamicsTitle: 'តុល្យភាពយីន-យ៉ាង និងស្មារតីយុទ្ធគុន',
+    movementSequenceTitle: 'លំដាប់ចលនា',
+    stepBreakdownTitle: 'ការវិភាគចលនាមួយជំហានម្តងៗ',
+    mandatoryKihapLabel: 'ការស្រែកបញ្ចេញសំឡេងជាកំហិត (Kihap)',
+    kihapRequiredBadge: 'តម្រូវឱ្យមាន Kihap',
+    completedLabel: 'បានបញ្ចប់',
+    curriculumStandardFooter: 'ស្តង់ដារកម្មវិធីសិក្សាផ្លូវការ World Taekwondo & Kukkiwon',
+    lineSymbolPrefix: 'និមិត្តសញ្ញាខ្សែ៖',
+    termsDocumentedSuffix: 'ពាក្យបច្ចេកទេសដែលបានកត់ត្រា',
+    officialPracticalPointers: 'ចំណុចណែនាំអនុវត្តផ្លូវការ',
+    coachingInsightPrefix: 'គន្លឹះគ្រូបង្វឹក',
+    stepsCuratedNotice: 'ការវិភាគចលនាមួយជំហានម្តងៗជាផ្លូវការកំពុងត្រូវបានរៀបចំសម្រាប់មេគុននេះ។',
+    termsCuratedNotice: 'វចនានុក្រមបច្ចេកទេសកំពុងត្រូវបានធ្វើបច្ចុប្បន្នភាពសម្រាប់មេគុននេះ។',
+    tipsCuratedNotice: 'គន្លឹះគ្រូបង្វឹកកំពុងត្រូវបានធ្វើបច្ចុប្បន្នភាពសម្រាប់មេគុននេះ។',
+    ringGeometryDescPrefix: 'អ្នកប្រកួតត្រូវតែធ្វើតាមគន្លងធរណីមាត្រជាក់លាក់',
+    ringGeometryDescSuffix: 'ឆ្លងកាត់ទីលានប្រកួត ១០ម x ១០ម ដោយចាប់ផ្តើម និងត្រឡប់មកចំណុចដើមវិញដោយគម្លាតមិនលើសពីមួយជំហានជើង។',
   },
   zh: {
     catalogTab: '1. 品势目录全集',
@@ -163,6 +621,157 @@ export const poomsaeI18n: Record<string, PoomsaeI18nDictionary> = {
     governingStandardLabel: '官方权威审定规范',
     scoringMetricLabel: '世跆联竞技打分模型',
     allSeriesCount: '全套三大系列共27套公认品势',
+
+    sectionBadge: '核心板块',
+    patternsCountSuffix: '套公认品势',
+    catalogKoreanNav: '公认27套品势图谱 (三大系列全集)',
+    foundationsKoreanNav: '品势本质内涵、源流考据与三大执教要诀',
+    foundationsNavSubtitle: '为什么品势至关重要、三大常见误区与十级白带启蒙',
+    taegeukKoreanNav: '周易八卦与四大阴阳对立对 (1971年历史转型)',
+    taegeukNavSubtitle: '阴阳合一、八卦卦象对立统一与历史源流',
+    yudanjaKoreanNav: '有段者品势 (地面汉字演武线、升段考核与实战拆解)',
+    yudanjaNavSubtitle: '专属汉字演武线、考核晋段周期与Hosinsul防身拆解',
+
+    foundationsBadge: '品势筑基与历史源流',
+    partnerlessCombatTitle: '无对手模拟实战：',
+    mindBodyUnityTitle: '身心合一与无压境界：',
+    pillarPrefix: '核心支柱 #',
+    errorPrefix: '常见误区 #',
+    flawLabel: '技术缺陷：',
+    grandmasterCorrectionLabel: '宗师正误要诀：',
+    focusLabel: '核心要领：',
+
+    cosmologyBadge: '宇宙哲学与武道本体论',
+    yangRedEumBlue: '阳 (红) • 阴 (蓝)',
+    taegeukgiConnectionTitle: '韩国太极国旗渊源 (태극기)：',
+    fourCoreElementsBadge: '四大执行要素',
+    elementLabel: '要素维度',
+    keyPrinciplesLabel: '核心准则：',
+    coordinateSystemBadge: '空间标准化坐标体系',
+    wangFloorPlanTitle: '“王”字演武线与八卦运足法度',
+    wangFloorPlanSubtitle: '王자 품새선과 주역 3효(三爻) 운족의 법칙 (向前上步推进 = 纯阳爻 • 原地转身/后退 = 阴爻)',
+    floorGeometryBadge: '演武几何法度',
+    steppingLawTitle: '三道水平横线运步法则说明：',
+    steppingLawDesc: '“王”字的三道横线直接对应所演练《易经》卦象的三道爻（上爻=天、中爻=人、下爻=地）。',
+    solidYangDesc: '纯阳实爻 (—–)：若学员沿着该横向路线向前上步推进移动，则该线在地表轨迹中显化为完整的连贯阳爻实线。',
+    brokenUmDesc: '纯阴断爻 (– –)：若学员在该横向上仅原地换势、后退、或未向前迈步推进，则显化为中断的阴爻虚线。',
+    selectTaegeukToInspect: '选择太极品势以检视演武线运足法则：',
+    inspectFullDossierBtn: '查看完整演练档案 →',
+    trigramPrefix: '卦象：',
+    elementPrefix: '元素：',
+    solidYangBadge: '纯阳实爻 (向前推进)',
+    brokenUmBadge: '纯阴断爻 (原地/不前)',
+    eightPillarsBadge: '演练八大支柱',
+    masterCuePrefix: '宗师口诀：',
+    historicalMatrixBadge: '历史演变矩阵 • 1967年八卦 vs 1971年太极',
+    viewTableBtn: '表格模式',
+    viewCardsBtn: '卡片模式',
+    thPalgweNumber: '序号',
+    thPalgweForm: '1967年传统八卦品势',
+    thPalgwePattern: '八卦演武路线',
+    thPatternMeaning: '演武线字形意涵',
+    thTrigram: '八卦卦象',
+    thTaegeukForm: '1971年公认太极品势',
+    thTaegeukPattern: '太极演武路线',
+    thNaturalElement: '天地五行元素',
+    thTacticalNuance: '实战战术演进差异',
+    allFormsWangNote: '王 (全套通用)',
+    fiveIdealsTitle: '太极品势所蕴含之跆拳道五大核心宗旨',
+    fiveIdealsBadge: '和平 • 和谐 • 创造 • 不屈 • 永恒',
+    fiveIdealsIntro: '太极品势集中体现了跆拳道武道的核心宗旨：和平主义、和谐统一、创造精神、百折不屈与永恒性。它不仅凝练了掌握跆拳道必须熟稔的基础肢体技击动作，更深刻寄托着伴随武道修习的精神心法。正是在这些哲思熏陶之下，跆拳道升华为崇高的武道境界。',
+    idealPrefix: '宗旨',
+    metaphysicalOriginsBadge: '东方玄学深厚源流',
+    lineageFuhHiLabel: '道统：伏羲氏 (距今3300年) • 周易 (주역 / 周易)',
+    taegukkiIntegrationTitle: '太极国旗与品势演练深层融合：',
+    pre1971KtaBadge: '1971年大韩跆协历史决议',
+    keyEvolutionsLabel: '八卦品势向太极品势升华之核心革新：',
+    fourPairsTitle: '太极四大对立统一阴阳辩证卦对 (태극 4대 대립쌍)',
+    fourPairsDesc: '每套太极品势均有一套与其相对立统一的卦相伙伴，生动映射大自然永恒动态的阴阳平衡。',
+    oppositesInBalanceBadge: '对立中见和谐',
+    inspectPairBtn: '检视品势',
+
+    yudanjaCurriculumBadge: '世跆联与国技院官方公认黑带教范',
+    historicalClarificationsTitle: '国技院官方权威字源考据与正误勘误：',
+    kupVsDanBadge: '级位与段位体系对比',
+    thDimension: '体系维度',
+    thTaegeukSeriesCol: '太极系列 (色带级位)',
+    thYudanjaSeriesCol: '有段者系列 (黑带段位)',
+    danMasteryMatrixTitle: '国技院黑带一段至九段至尊大系全览矩阵表',
+    danMasteryMatrixSubtitle: '世跆联与国技院官方教范标准：段位品阶、金杠带身、品势名源起、地面汉字线、图腾哲学内涵及大宗师武德品格。',
+    thDanLevel: '段位',
+    thDanBelt: '黑带',
+    thDanFormName: '品势名称',
+    thDanMeaningOfName: '命名释义',
+    thDanFloorPattern: '演武路线',
+    thDanMeaningOfSymbol: '图腾涵义',
+    thDanHanjaSymbol: '汉字',
+    thDanMasterCharacteristic: '大宗师武德品格',
+    thDanAction: '操作',
+    footnotesTitle: '历史字源考据与神话渊源注记：',
+    fnGeumgangTitle: '¹ 金刚山 (Geumgangsan)：',
+    fnGeumgangDesc: '源自金刚山之雄浑及佛教“金刚杵 (Vajra)”之坚不可摧，象征破除一切迷执之刚硬、明澈武德与巍峨山势。',
+    fnTaebaekTitle: '² 终极光明 (太白)：',
+    fnTaebaekDesc: '源自檀君王俭在白头山（太白山）开辟古朝鲜之圣迹，弘扬“弘益人间 (Hongik Ingan)”造福苍生之至高开国宏愿。',
+    fnSipjinTitle: '³ 十长生 (Sipjangsaeng / 십장생)：',
+    fnSipjinDesc: '半岛传统十种象征长生久视与宇宙恒常和谐之自然圣物：日、月、山、水、石、松、不老草、龟、鹤、鹿。',
+    cardMeaningLabel: '命名释义：',
+    cardSymbolLabel: '图腾核心意涵：',
+    cardFloorLabel: '地面演武轨迹：',
+    cardCharacteristicLabel: '大宗师品格：',
+    cardPhilosophicalLabel: '武道哲学命题：',
+    cardKeyTechLabel: '核心必修技术：',
+    nonLinearDanProgressionTitle: '有段者非线性进阶特点：',
+    competitionDynamicsTitle: '国际大赛演武空间挑战：',
+    selfDefenseBunkaiTitle: '实战防身自卫拆解 (Hosinsul Bunkai)：',
+
+    dualityPairTitle: '哲学对立统一之配对:',
+    oppositeCounterpartLabel: '对立配对品势:',
+    switchToOppositeBtn: '切换至对立品势 →',
+    jooyeokTrigramLineage: '周易八卦象义传承',
+    rankPrefix: '段位级次:',
+    taegukkiTrigramBadge: '太极旗四大天象卦 (태극기 4대 괘)',
+    coreUniversalConceptTitle: '核心宇宙概念:',
+    cosmicDialecticTitle: '宇宙辩证与动态平衡:',
+    philosophicalDirectiveTitle: '品势修练要诀与哲学指导 (수련 요결):',
+    wangFloorDynamicsTitle: '“王”字演武线步法运转机理:',
+    fourPointClockTitle: '四向时钟演武轨迹与气合 (Kihap) 定位:',
+    kihapStepPrefix: '气合: 第',
+    wtCompetitionScoringTitle: '世界跆联 (WT) 竞技品势裁判扣分标准:',
+    targetDurationPrefix: '标准时长:',
+    majorDeductionsTitle: '严重扣分项 (每次 -0.3 分):',
+    minorDeductionsTitle: '轻微扣分项 (每次 -0.1 分):',
+    eightPillarsCuesTitle: '八大核心要领演练提示:',
+    danMasteryOfficialTitle: '世界跆联 (WT) 与国技院 (Kukkiwon) 官方段位大师标准',
+    danMasteryDoctrineTitle: '段位修养精要与哲学宗旨:',
+    junbiSeogiTitle: '准备姿势 (준비서기) 与丹田呼吸法 (Danjeon):',
+    introducedKeyTechTitle: '新引入核心技术 (신규 도입 기술):',
+    dynamicMovementCharsTitle: '动作动态特性 (동작 특성):',
+    classicalLineageTitle: '古典传承与历史渊源 (역사적 유래):',
+    etymologyNoteLabel: '词源考证:',
+    newPoomsaeBadge: '国技院官方新品势 (새 품새 / New Poomsae)',
+    targetAgeRationaleTitle: '年龄组别与研发依据',
+    officialKukkiwonMeaningTitle: '国技院官方释义',
+    floorLineSymbolTitle: '演武路线与路线符号',
+    technicalArsenalTitle: '技术体系与标志性动作:',
+    signatureKicksTitle: '代表性踢技 (Signature Kicks):',
+    signatureHandsTitle: '代表性手技与防守系统 (Signature Hands):',
+    philosophicalMeaningTitle: '哲学寓意与概念内涵',
+    yinYangDynamicsTitle: '阴阳生克与武道精神',
+    movementSequenceTitle: '动作演练顺序',
+    stepBreakdownTitle: '分解动作详解',
+    mandatoryKihapLabel: '必须发声发劲 (Kihap / 气合)',
+    kihapRequiredBadge: '要求发声气合',
+    completedLabel: '已完成',
+    curriculumStandardFooter: '世界跆拳道联盟 (WT) 与国技院 (Kukkiwon) 官方教学标准',
+    lineSymbolPrefix: '路线符号:',
+    termsDocumentedSuffix: '条术语已收录',
+    officialPracticalPointers: '官方实战演练要点',
+    coachingInsightPrefix: '指导要诀',
+    stepsCuratedNotice: '官方逐动分解教学正在完善整理中。',
+    termsCuratedNotice: '该品势的技术术语词汇表正在持续更新中。',
+    tipsCuratedNotice: '该品势的教练要领正在整理更新中。',
+    ringGeometryDescPrefix: '参赛选手必须遵循严格的几何路线',
+    ringGeometryDescSuffix: '在 10m x 10m 比赛区域内演练，起式与收式必须回到原点坐标，允许误差在一脚长以内。',
   },
   ko: {
     catalogTab: '1. 공인 품새 카탈로그',
@@ -202,6 +811,157 @@ export const poomsaeI18n: Record<string, PoomsaeI18nDictionary> = {
     governingStandardLabel: '공인 총괄 표준',
     scoringMetricLabel: 'WT 경기 채점 방식',
     allSeriesCount: '3대 시리즈 총 27개 공인 품새 완비',
+
+    sectionBadge: '섹션',
+    patternsCountSuffix: '개 공인 품새',
+    catalogKoreanNav: '공인 27개 품새 도감 (3대 시리즈)',
+    foundationsKoreanNav: '품새의 본질·기원 및 3대 수련 요결',
+    foundationsNavSubtitle: '품새의 중요성, 빈출 실수 및 10급 흰 띠 기초',
+    taegeukKoreanNav: '주역 8괘와 4대 대립쌍 (1971년 전환)',
+    taegeukNavSubtitle: '음양 일치, 괘상 대립쌍 및 역사적 전환',
+    yudanjaKoreanNav: '유단자 품새 (한자선·승단·실전 공방)',
+    yudanjaNavSubtitle: '고유 한자선, 승단 계제 및 호신술 응용',
+
+    foundationsBadge: '무도적 기원과 본질',
+    partnerlessCombatTitle: '상대 없는 가상 실전 공방:',
+    mindBodyUnityTitle: '압박 없는 심신 일치와 집중:',
+    pillarPrefix: '핵심 요결 #',
+    errorPrefix: '빈출 오류 #',
+    flawLabel: '오류 내용:',
+    grandmasterCorrectionLabel: '사범 교정 요결:',
+    focusLabel: '수련 초점:',
+
+    cosmologyBadge: '우주관과 무도 철학',
+    yangRedEumBlue: '양 (적색) • 음 (청색)',
+    taegeukgiConnectionTitle: '태극기와 품새의 연결성:',
+    fourCoreElementsBadge: '4대 구성 요소',
+    elementLabel: '구성 요소',
+    keyPrinciplesLabel: '핵심 수련 원칙:',
+    coordinateSystemBadge: '공인 4방향 시계좌표 체계',
+    wangFloorPlanTitle: '王자 품새선과 주역 3효(三爻) 운족의 법칙',
+    wangFloorPlanSubtitle: '王자 품새선과 주역 3효(三爻) 운족의 법칙 (전진 보법 = 양 • 제자리/후진 = 음)',
+    floorGeometryBadge: '품새선 기하학',
+    steppingLawTitle: '품새선 3개 횡선의 운족 원리:',
+    steppingLawDesc: '임금 왕(王)자의 3개 가로선은 주역 3효와 1:1로 정확히 대응합니다 (상선=하늘, 중선=사람, 하선=땅).',
+    solidYangDesc: '양효 실선 (—–): 해당 가로선을 따라 전진 보법을 취하면 끊어지지 않는 양효가 성립합니다.',
+    brokenUmDesc: '음효 점선 (– –): 해당 가로선에서 전진하지 않고 제자리 동작, 후진, 또는 방향 전환만 수행하면 음효가 성립합니다.',
+    selectTaegeukToInspect: '태극 품새를 선택하여 품새선 운족 법칙 확인:',
+    inspectFullDossierBtn: '상세 품새 교본 보기 →',
+    trigramPrefix: '괘상:',
+    elementPrefix: '요소:',
+    solidYangBadge: '양효 실선 (전진)',
+    brokenUmBadge: '음효 점선 (비전진)',
+    eightPillarsBadge: '품새 시연 8대 요결',
+    masterCuePrefix: '사범 구령:',
+    historicalMatrixBadge: '역사적 비교 매트릭스 • 1967년 팔괘 vs 1971년 태극',
+    viewTableBtn: '표 보기',
+    viewCardsBtn: '카드 보기',
+    thPalgweNumber: '번호',
+    thPalgweForm: '1967년 팔괘 품새',
+    thPalgwePattern: '팔괘 품새선',
+    thPatternMeaning: '품새선 의미',
+    thTrigram: '괘상',
+    thTaegeukForm: '1971년 태극 품새',
+    thTaegeukPattern: '태극 품새선',
+    thNaturalElement: '음양오행 요소',
+    thTacticalNuance: '기술적 차이점 및 전술',
+    allFormsWangNote: '王 (전 품새 공통)',
+    fiveIdealsTitle: '태극 품새에 담긴 태권도 5대 핵심 이념',
+    fiveIdealsBadge: '평화 • 일치 • 창조 • 백절불굴 • 영원',
+    fiveIdealsIntro: '태극 품새는 태권도의 5대 무도 이념인 평화주의, 일치와 조화, 창조적 정신, 백절불굴, 그리고 영원성을 형상화하고 있습니다. 태권도를 숙달하기 위해 필수적인 신체 동작뿐만 아니라, 수련에 수반되는 숭고한 무도 철학을 온전히 담고 있습니다.',
+    idealPrefix: '이념',
+    metaphysicalOriginsBadge: '심오한 동양 형이상학의 근원',
+    lineageFuhHiLabel: '도통: 복희씨 (3,300년 전) • 주역 (주역 / 周易)',
+    taegukkiIntegrationTitle: '태극기와 품새 동작의 일체화:',
+    pre1971KtaBadge: '1971년 KTA 품새 대전환 결의',
+    keyEvolutionsLabel: '팔괘에서 태극으로의 핵심 전환점:',
+    fourPairsTitle: '태극 4대 대립쌍(對立雙)의 음양 조화',
+    fourPairsDesc: '모든 태극 품새는 대칭되는 대립쌍을 가지며, 이는 자연계의 영원한 음양 균형을 형상화합니다.',
+    oppositesInBalanceBadge: '대립 속의 조화',
+    inspectPairBtn: '상세 검토',
+
+    yudanjaCurriculumBadge: 'WT & 국기원 공인 유단자 승단 교육과정',
+    historicalClarificationsTitle: '국기원 공인 어원 고증 및 명칭 정정 안내:',
+    kupVsDanBadge: '유급자와 유단자 구조 비교',
+    thDimension: '비교 항목',
+    thTaegeukSeriesCol: '태극 품새 (유급자)',
+    thYudanjaSeriesCol: '유단자 품새 (유단자)',
+    danMasteryMatrixTitle: '국기원 공인 1단~9단 유단자 품새 종합 매트릭스',
+    danMasteryMatrixSubtitle: 'WT 및 국기원 공인 기준: 단수, 금색 줄무늬 띠, 품새명 의미, 한자 품새선, 상징적 의미, 사범의 덕목.',
+    thDanLevel: '단수',
+    thDanBelt: '띠',
+    thDanFormName: '품새명',
+    thDanMeaningOfName: '이름의 의미',
+    thDanFloorPattern: '품새선',
+    thDanMeaningOfSymbol: '상징의 의미',
+    thDanHanjaSymbol: '한자',
+    thDanMasterCharacteristic: '사범의 덕목',
+    thDanAction: '상세',
+    footnotesTitle: '역사적 어원 고증 및 신화적 주석:',
+    fnGeumgangTitle: '¹ 금강산(金剛山):',
+    fnGeumgangDesc: '불교의 금강저(Vajra)와 한반도의 명산 금강산에서 유래하여 어떤 것에도 부서지지 않는 단단함과 도덕적 지조, 웅장한 기개를 상징.',
+    fnTaebaekTitle: '² 궁극의 밝음(태백):',
+    fnTaebaekDesc: '단군왕검이 고조선을 개국한 영산 백두산(태백산)의 옛 이름으로, 널리 인간을 이롭게 한다는 홍익인간(弘益人間)의 개천 이념.',
+    fnSipjinTitle: '³ 십장생(十長生):',
+    fnSipjinDesc: '해, 달, 산, 물, 돌, 소나무, 불로초, 거북, 학, 사슴 등 동양 전통에서 불로장생과 조화로운 영속성을 상징하는 열 가지 자연물.',
+    cardMeaningLabel: '이름의 의미:',
+    cardSymbolLabel: '상징 개념:',
+    cardFloorLabel: '품새선 궤적:',
+    cardCharacteristicLabel: '사범의 기질:',
+    cardPhilosophicalLabel: '철학적 요결:',
+    cardKeyTechLabel: '주요 핵심 기술:',
+    nonLinearDanProgressionTitle: '비선형적 유단자 수련 계제:',
+    competitionDynamicsTitle: '공인 경기 품새선의 공간적 과제:',
+    selfDefenseBunkaiTitle: '실전 호신술(Hosinsul Bunkai) 응용:',
+
+    dualityPairTitle: '철학적 대대(待對) 대칭 쌍:',
+    oppositeCounterpartLabel: '대칭 대응 품새:',
+    switchToOppositeBtn: '대칭 품새로 전환 →',
+    jooyeokTrigramLineage: '주역(周易) 괘상 계보',
+    rankPrefix: '급/단 단계:',
+    taegukkiTrigramBadge: '태극기 4대 괘 (건·곤·감·리)',
+    coreUniversalConceptTitle: '핵심 우주론적 개념:',
+    cosmicDialecticTitle: '우주 변증법 및 역학적 균형:',
+    philosophicalDirectiveTitle: '품새 수련 요결 및 철학적 지침 (수련 요결):',
+    wangFloorDynamicsTitle: '王자 품새선 보법 운용 동학:',
+    fourPointClockTitle: '4방 시계 궤적 및 기합(Kihap) 위치:',
+    kihapStepPrefix: '기합: 제',
+    wtCompetitionScoringTitle: '공인 WT 경기 품새 채점 및 감점 기준:',
+    targetDurationPrefix: '규정 시간:',
+    majorDeductionsTitle: '중감점 사항 (각 -0.3점 감점):',
+    minorDeductionsTitle: '소감점 사항 (각 -0.1점 감점):',
+    eightPillarsCuesTitle: '8대 핵심 원리 수행 요결:',
+    danMasteryOfficialTitle: '공인 WT & 국기원 유단자 마스터리 (Kukkiwon Dan Mastery)',
+    danMasteryDoctrineTitle: '유단자 수련 교의 및 철학적 지침 (Dan Doctrine):',
+    junbiSeogiTitle: '준비서기 (Junbi-seogi) 및 단전호흡 (Danjeon):',
+    introducedKeyTechTitle: '신규 도입 핵심 기술 (Key Techniques):',
+    dynamicMovementCharsTitle: '동작 역학 특성 (동작 특성):',
+    classicalLineageTitle: '역사적 유래 및 고전적 계보 (역사적 유래):',
+    etymologyNoteLabel: '어원 및 명칭 해설:',
+    newPoomsaeBadge: '국기원 공인 신규 개발 새 품새 (New Poomsae)',
+    targetAgeRationaleTitle: '연령 부문 및 개발 취지',
+    officialKukkiwonMeaningTitle: '국기원 공인 공식 의의',
+    floorLineSymbolTitle: '품새선 및 도식 기호',
+    technicalArsenalTitle: '기술 체계 및 시그니처 동작:',
+    signatureKicksTitle: '대표 발차기 기술 (Signature Kicks):',
+    signatureHandsTitle: '대표 손동작 및 방어 체계 (Signature Hands):',
+    philosophicalMeaningTitle: '철학적 의미 및 기본 개념',
+    yinYangDynamicsTitle: '음양 조화 및 무도 정신',
+    movementSequenceTitle: '동작 순서',
+    stepBreakdownTitle: '단계별 세부 동작 분석',
+    mandatoryKihapLabel: '필수 기합 (Mandatory Kihap)',
+    kihapRequiredBadge: '기합 필수',
+    completedLabel: '완료',
+    curriculumStandardFooter: '공인 세계태권도연맹 (WT) 및 국기원 교육 과정 표준',
+    lineSymbolPrefix: '품새선 기호:',
+    termsDocumentedSuffix: '개 공식 용어 등재',
+    officialPracticalPointers: '공인 실전 지도 요결',
+    coachingInsightPrefix: '지도 요령',
+    stepsCuratedNotice: '공인 동작별 세부 분해 지침이 현재 체계화 중입니다.',
+    termsCuratedNotice: '해당 품새의 기술 용어 사전이 업데이트 중입니다.',
+    tipsCuratedNotice: '해당 품새의 마스터 지도 팁이 정리 중입니다.',
+    ringGeometryDescPrefix: '선수는 10m x 10m 경기장 내에서 지정된 엄격한 기하학적 품새선',
+    ringGeometryDescSuffix: '을 준수해야 하며, 시점과 종점은 1보(발 하나 너비) 이내의 오차 범위 내에서 일치해야 합니다.',
   },
 }
 
@@ -690,15 +1450,144 @@ export function getYudanjaGuide(lang: string): YudanjaGuideData {
           ],
         },
         floorPatterns: [
-          { danRank: '1st Dan', name: 'Koryo (កូរ្យ៉ូ)', koreanName: '고려', hanjaCharacter: '士', characterMeaning: 'អ្នកប្រាជ្ញ-អ្នកចម្បាំង (Scholar-Warrior)', floorPatternShape: '士 (បន្ទាត់អ្នកប្រាជ្ញ)', masterVirtue: 'ស្មារតីស្នេហាជាតិ និងភាពរឹងមាំមិនចុះចាញ់', totalMoves: 30 },
-          { danRank: '2nd Dan', name: 'Keumgang (គឹមហ្កាង)', koreanName: '금강', hanjaCharacter: '山', characterMeaning: 'ភ្នំពេជ្រ (Diamond Mountain)', floorPatternShape: '山 (បន្ទាត់ភ្នំ)', masterVirtue: 'ភាពរឹងមាំខាងសីលធម៌ និងស្ថេរភាពមិនរង្គោះរង្គើ', totalMoves: 27 },
-          { danRank: '3rd Dan', name: 'Taebaek (ថែបែក)', koreanName: '태백', hanjaCharacter: '工 / 大', characterMeaning: 'ពលកម្ម & ការបង្កើតជាតិ (Sacred Mountain)', floorPatternShape: '工 (បន្ទាត់ពលកម្ម)', masterVirtue: 'ការបំភ្លឺ និងការបម្រើមនុស្សជាតិ (Hongik Ingan)', totalMoves: 26 },
-          { danRank: '4th Dan', name: 'Pyongwon (ព្យុងវ៉ុន)', koreanName: '평원', hanjaCharacter: '一', characterMeaning: 'បន្ទាត់ត្រង់តែមួយ / វាលទំនាប (Expansive Plain)', floorPatternShape: '一 (បន្ទាត់ត្រង់ផ្តេក)', masterVirtue: 'ចិត្តទូលាយដូចវាលស្មៅដែលចិញ្ចឹមបីបាច់ជីវិត', totalMoves: 21 },
-          { danRank: '5th Dan', name: 'Shipjin (ស៊ីបជីន)', koreanName: '십진', hanjaCharacter: '十', characterMeaning: 'ប្រព័ន្ធទសភាគ & និមិត្តសញ្ញាអាយុយឺនយូរ ១០', floorPatternShape: '十 (បន្ទាត់ឈើឆ្កាង)', masterVirtue: 'ការអភិវឌ្ឍគ្មានទីបញ្ចប់ និងការរស់នៅសុខដុម', totalMoves: 28 },
-          { danRank: '6th Dan', name: 'Jitae (ជីថែ)', koreanName: '지태', hanjaCharacter: 'ㅗ', characterMeaning: 'ជំហានមនុស្សលោកលើផែនដី (Upright Human Stride)', floorPatternShape: 'ㅗ (បន្ទាត់ឈរលើផែនដី)', masterVirtue: 'ការឈរយ៉ាងរឹងមាំលើផែនដីដោយយុត្តិធម៌', totalMoves: 28 },
-          { danRank: '7th Dan', name: 'Cheonkwon (ឆនក្វន់)', koreanName: '천권', hanjaCharacter: '丅', characterMeaning: 'មេឃាដែលមើលថែពិភពលោក (Heavenly Canopy)', floorPatternShape: '丅 (បន្ទាត់មេឃាក្រឡេកមើល)', masterVirtue: 'ការលះបង់អញ និងការមើលពិភពលោកពីទស្សនៈខ្ពង់ខ្ពស់', totalMoves: 26 },
-          { danRank: '8th Dan', name: 'Hansoo (ហាន់ស៊ូ)', koreanName: '한수', hanjaCharacter: '水', characterMeaning: 'ទឹកជាប្រភពនៃជីវិត (Origin Water)', floorPatternShape: '水 (បន្ទាត់អក្សរទឹក)', masterVirtue: 'ភាពបត់បែនទន់ភ្លន់ដូចទឹក តែមានកម្លាំងកម្ទេចថ្ម', totalMoves: 27 },
-          { danRank: '9th Dan', name: 'Ilyo (អ៊ីលយ៉ូ)', koreanName: '일여', hanjaCharacter: '卍 / O', characterMeaning: 'ភាពជាតែមួយនៃកាយ និងចិត្ត (Buddhist Non-Duality)', floorPatternShape: '卍 ឬ រង្វង់មូល (បន្ទាត់ភាពជាតែមួយ)', masterVirtue: 'ការរួបរួមរវាងបច្ចេកទេស និងវិញ្ញាណជាធ្លុងមួយ', totalMoves: 23 },
+          {
+            danRank: '1st Dan',
+            beltStripes: 1,
+            beltStripeRoman: 'I',
+            name: 'Koryo (កូរ្យ៉ូ)',
+            koreanName: '고려',
+            meaningOfName: 'រាជវង្សកូរ្យ៉ូបុរាណ (Ancient Korea)',
+            hanjaCharacter: '士',
+            meaningOfSymbol: 'អ្នកប្រាជ្ញ Seonbi & អ្នកចម្បាំងសុចរិត',
+            characterMeaning: 'អ្នកប្រាជ្ញ និងអ្នកចម្បាំងការពារជាតិ',
+            floorPatternShape: '士 (បន្ទាត់អ្នកប្រាជ្ញ-អ្នកចម្បាំង)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយប្រាជ្ញា (Wise)',
+            masterVirtue: 'ស្មារតីស្នេហាជាតិ និងភាពរឹងមាំមិនចុះចាញ់ចំពោះការឈ្លានពាន',
+            totalMoves: 30,
+          },
+          {
+            danRank: '2nd Dan',
+            beltStripes: 2,
+            beltStripeRoman: 'II',
+            name: 'Keumgang (គឹមហ្កាង)',
+            koreanName: '금강',
+            meaningOfName: 'ភ្នំពេជ្រ និងត្បូងពេជ្រមិនអាចបំបែកបាន¹',
+            nameFootnote: 'ភ្នំពេជ្រ (Geumgangsan)៖ មានប្រភពពីក្បួន Vajra នៃពុទ្ធសាសនា តំណាងឱ្យភាពរឹងមាំ មិនរង្គោះរង្គើ និងភ្នំដ៏ខ្ពង់ខ្ពស់។',
+            hanjaCharacter: '山',
+            meaningOfSymbol: 'ភ្នំដ៏មហិមា (Mountain)',
+            characterMeaning: 'ភ្នំពេជ្រ & ភាពរឹងមាំដូចថ្មពេជ្រ',
+            floorPatternShape: '山 (បន្ទាត់ភ្នំ)',
+            masterCharacteristic: 'មេគ្រូមិនអាចបំបែកបាន (Unbreakable)',
+            masterVirtue: 'ភាពរឹងមាំខាងសីលធម៌ និងស្ថេរភាពមិនរង្គោះរង្គើចំពោះឧបសគ្គ',
+            totalMoves: 27,
+          },
+          {
+            danRank: '3rd Dan',
+            beltStripes: 3,
+            beltStripeRoman: 'III',
+            name: 'Taebaek (ថែបែក)',
+            koreanName: '태백',
+            meaningOfName: 'ពន្លឺដ៏ឧត្តុង្គឧត្តម²',
+            nameFootnote: 'ពន្លឺដ៏ឧត្តុង្គឧត្តម (Taebaek)៖ ភ្នំពិសិដ្ឋ Baekdu ជាកន្លែងដែលស្តេច Dangun បង្កើតរដ្ឋ Gojoseon ក្រោមទស្សនវិជ្ជា Hongik Ingan (បម្រើមនុស្សជាតិ)។',
+            hanjaCharacter: '工',
+            meaningOfSymbol: 'ស្ពានរវាងមេឃ និងផែនដី',
+            characterMeaning: 'ការបង្កើតជាតិ & ពន្លឺបំភ្លឺមនុស្សជាតិ',
+            floorPatternShape: '工 (បន្ទាត់ស្ពានតភ្ជាប់មេឃ និងដី)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយស្មារតីវិញ្ញាណ (Spiritual)',
+            masterVirtue: 'ឧត្តមគតិដ៏ពិសិដ្ឋនៃការបម្រើ និងផ្តល់ផលប្រយោជន៍ដល់មនុស្សជាតិ (Hongik Ingan)',
+            totalMoves: 26,
+          },
+          {
+            danRank: '4th Dan',
+            beltStripes: 4,
+            beltStripeRoman: 'IIII',
+            name: 'Pyongwon (ព្យុងវ៉ុន)',
+            koreanName: '평원',
+            meaningOfName: 'វាលទំនាបដ៏ធំល្វឹងល្វើយ (Vast Plain)',
+            hanjaCharacter: '一',
+            meaningOfSymbol: 'វាលស្មៅធំទូលាយ (The Plain)',
+            characterMeaning: 'វាលទំនាបដែលផ្តល់កំណើតដល់ជីវិត',
+            floorPatternShape: '一 (បន្ទាត់ត្រង់ផ្តេក)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយសន្តិភាព (Peaceful)',
+            masterVirtue: 'ចិត្តទូលាយដូចវាលស្មៅដែលចិញ្ចឹមបីបាច់ជីវិតគ្រប់ប្រភេទដោយគ្មានការរើសអើង',
+            totalMoves: 21,
+          },
+          {
+            danRank: '5th Dan',
+            beltStripes: 5,
+            beltStripeRoman: 'IIIII',
+            name: 'Shipjin (ស៊ីបជីន)',
+            koreanName: '십진',
+            meaningOfName: 'ប្រព័ន្ធទសភាគ & និមិត្តសញ្ញាអាយុយឺនយូរទាំង ១០³',
+            nameFootnote: 'និមិត្តសញ្ញាអាយុយឺនយូរទាំង ១០ (Sipjangsaeng)៖ ព្រះអាទិត្យ ព្រះច័ន្ទ ភ្នំ ទឹក ថ្ម ដើមស្រល់ ឱសថទិព្វ អណ្តើក សត្វក្រៀល និងក្តាន់។',
+            hanjaCharacter: '十',
+            meaningOfSymbol: 'លេខដប់ & ភាពពេញលេញ (Ten)',
+            characterMeaning: 'ប្រព័ន្ធទសភាគ និងនិមិត្តសញ្ញាអាយុយឺនយូរ ១០',
+            floorPatternShape: '十 (បន្ទាត់ឈើឆ្កាងនៃភាពគ្មានទីបញ្ចប់)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយសុខភាព និងអាយុយឺនយូរ (Healthy)',
+            masterVirtue: 'ការអភិវឌ្ឍឥតឈប់ឈរ និងការរស់នៅប្រកបដោយសុខដុមតាមច្បាប់ធម្មជាតិ',
+            totalMoves: 28,
+          },
+          {
+            danRank: '6th Dan',
+            beltStripes: 6,
+            beltStripeRoman: 'IIIIII',
+            name: 'Jitae (ជីថែ)',
+            koreanName: '지태',
+            meaningOfName: 'មនុស្សឈរលើផែនដីសម្លឹងមើលទៅមេឃ',
+            hanjaCharacter: 'ㅗ',
+            meaningOfSymbol: 'ជំហានរឹងមាំរបស់មនុស្សលើដី',
+            characterMeaning: 'មនុស្សលោកដែលឈរយ៉ាងរឹងមាំលើផែនដី',
+            floorPatternShape: 'ㅗ (បន្ទាត់មនុស្សឈរលើផែនដី)',
+            masterCharacteristic: 'មេគ្រូពឹងផ្អែកលើខ្លួនឯង & បន្សល់ទុកកេរដំណែល (Legacy)',
+            masterVirtue: 'ការឈរយ៉ាងរឹងមាំលើផែនដីដោយយុត្តិធម៌ និងការជម្នះរាល់ឧបសគ្គក្នុងជីវិត',
+            totalMoves: 28,
+          },
+          {
+            danRank: '7th Dan',
+            beltStripes: 7,
+            beltStripeRoman: 'IIIIIII',
+            name: 'Cheonkwon (ឆនក្វន់)',
+            koreanName: '천권',
+            meaningOfName: 'អំណាច និងមហិទ្ធិឫទ្ធិនៃមេឃា (Heavenly Might)',
+            hanjaCharacter: '丅',
+            meaningOfSymbol: 'មេឃាដ៏ធំធេងដែលគ្របដណ្តប់លើលោក',
+            characterMeaning: 'មេឃាដែលមើលថែពិភពលោកទាំងមូល',
+            floorPatternShape: '丅 (បន្ទាត់មេឃាក្រឡេកមើលមនុស្សលោក)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយការគោរព និងស្មោះត្រង់ (Pious)',
+            masterVirtue: 'ការលះបង់នូវអញ និងការមើលពិភពលោកពីទស្សនៈដ៏ខ្ពង់ខ្ពស់នៃមេឃា',
+            totalMoves: 26,
+          },
+          {
+            danRank: '8th Dan',
+            beltStripes: 8,
+            beltStripeRoman: 'IIIIIIII',
+            name: 'Hansoo (ហាន់ស៊ូ)',
+            koreanName: '한수',
+            meaningOfName: 'ទឹកជាប្រភពនៃជីវិតទាំងអស់ (Origin Water)',
+            hanjaCharacter: '水',
+            meaningOfSymbol: 'ទឹកហូរ និងភាពបត់បែន (Water)',
+            characterMeaning: 'ទឹកជាប្រភពដើម និងសារធាតុចិញ្ចឹមនៃជីវិត',
+            floorPatternShape: '水 (បន្ទាត់អក្សរទឹក)',
+            masterCharacteristic: 'មេគ្រូប្រកបដោយភាពបត់បែន និងលំហូរ (Fluid)',
+            masterVirtue: 'ភាពទន់ភ្លន់ដូចទឹក—ហូរចូលគ្រប់កន្លែង តែមានថាមពលកម្ទេចថ្មភ្នំ',
+            totalMoves: 27,
+          },
+          {
+            danRank: '9th Dan',
+            beltStripes: 9,
+            beltStripeRoman: 'IIIIIIIII',
+            name: 'Ilyo (អ៊ីលយ៉ូ)',
+            koreanName: '일여',
+            meaningOfName: 'ភាពជាតែមួយនៃកាយ និងចិត្ត (Oneness)',
+            hanjaCharacter: '卍',
+            meaningOfSymbol: 'ភាពជាតែមួយនៃពុទ្ធសាសនា (Non-Duality)',
+            characterMeaning: 'ទស្សនវិជ្ជាព្រះសង្ឃ Wonhyo ភាពជាតែមួយនៃកាយ និងចិត្ត',
+            floorPatternShape: '卍 (បន្ទាត់ភាពសុខដុមនៃសកលលោក)',
+            masterCharacteristic: 'មហាមេគ្រូប្រកបដោយសុខដុមភាពពេញលេញ (Harmonious)',
+            masterVirtue: 'ការរលាយចូលគ្នារវាងរាងកាយ ចិត្ត បច្ចេកទេស និងសកលលោកជាធ្លុងមួយ',
+            totalMoves: 23,
+          },
         ],
         gradingsAndCompetition: {
           title: 'ការប្រឡងឡើងកម្រិត Dan និងការប្រកួតប្រជែងមេគុន Yudanja',
@@ -748,15 +1637,144 @@ export function getYudanjaGuide(lang: string): YudanjaGuideData {
           ],
         },
         floorPatterns: [
-          { danRank: '一段 (1st Dan)', name: '高丽 (Koryo)', koreanName: '고려', hanjaCharacter: '士', characterMeaning: '学士文人与尚武义士 (Scholar-Warrior)', floorPatternShape: '士 (士字线)', masterVirtue: '爱国尚武之魂与不屈民族气节', totalMoves: 30 },
-          { danRank: '二段 (2nd Dan)', name: '金刚 (Keumgang)', koreanName: '금강', hanjaCharacter: '山', characterMeaning: '金刚山之巍峨雄壮 (Diamond Mountain)', floorPatternShape: '山 (山字线)', masterVirtue: '如金刚石般粉碎迷妄的刚毅武德', totalMoves: 27 },
-          { danRank: '三段 (3rd Dan)', name: '太白 (Taebaek)', koreanName: '태백', hanjaCharacter: '工 / 大', characterMeaning: '天帝开国与洪益人间 (Sacred Mountain)', floorPatternShape: '工 (工字线)', masterVirtue: '光明正大照亮苍生的浩然正气', totalMoves: 26 },
-          { danRank: '四段 (4th Dan)', name: '平原 (Pyongwon)', koreanName: '평원', hanjaCharacter: '一', characterMeaning: '一望无际之生命平原 (Expansive Plain)', floorPatternShape: '一 (一字单横线)', masterVirtue: '坦荡开阔容纳万物之慈悲包容', totalMoves: 21 },
-          { danRank: '五段 (5th Dan)', name: '十进 (Shipjin)', koreanName: '십진', hanjaCharacter: '十', characterMeaning: '十进制无限递增与十长生 (Decimal Longevity)', floorPatternShape: '十 (十字交叉线)', masterVirtue: '天道运行无止境之自强不息', totalMoves: 28 },
-          { danRank: '六段 (6th Dan)', name: '地跆 (Jitae)', koreanName: '지태', hanjaCharacter: 'ㅗ', characterMeaning: '人类立足大地顶天立地 (Upright Human)', floorPatternShape: 'ㅗ (地平立人线)', masterVirtue: '双足扎根大地战胜人间磨难之魄力', totalMoves: 28 },
-          { danRank: '七段 (7th Dan)', name: '天拳 (Cheonkwon)', koreanName: '천권', hanjaCharacter: '丅', characterMeaning: '浩瀚苍天俯瞰人间 (Heavenly Canopy)', floorPatternShape: '丅 (天幕俯察线)', masterVirtue: '超脱私欲局限归于苍穹之大觉悟', totalMoves: 26 },
-          { danRank: '八段 (8th Dan)', name: '汉水 (Hansoo)', koreanName: '한수', hanjaCharacter: '水', characterMeaning: '万物生命之源泉活水 (Origin Water)', floorPatternShape: '水 (水字波浪线)', masterVirtue: '上善若水避实就虚滴水穿石之柔韧', totalMoves: 27 },
-          { danRank: '九段 (9th Dan)', name: '一如 (Ilyo)', koreanName: '일여', hanjaCharacter: '卍 / O', characterMeaning: '身心不二与真如一心 (Buddhist Non-Duality)', floorPatternShape: '卍 或 圆形 (一如圆环线)', masterVirtue: '技进乎道物我两忘之无上武道境界', totalMoves: 23 },
+          {
+            danRank: '一段 (1st Dan)',
+            beltStripes: 1,
+            beltStripeRoman: 'I',
+            name: '高丽 (Koryo)',
+            koreanName: '고려',
+            meaningOfName: '高丽古国国号 (Ancient Korea)',
+            hanjaCharacter: '士',
+            meaningOfSymbol: '学士文人与尚武义士 (Scholar-Warrior)',
+            characterMeaning: '学士文人与尚武义士 (Scholar-Warrior)',
+            floorPatternShape: '士 (士字线)',
+            masterCharacteristic: '智者之范 (Wise)',
+            masterVirtue: '爱国尚武之魂与坚贞不屈的民族气节',
+            totalMoves: 30,
+          },
+          {
+            danRank: '二段 (2nd Dan)',
+            beltStripes: 2,
+            beltStripeRoman: 'II',
+            name: '金刚 (Keumgang)',
+            koreanName: '금강',
+            meaningOfName: '金刚石与金刚山¹',
+            nameFootnote: '金刚山(金剛山)：源自佛教金刚杵(Vajra)之不可摧毁，象征粉碎迷妄的刚毅武德与巍峨山势。',
+            hanjaCharacter: '山',
+            meaningOfSymbol: '巍峨名山 (Mountain)',
+            characterMeaning: '金刚山之巍峨雄壮 (Diamond Mountain)',
+            floorPatternShape: '山 (山字线)',
+            masterCharacteristic: '坚不可摧 (Unbreakable)',
+            masterVirtue: '如金刚石般粉碎迷妄的刚毅武德与泰山般稳固',
+            totalMoves: 27,
+          },
+          {
+            danRank: '三段 (3rd Dan)',
+            beltStripes: 3,
+            beltStripeRoman: 'III',
+            name: '太白 (Taebaek)',
+            koreanName: '태백',
+            meaningOfName: '终极光明²',
+            nameFootnote: '终极光明(太白)：檀君王俭开辟古朝鲜之白头圣山，弘扬“弘益人间(弘益人間)”之开国大义。',
+            hanjaCharacter: '工',
+            meaningOfSymbol: '沟通天地之桥梁 (Bridge)',
+            characterMeaning: '天帝开国与弘益人间 (Sacred Mountain)',
+            floorPatternShape: '工 (工字线 / 通天达地之梁)',
+            masterCharacteristic: '浩然之灵 (Spiritual)',
+            masterVirtue: '光明正大照亮苍生的浩然正气与崇高道德',
+            totalMoves: 26,
+          },
+          {
+            danRank: '四段 (4th Dan)',
+            beltStripes: 4,
+            beltStripeRoman: 'IIII',
+            name: '平原 (Pyongwon)',
+            koreanName: '평원',
+            meaningOfName: '一望无际之苍茫平原 (Expansive Plain)',
+            hanjaCharacter: '一',
+            meaningOfSymbol: '辽阔平原 (The Plain)',
+            characterMeaning: '一望无际之生命平原 (Expansive Plain)',
+            floorPatternShape: '一 (一字单横线)',
+            masterCharacteristic: '平和慈悲 (Peaceful)',
+            masterVirtue: '坦荡开阔容纳万物之慈悲包容与平和心境',
+            totalMoves: 21,
+          },
+          {
+            danRank: '五段 (5th Dan)',
+            beltStripes: 5,
+            beltStripeRoman: 'IIIII',
+            name: '十进 (Shipjin)',
+            koreanName: '십진',
+            meaningOfName: '十进制无限递增与十长生³',
+            nameFootnote: '十长生(十長生)：日、月、山、水、石、松、不老草、龟、鹤、鹿十种永恒长青圣物。',
+            hanjaCharacter: '十',
+            meaningOfSymbol: '圆满数“十” (Ten)',
+            characterMeaning: '十进制无限递增与十长生 (Decimal Longevity)',
+            floorPatternShape: '十 (十字交叉线)',
+            masterCharacteristic: '长生康宁 (Healthy)',
+            masterVirtue: '天道运行无止境之自强不息与生命秩序',
+            totalMoves: 28,
+          },
+          {
+            danRank: '六段 (6th Dan)',
+            beltStripes: 6,
+            beltStripeRoman: 'IIIIII',
+            name: '地跆 (Jitae)',
+            koreanName: '지태',
+            meaningOfName: '人类立足大地顶天立地 (Man on Earth)',
+            hanjaCharacter: 'ㅗ',
+            meaningOfSymbol: '立足大地仰望天空之人',
+            characterMeaning: '人类立足大地顶天立地 (Upright Human)',
+            floorPatternShape: 'ㅗ (地平立人线)',
+            masterCharacteristic: '自强立世与万代宗风 (Legacy)',
+            masterVirtue: '双足扎根大地战胜人间磨难之魄力与道统传承',
+            totalMoves: 28,
+          },
+          {
+            danRank: '七段 (7th Dan)',
+            beltStripes: 7,
+            beltStripeRoman: 'IIIIIII',
+            name: '天拳 (Cheonkwon)',
+            koreanName: '천권',
+            meaningOfName: '浩瀚苍天之至高威权 (Heavenly Might)',
+            hanjaCharacter: '丅',
+            meaningOfSymbol: '从天而降俯瞰尘寰之人',
+            characterMeaning: '浩瀚苍天俯瞰人间 (Heavenly Canopy)',
+            floorPatternShape: '丅 (天幕俯察线)',
+            masterCharacteristic: '天命虔敬 (Pious)',
+            masterVirtue: '超脱私欲局限归于苍穹宇宙之大觉悟',
+            totalMoves: 26,
+          },
+          {
+            danRank: '八段 (8th Dan)',
+            beltStripes: 8,
+            beltStripeRoman: 'IIIIIIII',
+            name: '汉水 (Hansoo)',
+            koreanName: '한수',
+            meaningOfName: '万物生命之源泉活水 (Origin Water)',
+            hanjaCharacter: '水',
+            meaningOfSymbol: '上善若水 (Water)',
+            characterMeaning: '万物生命之源泉活水 (Origin Water)',
+            floorPatternShape: '水 (水字波浪线)',
+            masterCharacteristic: '随方就圆上善若水 (Fluid)',
+            masterVirtue: '上善若水避实就虚滴水穿石之包容与柔韧',
+            totalMoves: 27,
+          },
+          {
+            danRank: '九段 (9th Dan)',
+            beltStripes: 9,
+            beltStripeRoman: 'IIIIIIIII',
+            name: '一如 (Ilyo)',
+            koreanName: '일여',
+            meaningOfName: '真如一心与身心不二 (Oneness)',
+            hanjaCharacter: '卍',
+            meaningOfSymbol: '佛学真如境界 (Non-Duality)',
+            characterMeaning: '身心不二与真如一心 (Buddhist Non-Duality)',
+            floorPatternShape: '卍 (一如圆环线)',
+            masterCharacteristic: '物我两忘圆满调和 (Harmonious)',
+            masterVirtue: '技进乎道物我两忘之无上武道大圆满境地',
+            totalMoves: 23,
+          },
         ],
         gradingsAndCompetition: {
           title: '有段者升段考核与高规格公认品势竞技',
@@ -1293,7 +2311,7 @@ export interface WhatIsTaegeukData {
   palgweComparison?: PalgweComparisonData
 }
 
-export const DEFAULT_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
+export const EN_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
   title: 'The 4 Core Elements of Poomsae Execution',
   subtitle: 'Pattern, Direction, Stance, and Technique (품새의 4대 구성 요소)',
   summary:
@@ -1301,14 +2319,14 @@ export const DEFAULT_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
   elements: [
     {
       id: 'pattern',
-      title: '1. Pattern (도형 / Pattern)',
+      title: '1. Pattern (도형 / Floor Trajectory)',
       koreanTitle: '도형 (Floor Trajectory & Character)',
       concept: 'The geometric shape drawn by the practitioner’s feet on the dojang floor.',
       details: [
         'All eight Taegeuk poomsae follow the Chinese character "王" (Wang / King).',
         'Each of the three horizontal lines of "王" corresponds directly to one line of that form’s trigram (Top = Heaven, Middle = Man, Bottom = Earth).',
         'Palgwe forms vary by character: Palgwe 1–4 & 6 use "工" (Gong / Work), Palgwe 5 uses "干" (Gan / Shield), Palgwe 7 uses "下" (Ha / Below), and Palgwe 8 uses "土" (Tu / Earth).',
-        'Black Belt forms each follow unique Hanja characters (士, 山, 工, 一, 十, 上, 下, 水, 卍).',
+        'Black Belt forms each follow unique Hanja characters (士, 山, 工, 一, 十, ㅗ, 丅, 水, 卍).',
       ],
       practicalApplication:
         'Return to the exact origin spot (Joon-bi line) upon completion; deviations indicate faulty stance lengths or imprecise pivot axes.',
@@ -1382,7 +2400,276 @@ export const DEFAULT_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
   },
 }
 
-export const DEFAULT_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
+export const KM_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
+  title: 'ធាតុស្នូលទាំង ៤ នៃការសម្តែងមេគុន',
+  subtitle: 'គន្លងផ្លូវ ទិសដៅ ជំហរ និងបច្ចេកទេស (품새의 4대 구성 요소)',
+  summary:
+    'ទ្រឹស្តីមេគុនបុរាណ World Taekwondo (Ronald A. Southwick, 2005) ចែងថារាល់មេគុនទាំងអស់ត្រូវបានអនុវត្តតាមរយៈធាតុគ្រឹះ ៤ ដែលផ្សារភ្ជាប់គ្នាយ៉ាងជិតស្និទ្ធ៖ គន្លងលើកម្រាល (Pattern), ទិសដៅលំហ (Direction), ជំហរគ្រឹះ (Stance), និងបច្ចេកទេសកម្លាំងចលករ (Technique)។',
+  elements: [
+    {
+      id: 'pattern',
+      title: '១. គន្លងផ្លូវលើកម្រាល (Pattern / 도형)',
+      koreanTitle: '도형 (Floor Trajectory & Character)',
+      concept: 'ទម្រង់ធរណីមាត្រដែលគូសចេញដោយជើងរបស់អ្នកហ្វឹកហាត់លើកម្រាល Dojang។',
+      details: [
+        'មេគុន Taegeuk ទាំង ៨ ដើរតាមគន្លងអក្សរចិន "王" (Wang / ស្តេច) ដូចៗគ្នា។',
+        'បន្ទាត់ផ្តេកទាំង ៣ នៃអក្សរ "王" ត្រូវគ្នានឹងបន្ទាត់ទាំង ៣ នៃត្រីក្រាម I Ching (ខាងលើ = មេឃ, កណ្តាល = មនុស្ស, ខាងក្រោម = ផែនដី)។',
+        'មេគុន Palgwe ដើរតាមអក្សរចិនផ្សេងៗគ្នា៖ Palgwe 1–4 & 6 ប្រើអក្សរ "工" (Gong / ពលកម្ម), Palgwe 5 ប្រើ "干" (Gan / ខែល), Palgwe 7 ប្រើ "下" (Ha / ខាងក្រោម), និង Palgwe 8 ប្រើ "土" (Tu / ផែនដី)។',
+        'មេគុនខ្សែក្រវាត់ខ្មៅ Yudanja នីមួយៗដើរតាមអក្សរចិនជាក់លាក់រៀងៗខ្លួន (士, 山, 工, 一, 十, ㅗ, 丅, 水, 卍)។',
+      ],
+      practicalApplication:
+        'ត្រូវវិលត្រឡប់មកកាន់ចំណុចចាប់ផ្តើម (Joon-bi) ឱ្យបានត្រឹមត្រូវ ១០០% នៅពេលបញ្ចប់។ គម្លាតខុសបង្ហាញពីការបោះជំហានខ្វះ ឬលើសប្រវែង ឬអ័ក្សបង្វិលមិនចំកណ្តាល។',
+    },
+    {
+      id: 'direction',
+      title: '២. ទិសដៅលំហ (Direction / 방향 - វិធីសាស្ត្រនាឡិកា)',
+      koreanTitle: '방향 (The 4-Point Clock Method)',
+      concept: 'ការតម្រង់ទិសលំហដែលគ្រប់គ្រងមុំដែលអ្នកហ្វឹកហាត់ត្រូវបែរមុខទៅរកក្នុងអំឡុងពេលសម្តែងមេគុន។',
+      details: [
+        'ទិសម៉ោង ១២:០០ (ខាងមុខ / Buk - 북)៖ ការប្រឈមមុខដោយផ្ទាល់ជាមួយគូប្រកួតស្រមើស្រមៃខាងមុខ។',
+        'ទិសម៉ោង ៣:០០ (ខាងស្តាំ / Dong - 동)៖ ការការពារ និងវាយបកស្លាបចំហៀងមុំ ៩០ ដឺក្រេ។',
+        'ទិសម៉ោង ៦:០០ (ខាងក្រោយ / Nam - 남)៖ ផ្លូវត្រឡប់ក្រោយ និងការទប់ទល់ការគំរាមកំហែងពីខាងក្រោយ។',
+        'ទិសម៉ោង ៩:០០ (ខាងឆ្វេង / Seo - 서)៖ ការបង្វិលខ្លួន ៩០ ដឺក្រេដំបូងដើម្បីផ្តើមបន្ទាត់ផ្តេកនៃត្រីក្រាម។',
+      ],
+      practicalApplication:
+        'មេគុន Taegeuk និង Palgwe ទាំងអស់តម្រូវឱ្យសិស្សបែរមុខទៅកាន់ទិសត្រីវិស័យធំៗទាំង ៤ នេះប៉ុណ្ណោះ ដោយគ្មានមុំស្រពិចស្រពិលឡើយ។',
+    },
+    {
+      id: 'stance',
+      title: '៣. ជំហរគ្រឹះ (Stance / 서기)',
+      koreanTitle: '서기 (Weight Distribution & Center of Gravity)',
+      concept: 'ទីតាំង និងគម្លាតនៃប្រអប់ជើង ការបត់ជង្គង់ និងការបែងចែកទម្ងន់រាងកាយឱ្យមានលំនឹង។',
+      details: [
+        'Ap-seogi (ជំហរដើរធម្មតា)៖ ទម្ងន់ ៥០/៥០ ស្មើគ្នា ជំហានប្រវែង ១ ប្រអប់ជើង ដងខ្លួនត្រង់បែបធម្មជាតិ។',
+        'Ap-kubi (ជំហរវែងមុខ)៖ ៧០% ជើងមុខ / ៣០% ជើងក្រោយ ប្រវែង ៤–៤.៥ ប្រអប់ជើង ឫសកម្លាំងជ្រៅ។',
+        'Dwit-kubi (ជំហរអក្សរអិល L-Stance)៖ ៧០% ជើងក្រោយ / ៣០% ជើងមុខ កែងជើងទាំងពីរនៅលើបន្ទាត់តែមួយកាត់កែង ៩០ ដឺក្រេ។',
+        'Beom-seogi (ជំហរខ្លា)៖ ៩០–១០០% ទម្ងន់លើជើងក្រោយ កែងជើងមុខលើកផុតកម្រាល ប្រៀបដូចរ៉ឺស័រត្រៀមស្ទុះ។',
+        'Juchum-seogi (ជំហរជិះសេះ)៖ ទម្ងន់ ៥០/៥០ ទទឹង ២ ប្រអប់ជើង ជើងស្របគ្នា បន្ទាបត្រគាក។',
+      ],
+      practicalApplication:
+        'ជំហរត្រឹមត្រូវគឺជាគ្រឹះនៃការបញ្ជូនកម្លាំងចលករ។ ជំហរទន់ខ្សោយនឹងធ្វើឱ្យបាត់បង់ថាមពល និងបាត់បង់លំនឹងពេលចេញក្បាច់។',
+    },
+    {
+      id: 'technique',
+      title: '៤. បច្ចេកទេសក្បាច់ (Technique / 기술)',
+      koreanTitle: '기술 (Chambering, Trajectory & Impact)',
+      concept: 'វិធីសាស្ត្រនៃការរារាំង ការវាយ កាប់ ចាក់ និងទាត់ប្រកបដោយប្រសិទ្ធភាពជីវមេកានិចខ្ពស់បំផុត។',
+      details: [
+        'ការរៀបចំដៃត្រៀម (Chambering)៖ រាល់ការរារាំង និងវាយត្រូវចាប់ផ្តើមពីចំណុចប្រភព (ដូចជាស្មាផ្ទុយ ត្រគាក ត្រចៀក) ដើម្បីបង្កើតកម្លាំងរង្វិល។',
+        'កម្លាំងបង្វិលត្រគាក (Hip Torque)៖ ការខ្ទាតបង្វិលនៃឆ្អឹងអាងត្រគាកត្រូវស៊ីចង្វាក់គ្នានឹង ១០% ចុងក្រោយនៃការចេញក្បាច់។',
+        'អាវុធវាយប្រហារ៖ កណ្តាប់ដៃ (Jumeok), បាតដៃកាំបិត (Sonnal), ចុងម្រាមដៃ (Pyonsonkkeut), កែងដៃ (Palkoop), និងគែមជើង (Balnal)។',
+        'ចលនការនៃការទាត់៖ លើកជង្គង់ (Chamber) -> លាតសន្ធឹងធាក់ទាត់ -> ខ្ទាតត្រូវគោលដៅដោយអាវុធជាក់លាក់ (Ap-chook / Balnal) -> បត់ជង្គង់ត្រឡប់មកវិញ (Re-chamber) មុនពេលទម្លាក់ជើងដោយទប់លំនឹង។',
+      ],
+      practicalApplication:
+        'បច្ចេកទេសត្រូវតែច្បាស់លាស់ និងម៉ឺងម៉ាត់—មិនមែនជាការសម្តែងល្ខោនឡើយ។ បញ្ចេញគ្រប់ចលនាដូចជាកំពុងជួបគូប្រកួតពិតប្រាកដ។',
+    },
+  ],
+  wangFloorRule: {
+    title: 'គន្លងកម្រាល "王" (ស្តេច) & ច្បាប់បោះជំហានត្រីក្រាម',
+    chineseCharacter: '王',
+    definition:
+      'នៅក្នុងមេគុន Taegeuk បន្ទាត់ផ្តេកទាំង ៣ នៃអក្សរចិន "王" តំណាងឱ្យបន្ទាត់ទាំង ៣ នៃត្រីក្រាម I Ching។ បន្ទាត់លើតំណាងឱ្យមេឃ កណ្តាលតំណាងឱ្យមនុស្ស និងក្រោមតំណាងឱ្យផែនដី។',
+    yangRule:
+      'បន្ទាត់រឹង (Yang —–)៖ ប្រសិនបើសិស្សបោះជំហានទៅមុខតាមបន្ទាត់ផ្តេក នោះបន្ទាត់នោះនឹងក្លាយជាបន្ទាត់រឹង Yang។',
+    umRule:
+      'បន្ទាត់ដាច់ (Um – –)៖ ប្រសិនបើសិស្សមិនបោះជំហានទៅមុខតាមបន្ទាត់ផ្តេក (ដូចជាធ្វើចលនានៅនឹងកន្លែង ថយក្រោយ ឬបង្វិលខ្លួនដោយមិនបោះទៅមុខ) នោះបន្ទាត់នោះនឹងក្លាយជាបន្ទាត់ដាច់ Um។',
+    philosophicalSignificance:
+      'ទំនាក់ទំនងផ្ទាល់នេះអនុញ្ញាតឱ្យកីឡាករគូសត្រីក្រាមនៃចក្រវាលនៅលើកម្រាល Dojang តាមរយៈជំហានជើងជាក់ស្តែងរបស់ខ្លួន។',
+  },
+  clockSystem: {
+    title: 'ប្រព័ន្ធកូអរដោនេនាឡិកា ៤ ទិសបុរាណ',
+    description:
+      'ដើម្បីលុបបំបាត់ភាពស្រពិចស្រពិលនៃទិសដៅក្នុងការហ្វឹកហាត់ និងការប្រឡង ក្បួនមេគុនបុរាណបានកំណត់ម៉ោងនាឡិកាសម្រាប់ទិសទាំង ៤។',
+    directions: [
+      { hour: '12:00', direction: 'ខាងមុខ (North / 북)', koreanName: '전방 (Jeon-bang)', tacticalRole: 'ខ្សែភ្នែកដំបូង និងការវាយលុកទៅមុខជាចម្បង' },
+      { hour: '3:00', direction: 'ខាងស្តាំ (East / 동)', koreanName: '우측 (Woo-cheuk)', tacticalRole: 'ការទប់ទល់ស្លាបស្តាំ និងការឆ្លងកាត់ត្រឡប់មកវិញ' },
+      { hour: '6:00', direction: 'ខាងក្រោយ (South / 남)', koreanName: '후방 (Hoo-bang)', tacticalRole: 'ខ្សែត្រឡប់មកកណ្តាល និងបន្សំក្បាច់បញ្ចប់ចុងក្រោយ' },
+      { hour: '9:00', direction: 'ខាងឆ្វេង (West / 서)', koreanName: '좌측 (Jwa-cheuk)', tacticalRole: 'ការបង្វិលខ្លួនដំបូងផ្តើមបន្ទាត់ផ្តេកនៃត្រីក្រាម' },
+    ],
+  },
+}
+
+export const ZH_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
+  title: '公认品势演练四大核心构成要素',
+  subtitle: '演武路线、方向维度、稳固步法与发劲技术 (품새의 4대 구성 요소)',
+  summary:
+    '古典世界跆拳道品势理论（Ronald A. Southwick，2005）明确规定，每一套品势的演练均由四大相互依存的根本基石构成：地面演武路线（Pattern）、三维空间朝向（Direction）、骨骼中轴步法（Stance）以及运动生物力学技术（Technique）。',
+  elements: [
+    {
+      id: 'pattern',
+      title: '1. 演武路线 (도형 / Floor Pattern)',
+      koreanTitle: '도형 (Floor Trajectory & Character)',
+      concept: '练习者双足在道馆地板上演练移动时所描绘出的几何汉字轨迹。',
+      details: [
+        '太极一至八章全部遵循中正对称的汉字“王 (Wang / King)”演武线。',
+        '“王”字的三道横线直接对应八卦的三爻（上横线=天爻、中横线=人爻、下横线=地爻）。',
+        '传统八卦品势则因套路而异：八卦1–4与6章走“工”字线，八卦5章走“干”字线，八卦7章走“下”字线，八卦8章走“土”字线。',
+        '黑带一段至九段有段者品势则各自描绘专属独立汉字（士、山、工、一、十、ㅗ、丅、水、卍）。',
+      ],
+      practicalApplication:
+        '套路打完收势必须百分之百精准回归起势的原点准星（Joon-bi 线）；若偏离原点，必然表明步幅大小失衡或轴心脚旋转产生位移。',
+    },
+    {
+      id: 'direction',
+      title: '2. 空间朝向 (방향 / Direction - 四向时钟法)',
+      koreanTitle: '방향 (The 4-Point Clock Method)',
+      concept: '演练过程中统领学员视线与身体迎敌朝向的空间坐标系统。',
+      details: [
+        '12:00 方位 (正前 / Buk - 북)：正面对决前方假想敌，推进核心攻防。',
+        '3:00 方位 (右侧 / Dong - 동)：90度右翼防守与侧翼强力反击。',
+        '6:00 方位 (正后 / Nam - 남)：中央回撤主轴线，完成高潮终结连击。',
+        '9:00 方位 (左侧 / Seo - 서)：起势首度左转90度，开启横向三爻行运。',
+      ],
+      practicalApplication:
+        '所有太极与八卦品势均严格限定学员仅面向这四大正向基准罗盘坐标，彻底杜绝斜向模糊角度。',
+    },
+    {
+      id: 'stance',
+      title: '3. 稳固步法 (서기 / Stance)',
+      koreanTitle: '서기 (Weight Distribution & Center of Gravity)',
+      concept: '双足间距、膝盖屈曲弹性以及全身重心中轴在地面上的稳定分布。',
+      details: [
+        '前步 / 自然步 (Ap-seogi)：重心 50/50 平均分布，步幅为单脚自然迈步长，上身中正挺拔。',
+        '前弓步 (Ap-kubi)：重心 前腿70% / 后腿30%，步幅4至4.5脚长，后脚锁扣30度，构筑如山根基。',
+        '后弓步 (Dwit-kubi)：重心 后腿70% / 前腿30%，双脚跟位于同一直线上成90度直角扣合。',
+        '虎步 (Beom-seogi)：重心 90–100% 压于屈曲后腿，前脚掌轻点地面脚跟悬空，如压缩弹簧蓄势待发。',
+        '骑马步 (Juchum-seogi)：重心 50/50，两脚宽约两脚长，双足平行内扣，下沉髋关节。',
+      ],
+      practicalApplication:
+        '步法是力量传导的中枢母体。步法松浮漂移会直接泄掉打击的反作用力，导致攻防失去平衡。',
+    },
+    {
+      id: 'technique',
+      title: '4. 发劲技术 (기술 / Technique)',
+      koreanTitle: '기술 (Chambering, Trajectory & Impact)',
+      concept: '以最高人体运动生物力学效率施展的格挡、冲拳、穿刺与腿法打击。',
+      details: [
+        '预备折臂 (Chambering)：每一次防守与击打必须经由对侧肩、髋或耳际完整蓄力引伸，蓄积旋转角动量。',
+        '骨盆扭矩 (Hip Torque)：骨盆转动发劲必须在动作接触目标的最后10%瞬间完成爆发性制动锁死（Snap）。',
+        '击打武器库：正拳 (Jumeok)、手刀 (Sonnal)、贯手 (Pyonsonkkeut)、肘关节 (Palkoop) 以及脚刀 (Balnal)。',
+        '腿法发力链：提膝折叠 -> 弹击破空 -> 专用接触面（前掌垫/脚刀）命中要害 -> 顺畅折膝收腿 -> 沉稳控重落步。',
+      ],
+      practicalApplication:
+        '动作必须利落、真实、透力，杜绝花拳绣腿的摆姿态。每一次出手皆以摧毁真实强敌为唯一定位。',
+    },
+  ],
+  wangFloorRule: {
+    title: '“王”字演武线与八卦三爻运足法则',
+    chineseCharacter: '王',
+    definition:
+      '在太极品势中，“王”字的三道水平横线直接具象化所对应《易经》卦象的三道爻（上爻=天、中爻=人、下爻=地）。',
+    yangRule:
+      '纯阳爻 (Yang —–)：若学员沿着该横向路线向前上步推进移动，则该线在地表轨迹中显化为完整的连贯阳爻实线。',
+    umRule:
+      '纯阴爻 (Um – –)：若学员在该横向上仅原地换势、后退、或未向前迈步推进，则显化为中断的阴爻虚线。',
+    philosophicalSignificance:
+      '这一直接映射使武道修习者能够通过足底在道馆地面的实地运步，将深邃的宏观宇宙卦象亲笔书写于大地之上。',
+  },
+  clockSystem: {
+    title: '古典四向时钟空间方位坐标法',
+    description:
+      '为消除训练与考段过程中方位理解的歧义，正统品势教程将演武场划分为四个标准时钟象限。',
+    directions: [
+      { hour: '12:00', direction: '正前 (北 / North)', koreanName: '전방 (Jeon-bang)', tacticalRole: '初始基准视线与主要进攻纵深推进线' },
+      { hour: '3:00', direction: '右侧 (东 / East)', koreanName: '우측 (Woo-cheuk)', tacticalRole: '右侧翼近身化解与折返横线交织' },
+      { hour: '6:00', direction: '正后 (南 / South)', koreanName: '후방 (Hoo-bang)', tacticalRole: '中轴回撤纵深与高潮终结组合技施展' },
+      { hour: '9:00', direction: '左侧 (西 / West)', koreanName: '좌측 (Jwa-cheuk)', tacticalRole: '起手左转90度开启横向三爻行运' },
+    ],
+  },
+}
+
+export const KO_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = {
+  title: '품새 시연의 4대 핵심 구성 요소',
+  subtitle: '도형, 방향, 서기, 그리고 기술 (품새의 4대 구성 요소)',
+  summary:
+    '세계태권도연맹(WT) 공인 고전 품새 이론(Ronald A. Southwick, 2005)에 따르면, 모든 품새는 상호 유기적으로 결합된 네 가지 근본 요소인 바닥 도형(Pattern), 공간 방향(Direction), 중심 보법(Stance), 그리고 운동역학적 기술(Technique)을 통해 완성됩니다.',
+  elements: [
+    {
+      id: 'pattern',
+      title: '1. 도형 (도형 / Floor Pattern)',
+      koreanTitle: '도형 (Floor Trajectory & Character)',
+      concept: '수련자가 도장 바닥 위에서 발 디딤을 통해 그려내는 고유한 기하학적 한자 궤적.',
+      details: [
+        '태극 1~8장은 모두 한자 임금 왕(王)자 품새선을 공통적으로 따릅니다.',
+        '왕(王)자의 3개 가로선은 해당 품새의 주역 3효와 1:1로 정확히 대응합니다 (상선=하늘, 중선=사람, 하선=땅).',
+        '팔괘 품새는 품새별로 한자가 다릅니다: 팔괘 1~4장 및 6장은 장인 공(工)자, 5장은 방패 간(干)자, 7장은 아래 하(下)자, 8장은 흙 토(土)자를 따릅니다.',
+        '유단자 품새는 품새마다 고유한 독립 한자 품새선을 그립니다 (士, 山, 工, 一, 十, ㅗ, 丅, 水, 卍).',
+      ],
+      practicalApplication:
+        '품새를 마친 후 바로(Ba-ro) 구령 시 정확히 출발 원점(준비선)으로 복귀해야 합니다. 오차가 발생하는 것은 보폭의 불균형이나 축발 회전 중심의 흔들림을 의미합니다.',
+    },
+    {
+      id: 'direction',
+      title: '2. 방향 (방향 / Direction - 시계 방향법)',
+      koreanTitle: '방향 (The 4-Point Clock Method)',
+      concept: '품새 시연 중 수련자가 가상의 적을 향해 바라보는 4대 동서남북 공간 좌표 체계.',
+      details: [
+        '12:00 방향 (전방 / 북 - Buk): 정면 가상의 적과 맞서는 주된 전진 공방선.',
+        '3:00 방향 (우측 / 동 - Dong): 90도 우측 측면 방어 및 치명적 반격선.',
+        '6:00 방향 (후방 / 남 - Nam): 중앙 회귀선 및 품새의 클라이맥스 종결 조합선.',
+        '9:00 방향 (좌측 / 서 - Seo): 품새 시작과 함께 좌측 90도로 전환하며 효(爻)선을 여는 기점.',
+      ],
+      practicalApplication:
+        '태극 및 팔괘 품새의 모든 회전은 사선이 아닌 정확한 4대 방위만을 지향하여 공간적 모호함을 배제합니다.',
+    },
+    {
+      id: 'stance',
+      title: '3. 서기 (서기 / Stance)',
+      koreanTitle: '서기 (Weight Distribution & Center of Gravity)',
+      concept: '양발의 위치, 보폭, 무릎의 탄력 각도 및 신체 중심(단전)의 안정된 하중 배분.',
+      details: [
+        '앞서기(Walking Stance): 체중 50/50 균등 배분, 1발 길이 자연스러운 보폭, 곧은 상체.',
+        '앞굽이(Forward Stance): 앞다리 70% / 뒷다리 30%, 4~4.5발 길이의 깊은 보폭, 뒷발 30도 견고한 고정.',
+        '뒷굽이(Back Stance / L-Stance): 뒷다리 70% / 앞다리 30%, 양발 뒤꿈치가 일직선상에서 90도를 이룸.',
+        '범서기(Tiger Stance): 뒷다리에 체중 90~100% 집중, 앞발은 뒤꿈치를 들고 발끝만 가볍게 딛는 탄발 자세.',
+        '주춤서기(Riding Stance): 체중 50/50, 2발 너비의 넓은 평행 보폭, 기마 자세로 하체 중심 안정화.',
+      ],
+      practicalApplication:
+        '올바른 서기는 파워 전달의 원천입니다. 서기가 흔들리면 타격 순간 반작용력이 소실되고 중심이 무너집니다.',
+    },
+    {
+      id: 'technique',
+      title: '4. 기술 (기술 / Technique)',
+      koreanTitle: '기술 (Chambering, Trajectory & Impact)',
+      concept: '최적의 운동역학을 바탕으로 가상의 적을 제압하는 막기, 지르기, 치기, 찌르기, 차기의 완성도.',
+      details: [
+        '예비동작(Chambering): 모든 막기와 치기는 반대편 어깨나 골반, 귀 뒤에서 시작하여 회전 모멘텀을 극대화합니다.',
+        '골반 회전력(Hip Torque): 골반의 탄력적인 스냅 회전은 타격 접촉 직전 마지막 10% 순간에 일치하여 결합됩니다.',
+        '공격 부위(Weapons): 주먹(바른주먹, 등주먹, 메주먹), 손날, 편손끝, 팔굽, 발날 및 앞축.',
+        '발차기 역학: 무릎 접어올리기 -> 폭발적 뻗기 -> 가격 -> 무릎 다시 접어 회수(Re-chamber) -> 균형 잡힌 착지.',
+      ],
+      practicalApplication:
+        '기술은 형식적인 흉내가 아니라 실전의 파괴력을 담아야 합니다. 실전 상대의 급소를 꿰뚫듯 명확하게 격파하십시오.',
+    },
+  ],
+  wangFloorRule: {
+    title: '王자 품새선과 주역 3효(三爻) 운족의 법칙',
+    chineseCharacter: '王',
+    definition:
+      '태극 품새에서 한자 임금 왕(王)자의 3개 가로선은 주역 8괘의 3효(상효=하늘, 중효=사람, 하효=땅)와 1:1로 직결됩니다.',
+    yangRule:
+      '양효(Yang —–): 수련자가 해당 가로선을 따라 앞으로 전진(발을 내딛음)하면 끊어지지 않은 온전한 양효가 성립합니다.',
+    umRule:
+      '음효(Um – –): 수련자가 해당 가로선에서 전진하지 않고 제자리 동작, 후진, 또는 방향 전환만 수행하면 끊어진 음효가 성립합니다.',
+    philosophicalSignificance:
+      '이 법칙을 통해 수련자는 도장 바닥을 딛는 자신의 발걸음으로 거대한 우주 삼라만상의 괘상을 몸소 써 내려가게 됩니다.',
+  },
+  clockSystem: {
+    title: '공인 4방향 시계좌표 시스템',
+    description:
+      '수련과 심사 과정에서 방향의 왜곡을 없애기 위해 품새 교본은 4개 사분면에 정확한 시계 시각을 부여합니다.',
+    directions: [
+      { hour: '12:00', direction: '전방 (북 / North)', koreanName: '전방 (Jeon-bang)', tacticalRole: '초기 시선 정렬선 및 주 공격 전진선' },
+      { hour: '3:00', direction: '우측 (동 / East)', koreanName: '우측 (Woo-cheuk)', tacticalRole: '우측 측면 공방 및 교차 복귀선' },
+      { hour: '6:00', direction: '후방 (남 / South)', koreanName: '후방 (Hoo-bang)', tacticalRole: '중앙 회귀선 및 종결 연속 기술 구간' },
+      { hour: '9:00', direction: '좌측 (서 / West)', koreanName: '좌측 (Jwa-cheuk)', tacticalRole: '품새 시작 좌회전 및 가로선 개시' },
+    ],
+  },
+}
+
+export const DEFAULT_FOUR_EXECUTION_ELEMENTS: FourExecutionElementsData = EN_FOUR_EXECUTION_ELEMENTS
+
+export const EN_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
   title: 'The 8 Pillars of Poomse Performance',
   subtitle: 'Developing the Soul of Taekwondo Practice (Ronald A. Southwick Treatise)',
   summary:
@@ -1455,7 +2742,228 @@ export const DEFAULT_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
   ],
 }
 
-export const DEFAULT_PALGWE_COMPARISON: PalgweComparisonData = {
+export const KM_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
+  title: 'សសរស្តម្ភទាំង ៨ នៃការសម្តែងមេគុន',
+  subtitle: 'ការអភិវឌ្ឍវិញ្ញាណ និងខ្លឹមសារពិតនៃការហ្វឹកហាត់តេក្វាន់ដូ (ក្បួន Southwick)',
+  summary:
+    'មេគ្រូដ៏ចំណានអាចមើលដឹងពីភាពចាស់ទុំនៃបច្ចេកទេស ការផ្តោតអារម្មណ៍ផ្លូវចិត្ត លំនឹង និងស្មារតីខាងក្នុងរបស់សិស្ស តាមរយៈការសង្កេតមើលមេគុនតែមួយលើកប៉ុណ្ណោះ។ ការឈានដល់កម្រិតកំពូលតម្រូវឱ្យមានតុល្យភាពរវាងវិមាត្រទាំង ៨ នេះ។',
+  pillars: [
+    {
+      number: 1,
+      title: '១. ភាពត្រឹមត្រូវនៃបច្ចេកទេស (Technique / 기술)',
+      koreanTitle: '정확한 기본기 (Technical Accuracy)',
+      summary: 'ការរារាំងចាប់ផ្តើម និងបញ្ចប់នៅចំណុចមានប្រសិទ្ធភាព; ការវាយចេញពីត្រគាកប្រកបដោយថាមពលពេញលេញ; ការទាត់បង្ហាញពីលំនឹង និងទម្រង់ប្រអប់ជើងត្រឹមត្រូវ។',
+      executionGuide: 'កុំប្តូរភាពជាក់លាក់ដើម្បីតែភាពទាក់ទាញភ្នែកឡើយ។ រាល់ការរារាំងត្រូវតែមានមុំការពារជាក់ស្តែង ហើយរាល់ការវាយត្រូវតែទម្លុះចំណុចស្លាប់របស់រាងកាយ។',
+      masterCue: 'រៀបចំដៃឱ្យពេញ លឿនដូចផ្លេកបន្ទោរ និងចាក់សោឱ្យរឹងមាំពេលប៉ះគោលដៅ។',
+    },
+    {
+      number: 2,
+      title: '២. ការយល់ដឹងពីមេគុន (Knowledge / 지식)',
+      koreanTitle: '품새에 대한 이해 (Pattern & Lineage Knowledge)',
+      summary: 'ការដឹងពីគន្លងផ្លូវលើកម្រាល ជំហរ បច្ចេកទេស ទម្រង់អក្សរចិន និងទស្សនវិជ្ជាត្រីក្រាមយ៉ាងលម្អិត។',
+      executionGuide: 'ត្រូវយល់ពីមូលហេតុដែលបច្ចេកទេសនីមួយៗត្រូវបានដាក់នៅទីនោះ។ ត្រូវដឹងថាអ្នកកំពុងដើរលើបន្ទាត់ត្រីក្រាមណា និងធាតុធម្មជាតិអ្វីដែលវាបង្ហាញ។',
+      masterCue: 'សិស្សដែលយល់ពីអត្ថន័យ នឹងធ្វើចលនាប្រកបដោយទំនុកចិត្ត និងអំណាច។',
+    },
+    {
+      number: 3,
+      title: '៣. ឥរិយាបថ និងស្មារតី (Attitude & Spirit / 태도)',
+      koreanTitle: '수련 태도와 백절불굴 (Indomitable Attitude)',
+      summary: 'ការបណ្តុះការតស៊ូ (Innae) ការអត់ធ្មត់ និងការបន្ទាបខ្លួន។ ការបង្ហាញការយកចិត្តទុកដាក់ខ្ពស់ និងអាកប្បកិរិយាគុនដ៏ថ្លៃថ្នូរ។',
+      executionGuide: 'ចូលទៅកាន់មេគុនដោយការគោរព និងម៉ឺងម៉ាត់។ ចាប់ពីការគំនាប់ Charyeut ដំបូង រហូតដល់ការត្រឡប់មក Ba-ro ចុងក្រោយ កែវភ្នែករបស់អ្នកមិនត្រូវរេឡើយ។',
+      masterCue: 'ស្មារតីខាងក្នុងបញ្ចេញពន្លឺតាមរយៈកែវភ្នែក និងជំហររាងកាយ។',
+    },
+    {
+      number: 4,
+      title: '៤. ការផ្តោតខ្សែភ្នែក (Eye Focus / 시선)',
+      koreanTitle: '시선과 가상 대전 (Gaze & Simulated Combat)',
+      summary: 'ការក្រឡេកមើលចំគូប្រកួតស្រមើស្រមៃ; ការដាក់ការវាយ និងរារាំងឱ្យចំកម្ពស់គោលដៅជាក់លាក់ (ដើមទ្រូង ចន្លោះបបូរមាត់ និងច្រមុះ ប្រដាប់បន្តពូជ)។',
+      executionGuide: 'មុនពេលបង្វិលរាងកាយ ត្រូវបង្វែរភ្នែកសិន។ មើលទៅកន្លែងដែលគូប្រកួតឈរ ផ្ទៀងផ្ទាត់គោលដៅ រួចបញ្ចេញក្បាច់ឱ្យចំគោលដៅ។',
+      masterCue: 'បង្វែរភ្នែកមុន បន្ទាប់មកជើង រួចបញ្ចេញការវាយប្រហារ។',
+    },
+    {
+      number: 5,
+      title: '៥. ឥរិយាបថ និងលំនឹងរាងកាយ (Posture & Balance / 자세와 중심)',
+      koreanTitle: '무게중심 제어 (Center of Gravity Control)',
+      summary: 'ការគ្រប់គ្រងចំណុចកណ្តាលនៃទំនាញផែនដី (Danjeon) តាមរយៈជំហររឹងមាំ ដែលអនុញ្ញាតឱ្យបញ្ចេញកម្លាំងចលករជាអតិបរមាដោយមិនបាត់បង់លំនឹង។',
+      executionGuide: 'រក្សាឆ្អឹងខ្នងឱ្យត្រង់ និងស្មាឱ្យស្មើ។ កុំងក់ក្បាលឡើងចុះនៅពេលបោះជំហាន។ រំកិលខ្លួនយ៉ាងរលូនលើកម្រាល។',
+      masterCue: 'ចាក់ឫសជើងដូចដើមឈើ; បង្វិលខ្លួនឱ្យស្អាតនៅលើបាតជើងខាងមុខ។',
+    },
+    {
+      number: 6,
+      title: '៦. ចង្វាក់ និងភាពរលូន (Grace & Rhythm / 부드러움과 완급)',
+      koreanTitle: '동작의 완급과 연결 (Rhythm & Seamless Cadence)',
+      summary: 'ការបញ្ចប់ចលនានីមួយៗឱ្យបានពេញលេញមុននឹងបន្តទៅចលនាបន្ទាប់ដោយមិនស្ទាក់ស្ទើរ។ ការបែងចែករវាងចលនាផ្ទុះលឿន និងចលនាដកដង្ហើមទប់យឺត។',
+      executionGuide: 'ជៀសវាងការឈប់រឹងដូចមនុស្សយន្ត។ ជំហរត្រូវហូរចូលទៅក្នុងបច្ចេកទេសបន្ទាប់ដូចទឹករលកបោកបក់មកច្រាំង ស្រូបយក និងបង្វែរកម្លាំងចលករ។',
+      masterCue: 'ទន់ភ្លន់ដូចទឹកហូរ តែមុតស្រួចដូចកាំបិតកាត់ថ្មពេជ្រ។',
+    },
+    {
+      number: 7,
+      title: '៧. កម្លាំង៖ ការបន្ធូរ និងការរឹតសាច់ដុំ (Power / 힘과 유강)',
+      koreanTitle: '유강의 조화 (Tension & Relaxation Dynamic)',
+      summary: 'ការបន្ធូរសាច់ដុំក្នុងអំឡុងពេលត្រៀមផ្តល់នូវល្បឿន; ការរឹតសាច់ដុំមួយពព្រិចភ្នែកនៅពេលប៉ះគោលដៅបង្កើតនូវកម្លាំងកម្ទេចយ៉ាងខ្លាំងក្លា។',
+      executionGuide: 'សាច់ដុំដែលតឹងរឹងរហូតនឹងធ្វើឱ្យចលនាយឺត និងរឹង។ ត្រូវសម្រាកដូចទឹក រហូតដល់មួយចំណែករាប់ពាន់នៃវិនាទីដែលប៉ះគោលដៅ ទើបចាក់សោដូចដែកថែប។',
+      masterCue: 'ល្បឿនកើតចេញពីការសម្រាក; កម្លាំងបំផ្លាញកើតចេញពីការរឹតបន្តឹងពេលប៉ះគោលដៅ។',
+    },
+    {
+      number: 8,
+      title: '៨. ការដកដង្ហើម និងការស្រែកគីហាប់ (Breathing & Kihap / 호흡과 기합)',
+      koreanTitle: '단전호흡과 기합 (Danjeon Breath & Spirit Shout)',
+      summary: 'ដកដង្ហើមចូលវែងៗតាមច្រមុះពេលរៀបចំ; ដកដង្ហើមចេញខ្លីៗពេលបញ្ចេញក្បាច់។ ការស្រែកគីហាប់ (Kihap) ត្រូវតែផ្ទុះចេញពីពោះក្រោម (Danjeon) មិនមែនចេញពីបំពង់កឡើយ។',
+      executionGuide: 'ដកដង្ហើមស្ងាត់ៗតាមច្រមុះក្នុងចលនាយឺត ហើយដកដង្ហើមចេញខ្លីតាមធ្មេញនៅពេលប៉ះគោលដៅ។ Kihap ផ្តោតថាមពលខាងក្នុង (Qi) ទាំងអស់។',
+      masterCue: 'ការដកដង្ហើមចេញ គឺជាខណៈពេលដ៏រឹងមាំបំផុតនៃចលនា។',
+    },
+  ],
+}
+
+export const ZH_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
+  title: '公认品势演练八大至高修为支柱',
+  subtitle: '铸就正统跆拳道武道武魂 (Ronald A. Southwick 宗师教范)',
+  summary:
+    '真正的大师仅凭观察一套品势演练，便能洞察修习者的技术成熟度、心神专注力、重心平衡以及内在武道魂魄。登堂入室必须在这八大古典维度中达到高度统一。',
+  pillars: [
+    {
+      number: 1,
+      title: '1. 技术规范准确度 (기술 / Gisul)',
+      koreanTitle: '정확한 기본기 (Technical Accuracy)',
+      summary: '格挡起于合度、止于有效；冲拳源自骨盆髋轴并具穿透力；腿法具备优美平衡与精准靶面构造。',
+      executionGuide: '严禁为了追求花哨而牺牲动作准确度。每一次格挡必须具有真实防护几何角度，每一次击打必须贯穿人体生理解剖要害。',
+      masterCue: '引臂蓄势完整，发劲迅如破竹，接触瞬间锁死。',
+    },
+    {
+      number: 2,
+      title: '2. 品势源流渊博知识 (지식 / Ji)',
+      koreanTitle: '품새에 대한 이해 (Pattern & Lineage Knowledge)',
+      summary: '对演武路线、步法间距、攻防技术、汉字演武线意涵与《易经》卦象哲学了然于胸、毫厘不爽。',
+      executionGuide: '深切通晓每一技术为何处于特定空间位点。清楚知晓自己正在踏步走过哪一道爻线，及其象征的大自然终极力量。',
+      masterCue: '明其深意者，举手投足皆具泰山之笃定。',
+    },
+    {
+      number: 3,
+      title: '3. 虔敬仪态与不屈精神 (태도 / Taedo)',
+      koreanTitle: '수련 태도와 백절불굴 (Indomitable Attitude)',
+      summary: '涵养忍耐（Innae）、克己与谦逊之美德。展现毫无杂念的高度专注与庄严纯粹的武者风骨。',
+      executionGuide: '怀揣虔敬肃穆之心步入演武场。从最初的立正鞠躬致礼到最终收势回位，眼神中闪烁的武道精魄绝不可有半点游移。',
+      masterCue: '内在武魂，由双眸与挺立骨骼自然流露。',
+    },
+    {
+      number: 4,
+      title: '4. 眼神聚焦与假想敌对决 (시선 / Shi-seon)',
+      koreanTitle: '시선과 가상 대전 (Gaze & Simulated Combat)',
+      summary: '目光如炬直视四面八方假想强敌；将防御与打击精准对准要害基准高度（太阳神经丛、人中、下阴）。',
+      executionGuide: '身随步动，眼在身先。在身体转动之前，视线先一步锁定假想敌方位，验证打击目标，随即以雷霆之势精准轰击。',
+      masterCue: '眼神先行，步法紧跟，爆发轰击。',
+    },
+    {
+      number: 5,
+      title: '5. 重心中轴与身形平衡 (자세와 중심 / Junsim)',
+      koreanTitle: '무게중심 제어 (Center of Gravity Control)',
+      summary: '通过坚如磐石的步法深扎根基，精准调控下丹田重心，确保在释放最大动能时不出现丝毫晃动。',
+      executionGuide: '保持脊柱垂直挺立，双肩水平持平。在水平迈步移动时切忌上下颠簸点头。如行云流水般平稳掠过地面。',
+      masterCue: '双足扎根如松，脚掌中轴灵敏转动。',
+    },
+    {
+      number: 6,
+      title: '6. 刚柔节律与行云流水 (부드러움과 완급 / Yuyeonseong)',
+      koreanTitle: '동작의 완급과 연결 (Rhythm & Seamless Cadence)',
+      summary: '动作开合张弛有度，每一动作完成末端制动后毫无停顿凝滞地自然过渡；清晰区分爆发性突进与慢速深长吐纳。',
+      executionGuide: '坚决摒弃机械生硬的骤停骤起。步法与技击应如浪潮拍岸般连贯激荡，吸收并再导向动量，呈现出从容大气的武道威仪。',
+      masterCue: '流动如江河奔涌，落点如金石截断。',
+    },
+    {
+      number: 7,
+      title: '7. 劲道化境：极度松弛与瞬时爆发 (힘과 유강 / Him & Yu-Gang)',
+      koreanTitle: '유강의 조화 (Tension & Relaxation Dynamic)',
+      summary: '预备蓄力阶段全身高度松弛以换取极致速度；在命中假想敌的千分之一秒瞬间，全身肌肉锁死产生摧枯拉朽的冲击波。',
+      executionGuide: '通篇肌肉僵硬只会导致动作迟滞笨拙。未触敌前身心如流水般放松，在触碰瞬间凝聚为金刚生铁。',
+      masterCue: '速度源于彻底放松，破坏力源于接触刹那的绝对锁紧。',
+    },
+    {
+      number: 8,
+      title: '8. 丹田吐纳与雷霆气合 (호흡과 기합 / Hohup & Kihap)',
+      koreanTitle: '단전호흡과 기합 (Danjeon Breath & Spirit Shout)',
+      summary: '蓄势引身时由鼻腔无声深长吸气入丹田；发力打击时通过牙关短促吐气。气合声必须自下丹田雷霆迸发，而非仅喉头嘶吼。',
+      executionGuide: '慢动吸气蓄劲于腹，爆发吐气锁气于骨。气合用于统摄周身内劲（Qi），展现令强敌胆寒的浩然正气。',
+      masterCue: '呼气之刹那，乃周身最强之时刻。',
+    },
+  ],
+}
+
+export const KO_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = {
+  title: '공인 품새 수련의 8대 핵심 지침',
+  subtitle: '태권도 무도 혼의 체화 (Ronald A. Southwick 대사범 교본)',
+  summary:
+    '숙련된 대사범은 단 한 번의 품새 시연만으로도 수련자의 기술 완성도, 정신 집중력, 균형 감각, 그리고 내면의 무도 혼을 꿰뚫어 볼 수 있습니다. 진정한 품새 숙달은 이 8대 고전적 차원의 완벽한 조화를 요구합니다.',
+  pillars: [
+    {
+      number: 1,
+      title: '1. 정확한 기본기 (기술 / Gisul)',
+      koreanTitle: '정확한 기본기 (Technical Accuracy)',
+      summary: '막기는 유효한 위치에서 시작하여 멈추며, 지르기는 골반과 허리에서 시작하여 관통력을 가지고, 차기는 완벽한 균형과 타격 부위 형태를 갖추어야 합니다.',
+      executionGuide: '외형적인 화려함을 위해 정확성을 희생해서는 안 됩니다. 모든 막기는 실전 방어 각도를 갖추어야 하며, 모든 공격은 인체 해부학적 급소를 정확히 가격해야 합니다.',
+      masterCue: '예비동작을 완전하게, 타격은 번개처럼, 타격 순간에는 단단하게 매듭지으십시오.',
+    },
+    {
+      number: 2,
+      title: '2. 품새에 대한 깊은 이해 (지식 / Ji)',
+      koreanTitle: '품새에 대한 이해 (Pattern & Lineage Knowledge)',
+      summary: '품새선(도형), 보법, 공격과 방어 기술, 한자 품새선 의미, 그리고 주역 괘상의 철학을 미세한 부분까지 완벽히 숙지하는 것입니다.',
+      executionGuide: '특정 기술이 왜 그 위치에 배치되었는지 이해해야 합니다. 자신이 걷고 있는 품새선이 주역의 어느 효(爻)에 해당하는지, 어떤 자연의 힘을 표현하는지 알아야 합니다.',
+      masterCue: '품새의 의미를 깊이 아는 수련자의 동작에는 흔들림 없는 확신이 깃듭니다.',
+    },
+    {
+      number: 3,
+      title: '3. 수련 태도와 백절불굴 (태도 / Taedo)',
+      koreanTitle: '수련 태도와 백절불굴 (Indomitable Attitude)',
+      summary: '인내(Innae), 극기, 겸손의 무도 덕목을 함양하는 것입니다. 흐트러짐 없는 고도의 집중력과 엄숙한 무도적 품격을 드러내야 합니다.',
+      executionGuide: '경건한 마음가짐으로 품새에 임하십시오. 시작의 차렷 경례부터 마지막 바로 복귀까지, 수련자의 시선과 기백은 단 한 순간도 흐트러져서는 안 됩니다.',
+      masterCue: '내면의 무도 정신은 수련자의 눈빛과 곧은 자세를 통해 드러납니다.',
+    },
+    {
+      number: 4,
+      title: '4. 시선과 가상 대전 (시선 / Shi-seon)',
+      koreanTitle: '시선과 가상 대전 (Gaze & Simulated Combat)',
+      summary: '사방의 가상 상대를 명확히 응시하고, 공격과 방어를 인체의 정확한 목표 높이(명치, 인중, 낭심)에 완벽히 일치시키는 것입니다.',
+      executionGuide: '몸을 회전하기 전에 먼저 시선을 돌리십시오. 가상의 상대가 서 있는 위치를 바라보고 목표를 확인한 후, 한 치의 오차도 없이 기술을 구사하십시오.',
+      masterCue: '시선이 먼저 향하고, 발이 이동하며, 강력한 타격이 뒤따릅니다.',
+    },
+    {
+      number: 5,
+      title: '5. 자세와 무게중심 제어 (자세와 중심 / Junsim)',
+      koreanTitle: '무게중심 제어 (Center of Gravity Control)',
+      summary: '견고한 보법을 통해 단전의 무게중심을 낮고 안정되게 유지함으로써, 균형을 잃지 않고 최대의 운동역학적 충격력을 발휘하는 능력입니다.',
+      executionGuide: '척추를 곧게 세우고 양어깨의 수평을 유지하십시오. 발을 내딛을 때 머리가 위아래로 흔들리지 않도록 지면을 부드럽게 미끄러지듯 이동해야 합니다.',
+      masterCue: '발은 대지에 깊게 뿌리내리고, 회전은 앞축을 중심으로 정밀하게 이루어집니다.',
+    },
+    {
+      number: 6,
+      title: '6. 동작의 완급과 흐름 (부드러움과 완급 / Yuyeonseong)',
+      koreanTitle: '동작의 완급과 연결 (Rhythm & Seamless Cadence)',
+      summary: '동작의 경직됨이 없이 한 동작을 완전히 끝낸 후 주저함 없이 다음 동작으로 매끄럽게 연결하는 것입니다. 빠른 폭발적 동작과 느린 단전호흡을 명확히 구분해야 합니다.',
+      executionGuide: '로봇처럼 끊어지는 동작을 지양하십시오. 보법과 기술은 파도가 해안에 밀려오듯 자연스럽게 다음 동작으로 에너지를 전달하며 이어져야 합니다.',
+      masterCue: '흐르는 물처럼 유연하게, 타격하는 순간에는 옥을 가르듯 명쾌하게.',
+    },
+    {
+      number: 7,
+      title: '7. 유강의 조화 (힘과 유강 / Him & Yu-Gang)',
+      koreanTitle: '유강의 조화 (Tension & Relaxation Dynamic)',
+      summary: '예비동작 단계에서의 온전한 이완은 스피드를 극대화하며, 임팩트 순간의 찰나적 근육 긴장은 가공할 파괴력을 창출합니다.',
+      executionGuide: '시종일관 힘을 주고 경직되어 있으면 동작이 느려지고 둔탁해집니다. 타격 순간 직전까지는 물처럼 부드럽게 이완하고, 타격 순간에는 강철처럼 굳게 맺으십시오.',
+      masterCue: '스피드는 완전한 이완에서 나오며, 파괴력은 임팩트 순간의 응축에서 나옵니다.',
+    },
+    {
+      number: 8,
+      title: '8. 단전호흡과 기합 (호흡과 기합 / Hohup & Kihap)',
+      koreanTitle: '단전호흡과 기합 (Danjeon Breath & Spirit Shout)',
+      summary: '동작 준비 시 코로 조용히 깊게 들이마시고, 타격 순간 입으로 짧고 강하게 내쉽니다. 기합은 목이 아닌 아랫배 단전(丹田)에서 폭발적으로 터져 나와야 합니다.',
+      executionGuide: '느린 예비동작에서는 코로 소리 없이 숨을 마시고, 임팩트 순간에는 치아 사이로 짧게 숨을 뿜으십시오. 지정된 기합은 모든 내면의 기(氣)를 하나로 응집합니다.',
+      masterCue: '숨을 내쉬는 찰나가 신체에서 가장 강력한 힘이 발현되는 순간입니다.',
+    },
+  ],
+}
+
+export const DEFAULT_EIGHT_PERFORMANCE_PILLARS: EightPerformancePillarsData = EN_EIGHT_PERFORMANCE_PILLARS
+
+export const EN_PALGWE_COMPARISON: PalgweComparisonData = {
   title: 'The 1967 Palgwe vs 1971 Taegeuk Historical Matrix',
   subtitle: 'Evolution from Traditional Kwan Kata to Modern WT Olympic Curriculum',
   historicalTimeline: 'Adopted January 30, 1967 (KTA) & Transitioned 1971 (Kukkiwon)',
@@ -1544,6 +3052,278 @@ export const DEFAULT_PALGWE_COMPARISON: PalgweComparisonData = {
     },
   ],
 }
+
+export const KM_PALGWE_COMPARISON: PalgweComparisonData = {
+  title: 'តារាងប្រៀបធៀបប្រវត្តិសាស្ត្រ៖ Palgwe ១៩៦៧ និង Taegeuk ១៩៧១',
+  subtitle: 'ការវិវត្តពីក្បាច់គុនប្រពៃណី Kwan Kata ទៅកាន់កម្មវិធីសិក្សាអូឡាំពិកទំនើប WT',
+  historicalTimeline: 'អនុម័តថ្ងៃទី ៣០ ខែមករា ឆ្នាំ ១៩៦៧ (KTA) & ផ្លាស់ប្តូរឆ្នាំ ១៩៧១ (Kukkiwon)',
+  summary:
+    'នៅថ្ងៃទី ៣០ ខែមករា ឆ្នាំ ១៩៦៧ សមាគមតេក្វាន់ដូកូរ៉េ (KTA) បានអនុម័តមេគុនស្តង់ដារ Palgwe (八卦) ចំនួន ៨ និង Taegeuk (太極) ចំនួន ៨ សម្រាប់សិស្សកម្រិត Geup។ នៅឆ្នាំ ១៩៧១ Kukkiwon បានកំណត់យកស៊េរី Taegeuk ជាស្តង់ដារផ្លូវការអន្តរជាតិតែមួយគត់ ដោយរក្សាទុកនូវត្រីក្រាម I Ching ទាំង ៨ ដដែល ប៉ុន្តែធ្វើឱ្យជំហានជើង និងបន្សំក្បាច់ទាត់កាន់តែរលូន ស្របតាមកីឡាប្រយុទ្ធទំនើប។',
+  forms: [
+    {
+      number: 1,
+      name: 'Palgwe Il Jang (១)',
+      trigram: '☰ Keon (មេឃ)',
+      floorPattern: '工 (Gong / ពលកម្ម)',
+      patternDefinition: 'ពលកម្ម & ការកសាង',
+      element: 'មេឃ និងពន្លឺ',
+      taegeukCounterpart: 'Taegeuk 1 (Il Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 1 ប្រើជំហរវែងមុខជ្រៅ (Ap-kubi) និងការរារាំងកណ្តាលយឺត; Taegeuk 1 ណែនាំជំហរដើរធម្មជាតិ (Ap-seogi) ជាមួយនឹងការរារាំងក្រោមរហ័ស (Arae-makki) និងការទាត់មុខខ្ទាត។',
+    },
+    {
+      number: 2,
+      name: 'Palgwe Ee Jang (២)',
+      trigram: '☱ Tae (បឹង)',
+      floorPattern: '工 (Gong / ពលកម្ម)',
+      patternDefinition: 'ពលកម្ម & ការកសាង',
+      element: 'បឹង និងភាពស្ងប់',
+      taegeukCounterpart: 'Taegeuk 2 (Ee Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 2 ប្រើការរារាំងកណ្តាល និងរារាំងក្រោមដោយកណ្តាប់ដៃពីរក្នុងជំហរក្រោយ; Taegeuk 2 បញ្ចូលការដាល់មុខខ្ពស់ (Olgul-jireugi) និងការទម្លាក់ជើងទប់លំនឹងក្រោយទាត់។',
+    },
+    {
+      number: 3,
+      name: 'Palgwe Sam Jang (៣)',
+      trigram: '☲ Ri (ភ្លើង)',
+      floorPattern: '工 (Gong / ពលកម្ម)',
+      patternDefinition: 'ពលកម្ម & ការកសាង',
+      element: 'ភ្លើង និងភាពច្បាស់លាស់',
+      taegeukCounterpart: 'Taegeuk 3 (Sam Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 3 ប្រើការរារាំងបាតដៃកាំបិតទ្វេតាមទិសម៉ោង ៦:០០; Taegeuk 3 ណែនាំការកាប់កកូនកាំបិតទោល (Sonnal Mok-chigi) និងបន្សំដាល់ ១-២ យ៉ាងរហ័ស។',
+    },
+    {
+      number: 4,
+      name: 'Palgwe Sa Jang (៤)',
+      trigram: '☳ Jin (ផ្គរលាន់)',
+      floorPattern: '工 (Gong / ពលកម្ម)',
+      patternDefinition: 'ពលកម្ម & ការកសាង',
+      element: 'ផ្គរលាន់ និងកម្លាំងរញ្ជួយ',
+      taegeukCounterpart: 'Taegeuk 4 (Sa Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 4 មានការបង្វិលខ្លួន ៣៦០ ដឺក្រេដាល់កណ្តាប់ដៃញញួរ; Taegeuk 4 ណែនាំការចាក់ម្រាមដៃ (Pyon-son-kkeut), កាប់កទម្រង់សត្វត្របែក (Jebipoom) និងទាត់ផ្អៀងបន្តបន្ទាប់។',
+    },
+    {
+      number: 5,
+      name: 'Palgwe Oh Jang (៥)',
+      trigram: '☴ Seon (ខ្យល់)',
+      floorPattern: '干 (Gan / ខែល)',
+      patternDefinition: 'ខែល & ការការពារ',
+      element: 'ខ្យល់ និងការជ្រាបចូល',
+      taegeukCounterpart: 'Taegeuk 5 (Oh Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 5 ប្រើគន្លងអក្សរ "干" (ខែល) មាន ៣៥ ចលនា និងជំហរសត្វក្រៀល; Taegeuk 5 កាត់បន្ថយមកត្រឹម ២០ ចលនា ដោយផ្តោតលើការវាយកែងចំគោលដៅ និងជំហរខ្វែងជើងទម្លាក់ទម្ងន់។',
+    },
+    {
+      number: 6,
+      name: 'Palgwe Yook Jang (៦)',
+      trigram: '☵ Gam (ទឹក)',
+      floorPattern: '工 (Gong / ពលកម្ម)',
+      patternDefinition: 'ពលកម្ម & ការកសាង',
+      element: 'ទឹក និងលំហូរឥតឈប់ឈរ',
+      taegeukCounterpart: 'Taegeuk 6 (Yuk Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 6 ប្រើការរារាំងបាតដៃច្រានចេញក្រៅ និងជំហរខ្វែងជើងលោត; Taegeuk 6 ណែនាំការទាត់កោង (Dollyo-chagi), រារាំងបាតដៃរុញ និងការគ្រប់គ្រងដង្ហើម ៥ វិនាទី។',
+    },
+    {
+      number: 7,
+      name: 'Palgwe Chil Jang (៧)',
+      trigram: '☶ Gan (ភ្នំ)',
+      floorPattern: '下 (Ha / ខាងក្រោម)',
+      patternDefinition: 'ខាងក្រោម & ឫសដី',
+      element: 'ភ្នំ និងស្ថេរភាព',
+      taegeukCounterpart: 'Taegeuk 7 (Chil Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 7 ប្រើគន្លងអក្សរ "下" និងការរារាំងអក្សរ X ខ្ពស់; Taegeuk 7 ណែនាំជំហរខ្លា (Beom-seogi) ច្រើនលើក, រារាំងកន្ត្រៃ (Gawi-makki), បុកជង្គង់ និងការក្តាប់ដៃគ្រប់គ្រងដង្ហើម។',
+    },
+    {
+      number: 8,
+      name: 'Palgwe Pal Jang (៨)',
+      trigram: '☷ Gon (ផែនដី)',
+      floorPattern: '土 (Tu / ផែនដី)',
+      patternDefinition: 'ផែនដី & ការបញ្ចប់',
+      element: 'ផែនដី និងភាពពេញលេញ',
+      taegeukCounterpart: 'Taegeuk 8 (Pal Jang) — គន្លង៖ 王',
+      keyDivergence: 'Palgwe 8 ដើរតាមគន្លងអក្សរ "土" ជាមួយនឹងក្បាច់ដោះការចាប់ពីក្រោយ; Taegeuk 8 ណែនាំការទាត់លោតពីរជើងលើអាកាស (Dubal-dangsang-chagi), រារាំងភ្នំទោល និងការដាល់ទំពក់ឡើងលើ។',
+    },
+  ],
+}
+
+export const ZH_PALGWE_COMPARISON: PalgweComparisonData = {
+  title: '1967年传统八卦套路与1971年公认太极品势历史演变矩阵表',
+  subtitle: '自早期九大道馆空手道型结构向现代WT奥运竞技教育大系的伟大飞跃',
+  historicalTimeline: '1967年1月30日韩国跆拳道协会审定通过 & 1971年国技院确立太极官方教范',
+  summary:
+    '1967年1月30日，大韩跆拳道协会正式审定面向级位学员的八套“八卦（Palgwae / 八卦）”与八套“太极（Taegeuk / 太極）”套路。至1971年，国技院技术委员会正式确立太极品势为全球唯一公认官方国际考核标准。新体系完整继承了《周易》八卦宇宙哲学，但在人体运动解剖学与实战步法上实现了跨时代革新。',
+  forms: [
+    {
+      number: 1,
+      name: '八卦一章 (Palgwe 1)',
+      trigram: '☰ 乾 (天)',
+      floorPattern: '工 (工字线)',
+      patternDefinition: '工巧与营造',
+      element: '乾天与朝阳',
+      taegeukCounterpart: '太极一章 (Taegeuk 1) — 路线：王',
+      keyDivergence: '八卦一章全篇多采用深沉僵硬的前弓步与内格挡；太极一章则大体量引入自然行走步（前步/Ap-seogi）、利落下截防守与前踢弹击。',
+    },
+    {
+      number: 2,
+      name: '八卦二章 (Palgwe 2)',
+      trigram: '☱ 兑 (泽)',
+      floorPattern: '工 (工字线)',
+      patternDefinition: '工巧与营造',
+      element: '湖泽与愉悦',
+      taegeukCounterpart: '太极二章 (Taegeuk 2) — 路线：王',
+      keyDivergence: '八卦二章反复在后弓步中施展双拳下截与内防守；太极二章则引入正面上段反冲拳（Olgul-jireugi）与流畅的前踢缓冲落步。',
+    },
+    {
+      number: 3,
+      name: '八卦三章 (Palgwe 3)',
+      trigram: '☲ 离 (火)',
+      floorPattern: '工 (工字线)',
+      patternDefinition: '工巧与营造',
+      element: '烈火与光明',
+      taegeukCounterpart: '太极三章 (Taegeuk 3) — 路线：王',
+      keyDivergence: '八卦三章沿6:00后退轴线多次重复双手刀中段截击；太极三章则率先引入单手刀击颈（Sonnal Mok-chigi）与凌厉迅猛的左右1-2连击冲拳。',
+    },
+    {
+      number: 4,
+      name: '八卦四章 (Palgwe 4)',
+      trigram: '☳ 震 (雷)',
+      floorPattern: '工 (工字线)',
+      patternDefinition: '工巧与营造',
+      element: '惊雷与威势',
+      taegeukCounterpart: '太极四章 (Taegeuk 4) — 路线：王',
+      keyDivergence: '八卦四章包含360度大旋转铁锤拳下砸；太极四章则引入直插要害的立掌贯手（Pyon-son-kkeut）、燕子服手刀击颈与连续强力侧踢。',
+    },
+    {
+      number: 5,
+      name: '八卦五章 (Palgwe 5)',
+      trigram: '☴ 巽 (风)',
+      floorPattern: '干 (干字线)',
+      patternDefinition: '干橹与防御',
+      element: '清风与入微',
+      taegeukCounterpart: '太极五章 (Taegeuk 5) — 路线：王',
+      keyDivergence: '八卦五章采用罕见的“干”字演武线、35个繁复动作与鹤腿步；太极五章精炼为20个高爆发动作，突出标靶肘击与交叉步下踏下砸。',
+    },
+    {
+      number: 6,
+      name: '八卦六章 (Palgwe 6)',
+      trigram: '☵ 坎 (水)',
+      floorPattern: '工 (工字线)',
+      patternDefinition: '工巧与营造',
+      element: '活水与流动',
+      taegeukCounterpart: '太极六章 (Taegeuk 6) — 路线：王',
+      keyDivergence: '八卦六章多用掌心向外之分截与腾空交叉步；太极六章则率先引入高位旋风踢（Dollyo-chagi）、掌底格挡与5秒沉稳丹田深呼吸。',
+    },
+    {
+      number: 7,
+      name: '八卦七章 (Palgwe 7)',
+      trigram: '☶ 艮 (山)',
+      floorPattern: '下 (下字线)',
+      patternDefinition: '下沉与立根',
+      element: '重山与稳固',
+      taegeukCounterpart: '太极七章 (Taegeuk 7) — 路线：王',
+      keyDivergence: '八卦七章走“下”字形路线、施展下压分截与高位十字交叉防守；太极七章则多番演练虎步（Beom-seogi）、剪刀格挡、顶膝与含拳调息。',
+    },
+    {
+      number: 8,
+      name: '八卦八章 (Palgwe 8)',
+      trigram: '☷ 坤 (地)',
+      floorPattern: '土 (土字线)',
+      patternDefinition: '厚土与承载',
+      element: '大地与圆满',
+      taegeukCounterpart: '太极八章 (Taegeuk 8) — 路线：王',
+      keyDivergence: '八卦八章走“土”字形路线，含后方被擒解脱技与鹤腿防守；太极八章则引入全场最高难度之双飞腾空前踢（Dubal-dangsang）、单山形防守与勾下巴冲拳。',
+    },
+  ],
+}
+
+export const KO_PALGWE_COMPARISON: PalgweComparisonData = {
+  title: '1967년 팔괘 품새와 1971년 태극 품새의 역사적 비교 매트릭스',
+  subtitle: '초기 9대 관의 전통 가라테 형(型) 잔재에서 WT 올림픽 현대 표준으로의 도약',
+  historicalTimeline: '1967년 1월 30일 KTA 제정 & 1971년 국기원 태극 품새 공식 채택',
+  summary:
+    '1967년 1월 30일 대한태권도협회(KTA)는 유급자를 위한 팔괘(八卦) 8개와 태극(太極) 8개 품새를 공식 제정하였습니다. 이후 1971년 국기원은 주역 8괘의 심오한 동양 철학은 온전히 계승하되, 가라테 형의 부자연스러운 직선적 보법을 탈피하고 현대 스포츠 겨루기에 부합하는 한국 고유의 보법과 리듬을 담아 태극 품새를 유일한 국제 공인 표준으로 확립하였습니다.',
+  forms: [
+    {
+      number: 1,
+      name: '팔괘 1장 (Palgwe 1)',
+      trigram: '☰ 건 (하늘)',
+      floorPattern: '工 (장인 공자선)',
+      patternDefinition: '공작과 건축',
+      element: '하늘과 빛',
+      taegeukCounterpart: '태극 1장 (Taegeuk 1) — 품새선: 王',
+      keyDivergence: '팔괘 1장은 깊고 무거운 앞굽이 위주의 직선 공방 중심; 태극 1장은 자연스러운 앞서기 보법, 간결한 아래막기, 그리고 스냅력 있는 앞차기를 도입함.',
+    },
+    {
+      number: 2,
+      name: '팔괘 2장 (Palgwe 2)',
+      trigram: '☱ 태 (연못)',
+      floorPattern: '工 (장인 공자선)',
+      patternDefinition: '공작과 건축',
+      element: '연못과 기쁨',
+      taegeukCounterpart: '태극 2장 (Taegeuk 2) — 품새선: 王',
+      keyDivergence: '팔괘 2장은 뒷굽이에서 두 주먹 몸통 및 아래막기를 반복; 태극 2장은 얼굴반대지르기 도입과 앞차기 후 유연한 중심 이동 및 완급 조절을 강조함.',
+    },
+    {
+      number: 3,
+      name: '팔괘 3장 (Palgwe 3)',
+      trigram: '☲ 리 (불)',
+      floorPattern: '工 (장인 공자선)',
+      patternDefinition: '공작과 건축',
+      element: '불과 태양',
+      taegeukCounterpart: '태극 3장 (Taegeuk 3) — 품새선: 王',
+      keyDivergence: '팔괘 3장은 6:00 후방 복귀선에서 양손날 몸통막기 반복; 태극 3장은 한손날 목치기와 신속한 원투 연속 몸통지르기를 도입함.',
+    },
+    {
+      number: 4,
+      name: '팔괘 4장 (Palgwe 4)',
+      trigram: '☳ 진 (우레)',
+      floorPattern: '工 (장인 공자선)',
+      patternDefinition: '공작과 건축',
+      element: '우레와 벽력',
+      taegeukCounterpart: '태극 4장 (Taegeuk 4) — 품새선: 王',
+      keyDivergence: '팔괘 4장은 360도 회전 메주먹 치기 특징; 태극 4장은 실전 편손끝 세워찌르기, 제비품 목치기, 그리고 연속 옆차기를 최초로 도입함.',
+    },
+    {
+      number: 5,
+      name: '팔괘 5장 (Palgwe 5)',
+      trigram: '☴ 손 (바람)',
+      floorPattern: '干 (방패 간자선)',
+      patternDefinition: '방패와 수호',
+      element: '바람과 침투',
+      taegeukCounterpart: '태극 5장 (Taegeuk 5) — 품새선: 王',
+      keyDivergence: '팔괘 5장은 특이한 "干"자선과 35개 동작, 학다리서기 구사; 태극 5장은 20개 동작으로 집약하여 표적 팔굽치기와 꼬아서기 딛기, 메주먹 내려치기를 정립함.',
+    },
+    {
+      number: 6,
+      name: '팔괘 6장 (Palgwe 6)',
+      trigram: '☵ 감 (물)',
+      floorPattern: '工 (장인 공자선)',
+      patternDefinition: '공작과 건축',
+      element: '물과 흐름',
+      taegeukCounterpart: '태극 6장 (Taegeuk 6) — 품새선: 王',
+      keyDivergence: '팔괘 6장은 손바닥 바깥헤쳐막기와 도약 꼬아서기 구사; 태극 6장은 돌려차기, 바탕손 몸통막기, 한손날 얼굴바깥막기, 5초 단전호흡을 도입함.',
+    },
+    {
+      number: 7,
+      name: '팔괘 7장 (Palgwe 7)',
+      trigram: '☶ 간 (산)',
+      floorPattern: '下 (아래 하자선)',
+      patternDefinition: '하강과 정착',
+      element: '산과 무게',
+      taegeukCounterpart: '태극 7장 (Taegeuk 7) — 품새선: 王',
+      keyDivergence: '팔괘 7장은 "下"자선과 아래헤쳐막기, 엇걸어막기 중심; 태극 7장은 범서기 자세의 집중 훈련, 가위막기, 무릎치기, 보주먹 조화 단전호흡을 도입함.',
+    },
+    {
+      number: 8,
+      name: '팔괘 8장 (Palgwe 8)',
+      trigram: '☷ 곤 (땅)',
+      floorPattern: '土 (흙 토자선)',
+      patternDefinition: '대지와 포용',
+      element: '땅과 대지',
+      taegeukCounterpart: '태극 8장 (Taegeuk 8) — 품새선: 王',
+      keyDivergence: '팔괘 8장은 "土"자선과 뒤에서 잡혔을 때의 멍에빼기 기술 구사; 태극 8장은 최고 난이도의 공중 도약 두발당성 앞차기, 외산틀막기, 당겨 턱지르기를 집대성함.',
+    },
+  ],
+}
+
+export const DEFAULT_PALGWE_COMPARISON: PalgweComparisonData = EN_PALGWE_COMPARISON
 
 function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
   switch (lang) {
@@ -1753,9 +3533,9 @@ function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
-        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
-        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
-        palgweComparison: DEFAULT_PALGWE_COMPARISON,
+        fourExecutionElements: KM_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: KM_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: KM_PALGWE_COMPARISON,
       }
     case 'zh':
       return {
@@ -1963,9 +3743,9 @@ function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
-        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
-        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
-        palgweComparison: DEFAULT_PALGWE_COMPARISON,
+        fourExecutionElements: ZH_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: ZH_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: ZH_PALGWE_COMPARISON,
       }
     case 'ko':
       return {
@@ -2173,9 +3953,9 @@ function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
-        fourExecutionElements: DEFAULT_FOUR_EXECUTION_ELEMENTS,
-        eightPerformancePillars: DEFAULT_EIGHT_PERFORMANCE_PILLARS,
-        palgweComparison: DEFAULT_PALGWE_COMPARISON,
+        fourExecutionElements: KO_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: KO_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: KO_PALGWE_COMPARISON,
       }
     default:
       return {
@@ -2395,255 +4175,9 @@ function getRawLocalizedWhatIsTaegeuk(lang: string): WhatIsTaegeukData {
             },
           ],
         },
-        fourExecutionElements: {
-          title: 'The 4 Core Elements of Poomsae Execution',
-          subtitle: 'Pattern, Direction, Stance, and Technique (품새의 4대 구성 요소)',
-          summary:
-            'Classical World Taekwondo poomsae theory (Ronald A. Southwick, 2005) dictates that every form is executed through four fundamental, interdependent elements: the floor Pattern, spatial Direction, foundational Stance, and kinetic Technique.',
-          elements: [
-            {
-              id: 'pattern',
-              title: '1. Pattern (도형 / Pattern)',
-              koreanTitle: '도형 (Floor Trajectory & Character)',
-              concept: 'The geometric shape drawn by the practitioner’s feet on the dojang floor.',
-              details: [
-                'All eight Taegeuk poomsae follow the Chinese character "王" (Wang / King).',
-                'Each of the three horizontal lines of "王" corresponds directly to one line of that form’s trigram (Top = Heaven, Middle = Man, Bottom = Earth).',
-                'Palgwe forms vary by character: Palgwe 1–4 & 6 use "工" (Gong / Work), Palgwe 5 uses "干" (Gan / Shield), Palgwe 7 uses "下" (Ha / Below), and Palgwe 8 uses "土" (Tu / Earth).',
-                'Black Belt forms each follow unique Hanja characters (士, 山, 工, 一, 十, 上, 下, 水, 卍).',
-              ],
-              practicalApplication:
-                'Return to the exact origin spot (Joon-bi line) upon completion; deviations indicate faulty stance lengths or imprecise pivot axes.',
-            },
-            {
-              id: 'direction',
-              title: '2. Direction (방향 / Direction - The Clock Method)',
-              koreanTitle: '방향 (The 4-Point Clock Method)',
-              concept: 'Spatial orientation governing which angle the practitioner faces throughout the form.',
-              details: [
-                '12 o’clock (Front / Buk - 북): Direct engagement with imaginary forward opponent.',
-                '3 o’clock (Right / Dong - 동): 90-degree lateral flank defense and counter-attack.',
-                '6 o’clock (Rear / Nam - 남): Return path, retrogression, and rear threat neutralization.',
-                '9 o’clock (Left / Seo - 서): Initial 90-degree pivot initiating all horizontal lines.',
-              ],
-              practicalApplication:
-                'All Taegeuk and Palgwe forms require the student to face only these four cardinal compass points, eliminating oblique guesswork.',
-            },
-            {
-              id: 'stance',
-              title: '3. Stance (서기 / Stance)',
-              koreanTitle: '서기 (Weight Distribution & Center of Gravity)',
-              concept: 'Positioning and spacing of feet, knee flexion, and body weight distribution.',
-              details: [
-                'Ap-seogi (Walking Stance): 50/50 equal balance, 1 foot-length step, naturally upright.',
-                'Ap-kubi (Forward Stance): 70% front leg / 30% rear leg, 4–4.5 foot-lengths, deep power root.',
-                'Dwit-kubi (Back Stance / L-Stance): 70% rear leg / 30% front leg, heels aligned on single line at 90° angle.',
-                'Beom-seogi (Tiger Stance): 90–100% rear leg weight, front heel elevated, coiled spring readiness.',
-                'Juchum-seogi (Riding Stance): 50/50 balance, 2 foot-lengths wide, parallel feet, hips lowered.',
-              ],
-              practicalApplication:
-                'Proper stance is the foundation of kinetic force transmission. A flawed stance bleeds power and breaks balance during strikes.',
-            },
-            {
-              id: 'technique',
-              title: '4. Technique (기술 / Technique)',
-              koreanTitle: '기술 (Chambering, Trajectory & Impact)',
-              concept: 'Methods of blocking, striking, thrusting, and kicking with maximum biomechanical efficiency.',
-              details: [
-                'Chambering: Every block and strike starts from an origin point (e.g. opposite shoulder, hip, ear) to generate rotational momentum.',
-                'Hip Torque: Rotational snap of the pelvis aligns with the final 10% of technique delivery.',
-                'Striking Weapons: Fists (Joomeok), Knife-hands (Sonnal), Spear-hands (Pyon-sonkkeut), Elbows (Palkoop), and Foot-blades (Balnal).',
-                'Kicking Dynamics: Chamber -> Extend -> Strike with dedicated weapon (Ap-chook / Balnal) -> Re-chamber before controlled landing.',
-              ],
-              practicalApplication:
-                'Technique must look crisp and authentic—not pantomime. Deliver every movement as if encountering an actual opponent.',
-            },
-          ],
-          wangFloorRule: {
-            title: 'The "王" (King) Floor Plan & The Trigram Stepping Law',
-            chineseCharacter: '王',
-            definition:
-              'In Taegeuk forms, the three horizontal lines of the Chinese character "王" directly represent the three lines of the I Ching trigram. The top line represents Heaven, the middle line represents Man, and the bottom line represents Earth.',
-            yangRule:
-              'Solid Line (Yang —–): If the practitioner advances (takes a step forward) along the horizontal line, that line manifests as a solid, unbroken Yang line.',
-            umRule:
-              'Broken Line (Um – –): If the practitioner does not take a step forward along the horizontal line (e.g., executing in place, retreating, or turning without forward advance), that line manifests as a broken Um line.',
-            philosophicalSignificance:
-              'This direct correlation allows the martial artist to literally write the cosmological trigram across the dojang floor through their physical footsteps.',
-          },
-          clockSystem: {
-            title: 'The Classical 4-Point Clock System',
-            description:
-              'To eliminate directional ambiguity during practice and grading, classical poomsae treatises assign clock hours to all four quadrants.',
-            directions: [
-              { hour: '12:00', direction: 'Front (북 / North)', koreanName: '전방 (Jeon-bang)', tacticalRole: 'Initial line of sight and primary offensive progression' },
-              { hour: '3:00', direction: 'Right (동 / East)', koreanName: '우측 (Woo-cheuk)', tacticalRole: 'Right lateral flank engagements and return crossings' },
-              { hour: '6:00', direction: 'Rear (남 / South)', koreanName: '후방 (Hoo-bang)', tacticalRole: 'Return center line and climactic finishing combinations' },
-              { hour: '9:00', direction: 'Left (서 / West)', koreanName: '좌측 (Jwa-cheuk)', tacticalRole: 'Opening pivot initiating the horizontal trigram lines' },
-            ],
-          },
-        },
-        eightPerformancePillars: {
-          title: 'The 8 Pillars of Poomse Performance',
-          subtitle: 'Developing the Soul of Taekwondo Practice (Ronald A. Southwick Treatise)',
-          summary:
-            'A skilled master can discern a student’s technical maturity, mental focus, balance, and inner spirit by observing a single poomsae. Mastery requires balancing these eight classical dimensions.',
-          pillars: [
-            {
-              number: 1,
-              title: 'Technique (기술 / Gisul)',
-              koreanTitle: '정확한 기본기 (Technical Accuracy)',
-              summary: 'Blocks start and stop where effective; strikes originate from the hip with full follow-through; kicks display balance and proper foot formation.',
-              executionGuide: 'Never sacrifice precision for flashiness. Every block must have an authentic protective angle, and every strike must penetrate the intended anatomical target.',
-              masterCue: 'Chamber completely, snap explosively, lock at impact.',
-            },
-            {
-              number: 2,
-              title: 'Knowledge of the Poomse (지식 / Ji)',
-              koreanTitle: '품새에 대한 이해 (Pattern & Lineage Knowledge)',
-              summary: 'Knowing the floor pattern, stances, techniques, Hanja character shapes, and trigram philosophy in microscopic detail.',
-              executionGuide: 'Understand why a technique is placed where it is. Know which trigram line you are walking and the cosmic element it expresses.',
-              masterCue: 'A student who knows the meaning moves with conviction.',
-            },
-            {
-              number: 3,
-              title: 'Attitude & Spirit (태도 / Taedo)',
-              koreanTitle: '수련 태도와 백절불굴 (Indomitable Attitude)',
-              summary: 'Fostering perseverance (Innae), patience, and humility. Displaying complete undivided attention and solemn martial presence.',
-              executionGuide: 'Approach the poomsae with reverent seriousness. From the initial Charyeut bow to the final Ba-ro return, your gaze must remain unbroken.',
-              masterCue: 'The inner spirit shines through the eyes and posture.',
-            },
-            {
-              number: 4,
-              title: 'Eye Focus & Precision (시선 / Shi-seon)',
-              koreanTitle: '시선과 가상 대전 (Gaze & Simulated Combat)',
-              summary: 'Looking directly at imaginary opponents; placing attacks and blocks at exact target heights (solar plexus, philtrum, groin).',
-              executionGuide: 'Before turning your body, turn your eyes. Look where your imaginary opponent stands, verify the target, then execute with pinpoint accuracy.',
-              masterCue: 'Turn the eyes first, then the feet, then deliver the blow.',
-            },
-            {
-              number: 5,
-              title: 'Posture & Balance (자세와 중심 / Junsim)',
-              koreanTitle: '무게중심 제어 (Center of Gravity Control)',
-              summary: 'Controlling your center of gravity through rooted stances, enabling maximum kinetic force delivery without losing equilibrium.',
-              executionGuide: 'Keep your spine erect and shoulders level. Do not bob your head up and down when stepping. Glide smoothly across the floor.',
-              masterCue: 'Root your feet like trees; pivot cleanly on the balls of your feet.',
-            },
-            {
-              number: 6,
-              title: 'Timing & Rhythm (시간과 완급 / Sogan)',
-              koreanTitle: '동작의 완급과 연결 (Rhythm & Seamless Cadence)',
-              summary: 'Completing each motion fully before transitioning without hesitation. Distinguishing fast explosive bursts from slow, controlled tension.',
-              executionGuide: 'Do not rush through techniques in a frantic blur. Pause momentarily at full lockout to demonstrate absolute control, then transition fluidly.',
-              masterCue: 'Stillness followed by explosion; speed without panic.',
-            },
-            {
-              number: 7,
-              title: 'Power: Tension & Relaxation (힘과 유강 / Him & Yu-Gang)',
-              koreanTitle: '유강의 조화 (Tension & Relaxation Dynamic)',
-              summary: 'Relaxation during the preparatory chambering stage grants speed; instantaneous muscular tension at impact creates crushing power.',
-              executionGuide: 'Muscles kept rigid throughout a form cause slow, stiff movements. Stay relaxed like water until the microsecond of impact, then lock like iron.',
-              masterCue: 'Speed comes from relaxation; destructive force comes from impact tension.',
-            },
-            {
-              number: 8,
-              title: 'Breathing & Kihop (호흡과 기합 / Hohup & Kihap)',
-              koreanTitle: '단전호흡과 기합 (Danjeon Breath & Spirit Shout)',
-              summary: 'Inhaling smoothly during preparation; exhaling sharply on delivery. The spirit shout (Kihap) erupts from the lower abdomen (Danjeon), not the throat.',
-              executionGuide: 'Breathe silently through the nose during slow chambers, and exhale with a short breath through the teeth on impact. The Kihap focuses all internal energy (Qi).',
-              masterCue: 'The exhalation is the strongest moment of the action.',
-            },
-          ],
-        },
-        palgweComparison: {
-          title: 'The 1967 Palgwe vs 1971 Taegeuk Historical Matrix',
-          subtitle: 'Evolution from Traditional Kwan Kata to Modern WT Olympic Curriculum',
-          historicalTimeline: 'Adopted January 30, 1967 (KTA) & Transitioned 1971 (Kukkiwon)',
-          summary:
-            'On January 30, 1967, the Korea Taekwondo Association adopted standard sets of 8 Palgwe (八卦) and 8 Taegeuk (太極) forms for Gup holders. In 1971, Kukkiwon established the Taegeuk series as the official international standard, preserving the 8 I Ching trigrams while modernizing footwork and kicking combinations.',
-          forms: [
-            {
-              number: 1,
-              name: 'Palgwe Il Jang (1)',
-              trigram: '☰ Keon (Heaven)',
-              floorPattern: '工 (Gong / Work)',
-              patternDefinition: 'Work / Craftsmanship',
-              element: 'Heaven & Light',
-              taegeukCounterpart: 'Taegeuk 1 (Il Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 1 uses deep forward stance (Ap-kubi) and middle blocks; Taegeuk 1 uses natural walking stances (Ap-seogi) with crisp low blocks and front kicks.',
-            },
-            {
-              number: 2,
-              name: 'Palgwe Ee Jang (2)',
-              trigram: '☱ Tae (Lake)',
-              floorPattern: '工 (Gong / Work)',
-              patternDefinition: 'Work / Craftsmanship',
-              element: 'Lake & Joy',
-              taegeukCounterpart: 'Taegeuk 2 (Ee Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 2 utilizes dual-fisted middle and low blocks in back stance; Taegeuk 2 incorporates high face punches and fluid front-kick deceleration landings.',
-            },
-            {
-              number: 3,
-              name: 'Palgwe Sam Jang (3)',
-              trigram: '☲ Ri (Fire)',
-              floorPattern: '工 (Gong / Work)',
-              patternDefinition: 'Work / Craftsmanship',
-              element: 'Fire & Clarity',
-              taegeukCounterpart: 'Taegeuk 3 (Sam Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 3 repeats double knifehand middle blocks along 6:00 and upper punches; Taegeuk 3 introduces single knifehand neck strikes (Hansonnal Mok-chigi) and rapid 1-2 punches.',
-            },
-            {
-              number: 4,
-              name: 'Palgwe Sa Jang (4)',
-              trigram: '☳ Jin (Thunder)',
-              floorPattern: '工 (Gong / Work)',
-              patternDefinition: 'Work / Craftsmanship',
-              element: 'Thunder & Awe',
-              taegeukCounterpart: 'Taegeuk 4 (Sa Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 4 features 360-degree spinning hammerfist strikes and Keumgang diamond mountain blocks; Taegeuk 4 introduces spearhand thrusts, swallow-form neck strikes, and consecutive side kicks.',
-            },
-            {
-              number: 5,
-              name: 'Palgwe Oh Jang (5)',
-              trigram: '☴ Seon (Wind)',
-              floorPattern: '干 (Gan / Shield)',
-              patternDefinition: 'Shield / Defense',
-              element: 'Wind & Penetration',
-              taegeukCounterpart: 'Taegeuk 5 (Oh Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 5 uses the unique "干" (Shield) floor shape, 35 movements, and crane stances (Haktari-seogi); Taegeuk 5 streamlines to 20 movements with target elbow strikes and crossed-stance stomps.',
-            },
-            {
-              number: 6,
-              name: 'Palgwe Yook Jang (6)',
-              trigram: '☵ Gam (Water)',
-              floorPattern: '工 (Gong / Work)',
-              patternDefinition: 'Work / Craftsmanship',
-              element: 'Water & Constant Flow',
-              taegeukCounterpart: 'Taegeuk 6 (Yuk Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 6 employs palm outward wedge blocks and jumping crossed stances; Taegeuk 6 introduces roundhouse kicks (Dollyo-chagi), palm heel parries, and 5-second Danjeon breath control.',
-            },
-            {
-              number: 7,
-              name: 'Palgwe Chil Jang (7)',
-              trigram: '☶ Gan (Mountain)',
-              floorPattern: '下 (Ha / Below)',
-              patternDefinition: 'Below / Grounding',
-              element: 'Mountain & Stability',
-              taegeukCounterpart: 'Taegeuk 7 (Chil Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 7 uses the "下" pattern, down wedge blocks, and high X-blocks; Taegeuk 7 introduces repeated Tiger Stances (Beom-seogi), scissors blocks, knee strikes, and covered-fist breath control.',
-            },
-            {
-              number: 8,
-              name: 'Palgwe Pal Jang (8)',
-              trigram: '☷ Gon (Earth)',
-              floorPattern: '土 (Tu / Earth)',
-              patternDefinition: 'Earth / Soil',
-              element: 'Earth & Completion',
-              taegeukCounterpart: 'Taegeuk 8 (Pal Jang) — Floor: 王',
-              keyDivergence: 'Palgwe 8 follows the "土" pattern with rear grab escapes (Meonge Paegi) and crane stances; Taegeuk 8 introduces aerial jumping double front kicks (Dubal-dangsang-chagi), single mountain blocks, and pulling uppercuts.',
-            },
-          ],
-        },
+        fourExecutionElements: EN_FOUR_EXECUTION_ELEMENTS,
+        eightPerformancePillars: EN_EIGHT_PERFORMANCE_PILLARS,
+        palgweComparison: EN_PALGWE_COMPARISON,
       }
   }
 }
