@@ -34,6 +34,7 @@ import {
   AlertTriangle,
   Scale,
   Footprints,
+  Volume2,
 } from 'lucide-react'
 import { getSafeVideoEmbedUrl } from '@/lib/videoHelper'
 import { BlackBeltStripesBadge } from '@/components/library/BlackBeltStripesBadge'
@@ -526,6 +527,184 @@ export default function TechniquePage({ params }: TechniquePageProps) {
                   </div>
                 </div>
               )}
+
+              {/* Wang (王) Floor Line & Stepping Law Matrix */}
+              {item.taegeukPhilosophy.wangFloorPlanLines && (
+                <div className="p-5 rounded-xl bg-white/5 border border-white/10 space-y-3 font-mono">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                      <Footprints className="w-4 h-4 text-brand-red" />
+                      <span>Wang (王) Floor Line Stepping Dynamics:</span>
+                    </div>
+                    <span className="text-[10px] text-zinc-400">
+                      Southwick Stepping Rule
+                    </span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                    {/* Line 1 Top */}
+                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-brand-red">Line 1 (Top / Heaven)</span>
+                        <span
+                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                            item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
+                              ? 'bg-emerald-500/20 text-emerald-300'
+                              : 'bg-blue-500/20 text-blue-300'
+                          }`}
+                        >
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-zinc-400 block">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
+                      </span>
+                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
+                      </p>
+                    </div>
+
+                    {/* Line 2 Middle */}
+                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-amber-400">Line 2 (Middle / Man)</span>
+                        <span
+                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                            item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
+                              ? 'bg-emerald-500/20 text-emerald-300'
+                              : 'bg-blue-500/20 text-blue-300'
+                          }`}
+                        >
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-zinc-400 block">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
+                      </span>
+                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
+                      </p>
+                    </div>
+
+                    {/* Line 3 Bottom */}
+                    <div className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-blue-400">Line 3 (Bottom / Earth)</span>
+                        <span
+                          className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                            item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
+                              ? 'bg-emerald-500/20 text-emerald-300'
+                              : 'bg-blue-500/20 text-blue-300'
+                          }`}
+                        >
+                          {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-zinc-400 block">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
+                      </span>
+                      <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                        {item.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Clock Trajectory & Kihap Indicator */}
+              {(item.taegeukPhilosophy.clockTrajectory || item.taegeukPhilosophy.kihapSteps) && (
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2.5 font-mono">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                      <Compass className="w-4 h-4 text-blue-400" />
+                      <span>4-Point Clock Trajectory &amp; Kihap Placement:</span>
+                    </div>
+                    {item.taegeukPhilosophy.kihapSteps && (
+                      <div className="flex items-center gap-1.5 text-xs text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+                        <Volume2 className="w-3.5 h-3.5" />
+                        <span>Kihap: Step {item.taegeukPhilosophy.kihapSteps.join(' & ')}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {item.taegeukPhilosophy.clockTrajectory && (
+                    <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300 flex items-center gap-1.5 overflow-x-auto">
+                      <span className="text-zinc-500 uppercase font-bold text-[10px] shrink-0">Vector Path:</span>
+                      <span className="text-amber-300 font-bold whitespace-nowrap">
+                        {item.taegeukPhilosophy.clockTrajectory}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* WT Competition Scoring Guidelines */}
+              {item.taegeukPhilosophy.wtCompetitionScoring && (
+                <div className="p-5 rounded-xl bg-white/5 border border-white/10 space-y-3 font-mono">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                      <Shield className="w-4 h-4 text-amber-400" />
+                      <span>WT Competition Scoring &amp; Deduction Criteria:</span>
+                    </div>
+                    <span className="text-[10px] text-zinc-400">
+                      Target: {item.taegeukPhilosophy.wtCompetitionScoring.targetDuration}
+                    </span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                    {/* Major Deductions */}
+                    <div className="p-3.5 rounded-lg bg-red-950/30 border border-red-500/30 space-y-1.5">
+                      <span className="text-[10px] font-bold text-red-400 uppercase block">
+                        Major Deductions (-0.3 points each):
+                      </span>
+                      <ul className="space-y-1 text-zinc-300 font-light text-[11px]">
+                        {item.taegeukPhilosophy.wtCompetitionScoring.majorDeductions.map((ded, idx) => (
+                          <li key={idx} className="flex items-start gap-1.5">
+                            <span className="text-red-400 mt-0.5">&bull;</span>
+                            <span>{ded}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Minor Deductions */}
+                    <div className="p-3.5 rounded-lg bg-amber-950/30 border border-amber-500/30 space-y-1.5">
+                      <span className="text-[10px] font-bold text-amber-400 uppercase block">
+                        Minor Deductions (-0.1 points each):
+                      </span>
+                      <ul className="space-y-1 text-zinc-300 font-light text-[11px]">
+                        {item.taegeukPhilosophy.wtCompetitionScoring.minorDeductions.map((ded, idx) => (
+                          <li key={idx} className="flex items-start gap-1.5">
+                            <span className="text-amber-400 mt-0.5">&bull;</span>
+                            <span>{ded}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 8 Execution Principles Tailored to Form */}
+              {item.taegeukPhilosophy.executionPrinciples &&
+                item.taegeukPhilosophy.executionPrinciples.length > 0 && (
+                  <div className="p-5 rounded-xl bg-white/5 border border-white/10 space-y-2.5 font-mono">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider block">
+                      8 Performance Pillars Execution Cues:
+                    </span>
+                    <div className="grid sm:grid-cols-2 gap-2 text-[11px] font-sans">
+                      {item.taegeukPhilosophy.executionPrinciples.map((principle, idx) => (
+                        <div
+                          key={idx}
+                          className="p-2.5 rounded bg-zinc-900/90 border border-zinc-800 text-zinc-300 font-light leading-relaxed flex items-start gap-1.5"
+                        >
+                          <span className="text-brand-red font-bold mt-0.5">&bull;</span>
+                          <span>{principle}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         )}

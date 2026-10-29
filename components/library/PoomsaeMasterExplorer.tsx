@@ -158,6 +158,10 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
   // Yudanja Dan Mastery View Mode: Table vs Cards
   const [danViewMode, setDanViewMode] = React.useState<'table' | 'cards'>('table')
 
+  // Taegeuk Specialized State
+  const [selectedWangFormId, setSelectedWangFormId] = React.useState<string>('taegeuk-1')
+  const [palgweViewMode, setPalgweViewMode] = React.useState<'table' | 'cards'>('table')
+
   // Catalog Internal State
   const [activeSeries, setActiveSeries] = React.useState<PoomsaeSeriesKey>('taegeuk')
   const [viewLayout, setViewLayout] = React.useState<ViewLayoutMode>('grid')
@@ -175,6 +179,11 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
   const whatIsTaegeukData = React.useMemo(() => getLocalizedWhatIsTaegeuk(language), [language])
   const yudanjaGuideData = React.useMemo(() => getYudanjaGuide(language), [language])
   const blackBeltDossierData = React.useMemo(() => getLocalizedBlackBeltDossier(language), [language])
+
+  // Active form for Wang Floor Plan Interactive Visualizer
+  const activeWangItem = React.useMemo(() => {
+    return items.find((i) => i.id === selectedWangFormId) || items.find((i) => i.id === 'taegeuk-1')
+  }, [items, selectedWangFormId])
 
   // Reset sub-filter on series change
   React.useEffect(() => {
@@ -1223,6 +1232,570 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
             </div>
           </div>
 
+          {/* ================================================================ */}
+          {/* 1. THE 4 CORE EXECUTION ELEMENTS OF POOMSAE                      */}
+          {/* ================================================================ */}
+          {whatIsTaegeukData.fourExecutionElements && (
+            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <Compass className="w-4 h-4 text-brand-red" />
+                    <span className="text-xs font-mono font-bold uppercase text-brand-red tracking-wider">
+                      Authoritative Foundations &bull; Southwick Treatise
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                    {whatIsTaegeukData.fourExecutionElements.title}
+                  </h3>
+                  <span className="text-xs font-mono text-zinc-400 block">
+                    {whatIsTaegeukData.fourExecutionElements.subtitle}
+                  </span>
+                </div>
+                <span className="text-xs font-mono px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red font-bold self-start sm:self-auto border border-brand-red/20">
+                  4 Core Elements
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                {whatIsTaegeukData.fourExecutionElements.summary}
+              </p>
+
+              {/* 4 Element Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {whatIsTaegeukData.fourExecutionElements.elements.map((el) => {
+                  const iconMap: Record<string, React.ReactNode> = {
+                    pattern: <Layers className="w-5 h-5 text-brand-red" />,
+                    direction: <Compass className="w-5 h-5 text-blue-500" />,
+                    stance: <Footprints className="w-5 h-5 text-emerald-500" />,
+                    technique: <Zap className="w-5 h-5 text-amber-500" />,
+                  }
+
+                  return (
+                    <div
+                      key={el.id}
+                      className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3 flex flex-col justify-between"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <div className="w-9 h-9 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shadow-sm">
+                            {iconMap[el.id] || <Sparkles className="w-5 h-5 text-brand-red" />}
+                          </div>
+                          <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                            Element
+                          </span>
+                        </div>
+                        <div>
+                          <strong className="text-sm font-bold text-zinc-900 dark:text-white block">
+                            {el.title}
+                          </strong>
+                          <span className="text-[11px] font-mono text-brand-red block">
+                            {el.koreanTitle}
+                          </span>
+                        </div>
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                          {el.concept}
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800 space-y-1.5 text-[11px] font-mono">
+                        <span className="text-[10px] uppercase font-bold text-zinc-500 block">
+                          Key Principles:
+                        </span>
+                        <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light">
+                          {el.details.map((dt, idx) => (
+                            <li key={idx} className="flex items-start gap-1.5">
+                              <span className="text-brand-red mt-0.5">&bull;</span>
+                              <span>{dt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* 4-Point Clock System Visualizer Banner */}
+              {whatIsTaegeukData.fourExecutionElements.clockSystem && (
+                <div className="p-5 sm:p-6 rounded-xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-white border border-zinc-800 space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-amber-400" />
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-white">
+                        {whatIsTaegeukData.fourExecutionElements.clockSystem.title}
+                      </h4>
+                    </div>
+                    <span className="text-[10px] font-mono text-amber-300 font-bold px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/20">
+                      Standardized Coordinate System
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-zinc-300 font-light leading-relaxed">
+                    {whatIsTaegeukData.fourExecutionElements.clockSystem.description}
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+                    {whatIsTaegeukData.fourExecutionElements.clockSystem.directions.map((dir, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3.5 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-base font-black text-amber-400">{dir.hour}</span>
+                          <span className="text-[10px] text-zinc-400">{dir.koreanName}</span>
+                        </div>
+                        <strong className="text-xs text-white block">{dir.direction}</strong>
+                        <span className="text-[10px] text-zinc-400 block">{dir.tacticalRole}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ================================================================ */}
+          {/* 2. THE WANG (王) FLOOR PLAN & TRIGRAM STEPPING LAW VISUALIZER    */}
+          {/* ================================================================ */}
+          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <Footprints className="w-4 h-4 text-brand-red" />
+                  <span className="text-xs font-mono font-bold uppercase text-brand-red tracking-wider">
+                    Geometric Footwork Law &bull; Ronald A. Southwick
+                  </span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                  The Wang (王) Floor Plan &amp; Trigram Stepping Law
+                </h3>
+                <span className="text-xs font-mono text-zinc-400 block">
+                  王자 품새선과 주역 3효(三爻) 운족의 법칙 (Step Forward = Yang &bull; Stationary/Retreat = Um)
+                </span>
+              </div>
+              <span className="text-xs font-mono px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red font-bold self-start sm:self-auto border border-brand-red/20">
+                Floor Geometry
+              </span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 space-y-2">
+              <strong className="text-zinc-900 dark:text-white block font-bold text-xs uppercase">
+                The Stepping Law of the 3 Horizontal Lines:
+              </strong>
+              <p className="font-light leading-relaxed">
+                The 3 horizontal lines of the Chinese character <strong>王 (Wang)</strong> correspond directly to the 3 lines of that form’s I Ching trigram (<strong>Top = Heaven</strong>, <strong>Middle = Man</strong>, <strong>Bottom = Earth</strong>).
+              </p>
+              <div className="grid sm:grid-cols-2 gap-2 pt-1">
+                <div className="p-2.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">
+                  <span className="font-bold block">Solid Yang Line (—–):</span>
+                  <span>If the practitioner advances (takes a step forward) along that horizontal line, it is a solid line.</span>
+                </div>
+                <div className="p-2.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-700 dark:text-blue-300">
+                  <span className="font-bold block">Broken Um Line (– –):</span>
+                  <span>If the practitioner executes in place, retreats, or turns without advancing along that horizontal line, it is a broken line.</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Form Selector Pills for Taegeuk 1 to 8 */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono uppercase font-bold text-zinc-500 block">
+                Select Taegeuk Form to Inspect Floor Line Stepping Laws:
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => {
+                  const formId = `taegeuk-${num}`
+                  const formItem = items.find((i) => i.id === formId)
+                  const isSelected = selectedWangFormId === formId
+
+                  return (
+                    <button
+                      key={formId}
+                      onClick={() => setSelectedWangFormId(formId)}
+                      className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer font-mono ${
+                        isSelected
+                          ? 'bg-brand-red text-white border-brand-red shadow-md scale-[1.02]'
+                          : 'bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300'
+                      }`}
+                    >
+                      <span className="text-lg block font-serif leading-none mb-1">
+                        {formItem?.trigramSymbol?.split(' ')[0] || '☰'}
+                      </span>
+                      <strong className="text-[11px] block font-bold truncate">
+                        Taegeuk {num}
+                      </strong>
+                      <span className={`text-[9px] block ${isSelected ? 'text-white/80' : 'text-zinc-400'}`}>
+                        {formItem?.taegeukPhilosophy?.trigramName || `Form ${num}`}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Active Form's Wang Floor Plan Breakdown Card */}
+            {activeWangItem?.taegeukPhilosophy?.wangFloorPlanLines && (
+              <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-5 font-mono">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-200 dark:border-zinc-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-3xl font-serif text-brand-red font-bold shadow-sm">
+                      {activeWangItem.taegeukPhilosophy.trigramSymbol}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] uppercase font-bold text-brand-red">
+                          {activeWangItem.name}
+                        </span>
+                        <span className="text-zinc-400">&bull;</span>
+                        <span className="text-[10px] text-zinc-500">{activeWangItem.koreanName}</span>
+                      </div>
+                      <h4 className="text-base font-bold text-zinc-900 dark:text-white">
+                        Trigram: {activeWangItem.taegeukPhilosophy.trigramName} &bull; Element: {activeWangItem.taegeukPhilosophy.naturalElement}
+                      </h4>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setSelectedPoomsae(decoratePoomsaeItem(activeWangItem, language))}
+                    className="px-3.5 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold hover:bg-brand-red/90 transition-colors cursor-pointer self-start sm:self-auto shadow-sm"
+                  >
+                    Inspect Full Dossier &rarr;
+                  </button>
+                </div>
+
+                {/* 3-Line Horizontal Breakdown */}
+                <div className="space-y-3">
+                  {/* Line 1 (Top / Heaven) */}
+                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-brand-red/10 text-brand-red text-xs font-bold flex items-center justify-center">
+                          1
+                        </span>
+                        <strong className="text-xs text-zinc-900 dark:text-white">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line1Top.name}
+                        </strong>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-zinc-400">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
+                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                              : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                          }`}
+                        >
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
+                            ? 'Solid Yang Line (Advances)'
+                            : 'Broken Um Line (No Advance)'}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light font-sans leading-relaxed">
+                      {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
+                    </p>
+                  </div>
+
+                  {/* Line 2 (Middle / Man) */}
+                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-amber-500/10 text-amber-500 text-xs font-bold flex items-center justify-center">
+                          2
+                        </span>
+                        <strong className="text-xs text-zinc-900 dark:text-white">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line2Middle.name}
+                        </strong>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-zinc-400">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
+                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                              : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                          }`}
+                        >
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
+                            ? 'Solid Yang Line (Advances)'
+                            : 'Broken Um Line (No Advance)'}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light font-sans leading-relaxed">
+                      {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
+                    </p>
+                  </div>
+
+                  {/* Line 3 (Bottom / Earth) */}
+                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold flex items-center justify-center">
+                          3
+                        </span>
+                        <strong className="text-xs text-zinc-900 dark:text-white">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.name}
+                        </strong>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-zinc-400">
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
+                              ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                              : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                          }`}
+                        >
+                          {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
+                            ? 'Solid Yang Line (Advances)'
+                            : 'Broken Um Line (No Advance)'}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light font-sans leading-relaxed">
+                      {activeWangItem.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ================================================================ */}
+          {/* 3. THE 8 PILLARS OF POOMSAE PERFORMANCE (SOUTHWICK TREATISE)     */}
+          {/* ================================================================ */}
+          {whatIsTaegeukData.eightPerformancePillars && (
+            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-brand-red" />
+                    <span className="text-xs font-mono font-bold uppercase text-brand-red tracking-wider">
+                      Master Criteria &bull; Ronald A. Southwick
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                    {whatIsTaegeukData.eightPerformancePillars.title}
+                  </h3>
+                  <span className="text-xs font-mono text-zinc-400 block">
+                    {whatIsTaegeukData.eightPerformancePillars.subtitle}
+                  </span>
+                </div>
+                <span className="text-xs font-mono px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red font-bold self-start sm:self-auto border border-brand-red/20">
+                  8 Performance Pillars
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                {whatIsTaegeukData.eightPerformancePillars.summary}
+              </p>
+
+              {/* 8 Pillars Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {whatIsTaegeukData.eightPerformancePillars.pillars.map((pil) => (
+                  <div
+                    key={pil.number}
+                    className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3 flex flex-col justify-between"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="w-6 h-6 rounded-full bg-brand-red/10 text-brand-red text-xs font-mono font-bold flex items-center justify-center">
+                          #{pil.number}
+                        </span>
+                        <span className="text-[10px] font-mono text-zinc-400 uppercase">Pillar</span>
+                      </div>
+                      <div>
+                        <strong className="text-sm font-bold text-zinc-900 dark:text-white block">
+                          {pil.title}
+                        </strong>
+                        <span className="text-[11px] font-mono text-brand-red block">
+                          {pil.koreanTitle}
+                        </span>
+                      </div>
+                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                        {pil.summary}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800 space-y-2 text-xs">
+                      <p className="text-[11px] text-zinc-500 font-light leading-relaxed">
+                        {pil.executionGuide}
+                      </p>
+                      <div className="p-2 rounded bg-brand-red/5 border border-brand-red/15 text-[10px] font-mono text-brand-red font-bold">
+                        💡 {pil.masterCue}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================ */}
+          {/* 4. 1967 PALGWE VS 1971 TAEGEUK HISTORICAL MATRIX                */}
+          {/* ================================================================ */}
+          {whatIsTaegeukData.palgweComparison && (
+            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <Table className="w-4 h-4 text-brand-red" />
+                    <span className="text-xs font-mono font-bold uppercase text-brand-red tracking-wider">
+                      Historical Matrix &bull; 1967 Palgwe vs. 1971 Taegeuk
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                    {whatIsTaegeukData.palgweComparison.title}
+                  </h3>
+                  <span className="text-xs font-mono text-zinc-400 block">
+                    {whatIsTaegeukData.palgweComparison.subtitle} &bull; {whatIsTaegeukData.palgweComparison.historicalTimeline}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 shrink-0">
+                  <button
+                    onClick={() => setPalgweViewMode('table')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer transition-colors ${
+                      palgweViewMode === 'table'
+                        ? 'bg-white dark:bg-zinc-900 text-brand-red shadow-sm'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <Table className="w-3.5 h-3.5" /> Table
+                  </button>
+                  <button
+                    onClick={() => setPalgweViewMode('cards')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 cursor-pointer transition-colors ${
+                      palgweViewMode === 'cards'
+                        ? 'bg-white dark:bg-zinc-900 text-brand-red shadow-sm'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <LayoutGrid className="w-3.5 h-3.5" /> Cards
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                {whatIsTaegeukData.palgweComparison.summary}
+              </p>
+
+              {/* Table Mode */}
+              {palgweViewMode === 'table' && (
+                <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                  <table className="w-full text-left text-xs font-mono border-collapse">
+                    <thead>
+                      <tr className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white uppercase text-[11px] font-bold">
+                        <th className="p-3 text-center border-r border-zinc-200 dark:border-zinc-700">#</th>
+                        <th className="p-3 border-r border-zinc-200 dark:border-zinc-700">1967 Palgwe Form</th>
+                        <th className="p-3 text-center border-r border-zinc-200 dark:border-zinc-700">Palgwe Floor Pattern</th>
+                        <th className="p-3 border-r border-zinc-200 dark:border-zinc-700">Pattern Meaning</th>
+                        <th className="p-3 text-center border-r border-zinc-200 dark:border-zinc-700">Trigram</th>
+                        <th className="p-3 border-r border-zinc-200 dark:border-zinc-700">1971 Taegeuk Form</th>
+                        <th className="p-3 text-center border-r border-zinc-200 dark:border-zinc-700">Taegeuk Floor Pattern</th>
+                        <th className="p-3 border-r border-zinc-200 dark:border-zinc-700">Natural Element</th>
+                        <th className="p-3">Tactical Nuance</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-800 dark:text-zinc-200 font-normal">
+                      {whatIsTaegeukData.palgweComparison.forms.map((item) => (
+                        <tr key={item.number} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
+                          <td className="p-3 text-center font-bold text-brand-red border-r border-zinc-200 dark:border-zinc-800">
+                            {item.number}
+                          </td>
+                          <td className="p-3 font-bold border-r border-zinc-200 dark:border-zinc-800">
+                            {item.name}
+                          </td>
+                          <td className="p-3 text-center font-black font-serif text-base text-zinc-900 dark:text-white border-r border-zinc-200 dark:border-zinc-800">
+                            {item.floorPattern}
+                          </td>
+                          <td className="p-3 text-zinc-500 border-r border-zinc-200 dark:border-zinc-800 text-[11px]">
+                            {item.patternDefinition}
+                          </td>
+                          <td className="p-3 text-center text-base font-serif text-brand-red border-r border-zinc-200 dark:border-zinc-800">
+                            {item.trigram}
+                          </td>
+                          <td className="p-3 font-bold text-brand-red border-r border-zinc-200 dark:border-zinc-800">
+                            {item.taegeukCounterpart}
+                          </td>
+                          <td className="p-3 text-center font-black font-serif text-base text-brand-red border-r border-zinc-200 dark:border-zinc-800">
+                            王 (All Forms)
+                          </td>
+                          <td className="p-3 text-zinc-600 dark:text-zinc-300 border-r border-zinc-200 dark:border-zinc-800 text-[11px]">
+                            {item.element}
+                          </td>
+                          <td className="p-3 text-[11px] text-zinc-500 font-light">
+                            {item.keyDivergence}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Cards Mode */}
+              {palgweViewMode === 'cards' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+                  {whatIsTaegeukData.palgweComparison.forms.map((item) => (
+                    <div
+                      key={item.number}
+                      className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3 flex flex-col justify-between"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="w-6 h-6 rounded-full bg-brand-red/10 text-brand-red text-xs font-bold flex items-center justify-center">
+                            #{item.number}
+                          </span>
+                          <span className="text-lg font-serif text-brand-red font-bold">
+                            {item.trigram}
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 pt-1 border-t border-zinc-200 dark:border-zinc-800">
+                          <div className="p-2 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+                            <span className="text-[9px] uppercase text-zinc-400 block">1967 Palgwe</span>
+                            <strong className="text-xs text-zinc-900 dark:text-white block truncate">
+                              {item.name}
+                            </strong>
+                            <span className="text-sm font-black font-serif text-zinc-500 block">
+                              Floor: {item.floorPattern}
+                            </span>
+                          </div>
+                          <div className="p-2 rounded bg-white dark:bg-zinc-900 border border-brand-red/20">
+                            <span className="text-[9px] uppercase text-brand-red block">1971 Taegeuk</span>
+                            <strong className="text-xs text-brand-red block truncate">
+                              {item.taegeukCounterpart}
+                            </strong>
+                            <span className="text-sm font-black font-serif text-brand-red block">
+                              Floor: 王
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="text-[11px] text-zinc-600 dark:text-zinc-400 font-light pt-1">
+                          <strong>Element:</strong> {item.element}
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] text-zinc-500 font-light leading-relaxed">
+                        {item.keyDivergence}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* The 5 Core Ideals of Taekwondo in Taegeuk Poomsae */}
           <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-100 dark:border-zinc-800">
@@ -2092,6 +2665,184 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                       </div>
                     </div>
                   )}
+
+                  {/* Wang (王) Floor Line & Stepping Law Matrix */}
+                  {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines && (
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                          <Footprints className="w-4 h-4 text-brand-red" />
+                          <span>Wang (王) Floor Line Stepping Dynamics:</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-400 font-mono">
+                          Southwick Stepping Rule
+                        </span>
+                      </div>
+
+                      <div className="grid sm:grid-cols-3 gap-2.5 text-xs font-mono">
+                        {/* Line 1 Top */}
+                        <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold text-brand-red">Line 1 (Top / Heaven)</span>
+                            <span
+                              className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                                selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang
+                                  ? 'bg-emerald-500/20 text-emerald-300'
+                                  : 'bg-blue-500/20 text-blue-300'
+                              }`}
+                            >
+                              {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-zinc-400 block">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
+                          </span>
+                          <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
+                          </p>
+                        </div>
+
+                        {/* Line 2 Middle */}
+                        <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold text-amber-400">Line 2 (Middle / Man)</span>
+                            <span
+                              className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                                selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
+                                  ? 'bg-emerald-500/20 text-emerald-300'
+                                  : 'bg-blue-500/20 text-blue-300'
+                              }`}
+                            >
+                              {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-zinc-400 block">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
+                          </span>
+                          <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
+                          </p>
+                        </div>
+
+                        {/* Line 3 Bottom */}
+                        <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold text-blue-400">Line 3 (Bottom / Earth)</span>
+                            <span
+                              className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                                selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
+                                  ? 'bg-emerald-500/20 text-emerald-300'
+                                  : 'bg-blue-500/20 text-blue-300'
+                              }`}
+                            >
+                              {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang ? 'Yang (—–)' : 'Um (– –)'}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-zinc-400 block">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
+                          </span>
+                          <p className="text-[11px] text-zinc-300 font-light font-sans leading-relaxed">
+                            {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Clock Trajectory & Kihap Indicator */}
+                  {(selectedPoomsae.taegeukPhilosophy.clockTrajectory || selectedPoomsae.taegeukPhilosophy.kihapSteps) && (
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2.5">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                          <Compass className="w-4 h-4 text-blue-400" />
+                          <span>4-Point Clock Trajectory &amp; Kihap Placement:</span>
+                        </div>
+                        {selectedPoomsae.taegeukPhilosophy.kihapSteps && (
+                          <div className="flex items-center gap-1.5 text-xs font-mono text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
+                            <Volume2 className="w-3.5 h-3.5" />
+                            <span>Kihap: Step {selectedPoomsae.taegeukPhilosophy.kihapSteps.join(' & ')}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {selectedPoomsae.taegeukPhilosophy.clockTrajectory && (
+                        <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300 font-mono flex items-center gap-1.5 overflow-x-auto">
+                          <span className="text-zinc-500 uppercase font-bold text-[10px] shrink-0">Vector Path:</span>
+                          <span className="text-amber-300 font-bold whitespace-nowrap">
+                            {selectedPoomsae.taegeukPhilosophy.clockTrajectory}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* WT Competition Scoring Guidelines */}
+                  {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring && (
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                          <Shield className="w-4 h-4 text-amber-400" />
+                          <span>WT Competition Scoring &amp; Deduction Criteria:</span>
+                        </div>
+                        <span className="text-[10px] font-mono text-zinc-400">
+                          Target: {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.targetDuration}
+                        </span>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-3 text-xs font-mono">
+                        {/* Major Deductions */}
+                        <div className="p-3 rounded-lg bg-red-950/30 border border-red-500/30 space-y-1.5">
+                          <span className="text-[10px] font-bold text-red-400 uppercase block">
+                            Major Deductions (-0.3 points each):
+                          </span>
+                          <ul className="space-y-1 text-zinc-300 font-light text-[11px]">
+                            {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.majorDeductions.map((ded, idx) => (
+                              <li key={idx} className="flex items-start gap-1.5">
+                                <span className="text-red-400 mt-0.5">&bull;</span>
+                                <span>{ded}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Minor Deductions */}
+                        <div className="p-3 rounded-lg bg-amber-950/30 border border-amber-500/30 space-y-1.5">
+                          <span className="text-[10px] font-bold text-amber-400 uppercase block">
+                            Minor Deductions (-0.1 points each):
+                          </span>
+                          <ul className="space-y-1 text-zinc-300 font-light text-[11px]">
+                            {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.minorDeductions.map((ded, idx) => (
+                              <li key={idx} className="flex items-start gap-1.5">
+                                <span className="text-amber-400 mt-0.5">&bull;</span>
+                                <span>{ded}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 8 Execution Principles Tailored to Form */}
+                  {selectedPoomsae.taegeukPhilosophy.executionPrinciples &&
+                    selectedPoomsae.taegeukPhilosophy.executionPrinciples.length > 0 && (
+                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                        <span className="text-xs font-bold text-white uppercase tracking-wider block">
+                          8 Performance Pillars Execution Cues:
+                        </span>
+                        <div className="grid sm:grid-cols-2 gap-2 text-[11px] font-sans">
+                          {selectedPoomsae.taegeukPhilosophy.executionPrinciples.map((principle, idx) => (
+                            <div
+                              key={idx}
+                              className="p-2 rounded bg-zinc-900/90 border border-zinc-800 text-zinc-300 font-light leading-relaxed flex items-start gap-1.5"
+                            >
+                              <span className="text-brand-red font-bold mt-0.5">&bull;</span>
+                              <span>{principle}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                 </div>
               )}
 

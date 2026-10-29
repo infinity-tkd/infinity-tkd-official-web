@@ -50,6 +50,20 @@ export interface TaegeukPhilosophyInfo {
   introducedKeyTechniques: string[] // List of key newly introduced techniques in this form
   dialecticRole?: string // Dialectic relationship e.g. Keon & Gon
   flagPresence?: boolean // true if on Korean National Flag (Keon, Gon, Ri, Gam)
+  trigramLines?: [boolean, boolean, boolean] // Top, Middle, Bottom: true = solid (Yang), false = broken (Um)
+  wangFloorPlanLines?: {
+    line1Top: { name: string; meaning: string; isYang: boolean; stepsRange: string; stepForward: boolean; explanation: string }
+    line2Middle: { name: string; meaning: string; isYang: boolean; stepsRange: string; stepForward: boolean; explanation: string }
+    line3Bottom: { name: string; meaning: string; isYang: boolean; stepsRange: string; stepForward: boolean; explanation: string }
+  }
+  clockTrajectory?: string // e.g. "9:00 -> 3:00 -> 12:00 -> 9:00 -> 3:00 -> 12:00 -> 9:00 -> 3:00 -> 6:00"
+  kihapSteps?: number[] // e.g. [16] or [2, 18]
+  executionPrinciples?: string[] // Application of Southwick's 4 elements & 8 performance pillars
+  wtCompetitionScoring?: {
+    majorDeductions: string[] // -0.3 deductions
+    minorDeductions: string[] // -0.1 deductions
+    targetDuration: string // e.g. "30–35 sec"
+  }
 }
 
 export interface NewPoomsaeSpecInfo {
