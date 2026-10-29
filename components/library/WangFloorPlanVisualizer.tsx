@@ -61,21 +61,21 @@ export function WangFloorPlanVisualizer({
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
 
         {/* Top Header inside Visualizer */}
-        <div className="w-full flex items-center justify-between gap-2 pb-3 mb-2 border-b border-zinc-800/80 z-10 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-            <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">
-              Character 王 Floor Geometry
+        <div className="w-full flex items-center justify-between gap-2 pb-3 mb-2 border-b border-zinc-800/80 z-10 text-xs flex-wrap sm:flex-nowrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse shrink-0" />
+            <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider shrink-0">
+              Character 王 Floor
             </span>
             {formName && (
               <>
                 <span className="text-zinc-600">&bull;</span>
-                <span className="text-white font-bold truncate">{formName}</span>
+                <span className="text-white font-bold truncate max-w-[130px] sm:max-w-[200px]">{formName}</span>
               </>
             )}
           </div>
           {trigramSymbol && (
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-brand-red text-xs font-bold">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-brand-red text-xs font-bold shrink-0">
               <span className="text-sm font-serif">{trigramSymbol}</span>
               {elementName && <span className="text-[10px] text-zinc-300 font-sans">{elementName}</span>}
             </div>
@@ -294,12 +294,12 @@ export function WangFloorPlanVisualizer({
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-center gap-4 pt-2 border-t border-zinc-800/80 w-full text-[10px] text-zinc-400">
-          <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 pt-2 border-t border-zinc-800/80 w-full text-[10px] text-zinc-400 flex-wrap">
+          <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-3.5 h-1.5 rounded-sm bg-emerald-500" />
-            <span>Solid Yang (Advances forward)</span>
+            <span>Solid Yang (Advances)</span>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-1.5 h-1.5 rounded-sm bg-blue-500" />
             <span className="w-1.5 h-1.5 rounded-sm bg-blue-500" />
             <span>Broken Um (Stationary / Pivot)</span>

@@ -8,6 +8,7 @@ import {
   libraryItems,
   type LibraryItem,
 } from '@/data/library'
+import dynamic from 'next/dynamic'
 import {
   PoomsaeCard,
   StanceCard,
@@ -17,12 +18,67 @@ import {
   HistoryCard,
   HosinsulCard,
 } from '@/components/library/TechniqueDisciplineCards'
-import { CompetitionRulesReader } from '@/components/library/CompetitionRulesReader'
-import { HistoryHeritageMaster } from '@/components/library/HistoryHeritageMaster'
-import { PoomsaeMasterExplorer } from '@/components/library/PoomsaeMasterExplorer'
-import { HosinsulMasterExplorer } from '@/components/library/HosinsulMasterExplorer'
-import { KickingMasterExplorer } from '@/components/library/KickingMasterExplorer'
-import { AdvancedKickingMasterExplorer } from '@/components/library/AdvancedKickingMasterExplorer'
+
+function MasterExplorerSkeleton({ title }: { title: string }) {
+  return (
+    <div className="w-full p-8 rounded-2xl bg-zinc-900/60 border border-zinc-800 animate-pulse space-y-4">
+      <div className="flex items-center gap-3">
+        <div className="w-8 h-8 rounded-lg bg-zinc-800" />
+        <div className="h-5 w-48 rounded bg-zinc-800" />
+      </div>
+      <p className="text-xs text-zinc-500 font-mono">{title}</p>
+      <div className="h-44 w-full rounded-xl bg-zinc-800/40" />
+    </div>
+  )
+}
+
+const CompetitionRulesReader = dynamic(
+  () => import('@/components/library/CompetitionRulesReader').then((mod) => mod.CompetitionRulesReader),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Competition Rules & Regulations..." />,
+    ssr: true,
+  }
+)
+
+const HistoryHeritageMaster = dynamic(
+  () => import('@/components/library/HistoryHeritageMaster').then((mod) => mod.HistoryHeritageMaster),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Taekwondo Heritage & Historical Lineage..." />,
+    ssr: true,
+  }
+)
+
+const PoomsaeMasterExplorer = dynamic(
+  () => import('@/components/library/PoomsaeMasterExplorer').then((mod) => mod.PoomsaeMasterExplorer),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Poomsae Master Curriculum & Geometry..." />,
+    ssr: true,
+  }
+)
+
+const HosinsulMasterExplorer = dynamic(
+  () => import('@/components/library/HosinsulMasterExplorer').then((mod) => mod.HosinsulMasterExplorer),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Hosinsul Self-Defense System..." />,
+    ssr: true,
+  }
+)
+
+const KickingMasterExplorer = dynamic(
+  () => import('@/components/library/KickingMasterExplorer').then((mod) => mod.KickingMasterExplorer),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Kicking Fundamentals..." />,
+    ssr: true,
+  }
+)
+
+const AdvancedKickingMasterExplorer = dynamic(
+  () => import('@/components/library/AdvancedKickingMasterExplorer').then((mod) => mod.AdvancedKickingMasterExplorer),
+  {
+    loading: () => <MasterExplorerSkeleton title="Loading Advanced Kicking Techniques..." />,
+    ssr: true,
+  }
+)
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
