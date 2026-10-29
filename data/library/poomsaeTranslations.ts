@@ -4,6 +4,7 @@
 // =============================================================================
 
 import type { LibraryItem } from './types'
+import { poomsaeDetailedTranslations } from './poomsaeDetailedTranslations'
 
 export interface PoomsaeI18nDictionary {
   catalogTab: string
@@ -3282,11 +3283,14 @@ export function decoratePoomsaeItem(item: LibraryItem, lang: string): LibraryIte
   if (!item) return item
   if (lang === 'en') return item
 
-  const t = item.translations?.[lang as 'km' | 'zh' | 'ko']
+  const detailed = poomsaeDetailedTranslations[lang as 'km' | 'zh' | 'ko']?.[item.id]
+  const basic = item.translations?.[lang as 'km' | 'zh' | 'ko']
+  const t = detailed || basic
   if (!t) return item
 
   return {
     ...item,
+    ...t,
     name: t.name || item.name,
     koreanName: t.koreanName || item.koreanName,
     summary: t.summary || item.summary,

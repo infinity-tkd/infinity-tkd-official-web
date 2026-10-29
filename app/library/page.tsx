@@ -47,6 +47,8 @@ import {
   HosinsulCard,
 } from '@/components/library/TechniqueDisciplineCards'
 import { useLanguage } from '@/context/LanguageContext'
+import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
 import { CompetitionRulesViewer } from '@/components/library/CompetitionRulesViewer'
 import { HistoryChronicleReader } from '@/components/library/HistoryChronicleReader'
 import { SafeGrid } from '@/components/SafeGrid'
@@ -67,7 +69,7 @@ const iconMap: Record<string, React.ElementType> = {
 }
 
 export default function LibraryPage() {
-  const { t, localizeList } = useLanguage()
+  const { t, language, localize, localizeList } = useLanguage()
   const [selectedCategory, setSelectedCategory] = React.useState<LibraryCategory | 'all'>('all')
   const [selectedDifficulty, setSelectedDifficulty] = React.useState<DifficultyLevel | 'all'>('all')
   const [searchQuery, setSearchQuery] = React.useState<string>('')
@@ -78,8 +80,27 @@ export default function LibraryPage() {
   }, [localizeList])
 
   const localizedItems = React.useMemo(() => {
-    return localizeList(libraryItems)
-  }, [localizeList])
+    return libraryItems.map((item) => {
+      if (item.category === 'poomsae') {
+        return decoratePoomsaeItem(item, language)
+      }
+      if (item.category === 'kicking-fundamentals' || item.category === 'kicking-advanced') {
+        return getLocalizedKickingItem(item, language as 'en' | 'km' | 'zh' | 'ko')
+      }
+      return localize(item)
+    })
+  }, [language, localize])
+
+  const modalItem = React.useMemo(() => {
+    if (!activeItem) return null
+    if (activeItem.category === 'poomsae') {
+      return decoratePoomsaeItem(activeItem, language)
+    }
+    if (activeItem.category === 'kicking-fundamentals' || activeItem.category === 'kicking-advanced') {
+      return getLocalizedKickingItem(activeItem, language as 'en' | 'km' | 'zh' | 'ko')
+    }
+    return localize(activeItem)
+  }, [activeItem, language, localize])
 
   // Lock body scroll & Escape key listener when modal is open
   React.useEffect(() => {
@@ -345,7 +366,7 @@ export default function LibraryPage() {
       {/* ==================================================================== */}
       {/* UNIQUE DISPLAY MODAL (Responsive Sheet on Mobile, Centered on Desktop) */}
       {/* ==================================================================== */}
-      {activeItem && (
+      {activeItem && modalItem && (
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setActiveItem(null)}
@@ -361,7 +382,7 @@ export default function LibraryPage() {
           >
             {/* Modal Header Media Frame */}
             <div className="relative h-56 sm:h-64 w-full overflow-hidden shrink-0">
-              <SafeImage src={activeItem.image} alt={activeItem.name} className="w-full h-full object-cover" />
+              <SafeImage src={modalItem.image} alt={modalItem.name} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
               {/* Action Buttons (Close) */}
@@ -378,10 +399,10 @@ export default function LibraryPage() {
               {/* Title & Korean Subtitle */}
               <div className="absolute bottom-4 left-4 right-4 z-20">
                 <span className="text-xs text-brand-red font-mono font-bold block mb-0.5">
-                  {activeItem.koreanName} &bull; {activeItem.beltLevel}
+                  {modalItem.koreanName} &bull; {modalItem.beltLevel}
                 </span>
                 <h3 id="library-modal-title" className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-white tracking-tight leading-tight">
-                  {activeItem.name}
+                  {modalItem.name}
                 </h3>
               </div>
             </div>
@@ -394,12 +415,12 @@ export default function LibraryPage() {
               {safeActiveVideoUrl && (
                 <div className="space-y-2">
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
-                    <Play className="w-3 h-3 text-brand-red" /> Video Demonstration
+                    <Play className="w-3 h-3 text-brand-red" /> {t.library.videoDemonstration}
                   </h4>
                   <div className="relative aspect-video rounded-xl overflow-hidden bg-black border border-zinc-200 dark:border-zinc-800 shadow-inner">
                     <iframe
                       src={safeActiveVideoUrl}
-                      title={activeItem.name}
+                      title={modalItem.name}
                       className="w-full h-full border-0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -411,46 +432,46 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* 2. STYLE A: HISTORY BLOG FORMAT (Articles, Quotes, Citations) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.category === 'history' ? (
+              {modalItem.category === 'history' ? (
                 <div className="space-y-5">
                   {/* Blog Header Metadata */}
                   <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 font-mono">
                     <div className="flex items-center gap-2">
                       <User className="w-3.5 h-3.5 text-brand-red" />
                       <span className="font-bold text-zinc-800 dark:text-zinc-200">
-                        {activeItem.author || 'Infinity TKD Historian'}
+                        {modalItem.author || 'Infinity TKD Historian'}
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span>{activeItem.publishDate || 'August 2026'}</span>
+                      <span>{modalItem.publishDate || 'August 2026'}</span>
                       <span>&bull;</span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-brand-red" /> {activeItem.readTime || '5 min read'}
+                        <Clock className="w-3 h-3 text-brand-red" /> {modalItem.readTime || '5 min read'}
                       </span>
                     </div>
                   </div>
 
                   {/* Summary / Overview */}
                   <div className="p-4 rounded-xl bg-brand-red/5 border-l-4 border-brand-red italic text-zinc-800 dark:text-zinc-200 text-xs sm:text-sm">
-                    {activeItem.summary}
+                    {modalItem.summary}
                   </div>
 
                   {/* Blog Article Paragraphs (if provided) */}
-                  {activeItem.blogContent && activeItem.blogContent.length > 0 ? (
+                  {modalItem.blogContent && modalItem.blogContent.length > 0 ? (
                     <div className="space-y-4 text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
-                      {activeItem.blogContent.map((paragraph, i) => (
+                      {modalItem.blogContent.map((paragraph, i) => (
                         <p key={i}>{paragraph}</p>
                       ))}
                     </div>
                   ) : null}
 
                   {/* Historical Milestones */}
-                  {activeItem.steps && activeItem.steps.length > 0 && (
+                  {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                        Historical Chronicle Timeline
+                        {t.library.chronologicalMilestones}
                       </h4>
-                      {activeItem.steps.map((step, i) => (
+                      {modalItem.steps.map((step, i) => (
                         <div
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
@@ -467,28 +488,28 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* 3. STYLE B: COMPETITION RULES FORMAT (PDF Viewer & Scoring) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.category === 'competition-rules' ? (
+              {modalItem.category === 'competition-rules' ? (
                 <div className="space-y-5">
                   <div className="p-4 rounded-xl bg-blue-500/5 border-l-4 border-blue-500 text-zinc-800 dark:text-zinc-200 text-xs sm:text-sm">
-                    {activeItem.summary}
+                    {modalItem.summary}
                   </div>
 
                   {/* PDF Document Preview & Download Bar (Automatically hidden if no pdfUrl) */}
-                  {activeItem.pdfUrl && (
+                  {modalItem.pdfUrl && (
                     <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3">
                       <div className="flex items-center gap-2">
                         <FileText className="w-4 h-4 text-brand-red" />
                         <div>
                           <h5 className="text-xs font-bold text-zinc-900 dark:text-white">
-                            Official Rulebook PDF Document
+                            {t.library.officialCitation}
                           </h5>
                           <span className="text-[10px] text-zinc-400 font-mono">
-                            World Taekwondo Competition Standard
+                            {t.library.officialStandards}
                           </span>
                         </div>
                       </div>
                       <a
-                        href={activeItem.pdfUrl}
+                        href={modalItem.pdfUrl}
                         download
                         className="px-3 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm"
                       >
@@ -498,12 +519,12 @@ export default function LibraryPage() {
                   )}
 
                   {/* Scoring Rules Breakdown */}
-                  {activeItem.steps && activeItem.steps.length > 0 && (
+                  {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                        Official Point Values &amp; Penalty Protocols
+                        {t.library.rulebookProtocols}
                       </h4>
-                      {activeItem.steps.map((step, i) => (
+                      {modalItem.steps.map((step, i) => (
                         <div
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
@@ -520,55 +541,55 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* 4. STYLE C: POOMSAE UNIQUE MASTER FORMAT (Trigram & Step Rhythm) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.category === 'poomsae' ? (
+              {modalItem.category === 'poomsae' ? (
                 <div className="space-y-5">
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-                    {activeItem.diagramSymbol && (
+                    {modalItem.diagramSymbol && (
                       <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
                         <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
                           Trigram / Symbol
                         </span>
                         <span className="text-2xl font-serif font-black text-brand-red">
-                          {activeItem.diagramSymbol}
+                          {modalItem.diagramSymbol}
                         </span>
                       </div>
                     )}
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
                       <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
-                        Total Movements
+                        {t.library.totalSteps}
                       </span>
                       <span className="text-xl font-mono font-bold text-zinc-900 dark:text-white">
-                        {activeItem.totalMovements || 18} Steps
+                        {modalItem.totalMovements || 18} {t.library.step}s
                       </span>
                     </div>
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center col-span-2 sm:col-span-1">
                       <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
-                        Belt Rank
+                        {t.library.allRanks}
                       </span>
                       <span className="text-xs font-bold text-brand-red">
-                        {activeItem.beltLevel}
+                        {modalItem.beltLevel}
                       </span>
                     </div>
                   </div>
 
-                  {activeItem.meaning && (
+                  {modalItem.meaning && (
                     <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">
-                        Trigram Philosophy &amp; Element
+                        {t.library.martialPhilosophy}
                       </span>
                       <p className="text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
-                        {activeItem.meaning}
+                        {modalItem.meaning}
                       </p>
                     </div>
                   )}
 
                   {/* Execution Steps */}
-                  {activeItem.steps && activeItem.steps.length > 0 && (
+                  {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                        Poomsae Sequence &amp; Movement Steps
+                        {t.library.poomsaeSequence}
                       </h4>
-                      {activeItem.steps.map((step, i) => (
+                      {modalItem.steps.map((step, i) => (
                         <div
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
@@ -587,34 +608,34 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* 5. STYLE D: TUTORIAL STYLE (Hosinsul, Kicks, Stances, Hand, Tricking) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.category !== 'history' &&
-              activeItem.category !== 'competition-rules' &&
-              activeItem.category !== 'poomsae' ? (
+              {modalItem.category !== 'history' &&
+              modalItem.category !== 'competition-rules' &&
+              modalItem.category !== 'poomsae' ? (
                 <div className="space-y-5">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
-                    {activeItem.summary}
+                    {modalItem.summary}
                   </div>
 
                   {/* Striking Surface / Target Area Pills */}
-                  {(activeItem.strikingSurface || activeItem.targetArea) && (
+                  {(modalItem.strikingSurface || modalItem.targetArea) && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      {activeItem.strikingSurface && (
+                      {modalItem.strikingSurface && (
                         <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
                           <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
-                            Striking Weapon / Kinetic Surface
+                            {t.library.strikingWeaponLabel}
                           </span>
                           <strong className="text-zinc-900 dark:text-white">
-                            {activeItem.strikingSurface}
+                            {modalItem.strikingSurface}
                           </strong>
                         </div>
                       )}
-                      {activeItem.targetArea && (
+                      {modalItem.targetArea && (
                         <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
                           <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
-                            Anatomical Target Area
+                            {t.library.targetAnatomyLabel}
                           </span>
                           <strong className="text-zinc-900 dark:text-white">
-                            {activeItem.targetArea}
+                            {modalItem.targetArea}
                           </strong>
                         </div>
                       )}
@@ -622,12 +643,12 @@ export default function LibraryPage() {
                   )}
 
                   {/* Step by step tutorial instructions */}
-                  {activeItem.steps && activeItem.steps.length > 0 && (
+                  {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-                        Step-by-Step Execution Tutorial
+                        {t.library.stepByStepTutorial}
                       </h4>
-                      {activeItem.steps.map((step, i) => (
+                      {modalItem.steps.map((step, i) => (
                         <div
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
@@ -646,13 +667,13 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* COMMON MISTAKES & KEY DETAILS (Shared by all technique types) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.keyDetails && activeItem.keyDetails.length > 0 && (
+              {modalItem.keyDetails && modalItem.keyDetails.length > 0 && (
                 <div>
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                    Key Technical &amp; Biomechanical Cues
+                    {t.library.cuesTitle}
                   </h4>
                   <div className="space-y-1.5">
-                    {activeItem.keyDetails.map((det, i) => (
+                    {modalItem.keyDetails.map((det, i) => (
                       <div key={i} className="flex items-start gap-2 text-zinc-600 dark:text-zinc-400">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                         <span>{det}</span>
@@ -662,13 +683,13 @@ export default function LibraryPage() {
                 </div>
               )}
 
-              {activeItem.commonMistakes && activeItem.commonMistakes.length > 0 && (
+              {modalItem.commonMistakes && modalItem.commonMistakes.length > 0 && (
                 <div>
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                    Common Errors &amp; Corrections
+                    {t.library.errorsTitle}
                   </h4>
                   <div className="space-y-1.5">
-                    {activeItem.commonMistakes.map((mistake, i) => (
+                    {modalItem.commonMistakes.map((mistake, i) => (
                       <div key={i} className="flex items-start gap-2 text-zinc-600 dark:text-zinc-400">
                         <XCircle className="w-3.5 h-3.5 text-brand-red shrink-0 mt-0.5" />
                         <span>{mistake}</span>
@@ -681,35 +702,35 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {/* EXTERNAL REFERENCE SOURCE LINK (Automatically hidden if no link) */}
               {/* -------------------------------------------------------------- */}
-              {activeItem.sourceUrl && (
+              {modalItem.sourceUrl && (
                 <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
                   <div className="min-w-0 pr-2">
                     <span className="text-[10px] text-zinc-400 font-bold uppercase block">
-                      Reference &amp; Citation Source
+                      {t.library.officialCitation}
                     </span>
                     <span className="font-medium text-zinc-900 dark:text-white truncate block">
-                      {activeItem.sourceName || activeItem.sourceUrl}
+                      {modalItem.sourceName || modalItem.sourceUrl}
                     </span>
                   </div>
                   <a
-                    href={activeItem.sourceUrl}
+                    href={modalItem.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3 py-1.5 rounded-lg bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-brand-red hover:text-white transition-colors shrink-0 inline-flex items-center gap-1 font-bold"
                   >
-                    Open Source <ExternalLink className="w-3 h-3" />
+                    {t.library.visitSource} <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
               )}
 
               {/* Footer Actions */}
               <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-                <span className="text-[10px] font-mono text-zinc-400">ID: {activeItem.id}</span>
+                <span className="text-[10px] font-mono text-zinc-400">ID: {modalItem.id}</span>
                 <Link
-                  href={`/library/${activeItem.category}/${activeItem.slug}`}
+                  href={`/library/${modalItem.category}/${modalItem.slug}`}
                   className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors shadow-brand-glow inline-flex items-center gap-1.5"
                 >
-                  Dedicated Document Page <ArrowRight className="w-3 h-3" />
+                  {t.library.dedicatedPage} <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
             </div>

@@ -17,6 +17,7 @@ import {
   AcrobaticCard,
   HistoryCard,
   HosinsulCard,
+  RuleCard,
 } from '@/components/library/TechniqueDisciplineCards'
 
 function MasterExplorerSkeleton({ title }: { title: string }) {
@@ -82,6 +83,8 @@ const AdvancedKickingMasterExplorer = dynamic(
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
+import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
 import {
   BookOpen,
   Zap,
@@ -98,6 +101,7 @@ import {
   ListFilter,
   Info,
   Calendar,
+  Scale,
 } from 'lucide-react'
 
 const iconMap: Record<string, React.ElementType> = {
@@ -290,7 +294,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                   }`}
                 >
-                  <ListFilter className="w-3.5 h-3.5" /> Detailed View
+                  <ListFilter className="w-3.5 h-3.5" /> {t.library.detailedView}
                 </button>
 
                 <button
@@ -301,7 +305,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                   }`}
                 >
-                  <LayoutGrid className="w-3.5 h-3.5" /> Quick Highlight
+                  <LayoutGrid className="w-3.5 h-3.5" /> {t.library.quickHighlight}
                 </button>
               </div>
             </div>
@@ -309,9 +313,18 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
             {/* MODE 1: DETAILED VIEW */}
             {viewMode === 'detailed' && (
               <div className="space-y-8 mb-20">
-                {items.map((item) => {
-                  const isPoomsae = item.category === 'poomsae'
-                  const isStance = item.category === 'stances'
+                {items.map((rawItem) => {
+                  const isPoomsae = rawItem.category === 'poomsae'
+                  const isStance = rawItem.category === 'stances'
+                  const isHistory = rawItem.category === 'history'
+                  const isKicking = rawItem.category === 'kicking-fundamentals' || rawItem.category === 'kicking-advanced'
+
+                  const item = isPoomsae
+                    ? decoratePoomsaeItem(rawItem, language)
+                    : isKicking
+                    ? getLocalizedKickingItem(rawItem, language as 'en' | 'km' | 'zh' | 'ko')
+                    : localize(rawItem)
+
                   const rearPercent = item.weightDistribution?.includes('70%')
                     ? 70
                     : item.weightDistribution?.includes('90%')
@@ -321,27 +334,31 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                     : 50
                   const frontPercent = 100 - rearPercent
 
-                  const isHistory = item.category === 'history'
-
                   const stepSectionTitle = isHistory
-                    ? 'Chronological Milestones & Historical Timeline'
+                    ? t.library.chronologicalMilestones
+                    : isCompetitionRulesCategory
+                    ? t.library.rulebookProtocols
                     : isPoomsae
-                    ? 'Poomsae Movement Sequence & Rhythm Steps'
-                    : 'Step-by-Step Technical Execution'
+                    ? t.library.poomsaeSequence
+                    : t.library.stepByStepTutorial
 
-                  const StepIcon = isHistory ? Calendar : Target
+                  const StepIcon = isHistory ? Calendar : isCompetitionRulesCategory ? Scale : Target
 
                   const cuesSectionTitle = isHistory
-                    ? 'Archival Evidence & Historical Records'
+                    ? t.library.archivalEvidence
+                    : isCompetitionRulesCategory
+                    ? t.library.refereeScoring
                     : isPoomsae
-                    ? 'Kukkiwon Biomechanical Geometry'
-                    : 'Key Biomechanical Cues'
+                    ? t.library.biomechanicalGeometry
+                    : t.library.cuesTitle
 
                   const errorsSectionTitle = isHistory
-                    ? 'Historiographical Context & Research Notes'
+                    ? t.library.historiographicalNotes
+                    : isCompetitionRulesCategory
+                    ? t.library.gamJeomPenalties
                     : isPoomsae
-                    ? 'Referee Deductions (-0.1 / -0.3 Points)'
-                    : 'Common Errors & Technical Corrections'
+                    ? t.library.refereeDeductions
+                    : t.library.errorsTitle
 
                   return (
                     <Card3D key={item.id} maxTilt={2} scale={1.005} className="w-full">
@@ -386,8 +403,8 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {isStance && item.weightDistribution && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                                 <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase">
-                                  <span className="text-zinc-400">Rear Leg: <strong className="text-amber-500">{rearPercent}%</strong></span>
-                                  <span className="text-zinc-400">Front Leg: <strong className="text-emerald-500">{frontPercent}%</strong></span>
+                                  <span className="text-zinc-400">{t.library.rearLeg}: <strong className="text-amber-500">{rearPercent}%</strong></span>
+                                  <span className="text-zinc-400">{t.library.frontLeg}: <strong className="text-emerald-500">{frontPercent}%</strong></span>
                                 </div>
                                 <div className="w-full h-3 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden flex shadow-inner">
                                   <div
@@ -409,7 +426,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {item.meaning && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-1">
                                 <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-red block">
-                                  {isHistory ? 'Historical Significance' : 'Martial Philosophy & Meaning'}
+                                  {isHistory ? t.library.historicalSignificance : t.library.martialPhilosophy}
                                 </span>
                                 <p className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
                                   {item.meaning}
@@ -500,14 +517,14 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                                 href={`/library/${item.category}/${item.slug}`}
                                 className="text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors inline-flex items-center gap-1 touch-press"
                               >
-                                Dedicated Page <ArrowRight className="w-3 h-3" />
+                                {t.library.dedicatedPage} <ArrowRight className="w-3 h-3" />
                               </Link>
 
                               <Link
                                 href={`/contact?subject=Trial%20Booking%20for%20${encodeURIComponent(item.name)}`}
                                 className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors inline-flex items-center gap-1 shadow-brand-glow touch-press"
                               >
-                                Book Trial Class <ArrowRight className="w-3 h-3" />
+                                {t.library.bookTrialClass} <ArrowRight className="w-3 h-3" />
                               </Link>
                             </div>
                           </div>
@@ -522,7 +539,15 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
             {/* MODE 2: QUICK HIGHLIGHT VIEW */}
             {viewMode === 'highlight' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20">
-                {items.map((item) => {
+                {items.map((rawItem) => {
+                  const isPoomsae = rawItem.category === 'poomsae'
+                  const isKicking = rawItem.category === 'kicking-fundamentals' || rawItem.category === 'kicking-advanced'
+                  const item = isPoomsae
+                    ? decoratePoomsaeItem(rawItem, language)
+                    : isKicking
+                    ? getLocalizedKickingItem(rawItem, language as 'en' | 'km' | 'zh' | 'ko')
+                    : localize(rawItem)
+
                   if (item.category === 'poomsae') {
                     return (
                       <PoomsaeCard
@@ -577,6 +602,15 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       />
                     )
                   }
+                  if (item.category === 'competition-rules') {
+                    return (
+                      <RuleCard
+                        key={item.id}
+                        item={item}
+                        onSelect={() => setViewMode('detailed')}
+                      />
+                    )
+                  }
                   if (item.category === 'hosinsul') {
                     return (
                       <HosinsulCard
@@ -586,7 +620,13 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       />
                     )
                   }
-                  return null
+                  return (
+                    <PoomsaeCard
+                      key={item.id}
+                      item={item}
+                      onSelect={() => setViewMode('detailed')}
+                    />
+                  )
                 })}
               </div>
             )}

@@ -2579,10 +2579,40 @@ export function getLocalizedKickingItem(
 
   if (!detailed && !basic) return item
 
+  // Derive steps from trainingProcess if steps not explicitly provided in detailed
+  const derivedSteps =
+    detailed?.steps && detailed.steps.length > 0
+      ? detailed.steps
+      : detailed?.trainingProcess && detailed.trainingProcess.length > 0
+      ? detailed.trainingProcess.map((step) => {
+          const detailStr = step.details && step.details.length > 0 ? `: ${step.details.join(' ')}` : ''
+          return `${step.title}${detailStr}`
+        })
+      : item.steps
+
+  // Derive keyDetails from corePrinciples if not explicitly provided
+  const derivedKeyDetails =
+    detailed?.keyDetails && detailed.keyDetails.length > 0
+      ? detailed.keyDetails
+      : detailed?.corePrinciples && detailed.corePrinciples.length > 0
+      ? detailed.corePrinciples.map((cp) => `${cp.title}: ${cp.desc}`)
+      : item.keyDetails
+
+  // Derive commonMistakes from commonMistakesAndCorrections if not explicitly provided
+  const derivedCommonMistakes =
+    detailed?.commonMistakes && detailed.commonMistakes.length > 0
+      ? detailed.commonMistakes
+      : detailed?.commonMistakesAndCorrections && detailed.commonMistakesAndCorrections.length > 0
+      ? detailed.commonMistakesAndCorrections.map((cm) => `${cm.mistake} → ${cm.correction}`)
+      : item.commonMistakes
+
   return {
     ...item,
     ...basic,
     ...detailed,
+    steps: derivedSteps,
+    keyDetails: derivedKeyDetails,
+    commonMistakes: derivedCommonMistakes,
     corePrinciples: detailed?.corePrinciples || item.corePrinciples,
     skillPrerequisites: detailed?.skillPrerequisites || item.skillPrerequisites,
     trainingProcess: detailed?.trainingProcess || item.trainingProcess,
