@@ -43,10 +43,10 @@ export function Footer() {
     <footer className="bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-900 pt-16 pb-24 lg:pb-12 font-sans transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* MAIN MINIMALIST GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-zinc-200/80 dark:border-zinc-900">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-zinc-200/80 dark:border-zinc-900">
           
-          {/* Brand Identity & Social Channels (5 cols) */}
-          <div className="md:col-span-5 space-y-4">
+          {/* Brand Identity & Social Channels (5 cols on desktop, full width on tablet/mobile) */}
+          <div className="sm:col-span-2 lg:col-span-5 space-y-4">
             <Link href="/" className="inline-block group" aria-label="Infinity Taekwondo Home">
               <InfinityLogo
                 variant="full"
@@ -108,8 +108,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* 1. Academy (2 cols) */}
-          <div className="md:col-span-2 space-y-3">
+          {/* 1. Academy (2 cols on desktop, 1 col on tablet) */}
+          <div className="sm:col-span-1 lg:col-span-2 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
               {t.footer.colAcademy}
             </span>
@@ -137,8 +137,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 2. Organization (2 cols) */}
-          <div className="md:col-span-2 space-y-3">
+          {/* 2. Organization (2 cols on desktop, 1 col on tablet) */}
+          <div className="sm:col-span-1 lg:col-span-2 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
               {t.footer.colBranches}
             </span>
@@ -166,8 +166,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 3. Governance & Ethics (3 cols - PRESERVED & CLEAN) */}
-          <div className="md:col-span-3 space-y-3">
+          {/* 3. Governance & Ethics (3 cols on desktop, 2 cols on tablet) */}
+          <div className="sm:col-span-2 lg:col-span-3 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
               {t.footer.colLegal}
             </span>

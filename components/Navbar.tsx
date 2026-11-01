@@ -640,7 +640,7 @@ export function Navbar() {
 
               {/* Community Hub */}
               <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">02. {t.footer.colBranches}</span>
+                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">02. {t.nav.community}</span>
                 <Link
                   href="/community"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -675,7 +675,7 @@ export function Navbar() {
 
               {/* About & Organization Hub */}
               <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">03. {t.footer.colLegal}</span>
+                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">03. {t.nav.about}</span>
                 <Link
                   href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}

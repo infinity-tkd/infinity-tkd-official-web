@@ -617,32 +617,60 @@ export default function AboutPage() {
       </section>
 
       {/* ==================================================================== */}
-      {/* INTERACTIVE PHILOSOPHY NAVIGATION TABS (12px radius) */}
+      {/* INTERACTIVE PHILOSOPHY NAVIGATION TABS (12px radius, responsive scroll on mobile) */}
       {/* ==================================================================== */}
       <section className="py-3 sm:py-4 border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50/95 dark:bg-zinc-950/95 sticky top-16 sm:top-20 z-30 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5">
+          <div className="flex overflow-x-auto sm:flex-wrap sm:justify-center gap-2 sm:gap-2.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
             {[
-              { id: 'story', label: 'Logo & Brand Identity', icon: Compass },
-              { id: 'mind', label: 'Infinity Brain & Mind', icon: Brain },
-              { id: 'quad', label: 'Vision, Mission & Goals', icon: Target },
-              { id: 'values', label: '3 Core Values', icon: Flame },
-              { id: 'tenets', label: '5 Dojang Tenets', icon: Shield },
-              { id: 'journey', label: 'Our Journey', icon: Milestone },
-              { id: 'faculty', label: 'Leadership Faculty', icon: Users },
+              {
+                id: 'story',
+                label: language === 'km' ? 'និមិត្តសញ្ញា & អត្តសញ្ញាណ' : language === 'zh' ? '品牌标志与理念' : language === 'ko' ? '브랜드 로고 및 상징' : 'Logo & Identity',
+                icon: Compass,
+              },
+              {
+                id: 'mind',
+                label: language === 'km' ? 'ខួរក្បាល & ផ្នត់គំនិត' : language === 'zh' ? '无限大脑与心智' : language === 'ko' ? '인피니티 브레인 & 마인드' : 'Brain & Mind',
+                icon: Brain,
+              },
+              {
+                id: 'quad',
+                label: language === 'km' ? 'ចក្ខុវិស័យ & បេសកកម្ម' : language === 'zh' ? '愿景与使命' : language === 'ko' ? '비전 및 사명' : 'Vision & Mission',
+                icon: Target,
+              },
+              {
+                id: 'values',
+                label: language === 'km' ? 'គុណតម្លៃស្នូល ៣' : language === 'zh' ? '三大核心价值' : language === 'ko' ? '3대 핵심 가치' : '3 Core Values',
+                icon: Flame,
+              },
+              {
+                id: 'tenets',
+                label: language === 'km' ? 'វិន័យ ៥' : language === 'zh' ? '道馆五大精神' : language === 'ko' ? '태권도 5대 훈' : '5 Dojang Tenets',
+                icon: Shield,
+              },
+              {
+                id: 'journey',
+                label: language === 'km' ? 'ដំណើរវិវត្តន៍' : language === 'zh' ? '历史与足迹' : language === 'ko' ? '도장 역사와 발자취' : 'Our Journey',
+                icon: Milestone,
+              },
+              {
+                id: 'faculty',
+                label: language === 'km' ? 'គណៈគ្រូបង្វឹក' : language === 'zh' ? '教练导师团队' : language === 'ko' ? '수석 지도진' : 'Leadership Faculty',
+                icon: Users,
+              },
             ].map((tab) => {
               const Icon = tab.icon
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 sm:gap-2 touch-press cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 sm:py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-1.5 sm:gap-2 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'bg-brand-red text-white shadow-brand-glow'
                       : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" /> {tab.label}
+                  <Icon className="w-3.5 h-3.5 shrink-0" /> <span>{tab.label}</span>
                 </button>
               )
             })}

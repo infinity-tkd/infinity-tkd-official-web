@@ -170,7 +170,7 @@ export function LegalLayout({
             <div className="lg:hidden w-full border border-zinc-200 dark:border-zinc-800 rounded-[14px] bg-white dark:bg-zinc-900/60 shadow-sm overflow-hidden">
               <button
                 onClick={() => setIsTocOpen(!isTocOpen)}
-                className="w-full flex items-center justify-between p-4 text-left font-bold text-xs text-zinc-900 dark:text-white uppercase tracking-wider cursor-pointer"
+                className="w-full flex items-center justify-between p-4 min-h-[44px] text-left font-bold text-xs text-zinc-900 dark:text-white uppercase tracking-wider cursor-pointer touch-press"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="w-4 h-4 text-brand-red" />

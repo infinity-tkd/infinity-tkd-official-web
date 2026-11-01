@@ -127,52 +127,52 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* Main View Switcher Bar (12px radius) */}
+      {/* Main View Switcher Bar (12px radius, responsive scroll on mobile) */}
       <section className="py-3.5 sm:py-5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/95 dark:bg-zinc-950/95 sticky top-16 sm:top-20 z-30 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5">
+          <div className="flex overflow-x-auto sm:flex-wrap sm:justify-center gap-2 sm:gap-2.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
             <button
               onClick={() => setCurrentView('courses')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'courses'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5" /> {t.academy.tabCourses} ({academyCourses.length})
+              <BookOpen className="w-3.5 h-3.5 shrink-0" /> {t.academy.tabCourses} ({academyCourses.length})
             </button>
 
             <button
               onClick={() => setCurrentView('ages')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'ages'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
-              <Users className="w-3.5 h-3.5" /> All Ages &amp; Formats
+              <Users className="w-3.5 h-3.5 shrink-0" /> All Ages &amp; Formats
             </button>
 
             <button
               onClick={() => setCurrentView('belts')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'belts'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
-              <Award className="w-3.5 h-3.5" /> {t.academy.tabBelts}
+              <Award className="w-3.5 h-3.5 shrink-0" /> {t.academy.tabBelts}
             </button>
 
             <button
               onClick={() => setCurrentView('schedule')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'schedule'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
-              <CalendarRange className="w-3.5 h-3.5" /> {t.academy.tabSchedule}
+              <CalendarRange className="w-3.5 h-3.5 shrink-0" /> {t.academy.tabSchedule}
             </button>
           </div>
         </div>
@@ -183,14 +183,14 @@ export default function AcademyPage() {
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 animate-fade-in">
           <div className="container mx-auto max-w-7xl">
             {/* Division Filters & Search Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 sm:mb-12">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-10 sm:mb-12">
               {/* Filter Sub-pills */}
-              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
+              <div className="flex overflow-x-auto sm:flex-wrap justify-start gap-2 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
                 {divisions.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => setSelectedDivision(tab.id)}
-                    className={`px-3.5 py-2 rounded-xl text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                    className={`px-3.5 py-2 min-h-[38px] rounded-xl text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedDivision === tab.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'

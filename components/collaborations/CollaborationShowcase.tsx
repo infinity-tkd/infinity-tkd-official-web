@@ -101,8 +101,8 @@ export function CollaborationShowcase() {
       {/* FILTER & SEARCH TOOLBAR (14px radius) */}
       {/* -------------------------------------------------------------------- */}
       <div className="p-4 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-1.5">
+        {/* Category Filter Pills (responsive scroll on mobile) */}
+        <div className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-2 px-2 sm:mx-0 sm:px-0">
           {collaborationCategories.map((cat) => {
             const isSelected = selectedCategory === cat.id
             const Icon = categoryIcons[cat.id] || Layers
@@ -119,13 +119,13 @@ export function CollaborationShowcase() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all touch-press cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 py-2 min-h-[44px] rounded-xl text-xs font-bold uppercase tracking-wider transition-all touch-press cursor-pointer flex items-center gap-1.5 shrink-0 snap-center whitespace-nowrap ${
                   isSelected
                     ? 'bg-brand-red text-white shadow-brand-glow'
                     : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-700'
                 }`}
               >
-                <Icon className="w-3.5 h-3.5" />
+                <Icon className="w-3.5 h-3.5 shrink-0" />
                 <span>{label}</span>
               </button>
             )

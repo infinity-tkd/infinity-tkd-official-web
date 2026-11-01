@@ -166,9 +166,9 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* Main Tab Switcher (12px radius) */}
+      {/* Main Tab Switcher (12px radius, responsive scroll on mobile) */}
       <section className="container mx-auto px-4 sm:px-6 mb-10 sm:mb-14 max-w-7xl">
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 max-w-2xl mx-auto">
+        <div className="flex overflow-x-auto sm:flex-wrap sm:justify-center gap-2 sm:gap-2.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
           {[
             { id: 'all', label: `${t.community.tabAll} (${coachFaculty.length + athleteSpotlights.length})` },
             { id: 'coaches', label: `${t.community.tabCoaches} (${coachFaculty.length})` },
@@ -178,7 +178,7 @@ export default function CommunityPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-4 sm:px-5 py-2 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-widest transition-all duration-300 touch-press cursor-pointer ${
+              className={`px-4 sm:px-5 py-2 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest transition-all duration-300 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -223,12 +223,12 @@ export default function CommunityPage() {
               </div>
 
               {/* Division Filter Pills */}
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex overflow-x-auto sm:flex-wrap gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
                 {coachDivisions.map((div) => (
                   <button
                     key={div.id}
                     onClick={() => setSelectedCoachDivision(div.id)}
-                    className={`px-3 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 touch-press cursor-pointer ${
+                    className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedCoachDivision === div.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -369,12 +369,12 @@ export default function CommunityPage() {
               </div>
 
               {/* Category Filter Pills */}
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex overflow-x-auto sm:flex-wrap gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
                 {studentCategories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setSelectedStudentCategory(cat.id)}
-                    className={`px-3 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                    className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedStudentCategory === cat.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'

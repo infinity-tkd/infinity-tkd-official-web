@@ -299,7 +299,7 @@ export default function PricingPage() {
         {/* ==================================================================== */}
         {/* 3. CONFIDENCE & VALUE ASSURANCE BAR (12px radius) */}
         {/* ==================================================================== */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-16 sm:mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 max-w-5xl mx-auto mb-16 sm:mb-24">
           <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex items-start gap-3">
             <Gift className="w-5 h-5 text-brand-red shrink-0 mt-0.5" />
             <div>

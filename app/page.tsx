@@ -252,7 +252,7 @@ export default function HomePage() {
                     <p className="text-brand-red text-xs font-bold uppercase tracking-widest mb-2">
                       {t.pillars.p1Subtitle}
                     </p>
-                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-all duration-300 block line-clamp-3 lg:line-clamp-none">
                       {t.pillars.p1Desc}
                     </p>
                   </div>
@@ -283,7 +283,7 @@ export default function HomePage() {
                     <p className="text-zinc-300 text-xs font-bold uppercase tracking-widest mb-2">
                       {t.pillars.p2Subtitle}
                     </p>
-                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-all duration-300 block line-clamp-3 lg:line-clamp-none">
                       {t.pillars.p2Desc}
                     </p>
                   </div>
@@ -314,7 +314,7 @@ export default function HomePage() {
                     <p className="text-brand-green text-xs font-bold uppercase tracking-widest mb-2">
                       {t.pillars.p3Subtitle}
                     </p>
-                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-all duration-300 block line-clamp-3 lg:line-clamp-none">
                       {t.pillars.p3Desc}
                     </p>
                   </div>
@@ -345,7 +345,7 @@ export default function HomePage() {
                     <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-2">
                       {t.pillars.p4Subtitle}
                     </p>
-                    <p className="text-zinc-300 text-xs leading-relaxed transition-opacity duration-500 block md:opacity-0 md:group-hover:opacity-100 md:h-0 md:group-hover:h-auto overflow-hidden">
+                    <p className="text-zinc-300 text-xs leading-relaxed transition-all duration-300 block line-clamp-3 lg:line-clamp-none">
                       {t.pillars.p4Desc}
                     </p>
                   </div>

@@ -327,15 +327,15 @@ export default function AchievementsPage() {
           </div>
 
           {/* Secondary Filters Bar: Category & Medal Filter Pills */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
             {/* Category Pills (for Trophy View) */}
             {selectedView !== 'students' ? (
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex overflow-x-auto sm:flex-wrap gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
                 {dynamicCategories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-3 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                    className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedCategory === cat.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -352,15 +352,15 @@ export default function AchievementsPage() {
             )}
 
             {/* Medal Type Filter */}
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mr-1 hidden sm:inline-block">
+            <div className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mr-1 hidden sm:inline-block shrink-0">
                 Medal:
               </span>
               {['All', 'Gold', 'Silver', 'Bronze', 'Special Honor'].map((m) => (
                 <button
                   key={m}
                   onClick={() => setSelectedMedalFilter(m)}
-                  className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`px-2.5 py-1.5 min-h-[36px] rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                     selectedMedalFilter === m
                       ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm font-black'
                       : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
