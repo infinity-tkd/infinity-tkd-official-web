@@ -9,6 +9,7 @@ import { ScrollNavProvider } from '@/context/ScrollNavContext'
 import { AutoErrorHandler } from '@/components/AutoErrorHandler'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { BackToTop } from '@/components/ui/BackToTop'
+import { siteSettings } from '@/config/siteSettings'
 import './globals.css'
 
 const montserrat = Montserrat({
@@ -60,16 +61,24 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
-    description: 'Empowering boundless potential from white belt to black belt mastery.',
+    description: 'Empowering boundless potential from white belt to black belt mastery in Phnom Penh, Cambodia.',
     url: 'https://infinitytaekwondo.com',
     siteName: 'Infinity Taekwondo',
     type: 'website',
-    images: ['/logo.svg'],
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Infinity Taekwondo Academy Phnom Penh',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
-    description: 'Empowering boundless potential from white belt to black belt mastery.',
+    description: 'Empowering boundless potential from white belt to black belt mastery in Phnom Penh, Cambodia.',
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: '/favicon.svg',
@@ -83,6 +92,54 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsClub',
+    name: 'Infinity Taekwondo Academy',
+    alternateName: 'Infinity TKD',
+    url: 'https://infinitytaekwondo.com',
+    logo: 'https://infinitytaekwondo.com/favicon.svg',
+    image: 'https://infinitytaekwondo.com/opengraph-image',
+    description:
+      'Elite Kukkiwon & World Taekwondo curriculum blending athletic science with freestyle Taekwondo martial discipline in Phnom Penh, Cambodia.',
+    telephone: siteSettings.contact.hotlinePhone,
+    email: siteSettings.contact.generalEmail,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteSettings.contact.headquartersAddress.street,
+      addressLocality: siteSettings.contact.headquartersAddress.city,
+      addressRegion: siteSettings.contact.headquartersAddress.district,
+      addressCountry: 'KH',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 11.5234,
+      longitude: 104.9312,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '06:00',
+        closes: '21:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday'],
+        opens: '07:00',
+        closes: '19:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Sunday'],
+        opens: '08:00',
+        closes: '17:00',
+      },
+    ],
+    sameAs: siteSettings.socials.map((s) => s.url),
+    priceRange: '$$',
+  }
+
   return (
     <html
       lang="en"
@@ -92,6 +149,15 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-screen flex flex-col font-sans selection:bg-brand-red selection:text-white">
         {/* Skip to Main Content Link (WCAG 2.4.1 Bypass Blocks) */}

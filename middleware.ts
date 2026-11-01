@@ -203,9 +203,12 @@ export function middleware(request: NextRequest) {
   // 8. Prepare response with full HTTP Security Headers derived from siteSettings
   const response = NextResponse.next()
   const secHeaders = siteSettings.security.headers
+  const isFigma = Boolean(process.env.FIGMA)
 
-  response.headers.set('Content-Security-Policy', buildCspHeader())
-  response.headers.set('X-Frame-Options', secHeaders.xFrameOptions)
+  response.headers.set('Content-Security-Policy', buildCspHeader(isFigma))
+  if (!isFigma) {
+    response.headers.set('X-Frame-Options', secHeaders.xFrameOptions)
+  }
   response.headers.set('X-Content-Type-Options', secHeaders.xContentTypeOptions)
   response.headers.set('Referrer-Policy', secHeaders.referrerPolicy)
   response.headers.set('Permissions-Policy', secHeaders.permissionsPolicy)

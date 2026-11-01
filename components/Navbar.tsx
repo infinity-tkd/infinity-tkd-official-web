@@ -72,7 +72,7 @@ export function Navbar() {
     }
     window.addEventListener('resize', handleResize, { passive: true })
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [setIsMobileMenuOpen])
 
   // Lock body scroll when mobile menu is active
   React.useEffect(() => {
@@ -170,7 +170,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Training Syllabus
+                          {t.footer.syllabus}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Age divisions, belts &amp; weekly class formats</p>
                       </div>
@@ -186,7 +186,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Memberships &amp; Pricing
+                          {t.footer.pricing}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Flexible monthly plans &amp; family packages</p>
                       </div>
@@ -202,7 +202,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Student Incubator
+                          {t.footer.incubator}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Cadet research &amp; martial leadership grants</p>
                       </div>
@@ -218,7 +218,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors flex items-center gap-1">
-                          Pro Shop &amp; Store <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
+                          {t.footer.store} <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Official Doboks, sparring gear &amp; equipment</p>
                       </div>
@@ -380,7 +380,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Coaches &amp; Athletes
+                          {t.footer.community}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Kukkiwon certified Master faculty &amp; demo team</p>
                       </div>
@@ -396,7 +396,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Achievements &amp; Medals
+                          {t.footer.achievements}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">National &amp; international championship records</p>
                       </div>
@@ -412,7 +412,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Join Coaching Staff
+                          {t.footer.coachingCareers}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Instructor careers &amp; assistant internships</p>
                       </div>
@@ -473,7 +473,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Philosophy &amp; Story
+                          {t.footer.philosophy}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Founding journey, core tenets &amp; executive faculty</p>
                       </div>
@@ -489,7 +489,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Global Collaborations
+                          {t.footer.collaborations}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">World Taekwondo, Kukkiwon &amp; academic alliances</p>
                       </div>
@@ -505,7 +505,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          Dojang Locations
+                          {t.footer.branchesLink}
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Facility specifications, schedules &amp; interactive maps</p>
                       </div>
@@ -521,7 +521,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors flex items-center gap-1">
-                          Martial Journal &amp; Blog <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
+                          {t.footer.blog} <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
                         </h5>
                         <p className="text-[10px] text-zinc-500 font-light">Articles, tournament recaps &amp; master perspectives</p>
                       </div>
@@ -594,7 +594,7 @@ export function Navbar() {
             <div className="divide-y divide-zinc-100 dark:divide-zinc-900 font-bold uppercase text-xs sm:text-sm">
               {/* Academy Hub */}
               <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">01. Academic Programs</span>
+                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">01. {t.footer.colAcademy}</span>
                 <Link
                   href="/academy"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -602,7 +602,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <GraduationCap className="w-4 h-4 text-brand-red" />
-                    {t.nav.academy} Syllabus
+                    {t.footer.syllabus}
                   </span>
                 </Link>
                 <Link
@@ -612,7 +612,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <CreditCard className="w-4 h-4 text-emerald-500" />
-                    {t.nav.pricing}
+                    {t.footer.pricing}
                   </span>
                 </Link>
                 <Link
@@ -622,7 +622,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Lightbulb className="w-4 h-4 text-amber-500" />
-                    Student Incubator
+                    {t.footer.incubator}
                   </span>
                 </Link>
                 <a
@@ -632,7 +632,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <ShoppingBag className="w-4 h-4 text-purple-500" />
-                    Pro Shop &amp; Gear Store
+                    {t.footer.store}
                   </span>
                   <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
                 </a>
@@ -640,7 +640,7 @@ export function Navbar() {
 
               {/* Community Hub */}
               <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">02. People &amp; Milestones</span>
+                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">02. {t.footer.colBranches}</span>
                 <Link
                   href="/community"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -648,7 +648,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Users className="w-4 h-4 text-blue-500" />
-                    {t.nav.community}
+                    {t.footer.community}
                   </span>
                 </Link>
                 <Link
@@ -658,7 +658,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Award className="w-4 h-4 text-amber-500" />
-                    {t.nav.achievements}
+                    {t.footer.achievements}
                   </span>
                 </Link>
                 <Link
@@ -668,14 +668,14 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Briefcase className="w-4 h-4 text-purple-500" />
-                    Join Coaching Staff
+                    {t.footer.coachingCareers}
                   </span>
                 </Link>
               </div>
 
               {/* About & Organization Hub */}
               <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">03. Philosophy &amp; Ecosystem</span>
+                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">03. {t.footer.colLegal}</span>
                 <Link
                   href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -683,7 +683,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Info className="w-4 h-4 text-brand-red" />
-                    {t.nav.about} Philosophy
+                    {t.footer.philosophy}
                   </span>
                 </Link>
                 <Link
@@ -693,7 +693,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <HeartHandshake className="w-4 h-4 text-blue-500" />
-                    Global Collaborations
+                    {t.footer.collaborations}
                   </span>
                 </Link>
                 <Link
@@ -703,7 +703,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <MapPin className="w-4 h-4 text-emerald-500" />
-                    Dojang Locations
+                    {t.footer.branchesLink}
                   </span>
                 </Link>
                 <a
@@ -713,7 +713,7 @@ export function Navbar() {
                 >
                   <span className="flex items-center gap-2.5">
                     <Newspaper className="w-4 h-4 text-amber-500" />
-                    Martial Journal &amp; Blog
+                    {t.footer.blog}
                   </span>
                   <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
                 </a>

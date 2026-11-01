@@ -126,8 +126,10 @@ export function getLocalizedList<T extends Record<string, any>>(
   return items.map((item) => getLocalizedItem(item, language))
 }
 
-export default {
+const i18n = {
   getLocalizedField,
   getLocalizedItem,
   getLocalizedList,
 }
+
+export default i18n

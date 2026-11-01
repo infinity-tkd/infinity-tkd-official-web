@@ -256,17 +256,17 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
     return filteredItems.findIndex((i) => i.id === selectedPoomsae.id)
   }, [selectedPoomsae, filteredItems])
 
-  const handleNextPoomsae = () => {
+  const handleNextPoomsae = React.useCallback(() => {
     if (currentModalIndex >= 0 && currentModalIndex < filteredItems.length - 1) {
       setSelectedPoomsae(filteredItems[currentModalIndex + 1])
     }
-  }
+  }, [currentModalIndex, filteredItems])
 
-  const handlePrevPoomsae = () => {
+  const handlePrevPoomsae = React.useCallback(() => {
     if (currentModalIndex > 0) {
       setSelectedPoomsae(filteredItems[currentModalIndex - 1])
     }
-  }
+  }, [currentModalIndex, filteredItems])
 
   // Combined Black Belt Dan Mastery cards (consolidates floor patterns & technical dossiers with zero duplicates)
   const combinedYudanjaCards = React.useMemo(() => {
@@ -318,7 +318,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [selectedPoomsae, currentModalIndex, filteredItems])
+  }, [selectedPoomsae, handleNextPoomsae, handlePrevPoomsae])
 
   // Find counterpart form for Taegeuk duality
   const getTaegeukCounterpart = (poomsaeId: string) => {

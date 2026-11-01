@@ -38,12 +38,20 @@ export function generateMetadata({ params }: CategoryPageProps): Metadata {
       description,
       type: 'website',
       url: `/library/${params.category}`,
-      images: ['/logo.svg'],
+      images: [
+        {
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: `${categoryMeta.title} - Infinity Taekwondo Curriculum`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} | Infinity Taekwondo`,
       description,
+      images: ['/twitter-image'],
     },
   }
 }

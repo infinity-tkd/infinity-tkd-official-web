@@ -6,6 +6,24 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | Infinity Taekwondo',
   description:
     'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights across our Phnom Penh branches.',
+  alternates: {
+    canonical: '/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights.',
+    url: '/privacy',
+    type: 'website',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Infinity Taekwondo Privacy Policy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Privacy Policy - Student records, Kukkiwon Dan registry, and privacy safeguards.',
+    images: ['/twitter-image'],
+  },
 }
 
 export default function PrivacyPage() {

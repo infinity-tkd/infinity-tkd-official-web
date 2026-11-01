@@ -44,7 +44,7 @@ import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function AboutPage() {
-  const { t, localizeList } = useLanguage()
+  const { t, localizeList, language } = useLanguage()
   const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null)
   const [activeTab, setActiveTab] = React.useState<
     'story' | 'mind' | 'quad' | 'values' | 'tenets' | 'journey' | 'faculty'
@@ -1103,7 +1103,6 @@ export default function AboutPage() {
       {/* ==================================================================== */}
       {activeTab === 'journey' && (() => {
         const activeMilestone = milestones.find((m) => m.year === selectedEraYear) || milestones[0]
-        const { language } = useLanguage()
 
         const getLocalizedMilestone = (m: (typeof milestones)[0]) => {
           if (language === 'en') return m

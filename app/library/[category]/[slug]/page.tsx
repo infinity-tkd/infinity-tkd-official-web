@@ -50,12 +50,22 @@ export function generateMetadata({ params }: TechniquePageProps): Metadata {
       description,
       type: 'article',
       url: `/library/${item.category}/${item.slug}`,
-      images: item.image ? [item.image] : ['/logo.svg'],
+      images: item.image
+        ? [item.image]
+        : [
+            {
+              url: '/opengraph-image',
+              width: 1200,
+              height: 630,
+              alt: `${item.name} (${item.koreanName}) - Infinity Taekwondo`,
+            },
+          ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} | Infinity Taekwondo Curriculum`,
       description,
+      images: item.image ? [item.image] : ['/twitter-image'],
     },
   }
 }

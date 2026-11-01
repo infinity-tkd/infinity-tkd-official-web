@@ -1,27 +1,35 @@
 /** @type {import('next').NextConfig} */
 
+const isFigma = Boolean(process.env.FIGMA)
+
+const cspDirectives = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
+  "img-src 'self' data: blob: https://images.unsplash.com https://source.unsplash.com https://i.ytimg.com https://img.youtube.com",
+  "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
+  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net",
+  "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com",
+  isFigma ? "frame-ancestors 'self' https://*.figma.com https://figma.com" : "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  'upgrade-insecure-requests',
+]
+
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
-      "img-src 'self' data: blob: https://images.unsplash.com https://source.unsplash.com https://i.ytimg.com https://img.youtube.com",
-      "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
-      "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net",
-      "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com",
-      "frame-ancestors 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "object-src 'none'",
-      'upgrade-insecure-requests',
-    ].join('; '),
+    value: cspDirectives.join('; '),
   },
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY',
-  },
+  ...(isFigma
+    ? []
+    : [
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+      ]),
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff',

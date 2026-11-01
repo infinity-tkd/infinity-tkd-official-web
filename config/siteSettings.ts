@@ -1098,8 +1098,12 @@ export const getHeadquartersFullAddress = () =>
   `${siteSettings.contact.headquartersAddress.street}, ${siteSettings.contact.headquartersAddress.district}, ${siteSettings.contact.headquartersAddress.city}, ${siteSettings.contact.headquartersAddress.country}`
 
 /** Build formatted CSP header string */
-export function buildCspHeader(): string {
+export function buildCspHeader(isFigma = Boolean(process.env.FIGMA)): string {
   const csp = siteSettings.security.headers.contentSecurityPolicy
+  const frameAncestors = isFigma
+    ? ["'self'", 'https://*.figma.com', 'https://figma.com']
+    : csp.frameAncestors
+
   return [
     `default-src ${csp.defaultSrc.join(' ')}`,
     `script-src ${csp.scriptSrc.join(' ')}`,
@@ -1108,7 +1112,7 @@ export function buildCspHeader(): string {
     `font-src ${csp.fontSrc.join(' ')}`,
     `connect-src ${csp.connectSrc.join(' ')}`,
     `frame-src ${csp.frameSrc.join(' ')}`,
-    `frame-ancestors ${csp.frameAncestors.join(' ')}`,
+    `frame-ancestors ${frameAncestors.join(' ')}`,
     `base-uri ${csp.baseUri.join(' ')}`,
     `form-action ${csp.formAction.join(' ')}`,
     `object-src ${csp.objectSrc.join(' ')}`,

@@ -20,6 +20,24 @@ export const metadata: Metadata = {
   title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
   description:
     'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, Para-Taekwondo adaptive training, and cultural mutual respect across all academies.',
+  alternates: {
+    canonical: '/equality',
+  },
+  openGraph: {
+    title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, and Para-Taekwondo adaptive training.',
+    url: '/equality',
+    type: 'website',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Equality, Diversity & Inclusion Policy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, and safe martial sport.',
+    images: ['/twitter-image'],
+  },
 }
 
 export default function EqualityPage() {

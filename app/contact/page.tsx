@@ -49,6 +49,7 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 const socials = [
+  { name: 'Telegram', icon: Send, link: 'https://t.me/infinitytaekwondo' },
   { name: 'Instagram', icon: Instagram, link: 'https://instagram.com/infinitytaekwondo' },
   { name: 'YouTube', icon: Youtube, link: 'https://youtube.com/@infinitytaekwondo' },
   { name: 'Facebook', icon: Facebook, link: 'https://facebook.com/infinitytaekwondo' },
@@ -116,20 +117,42 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 600))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        name: '',
-        email: '',
-        branch: 'The Factory Phnom Penh (HQ)',
-        subject: 'General Inquiry',
-        message: '',
-        hp_security_token: '',
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: cleanName,
+          email: cleanEmail,
+          branch: cleanBranch,
+          subject: cleanSubject,
+          message: cleanMessage,
+          hp_security_token: formData.hp_security_token,
+        }),
       })
-    }, 4000)
+
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message.')
+      }
+
+      setSubmitted(true)
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({
+          name: '',
+          email: '',
+          branch: 'The Factory Phnom Penh (HQ)',
+          subject: 'General Inquiry',
+          message: '',
+          hp_security_token: '',
+        })
+      }, 5000)
+    } catch (err: any) {
+      setErrorMsg(err.message || 'An error occurred while sending your message. Please reach out via Telegram @infinitytaekwondo.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -251,6 +274,18 @@ export default function ContactPage() {
                       </a>
                     )
                   })}
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                  <a
+                    href="https://t.me/infinitytaekwondo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#229ED9]/10 text-[#229ED9] hover:bg-[#229ED9] hover:text-white transition-all text-xs font-bold uppercase tracking-wider touch-press"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    Instant Admissions on Telegram
+                  </a>
                 </div>
               </div>
             </Card3D>

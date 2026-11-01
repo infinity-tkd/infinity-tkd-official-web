@@ -18,6 +18,24 @@ export const metadata: Metadata = {
   title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
   description:
     'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, coach conduct rules, and confidential reporting channels across all Phnom Penh dojangs.',
+  alternates: {
+    canonical: '/safeguarding',
+  },
+  openGraph: {
+    title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, coach conduct rules, and confidential reporting channels.',
+    url: '/safeguarding',
+    type: 'website',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Safeguarding & Safe Sport Policy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, and safe sport guidelines.',
+    images: ['/twitter-image'],
+  },
 }
 
 export default function SafeguardingPage() {

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import type { Metadata } from 'next'
 import { ErrorScreen, type ErrorType } from '@/components/ErrorScreen'
 
 export function generateStaticParams() {
@@ -16,6 +17,16 @@ export function generateStaticParams() {
 interface ErrorPageProps {
   params: {
     code: string
+  }
+}
+
+export function generateMetadata({ params }: ErrorPageProps): Metadata {
+  return {
+    title: `Error ${params.code} | Infinity Taekwondo`,
+    robots: {
+      index: false,
+      follow: false,
+    },
   }
 }
 

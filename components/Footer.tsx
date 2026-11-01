@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { InfinityLogo } from './InfinityLogo'
 import { siteSettings } from '@/config/siteSettings'
+import { useLanguage } from '@/context/LanguageContext'
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -36,6 +37,8 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 export function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-900 pt-16 pb-24 lg:pb-12 font-sans transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
@@ -52,7 +55,7 @@ export function Footer() {
             </Link>
 
             <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
-              World Taekwondo Olympic syllabus, sports biomechanics, and martial leadership in Phnom Penh, Cambodia.
+              {t.footer.tagline}
             </p>
 
             {/* Minimalist Social Icon Links */}
@@ -108,27 +111,27 @@ export function Footer() {
           {/* 1. Academy (2 cols) */}
           <div className="md:col-span-2 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              Academy
+              {t.footer.colAcademy}
             </span>
             <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
               <li>
                 <Link href="/academy" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Syllabus
+                  {t.footer.syllabus}
                 </Link>
               </li>
               <li>
                 <Link href="/library" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Library Hub
+                  {t.nav.library}
                 </Link>
               </li>
               <li>
                 <Link href="/community" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Coaches &amp; Athletes
+                  {t.footer.community}
                 </Link>
               </li>
               <li>
                 <Link href="/pricing" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Memberships
+                  {t.footer.pricing}
                 </Link>
               </li>
             </ul>
@@ -137,27 +140,27 @@ export function Footer() {
           {/* 2. Organization (2 cols) */}
           <div className="md:col-span-2 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              Organization
+              {t.footer.colBranches}
             </span>
             <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
               <li>
                 <Link href="/about" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  About &amp; Story
+                  {t.footer.philosophy}
                 </Link>
               </li>
               <li>
                 <Link href="/collaborations" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5 font-medium text-zinc-900 dark:text-zinc-200">
-                  Collaborations
+                  {t.footer.collaborations}
                 </Link>
               </li>
               <li>
                 <Link href="/locations" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Dojang Branches
+                  {t.footer.branchesLink}
                 </Link>
               </li>
               <li>
                 <Link href="/achievements" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  Achievements
+                  {t.footer.achievements}
                 </Link>
               </li>
             </ul>
@@ -166,7 +169,7 @@ export function Footer() {
           {/* 3. Governance & Ethics (3 cols - PRESERVED & CLEAN) */}
           <div className="md:col-span-3 space-y-3">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              Governance &amp; Ethics
+              {t.footer.colLegal}
             </span>
             <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
               <li>
@@ -175,7 +178,7 @@ export function Footer() {
                   className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                  Safeguarding &amp; Safe Sport
+                  {t.footer.safeguarding}
                 </Link>
               </li>
               <li>
@@ -184,7 +187,7 @@ export function Footer() {
                   className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
                 >
                   <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                  Anti-Doping &amp; Clean Sport
+                  {t.footer.antiDoping}
                 </Link>
               </li>
               <li>
@@ -193,7 +196,7 @@ export function Footer() {
                   className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
                 >
                   <Heart className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  Equality &amp; Diversity
+                  {t.footer.equality}
                 </Link>
               </li>
               <li>
@@ -202,7 +205,7 @@ export function Footer() {
                   className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5"
                 >
                   <Shield className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                  Privacy Policy
+                  {t.footer.privacy}
                 </Link>
               </li>
               <li>
@@ -211,7 +214,7 @@ export function Footer() {
                   className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5"
                 >
                   <Scale className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                  Terms of Service
+                  {t.footer.terms}
                 </Link>
               </li>
             </ul>
@@ -220,7 +223,7 @@ export function Footer() {
 
         {/* MINIMALIST BOTTOM BAR */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400 font-light">
-          <p>© {new Date().getFullYear()} Infinity Taekwondo. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Infinity Taekwondo. {t.footer.copyright}</p>
           <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-600 dark:text-zinc-400">
             <span>Kukkiwon Dan Certified</span>
             <span>&bull;</span>

@@ -18,6 +18,31 @@ export const metadata: Metadata = {
   title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',
   description:
     'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, national federations, sport universities, and athletic equipment innovators.',
+  alternates: {
+    canonical: '/collaborations',
+  },
+  openGraph: {
+    title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',
+    description:
+      'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, national federations, sport universities, and athletic equipment innovators.',
+    url: '/collaborations',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Infinity Taekwondo Collaborations',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',
+    description:
+      'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, and national federations.',
+    images: ['/twitter-image'],
+  },
 }
 
 export default function CollaborationsPage() {

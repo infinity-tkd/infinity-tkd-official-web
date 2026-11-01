@@ -18,6 +18,24 @@ export const metadata: Metadata = {
   title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
   description:
     'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols, prohibited substances list, TUE exemptions, and clean athlete education.',
+  alternates: {
+    canonical: '/anti-doping',
+  },
+  openGraph: {
+    title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols.',
+    url: '/anti-doping',
+    type: 'website',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Anti-Doping & Clean Sport Policy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
+    description:
+      'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and SEARADO protocols.',
+    images: ['/twitter-image'],
+  },
 }
 
 export default function AntiDopingPage() {

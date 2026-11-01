@@ -185,21 +185,45 @@ export default function JoinTeamPage() {
     }
 
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 600))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        danRank: 'Kukkiwon 2nd Dan',
-        experience: '',
-        whyJoin: '',
-        hp_security_token: '',
+    try {
+      const res = await fetch('/api/join-team', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: cleanName,
+          phone: cleanPhone,
+          email: cleanEmail,
+          danRank: cleanDan,
+          experience: formData.experience,
+          whyJoin: cleanWhyJoin,
+          jobTitle: selectedJob.title,
+          hp_security_token: formData.hp_security_token,
+        }),
       })
-    }, 4000)
+
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit application.')
+      }
+
+      setSubmitted(true)
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          danRank: 'Kukkiwon 2nd Dan',
+          experience: '',
+          whyJoin: '',
+          hp_security_token: '',
+        })
+      }, 5000)
+    } catch (err: any) {
+      setErrorMsg(err.message || 'An error occurred while submitting your application. You can also contact us via Telegram @infinitytaekwondo.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -467,6 +491,17 @@ export default function JoinTeamPage() {
                       </>
                     )}
                   </button>
+
+                  <div className="pt-2 text-center">
+                    <a
+                      href="https://t.me/infinitytaekwondo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-brand-red font-medium transition-colors"
+                    >
+                      <span>Prefer direct messaging? Reach out on Telegram @infinitytaekwondo</span>
+                    </a>
+                  </div>
                 </form>
               )}
             </div>
