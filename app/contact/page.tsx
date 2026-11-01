@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import {
   MapPin,
   Mail,
@@ -57,8 +58,10 @@ const socials = [
   { name: 'TikTok', icon: TikTokIcon, link: 'https://tiktok.com/@infinitytaekwondo' },
 ]
 
-export default function ContactPage() {
+function ContactContent() {
   const { t } = useLanguage()
+  const searchParams = useSearchParams()
+
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
@@ -70,6 +73,69 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = React.useState(false)
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState('')
+
+  // Synchronize URL deep-link parameters into form state
+  React.useEffect(() => {
+    if (!searchParams) return
+    const rawSubject = searchParams.get('subject') || ''
+    const rawBranch = searchParams.get('branch') || ''
+    const plan = searchParams.get('plan') || ''
+    const coach = searchParams.get('coach') || ''
+
+    let resolvedSubject = ''
+    let resolvedBranch = ''
+    let defaultMsg = ''
+
+    const subLower = rawSubject.toLowerCase()
+    if (subLower.includes('trial') || subLower.includes('free')) {
+      resolvedSubject = 'Free Trial Class Booking'
+      defaultMsg = 'Hi, I would like to book a free trial class at Infinity Taekwondo. Please let me know available training times.'
+    } else if (subLower.includes('junior') || subLower.includes('warrior') || subLower.includes('kid')) {
+      resolvedSubject = 'Junior Warriors Enrollment (Ages 5-13)'
+      defaultMsg = 'Hi, I would like to enroll my child in the Junior Warriors program. Please share schedule and age group details.'
+    } else if (subLower.includes('athlete') || subLower.includes('pro') || subLower.includes('member')) {
+      resolvedSubject = 'Pro Athlete Membership'
+      defaultMsg = plan
+        ? `Hi, I am interested in enrolling in the ${plan} membership plan. Please send enrollment steps.`
+        : 'Hi, I would like to inquire about the Pro Athlete Membership program.'
+    } else if (subLower.includes('private') || subLower.includes('master') || subLower.includes('dan')) {
+      resolvedSubject = 'Private Master Dan Coaching'
+      defaultMsg = coach
+        ? `Hi, I would like to inquire about private 1-on-1 coaching sessions with ${coach}.`
+        : 'Hi, I would like to inquire about 1-on-1 private Master Dan coaching.'
+    } else if (subLower.includes('faculty') || subLower.includes('coach') || subLower.includes('career')) {
+      resolvedSubject = 'Faculty / Coaching Application'
+    } else if (subLower.includes('incubator') || subLower.includes('project')) {
+      resolvedSubject = 'Student Project Incubator Pitch'
+    }
+
+    const branchLower = (rawBranch || rawSubject).toLowerCase()
+    if (branchLower.includes('bkk1')) {
+      resolvedBranch = 'BKK1 Elite Training Center'
+    } else if (branchLower.includes('factory') || branchLower.includes('hq')) {
+      resolvedBranch = 'The Factory Phnom Penh (HQ)'
+    }
+
+    if (rawSubject.includes('inspired by')) {
+      const studentName = rawSubject.replace(/Enrollment inspired by /i, '').trim()
+      defaultMsg = `Hi, I was inspired by ${studentName}'s journey at Infinity Taekwondo and want to begin training.`
+    }
+
+    if (resolvedSubject || resolvedBranch || defaultMsg) {
+      setFormData((prev) => ({
+        ...prev,
+        subject: resolvedSubject || prev.subject,
+        branch: resolvedBranch || prev.branch,
+        message: prev.message || defaultMsg,
+      }))
+
+      // Smooth scroll to form element when query parameters are supplied
+      const formAnchor = document.getElementById('contact-form')
+      if (formAnchor) {
+        formAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+  }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -292,7 +358,7 @@ export default function ContactPage() {
           </div>
 
           {/* RIGHT COLUMN: Form (14px radius) */}
-          <div className="md:col-span-7">
+          <div className="md:col-span-7" id="contact-form">
             <div className="bg-white dark:bg-zinc-900 rounded-[14px] p-6 sm:p-8 md:p-10 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/50 dark:shadow-black/50 h-full flex flex-col justify-center">
               <div className="mb-6 sm:mb-8">
                 <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
@@ -459,5 +525,19 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-zinc-50 dark:bg-black pt-28 flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-brand-red border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <ContactContent />
+    </React.Suspense>
   )
 }

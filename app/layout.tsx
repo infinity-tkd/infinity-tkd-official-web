@@ -47,6 +47,13 @@ export const metadata: Metadata = {
     'To provide world-class training that blends athletic science with the artistry of freestyle Taekwondo, empowering students to achieve limitless potential.',
   alternates: {
     canonical: '/',
+    languages: {
+      'en': '/',
+      'km': '/',
+      'zh': '/',
+      'ko': '/',
+      'x-default': '/',
+    },
   },
   robots: {
     index: true,
@@ -81,9 +88,14 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon', sizes: '32x32', type: 'image/png' },
+    ],
     shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    apple: [
+      { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
+    ],
   },
 }
 

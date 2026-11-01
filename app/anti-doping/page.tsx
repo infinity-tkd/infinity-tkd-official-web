@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols, prohibited substances list, TUE exemptions, and clean athlete education.',
   alternates: {
     canonical: '/anti-doping',
+    languages: {
+      'en': '/anti-doping',
+      'km': '/anti-doping',
+      'zh': '/anti-doping',
+      'ko': '/anti-doping',
+      'x-default': '/anti-doping',
+    },
   },
   openGraph: {
     title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',

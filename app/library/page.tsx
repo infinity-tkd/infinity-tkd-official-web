@@ -49,8 +49,16 @@ import {
 import { useLanguage } from '@/context/LanguageContext'
 import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
 import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
-import { CompetitionRulesViewer } from '@/components/library/CompetitionRulesViewer'
-import { HistoryChronicleReader } from '@/components/library/HistoryChronicleReader'
+import dynamic from 'next/dynamic'
+
+const CompetitionRulesViewer = dynamic(
+  () => import('@/components/library/CompetitionRulesViewer').then((mod) => mod.CompetitionRulesViewer),
+  { ssr: false }
+)
+const HistoryChronicleReader = dynamic(
+  () => import('@/components/library/HistoryChronicleReader').then((mod) => mod.HistoryChronicleReader),
+  { ssr: false }
+)
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'

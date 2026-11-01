@@ -15,6 +15,7 @@ const config: Config = {
           DEFAULT: '#EF2F38', // Infinity TKD Primary Red
           red: '#EF2F38',     // Primary
           primary: '#EF2F38',
+          text: 'var(--color-brand-text)', // Accessible high-contrast text color
           // Light Tints
           50: '#FFEDEA',
           100: '#FFC9C3',

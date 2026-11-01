@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, national federations, sport universities, and athletic equipment innovators.',
   alternates: {
     canonical: '/collaborations',
+    languages: {
+      'en': '/collaborations',
+      'km': '/collaborations',
+      'zh': '/collaborations',
+      'ko': '/collaborations',
+      'x-default': '/collaborations',
+    },
   },
   openGraph: {
     title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',

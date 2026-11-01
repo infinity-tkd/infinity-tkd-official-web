@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Train at our Olympic-standard dojang branches in Phnom Penh: The Factory Phnom Penh (HQ Chak Angre Leu) and BKK1 Elite Training Center. View schedules, maps, and amenities.',
   alternates: {
     canonical: '/locations',
+    languages: {
+      'en': '/locations',
+      'km': '/locations',
+      'zh': '/locations',
+      'ko': '/locations',
+      'x-default': '/locations',
+    },
   },
   openGraph: {
     title: 'Dojang Branches & Training Centers | Infinity Taekwondo',

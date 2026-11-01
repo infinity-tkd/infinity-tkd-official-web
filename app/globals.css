@@ -22,6 +22,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
+    --color-brand-text: #D0272F; /* WCAG AA 4.88:1 on light surface */
     --color-brand-muted: rgba(239, 47, 56, 0.1);
     --color-brand-glow: rgba(239, 47, 56, 0.35);
   }
@@ -40,6 +41,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
+    --color-brand-text: #EF2F38; /* WCAG AA 5.26:1 on dark surface */
     --color-brand-muted: rgba(239, 47, 56, 0.15);
     --color-brand-glow: rgba(239, 47, 56, 0.5);
   }

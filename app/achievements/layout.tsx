@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Official tournament records, national gold medals, Southeast Asian podium finishes, and Kukkiwon Dan certifications achieved by Infinity Taekwondo athletes.',
   alternates: {
     canonical: '/achievements',
+    languages: {
+      'en': '/achievements',
+      'km': '/achievements',
+      'zh': '/achievements',
+      'ko': '/achievements',
+      'x-default': '/achievements',
+    },
   },
   openGraph: {
     title: 'Championship Achievements & Medal Record | Infinity Taekwondo',

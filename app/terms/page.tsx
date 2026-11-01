@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     'Infinity Taekwondo Terms of Service - Academy membership rules, liability and sparring waivers, dojang code of conduct, and Kukkiwon grading policies.',
   alternates: {
     canonical: '/terms',
+    languages: {
+      'en': '/terms',
+      'km': '/terms',
+      'zh': '/terms',
+      'ko': '/terms',
+      'x-default': '/terms',
+    },
   },
   openGraph: {
     title: 'Terms of Service | Infinity Taekwondo',

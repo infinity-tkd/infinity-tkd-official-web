@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Join Cambodia’s premier Taekwondo academy as a martial arts coach, assistant instructor, or athletic trainer. Competitive compensation and international pathway development.',
   alternates: {
     canonical: '/join-team',
+    languages: {
+      'en': '/join-team',
+      'km': '/join-team',
+      'zh': '/join-team',
+      'ko': '/join-team',
+      'x-default': '/join-team',
+    },
   },
   openGraph: {
     title: 'Careers & Join Our Coaching Staff | Infinity Taekwondo',

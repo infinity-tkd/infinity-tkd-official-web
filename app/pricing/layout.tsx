@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Transparent tuition pricing, flexible monthly memberships, and family training packages at Infinity Taekwondo Phnom Penh. Start with a risk-free trial session.',
   alternates: {
     canonical: '/pricing',
+    languages: {
+      'en': '/pricing',
+      'km': '/pricing',
+      'zh': '/pricing',
+      'ko': '/pricing',
+      'x-default': '/pricing',
+    },
   },
   openGraph: {
     title: 'Memberships & Tuition Plans | Infinity Taekwondo',

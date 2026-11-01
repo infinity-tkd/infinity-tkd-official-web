@@ -33,6 +33,35 @@ function isRateLimited(ip: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    // 0. Cross-Origin (CSRF) Guard
+    const origin = request.headers.get('origin')
+    const host = request.headers.get('host')
+    const secFetchSite = request.headers.get('sec-fetch-site')
+
+    if (secFetchSite && secFetchSite === 'cross-site') {
+      return NextResponse.json(
+        { error: 'Forbidden cross-origin request.' },
+        { status: 403 }
+      )
+    }
+
+    if (origin && host) {
+      try {
+        const originHost = new URL(origin).host
+        if (originHost !== host && !originHost.includes('localhost')) {
+          return NextResponse.json(
+            { error: 'Unauthorized origin.' },
+            { status: 403 }
+          )
+        }
+      } catch {
+        return NextResponse.json(
+          { error: 'Malformed origin header.' },
+          { status: 400 }
+        )
+      }
+    }
+
     // 1. IP extraction & Rate limiting
     const ip =
       request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||

@@ -37,7 +37,7 @@ const CompetitionRulesReader = dynamic(
   () => import('@/components/library/CompetitionRulesReader').then((mod) => mod.CompetitionRulesReader),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Competition Rules & Regulations..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 
@@ -45,7 +45,7 @@ const HistoryHeritageMaster = dynamic(
   () => import('@/components/library/HistoryHeritageMaster').then((mod) => mod.HistoryHeritageMaster),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Taekwondo Heritage & Historical Lineage..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 
@@ -53,7 +53,7 @@ const PoomsaeMasterExplorer = dynamic(
   () => import('@/components/library/PoomsaeMasterExplorer').then((mod) => mod.PoomsaeMasterExplorer),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Poomsae Master Curriculum & Geometry..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 
@@ -61,7 +61,7 @@ const HosinsulMasterExplorer = dynamic(
   () => import('@/components/library/HosinsulMasterExplorer').then((mod) => mod.HosinsulMasterExplorer),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Hosinsul Self-Defense System..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 
@@ -69,7 +69,7 @@ const KickingMasterExplorer = dynamic(
   () => import('@/components/library/KickingMasterExplorer').then((mod) => mod.KickingMasterExplorer),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Kicking Fundamentals..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 
@@ -77,7 +77,7 @@ const AdvancedKickingMasterExplorer = dynamic(
   () => import('@/components/library/AdvancedKickingMasterExplorer').then((mod) => mod.AdvancedKickingMasterExplorer),
   {
     loading: () => <MasterExplorerSkeleton title="Loading Advanced Kicking Techniques..." />,
-    ssr: true,
+    ssr: false,
   }
 )
 import { SafeImage } from '@/components/SafeImage'

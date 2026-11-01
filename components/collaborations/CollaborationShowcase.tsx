@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   collaborationsData,
   collaborationCategories,
@@ -208,15 +209,15 @@ export function CollaborationShowcase() {
                   <div className="space-y-4">
                     {/* Card Header with Logo Preview & Fallback */}
                     <div className="flex items-center justify-between gap-3">
-                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-1 shadow-sm shrink-0 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-1 shadow-sm shrink-0 flex items-center justify-center relative">
                         {!isLogoBroken ? (
-                          <img
+                          <Image
                             src={partner.logo}
                             alt={partner.name}
-                            loading="lazy"
-                            decoding="async"
+                            fill
+                            sizes="56px"
                             onError={() => handleImageError(`${partner.id}_logo`)}
-                            className="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all"
+                            className="object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all p-1"
                           />
                         ) : (
                           <div
@@ -331,13 +332,14 @@ export function CollaborationShowcase() {
               {/* Partner Banner & Identity with Auto-Error Fallback */}
               <div className="relative h-44 sm:h-56 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md bg-zinc-900">
                 {!brokenImages[`${activeModalPartner.id}_banner`] ? (
-                  <img
+                  <Image
                     src={activeModalPartner.bannerImage}
                     alt={activeModalPartner.name}
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    priority
                     onError={() => handleImageError(`${activeModalPartner.id}_banner`)}
-                    className="w-full h-full object-cover"
+                    className="object-cover"
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-tr from-black via-zinc-900 to-brand-red/30 flex items-center justify-center p-6 text-center">
@@ -352,15 +354,15 @@ export function CollaborationShowcase() {
                 <div className="absolute bottom-4 left-4 right-4 text-white flex items-end justify-between gap-4">
                   <div className="flex items-center gap-3.5">
                     {/* Embedded Logo in Banner */}
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-white dark:bg-zinc-900 border-2 border-white/40 p-1 shadow-lg shrink-0 flex items-center justify-center">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-white dark:bg-zinc-900 border-2 border-white/40 p-1 shadow-lg shrink-0 flex items-center justify-center relative">
                       {!brokenImages[`${activeModalPartner.id}_modal_logo`] ? (
-                        <img
+                        <Image
                           src={activeModalPartner.logo}
                           alt={activeModalPartner.name}
-                          loading="lazy"
-                          decoding="async"
+                          fill
+                          sizes="64px"
                           onError={() => handleImageError(`${activeModalPartner.id}_modal_logo`)}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="object-cover rounded-lg p-1"
                         />
                       ) : (
                         <span className="font-black text-xs text-brand-red">

@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery: Little Tigers, Cadet Elite, High-Performance Kyorugi, and Freestyle Poomsae in Cambodia.',
   alternates: {
     canonical: '/academy',
+    languages: {
+      'en': '/academy',
+      'km': '/academy',
+      'zh': '/academy',
+      'ko': '/academy',
+      'x-default': '/academy',
+    },
   },
   openGraph: {
     title: 'Academy Training Programs & Syllabus | Infinity Taekwondo',

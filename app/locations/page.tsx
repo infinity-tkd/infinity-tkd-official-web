@@ -253,7 +253,7 @@ export default function LocationsPage() {
                   </div>
 
                   <Link
-                    href={`/contact?subject=Trial%20Booking%20at%20${encodeURIComponent(activeBranch.name)}`}
+                    href={`/contact?subject=Free%20Trial%20Class%20Booking&branch=${encodeURIComponent(activeBranch.name)}`}
                     className="w-full py-3.5 sm:py-4 rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
                   >
                     {t.locations.bookTrialAtBranch} <ArrowRight className="w-4 h-4" />

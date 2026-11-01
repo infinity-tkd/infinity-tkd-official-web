@@ -6,6 +6,13 @@ export const metadata: Metadata = {
     'Fostering youth entrepreneurship, athletic innovation, and creative leadership through sports science and martial arts discipline at Infinity Taekwondo.',
   alternates: {
     canonical: '/incubator',
+    languages: {
+      'en': '/incubator',
+      'km': '/incubator',
+      'zh': '/incubator',
+      'ko': '/incubator',
+      'x-default': '/incubator',
+    },
   },
   openGraph: {
     title: 'Student Project Incubator & Leadership Lab | Infinity Taekwondo',

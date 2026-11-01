@@ -22,6 +22,13 @@ export const metadata: Metadata = {
     'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, Para-Taekwondo adaptive training, and cultural mutual respect across all academies.',
   alternates: {
     canonical: '/equality',
+    languages: {
+      'en': '/equality',
+      'km': '/equality',
+      'zh': '/equality',
+      'ko': '/equality',
+      'x-default': '/equality',
+    },
   },
   openGraph: {
     title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',

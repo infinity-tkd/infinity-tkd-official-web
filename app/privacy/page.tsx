@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights across our Phnom Penh branches.',
   alternates: {
     canonical: '/privacy',
+    languages: {
+      'en': '/privacy',
+      'km': '/privacy',
+      'zh': '/privacy',
+      'ko': '/privacy',
+      'x-default': '/privacy',
+    },
   },
   openGraph: {
     title: 'Privacy Policy | Infinity Taekwondo',
