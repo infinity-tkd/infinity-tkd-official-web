@@ -69,7 +69,7 @@ export function TestimonialsSection() {
         <SafeGrid isolateItems className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((item) => (
             <Card3D key={item.name} maxTilt={6} scale={1.015} className="h-full">
-              <div className="h-full p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-brand-glow hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between">
+              <div className="h-full p-5 sm:p-6 lg:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-brand-glow hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between">
                 <div>
                   {/* Rating stars & Quote Icon */}
                   <div className="flex justify-between items-center mb-6">
