@@ -65,7 +65,7 @@ function ContactContent() {
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
-    branch: 'The Factory Phnom Penh (HQ)',
+    branch: 'Olympic Branch (HQ)',
     subject: 'General Inquiry',
     message: '',
     hp_security_token: '',
@@ -110,10 +110,10 @@ function ContactContent() {
     }
 
     const branchLower = (rawBranch || rawSubject).toLowerCase()
-    if (branchLower.includes('bkk1')) {
-      resolvedBranch = 'BKK1 Elite Training Center'
-    } else if (branchLower.includes('factory') || branchLower.includes('hq')) {
-      resolvedBranch = 'The Factory Phnom Penh (HQ)'
+    if (branchLower.includes('kouk') || branchLower.includes('khleang') || branchLower.includes('bkk1')) {
+      resolvedBranch = 'Kouk Khleang Branch'
+    } else if (branchLower.includes('olympic') || branchLower.includes('factory') || branchLower.includes('hq')) {
+      resolvedBranch = 'Olympic Branch (HQ)'
     }
 
     if (rawSubject.includes('inspired by')) {
@@ -208,7 +208,7 @@ function ContactContent() {
         setFormData({
           name: '',
           email: '',
-          branch: 'The Factory Phnom Penh (HQ)',
+          branch: 'Olympic Branch (HQ)',
           subject: 'General Inquiry',
           message: '',
           hp_security_token: '',
@@ -257,23 +257,23 @@ function ContactContent() {
 
                 <div>
                   <h4 className="text-base font-black text-zinc-900 dark:text-white uppercase">
-                    The Factory Phnom Penh (HQ)
+                    Olympic Branch (HQ)
                   </h4>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                    Urban Village, National Road 2, Chak Angre Leu, Phnom Penh
+                    National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh
                   </p>
                 </div>
 
                 <div className="text-xs text-zinc-500 space-y-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                   <p className="flex items-center gap-2">
                     <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <a href="tel:+85512345678" className="hover:text-brand-red font-semibold">
-                      +855 12 345 678
+                    <a href="tel:012220124" className="hover:text-brand-red font-semibold">
+                      012 220 124
                     </a>
                   </p>
                   <p className="flex items-center gap-2">
                     <Mail className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <span>hq@infinitytaekwondo.com</span>
+                    <span>infinity.tkd.kh@gmail.com</span>
                   </p>
                 </div>
               </div>
@@ -296,23 +296,23 @@ function ContactContent() {
 
                 <div>
                   <h4 className="text-base font-black text-zinc-900 dark:text-white uppercase">
-                    BKK1 Elite Training Center
+                    Kouk Khleang Branch
                   </h4>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                    St 310, Boeung Keng Kang 1 (BKK1), Phnom Penh
+                    Kouk Khleang, Sen Sok, Phnom Penh
                   </p>
                 </div>
 
                 <div className="text-xs text-zinc-500 space-y-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                   <p className="flex items-center gap-2">
                     <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <a href="tel:+85512987654" className="hover:text-brand-red font-semibold">
-                      +855 12 987 654
+                    <a href="tel:012220124" className="hover:text-brand-red font-semibold">
+                      012 220 124
                     </a>
                   </p>
                   <p className="flex items-center gap-2">
                     <Mail className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <span>bkk1@infinitytaekwondo.com</span>
+                    <span>infinity.tkd.kh@gmail.com</span>
                   </p>
                 </div>
               </div>
@@ -452,8 +452,8 @@ function ContactContent() {
                           onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
                           className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all text-zinc-700 dark:text-zinc-300 appearance-none"
                         >
-                          <option>The Factory Phnom Penh (HQ)</option>
-                          <option>BKK1 Elite Training Center</option>
+                          <option>Olympic Branch (HQ)</option>
+                          <option>Kouk Khleang Branch</option>
                           <option>Either Branch</option>
                         </select>
                         <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 pointer-events-none" />

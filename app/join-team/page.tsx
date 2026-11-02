@@ -45,7 +45,7 @@ const jobOpenings: JobOpening[] = [
     id: 'tkd-instructor',
     title: 'Head / Assistant Taekwondo Master Instructor',
     type: 'Full-Time / Part-Time',
-    branch: 'The Factory HQ & BKK1 Branch',
+    branch: 'Olympic HQ & Kouk Khleang Branch',
     minDan: 'Kukkiwon 2nd Dan or higher',
     description:
       'Lead daily classes for junior warriors and adult athletes. Emphasize Taegeuk recognized poomsae, Olympic sparring footwork, and respectful dojang etiquette.',
@@ -65,7 +65,7 @@ const jobOpenings: JobOpening[] = [
     id: 'tricking-coach',
     title: 'Freestyle Tricking & Acrobatic Coach',
     type: 'Part-Time (Evenings & Weekends)',
-    branch: 'The Factory Phnom Penh HQ',
+    branch: 'Olympic Branch (HQ)',
     minDan: 'Black Belt or Proven Acrobatics Track Record',
     description:
       'Guide students safely through gymnastic foundations, springboard launches, 540/720 kicks, and foam pit landing mechanics.',
@@ -84,7 +84,7 @@ const jobOpenings: JobOpening[] = [
     id: 'physio-coach',
     title: 'Sports Physiotherapist & Biomechanics Specialist',
     type: 'Part-Time / Clinical Contract',
-    branch: 'Sport Science Lab (The Factory HQ)',
+    branch: 'Sport Science Lab (Olympic HQ)',
     minDan: 'Physical Therapy / Sports Medicine Degree',
     description:
       'Provide musculoskeletal screenings, tendon pre-hab, mobility conditioning, and recovery support for elite competition athletes.',

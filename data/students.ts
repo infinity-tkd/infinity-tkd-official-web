@@ -132,14 +132,14 @@ export const athleteSpotlights: StudentSpotlight[] = [
     joinedYear: '2023',
     title: 'Tech Executive to Dojang Warrior: 25kg Transformation',
     story:
-      'Working long hours in front of a computer left Rathana feeling drained and out of shape. Enrolling in adult evening classes at our BKK1 branch, he rebuilt his cardiovascular stamina, lost 25kg, and developed lifelong mental resilience.',
+      'Working long hours in front of a computer left Rathana feeling drained and out of shape. Enrolling in adult evening classes at our Kouk Khleang branch, he rebuilt his cardiovascular stamina, lost 25kg, and developed lifelong mental resilience.',
     quote:
       'Martial arts gave me my life and clarity back. Stepping onto the mats resets my mind completely after intense workdays.',
     achievements: [
       '25kg Weight Loss & Tendon Health Transformation',
       'Graduated White to Blue Belt with Honors',
       'Completed 150 Consecutive Dojang Training Sessions',
-      'BKK1 Adult Cohort Class Representative',
+      'Kouk Khleang Adult Cohort Class Representative',
     ],
     image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2787&auto=format&fit=crop',
     category: 'Transformation',

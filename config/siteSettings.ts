@@ -546,7 +546,8 @@ export const siteSettings: SiteSettings = {
       'Poomsae Training',
       'Olympic Sparring Kyorugi',
       'Kids Martial Arts Phnom Penh',
-      'The Factory Phnom Penh Martial Arts',
+      'Olympic Stadium Taekwondo Phnom Penh',
+      'Kouk Khleang Sen Sok Martial Arts',
     ],
     ogImage: '/logo.svg',
     favicon: '/favicon.svg',
@@ -784,33 +785,33 @@ export const siteSettings: SiteSettings = {
   // 5. CONTACT ENDPOINTS & DOJANG BRANCH LOCATIONS
   // ----------------------------------------------------------------------------
   contact: {
-    generalEmail: 'contact@infinitytaekwondo.com',
-    supportEmail: 'admissions@infinitytaekwondo.com',
-    pressEmail: 'press@infinitytaekwondo.com',
-    hotlinePhone: '+855 12 345 678',
+    generalEmail: 'infinity.tkd.kh@gmail.com',
+    supportEmail: 'infinity.tkd.kh@gmail.com',
+    pressEmail: 'infinity.tkd.kh@gmail.com',
+    hotlinePhone: '012 220 124',
 
     headquartersAddress: {
-      facilityName: 'The Factory Phnom Penh (HQ)',
-      street: 'Urban Village, National Road 2, Chak Angre Leu',
-      district: 'Meanchey',
+      facilityName: 'Olympic Branch (HQ)',
+      street: 'National Olympic Stadium Complex, Charles de Gaulle Blvd',
+      district: 'Khan 7 Makara',
       city: 'Phnom Penh',
       country: 'Cambodia',
-      mapLocationUrl: 'https://maps.google.com/?q=The+Factory+Phnom+Penh',
+      mapLocationUrl: 'https://maps.app.goo.gl/Qw3aSuaBCGiFAR6k8',
     },
 
     bkk1BranchAddress: {
-      facilityName: 'BKK1 Elite Training Center',
-      street: 'Street 302, Boeung Keng Kang 1',
-      district: 'Chamkarmon',
+      facilityName: 'Kouk Khleang Branch',
+      street: 'Kouk Khleang, Sen Sok',
+      district: 'Khan Sen Sok',
       city: 'Phnom Penh',
       country: 'Cambodia',
-      mapLocationUrl: 'https://maps.google.com/?q=BKK1+Phnom+Penh',
+      mapLocationUrl: 'https://maps.app.goo.gl/QgYNFhQLwkuQB9LN8',
     },
 
     operatingHours: {
-      weekdays: 'Monday – Friday: 06:00 AM – 09:00 PM',
-      saturday: 'Saturday: 07:00 AM – 07:00 PM',
-      sunday: 'Sunday: 08:00 AM – 05:00 PM',
+      weekdays: 'Tuesday – Friday: 09:00 AM – 08:00 PM (Kouk Khleang)',
+      saturday: 'Saturday: 09:00 AM – 08:00 PM (Olympic & Kouk Khleang)',
+      sunday: 'Sunday: 09:00 AM – 08:00 PM (Olympic & Kouk Khleang)',
     },
   },
 

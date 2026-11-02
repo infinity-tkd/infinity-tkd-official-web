@@ -397,7 +397,7 @@ export const collaborationsData: CollaborationItem[] = [
     ],
     activeInitiatives: [
       'Infinity TKD 2.0 Digital Platform UI/UX design and design tokens maintainer',
-      'Branch 02 (BKK1 Elite Center) spatial interior architecture',
+      'Branch 02 (Kouk Khleang Branch) spatial interior architecture',
       'Annual limited-edition tournament merchandise and medal design',
     ],
     badgeColor: '#FFD505',

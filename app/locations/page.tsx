@@ -9,12 +9,12 @@ import {
   Clock,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   Building2,
   Navigation,
   MessageCircle,
+  Calendar,
 } from 'lucide-react'
-import { dojangBranches, type DojangBranch } from '@/data/locations'
+import { dojangBranches } from '@/data/locations'
 import { useLanguage } from '@/context/LanguageContext'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
@@ -63,7 +63,9 @@ export default function LocationsPage() {
             return (
               <Card3D key={branch.id} maxTilt={4} scale={1.01} className="h-full">
                 <button
+                  type="button"
                   onClick={() => setActiveBranchId(branch.id)}
+                  aria-pressed={isSelected}
                   className={`w-full h-full p-5 sm:p-6 rounded-[14px] border transition-all duration-300 text-left flex flex-col justify-between cursor-pointer touch-press ${
                     isSelected
                       ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20'
@@ -82,23 +84,27 @@ export default function LocationsPage() {
                         {branch.isHeadquarters ? t.common.headquarters : t.common.branch02}
                       </span>
                       {isSelected && (
-                        <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-brand-red animate-pulse" />
                       )}
                     </div>
                     <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mt-1">
                       {branch.name}
                     </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-light">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-light leading-relaxed">
                       {branch.tagline}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
-                    <span className="flex items-center gap-1">
+                  <div className="mt-5 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
+                    <span className="flex items-center gap-1.5 font-medium">
                       <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" /> {branch.address.district}
                     </span>
-                    <span className="font-bold text-brand-red uppercase text-[10px]">
-                      {isSelected ? 'Viewing' : 'Select Branch'}
+                    <span
+                      className={`font-black uppercase text-[10px] tracking-wider ${
+                        isSelected ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400'
+                      }`}
+                    >
+                      {isSelected ? 'Viewing Branch' : 'Select Branch'}
                     </span>
                   </div>
                 </button>
@@ -111,159 +117,213 @@ export default function LocationsPage() {
       {/* Selected Branch Detail Hero (14px radius) */}
       {activeBranch && (
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl animate-fade-in">
-        <div className="rounded-[14px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 shadow-xl">
-          {/* Cover Image */}
-          <div className="relative aspect-[16/9] md:aspect-[21/9] bg-zinc-950 overflow-hidden">
-            <SafeImage
-              src={activeBranch.image}
-              alt={activeBranch.name}
-              className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="rounded-[14px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 shadow-xl">
+            {/* Cover Image */}
+            <div className="relative aspect-[16/9] md:aspect-[21/9] bg-zinc-950 overflow-hidden">
+              <SafeImage
+                src={activeBranch.image}
+                alt={activeBranch.name}
+                className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-            <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 z-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
-                  {activeBranch.isHeadquarters ? t.common.headquarters : t.common.branch02}
-                </span>
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-none">
-                  {activeBranch.name}
-                </h2>
-                <p className="text-xs sm:text-sm text-zinc-300 mt-1.5 flex items-center gap-1.5 font-light">
-                  <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" /> {activeBranch.address.street}, {activeBranch.address.district}
-                </p>
-              </div>
-
-              <a
-                href={activeBranch.mapEmbedUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-brand-red hover:text-white transition-all shadow-lg flex items-center gap-2 touch-press"
-              >
-                <Navigation className="w-3.5 h-3.5" /> Open in Google Maps
-              </a>
-            </div>
-          </div>
-
-          {/* Details Content Grid */}
-          <div className="p-6 sm:p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Left Col: Hours, Contact, Instructors */}
-            <div className="lg:col-span-6 space-y-6 sm:space-y-8">
-              {/* Operating Hours */}
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4 flex items-center gap-2">
-                  <Clock className="w-4 h-4" /> {t.locations.operatingHours}
-                </h4>
-                <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 space-y-2.5 text-xs sm:text-sm">
-                  <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
-                    <span className="font-semibold">Monday – Friday:</span>
-                    <span>{activeBranch.hours.weekdays}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
-                    <span className="font-semibold">Saturday:</span>
-                    <span>{activeBranch.hours.saturday}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-zinc-700 dark:text-zinc-300">
-                    <span className="font-semibold">Sunday:</span>
-                    <span>{activeBranch.hours.sunday}</span>
-                  </div>
+              <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 z-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
+                    {activeBranch.isHeadquarters ? t.common.headquarters : t.common.branch02}
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-none">
+                    {activeBranch.name}
+                  </h2>
+                  <p className="text-xs sm:text-sm text-zinc-300 mt-2 flex items-center gap-1.5 font-light">
+                    <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" />{' '}
+                    {activeBranch.address.street}, {activeBranch.address.district}, {activeBranch.address.city}
+                  </p>
                 </div>
-              </div>
 
-              {/* Direct Contacts */}
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4 flex items-center gap-2">
-                  <Phone className="w-4 h-4" /> {t.locations.directContact}
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
-                    <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
-                      Desk Phone
-                    </span>
-                    <a
-                      href={`tel:${activeBranch.phone}`}
-                      className="font-bold text-zinc-900 dark:text-white hover:text-brand-red text-sm"
-                    >
-                      {activeBranch.phone}
-                    </a>
-                  </div>
-                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
-                    <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
-                      Email Admissions
-                    </span>
-                    <a
-                      href={`mailto:${activeBranch.email}`}
-                      className="font-bold text-zinc-900 dark:text-white hover:text-brand-red text-xs truncate block"
-                    >
-                      {activeBranch.email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Lead Instructors */}
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3">
-                  {t.locations.leadInstructors}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {activeBranch.leadInstructors.map((inst) => (
-                    <span
-                      key={inst}
-                      className="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-xs font-bold text-zinc-700 dark:text-zinc-300"
-                    >
-                      {inst}
-                    </span>
-                  ))}
-                </div>
+                <a
+                  href={activeBranch.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-brand-red hover:text-white transition-all shadow-lg flex items-center gap-2 touch-press"
+                >
+                  <Navigation className="w-3.5 h-3.5" /> Open in Google Maps
+                </a>
               </div>
             </div>
 
-            {/* Right Col: Highlights & Booking Action */}
-            <div className="lg:col-span-6 space-y-6 sm:space-y-8 flex flex-col justify-between">
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4">
-                  {t.locations.facilityHighlights}
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {activeBranch.features.map((item, i) => (
-                    <div
-                      key={i}
-                      className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 flex items-start gap-2.5"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                      <span className="leading-relaxed font-medium">{item}</span>
+            {/* Details Content Grid */}
+            <div className="p-6 sm:p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              {/* Left Col: Training Schedule & Direct Contacts */}
+              <div className="lg:col-span-6 space-y-6 sm:space-y-8">
+                {/* Training Schedule */}
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4 flex items-center gap-2">
+                    <Clock className="w-4 h-4" /> {t.locations.operatingHours}
+                  </h4>
+                  <div className="space-y-3">
+                    {activeBranch.scheduleGroups.map((group, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 transition-colors"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="font-bold text-sm text-zinc-900 dark:text-white flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-brand-red shrink-0" />
+                            {group.label}
+                          </span>
+                          <span
+                            className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${
+                              group.badge.toLowerCase().includes('weekend') ||
+                              group.badge.includes('ចុងសប្តាហ៍') ||
+                              group.badge.includes('周末') ||
+                              group.badge.includes('주말')
+                                ? 'bg-brand-red/10 text-brand-red border border-brand-red/30'
+                                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                            }`}
+                          >
+                            {group.badge}
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {group.slots.map((slot, sIdx) => (
+                            <span
+                              key={sIdx}
+                              className="px-3 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center gap-1.5"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-brand-red" />
+                              {slot}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Direct Contacts */}
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4 flex items-center gap-2">
+                    <Phone className="w-4 h-4" /> {t.locations.directContact}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
+                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                        Desk Phone
+                      </span>
+                      <a
+                        href={`tel:${activeBranch.phone.replace(/\s+/g, '')}`}
+                        className="font-bold text-zinc-900 dark:text-white hover:text-brand-red text-sm transition-colors"
+                      >
+                        {activeBranch.phone}
+                      </a>
                     </div>
-                  ))}
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
+                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                        Admissions Email
+                      </span>
+                      <a
+                        href={`mailto:${activeBranch.email}`}
+                        className="font-bold text-zinc-900 dark:text-white hover:text-brand-red text-xs truncate block transition-colors"
+                      >
+                        {activeBranch.email}
+                      </a>
+                    </div>
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 sm:col-span-2">
+                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                        WhatsApp Hotline
+                      </span>
+                      <a
+                        href={`https://wa.me/${activeBranch.whatsapp.replace(/[^0-9]/g, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-zinc-900 dark:text-white hover:text-brand-red text-xs flex items-center gap-1.5 transition-colors"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
+                        {activeBranch.whatsapp}
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <Card3D maxTilt={5} scale={1.01} className="w-full">
-                <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
-                      Free Trial Booking
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-                      Train At {activeBranch.name.split(' (')[0]}
-                    </h3>
-                    <p className="text-xs text-zinc-400 font-light mt-1">
-                      Experience our martial arts training, meet the Master faculty, and tour the facility.
-                    </p>
+              {/* Right Col: Facility Highlights, Google Map Embed & Booking Action */}
+              <div className="lg:col-span-6 space-y-6 sm:space-y-8 flex flex-col justify-between">
+                {/* Highlights */}
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-3 sm:mb-4">
+                    {t.locations.facilityHighlights}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {activeBranch.features.map((item, i) => (
+                      <div
+                        key={i}
+                        className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 flex items-start gap-2.5"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                        <span className="leading-relaxed font-medium">{item}</span>
+                      </div>
+                    ))}
                   </div>
-
-                  <Link
-                    href={`/contact?subject=Free%20Trial%20Class%20Booking&branch=${encodeURIComponent(activeBranch.name)}`}
-                    className="w-full py-3.5 sm:py-4 rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
-                  >
-                    {t.locations.bookTrialAtBranch} <ArrowRight className="w-4 h-4" />
-                  </Link>
                 </div>
-              </Card3D>
+
+                {/* Interactive Map Embed */}
+                <div className="rounded-[14px] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner bg-zinc-100 dark:bg-zinc-950">
+                  <div className="p-3 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
+                    <span className="font-bold uppercase tracking-wider text-[11px] text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-brand-red" /> {activeBranch.name} Map
+                    </span>
+                    <a
+                      href={activeBranch.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-bold text-brand-red hover:underline flex items-center gap-1"
+                    >
+                      Full Map <Navigation className="w-3 h-3" />
+                    </a>
+                  </div>
+                  <iframe
+                    src={activeBranch.mapEmbedUrl}
+                    width="100%"
+                    height="230"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`${activeBranch.name} Google Map`}
+                    className="w-full grayscale contrast-125 dark:invert dark:hue-rotate-180"
+                  />
+                </div>
+
+                {/* Free Trial Class Booking Card */}
+                <Card3D maxTilt={5} scale={1.01} className="w-full">
+                  <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4 shadow-xl">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+                        Free Trial Booking
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
+                        Train At {activeBranch.name.split(' (')[0]}
+                      </h3>
+                      <p className="text-xs text-zinc-400 font-light mt-1 leading-relaxed">
+                        Step onto the mat, experience our high-caliber coaching, and tour the facilities firsthand.
+                      </p>
+                    </div>
+
+                    <Link
+                      href={`/contact?subject=Free%20Trial%20Class%20Booking&branch=${encodeURIComponent(
+                        activeBranch.name
+                      )}`}
+                      className="w-full py-3.5 sm:py-4 rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
+                    >
+                      {t.locations.bookTrialAtBranch} <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </Card3D>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
     </div>
   )

@@ -118,7 +118,7 @@ export default function PrivacyPage() {
       </div>
 
       <p>
-        This Privacy Policy applies to all students, athletes, parents, guardians, and visitors across our Phnom Penh dojang branches (The Factory Phnom Penh Headquarters and BKK1 Elite Training Center) and digital platforms.
+        This Privacy Policy applies to all students, athletes, parents, guardians, and visitors across our Phnom Penh dojang branches (Olympic Branch and Kouk Khleang Branch) and digital platforms.
       </p>
 
       {/* SECTION 1 */}
@@ -243,10 +243,10 @@ export default function PrivacyPage() {
       </p>
       <div className="p-5 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
         <p className="font-bold text-zinc-900 dark:text-white">Infinity Taekwondo Operations Directorate</p>
-        <p className="text-zinc-500">📍 The Factory Phnom Penh HQ &bull; National Road 2, Chak Angre Leu, Phnom Penh</p>
-        <p className="text-zinc-500">📍 BKK1 Elite Training Center &bull; St 310, Boeung Keng Kang 1, Phnom Penh</p>
-        <p className="text-zinc-500">📧 Email: <a href="mailto:privacy@infinity-tkd.com" className="text-brand-red hover:underline font-bold">privacy@infinity-tkd.com</a></p>
-        <p className="text-zinc-500">📞 Phone: +855 12 345 678 (Mon–Sat 9:00 AM – 7:00 PM ICT)</p>
+        <p className="text-zinc-500">📍 Olympic Branch (HQ) &bull; National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh</p>
+        <p className="text-zinc-500">📍 Kouk Khleang Branch &bull; Kouk Khleang, Sen Sok, Phnom Penh</p>
+        <p className="text-zinc-500">📧 Email: <a href="mailto:infinity.tkd.kh@gmail.com" className="text-brand-red hover:underline font-bold">infinity.tkd.kh@gmail.com</a></p>
+        <p className="text-zinc-500">📞 Phone: 012 220 124 (Available during training hours ICT)</p>
       </div>
     </LegalLayout>
   )

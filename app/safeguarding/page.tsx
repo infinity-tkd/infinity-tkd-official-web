@@ -194,7 +194,7 @@ export default function SafeguardingPage() {
           5. Open Dojang &amp; Parental Visibility
         </h2>
         <p>
-          Infinity Taekwondo enforces an open-door policy across all branches (The Factory Phnom Penh HQ &amp; BKK1 Elite Center):
+          Infinity Taekwondo enforces an open-door policy across all branches (Olympic Branch HQ &amp; Kouk Khleang Branch):
         </p>
         <ul className="list-disc pl-5 space-y-2">
           <li><strong>Unobstructed Viewing Windows:</strong> Parents and guardians are invited to observe all classes through full-glass viewing galleries or designated ringside seating.</li>
@@ -264,13 +264,13 @@ export default function SafeguardingPage() {
             </div>
             <div>
               <span className="text-[10px] text-zinc-400 block">Emergency Welfare Hotline:</span>
-              <a href="tel:+85512345678" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
-                +855 (0) 12 345 678
+              <a href="tel:012220124" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
+                012 220 124
               </a>
             </div>
           </div>
           <div className="text-[11px] text-zinc-400 pt-2 border-t border-zinc-200 dark:border-zinc-800">
-            Mailing Address: Factory Phnom Penh, Urban Village, National Road 2, Chak Angre Leu, Mean Chey, Phnom Penh, Cambodia.
+            Address: Olympic Branch (National Olympic Stadium Complex, Charles de Gaulle Blvd) &bull; Kouk Khleang Branch (Sen Sok, Phnom Penh, Cambodia).
           </div>
         </div>
       </section>

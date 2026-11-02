@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
 
     const cleanName = sanitizeInput(name || '', 100)
     const cleanEmail = sanitizeEmail(email || '')
-    const cleanBranch = sanitizeInput(branch || 'The Factory Phnom Penh (HQ)', 100)
+    const cleanBranch = sanitizeInput(branch || 'Olympic Branch (HQ)', 100)
     const cleanSubject = sanitizeInput(subject || 'General Inquiry', 100)
     const cleanMessage = sanitizeInput(message || '', 3000)
 

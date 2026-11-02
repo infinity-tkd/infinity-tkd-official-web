@@ -15,7 +15,7 @@
  * 6. Tournament Medals:   Edit `data/achievements.ts`  (Trophies, Student Medalists, Dan Records)
  * 7. Master Coaches:      Edit `data/coaches.ts`       (5th Dan Masters, Bios, Certifications)
  * 8. Student Spotlights:  Edit `data/students.ts`      (Student Stories, Belt Graduates)
- * 9. Dojang Branches:     Edit `data/locations.ts`     (Factory HQ, BKK1, Google Maps, Timetables)
+ * 9. Dojang Branches:     Edit `data/locations.ts`     (Olympic HQ, Kouk Khleang, Google Maps, Timetables)
  * 10. Class Schedule:     Edit `data/schedule.ts`      (Weekly Timetables by Day & Division)
  * 11. Master Settings:    Edit `config/siteSettings.ts`(Theme tokens, Colors, Security, Radiuses)
  * 12. Translations:       Edit `data/translations.ts`  (EN, KM, ZH, KO multi-language dictionary)
