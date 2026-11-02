@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import { Montserrat, Kantumruy_Pro } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { Navbar } from '@/components/Navbar'
@@ -11,20 +10,6 @@ import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { BackToTop } from '@/components/ui/BackToTop'
 import { siteSettings } from '@/config/siteSettings'
 import './globals.css'
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-montserrat',
-  display: 'swap',
-})
-
-const kantumruy = Kantumruy_Pro({
-  subsets: ['khmer', 'latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-kantumruy',
-  display: 'swap',
-})
 
 export const viewport: Viewport = {
   themeColor: [
@@ -156,9 +141,14 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${montserrat.variable} ${kantumruy.variable}`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+        />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />

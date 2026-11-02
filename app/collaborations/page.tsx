@@ -60,7 +60,7 @@ export default function CollaborationsPage() {
         {/* HERO SECTION (14px radius) */}
         {/* ------------------------------------------------------------------ */}
         <Card3D maxTilt={3} scale={1.008} className="mb-12">
-          <div className="p-8 sm:p-12 md:p-16 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl relative overflow-hidden">
+          <div className="p-5 sm:p-8 md:p-12 lg:p-16 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[130px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl">
@@ -82,21 +82,21 @@ export default function CollaborationsPage() {
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono pt-4 border-t border-zinc-100 dark:border-zinc-800">
-              <div>
-                <span className="text-zinc-400 block text-[10px]">Governing Body</span>
-                <strong className="text-brand-red text-sm font-black">World Taekwondo</strong>
+              <div className="min-w-0">
+                <span className="text-zinc-400 block text-[10px] truncate">Governing Body</span>
+                <strong className="text-brand-red text-xs sm:text-sm font-black truncate block" title="World Taekwondo">World Taekwondo</strong>
               </div>
-              <div>
-                <span className="text-zinc-400 block text-[10px]">Dan Certification</span>
-                <strong className="text-zinc-900 dark:text-white text-sm font-black">100% Kukkiwon</strong>
+              <div className="min-w-0">
+                <span className="text-zinc-400 block text-[10px] truncate">Dan Certification</span>
+                <strong className="text-zinc-900 dark:text-white text-xs sm:text-sm font-black truncate block" title="100% Kukkiwon">100% Kukkiwon</strong>
               </div>
-              <div>
-                <span className="text-zinc-400 block text-[10px]">PSS Technology</span>
-                <strong className="text-zinc-900 dark:text-white text-sm font-black">Daedo Gen-2</strong>
+              <div className="min-w-0">
+                <span className="text-zinc-400 block text-[10px] truncate">PSS Technology</span>
+                <strong className="text-zinc-900 dark:text-white text-xs sm:text-sm font-black truncate block" title="Daedo Gen-2">Daedo Gen-2</strong>
               </div>
-              <div>
-                <span className="text-zinc-400 block text-[10px]">Community Reach</span>
-                <strong className="text-emerald-500 text-sm font-black">250+ Youths/Yr</strong>
+              <div className="min-w-0">
+                <span className="text-zinc-400 block text-[10px] truncate">Community Reach</span>
+                <strong className="text-emerald-500 text-xs sm:text-sm font-black truncate block" title="250+ Youths/Yr">250+ Youths/Yr</strong>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function CollaborationsPage() {
         {/* PARTNER LEAD GENERATION CTA (14px radius) */}
         {/* ------------------------------------------------------------------ */}
         <Card3D maxTilt={4} scale={1.01} className="mt-16">
-          <div className="p-8 sm:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="p-6 sm:p-10 md:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-2 max-w-xl">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
                 Institutional Synergy
@@ -127,7 +127,7 @@ export default function CollaborationsPage() {
 
             <Link
               href="/contact?subject=New%20Institutional%20Partnership%20Proposal"
-              className="px-8 py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow whitespace-nowrap inline-flex items-center gap-2 touch-press"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow text-center inline-flex items-center justify-center gap-2 touch-press shrink-0 min-h-[44px]"
             >
               Submit Partnership Proposal <ArrowRight className="w-4 h-4" />
             </Link>

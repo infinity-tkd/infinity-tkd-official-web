@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-kantumruy: 'Kantumruy Pro', sans-serif;
     --font-fallback-english: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-fallback-khmer: var(--font-kantumruy), 'Kantumruy Pro', 'Hanuman', 'Khmer OS Battambang', 'Khmer OS', system-ui, sans-serif;
     --font-fallback-chinese: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'SimHei', sans-serif;
