@@ -16,15 +16,16 @@ export function generateStaticParams() {
 }
 
 interface TechniquePageProps {
-  params: {
+  params: Promise<{
     category: string
     slug: string
-  }
+  }>
 }
 
-export function generateMetadata({ params }: TechniquePageProps): Metadata {
+export async function generateMetadata({ params }: TechniquePageProps): Promise<Metadata> {
+  const { category, slug } = await params
   const item = libraryItems.find(
-    (i) => i.category === params.category && i.slug === params.slug
+    (i) => i.category === category && i.slug === slug
   )
 
   if (!item) {
@@ -70,9 +71,10 @@ export function generateMetadata({ params }: TechniquePageProps): Metadata {
   }
 }
 
-export default function TechniquePage({ params }: TechniquePageProps) {
+export default async function TechniquePage({ params }: TechniquePageProps) {
+  const { category, slug } = await params
   const item = libraryItems.find(
-    (i) => i.category === params.category && i.slug === params.slug
+    (i) => i.category === category && i.slug === slug
   )
 
   if (!item) {

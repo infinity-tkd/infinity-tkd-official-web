@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import path from 'path'
 
 const isFigma = Boolean(process.env.FIGMA)
 
@@ -62,6 +63,9 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  turbopack: {
+    root: path.resolve('.'),
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   images: {

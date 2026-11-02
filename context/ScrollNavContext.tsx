@@ -31,13 +31,7 @@ export function ScrollNavProvider({ children }: { children: React.ReactNode }) {
 export function useScrollNavContext(): ScrollNavContextValue {
   const context = React.useContext(ScrollNavContext)
   if (!context) {
-    // Graceful fallback to standalone hook if used outside provider
-    const scrollNav = useScrollNav()
-    return {
-      ...scrollNav,
-      isMobileMenuOpen: false,
-      setIsMobileMenuOpen: () => {},
-    }
+    throw new Error('useScrollNavContext must be used within a ScrollNavProvider')
   }
   return context
 }

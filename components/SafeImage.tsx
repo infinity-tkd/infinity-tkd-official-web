@@ -3,7 +3,8 @@
 import * as React from 'react'
 import { Shield } from 'lucide-react'
 
-export interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface SafeImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  src?: string
   fallbackSrc?: string
   alt: string
 }

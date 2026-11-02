@@ -21,7 +21,7 @@ const SCANNER_USER_AGENT_PATTERN =
 // Suspicious path traversal encodings (e.g. double encoded, slash variations)
 const TRAVERSAL_PATTERN = /(?:\.\.[\\/]|%2e%2e[\\/]|%252e%252e|\.\.%2f|\.\.%5c)/i
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
   const userAgent = request.headers.get('user-agent') || ''
 
@@ -233,3 +233,6 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|woff|woff2)$).*)',
   ],
 }
+
+export default proxy
+

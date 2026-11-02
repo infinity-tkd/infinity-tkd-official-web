@@ -15,14 +15,15 @@ export function generateStaticParams() {
 }
 
 interface ErrorPageProps {
-  params: {
+  params: Promise<{
     code: string
-  }
+  }>
 }
 
-export function generateMetadata({ params }: ErrorPageProps): Metadata {
+export async function generateMetadata({ params }: ErrorPageProps): Promise<Metadata> {
+  const { code } = await params
   return {
-    title: `Error ${params.code} | Infinity Taekwondo`,
+    title: `Error ${code} | Infinity Taekwondo`,
     robots: {
       index: false,
       follow: false,
@@ -30,10 +31,11 @@ export function generateMetadata({ params }: ErrorPageProps): Metadata {
   }
 }
 
-export default function DynamicErrorPage({ params }: ErrorPageProps) {
+export default async function DynamicErrorPage({ params }: ErrorPageProps) {
+  const { code: rawCode } = await params
   const validCodes: ErrorType[] = ['404', '500', '501', '502', '503', '504', 'server-error']
-  const code: ErrorType = validCodes.includes(params.code as ErrorType)
-    ? (params.code as ErrorType)
+  const code: ErrorType = validCodes.includes(rawCode as ErrorType)
+    ? (rawCode as ErrorType)
     : '404'
 
   return <ErrorScreen code={code} />

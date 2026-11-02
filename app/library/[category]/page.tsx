@@ -4,9 +4,9 @@ import { libraryCategoriesMeta } from '@/data/library'
 import { CategoryViewClient } from '@/components/library/CategoryViewClient'
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string
-  }
+  }>
 }
 
 export function generateStaticParams() {
@@ -15,8 +15,9 @@ export function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }: CategoryPageProps): Metadata {
-  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === params.category)
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { category } = await params
+  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === category)
 
   if (!categoryMeta) {
     return {
@@ -31,13 +32,13 @@ export function generateMetadata({ params }: CategoryPageProps): Metadata {
     title,
     description,
     alternates: {
-      canonical: `/library/${params.category}`,
+      canonical: `/library/${category}`,
     },
     openGraph: {
       title: `${title} | Infinity Taekwondo`,
       description,
       type: 'website',
-      url: `/library/${params.category}`,
+      url: `/library/${category}`,
       images: [
         {
           url: '/opengraph-image',
@@ -56,12 +57,13 @@ export function generateMetadata({ params }: CategoryPageProps): Metadata {
   }
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === params.category)
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params
+  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === category)
 
   if (!categoryMeta) {
     notFound()
   }
 
-  return <CategoryViewClient category={params.category} />
+  return <CategoryViewClient category={category} />
 }
