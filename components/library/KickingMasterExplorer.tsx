@@ -32,8 +32,8 @@ import {
 } from 'lucide-react'
 import type { LibraryItem } from '@/data/library/types'
 import { useLanguage } from '@/context/LanguageContext'
-import { getKickingOverview, kickingI18n } from '@/data/library/kickingTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { getKickingOverview, kickingI18n } from '@/data/library/kicking/kickingTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 
 interface KickingMasterExplorerProps {
   items: LibraryItem[]

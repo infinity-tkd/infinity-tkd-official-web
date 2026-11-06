@@ -1,4 +1,4 @@
-import type { LibraryItem } from './types'
+import type { LibraryItem } from '../types'
 
 export interface AdvancedKickingOverview {
   title: string

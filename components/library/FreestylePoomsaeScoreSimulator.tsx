@@ -28,7 +28,7 @@ import {
   freestyleScoringI18n,
   compulsoryFootSkillRules,
   type CompulsoryFootSkillRule,
-} from '@/data/library/freestyleScoringTranslations'
+} from '@/data/library/rules/freestyleScoringTranslations'
 
 interface FootSkillState {
   basicScore: number // 0.0 to 0.7

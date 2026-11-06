@@ -1,4 +1,5 @@
-import type { LibraryItem } from './types'
+import type { LibraryItem } from '../types'
+import { ruleDocuments } from './ruleDocuments'
 
 export const competitionRulesItems: LibraryItem[] = [
   {
@@ -11,7 +12,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Intermediate',
     beltLevel: 'Green Belt+',
     badgeColor: '#EF2F38',
-    pdfUrl: '/docs/world-taekwondo-kyorugi-rules-2026.pdf',
+    pdfUrl: ruleDocuments.kyorugi.file,
     sourceName: 'World Taekwondo Official Competition Rules (2026 Edition)',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
@@ -60,7 +61,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Advanced',
     beltLevel: 'Blue Belt+',
     badgeColor: '#0042EA',
-    pdfUrl: '/docs/world-taekwondo-kyorugi-rules-2026.pdf',
+    pdfUrl: ruleDocuments.kyorugi.file,
     sourceName: 'World Taekwondo Official Referee Guidelines',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     summary:
@@ -106,7 +107,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Advanced',
     beltLevel: 'Red Belt+',
     badgeColor: '#09BB00',
-    pdfUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
+    pdfUrl: ruleDocuments.poomsae.file,
     sourceName: 'World Taekwondo Poomsae Competition Rules & Explanations',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     summary:
@@ -152,7 +153,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Elite',
     beltLevel: 'Black Belt (Dan)',
     badgeColor: '#A855F7',
-    pdfUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
+    pdfUrl: ruleDocuments.poomsae.file,
     sourceName: 'World Taekwondo Poomsae Competition Rules & Explanations',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     summary:
@@ -196,7 +197,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Elite',
     beltLevel: 'Black Belt (Dan)',
     badgeColor: '#FF5733',
-    pdfUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
+    pdfUrl: ruleDocuments.poomsae.file,
     sourceName: 'World Taekwondo Freestyle Poomsae Scoring Guidelines',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     summary:
@@ -245,7 +246,7 @@ export const competitionRulesItems: LibraryItem[] = [
     difficulty: 'Advanced',
     beltLevel: 'Red Belt+',
     badgeColor: '#0042EA',
-    pdfUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
+    pdfUrl: ruleDocuments.poomsae.file,
     sourceName: 'World Taekwondo Recognized Poomsae Slow Movement Standards',
     sourceUrl: 'http://www.worldtaekwondo.org/rules-wt/rules.html',
     summary:

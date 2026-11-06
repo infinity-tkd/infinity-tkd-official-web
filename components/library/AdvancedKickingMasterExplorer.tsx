@@ -37,7 +37,7 @@ import {
   getAdvancedKickingOverview,
   kickingAdvancedI18n,
   getLocalizedAdvancedKickingItem,
-} from '@/data/library/kickingAdvancedTranslations'
+} from '@/data/library/kicking/kickingAdvancedTranslations'
 
 interface AdvancedKickingMasterExplorerProps {
   items: LibraryItem[]

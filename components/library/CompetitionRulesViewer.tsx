@@ -21,7 +21,8 @@ import {
   Flame,
   Zap,
 } from 'lucide-react'
-import { competitionRulesItems } from '@/data/library/competitionRules'
+import { competitionRulesItems } from '@/data/library/rules/competitionRules'
+import { ruleDocumentFileName, ruleDocuments } from '@/data/library/rules/ruleDocuments'
 import { useLanguage } from '@/context/LanguageContext'
 
 interface CompetitionRulesViewerProps {
@@ -35,28 +36,8 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
   const [pdfZoom, setPdfZoom] = React.useState(100)
   const [activeRuleModal, setActiveRuleModal] = React.useState<any | null>(null)
 
-  const pdfDocuments = {
-    kyorugi: {
-      title: 'World Taekwondo Kyorugi Competition Rules & Interpretation 2026',
-      koreanTitle: '세계태권도연맹 공인 겨루기 경기 규칙집',
-      edition: 'Official WT 2026 Edition',
-      fileName: 'world-taekwondo-kyorugi-rules-2026.pdf',
-      fileUrl: '/docs/world-taekwondo-kyorugi-rules-2026.pdf',
-      pages: 48,
-      lastUpdated: 'January 2026',
-    },
-    poomsae: {
-      title: 'World Taekwondo Poomsae Competition Rules & Scoring Guidelines 2026',
-      koreanTitle: '세계태권도연맹 공인 품새 채점 기준집',
-      edition: 'Official WT 2026 Edition',
-      fileName: 'world-taekwondo-poomsae-rules-2026.pdf',
-      fileUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
-      pages: 36,
-      lastUpdated: 'January 2026',
-    },
-  }
-
-  const currentPdf = pdfDocuments[activeRuleType]
+  // Rulebook metadata and PDF paths live in data/library/rules/ruleDocuments.ts.
+  const currentPdf = ruleDocuments[activeRuleType]
 
   return (
     <div className="space-y-8">
@@ -81,23 +62,25 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
             </p>
           </div>
 
-          {/* Quick PDF Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            <button
-              onClick={() => setIsPdfModalOpen(true)}
-              className="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-brand-glow inline-flex items-center gap-2 cursor-pointer"
-            >
-              <FileText className="w-3.5 h-3.5" /> Open PDF Reader Mode
-            </button>
+          {/* Quick PDF actions (only when the rulebook PDF is in public/docs) */}
+          {currentPdf.file && (
+            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              <button
+                onClick={() => setIsPdfModalOpen(true)}
+                className="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-brand-glow inline-flex items-center gap-2 cursor-pointer"
+              >
+                <FileText className="w-3.5 h-3.5" /> Open PDF Reader Mode
+              </button>
 
-            <a
-              href={currentPdf.fileUrl}
-              download={currentPdf.fileName}
-              className="px-3.5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 text-xs font-bold uppercase tracking-wider transition-colors inline-flex items-center gap-2 border border-zinc-200 dark:border-zinc-700"
-            >
-              <Download className="w-3.5 h-3.5" /> Download PDF
-            </a>
-          </div>
+              <a
+                href={currentPdf.file}
+                download={ruleDocumentFileName(currentPdf)}
+                className="px-3.5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 text-xs font-bold uppercase tracking-wider transition-colors inline-flex items-center gap-2 border border-zinc-200 dark:border-zinc-700"
+              >
+                <Download className="w-3.5 h-3.5" /> Download PDF
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Category Switcher Tabs */}
@@ -249,7 +232,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
       {/* -------------------------------------------------------------------- */}
       {/* PDF VIEWER MODAL (Full Online Read, Download, Zoom & Print) */}
       {/* -------------------------------------------------------------------- */}
-      {isPdfModalOpen && (
+      {isPdfModalOpen && currentPdf.file && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-fade-in"
           onClick={() => setIsPdfModalOpen(false)}
@@ -269,7 +252,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                     {currentPdf.title}
                   </h4>
                   <span className="text-[11px] text-zinc-400 font-mono block">
-                    {currentPdf.edition} &bull; {currentPdf.pages} Pages &bull; {currentPdf.lastUpdated}
+                    {currentPdf.edition} &bull; {currentPdf.pages} Pages &bull; {currentPdf.inForceDate}
                   </span>
                 </div>
               </div>
@@ -295,8 +278,8 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                 <div className="h-4 w-px bg-zinc-800 mx-1" />
 
                 <a
-                  href={currentPdf.fileUrl}
-                  download={currentPdf.fileName}
+                  href={currentPdf.file}
+                  download={ruleDocumentFileName(currentPdf)}
                   className="px-3 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" /> Download
@@ -328,7 +311,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
               >
                 {/* Iframe with fallback placeholder */}
                 <iframe
-                  src={`${currentPdf.fileUrl}#toolbar=0&navpanes=0`}
+                  src={`${currentPdf.file}#toolbar=0&navpanes=0`}
                   title={currentPdf.title}
                   className="w-full h-full border-0 min-h-[500px]"
                 />

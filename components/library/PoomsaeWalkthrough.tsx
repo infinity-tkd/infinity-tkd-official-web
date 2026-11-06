@@ -24,7 +24,7 @@ import {
   type FloorPoint,
   type PoomsaeWalkthrough as WalkthroughData,
   type Stance,
-} from '@/data/library/poomsaeWalkthroughs'
+} from '@/data/library/poomsae/poomsaeWalkthroughs'
 import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(useGSAP)

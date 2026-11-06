@@ -38,7 +38,7 @@ import {
   hosinsulSafetyFramework,
   type HosinsulBeltCurriculum,
   type HosinsulTechnique,
-} from '@/data/library/hosinsulCurriculum'
+} from '@/data/library/hosinsul/hosinsulCurriculum'
 import { SafeGrid } from '@/components/SafeGrid'
 import type { LibraryItem } from '@/data/library/types'
 import { useLanguage } from '@/context/LanguageContext'
@@ -47,7 +47,7 @@ import {
   getHardVsSoftData,
   getVitalPointsGuide,
   hosinsulI18n,
-} from '@/data/library/hosinsulTranslations'
+} from '@/data/library/hosinsul/hosinsulTranslations'
 
 interface HosinsulMasterExplorerProps {
   items: LibraryItem[]

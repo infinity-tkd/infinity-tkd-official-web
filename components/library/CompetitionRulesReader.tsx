@@ -18,13 +18,13 @@ import {
   assistanceAuthorizationMatrix,
   freestyleDeductions,
   hanmadangEventsData,
-} from '@/data/library/competitionRulesData'
+} from '@/data/library/rules/competitionRulesData'
 import {
   competitionRulesI18n,
   getLocalizedKyorugiPointValues,
   getLocalizedGamjeomRules,
   getLocalizedRefereeSignals,
-} from '@/data/library/competitionRulesTranslations'
+} from '@/data/library/rules/competitionRulesTranslations'
 import {
   getLocalizedOfficials,
   getLocalizedRingDynamics,
@@ -35,7 +35,8 @@ import {
   getLocalizedPoomsaeCases,
   getLocalizedFourteenBasicMovements,
   getLocalizedProhibitedCategories,
-} from '@/data/library/competitionRulesDetailedTranslations'
+} from '@/data/library/rules/competitionRulesDetailedTranslations'
+import { ruleDocumentFileName, ruleDocuments } from '@/data/library/rules/ruleDocuments'
 import { useLanguage } from '@/context/LanguageContext'
 import { FreestylePoomsaeScoreSimulator } from '@/components/library/FreestylePoomsaeScoreSimulator'
 import {
@@ -122,37 +123,8 @@ export function CompetitionRulesReader() {
 
   const activeSkill = freestyleTechnicalSkills.find((s) => s.id === activeFreestyleSkillId) || freestyleTechnicalSkills[0]
 
-  const pdfDocuments = {
-    kyorugi: {
-      title: 'World Taekwondo Kyorugi Competition Rules & Interpretation (2026 Edition)',
-      koreanTitle: '세계태권도연맹 공인 겨루기 경기 규칙집',
-      edition: 'Official WT 2026 Edition',
-      inForceDate: 'In Force as of January 1, 2026',
-      fileName: 'world-taekwondo-kyorugi-rules-2026.pdf',
-      fileUrl: '/docs/world-taekwondo-kyorugi-rules-2026.pdf',
-      pages: 48,
-    },
-    poomsae: {
-      title: 'World Taekwondo Poomsae Competition Rules & Operational Regulations (2024 Edition)',
-      koreanTitle: '세계태권도연맹 공인 품새 경기 규칙 및 운영 규정집',
-      edition: 'Official WT 2024 Edition',
-      inForceDate: 'In Force as of September 30, 2024',
-      fileName: 'world-taekwondo-poomsae-rules-2024.pdf',
-      fileUrl: '/docs/world-taekwondo-poomsae-rules-2024.pdf',
-      pages: 42,
-    },
-    hanmadang: {
-      title: 'World Taekwondo Hanmadang International Regulations & Breaking Standards',
-      koreanTitle: '세계태권도한마당 경기 규정집',
-      edition: 'Kukkiwon Hanmadang Edition',
-      inForceDate: 'Annual Festival Standards',
-      fileName: 'world-taekwondo-poomsae-rules-2026.pdf',
-      fileUrl: '/docs/world-taekwondo-poomsae-rules-2026.pdf',
-      pages: 36,
-    },
-  }
-
-  const currentPdf = pdfDocuments[masterCategory]
+  // Rulebook metadata and PDF paths live in data/library/rules/ruleDocuments.ts.
+  const currentPdf = ruleDocuments[masterCategory]
 
   return (
     <div className="space-y-8 font-sans">
@@ -207,12 +179,14 @@ export function CompetitionRulesReader() {
               </button>
             </div>
 
-            <button
-              onClick={() => setIsPdfModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-all shadow-md inline-flex items-center gap-2 cursor-pointer hover:bg-brand-red hover:text-white"
-            >
-              <FileText className="w-3.5 h-3.5" /> {ruleT.btnPdf}
-            </button>
+            {currentPdf.file && (
+              <button
+                onClick={() => setIsPdfModalOpen(true)}
+                className="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-all shadow-md inline-flex items-center gap-2 cursor-pointer hover:bg-brand-red hover:text-white"
+              >
+                <FileText className="w-3.5 h-3.5" /> {ruleT.btnPdf}
+              </button>
+            )}
           </div>
         </div>
 
@@ -3313,7 +3287,7 @@ export function CompetitionRulesReader() {
       {/* ==================================================================== */}
       {/* PDF VIEWER MODAL (Full Online Read, Download, Zoom & Print) */}
       {/* ==================================================================== */}
-      {isPdfModalOpen && (
+      {isPdfModalOpen && currentPdf.file && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 animate-fade-in"
           onClick={() => setIsPdfModalOpen(false)}
@@ -3359,8 +3333,8 @@ export function CompetitionRulesReader() {
                 </button>
 
                 <a
-                  href={currentPdf.fileUrl}
-                  download={currentPdf.fileName}
+                  href={currentPdf.file}
+                  download={ruleDocumentFileName(currentPdf)}
                   className="px-3 py-1.5 rounded-lg bg-brand-red text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" /> {ruleT.pdfModal.download}
@@ -3379,7 +3353,7 @@ export function CompetitionRulesReader() {
 
             <div className="flex-1 bg-zinc-100 dark:bg-zinc-900 overflow-hidden relative">
               <iframe
-                src={`${currentPdf.fileUrl}#toolbar=0&navpanes=0&zoom=${pdfZoom}`}
+                src={`${currentPdf.file}#toolbar=0&navpanes=0&zoom=${pdfZoom}`}
                 title={currentPdf.title}
                 className="w-full h-full border-none"
               />

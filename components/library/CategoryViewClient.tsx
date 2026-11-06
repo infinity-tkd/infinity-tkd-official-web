@@ -83,8 +83,8 @@ const AdvancedKickingMasterExplorer = dynamic(
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 import {
   BookOpen,
   Zap,

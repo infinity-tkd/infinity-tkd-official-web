@@ -3,7 +3,7 @@
 // Languages: English (en), Khmer (km), Chinese (zh), Korean (ko)
 // =============================================================================
 
-import type { LibraryItem } from './types'
+import type { LibraryItem } from '../types'
 import { poomsaeDetailedTranslations } from './poomsaeDetailedTranslations'
 
 export interface PoomsaeI18nDictionary {

@@ -35,7 +35,9 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
     }
   }
 
-  const title = `${item.name} (${item.koreanName})`
+  // e.g. "Taegeuk 1 (Il Jang) | Infinity Taekwondo" (brand added by the library layout template).
+  // The Korean name often has its own brackets, so it goes in the social title instead.
+  const title = item.name
   const description = `${item.summary} Belt Level: ${item.beltLevel}. Difficulty: ${item.difficulty}.`.slice(
     0,
     160
@@ -48,7 +50,7 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
       canonical: `/library/${item.category}/${item.slug}`,
     },
     openGraph: {
-      title: `${title} | Infinity Taekwondo`,
+      title: `${item.name} · ${item.koreanName} | Infinity Taekwondo`,
       description,
       type: 'article',
       url: `/library/${item.category}/${item.slug}`,
@@ -65,7 +67,7 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} | Infinity Taekwondo`,
+      title: `${item.name} · ${item.koreanName} | Infinity Taekwondo`,
       description,
       images: item.image ? [item.image] : ['/twitter-image'],
     },

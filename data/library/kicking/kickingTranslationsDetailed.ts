@@ -5,7 +5,7 @@
 // performance & applications, and recovery conditioning for ALL 10 KICKS.
 // =============================================================================
 
-import type { LibraryItem } from './types'
+import type { LibraryItem } from '../types'
 
 export const kickingDetailedTranslations: Record<
   'km' | 'zh' | 'ko',

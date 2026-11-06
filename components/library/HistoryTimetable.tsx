@@ -14,7 +14,7 @@ import {
   User,
   Filter,
 } from 'lucide-react'
-import { historyTimelineData, type TimelineMilestone } from '@/data/library/historyTimeline'
+import { historyTimelineData, type TimelineMilestone } from '@/data/library/history/historyTimeline'
 import { SafeImage } from '@/components/SafeImage'
 
 export function HistoryTimetable() {

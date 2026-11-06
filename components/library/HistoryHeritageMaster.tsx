@@ -43,8 +43,8 @@ import {
   type LocalizedTimelineItem,
   type LocalizedKwanItem,
   type LocalizedOrgItem,
-} from '@/data/library/historyTranslations'
-import { getLocalizedTimelineMilestones } from '@/data/library/historyTimelineTranslations'
+} from '@/data/library/history/historyTranslations'
+import { getLocalizedTimelineMilestones } from '@/data/library/history/historyTimelineTranslations'
 import {
   getLocalizedDualSpirit,
   getLocalizedFiveVirtues,
@@ -54,15 +54,15 @@ import {
   getLocalizedTheoryOfPower,
   getLocalizedDobokPhilosophy,
   getLocalizedPhilosophySubTabs,
-} from '@/data/library/historyPhilosophyTranslations'
+} from '@/data/library/history/historyPhilosophyTranslations'
 import {
   getLocalizedKwans,
   getLocalizedKwanUnification,
-} from '@/data/library/historyKwansTranslations'
+} from '@/data/library/history/historyKwansTranslations'
 import {
   getLocalizedOrganizations,
   getLocalizedOrganizationComparisonTable,
-} from '@/data/library/historyOrganizationsTranslations'
+} from '@/data/library/history/historyOrganizationsTranslations'
 import { SafeImage } from '@/components/SafeImage'
 
 type HistoryPillarKey = 'timeline' | 'philosophy' | 'heritage' | 'organizations'

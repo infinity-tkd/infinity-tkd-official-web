@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Official Curriculum Library & Knowledge Base',
+  // A plain string here would drop the root "%s | Infinity Taekwondo" template for every
+  // category and technique page, so the template is repeated for this segment.
+  title: {
+    default: 'Official Curriculum Library & Knowledge Base',
+    template: '%s | Infinity Taekwondo',
+  },
   description:
     'Authoritative World Taekwondo & Kukkiwon syllabus repository: Step-by-step Poomsae dossiers, Olympic kicking biomechanics, Hosinsul self-defense, and history.',
   alternates: {

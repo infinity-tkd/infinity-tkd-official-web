@@ -26,7 +26,7 @@ import {
   Layers,
   CircleDot,
 } from 'lucide-react'
-import { historyItems } from '@/data/library/history'
+import { historyItems } from '@/data/library/history/history'
 import { useLanguage } from '@/context/LanguageContext'
 import { HistoryTimetable } from './HistoryTimetable'
 import { SafeImage } from '@/components/SafeImage'

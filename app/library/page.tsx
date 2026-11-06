@@ -47,8 +47,8 @@ import {
   HosinsulCard,
 } from '@/components/library/TechniqueDisciplineCards'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 import dynamic from 'next/dynamic'
 
 const CompetitionRulesViewer = dynamic(

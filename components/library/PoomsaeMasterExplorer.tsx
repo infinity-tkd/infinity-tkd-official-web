@@ -50,7 +50,7 @@ import {
   decoratePoomsaeItem,
   type PoomsaeSeriesKey,
   type SeriesInfo,
-} from '@/data/library/poomsaeTranslations'
+} from '@/data/library/poomsae/poomsaeTranslations'
 import {
   WangFloorPlanVisualizer,
   ClockCompassDial,

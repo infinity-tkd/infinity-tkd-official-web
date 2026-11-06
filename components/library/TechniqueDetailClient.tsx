@@ -41,15 +41,15 @@ import {
 import dynamic from 'next/dynamic'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
-import { getWalkthrough } from '@/data/library/poomsaeWalkthroughs'
+import { getWalkthrough } from '@/data/library/poomsae/poomsaeWalkthroughs'
 
 // Code-split: GSAP is only downloaded on forms that have a walkthrough.
 const PoomsaeWalkthrough = dynamic(() => import('@/components/library/PoomsaeWalkthrough'), {
   loading: () => <div className="h-[460px] animate-pulse rounded-2xl border border-zinc-800 bg-zinc-950" aria-hidden="true" />,
 })
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 
 interface TechniqueDetailClientProps {
   item: LibraryItem

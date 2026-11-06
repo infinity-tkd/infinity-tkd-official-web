@@ -6,7 +6,7 @@
 // with Romanized Korean sounds in parentheses.
 // =============================================================================
 
-import type { LibraryItem } from './types'
+import type { LibraryItem } from '../types'
 
 export const poomsaeDetailedTranslations: Record<
   'km' | 'zh' | 'ko',
