@@ -195,7 +195,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {/* ==================================================================== */}
       {/* 4-PILLAR MASTER NAVIGATION TABS (14px Radius) */}
       {/* ==================================================================== */}
-      <div className="p-1.5 bg-zinc-200/70 dark:bg-zinc-900/80 rounded-[14px] border border-zinc-300 dark:border-zinc-800 flex flex-wrap gap-1 shadow-sm">
+      <div className="p-1.5 bg-zinc-200/70 dark:bg-zinc-900/80 rounded-2xl border border-zinc-300 dark:border-zinc-800 flex flex-wrap gap-1 shadow-sm">
         {/* Tab 1: Curriculum Matrix */}
         <button
           onClick={() => setActiveTab('curriculum')}
@@ -278,7 +278,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {activeTab === 'curriculum' && (
         <div className="space-y-8 animate-fade-in">
           {/* 7-Belt Rank Selector Tabs */}
-          <div className="flex overflow-x-auto gap-2 p-1.5 bg-white dark:bg-zinc-900/80 rounded-[14px] border border-zinc-200 dark:border-zinc-800 shadow-sm no-scrollbar">
+          <div className="flex overflow-x-auto gap-2 p-1.5 bg-white dark:bg-zinc-900/80 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm no-scrollbar">
             {hosinsulCurriculum.map((belt) => {
               const isSelected = selectedBeltId === belt.id
               return (
@@ -300,7 +300,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                       {belt.rank.split(' (')[0]}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-zinc-400 block truncate">
+                  <span className="text-[11px] font-mono text-zinc-400 block truncate">
                     {belt.geup} &bull; {belt.koreanRank.split(' (')[0]}
                   </span>
                 </button>
@@ -309,7 +309,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* Active Belt Header & Defensive Objective Banner */}
-          <div className="p-6 sm:p-7 rounded-[14px] border border-brand-red/30 bg-gradient-to-r from-brand-red/10 via-zinc-50/60 to-transparent dark:from-brand-red/15 dark:via-zinc-900/60 dark:to-transparent flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-sm">
+          <div className="p-6 sm:p-7 rounded-2xl border border-brand-red/30 bg-gradient-to-r from-brand-red/10 via-zinc-50/60 to-transparent dark:from-brand-red/15 dark:via-zinc-900/60 dark:to-transparent flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-sm">
             <div className="space-y-2 max-w-3xl">
               <div className="flex flex-wrap items-center gap-2.5">
                 <span
@@ -338,14 +338,14 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               <span className="text-2xl sm:text-3xl font-black text-brand-red block leading-none">
                 {activeBelt.categories.reduce((acc, c) => acc + c.techniques.length, 0)}
               </span>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-1 block">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-1 block">
                 Required Techniques
               </span>
             </div>
           </div>
 
           {/* Search & Category Filter Row */}
-          <div className="p-4 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Input */}
             <div className="relative w-full md:w-80">
               <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
@@ -389,7 +389,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
 
           {/* Curriculum Techniques Rendered via SafeGrid */}
           {filteredCurriculumCategories.length === 0 ? (
-            <div className="p-12 text-center rounded-[14px] border border-dashed border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20">
+            <div className="p-12 text-center rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20">
               <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400">
                 No techniques match your search query in this belt rank.
               </p>
@@ -424,11 +424,11 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     {category.techniques.map((tech) => (
                       <div
                         key={tech.id}
-                        className="p-5 sm:p-6 rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/70 hover:border-brand-red/50 dark:hover:border-brand-red/50 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group"
+                        className="p-5 sm:p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/70 hover:border-brand-red/50 dark:hover:border-brand-red/50 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group"
                       >
                         <div>
                           <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
                               {tech.category}
                             </span>
                             {tech.koreanName && (
@@ -447,7 +447,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                             </p>
                           )}
 
-                          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed mt-3">
+                          <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed mt-3">
                             {tech.mechanics}
                           </p>
                         </div>
@@ -455,7 +455,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                         {tech.targetArea && (
                           <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center gap-2 text-xs">
                             <Target className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                            <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+                            <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
                               Target: {tech.targetArea}
                             </span>
                           </div>
@@ -485,7 +485,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   Universal Safety & "Tap-Out" Rules
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light">
+                <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400">
                   Strict protocol mandates enforced across all partner self-defense drills.
                 </p>
               </div>
@@ -495,12 +495,12 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               {hosinsulSafetyFramework.universalRules.map((rule) => (
                 <div
                   key={rule.id}
-                  className="p-5 rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 flex flex-col justify-between shadow-sm relative overflow-hidden"
+                  className="p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 flex flex-col justify-between shadow-sm relative overflow-hidden"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span
-                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                        className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                           rule.severity === 'critical'
                             ? 'bg-red-500 text-white'
                             : rule.severity === 'high'
@@ -511,7 +511,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                         {rule.badgeText}
                       </span>
                       {rule.koreanTitle && (
-                        <span className="text-[10px] font-mono text-zinc-400">
+                        <span className="text-[11px] font-mono text-zinc-400">
                           {rule.koreanTitle}
                         </span>
                       )}
@@ -519,7 +519,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     <h4 className="text-sm sm:text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                       {rule.title}
                     </h4>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-300 font-light leading-relaxed mt-2">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-2">
                       {rule.rule}
                     </p>
                   </div>
@@ -538,14 +538,14 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   4-Tier Contact & Resistance Progression Matrix
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light">
+                <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400">
                   Systematic pressure scaling eliminating uncontrolled joint hyperextension and trauma.
                 </p>
               </div>
             </div>
 
             {/* Tier Selector Buttons */}
-            <div className="p-1.5 bg-white dark:bg-zinc-900/80 rounded-[14px] border border-zinc-200 dark:border-zinc-800 flex flex-wrap gap-2 shadow-sm">
+            <div className="p-1.5 bg-white dark:bg-zinc-900/80 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex flex-wrap gap-2 shadow-sm">
               {hosinsulSafetyFramework.progressionMatrix.map((tier) => {
                 const isSelected = selectedSafetyTier === tier.tier
                 return (
@@ -558,7 +558,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                         : 'border-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800/40 text-zinc-600 dark:text-zinc-400'
                     }`}
                   >
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-red block">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand-red block">
                       {tier.tier}
                     </span>
                     <h5 className="text-sm font-black uppercase tracking-tight text-zinc-900 dark:text-white mt-0.5">
@@ -570,7 +570,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
             </div>
 
             {/* Active Tier Spotlight Card */}
-            <div className="p-6 sm:p-8 rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-md space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red">
@@ -584,7 +584,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                   {activeSafetyTier.gearRequired.map((gear, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-bold text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-xs font-bold text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
                     >
                       <CheckCircle2 className="w-3 h-3 text-brand-red" />
                       {gear}
@@ -625,7 +625,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               {/* Behavior & Focus Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-800/60">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400 block mb-1">
                     Partner Behavior Mode
                   </span>
                   <p className="text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
@@ -633,7 +633,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-brand-red/5 border border-brand-red/20">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                     Primary Pedagogical Focus
                   </span>
                   <p className="text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
@@ -644,7 +644,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
             </div>
 
             {/* Side-by-Side Full Matrix Comparison Table */}
-            <div className="overflow-x-auto rounded-[14px] border border-zinc-200 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900/80">
+            <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm bg-white dark:bg-zinc-900/80">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/60 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
@@ -659,7 +659,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                   {hosinsulSafetyFramework.progressionMatrix.map((tier) => (
                     <tr key={tier.tier} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
                       <td className="p-3.5 sm:p-4 font-bold text-zinc-900 dark:text-white">
-                        <span className="text-brand-red font-mono block text-[10px]">{tier.tier}</span>
+                        <span className="text-brand-red font-mono block text-[11px]">{tier.tier}</span>
                         {tier.levelName}
                       </td>
                       <td className="p-3.5 sm:p-4 font-mono">{tier.speedLabel}</td>
@@ -667,7 +667,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                       <td className="p-3.5 sm:p-4">
                         <div className="flex flex-wrap gap-1">
                           {tier.gearRequired.map((g, idx) => (
-                            <span key={idx} className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] font-mono">
+                            <span key={idx} className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-[11px] font-mono">
                               {g}
                             </span>
                           ))}
@@ -691,7 +691,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   Technique-Specific Safety Parameters
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light">
+                <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400">
                   Biomechanical constraints for small joints, cervical spine, knees, throws, and weapon simulations.
                 </p>
               </div>
@@ -701,10 +701,10 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               {hosinsulSafetyFramework.safetyParameters.map((param) => (
                 <div
                   key={param.id}
-                  className="p-5 sm:p-6 rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-sm flex flex-col justify-between"
+                  className="p-5 sm:p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-sm flex flex-col justify-between"
                 >
                   <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                       {param.subtitle}
                     </span>
                     <h4 className="text-sm sm:text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-3">
@@ -714,7 +714,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                       {param.guidelines.map((guide, idx) => (
                         <li
                           key={idx}
-                          className="text-xs text-zinc-600 dark:text-zinc-300 font-light leading-relaxed flex items-start gap-2"
+                          className="text-[13px] text-zinc-600 dark:text-zinc-300 leading-relaxed flex items-start gap-2"
                         >
                           <span className="text-brand-red font-bold">&bull;</span>
                           <span>{guide}</span>
@@ -737,14 +737,14 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   Floor Management & Instructor Intervention
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light">
+                <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400">
                   Enforced commands, ego control, and safe student pairing algorithms.
                 </p>
               </div>
             </div>
 
             {/* Emergency Stop Banner */}
-            <div className="p-6 sm:p-7 rounded-[14px] border border-red-500/40 bg-red-500/10 dark:bg-red-950/30 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg">
+            <div className="p-6 sm:p-7 rounded-2xl border border-red-500/40 bg-red-500/10 dark:bg-red-950/30 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg">
               <div className="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center shrink-0 shadow-brand-glow animate-pulse">
                 <Siren className="w-6 h-6" />
               </div>
@@ -760,7 +760,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   The "FREEZE!" Command
                 </h4>
-                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+                <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                   If the instructor shouts <strong>"FREEZE!"</strong> or sounds a single long whistle, every student on the floor must halt motion instantly while holding their exact position.
                 </p>
               </div>
@@ -773,7 +773,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 .map((proto) => (
                   <div
                     key={proto.id}
-                    className="p-5 sm:p-6 rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-sm flex flex-col justify-between"
+                    className="p-5 sm:p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-sm flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-2">
@@ -781,16 +781,16 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                           {proto.command}
                         </h4>
                         {proto.koreanCommand && (
-                          <span className="text-[10px] font-mono text-zinc-400">
+                          <span className="text-[11px] font-mono text-zinc-400">
                             {proto.koreanCommand}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+                      <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                         {proto.action}
                       </p>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 text-[11px] text-zinc-500 dark:text-zinc-400">
+                    <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 text-xs text-zinc-500 dark:text-zinc-400">
                       <strong>Rationale:</strong> {proto.rationale}
                     </div>
                   </div>
@@ -806,7 +806,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {activeTab === 'catalog' && (
         <div className="space-y-6">
           {/* Controls Bar: Search & Sub-Filters */}
-          <div className="p-4 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Input */}
             <div className="relative w-full md:w-96">
               <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
@@ -859,18 +859,18 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     setSelectedItem(item)
                     setCurrentStepIndex(0)
                   }}
-                  className="p-6 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 hover:shadow-xl transition-all duration-300 cursor-pointer group flex flex-col justify-between"
                 >
                   <div>
                     {/* Top Metadata */}
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span
-                        className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-white"
+                        className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider text-white"
                         style={{ backgroundColor: item.badgeColor }}
                       >
                         {item.difficulty}
                       </span>
-                      <span className="text-[11px] font-mono text-zinc-400">{item.beltLevel}</span>
+                      <span className="text-xs font-mono text-zinc-400">{item.beltLevel}</span>
                     </div>
 
                     {/* Titles */}
@@ -888,13 +888,13 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                   {/* Bottom Tags */}
                   <div className="space-y-2 pt-3 border-t border-zinc-100 dark:border-zinc-800/80">
                     {item.targetArea && (
-                      <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400">
                         <Target className="w-3.5 h-3.5 text-brand-red flex-shrink-0" />
                         <span className="truncate">{item.targetArea}</span>
                       </div>
                     )}
                     <div className="flex items-center justify-between pt-1">
-                      <span className="text-[10px] font-mono text-zinc-400">
+                      <span className="text-[11px] font-mono text-zinc-400">
                         {item.steps?.length || 0} Steps
                       </span>
                       <span className="inline-flex items-center gap-1 text-xs font-bold text-brand-red group-hover:translate-x-0.5 transition-transform">
@@ -909,7 +909,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </SafeGrid>
 
           {filteredItems.length === 0 && (
-            <div className="p-12 text-center rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+            <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
               <Shield className="w-10 h-10 text-zinc-400 mx-auto mb-3 opacity-40" />
               <p className="text-sm text-zinc-500">No self-defense techniques match your filter query.</p>
             </div>
@@ -923,7 +923,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {activeTab === 'principles' && (
         <div className="space-y-8">
           {/* 1. Etymology of Ho-Sin-Sul */}
-          <div className="p-8 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <div className="max-w-3xl mb-8">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block mb-1">
                 {foundations.koreanTitle}
@@ -961,7 +961,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* 2. Ilgyeok Pilsal (One Decisive Blow Doctrine) */}
-          <div className="p-8 sm:p-10 rounded-[14px] bg-gradient-to-br from-brand-red/10 via-white dark:via-zinc-900 to-white dark:to-zinc-900 border border-brand-red/30 shadow-md">
+          <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-brand-red/10 via-white dark:via-zinc-900 to-white dark:to-zinc-900 border border-brand-red/30 shadow-md">
             <div className="max-w-3xl mb-6">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block mb-1">
                 {foundations.ilgyeokPilsal.koreanTerm} &bull; {foundations.ilgyeokPilsal.hanja}
@@ -996,7 +996,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* 3. The 4 Technical Pillars of Hosinsul */}
-          <div className="p-8 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <div className="max-w-3xl mb-8">
               <h3 className="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">
                 {foundations.fourPillars.title}
@@ -1023,7 +1023,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     {pillar.techniques.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300"
+                        className="px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300"
                       >
                         {tech}
                       </span>
@@ -1035,7 +1035,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* 4. The Taekwondo & Hapkido Connection */}
-          <div className="p-8 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <div className="max-w-3xl mb-6">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block mb-1">
                 {foundations.hapkidoConnection.koreanTitle}
@@ -1069,7 +1069,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {activeTab === 'hard-vs-soft' && (
         <div className="space-y-8">
           {/* Header Banner */}
-          <div className="p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block mb-1">
               {hardVsSoft.koreanTitle}
             </span>
@@ -1084,7 +1084,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           {/* 2-Column Comparison: Linear Hard vs Circular Soft */}
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Column 1: Linear / Hard Techniques */}
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
@@ -1117,15 +1117,15 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     >
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-bold text-zinc-900 dark:text-white">{tier.range}</span>
-                        <span className="text-[10px] font-mono text-brand-red">{tier.koreanRange}</span>
+                        <span className="text-[11px] font-mono text-brand-red">{tier.koreanRange}</span>
                       </div>
                       <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-200 mb-1">
                         Weapons: {tier.weapons}
                       </p>
-                      <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-1.5">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-1.5">
                         {tier.strategy}
                       </p>
-                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-amber-600 dark:text-amber-400">
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-600 dark:text-amber-400">
                         <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>Warning: {tier.dangerWarning}</span>
                       </div>
@@ -1139,12 +1139,12 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 <h5 className="text-xs font-bold text-brand-red mb-1">
                   {hardVsSoft.linearHard.multipleAttackerDoctrine.title}
                 </h5>
-                <p className="text-[11px] text-zinc-700 dark:text-zinc-200 font-semibold mb-2">
+                <p className="text-xs text-zinc-700 dark:text-zinc-200 font-semibold mb-2">
                   {hardVsSoft.linearHard.multipleAttackerDoctrine.rule}
                 </p>
                 <ul className="space-y-1">
                   {hardVsSoft.linearHard.multipleAttackerDoctrine.tactics.map((tactic, idx) => (
-                    <li key={idx} className="text-[11px] text-zinc-600 dark:text-zinc-400 flex items-start gap-1.5">
+                    <li key={idx} className="text-xs text-zinc-600 dark:text-zinc-400 flex items-start gap-1.5">
                       <span className="text-brand-red font-bold">&bull;</span>
                       <span>{tactic}</span>
                     </li>
@@ -1154,7 +1154,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
             </div>
 
             {/* Column 2: Circular / Soft Techniques */}
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
@@ -1186,7 +1186,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                       className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60"
                     >
                       <h5 className="text-xs font-bold text-zinc-900 dark:text-white mb-1">{p.name}</h5>
-                      <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed">{p.desc}</p>
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">{p.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -1219,7 +1219,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* Side-by-Side Comparison Matrix Table */}
-          <div className="p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <h3 className="text-xl font-bold text-zinc-900 dark:text-white uppercase tracking-tight mb-4">
               Tactical & Technical Comparison Matrix
             </h3>
@@ -1253,7 +1253,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {activeTab === 'vital-points' && (
         <div className="space-y-8">
           {/* Header Banner */}
-          <div className="p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block mb-1">
               {vitalPointsGuide.koreanTitle}
             </span>
@@ -1293,7 +1293,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold">{vp.name}</span>
                       <span
-                        className={`text-[9px] font-mono px-1.5 py-0.5 rounded font-bold uppercase ${
+                        className={`text-[11px] font-mono px-1.5 py-0.5 rounded font-bold uppercase ${
                           vp.dangerLevel.includes('Lethal')
                             ? 'bg-red-500/20 text-red-500'
                             : 'bg-amber-500/20 text-amber-500'
@@ -1302,7 +1302,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                         {vp.dangerLevel}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-zinc-400 block mt-0.5">{vp.location}</span>
+                    <span className="text-xs font-mono text-zinc-400 block mt-0.5">{vp.location}</span>
                   </div>
                   <ChevronRight className="w-4 h-4 opacity-50" />
                 </div>
@@ -1311,14 +1311,14 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
 
             {/* Right Column: Detailed Anatomical Dossier */}
             <div className="lg:col-span-7">
-              <div className="p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md h-full flex flex-col justify-between">
+              <div className="p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono font-bold text-brand-red">
                       {selectedVitalPoint.koreanName} &bull; {selectedVitalPoint.romanized}
                     </span>
                     <span
-                      className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                      className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider ${
                         selectedVitalPoint.dangerLevel.includes('Lethal')
                           ? 'bg-red-500 text-white'
                           : 'bg-amber-500 text-black'
@@ -1365,7 +1365,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-[11px] text-zinc-400 font-mono">
+                <div className="pt-6 mt-6 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>Tactical Application: Ilgyeok Pilsal</span>
                   <span>Target Zone: {selectedVitalPoint.targetArea.toUpperCase()}</span>
                 </div>
@@ -1374,7 +1374,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* The 4-Stage Legal Self-Defense Framework */}
-          <div className="p-8 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <h3 className="text-xl font-black text-zinc-900 dark:text-white uppercase tracking-tight mb-6">
               {vitalPointsGuide.legalFramework.title}
             </h3>
@@ -1410,14 +1410,14 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] shadow-2xl overflow-hidden flex flex-col"
+            className="w-full max-w-4xl max-h-[90vh] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Modal Header */}
             <div className="p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/90">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span
-                    className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase text-white"
+                    className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase text-white"
                     style={{ backgroundColor: activeTechnique.badgeColor }}
                   >
                     {activeTechnique.difficulty}
@@ -1453,7 +1453,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               <div className="grid sm:grid-cols-2 gap-4">
                 {activeTechnique.strikingSurface && (
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800">
-                    <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 block mb-1">
+                    <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-1">
                       {t.strikingSurface}
                     </span>
                     <p className="text-xs font-bold text-zinc-900 dark:text-white">
@@ -1463,7 +1463,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                 )}
                 {activeTechnique.targetArea && (
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800">
-                    <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 block mb-1">
+                    <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-1">
                       {t.targetArea}
                     </span>
                     <p className="text-xs font-bold text-brand-red">{activeTechnique.targetArea}</p>
@@ -1473,7 +1473,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
 
               {/* Stepper View / Full List Toggle */}
               {activeTechnique.steps && activeTechnique.steps.length > 0 && (
-                <div className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
+                <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono font-bold uppercase tracking-wider text-brand-red">
                       {t.stepSequence} ({activeTechnique.steps.length} Steps)
@@ -1557,7 +1557,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
 
               {/* Korean Terminology Glossary Table */}
               {activeTechnique.terminology && activeTechnique.terminology.length > 0 && (
-                <div className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
+                <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-brand-red block mb-3">
                     {t.koreanTerminology}
                   </span>
@@ -1579,7 +1579,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                               {term.romanized}
                             </td>
                             <td className="py-2.5 px-3 text-zinc-800 dark:text-zinc-200">{term.english}</td>
-                            <td className="py-2.5 px-3 font-mono text-[10px] text-zinc-400">
+                            <td className="py-2.5 px-3 font-mono text-[11px] text-zinc-400">
                               {term.category || 'General'}
                             </td>
                           </tr>

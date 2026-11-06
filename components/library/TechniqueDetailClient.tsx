@@ -134,7 +134,7 @@ export function TechniqueDetailClient({
         </div>
 
         {/* Hero Banner (14px radius) */}
-        <div className="p-8 sm:p-12 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl mb-10 relative overflow-hidden">
+        <div className="p-8 sm:p-12 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl mb-10 relative overflow-hidden">
           <div
             className="absolute top-0 right-0 w-96 h-96 blur-[130px] rounded-full pointer-events-none opacity-20"
             style={{ backgroundColor: item.badgeColor }}
@@ -148,7 +148,7 @@ export function TechniqueDetailClient({
 
           <div className="relative z-10">
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+              <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
                 {item.beltLevel}
               </span>
               {item.danMastery && (
@@ -158,11 +158,11 @@ export function TechniqueDetailClient({
                 />
               )}
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[10px] font-mono text-zinc-500">{item.difficulty}</span>
+              <span className="text-[11px] font-mono text-zinc-500">{item.difficulty}</span>
               {item.danMastery && (
                 <>
                   <span className="text-zinc-400">&bull;</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
                     {t.library.characteristicOfMaster} {item.danMastery.masterCharacteristic}
                   </span>
                 </>
@@ -170,7 +170,7 @@ export function TechniqueDetailClient({
               {item.taegeukPhilosophy && (
                 <>
                   <span className="text-zinc-400">&bull;</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-brand-red/10 text-brand-red border border-brand-red/20 flex items-center gap-1">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red/10 text-brand-red border border-brand-red/20 flex items-center gap-1">
                     <span className="font-serif">{item.taegeukPhilosophy.trigramSymbol}</span>
                     <span>
                       {item.taegeukPhilosophy.trigramName} &bull;{' '}
@@ -182,7 +182,7 @@ export function TechniqueDetailClient({
               {item.newPoomsaeSpec && (
                 <>
                   <span className="text-zinc-400">&bull;</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center gap-1">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center gap-1">
                     <span>Form #{item.newPoomsaeSpec.formNumber}</span>
                     <span>&bull;</span>
                     <span>{item.newPoomsaeSpec.targetAge.split('(')[0].trim()}</span>
@@ -209,7 +209,7 @@ export function TechniqueDetailClient({
         {/* KUKKIWON BLACK BELT DAN MASTERY SPECIFICATION (If Dan Poomsae)     */}
         {/* ------------------------------------------------------------------ */}
         {item.danMastery && (
-          <div className="mb-10 p-6 sm:p-8 rounded-[14px] bg-gradient-to-br from-zinc-950 via-zinc-900 to-black text-white border border-amber-500/30 shadow-2xl relative overflow-hidden">
+          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-black text-white border border-amber-500/30 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
 
             {/* Header */}
@@ -220,7 +220,7 @@ export function TechniqueDetailClient({
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-amber-400">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-amber-400">
                       {t.library.danMasterySpec}
                     </span>
                     <BlackBeltStripesBadge
@@ -255,20 +255,20 @@ export function TechniqueDetailClient({
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-800/80 relative z-10">
               {/* Meaning of Name */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   {t.library.meaningOfName}
                 </span>
                 <strong className="text-sm font-bold text-white block">
                   {item.danMastery.meaningOfName}
                 </strong>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   Forms the spiritual baseline of {item.danMastery.formName} Dan technique.
                 </span>
               </div>
 
               {/* Floor Pattern Symbol */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Floor Pattern (Line)
                 </span>
                 <div className="flex items-center gap-2">
@@ -279,14 +279,14 @@ export function TechniqueDetailClient({
                     {item.danMastery.floorPatternName}
                   </strong>
                 </div>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   KTA / WT official directional trajectory.
                 </span>
               </div>
 
               {/* Meaning of Symbol */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Meaning of Symbol
                 </span>
                 <div className="flex items-center gap-2">
@@ -297,14 +297,14 @@ export function TechniqueDetailClient({
                     {item.danMastery.meaningOfSymbol}
                   </strong>
                 </div>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   Hanja calligraphy symbolism.
                 </span>
               </div>
 
               {/* Belt Stripes Badge & Rank */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Belt Embroidery Stripes
                 </span>
                 <div className="flex items-center gap-2">
@@ -316,7 +316,7 @@ export function TechniqueDetailClient({
                     {item.danMastery.danRank}
                   </span>
                 </div>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   {item.danMastery.danRank} Grandmaster Kukkiwon Dan rank standard.
                 </span>
               </div>
@@ -358,7 +358,7 @@ export function TechniqueDetailClient({
             />
 
             {/* Philosophy & Dialectic Role Banner */}
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800 flex-wrap gap-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center text-brand-red font-serif font-black text-xl">
@@ -404,7 +404,7 @@ export function TechniqueDetailClient({
               {/* Introduced Key Techniques Chips */}
               {item.taegeukPhilosophy.introducedKeyTechniques && (
                 <div className="pt-2">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-bold block mb-2">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-bold block mb-2">
                     Key Syllabus Techniques Introduced in this Form:
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -423,7 +423,7 @@ export function TechniqueDetailClient({
 
             {/* 8 WT Performance Pillars & Biomechanical Criteria */}
             {item.taegeukPhilosophy.executionPrinciples && (
-              <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-brand-red font-bold">
                   <Flame className="w-4 h-4" /> 8 WT Performance Principles &amp; Criteria
                 </div>
@@ -451,7 +451,7 @@ export function TechniqueDetailClient({
         {/* KUKKIWON NEW POOMSAE SUITE SPECIFICATION (If New Poomsae)          */}
         {/* ------------------------------------------------------------------ */}
         {item.newPoomsaeSpec && (
-          <div className="mb-10 p-6 sm:p-8 rounded-[14px] bg-gradient-to-br from-zinc-950 via-zinc-900 to-black text-white border border-blue-500/30 shadow-2xl relative overflow-hidden">
+          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-black text-white border border-blue-500/30 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
 
             {/* Header */}
@@ -462,10 +462,10 @@ export function TechniqueDetailClient({
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-blue-400">
                       Kukkiwon New Poomsae Suite (Elite Competition)
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
                       Form #{item.newPoomsaeSpec.formNumber}
                     </span>
                   </div>
@@ -492,49 +492,49 @@ export function TechniqueDetailClient({
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-800/80 relative z-10">
               {/* Competition Division */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Target Age Division
                 </span>
                 <strong className="text-sm font-bold text-white block">
                   {item.newPoomsaeSpec.targetAge}
                 </strong>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   Designated division in international championships.
                 </span>
               </div>
 
               {/* Line Symbol Meaning */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Movement Concept
                 </span>
                 <strong className="text-sm font-bold text-blue-400 block">
                   {item.newPoomsaeSpec.englishConcept}
                 </strong>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   {item.newPoomsaeSpec.lineSymbolMeaning}
                 </span>
               </div>
 
               {/* Total Movements */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Total Movement Count
                 </span>
                 <strong className="text-sm font-bold text-white block">
                   {item.totalMovements || 20} Movements
                 </strong>
-                <span className="text-[11px] text-zinc-400 leading-snug block">
+                <span className="text-xs text-zinc-400 leading-snug block">
                   Strictly judged per WT deduction metrics.
                 </span>
               </div>
 
               {/* Research Institute Context */}
               <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider block">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider block">
                   Official Meaning
                 </span>
-                <p className="text-xs text-zinc-300 font-light leading-snug">
+                <p className="text-[13px] text-zinc-300 leading-snug">
                   {item.newPoomsaeSpec.officialMeaning}
                 </p>
               </div>
@@ -556,7 +556,7 @@ export function TechniqueDetailClient({
               {item.newPoomsaeSpec.technicalCharacteristics?.signatureKicks &&
                 item.newPoomsaeSpec.technicalCharacteristics.signatureKicks.length > 0 && (
                   <div className="space-y-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-bold block">
                       Signature Kicking Techniques:
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -576,7 +576,7 @@ export function TechniqueDetailClient({
               {item.newPoomsaeSpec.technicalCharacteristics?.signatureHands &&
                 item.newPoomsaeSpec.technicalCharacteristics.signatureHands.length > 0 && (
                   <div className="space-y-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-bold block">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-bold block">
                       Signature Hand &amp; Blocking Systems:
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -607,7 +607,7 @@ export function TechniqueDetailClient({
 
         {/* Video Demonstration */}
         {safeVideoUrl && (
-          <div className="mb-10 p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md">
             <h3 className="text-base font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-zinc-900 dark:text-white">
               <Play className="w-4 h-4 text-brand-red" /> {t.library.videoDemonstration}
             </h3>
@@ -627,7 +627,7 @@ export function TechniqueDetailClient({
         {/* HISTORY BLOG EDITORIAL MODE (For history articles) */}
         {/* ------------------------------------------------------------------ */}
         {isHistory ? (
-          <div className="mb-10 p-8 sm:p-12 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+          <div className="mb-10 p-8 sm:p-12 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800 text-xs font-mono text-zinc-500">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-brand-red" />
@@ -666,7 +666,7 @@ export function TechniqueDetailClient({
         {/* COMPETITION RULES PDF DOCUMENT EMBED / DOWNLOAD BAR */}
         {/* ------------------------------------------------------------------ */}
         {isCompetitionRule && item.pdfUrl ? (
-          <div className="mb-10 p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-wrap items-center justify-between gap-4">
+          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <FileText className="w-6 h-6 text-brand-red shrink-0" />
               <div>
@@ -711,7 +711,7 @@ export function TechniqueDetailClient({
                 <div className="grid sm:grid-cols-2 gap-3 text-xs">
                   {item.strikingSurface && (
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase block mb-1">
+                      <span className="text-[11px] font-mono text-zinc-400 font-bold uppercase block mb-1">
                         {t.library.strikingWeaponLabel}
                       </span>
                       <strong className="text-zinc-900 dark:text-white block font-bold text-sm">
@@ -721,7 +721,7 @@ export function TechniqueDetailClient({
                   )}
                   {item.targetArea && (
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <span className="text-[10px] font-mono text-zinc-400 font-bold uppercase block mb-1">
+                      <span className="text-[11px] font-mono text-zinc-400 font-bold uppercase block mb-1">
                         {t.library.targetAnatomyLabel}
                       </span>
                       <strong className="text-zinc-900 dark:text-white block font-bold text-sm">
@@ -753,7 +753,7 @@ export function TechniqueDetailClient({
                       style={{ width: `${frontPercent}%` }}
                     />
                   </div>
-                  <p className="text-xs text-zinc-500 font-light text-center">
+                  <p className="text-[13px] text-zinc-500 text-center">
                     {item.weightDistribution}
                   </p>
                 </div>
@@ -762,10 +762,10 @@ export function TechniqueDetailClient({
               {/* Philosophical Meaning Card */}
               {item.meaning && (
                 <div className="p-5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-1.5">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block">
                     {t.library.martialPhilosophy}
                   </span>
-                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+                  <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                     {item.meaning}
                   </p>
                 </div>
@@ -776,7 +776,7 @@ export function TechniqueDetailClient({
 
         {/* Dynamic Step / Timeline / Rules Breakdown Section (14px radius) */}
         {item.steps && item.steps.length > 0 && (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-10 mb-10 shadow-md">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-10 mb-10 shadow-md">
             <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight mb-6 flex items-center gap-2 text-zinc-900 dark:text-white">
               <StepIcon className="w-5 h-5 text-brand-red" /> {stepSectionTitle}
             </h2>
@@ -798,7 +798,7 @@ export function TechniqueDetailClient({
 
         {/* Dynamic Korean Terminology Glossary Section */}
         {item.terminology && item.terminology.length > 0 && (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-10 mb-10 shadow-md">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-10 mb-10 shadow-md">
             <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight mb-6 flex items-center gap-2 text-zinc-900 dark:text-white">
               <BookOpen className="w-5 h-5 text-brand-red" /> {t.library.glossaryTitle}
             </h2>
@@ -813,13 +813,13 @@ export function TechniqueDetailClient({
                       {term.korean}
                     </strong>
                     {term.category && (
-                      <span className="text-[9px] uppercase px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-bold">
+                      <span className="text-xs px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
                         {term.category}
                       </span>
                     )}
                   </div>
                   <div className="text-xs font-bold text-brand-red">{term.romanized}</div>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-xs font-light">
+                  <p className="text-zinc-600 dark:text-zinc-400 text-[13px]">
                     {term.english}
                   </p>
                 </div>
@@ -830,7 +830,7 @@ export function TechniqueDetailClient({
 
         {/* Dynamic Master Coaching Tips Section */}
         {item.coachingTips && item.coachingTips.length > 0 && (
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-10 mb-10 shadow-md">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-10 mb-10 shadow-md">
             <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight mb-6 flex items-center gap-2 text-amber-500">
               <Zap className="w-5 h-5" /> {t.library.coachingTipsTitle}
             </h2>
@@ -854,7 +854,7 @@ export function TechniqueDetailClient({
         <div className="grid md:grid-cols-2 gap-6 mb-10">
           {/* Cues / Evidence */}
           {item.keyDetails && item.keyDetails.length > 0 && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-8 shadow-md">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-md">
               <h3 className="text-base font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-emerald-500">
                 <CheckCircle2 className="w-4 h-4" /> {cuesSectionTitle}
               </h3>
@@ -871,7 +871,7 @@ export function TechniqueDetailClient({
 
           {/* Mistakes / Notes / Infractions */}
           {item.commonMistakes && item.commonMistakes.length > 0 && (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-8 shadow-md">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-md">
               <h3 className="text-base font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-brand-red">
                 <XCircle className="w-4 h-4" /> {errorsSectionTitle}
               </h3>
@@ -889,9 +889,9 @@ export function TechniqueDetailClient({
 
         {/* External Reference Link (Automatically hidden if empty) */}
         {item.sourceUrl && (
-          <div className="mb-10 p-4 sm:p-5 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex items-center justify-between text-xs">
+          <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex items-center justify-between text-xs">
             <div>
-              <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase block mb-0.5">
+              <span className="text-[11px] font-mono font-bold text-zinc-400 uppercase block mb-0.5">
                 {t.library.officialCitation}
               </span>
               <strong className="text-zinc-900 dark:text-white">
@@ -943,7 +943,7 @@ export function TechniqueDetailClient({
                       className="w-12 h-12 rounded-lg object-cover grayscale group-hover:grayscale-0 transition-all shrink-0"
                     />
                     <div className="min-w-0">
-                      <span className="text-[10px] font-mono text-zinc-400 block truncate">
+                      <span className="text-[11px] font-mono text-zinc-400 block truncate">
                         {rel.koreanName}
                       </span>
                       <strong className="text-xs font-bold text-zinc-900 dark:text-white truncate block group-hover:text-brand-red transition-colors">
@@ -958,7 +958,7 @@ export function TechniqueDetailClient({
         )}
 
         {/* Lead Gen Banner (14px radius) */}
-        <div className="p-8 sm:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-lg">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
               {t.library.inPersonMastery}
@@ -966,7 +966,7 @@ export function TechniqueDetailClient({
             <h3 className="text-2xl font-black uppercase">
               {t.library.readyToExplore} {item.name}?
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+            <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
               {t.library.leadGenDesc}
             </p>
           </div>

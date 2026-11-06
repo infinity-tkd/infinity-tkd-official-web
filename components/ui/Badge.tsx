@@ -26,7 +26,7 @@ const variantStyles: Record<NonNullable<BadgeProps['variant']>, string> = {
 }
 
 const sizeStyles: Record<NonNullable<BadgeProps['size']>, string> = {
-  sm: 'text-[10px] px-2 py-0.5 font-bold uppercase tracking-wider',
+  sm: 'text-[11px] px-2 py-0.5 font-bold uppercase tracking-wider',
   md: 'text-xs px-2.5 py-1 font-bold uppercase tracking-widest',
   lg: 'text-sm px-3.5 py-1.5 font-bold uppercase tracking-widest',
 }

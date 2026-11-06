@@ -63,20 +63,20 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
       {/* -------------------------------------------------------------------- */}
       {/* HEADER & RULEBOOK SELECTOR BAR (14px radius) */}
       {/* -------------------------------------------------------------------- */}
-      <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red">
                 World Taekwondo Sanctioned
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[10px] font-mono text-zinc-500">{currentPdf.edition}</span>
+              <span className="text-[11px] font-mono text-zinc-500">{currentPdf.edition}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
               Competition Rulebook &amp; Scoring Matrix
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-500 font-light mt-1 max-w-2xl">
+            <p className="text-[13px] sm:text-sm text-zinc-500 mt-1 max-w-2xl">
               Official scoring standards, Gam-jeom penalty codes, sensor thresholds, and PDF document reader for World Kyorugi &amp; World Poomsae.
             </p>
           </div>
@@ -132,8 +132,8 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
       {activeRuleType === 'kyorugi' ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Point Values Card */}
-          <div className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-2">
+          <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-2">
               WT Point Value Matrix
             </span>
             <div className="space-y-2 text-xs">
@@ -161,11 +161,11 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
           </div>
 
           {/* Gam-Jeom Penalties Card */}
-          <div className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-500 block mb-2">
+          <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-500 block mb-2">
               Gam-Jeom Infraction Codes
             </span>
-            <ul className="space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400 font-light">
+            <ul className="space-y-1.5 text-[13px] text-zinc-600 dark:text-zinc-400">
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-500 font-bold">&bull;</span>
                 <span>Crossing boundary line with any foot.</span>
@@ -190,15 +190,15 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
           </div>
 
           {/* Best-of-3 & IVR Card */}
-          <div className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-500 block mb-2">
+          <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-500 block mb-2">
               Best-of-3 &amp; IVR Quota
             </span>
-            <div className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400 font-light">
+            <div className="space-y-2 text-[13px] text-zinc-600 dark:text-zinc-400">
               <p>
                 Matches are contested in <strong>3 independent 2-minute rounds</strong>. The first athlete to win 2 rounds claims victory immediately.
               </p>
-              <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-[11px]">
+              <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs">
                 <strong>IVR Video Card:</strong> Coach has 1 challenge card per match. Retained if successful; forfeited if overturned.
               </div>
             </div>
@@ -207,8 +207,8 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Accuracy Card */}
-          <div className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-500 block mb-2">
+          <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-purple-500 block mb-2">
               Accuracy Scoring (4.0 Max Base)
             </span>
             <div className="space-y-2 text-xs">
@@ -224,8 +224,8 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
           </div>
 
           {/* Presentation Card */}
-          <div className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-500 block mb-2">
+          <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-500 block mb-2">
               Presentation Scoring (6.0 Max Base)
             </span>
             <div className="space-y-2 text-xs">
@@ -257,7 +257,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-5xl bg-zinc-900 text-white shadow-2xl rounded-[14px] border border-zinc-800 overflow-hidden h-[92vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-5xl bg-zinc-900 text-white shadow-2xl rounded-2xl border border-zinc-800 overflow-hidden h-[92vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* PDF Viewer Control Bar */}
@@ -268,7 +268,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                   <h4 className="text-xs sm:text-sm font-bold truncate max-w-xs sm:max-w-md">
                     {currentPdf.title}
                   </h4>
-                  <span className="text-[10px] text-zinc-400 font-mono block">
+                  <span className="text-[11px] text-zinc-400 font-mono block">
                     {currentPdf.edition} &bull; {currentPdf.pages} Pages &bull; {currentPdf.lastUpdated}
                   </span>
                 </div>
@@ -283,7 +283,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-[11px] font-mono px-2 text-zinc-400">{pdfZoom}%</span>
+                <span className="text-xs font-mono px-2 text-zinc-400">{pdfZoom}%</span>
                 <button
                   onClick={() => setPdfZoom((z) => Math.min(200, z + 15))}
                   className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs"

@@ -7,6 +7,7 @@ import {
   type LibraryItem,
 } from '@/data/library'
 import { TechniqueDetailClient } from '@/components/library/TechniqueDetailClient'
+import { toLibraryCardStub } from '@/lib/libraryCards'
 
 export function generateStaticParams() {
   return libraryItems.map((item) => ({
@@ -30,11 +31,11 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
 
   if (!item) {
     return {
-      title: 'Technique Not Found | Infinity Taekwondo',
+      title: 'Technique Not Found',
     }
   }
 
-  const title = `${item.name} (${item.koreanName}) - Infinity Taekwondo Curriculum`
+  const title = `${item.name} (${item.koreanName})`
   const description = `${item.summary} Belt Level: ${item.beltLevel}. Difficulty: ${item.difficulty}.`.slice(
     0,
     160
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
       canonical: `/library/${item.category}/${item.slug}`,
     },
     openGraph: {
-      title: `${title} | Infinity Taekwondo Curriculum`,
+      title: `${title} | Infinity Taekwondo`,
       description,
       type: 'article',
       url: `/library/${item.category}/${item.slug}`,
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} | Infinity Taekwondo Curriculum`,
+      title: `${title} | Infinity Taekwondo`,
       description,
       images: item.image ? [item.image] : ['/twitter-image'],
     },
@@ -82,9 +83,10 @@ export default async function TechniquePage({ params }: TechniquePageProps) {
   }
 
   const categoryMeta = libraryCategoriesMeta.find((c) => c.id === item.category)
-  const relatedItems = libraryItems.filter(
-    (i) => i.category === item.category && i.id !== item.id
-  )
+  // Cards only need identity fields; sending full sibling records bloated every page's HTML.
+  const relatedItems = libraryItems
+    .filter((i) => i.category === item.category && i.id !== item.id)
+    .map(toLibraryCardStub)
 
   return (
     <TechniqueDetailClient

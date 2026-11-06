@@ -104,7 +104,7 @@ export function BeltProgressionGuide() {
   }
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden relative transition-colors duration-500">
+    <div className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden relative transition-colors duration-500">
       {/* Dynamic Background Aura Glow */}
       <div
         className="absolute top-0 right-0 w-96 h-96 blur-[130px] rounded-full pointer-events-none opacity-20 transition-colors duration-700"
@@ -114,13 +114,13 @@ export function BeltProgressionGuide() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-zinc-200 dark:border-zinc-800 gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[10px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20">
             <Award className="w-3.5 h-3.5" /> {t.beltGuide.badge}
           </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
             {t.beltGuide.title1} <span className="text-brand-red">{t.beltGuide.title2}</span>
           </h3>
-          <p className="text-zinc-500 dark:text-zinc-400 text-xs sm:text-sm mt-1 font-light max-w-xl">
+          <p className="text-zinc-500 dark:text-zinc-400 text-[13px] sm:text-sm mt-1 max-w-xl">
             Interactive syllabus roadmap detailing required Poomsae forms, philosophical milestones, and Dan examination criteria.
           </p>
         </div>
@@ -131,7 +131,7 @@ export function BeltProgressionGuide() {
           <div className="inline-flex items-center p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <button
               onClick={() => setViewMode('horizontal')}
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1 cursor-pointer ${
                 viewMode === 'horizontal'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
@@ -141,7 +141,7 @@ export function BeltProgressionGuide() {
             </button>
             <button
               onClick={() => setViewMode('vertical')}
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1 cursor-pointer ${
                 viewMode === 'vertical'
                   ? 'bg-brand-red text-white shadow-brand-glow'
                   : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
@@ -240,7 +240,7 @@ export function BeltProgressionGuide() {
                     <span className="text-xs font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
                       {belt.name.replace(' Belt', '')}
                     </span>
-                    <span className="text-[10px] text-zinc-400 font-medium truncate max-w-full">
+                    <span className="text-[11px] text-zinc-400 font-medium truncate max-w-full">
                       {belt.rankTitle}
                     </span>
                   </button>
@@ -275,7 +275,7 @@ export function BeltProgressionGuide() {
                       >
                         {activeBelt.koreanName}
                       </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                         {activeBelt.rankTitle}
                       </span>
                     </div>
@@ -287,13 +287,13 @@ export function BeltProgressionGuide() {
 
                 {/* Meaning & Philosophy */}
                 <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
                     Belt Symbolism &amp; Meaning
                   </span>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
                     {activeBelt.meaning}
                   </p>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed italic border-t border-zinc-100 dark:border-zinc-800/80 pt-2 font-light">
+                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed italic border-t border-zinc-100 dark:border-zinc-800/80 pt-2">
                     &ldquo;{activeBelt.philosophy}&rdquo;
                   </p>
                 </div>
@@ -302,14 +302,14 @@ export function BeltProgressionGuide() {
                 <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-1.5">
                   <div className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-brand-red" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">
                       Required Poomsae Form
                     </span>
                   </div>
                   <h5 className="text-sm font-bold text-zinc-900 dark:text-white">
                     {activeBelt.poomsae}
                   </h5>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
                     {activeBelt.poomsaeMeaning}
                   </p>
                 </div>
@@ -327,7 +327,7 @@ export function BeltProgressionGuide() {
                       <Clock className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-zinc-400 font-bold uppercase text-[10px] block">
+                      <span className="text-zinc-400 font-bold uppercase text-[11px] block">
                         Estimated Timeline
                       </span>
                       <span className="font-bold text-zinc-900 dark:text-white">
@@ -348,10 +348,10 @@ export function BeltProgressionGuide() {
                         <Zap className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="text-zinc-400 font-bold uppercase text-[10px] block">
+                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">
                           Board Breaking (Kyokpa)
                         </span>
-                        <span className="font-bold text-zinc-900 dark:text-white text-[11px] truncate block">
+                        <span className="font-bold text-zinc-900 dark:text-white text-xs truncate block">
                           {activeBelt.breakingRequirement.split(' with ')[0]}
                         </span>
                       </div>
@@ -374,7 +374,7 @@ export function BeltProgressionGuide() {
                         className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 text-xs text-zinc-800 dark:text-zinc-200 flex items-start gap-2.5"
                       >
                         <span
-                          className="w-5 h-5 rounded-lg flex items-center justify-center font-black text-[10px] text-white shrink-0 mt-0.5"
+                          className="w-5 h-5 rounded-lg flex items-center justify-center font-black text-[11px] text-white shrink-0 mt-0.5"
                           style={{ backgroundColor: getActiveBorderColor() }}
                         >
                           {i + 1}
@@ -447,7 +447,7 @@ export function BeltProgressionGuide() {
                       <span className="text-xs font-bold uppercase tracking-widest text-brand-red">
                         {belt.koreanName}
                       </span>
-                      <span className="text-[10px] font-mono text-zinc-400">
+                      <span className="text-[11px] font-mono text-zinc-400">
                         {belt.rankTitle}
                       </span>
                     </div>
@@ -460,13 +460,13 @@ export function BeltProgressionGuide() {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+                <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
                   {belt.meaning} &bull; <em className="italic">{belt.philosophy}</em>
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-4 border-t border-zinc-200 dark:border-zinc-800">
                   <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                       Required Poomsae Form
                     </span>
                     <p className="font-bold text-zinc-900 dark:text-white">
@@ -475,7 +475,7 @@ export function BeltProgressionGuide() {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                       Key Technical Focus
                     </span>
                     <p className="font-bold text-zinc-900 dark:text-white">

@@ -13,16 +13,12 @@ const ScrollNavContext = React.createContext<ScrollNavContextValue | undefined>(
 export function ScrollNavProvider({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
-  // Pass disabled: isMobileMenuOpen so navigation never hides while mobile drawer is open
-  const scrollNav = useScrollNav({ disabled: isMobileMenuOpen })
+  // Navigation never hides while the mobile drawer is open.
+  const { isNavVisible, isScrolled } = useScrollNav({ disabled: isMobileMenuOpen })
 
   const value = React.useMemo<ScrollNavContextValue>(
-    () => ({
-      ...scrollNav,
-      isMobileMenuOpen,
-      setIsMobileMenuOpen,
-    }),
-    [scrollNav, isMobileMenuOpen]
+    () => ({ isNavVisible, isScrolled, isMobileMenuOpen, setIsMobileMenuOpen }),
+    [isNavVisible, isScrolled, isMobileMenuOpen]
   )
 
   return <ScrollNavContext.Provider value={value}>{children}</ScrollNavContext.Provider>

@@ -21,7 +21,7 @@ export function InfinityDifficultyBadge({
 }: InfinityDifficultyBadgeProps) {
   // Size configurations
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-[9px] gap-1',
+    sm: 'px-2 py-0.5 text-[10px] gap-1',
     md: 'px-3 py-1 text-[10px] gap-1.5',
     lg: 'px-4 py-1.5 text-xs gap-2',
   }
@@ -52,7 +52,7 @@ export function InfinityDifficultyBadge({
           <span>Beginner (White–Green)</span>
 
           {showSubtitle && (
-            <span className="text-[9px] font-normal text-emerald-500/80 lowercase pl-1 border-l border-emerald-500/30">
+            <span className="text-[10px] font-normal text-emerald-500/80 lowercase pl-1 border-l border-emerald-500/30">
               {beltLevel || 'foundation'}
             </span>
           )}
@@ -77,7 +77,7 @@ export function InfinityDifficultyBadge({
           <span>Intermediate (Blue–Red)</span>
 
           {showSubtitle && (
-            <span className="text-[9px] font-normal text-blue-300/80 lowercase pl-1 border-l border-blue-500/30">
+            <span className="text-[10px] font-normal text-blue-300/80 lowercase pl-1 border-l border-blue-500/30">
               {beltLevel || 'power & control'}
             </span>
           )}
@@ -105,7 +105,7 @@ export function InfinityDifficultyBadge({
           </span>
 
           {showSubtitle && (
-            <span className="text-[9px] font-normal text-zinc-400 lowercase pl-1 border-l border-zinc-700">
+            <span className="text-[10px] font-normal text-zinc-400 lowercase pl-1 border-l border-zinc-700">
               {beltLevel || 'dan rank'}
             </span>
           )}
@@ -136,7 +136,7 @@ export function InfinityDifficultyBadge({
           </span>
 
           {showSubtitle && (
-            <span className="text-[9px] font-normal text-purple-300/80 lowercase pl-1 border-l border-purple-500/30">
+            <span className="text-[10px] font-normal text-purple-300/80 lowercase pl-1 border-l border-purple-500/30">
               {beltLevel || 'high acrobatics'}
             </span>
           )}
@@ -157,43 +157,43 @@ export function InfinityCategoryBadge({ category, className = '' }: InfinityCate
   switch (category) {
     case 'poomsae':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-brand-red/10 text-brand-red border border-brand-red/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-brand-red/10 text-brand-red border border-brand-red/30 flex items-center gap-1 ${className}`}>
           <Compass className="w-2.5 h-2.5" /> Poomsae (Forms)
         </span>
       )
     case 'kicking-fundamentals':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1 ${className}`}>
           <Zap className="w-2.5 h-2.5" /> Fundamental Kicks
         </span>
       )
     case 'kicking-advanced':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1 ${className}`}>
           <Flame className="w-2.5 h-2.5" /> Advanced 540 Kicks
         </span>
       )
     case 'hand-techniques':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/30 flex items-center gap-1 ${className}`}>
           <Shield className="w-2.5 h-2.5" /> Hand Techniques
         </span>
       )
     case 'stances':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-amber-800/20 text-amber-300 border border-amber-700/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-800/20 text-amber-300 border border-amber-700/30 flex items-center gap-1 ${className}`}>
           <Award className="w-2.5 h-2.5" /> Stances (Seogi)
         </span>
       )
     case 'tricking-acrobatics':
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-purple-500/10 text-purple-300 border border-purple-500/30 flex items-center gap-1 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-purple-500/10 text-purple-300 border border-purple-500/30 flex items-center gap-1 ${className}`}>
           <Sparkles className="w-2.5 h-2.5" /> Tricking &amp; Acrobatics
         </span>
       )
     default:
       return (
-        <span className={`px-2.5 py-1 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider bg-zinc-800 text-zinc-300 border border-zinc-700 ${className}`}>
+        <span className={`px-2.5 py-1 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider bg-zinc-800 text-zinc-300 border border-zinc-700 ${className}`}>
           {category}
         </span>
       )

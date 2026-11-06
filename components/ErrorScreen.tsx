@@ -270,7 +270,7 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
 
         {/* Quick Route Directory Helper */}
         <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-4">
+          <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-4">
             Quick Dojang Navigation
           </span>
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs">

@@ -149,7 +149,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
       {/* ==================================================================== */}
       {/* 1. MASTER PHILOSOPHY & 3 AIRBORNE TENETS (COLLAPSIBLE BRIEFING)      */}
       {/* ==================================================================== */}
-      <div className="rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md overflow-hidden">
+      <div className="rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md overflow-hidden">
         <button
           onClick={() => setShowPhilosophyGuide((prev) => !prev)}
           className="w-full p-6 sm:p-7 flex items-center justify-between gap-4 text-left transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
@@ -160,11 +160,11 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                   {overview.koreanTitle}
                 </span>
                 <span className="text-zinc-400 text-xs">&bull;</span>
-                <span className="text-[10px] font-mono text-zinc-500 uppercase">
+                <span className="text-[11px] font-mono text-zinc-500 uppercase">
                   {t.philosophyGuide}
                 </span>
               </div>
@@ -199,14 +199,14 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                 >
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
+                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px] font-bold">
                         0{idx + 1}
                       </span>
                       <h4 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                         {tenet.title}
                       </h4>
                     </div>
-                    <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {tenet.desc}
                     </p>
                   </div>
@@ -220,7 +220,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
       {/* ==================================================================== */}
       {/* 2. CONTROLS BAR: SEARCH & AIRBORNE DISCIPLINE FILTERS                */}
       {/* ==================================================================== */}
-      <div className="p-4 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
         {/* Search Input */}
         <div className="relative w-full md:w-96">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
@@ -270,7 +270,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
             <div
               key={kick.id}
               onClick={() => handleSelectKick(kick.id)}
-              className={`p-4 rounded-[14px] border transition-all cursor-pointer flex flex-col justify-between group ${
+              className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between group ${
                 isSelected
                   ? 'bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-600/20 scale-[1.02]'
                   : 'bg-white dark:bg-zinc-900/80 border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:shadow-md text-zinc-900 dark:text-white'
@@ -279,7 +279,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
               <div>
                 <div className="flex items-center justify-between gap-1 mb-2">
                   <span
-                    className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
+                    className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
                       isSelected ? 'bg-white/20 text-white' : 'text-white'
                     }`}
                     style={{ backgroundColor: isSelected ? undefined : kick.badgeColor }}
@@ -287,7 +287,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                     {kick.difficulty}
                   </span>
                   <span
-                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                    className={`text-[11px] font-mono px-1.5 py-0.5 rounded ${
                       isSelected
                         ? 'bg-white/10 text-white'
                         : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
@@ -311,7 +311,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
               </div>
 
               <div
-                className={`pt-2 border-t text-[10px] flex items-center justify-between ${
+                className={`pt-2 border-t text-[11px] flex items-center justify-between ${
                   isSelected
                     ? 'border-white/20 text-white/80'
                     : 'border-zinc-100 dark:border-zinc-800 text-zinc-400'
@@ -326,7 +326,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
       </div>
 
       {filteredKicks.length === 0 && (
-        <div className="p-12 text-center rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
+        <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800">
           <Zap className="w-10 h-10 text-zinc-400 mx-auto mb-3 opacity-40" />
           <p className="text-sm text-zinc-500">No aerial kicks match your query.</p>
         </div>
@@ -338,12 +338,12 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
       {activeKick && (
         <div className="space-y-6">
           {/* Active Kick Header Card */}
-          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 shadow-md">
             {/* Top Navigation & Jump Controls */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
               <div className="flex items-center gap-2">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase text-white"
+                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase text-white"
                   style={{ backgroundColor: activeKick.badgeColor }}
                 >
                   {activeKick.difficulty}
@@ -418,7 +418,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
               {/* Striking Surface & Target Area Badges */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 min-w-[160px]">
-                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                  <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
                     {t.strikingSurface}
                   </span>
                   <span className="text-xs font-bold text-zinc-900 dark:text-white">
@@ -427,7 +427,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 min-w-[160px]">
-                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                  <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
                     {t.targetArea}
                   </span>
                   <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
@@ -439,7 +439,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
 
             {/* Quick Kick Jump Strip (15 Kicks) */}
             <div className="pt-4 flex items-center gap-1.5 overflow-x-auto pb-1">
-              <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 shrink-0 mr-1">
+              <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 shrink-0 mr-1">
                 {t.quickJump}:
               </span>
               {items.map((k, idx) => {
@@ -448,7 +448,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                   <button
                     key={k.id}
                     onClick={() => handleSelectKick(k.id)}
-                    className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold shrink-0 transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold shrink-0 transition-all ${
                       isCurrent
                         ? 'bg-emerald-600 text-white shadow-sm'
                         : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
@@ -467,7 +467,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           </div>
 
           {/* 6-Tab Navigation (14px Radius) */}
-          <div className="p-1.5 bg-zinc-200/70 dark:bg-zinc-900/80 rounded-[14px] border border-zinc-300 dark:border-zinc-800 flex flex-wrap gap-1 shadow-sm">
+          <div className="p-1.5 bg-zinc-200/70 dark:bg-zinc-900/80 rounded-2xl border border-zinc-300 dark:border-zinc-800 flex flex-wrap gap-1 shadow-sm">
             {[
               { id: 'overview', label: t.tabs.overview, icon: Info },
               { id: 'process', label: t.tabs.process, icon: Layers },
@@ -502,7 +502,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
             <div className="space-y-6">
               {/* Balance and Flight Posture Card */}
               {activeKick.balanceAndPosture && (
-                <div className="p-6 rounded-[14px] bg-emerald-500/5 border border-emerald-500/20 shadow-sm flex items-start gap-4">
+                <div className="p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 shadow-sm flex items-start gap-4">
                   <span className="p-2.5 rounded-xl bg-emerald-600 text-white flex-shrink-0">
                     <Scale className="w-5 h-5" />
                   </span>
@@ -519,7 +519,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
 
               {/* Core Principles Grid */}
               {activeKick.corePrinciples && activeKick.corePrinciples.length > 0 && (
-                <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
                   <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
                     <Compass className="w-5 h-5 text-emerald-600" />
                     <span>{t.corePrinciples}</span>
@@ -532,7 +532,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                         className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60"
                       >
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="w-6 h-6 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center text-[10px] font-bold">
+                          <span className="w-6 h-6 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center text-[11px] font-bold">
                             {idx + 1}
                           </span>
                           <h4 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
@@ -550,7 +550,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
 
               {/* Skill Prerequisites Triad */}
               {activeKick.skillPrerequisites && (
-                <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
                   <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
                     <Award className="w-5 h-5 text-emerald-600" />
                     <span>{t.prerequisites}</span>
@@ -623,7 +623,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           {/* TAB 2: 5-STEP TRAINING PROCESS                                   */}
           {/* ================================================================ */}
           {activeTab === 'process' && activeKick.trainingProcess && (
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               {/* Header with Mode Switcher */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
@@ -689,7 +689,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                             : 'bg-zinc-50 dark:bg-zinc-800/60 text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                         }`}
                       >
-                        <span className="block text-[10px] font-mono opacity-60">
+                        <span className="block text-[11px] font-mono opacity-60">
                           {t.stepNumber} {idx + 1}
                         </span>
                         <span className="truncate block">{st.title.split(' ')[0]}</span>
@@ -785,7 +785,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           {/* TAB 3: DRILLING METHODS & PLYOMETRICS                            */}
           {/* ================================================================ */}
           {activeTab === 'drills' && activeKick.drillingMethods && (
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <Dumbbell className="w-5 h-5 text-emerald-600" />
                 <span>{t.drillingMethods}</span>
@@ -881,7 +881,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           {/* TAB 4: MISTAKES & SURGICAL CORRECTIONS                           */}
           {/* ================================================================ */}
           {activeTab === 'mistakes' && activeKick.commonMistakesAndCorrections && (
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-emerald-600" />
                 <span>{t.commonMistakes}</span>
@@ -897,7 +897,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                     <div className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-brand-red flex-shrink-0 mt-0.5" />
                       <div>
-                        <span className="text-[10px] font-mono font-bold uppercase text-brand-red block mb-0.5">
+                        <span className="text-[11px] font-mono font-bold uppercase text-brand-red block mb-0.5">
                           {t.mistakeLabel} 0{idx + 1}
                         </span>
                         <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 font-semibold leading-relaxed">
@@ -910,7 +910,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                     <div className="flex items-start gap-3 sm:border-l sm:border-zinc-200 dark:sm:border-zinc-700/60 sm:pl-4">
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                       <div>
-                        <span className="text-[10px] font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400 block mb-0.5">
+                        <span className="text-[11px] font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400 block mb-0.5">
                           {t.correctionLabel}
                         </span>
                         <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
@@ -928,7 +928,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           {/* TAB 5: COMPETITION, POOMSAE & DEMO BREAKS                        */}
           {/* ================================================================ */}
           {activeTab === 'application' && activeKick.performanceAndApplication && (
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <Target className="w-5 h-5 text-emerald-600" />
                 <span>{t.performanceTitle}</span>
@@ -974,7 +974,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                         key={idx}
                         className="p-3 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center gap-2"
                       >
-                        <span className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-[10px] font-bold">
+                        <span className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-[11px] font-bold">
                           {idx + 1}
                         </span>
                         <span>{combo}</span>
@@ -990,7 +990,7 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
           {/* TAB 6: RECOVERY, LANDING CARE & CONDITIONING                     */}
           {/* ================================================================ */}
           {activeTab === 'recovery' && activeKick.recoveryAndConditioning && (
-            <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <HeartPulse className="w-5 h-5 text-emerald-600" />
                 <span>{t.recoveryTitle}</span>

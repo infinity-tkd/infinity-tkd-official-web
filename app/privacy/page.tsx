@@ -3,18 +3,11 @@ import type { Metadata } from 'next'
 import { Shield, Lock, Eye, FileCheck, AlertCircle, Mail, MapPin, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Infinity Taekwondo',
+  title: 'Privacy Policy',
   description:
     'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights across our Phnom Penh branches.',
   alternates: {
     canonical: '/privacy',
-    languages: {
-      'en': '/privacy',
-      'km': '/privacy',
-      'zh': '/privacy',
-      'ko': '/privacy',
-      'x-default': '/privacy',
-    },
   },
   openGraph: {
     title: 'Privacy Policy | Infinity Taekwondo',
@@ -78,7 +71,7 @@ export default function PrivacyPage() {
       policyType="privacy"
     >
       {/* Executive Summary Callout Grid */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Shield className="w-4 h-4" /> At A Glance: Student Data Protection Commitment
         </div>
@@ -241,7 +234,7 @@ export default function PrivacyPage() {
       <p>
         If you have any questions, requests, or privacy concerns, please contact our Data Protection &amp; Operations Team:
       </p>
-      <div className="p-5 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
+      <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
         <p className="font-bold text-zinc-900 dark:text-white">Infinity Taekwondo Operations Directorate</p>
         <p className="text-zinc-500">📍 Olympic Branch (HQ) &bull; National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh</p>
         <p className="text-zinc-500">📍 Kouk Khleang Branch &bull; Kouk Khleang, Sen Sok, Phnom Penh</p>

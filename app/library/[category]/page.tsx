@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   if (!categoryMeta) {
     return {
-      title: 'Discipline Not Found | Infinity Taekwondo',
+      title: 'Discipline Not Found',
     }
   }
 

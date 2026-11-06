@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pricingFaqs } from '@/data/pricing'
 
 export const metadata: Metadata = {
   title: 'Memberships & Tuition Plans',
@@ -6,13 +7,6 @@ export const metadata: Metadata = {
     'Transparent tuition pricing, flexible monthly memberships, and family training packages at Infinity Taekwondo Phnom Penh. Start with a risk-free trial session.',
   alternates: {
     canonical: '/pricing',
-    languages: {
-      'en': '/pricing',
-      'km': '/pricing',
-      'zh': '/pricing',
-      'ko': '/pricing',
-      'x-default': '/pricing',
-    },
   },
   openGraph: {
     title: 'Memberships & Tuition Plans | Infinity Taekwondo',
@@ -29,5 +23,26 @@ export const metadata: Metadata = {
 }
 
 export default function PricingLayout({ children }: { children: React.ReactNode }) {
-  return children
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: pricingFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {children}
+    </>
+  )
 }

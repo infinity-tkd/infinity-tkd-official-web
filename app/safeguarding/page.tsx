@@ -15,18 +15,11 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
+  title: 'Safeguarding & Safe Sport Policy',
   description:
     'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, coach conduct rules, and confidential reporting channels across all Phnom Penh dojangs.',
   alternates: {
     canonical: '/safeguarding',
-    languages: {
-      'en': '/safeguarding',
-      'km': '/safeguarding',
-      'zh': '/safeguarding',
-      'ko': '/safeguarding',
-      'x-default': '/safeguarding',
-    },
   },
   openGraph: {
     title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
@@ -90,24 +83,24 @@ export default function SafeguardingPage() {
       policyType="safeguarding"
     >
       {/* Executive Summary */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <ShieldCheck className="w-4 h-4" /> At A Glance: Our Safe Sport Commitment
         </div>
-        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+        <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
           Infinity Taekwondo enforces an uncompromised <strong>Zero-Tolerance Policy</strong> against child abuse, physical aggression outside sanctioned rules, emotional bullying, harassment, neglect, or sexual misconduct. Every cadet, child, and adult athlete trains in a secure, transparent, and respectful environment governed by certified Kukkiwon and World Taekwondo Safe Sport standards.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">100% Vetting</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">100% Vetting</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Criminal Background Checks</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Parental Visibility</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Parental Visibility</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">100% Open Glass Dojangs</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Confidential Hotline</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Confidential Hotline</span>
             <strong className="text-xs font-bold text-brand-red">Direct Safeguarding Officer</strong>
           </div>
         </div>
@@ -251,25 +244,25 @@ export default function SafeguardingPage() {
         <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
           9. Designated Safeguarding Contacts
         </h2>
-        <div className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
+        <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Safeguarding &amp; Welfare Desk
           </div>
           <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
             <div>
-              <span className="text-[10px] text-zinc-400 block">Direct Welfare Email:</span>
+              <span className="text-[11px] text-zinc-400 block">Direct Welfare Email:</span>
               <a href="mailto:safeguarding@infinitytkd.com" className="text-brand-red font-bold hover:underline">
                 safeguarding@infinitytkd.com
               </a>
             </div>
             <div>
-              <span className="text-[10px] text-zinc-400 block">Emergency Welfare Hotline:</span>
+              <span className="text-[11px] text-zinc-400 block">Emergency Welfare Hotline:</span>
               <a href="tel:012220124" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 012 220 124
               </a>
             </div>
           </div>
-          <div className="text-[11px] text-zinc-400 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="text-xs text-zinc-400 pt-2 border-t border-zinc-200 dark:border-zinc-800">
             Address: Olympic Branch (National Olympic Stadium Complex, Charles de Gaulle Blvd) &bull; Kouk Khleang Branch (Sen Sok, Phnom Penh, Cambodia).
           </div>
         </div>

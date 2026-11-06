@@ -190,7 +190,7 @@ export default function AcademyPage() {
                   <button
                     key={tab.id}
                     onClick={() => setSelectedDivision(tab.id)}
-                    className={`px-3.5 py-2 min-h-[38px] rounded-xl text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
+                    className={`px-3.5 py-2 min-h-[38px] rounded-xl text-[11px] sm:text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedDivision === tab.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -225,7 +225,7 @@ export default function AcademyPage() {
                     <Card3D key={course.id} maxTilt={4} className="h-full">
                       <div
                         onClick={() => setActiveCourse(course)}
-                        className="group h-full rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+                        className="group h-full rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
                       >
                         <div>
                           {/* Image Header with Badge Overlay */}
@@ -239,13 +239,13 @@ export default function AcademyPage() {
 
                             <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
                               <span
-                                className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-md"
+                                className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-md"
                                 style={{ backgroundColor: badgeColor }}
                               >
                                 {course.badge}
                               </span>
                               {course.beltRequirement && (
-                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest bg-black/70 text-white backdrop-blur-md border border-white/10 flex items-center gap-1">
+                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-black/70 text-white backdrop-blur-md border border-white/10 flex items-center gap-1">
                                   <Award className="w-3 h-3 text-brand-red" /> {course.beltRequirement}
                                 </span>
                               )}
@@ -263,7 +263,7 @@ export default function AcademyPage() {
 
                           {/* Body */}
                           <div className="p-5 sm:p-6 space-y-4">
-                            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed line-clamp-2 break-words">
+                            <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2 break-words">
                               {course.description}
                             </p>
 
@@ -292,12 +292,12 @@ export default function AcademyPage() {
               </SafeGrid>
             ) : (
               /* Empty State */
-              <div className="p-12 text-center rounded-[14px] bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
+              <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
                 <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
                 <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                   No Programs Found
                 </h4>
-                <p className="text-xs text-zinc-500 mb-4 font-light">
+                <p className="text-[13px] text-zinc-500 mb-4">
                   No courses match your current search query.
                 </p>
                 <button
@@ -354,7 +354,7 @@ export default function AcademyPage() {
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Mobile Sheet Drag Indicator Bar */}
@@ -379,7 +379,7 @@ export default function AcademyPage() {
 
               <div className="absolute bottom-6 left-6 right-6 z-20">
                 <span
-                  className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-md inline-block mb-2"
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-md inline-block mb-2"
                   style={{ backgroundColor: getDivisionBadgeColor(activeCourse.division) }}
                 >
                   {activeCourse.badge}
@@ -402,7 +402,7 @@ export default function AcademyPage() {
                 <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
                   Course Overview
                 </h4>
-                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed break-words">
+                <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed break-words">
                   {activeCourse.description}
                 </p>
               </div>
@@ -430,7 +430,7 @@ export default function AcademyPage() {
               {/* Schedule, Prerequisites & Instructor */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                     Lead Instructor
                   </span>
                   <p className="font-bold text-zinc-900 dark:text-white break-words">
@@ -439,7 +439,7 @@ export default function AcademyPage() {
                 </div>
 
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                     Class Schedule
                   </span>
                   <p className="font-bold text-zinc-900 dark:text-white break-words">

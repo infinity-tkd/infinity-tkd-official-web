@@ -1,0 +1,83 @@
+import * as React from 'react'
+import { cn } from '@/lib/utils'
+
+/** Small uppercase pill that sits above section and page titles. */
+export function Eyebrow({
+  children,
+  icon: Icon,
+  className,
+}: {
+  children: React.ReactNode
+  icon?: React.ElementType
+  className?: string
+}) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest backdrop-blur-md',
+        className
+      )}
+    >
+      {Icon && <Icon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />}
+      {children}
+    </span>
+  )
+}
+
+interface PageHeroProps {
+  eyebrow: string
+  eyebrowIcon?: React.ElementType
+  title: string
+  /** Optional second line rendered in brand red. */
+  accent?: string
+  description?: string
+  align?: 'left' | 'center'
+  children?: React.ReactNode
+}
+
+/**
+ * Standard page header: soft red glow, eyebrow pill, heavy uppercase title with a red accent
+ * word, and a light supporting paragraph. Clears the fixed navbar.
+ */
+export function PageHero({
+  eyebrow,
+  eyebrowIcon,
+  title,
+  accent,
+  description,
+  align = 'center',
+  children,
+}: PageHeroProps) {
+  const centered = align === 'center'
+
+  return (
+    <section className="relative pt-24 sm:pt-28 pb-10 sm:pb-12 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none"
+      />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className={cn('max-w-3xl', centered && 'mx-auto text-center')}>
+          <Eyebrow icon={eyebrowIcon} className="mb-4 sm:mb-5">
+            {eyebrow}
+          </Eyebrow>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.95] text-zinc-900 dark:text-white break-words">
+            {title}
+            {accent && (
+              <>
+                {' '}
+                <span className="text-brand-red">{accent}</span>
+              </>
+            )}
+          </h1>
+          {description && (
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg font-light leading-relaxed text-zinc-600 dark:text-zinc-400">
+              {description}
+            </p>
+          )}
+          {children && <div className={cn('mt-6 sm:mt-8', centered && 'flex justify-center')}>{children}</div>}
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -232,7 +232,7 @@ export default function AchievementsPage() {
           {achievementMetrics.map((metric) => (
             <div
               key={metric.label}
-              className="p-5 sm:p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm text-center flex flex-col justify-center items-center transform transition-all duration-300 hover:border-brand-red/40"
+              className="p-5 sm:p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm text-center flex flex-col justify-center items-center transform transition-all duration-300 hover:border-brand-red/40"
             >
               <span className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-brand-red mb-1 font-mono">
                 <AnimatedCounter value={metric.value} duration={1800} />
@@ -240,7 +240,7 @@ export default function AchievementsPage() {
               <span className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white mb-1.5 sm:mb-2 break-words">
                 {metric.label}
               </span>
-              <p className="text-xs text-zinc-500 font-light leading-relaxed max-w-xs break-words">
+              <p className="text-[13px] text-zinc-500 leading-relaxed max-w-xs break-words">
                 {metric.description}
               </p>
             </div>
@@ -335,7 +335,7 @@ export default function AchievementsPage() {
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
+                    className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedCategory === cat.id
                         ? 'bg-brand-red text-white shadow-brand-glow'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
@@ -353,16 +353,16 @@ export default function AchievementsPage() {
 
             {/* Medal Type Filter */}
             <div className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mr-1 hidden sm:inline-block shrink-0">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 mr-1 hidden sm:inline-block shrink-0">
                 Medal:
               </span>
               {['All', 'Gold', 'Silver', 'Bronze', 'Special Honor'].map((m) => (
                 <button
                   key={m}
                   onClick={() => setSelectedMedalFilter(m)}
-                  className={`px-2.5 py-1.5 min-h-[36px] rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
+                  className={`px-2.5 py-1.5 min-h-[36px] rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                     selectedMedalFilter === m
-                      ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm font-black'
+                      ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm font-bold'
                       : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
@@ -385,7 +385,7 @@ export default function AchievementsPage() {
                     <Card3D key={record.id} maxTilt={3} className="h-full">
                       <div
                         onClick={() => openTrophyModal(record)}
-                        className={`group h-full p-6 sm:p-7 rounded-[14px] bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer ${styles.accentBorder} relative overflow-hidden`}
+                        className={`group h-full p-6 sm:p-7 rounded-2xl bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer ${styles.accentBorder} relative overflow-hidden`}
                       >
                         <div>
                           {/* Header: Year & Medal Tag */}
@@ -394,7 +394,7 @@ export default function AchievementsPage() {
                               {record.year}
                             </span>
                             <span
-                              className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${styles.bg}`}
+                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider border ${styles.bg}`}
                             >
                               {record.medal}
                             </span>
@@ -408,7 +408,7 @@ export default function AchievementsPage() {
                             {record.division}
                           </p>
 
-                          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4 line-clamp-3 break-words">
+                          <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4 line-clamp-3 break-words">
                             {record.description}
                           </p>
 
@@ -426,14 +426,14 @@ export default function AchievementsPage() {
                                     />
                                   ))}
                                 </div>
-                                <span className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200 truncate">
+                                <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200 truncate">
                                   {record.studentCompetitors[0].name}
                                   {record.studentCompetitors.length > 1 &&
                                     ` +${record.studentCompetitors.length - 1} more`}
                                 </span>
                               </div>
 
-                              <span className="text-[10px] font-bold uppercase tracking-wider text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-lg shrink-0">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-lg shrink-0">
                                 {record.studentCompetitors.length} Medalists
                               </span>
                             </div>
@@ -450,7 +450,7 @@ export default function AchievementsPage() {
                           <div className="flex items-center justify-between sm:justify-end gap-2 text-zinc-400">
                             <div className="flex items-center gap-1 min-w-0">
                               <MapPin className="w-3 h-3 shrink-0" />
-                              <span className="truncate text-[11px]">{record.location.split(',')[0]}</span>
+                              <span className="truncate text-xs">{record.location.split(',')[0]}</span>
                             </div>
                             <ChevronRight className="w-4 h-4 text-brand-red shrink-0 transform group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -461,12 +461,12 @@ export default function AchievementsPage() {
                 })}
               </SafeGrid>
             ) : (
-              <div className="p-12 text-center rounded-[14px] bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
+              <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
                 <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
                 <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                   No Achievements Found
                 </h4>
-                <p className="text-xs text-zinc-500 mb-4 font-light">
+                <p className="text-[13px] text-zinc-500 mb-4">
                   No championship records match &quot;{searchQuery}&quot;.
                 </p>
                 <button
@@ -496,7 +496,7 @@ export default function AchievementsPage() {
                     <Card3D key={student.id || idx} maxTilt={3} className="h-full">
                       <div
                         onClick={() => openCompetitorModal(student)}
-                        className="h-full p-6 rounded-[14px] bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl cursor-pointer group"
+                        className="h-full p-6 rounded-2xl bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl cursor-pointer group"
                       >
                         <div>
                           {/* Student Avatar & Medal Header */}
@@ -524,7 +524,7 @@ export default function AchievementsPage() {
                             </div>
 
                             <span
-                              className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider border ${medalStyles.bg}`}
+                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider border ${medalStyles.bg}`}
                             >
                               {student.medal}
                             </span>
@@ -532,7 +532,7 @@ export default function AchievementsPage() {
 
                           {/* Division & Tournament Title */}
                           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800/80 mb-3 space-y-1">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block">
+                            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block">
                               {student.division}
                             </span>
                             <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200 truncate">
@@ -542,7 +542,7 @@ export default function AchievementsPage() {
 
                           {/* Highlight */}
                           {student.highlight && (
-                            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4 italic">
+                            <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4 italic">
                               &ldquo;{student.highlight}&rdquo;
                             </p>
                           )}
@@ -550,7 +550,7 @@ export default function AchievementsPage() {
 
                         {/* Footer: Score / Action */}
                         <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs">
-                          <span className="text-zinc-400 font-mono text-[11px]">
+                          <span className="text-zinc-400 font-mono text-xs">
                             {student.score ? `Score: ${student.score}` : 'Official Podium Finish'}
                           </span>
                           <span className="font-bold text-brand-red group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 text-[11px] uppercase tracking-wide">
@@ -563,12 +563,12 @@ export default function AchievementsPage() {
                 })}
               </SafeGrid>
             ) : (
-              <div className="p-12 text-center rounded-[14px] bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
+              <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
                 <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
                 <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                   No Student Competitors Found
                 </h4>
-                <p className="text-xs text-zinc-500 mb-4 font-light">
+                <p className="text-[13px] text-zinc-500 mb-4">
                   No student athlete matches &quot;{searchQuery}&quot;.
                 </p>
                 <button
@@ -600,7 +600,7 @@ export default function AchievementsPage() {
 
           {/* Modal Container */}
           <div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Close Button */}
@@ -618,14 +618,14 @@ export default function AchievementsPage() {
 
               <div className="relative z-10 pr-8">
                 <div className="flex flex-wrap items-center gap-2.5 mb-3">
-                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white">
+                  <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white">
                     {selectedTrophy.category}
                   </span>
                   <span className="text-xs font-mono font-bold text-zinc-400">
                     {selectedTrophy.year} Tournament Season
                   </span>
                   {selectedTrophy.score && (
-                    <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wide bg-white/10 text-amber-300 border border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wide bg-white/10 text-amber-300 border border-white/10">
                       Score: {selectedTrophy.score}
                     </span>
                   )}
@@ -645,7 +645,7 @@ export default function AchievementsPage() {
               {/* Recipient & Location Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                     Athlete / Representing Unit
                   </span>
                   <p className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1.5 break-words">
@@ -655,7 +655,7 @@ export default function AchievementsPage() {
                 </div>
 
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                     Championship Venue &amp; Country
                   </span>
                   <p className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1.5 break-words">
@@ -672,7 +672,7 @@ export default function AchievementsPage() {
                     <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-brand-red" /> Participating Student Competitors &amp; Medalists
                     </h4>
-                    <span className="text-[10px] font-mono text-zinc-400">
+                    <span className="text-[11px] font-mono text-zinc-400">
                       {selectedTrophy.studentCompetitors.length} Fielded Athletes
                     </span>
                   </div>
@@ -702,7 +702,7 @@ export default function AchievementsPage() {
                                   {student.name}
                                 </h5>
                                 <span
-                                  className={`px-2.5 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-wider border ${medalStyles.bg}`}
+                                  className={`px-2.5 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wider border ${medalStyles.bg}`}
                                 >
                                   {student.medal}
                                 </span>
@@ -720,7 +720,7 @@ export default function AchievementsPage() {
                           </div>
 
                           {student.highlight && (
-                            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light italic max-w-xs text-left sm:text-right">
+                            <p className="text-[13px] text-zinc-600 dark:text-zinc-400 italic max-w-xs text-left sm:text-right">
                               &ldquo;{student.highlight}&rdquo;
                             </p>
                           )}
@@ -736,7 +736,7 @@ export default function AchievementsPage() {
                 <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
                   Official Match &amp; Performance Summary
                 </h4>
-                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed break-words">
+                <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed break-words">
                   {selectedTrophy.description}
                 </p>
               </div>
@@ -819,7 +819,7 @@ export default function AchievementsPage() {
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-lg bg-white dark:bg-zinc-950 shadow-2xl rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-lg bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -840,7 +840,7 @@ export default function AchievementsPage() {
                 />
                 <div>
                   <span
-                    className={`px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider border mb-1.5 inline-block ${
+                    className={`px-2.5 py-0.5 rounded-lg text-[11px] font-bold uppercase tracking-wider border mb-1.5 inline-block ${
                       getMedalStyles(selectedCompetitor.medal).bg
                     }`}
                   >
@@ -861,7 +861,7 @@ export default function AchievementsPage() {
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block">
                   Championship Division
                 </span>
                 <p className="text-sm font-bold text-zinc-900 dark:text-white">
@@ -876,10 +876,10 @@ export default function AchievementsPage() {
 
               {selectedCompetitor.highlight && (
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                     Athlete Highlight &amp; Achievement
                   </span>
-                  <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light italic leading-relaxed">
+                  <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 italic leading-relaxed">
                     &ldquo;{selectedCompetitor.highlight}&rdquo;
                   </p>
                 </div>
@@ -900,7 +900,7 @@ export default function AchievementsPage() {
 
       {/* Audition Banner (14px radius) */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24 max-w-5xl">
-        <div className="p-8 sm:p-12 rounded-[14px] bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
+        <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
           <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-xl">
@@ -910,7 +910,7 @@ export default function AchievementsPage() {
             <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-2 break-words">
               {t.achievements.auditionTitle1} <span className="text-brand-red">{t.achievements.auditionTitle2}</span>
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed break-words">
+            <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed break-words">
               {t.achievements.auditionDesc}
             </p>
           </div>

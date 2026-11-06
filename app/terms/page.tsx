@@ -3,18 +3,11 @@ import type { Metadata } from 'next'
 import { Shield, Award, AlertTriangle, CreditCard, Scale, CheckCircle2, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Infinity Taekwondo',
+  title: 'Terms of Service',
   description:
     'Infinity Taekwondo Terms of Service - Academy membership rules, liability and sparring waivers, dojang code of conduct, and Kukkiwon grading policies.',
   alternates: {
     canonical: '/terms',
-    languages: {
-      'en': '/terms',
-      'km': '/terms',
-      'zh': '/terms',
-      'ko': '/terms',
-      'x-default': '/terms',
-    },
   },
   openGraph: {
     title: 'Terms of Service | Infinity Taekwondo',
@@ -81,7 +74,7 @@ export default function TermsPage() {
       policyType="terms"
     >
       {/* Executive Summary Callout Grid */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Scale className="w-4 h-4" /> At A Glance: Key Membership &amp; Dojang Terms
         </div>
@@ -149,7 +142,7 @@ export default function TermsPage() {
 
       {/* SECTION 3 */}
       <h2 id="liability">3. Physical Liability &amp; Sparring Waiver</h2>
-      <div className="p-5 rounded-[14px] bg-red-500/10 border border-red-500/30 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 space-y-2 mb-4">
+      <div className="p-5 rounded-2xl bg-red-500/10 border border-red-500/30 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 space-y-2 mb-4">
         <div className="flex items-center gap-2 font-black uppercase text-brand-red tracking-wider">
           <AlertTriangle className="w-4 h-4" /> Assumption of Inherent Martial Arts Risk
         </div>
@@ -243,7 +236,7 @@ export default function TermsPage() {
       <p>
         These Terms of Service are governed by the laws of the Kingdom of Cambodia. For any legal inquiries or membership administration:
       </p>
-      <div className="p-5 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
+      <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
         <p className="font-bold text-zinc-900 dark:text-white">Infinity Taekwondo Administration Directorate</p>
         <p className="text-zinc-500">📍 Olympic Branch (HQ) &bull; National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh</p>
         <p className="text-zinc-500">📍 Kouk Khleang Branch &bull; Kouk Khleang, Sen Sok, Phnom Penh</p>

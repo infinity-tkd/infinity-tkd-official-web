@@ -55,7 +55,7 @@ export function AgeDivisionsAndFormats() {
       {/* ------------------------------------------------------------------------ */}
       {/* SECTION 1: ALL AGES WELCOME (TIGERS TO ELDERS) */}
       {/* ------------------------------------------------------------------------ */}
-      <div className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden transition-colors duration-500">
+      <div className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden transition-colors duration-500">
         {/* Dynamic Background Glow */}
         <div
           className="absolute top-0 right-0 w-96 h-96 blur-[130px] rounded-full pointer-events-none opacity-15 transition-colors duration-500"
@@ -63,13 +63,13 @@ export function AgeDivisionsAndFormats() {
         />
 
         <div className="max-w-3xl mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[10px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20">
             <Users className="w-3.5 h-3.5" /> All Ages Welcome • Tigers to Golden Age
           </div>
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
             Training Tailored For <span className="text-brand-red">Every Stage of Life</span>
           </h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm mt-1.5 font-light leading-relaxed">
+          <p className="text-zinc-600 dark:text-zinc-400 text-[13px] sm:text-sm mt-1.5 leading-relaxed">
             From toddlers developing balance and listening skills to active seniors preserving joint mobility, our certified Kukkiwon masters scale martial science safely for every age.
           </p>
         </div>
@@ -95,7 +95,7 @@ export function AgeDivisionsAndFormats() {
                   style={{ backgroundColor: division.badgeColor }}
                 />
                 <span>{division.name}</span>
-                <span className="text-[10px] opacity-70 font-mono">({division.ageRange.replace('Ages ', '')})</span>
+                <span className="text-[11px] opacity-70 font-mono">({division.ageRange.replace('Ages ', '')})</span>
               </button>
             )
           })}
@@ -117,7 +117,7 @@ export function AgeDivisionsAndFormats() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
                 <span
-                  className="inline-block px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-black mb-1.5 font-mono shadow-sm"
+                  className="inline-block px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-black mb-1.5 font-mono shadow-sm"
                   style={{ backgroundColor: activeAge.badgeColor }}
                 >
                   {activeAge.ageRange}
@@ -134,14 +134,14 @@ export function AgeDivisionsAndFormats() {
               <h5 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1">
                 {activeAge.tagline}
               </h5>
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+              <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 {activeAge.developmentFocus}
               </p>
             </div>
 
             {/* Key Curriculum Bullets */}
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">
                 Core Age-Calibrated Syllabus
               </span>
               <div className="grid sm:grid-cols-2 gap-2.5">
@@ -186,7 +186,7 @@ export function AgeDivisionsAndFormats() {
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
             Choose Your <span className="text-brand-red">Class Format</span>
           </h3>
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm mt-1.5 font-light leading-relaxed">
+          <p className="text-zinc-600 dark:text-zinc-400 text-[13px] sm:text-sm mt-1.5 leading-relaxed">
             Whether you want the high-energy camaraderie of group sessions, dedicated child-focused classes, or personalized 1-on-1 master assessment.
           </p>
         </div>
@@ -210,7 +210,7 @@ export function AgeDivisionsAndFormats() {
                       setSelectedFormatId(format.id)
                     }
                   }}
-                  className={`h-full p-6 sm:p-8 rounded-[14px] border transition-all duration-300 flex flex-col justify-between cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-red touch-press ${
+                  className={`h-full p-6 sm:p-8 rounded-2xl border transition-all duration-300 flex flex-col justify-between cursor-pointer relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-brand-red touch-press ${
                     isSelected
                       ? 'bg-zinc-900 text-white dark:bg-zinc-900 border-brand-red shadow-xl shadow-brand-red/10'
                       : 'bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 hover:bg-zinc-50 dark:hover:bg-zinc-900/60'
@@ -228,7 +228,7 @@ export function AgeDivisionsAndFormats() {
                         <Icon className="w-5 h-5" />
                       </div>
                       <span
-                        className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider"
+                        className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider"
                         style={{
                           backgroundColor: `${format.accentColor}25`,
                           color: format.accentColor,
@@ -243,7 +243,7 @@ export function AgeDivisionsAndFormats() {
                       {format.subtitle}
                     </p>
 
-                    <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-light leading-relaxed mb-6">
+                    <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
                       {format.description}
                     </p>
 
@@ -264,7 +264,7 @@ export function AgeDivisionsAndFormats() {
                   </div>
 
                   <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
-                    <span className="text-zinc-400 font-mono text-[11px]">
+                    <span className="text-zinc-400 font-mono text-xs">
                       Ratio: {format.ratio}
                     </span>
                     <Link

@@ -687,14 +687,14 @@ export default function AboutPage() {
           <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
               <div className="md:col-span-5 flex justify-center">
-                <div className="relative p-6 sm:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col items-center text-center w-full max-w-sm">
+                <div className="relative p-6 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col items-center text-center w-full max-w-sm">
                   <div className="relative">
                     <InfinityLogo variant="seal" className="w-44 sm:w-56 h-44 sm:h-56 mb-4 sm:mb-6 drop-shadow-brand-glow" />
                   </div>
                   <span className="text-xs font-black uppercase tracking-widest text-brand-red">
                     The Official Infinity Seal
                   </span>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-2 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
                     Geometric precision incorporating the Taekwondo belt knot into an eternal loop.
                   </p>
                 </div>
@@ -719,7 +719,7 @@ export default function AboutPage() {
                     <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-1">
                       Infinity Red (#EF2F38)
                     </h4>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Symbolizes vitality, energy, passion, and the intense indomitable warrior spirit of the practitioner.
                     </p>
                   </div>
@@ -727,7 +727,7 @@ export default function AboutPage() {
                     <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-1">
                       Korean Origin (태권도)
                     </h4>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Honors the art’s traditional origins while positioning the brand for international recognition.
                     </p>
                   </div>
@@ -738,7 +738,7 @@ export default function AboutPage() {
 
           {/* Logo Formula & Visual Equation */}
           <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <div className="p-8 sm:p-12 rounded-[14px] bg-zinc-900 text-white border border-brand-red/30 text-center relative overflow-hidden shadow-xl">
+            <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/30 text-center relative overflow-hidden shadow-xl">
               <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[120px] rounded-full pointer-events-none" />
 
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
@@ -754,7 +754,7 @@ export default function AboutPage() {
                     <span className="text-3xl font-black">🥋</span>
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider block">Taekwondo Belt Knot</span>
-                  <span className="text-[10px] text-zinc-400">Traditional Root</span>
+                  <span className="text-[11px] text-zinc-400">Traditional Root</span>
                 </div>
 
                 <span className="text-3xl font-black text-brand-red">+</span>
@@ -764,7 +764,7 @@ export default function AboutPage() {
                     <span className="text-4xl font-black text-brand-red">∞</span>
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider block">Eternal Loop</span>
-                  <span className="text-[10px] text-zinc-400">Limitless Growth</span>
+                  <span className="text-[11px] text-zinc-400">Limitless Growth</span>
                 </div>
 
                 <span className="text-3xl font-black text-brand-red">=</span>
@@ -774,7 +774,7 @@ export default function AboutPage() {
                     <InfinityLogo variant="symbol" className="w-12 h-12 text-brand-red" />
                   </div>
                   <span className="text-xs font-black uppercase tracking-wider block text-brand-red">Infinity TKD Mark</span>
-                  <span className="text-[10px] text-zinc-300">Global Martial Identity</span>
+                  <span className="text-[11px] text-zinc-300">Global Martial Identity</span>
                 </div>
               </div>
             </div>
@@ -811,7 +811,7 @@ export default function AboutPage() {
                       className="w-7 h-7 rounded-lg border shadow-sm transition-transform duration-300"
                       style={{ backgroundColor: belt.hex, borderColor: belt.border }}
                     />
-                    <span className="text-[11px] font-bold text-zinc-900 dark:text-white leading-tight">
+                    <span className="text-xs font-bold text-zinc-900 dark:text-white leading-tight">
                       {belt.name.replace(' (1st-5th Dan)', '')}
                     </span>
                   </button>
@@ -825,7 +825,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={activeBeltObj.name}
-                  className="p-6 sm:p-8 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto shadow-md animate-fade-in"
+                  className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto shadow-md animate-fade-in"
                 >
                   <div className="flex items-center gap-4">
                     <div
@@ -849,7 +849,7 @@ export default function AboutPage() {
                         <span className="text-xs font-mono font-bold text-brand-red">{activeBeltObj.korean}</span>
                       </div>
                       <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 mt-0.5">{activeBeltObj.meaning}</p>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1 max-w-lg leading-relaxed">
+                      <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg leading-relaxed">
                         {activeBeltObj.philosophy}
                       </p>
                     </div>
@@ -874,7 +874,7 @@ export default function AboutPage() {
       {/* TAB 2: INFINITY TKD BRAIN & MIND PHILOSOPHY */}
       {/* ==================================================================== */}
       {activeTab === 'mind' && (
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto space-y-16 sm:space-y-20">
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto space-y-16 sm:space-y-20">
           <InfinityBrainAnimation />
 
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
@@ -894,7 +894,7 @@ export default function AboutPage() {
               const Icon = item.icon
               return (
                 <Card3D key={item.number} max={5} depth={4} className="h-full">
-                  <div className="p-8 sm:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
+                  <div className="p-8 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
                     <div>
                       <div className="flex justify-between items-start mb-6">
                         <span className="text-3xl sm:text-4xl font-black text-brand-red/40 font-mono">
@@ -922,7 +922,7 @@ export default function AboutPage() {
                         <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
                         <span>Cultivated Daily</span>
                       </div>
-                      <span className="text-brand-red font-mono text-[11px]">{item.metric}</span>
+                      <span className="text-brand-red font-mono text-xs">{item.metric}</span>
                     </div>
                   </div>
                 </Card3D>
@@ -936,7 +936,7 @@ export default function AboutPage() {
       {/* TAB 3: VISION, MISSION, GOAL & DREAM QUAD-MATRIX */}
       {/* ==================================================================== */}
       {activeTab === 'quad' && (
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto">
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
               Direct from Brand Guide (Page 3)
@@ -954,11 +954,11 @@ export default function AboutPage() {
               const Icon = pillar.icon
               return (
                 <Card3D key={pillar.id} max={5} depth={4} className="h-full">
-                  <div className="p-8 sm:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
+                  <div className="p-8 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
                     <div>
                       <div className="flex justify-between items-start mb-6">
                         <span
-                          className="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-sm"
+                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
                           style={{ backgroundColor: pillar.color }}
                         >
                           {pillar.badge}
@@ -987,9 +987,9 @@ export default function AboutPage() {
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-zinc-400">
+                    <div className="mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-zinc-400">
                       <span>Source: {pillar.source}</span>
-                      <span className="font-bold text-brand-red uppercase text-[10px]">{pillar.target}</span>
+                      <span className="font-bold text-brand-red uppercase text-[11px]">{pillar.target}</span>
                     </div>
                   </div>
                 </Card3D>
@@ -1003,7 +1003,7 @@ export default function AboutPage() {
       {/* TAB 4: 3 CORE VALUES */}
       {/* ==================================================================== */}
       {activeTab === 'values' && (
-        <section className="py-16 sm:py-24 bg-white dark:bg-black animate-fade-in">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black animate-fade-in">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
@@ -1022,7 +1022,7 @@ export default function AboutPage() {
                 const Icon = val.icon
                 return (
                   <Card3D key={val.title} max={5} depth={4} className="h-full">
-                    <div className="p-6 sm:p-8 md:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
+                    <div className="p-6 sm:p-8 md:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
                       <div>
                         <div className="flex justify-between items-start mb-6 sm:mb-8">
                           <span className="text-4xl sm:text-5xl font-black text-brand-red/40 font-mono">
@@ -1074,7 +1074,7 @@ export default function AboutPage() {
       {/* TAB 5: THE 5 DOJANG TENETS */}
       {/* ==================================================================== */}
       {activeTab === 'tenets' && (
-        <section className="py-16 sm:py-24 bg-white dark:bg-black animate-fade-in">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black animate-fade-in">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
@@ -1091,7 +1091,7 @@ export default function AboutPage() {
             <div className="space-y-4">
               {dojangTenets.map((tenet) => (
                 <Card3D key={tenet.name} max={3} depth={2} className="w-full">
-                  <div className="p-6 sm:p-8 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="flex items-start md:items-center gap-4 sm:gap-6">
                       <span className="text-3xl sm:text-4xl font-black text-brand-red/60 w-12 sm:w-14 shrink-0 font-mono">
                         {tenet.number}
@@ -1107,14 +1107,14 @@ export default function AboutPage() {
                         <p className="text-sm text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
                           {tenet.principle}
                         </p>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 font-light mt-1.5 leading-relaxed">
-                          <strong className="text-zinc-800 dark:text-zinc-200 font-bold uppercase text-[10px]">Daily Action:</strong> {tenet.application}
+                        <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                          <strong className="text-zinc-800 dark:text-zinc-200 font-bold uppercase text-[11px]">Daily Action:</strong> {tenet.application}
                         </p>
                       </div>
                     </div>
 
                     <div className="shrink-0 self-end md:self-auto">
-                      <span className="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20 shadow-sm">
+                      <span className="px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20 shadow-sm">
                         Dojang Standard
                       </span>
                     </div>
@@ -1148,7 +1148,7 @@ export default function AboutPage() {
         const currentM = getLocalizedMilestone(activeMilestone)
 
         return (
-          <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in max-w-6xl mx-auto">
+          <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
@@ -1190,7 +1190,7 @@ export default function AboutPage() {
             {journeyViewMode === 'interactive' && (
               <div className="space-y-8 animate-fade-in">
                 {/* Horizontal Interactive Timeline Track */}
-                <div className="p-3 sm:p-4 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                <div className="p-3 sm:p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
                   <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
                     {milestones.map((m, idx) => {
                       const isSelected = selectedEraYear === m.year
@@ -1224,7 +1224,7 @@ export default function AboutPage() {
                             <span className="text-[11px] font-bold uppercase tracking-wider block text-zinc-900 dark:text-white truncate">
                               {m.era}
                             </span>
-                            <span className="text-[10px] text-zinc-400 font-mono block truncate">
+                            <span className="text-[11px] text-zinc-400 font-mono block truncate">
                               {m.badge}
                             </span>
                           </div>
@@ -1235,7 +1235,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Selected Era Spotlight Card (14px radius) */}
-                <div className="p-6 sm:p-10 md:p-12 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative overflow-hidden animate-fade-in">
+                <div className="p-6 sm:p-10 md:p-12 rounded-2xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative overflow-hidden animate-fade-in">
                   <div
                     className="absolute top-0 right-0 w-96 h-96 blur-[150px] rounded-full pointer-events-none opacity-20"
                     style={{ backgroundColor: currentM.badgeColor }}
@@ -1246,7 +1246,7 @@ export default function AboutPage() {
                     <div className="md:col-span-7 space-y-4">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <span
-                          className="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-sm"
+                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
                           style={{ backgroundColor: currentM.badgeColor }}
                         >
                           {currentM.badge}
@@ -1277,7 +1277,7 @@ export default function AboutPage() {
                         <p className="text-xs italic text-zinc-600 dark:text-zinc-300 font-serif leading-relaxed">
                           &ldquo;{currentM.quote.text}&rdquo;
                         </p>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-red block mt-2">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand-red block mt-2">
                           &mdash; {currentM.quote.author}
                         </span>
                       </div>
@@ -1287,7 +1287,7 @@ export default function AboutPage() {
                     <div className="md:col-span-5 space-y-4">
                       {/* Metric Callout Card */}
                       <div className="p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                        <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">
+                        <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
                           {currentM.metrics.label}
                         </span>
                         <span className="text-2xl sm:text-3xl font-black font-mono text-zinc-900 dark:text-white mt-1 block">
@@ -1302,7 +1302,7 @@ export default function AboutPage() {
                         </h4>
                         <div className="space-y-2.5">
                           {currentM.highlights.map((h, i) => (
-                            <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-700 dark:text-zinc-300 font-light">
+                            <div key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-700 dark:text-zinc-300">
                               <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
                               <span>{h}</span>
                             </div>
@@ -1348,7 +1348,7 @@ export default function AboutPage() {
                   return (
                     <div key={m.year} className="relative pl-8 sm:pl-10">
                       <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-red border-4 border-white dark:border-black shadow-brand-glow" />
-                      <div className="p-6 sm:p-8 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-brand-red/40 transition-all">
+                      <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-brand-red/40 transition-all">
                         <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
                           <div className="flex items-center gap-3">
                             <span className="text-3xl sm:text-4xl font-black text-brand-red font-mono">
@@ -1359,7 +1359,7 @@ export default function AboutPage() {
                             </span>
                           </div>
                           <span
-                            className="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-sm"
+                            className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
                             style={{ backgroundColor: m.badgeColor }}
                           >
                             {m.badge}
@@ -1382,7 +1382,7 @@ export default function AboutPage() {
                           {localizedM.highlights.map((h, i) => (
                             <span
                               key={i}
-                              className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-[11px] font-medium"
+                              className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-medium"
                             >
                               &bull; {h}
                             </span>
@@ -1402,7 +1402,7 @@ export default function AboutPage() {
       {/* TAB 7: LEADERSHIP TEAM */}
       {/* ==================================================================== */}
       {activeTab === 'faculty' && (
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in">
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
@@ -1458,16 +1458,16 @@ export default function AboutPage() {
       {/* INSTITUTIONAL COLLABORATIONS & GOVERNING ALLIANCES (14px radius) */}
       {/* ==================================================================== */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
-        <div className="p-8 sm:p-12 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-8">
+        <div className="p-8 sm:p-12 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Institutional Ecosystem
               </span>
               <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 Global Collaborations &amp; Alliances
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-500 font-light mt-1 max-w-2xl">
+              <p className="text-[13px] sm:text-sm text-zinc-500 mt-1 max-w-2xl">
                 Infinity Taekwondo aligns with international governing bodies, Seoul Kukkiwon headquarters, sport universities, and performance gear innovators.
               </p>
             </div>
@@ -1492,7 +1492,7 @@ export default function AboutPage() {
                       <div className="w-12 h-12 rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1">
                         <SafeImage src={partner.logo} alt={partner.name} className="w-full h-full object-cover rounded grayscale group-hover:grayscale-0 transition-all" />
                       </div>
-                      <span className="px-2 py-0.5 rounded-md text-[9px] font-mono font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
+                      <span className="px-2 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
                         {partner.tier}
                       </span>
                     </div>
@@ -1501,17 +1501,17 @@ export default function AboutPage() {
                       <h3 className="text-xs sm:text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight group-hover:text-brand-red transition-colors line-clamp-1">
                         {partner.name}
                       </h3>
-                      <span className="text-[10px] font-mono text-zinc-400 block mt-0.5 truncate">
+                      <span className="text-[11px] font-mono text-zinc-400 block mt-0.5 truncate">
                         {partner.partnerType}
                       </span>
                     </div>
 
-                    <p className="text-[11px] text-zinc-500 font-light line-clamp-2 leading-relaxed">
+                    <p className="text-[13px] text-zinc-500 line-clamp-2 leading-relaxed">
                       {partner.summary}
                     </p>
                   </div>
 
-                  <div className="pt-3 mt-4 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                  <div className="pt-3 mt-4 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400">
                     <span>{partner.country}</span>
                     <span className="text-brand-red font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
                       View <ArrowRight className="w-3 h-3" />
@@ -1528,7 +1528,7 @@ export default function AboutPage() {
       {/* BOTTOM CTA BANNER */}
       {/* ==================================================================== */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
-        <div className="p-8 sm:p-12 md:p-14 rounded-[14px] bg-zinc-900 text-white border border-zinc-800 text-center relative overflow-hidden shadow-2xl">
+        <div className="p-8 sm:p-12 md:p-14 rounded-2xl bg-zinc-900 text-white border border-zinc-800 text-center relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/15 blur-[140px] rounded-full pointer-events-none" />
 
           <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
@@ -1572,7 +1572,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/85 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-4xl bg-white dark:bg-zinc-950 shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] z-10 rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800"
+            className="relative w-full max-w-4xl bg-white dark:bg-zinc-950 shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] z-10 rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -1592,7 +1592,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
               <div className="absolute bottom-6 left-6 right-6 z-10">
-                <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
+                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
                   {selectedMember.role}
                 </span>
                 <h3 id="member-modal-title" className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-none">
@@ -1606,7 +1606,7 @@ export default function AboutPage() {
 
             <div className="w-full md:w-7/12 p-6 sm:p-8 md:p-10 overflow-y-auto space-y-6 touch-scroll">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
                   Executive Faculty Profile
                 </span>
                 <h4 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
@@ -1614,7 +1614,7 @@ export default function AboutPage() {
                 </h4>
               </div>
 
-              <div className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed text-xs sm:text-sm">
+              <div className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-[13px] sm:text-sm">
                 {selectedMember.bio}
               </div>
 

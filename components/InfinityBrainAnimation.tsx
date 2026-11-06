@@ -230,7 +230,7 @@ export function InfinityBrainAnimation() {
   }, [])
 
   return (
-    <div className="relative rounded-[14px] bg-zinc-950 border border-zinc-800/90 overflow-hidden shadow-2xl p-5 sm:p-8 md:p-10 text-white font-sans">
+    <div className="relative rounded-2xl bg-zinc-950 border border-zinc-800/90 overflow-hidden shadow-2xl p-5 sm:p-8 md:p-10 text-white font-sans">
       {/* Subtle Background Glow Aura */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,47,56,0.1),_transparent_70%)] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-brand-red/10 blur-[140px] rounded-full pointer-events-none" />
@@ -251,7 +251,7 @@ export function InfinityBrainAnimation() {
       {/* Main Grid Stage (14px radius cards) */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch max-w-6xl mx-auto">
         {/* Left Column: Interactive Animated Neural Canvas */}
-        <div className="lg:col-span-7 relative flex items-center justify-center p-6 sm:p-8 bg-zinc-900/70 rounded-[14px] border border-zinc-800 min-h-[360px] sm:min-h-[420px] overflow-hidden shadow-inner">
+        <div className="lg:col-span-7 relative flex items-center justify-center p-6 sm:p-8 bg-zinc-900/70 rounded-2xl border border-zinc-800 min-h-[360px] sm:min-h-[420px] overflow-hidden shadow-inner">
           {/* SVG Orbit and Synapse Lines */}
           <svg
             viewBox="0 0 800 400"
@@ -350,7 +350,7 @@ export function InfinityBrainAnimation() {
         </div>
 
         {/* Right Column: High-Precision Faculty Card */}
-        <div className="lg:col-span-5 p-6 sm:p-8 rounded-[14px] bg-zinc-900/80 border border-zinc-800 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-zinc-900/80 border border-zinc-800 shadow-xl flex flex-col justify-between">
           <div>
             {/* Top Telemetry Header (Clean, Uncrowded Layout) */}
             <div className="flex flex-wrap items-center justify-between gap-2.5 mb-6 pb-4 border-b border-zinc-800">
@@ -422,7 +422,7 @@ export function InfinityBrainAnimation() {
       {/* ==================================================================== */}
       {/* INTERACTIVE MILLISECOND REFLEX TESTER (Reaction Speed Mini-Lab) */}
       {/* ==================================================================== */}
-      <div className="relative z-10 mt-8 max-w-6xl mx-auto p-6 sm:p-8 rounded-[14px] bg-zinc-900/60 border border-zinc-800 shadow-md">
+      <div className="relative z-10 mt-8 max-w-6xl mx-auto p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-zinc-800 shadow-md">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-brand-red mb-1">

@@ -2,89 +2,73 @@
 
 import * as React from 'react'
 import { ChevronUp } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
+const RADIUS = 17
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS
+
+/**
+ * Floating "back to top" button with a scroll-progress ring.
+ * Only the visibility flip uses React state; the ring is updated directly on the DOM,
+ * so scrolling does not re-render the component every frame.
+ */
 export function BackToTop() {
   const [isVisible, setIsVisible] = React.useState(false)
-  const [progress, setProgress] = React.useState(0)
+  const ringRef = React.useRef<SVGCircleElement>(null)
 
   React.useEffect(() => {
     let ticking = false
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight
-          setIsVisible(scrollY > 350)
-          if (docHeight > 0) {
-            setProgress(Math.min(1, Math.max(0, scrollY / docHeight)))
-          } else {
-            setProgress(0)
-          }
-          ticking = false
-        })
-        ticking = true
-      }
+    const update = () => {
+      ticking = false
+      const scrollY = window.scrollY
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      const progress = scrollable > 0 ? Math.min(1, Math.max(0, scrollY / scrollable)) : 0
+      setIsVisible(scrollY > 400) // React bails out when the value is unchanged
+      if (ringRef.current) ringRef.current.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - progress))
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(update)
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  const radius = 17
-  const circumference = 2 * Math.PI * radius
-  const strokeDashoffset = circumference * (1 - progress)
 
   return (
     <button
-      onClick={scrollToTop}
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top of page"
-      className={`fixed bottom-24 lg:bottom-8 right-5 lg:right-8 z-40 p-2 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl transition-all duration-300 group touch-press focus:outline-none focus:ring-2 focus:ring-brand-red ${
-        isVisible
-          ? 'opacity-100 translate-y-0 pointer-events-auto scale-100'
-          : 'opacity-0 translate-y-6 pointer-events-none scale-90'
-      }`}
+      tabIndex={isVisible ? 0 : -1}
+      className={cn(
+        'group fixed bottom-[calc(5rem+env(safe-area-inset-bottom,0px))] right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full',
+        'border border-zinc-200 bg-white/85 shadow-lg backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/85',
+        'transition-[opacity,transform] duration-300 ease-out-expo touch-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red',
+        'lg:bottom-8 lg:right-8',
+        isVisible ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+      )}
     >
-      <svg className="w-10 h-10 -rotate-90 pointer-events-none" viewBox="0 0 44 44">
-        {/* Background Track */}
+      <svg className="pointer-events-none absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r={RADIUS} className="text-zinc-200 dark:text-zinc-800" stroke="currentColor" strokeWidth="2" fill="none" />
         <circle
+          ref={ringRef}
           cx="22"
           cy="22"
-          r={radius}
-          className="text-zinc-200 dark:text-zinc-800"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          fill="none"
-        />
-        {/* Active Progress Ring */}
-        <circle
-          cx="22"
-          cy="22"
-          r={radius}
+          r={RADIUS}
           className="text-brand-red"
           stroke="currentColor"
-          strokeWidth="2.5"
+          strokeWidth="2"
           fill="none"
           strokeLinecap="round"
-          style={{
-            strokeDasharray: circumference,
-            strokeDashoffset,
-            transition: 'stroke-dashoffset 100ms ease-out',
-          }}
+          style={{ strokeDasharray: CIRCUMFERENCE, strokeDashoffset: CIRCUMFERENCE }}
         />
       </svg>
-      {/* Icon */}
-      <span className="absolute inset-0 flex items-center justify-center text-zinc-700 dark:text-zinc-200 group-hover:text-brand-red group-hover:-translate-y-0.5 transition-all">
-        <ChevronUp className="w-4 h-4" />
-      </span>
+      <ChevronUp className="relative h-4 w-4 text-zinc-700 transition-transform duration-300 group-hover:-translate-y-0.5 dark:text-zinc-200" />
     </button>
   )
 }

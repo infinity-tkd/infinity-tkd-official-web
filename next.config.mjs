@@ -5,11 +5,12 @@ const isFigma = Boolean(process.env.FIGMA)
 
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
+  // 'unsafe-eval' is only needed by the dev server (React Refresh).
+  process.env.NODE_ENV === 'production' ? "script-src 'self' 'unsafe-inline'" : "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
   "img-src 'self' data: blob: https://images.unsplash.com https://source.unsplash.com https://i.ytimg.com https://img.youtube.com",
-  "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:",
-  "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net",
+  "font-src 'self' https://cdn.jsdelivr.net data:",
+  "connect-src 'self' https://cdn.jsdelivr.net",
   "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com",
   isFigma ? "frame-ancestors 'self' https://*.figma.com https://figma.com" : "frame-ancestors 'none'",
   "base-uri 'self'",
@@ -42,7 +43,7 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value:
-      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), display-capture=(), battery=()',
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=(), display-capture=()',
   },
   {
     key: 'Strict-Transport-Security',
@@ -69,6 +70,10 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
+    // Qualities that <Image quality={...}> may request. Values not listed here are coerced to 75.
+    qualities: [60, 65, 70, 75],
+    // Remote images are resized/re-encoded on demand; cache the results for a week.
+    minimumCacheTTL: 60 * 60 * 24 * 7,
     remotePatterns: [
       {
         protocol: 'https',

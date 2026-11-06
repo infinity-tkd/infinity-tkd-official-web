@@ -156,7 +156,7 @@ export function HistoryHeritageMaster() {
       {/* ==================================================================== */}
       {/* 1. TOP 4-PILLAR MASTER NAVIGATION (Minimalist & High Contrast) */}
       {/* ==================================================================== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-1.5 bg-zinc-100 dark:bg-zinc-900 rounded-[14px] border border-zinc-200 dark:border-zinc-800">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-1.5 bg-zinc-100 dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800">
         {pillars.map((pillar) => {
           const isActive = activePillar === pillar.key
           const { icon: Icon, accent } = pillarIcons[pillar.key] || { icon: Calendar, accent: '#EF2F38' }
@@ -180,7 +180,7 @@ export function HistoryHeritageMaster() {
 
               <div className="flex items-center justify-between mb-2">
                 <Icon className="w-5 h-5" style={{ color: accent }} />
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300">
+                <span className="text-[11px] font-mono uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300">
                   {ht.pillarBadge}
                 </span>
               </div>
@@ -189,12 +189,12 @@ export function HistoryHeritageMaster() {
                 <h3 className="text-sm sm:text-base font-black uppercase tracking-tight">
                   {pillar.title}
                 </h3>
-                <span className="text-[11px] text-zinc-400 font-light block">
+                <span className="text-[13px] text-zinc-400 block">
                   {pillar.korean}
                 </span>
               </div>
 
-              <div className="mt-2.5 pt-2 border-t border-zinc-100 dark:border-zinc-700/60 text-[10px] text-zinc-500 font-mono truncate">
+              <div className="mt-2.5 pt-2 border-t border-zinc-100 dark:border-zinc-700/60 text-[11px] text-zinc-500 font-mono truncate">
                 {pillar.subtitle}
               </div>
             </button>
@@ -208,7 +208,7 @@ export function HistoryHeritageMaster() {
       {activePillar === 'timeline' && (
         <div className="space-y-6 animate-fade-in">
           {/* Controls: Era Filter & Search & View Switcher */}
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
@@ -220,7 +220,7 @@ export function HistoryHeritageMaster() {
                 <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   {pillars[0]?.subtitle}
                 </h3>
-                <p className="text-xs text-zinc-500 font-light max-w-3xl mt-0.5">
+                <p className="text-[13px] text-zinc-500 max-w-3xl mt-0.5">
                   {language === 'km'
                     ? 'ស្វែងយល់អំពីការវិវត្តពីក្បាច់គុនរស់រានមានជីវិតបុរាណ និង Subak នៃសម័យ Goryeo រហូតដល់ការបង្កើតសាលាគុនទាំង ៥ ក្នុងឆ្នាំ ១៩៤៦ ការដាក់ឈ្មោះតេក្វាន់ដូឆ្នាំ ១៩៥៥ ការពង្រីកទូទាំងពិភពលោក និងឋានៈជាកីឡាជាតិស្របច្បាប់។'
                     : language === 'zh'
@@ -255,7 +255,7 @@ export function HistoryHeritageMaster() {
             {/* Era Filter Pills & View Switcher */}
             <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="text-[11px] font-mono text-zinc-400 mr-1 flex items-center gap-1">
+                <span className="text-xs font-mono text-zinc-400 mr-1 flex items-center gap-1">
                   <Filter className="w-3 h-3" /> Period:
                 </span>
                 {eras.map((era) => (
@@ -305,7 +305,7 @@ export function HistoryHeritageMaster() {
                 <div
                   key={item.id}
                   onClick={() => setSelectedMilestone(item)}
-                  className="p-5 sm:p-7 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center cursor-pointer group"
+                  className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center cursor-pointer group"
                 >
                   {/* Photo Column */}
                   <div className="md:col-span-4 relative h-44 sm:h-48 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
@@ -316,15 +316,15 @@ export function HistoryHeritageMaster() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                     <div className="absolute top-2.5 left-2.5 z-10">
-                      <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
+                      <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
                         {item.year}
                       </span>
                     </div>
                     <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-                      <span className="text-[10px] font-mono font-bold block" style={{ color: item.tagColor }}>
+                      <span className="text-[11px] font-mono font-bold block" style={{ color: item.tagColor }}>
                         {item.era}
                       </span>
-                      <span className="text-[11px] font-mono block opacity-80 truncate">
+                      <span className="text-xs font-mono block opacity-80 truncate">
                         {item.koreanTitle.split('(')[0]}
                       </span>
                     </div>
@@ -333,7 +333,7 @@ export function HistoryHeritageMaster() {
                   {/* Summary Column */}
                   <div className="md:col-span-8 space-y-2.5">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                         Epoch #{item.epochNumber} Milestone
                       </span>
                       <span className="text-xs font-mono text-zinc-400 flex items-center gap-1">
@@ -345,12 +345,12 @@ export function HistoryHeritageMaster() {
                       {item.title}
                     </h4>
 
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {item.summary}
                     </p>
 
                     <div className="pt-2 flex items-center justify-between text-xs font-mono border-t border-zinc-100 dark:border-zinc-800">
-                      <span className="text-[11px] text-zinc-500 truncate max-w-[320px]">
+                      <span className="text-xs text-zinc-500 truncate max-w-[320px]">
                         {ht.colFigures}: {item.keyFigures}
                       </span>
                       <span className="text-brand-red font-bold text-xs inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
@@ -365,11 +365,11 @@ export function HistoryHeritageMaster() {
 
           {/* VIEW B: CHRONO DATA TABLE */}
           {timelineView === 'table' && (
-            <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+            <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono border-collapse">
                   <thead>
-                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-500 uppercase text-[10px]">
+                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-500 uppercase text-[11px]">
                       <th className="p-3">{ht.colYear}</th>
                       <th className="p-3">{ht.colEvent}</th>
                       <th className="p-3">Hangul</th>
@@ -386,7 +386,7 @@ export function HistoryHeritageMaster() {
                       >
                         <td className="p-3 whitespace-nowrap">
                           <span className="font-bold text-brand-red block">{item.year}</span>
-                          <span className="text-[10px] text-zinc-400">{item.era}</span>
+                          <span className="text-[11px] text-zinc-400">{item.era}</span>
                         </td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white max-w-xs">
                           {item.title}
@@ -424,7 +424,7 @@ export function HistoryHeritageMaster() {
       {activePillar === 'philosophy' && (
         <div className="space-y-6 animate-fade-in">
           {/* Sub-Tabs */}
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
@@ -460,14 +460,14 @@ export function HistoryHeritageMaster() {
           {philosophySubTab === 'spirit-virtues' && (
             <div className="space-y-6">
               {/* Dual Ideology Banner */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
                   <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                     <Flame className="w-4 h-4 text-brand-red" /> {dualSpirit.title}
                   </h4>
                   <span className="text-xs font-mono text-zinc-400">{dualSpirit.koreanTitle}</span>
                 </div>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   {dualSpirit.summary}
                 </p>
 
@@ -482,7 +482,7 @@ export function HistoryHeritageMaster() {
                         <span className="text-xl font-bold font-mono px-2.5 py-0.5 rounded bg-white dark:bg-zinc-900 border text-zinc-900 dark:text-white">
                           {ideology.hanja}
                         </span>
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded text-white" style={{ backgroundColor: ideology.badgeColor }}>
+                        <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded text-white" style={{ backgroundColor: ideology.badgeColor }}>
                           {ideology.direction}
                         </span>
                       </div>
@@ -496,11 +496,11 @@ export function HistoryHeritageMaster() {
                         </strong>
                       </div>
 
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {ideology.explanation}
                       </p>
 
-                      <div className="p-3 rounded-lg bg-white dark:bg-zinc-900 text-[11px] font-mono text-zinc-500 italic border border-zinc-100 dark:border-zinc-800">
+                      <div className="p-3 rounded-lg bg-white dark:bg-zinc-900 text-xs font-mono text-zinc-500 italic border border-zinc-100 dark:border-zinc-800">
                         &ldquo;{ideology.quote}&rdquo;
                       </div>
                     </div>
@@ -530,7 +530,7 @@ export function HistoryHeritageMaster() {
                   {fiveVirtues.map((virtue, vIdx) => (
                     <div
                       key={virtue.id}
-                      className="p-5 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
+                      className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all space-y-3 flex flex-col justify-between"
                     >
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
@@ -549,7 +549,7 @@ export function HistoryHeritageMaster() {
                           <span className="text-xs font-mono text-zinc-400 block">{virtue.englishMeaning}</span>
                         </div>
 
-                        <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                        <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                           {virtue.definition}
                         </p>
                       </div>
@@ -571,7 +571,7 @@ export function HistoryHeritageMaster() {
               {fiveTenets.map((tenet, idx) => (
                 <div
                   key={tenet.id}
-                  className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-lg transition-all space-y-3 flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-lg transition-all space-y-3 flex flex-col justify-between"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
@@ -592,7 +592,7 @@ export function HistoryHeritageMaster() {
                       </span>
                     </div>
 
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {tenet.deepExplanation}
                     </p>
                   </div>
@@ -610,7 +610,7 @@ export function HistoryHeritageMaster() {
           {philosophySubTab === 'nature-sport' && (
             <div className="space-y-6">
               {/* Definition & Dual Purposes */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <div className="space-y-2">
                   <span className="text-xs font-mono font-bold text-brand-red uppercase">
                     Kukkiwon Academic Synthesis
@@ -618,7 +618,7 @@ export function HistoryHeritageMaster() {
                   <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white">
                     Definition &amp; Dual Purpose of Taekwondo
                   </h4>
-                  <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+                  <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                     {taekwondoNature.definition}
                   </p>
                   <p className="text-xs font-mono text-zinc-500 italic">
@@ -632,7 +632,7 @@ export function HistoryHeritageMaster() {
                       <strong className="text-xs font-bold text-zinc-900 dark:text-white block font-mono">
                         {p.title}
                       </strong>
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {p.description}
                       </p>
                     </div>
@@ -641,7 +641,7 @@ export function HistoryHeritageMaster() {
               </div>
 
               {/* 5 Distinct Technique Characteristics */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                   <Target className="w-4 h-4 text-brand-red" /> The Five Distinct Technique Characteristics
                 </h4>
@@ -652,14 +652,14 @@ export function HistoryHeritageMaster() {
                       key={tc.id}
                       className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs font-mono"
                     >
-                      <span className="text-[10px] text-brand-red font-bold uppercase">
+                      <span className="text-[11px] text-brand-red font-bold uppercase">
                         Feature #{idx + 1}
                       </span>
                       <strong className="text-xs font-bold text-zinc-900 dark:text-white block">
                         {tc.title}
                       </strong>
-                      <span className="text-[11px] text-zinc-400 block">{tc.korean}</span>
-                      <p className="text-[11px] text-zinc-600 dark:text-zinc-400 font-light leading-relaxed pt-1">
+                      <span className="text-xs text-zinc-400 block">{tc.korean}</span>
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed pt-1">
                         {tc.explanation}
                       </p>
                     </div>
@@ -669,20 +669,20 @@ export function HistoryHeritageMaster() {
 
               {/* Meaning of Practice (Suryeon) & Mudo Sport Traits */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white flex items-center gap-2">
                     <Compass className="w-4 h-4 text-blue-500" /> {taekwondoNature.suryeonMeaning.title}
                   </h4>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {taekwondoNature.suryeonMeaning.explanation}
                   </p>
                 </div>
 
-                <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white flex items-center gap-2">
                     <Dumbbell className="w-4 h-4 text-emerald-500" /> 5 Traits of Modern Martial Art Sport (Mudo Sport)
                   </h4>
-                  <ul className="space-y-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-400 font-light">
+                  <ul className="space-y-1.5 text-[13px] font-mono text-zinc-600 dark:text-zinc-400">
                     {taekwondoNature.mudoSportCharacteristics.map((trait, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
                         <span className="text-emerald-500 font-bold">&bull;</span>
@@ -700,7 +700,7 @@ export function HistoryHeritageMaster() {
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {dobokPhilosophy.aspects.map((asp, idx) => (
-                  <div key={idx} className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2.5">
+                  <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2.5">
                     <div className="flex items-center justify-between">
                       <span className="text-xl font-bold font-mono" style={{ color: asp.color }}>
                         {asp.hanja} ({asp.sound})
@@ -712,7 +712,7 @@ export function HistoryHeritageMaster() {
                     <h4 className="text-sm font-bold uppercase text-zinc-900 dark:text-white">
                       {asp.title}
                     </h4>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {asp.description}
                     </p>
                   </div>
@@ -720,7 +720,7 @@ export function HistoryHeritageMaster() {
               </div>
 
               {/* Belt Progression Journey */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                 <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                   <Award className="w-4 h-4 text-brand-red" /> {dobokPhilosophy.cycleTitle}
                 </h4>
@@ -738,8 +738,8 @@ export function HistoryHeritageMaster() {
                       <strong className={`block mt-1 ${belt.isDark ? '' : 'text-zinc-900 dark:text-white'}`}>
                         {belt.name}
                       </strong>
-                      <span className="text-[10px] block opacity-75">{belt.meaning}</span>
-                      <span className="text-[9px] block opacity-60 mt-0.5">{belt.sub}</span>
+                      <span className="text-[11px] block opacity-75">{belt.meaning}</span>
+                      <span className="text-[11px] block opacity-60 mt-0.5">{belt.sub}</span>
                     </div>
                   ))}
                 </div>
@@ -751,7 +751,7 @@ export function HistoryHeritageMaster() {
           {philosophySubTab === 'power-hwarang' && (
             <div className="space-y-6">
               {/* Theory of Power Grid */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
                   <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                     <Zap className="w-4 h-4 text-amber-500" /> Biomechanical Theory of Power (힘의 원리: E = ½mv²)
@@ -769,7 +769,7 @@ export function HistoryHeritageMaster() {
                         <span className="text-xs font-mono font-bold text-brand-red">
                           Factor #{idx + 1}
                         </span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white dark:bg-zinc-900 border text-zinc-500">
+                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white dark:bg-zinc-900 border text-zinc-500">
                           {item.principle}
                         </span>
                       </div>
@@ -777,7 +777,7 @@ export function HistoryHeritageMaster() {
                         {item.factor}
                       </h5>
                       <span className="text-xs font-mono text-zinc-400 block">{item.korean}</span>
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {item.explanation}
                       </p>
                     </div>
@@ -786,7 +786,7 @@ export function HistoryHeritageMaster() {
               </div>
 
               {/* Hwarang Sesok-Ogye */}
-              <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
                   <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                     <Shield className="w-4 h-4 text-brand-red" /> Silla Hwarangdo: The Five Secular Injunctions (Sesok-Ogye / 世俗五戒)
@@ -800,7 +800,7 @@ export function HistoryHeritageMaster() {
                       key={cIdx}
                       className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5 font-mono text-xs"
                     >
-                      <span className="text-[10px] text-brand-red font-bold uppercase block">
+                      <span className="text-[11px] text-brand-red font-bold uppercase block">
                         Rule #{cIdx + 1}
                       </span>
                       <strong className="text-sm font-bold text-zinc-900 dark:text-white block">
@@ -809,7 +809,7 @@ export function HistoryHeritageMaster() {
                       <span className="text-xs text-zinc-700 dark:text-zinc-300 font-bold block">
                         {cmd.english}
                       </span>
-                      <p className="text-[11px] text-zinc-500 font-light leading-relaxed pt-1">
+                      <p className="text-[13px] text-zinc-500 leading-relaxed pt-1">
                         {cmd.description}
                       </p>
                     </div>
@@ -827,7 +827,7 @@ export function HistoryHeritageMaster() {
       {activePillar === 'heritage' && (
         <div className="space-y-6 animate-fade-in">
           {/* Header Card */}
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-2">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-2">
             <div className="flex items-center gap-2 mb-1">
               <Shield className="w-4 h-4 text-blue-500" />
               <span className="text-xs font-mono uppercase font-bold text-blue-500 tracking-wider">
@@ -837,7 +837,7 @@ export function HistoryHeritageMaster() {
             <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
               {pillars[2]?.subtitle}
             </h3>
-            <p className="text-xs text-zinc-500 font-light max-w-3xl">
+            <p className="text-[13px] text-zinc-500 max-w-3xl">
               {language === 'km'
                 ? 'បន្ទាប់ពីការរំដោះប្រទេសកូរ៉េឆ្នាំ ១៩៤៥ សាលាគុនដំបូងៗទាំង ៥ (Chung Do Kwan, Song Moo Kwan, Moo Duk Kwan, Chang Moo Kwan, Jidokwan) បានបើកដំណើរការនៅសេអ៊ូល បន្ទាប់មកមាន Han Moo Kwan, Oh Do Kwan, Kang Duk Won និង Jung Do Kwan។ ក្នុងឆ្នាំ ១៩៧៨ សាលាគុនទាំង ៩ បានបង្រួបបង្រួមវិញ្ញាបនបត្រទាំងអស់ក្រោមប្រព័ន្ធ Kukkiwon។'
                 : language === 'zh'
@@ -854,14 +854,14 @@ export function HistoryHeritageMaster() {
               <div
                 key={kwan.id}
                 onClick={() => setSelectedKwan(kwan)}
-                className="p-5 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-brand-red/50 transition-all cursor-pointer space-y-3 flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-brand-red/50 transition-all cursor-pointer space-y-3 flex flex-col justify-between"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold font-mono px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-brand-red">
                       {kwan.hanja}
                     </span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
+                    <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
                       {ht.kwanAnnexBadge} {kwan.kwanNumber}
                     </span>
                   </div>
@@ -875,13 +875,13 @@ export function HistoryHeritageMaster() {
                     </span>
                   </div>
 
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {kwan.meaning} — {kwan.characteristics}
                   </p>
                 </div>
 
                 <div className="pt-2.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-400 text-[10px] truncate max-w-[190px]">
+                  <span className="text-zinc-400 text-[11px] truncate max-w-[190px]">
                     {ht.kwanLocation}: {kwan.location.split('(')[0]}
                   </span>
                   <span className="text-brand-red font-bold text-xs inline-flex items-center gap-1">
@@ -893,7 +893,7 @@ export function HistoryHeritageMaster() {
           </div>
 
           {/* Kwan Unification Story Box */}
-          <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+          <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-zinc-100 dark:border-zinc-800">
               <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                 <Building className="w-4 h-4 text-emerald-500" /> {kwanUnification.title}
@@ -903,12 +903,12 @@ export function HistoryHeritageMaster() {
               </span>
             </div>
 
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+            <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {kwanUnification.summary}
             </p>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 text-xs font-mono">
-              <span className="text-[10px] text-zinc-400 uppercase font-bold block">
+              <span className="text-[11px] text-zinc-400 uppercase font-bold block">
                 {language === 'km' ? 'សេចក្តីប្រកាសសំខាន់ៗ' : language === 'zh' ? '统合决议核心要点' : language === 'ko' ? '대통합 핵심 결의 내용' : 'Core Proclamations'}
               </span>
               <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light">
@@ -921,7 +921,7 @@ export function HistoryHeritageMaster() {
               </ul>
             </div>
 
-            <p className="text-xs text-zinc-500 font-light italic">
+            <p className="text-[13px] text-zinc-500 italic">
               {kwanUnification.legacyImpact}
             </p>
           </div>
@@ -934,7 +934,7 @@ export function HistoryHeritageMaster() {
       {activePillar === 'organizations' && (
         <div className="space-y-6 animate-fade-in">
           {/* Header & Sub-Tabs */}
-          <div className="p-5 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
@@ -978,7 +978,7 @@ export function HistoryHeritageMaster() {
 
           {/* TAB A: SIDE-BY-SIDE COMPARISON MATRIX TABLE */}
           {selectedOrgId === 'matrix' && (
-            <div className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+            <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight flex items-center gap-2">
                   <Table className="w-4 h-4 text-brand-red" /> {ht.tableComparisonTitle}
@@ -989,7 +989,7 @@ export function HistoryHeritageMaster() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono border-collapse">
                   <thead>
-                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-500 uppercase text-[10px]">
+                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-500 uppercase text-[11px]">
                       <th className="p-3">{ht.colFeature}</th>
                       <th className="p-3 text-brand-red">World Taekwondo (WT)</th>
                       <th className="p-3">Kukkiwon (World HQ)</th>
@@ -1029,12 +1029,12 @@ export function HistoryHeritageMaster() {
               const org = orgs.find((o) => o.id === selectedOrgId) || orgs[0]
 
               return (
-                <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
                   {/* Org Top Header */}
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-brand-red text-white">
+                        <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-brand-red text-white">
                           {org.logoText}
                         </span>
                         <span className="text-xs font-mono text-zinc-400">
@@ -1059,7 +1059,7 @@ export function HistoryHeritageMaster() {
                       <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white flex items-center gap-1.5">
                         <Building className="w-4 h-4 text-brand-red" /> Institutional Mandate
                       </h4>
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {org.summary}
                       </p>
                     </div>
@@ -1068,7 +1068,7 @@ export function HistoryHeritageMaster() {
                       <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white flex items-center gap-1.5">
                         <Scale className="w-4 h-4 text-blue-500" /> {ht.orgGovernanceRole}
                       </h4>
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                      <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                         {org.governanceRole}
                       </p>
                     </div>
@@ -1110,7 +1110,7 @@ export function HistoryHeritageMaster() {
                       <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white">
                         {ht.orgMilestonesTitle}
                       </h4>
-                      <ul className="space-y-1 text-xs font-mono text-zinc-600 dark:text-zinc-400 font-light">
+                      <ul className="space-y-1 text-[13px] font-mono text-zinc-600 dark:text-zinc-400">
                         {org.keyMilestones.map((ms, idx) => (
                           <li key={idx} className="flex items-start gap-1.5">
                             <span className="text-brand-red font-bold">&bull;</span>
@@ -1124,7 +1124,7 @@ export function HistoryHeritageMaster() {
                       <h4 className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white">
                         {ht.orgStrengthsTitle}
                       </h4>
-                      <ul className="space-y-1 text-xs font-mono text-zinc-600 dark:text-zinc-400 font-light">
+                      <ul className="space-y-1 text-[13px] font-mono text-zinc-600 dark:text-zinc-400">
                         {org.strengths.map((str, idx) => (
                           <li key={idx} className="flex items-start gap-1.5">
                             <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
@@ -1153,12 +1153,12 @@ export function HistoryHeritageMaster() {
           aria-labelledby="milestone-modal-title"
         >
           <div
-            className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-zinc-900 rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-y-auto flex flex-col justify-between"
+            className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-y-auto flex flex-col justify-between"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 z-20 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-4 sm:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-red/10 text-brand-red">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-red/10 text-brand-red">
                   {selectedMilestone.era} &bull; {selectedMilestone.year}
                 </span>
                 <h3 id="milestone-modal-title" className="text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight mt-1">
@@ -1193,7 +1193,7 @@ export function HistoryHeritageMaster() {
                 <span className="text-xs font-mono text-zinc-400 block">
                   Korean: {selectedMilestone.koreanTitle}
                 </span>
-                <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+                <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                   {selectedMilestone.summary}
                 </p>
               </div>
@@ -1237,7 +1237,7 @@ export function HistoryHeritageMaster() {
           aria-labelledby="kwan-modal-title"
         >
           <div
-            className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-zinc-900 rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-y-auto flex flex-col justify-between"
+            className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-y-auto flex flex-col justify-between"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 z-20 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md p-4 sm:p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-4">
@@ -1246,7 +1246,7 @@ export function HistoryHeritageMaster() {
                   {selectedKwan.hanja}
                 </span>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase text-brand-red block">
+                  <span className="text-[11px] font-mono font-bold uppercase text-brand-red block">
                     {ht.kwanAnnexBadge} {selectedKwan.kwanNumber} &bull; {ht.kwanFoundingYear} {selectedKwan.foundingYear}
                   </span>
                   <h3 id="kwan-modal-title" className="text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1266,31 +1266,31 @@ export function HistoryHeritageMaster() {
             <div className="p-6 space-y-4 text-xs font-mono">
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] text-zinc-400 uppercase block">{ht.kwanFounder}</span>
+                  <span className="text-[11px] text-zinc-400 uppercase block">{ht.kwanFounder}</span>
                   <strong className="text-zinc-900 dark:text-white text-xs block mt-0.5">{selectedKwan.founder}</strong>
                 </div>
                 <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-[10px] text-zinc-400 uppercase block">{ht.kwanLocation}</span>
+                  <span className="text-[11px] text-zinc-400 uppercase block">{ht.kwanLocation}</span>
                   <strong className="text-zinc-900 dark:text-white text-xs block mt-0.5">{selectedKwan.location}</strong>
                 </div>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
-                <span className="text-[10px] text-zinc-400 uppercase block">{ht.kwanLineage}</span>
+                <span className="text-[11px] text-zinc-400 uppercase block">{ht.kwanLineage}</span>
                 <p className="text-zinc-700 dark:text-zinc-300 font-light">{selectedKwan.lineageRoot}</p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
-                <span className="text-[10px] text-zinc-400 uppercase block">{ht.kwanCharacteristics}</span>
+                <span className="text-[11px] text-zinc-400 uppercase block">{ht.kwanCharacteristics}</span>
                 <p className="text-zinc-700 dark:text-zinc-300 font-light">{selectedKwan.characteristics}</p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
-                <span className="text-[10px] text-zinc-400 uppercase block">{ht.kwanLegacy}</span>
+                <span className="text-[11px] text-zinc-400 uppercase block">{ht.kwanLegacy}</span>
                 <p className="text-zinc-700 dark:text-zinc-300 font-light">{selectedKwan.historicalLegacy}</p>
               </div>
 
-              <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-[11px] text-zinc-600 dark:text-zinc-400">
+              <div className="p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-600 dark:text-zinc-400">
                 <strong>{ht.kwanMasters}:</strong> {selectedKwan.prominentMasters.join(', ')}
               </div>
             </div>

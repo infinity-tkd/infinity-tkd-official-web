@@ -1,4 +1,6 @@
 import { siteSettings, type SiteSettings } from '@/config/siteSettings'
+import { NAV_GROUPS } from '@/config/navigation'
+import { translationsEn } from '@/data/translations'
 
 export interface SiteConfig {
   name: string
@@ -45,9 +47,9 @@ export const siteConfig: SiteConfig = {
     name: s.platform,
     url: s.url,
   })),
-  navItems: siteSettings.navigation.mainNav.map((n) => ({
-    name: n.name,
-    path: n.path,
+  navItems: NAV_GROUPS.map((group) => ({
+    name: group.label(translationsEn),
+    path: group.href,
   })),
 }
 

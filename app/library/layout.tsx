@@ -6,13 +6,6 @@ export const metadata: Metadata = {
     'Authoritative World Taekwondo & Kukkiwon syllabus repository: Step-by-step Poomsae dossiers, Olympic kicking biomechanics, Hosinsul self-defense, and history.',
   alternates: {
     canonical: '/library',
-    languages: {
-      'en': '/library',
-      'km': '/library',
-      'zh': '/library',
-      'ko': '/library',
-      'x-default': '/library',
-    },
   },
   openGraph: {
     title: 'Official Curriculum Library & Knowledge Base | Infinity Taekwondo',

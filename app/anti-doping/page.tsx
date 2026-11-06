@@ -15,18 +15,11 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
+  title: 'Anti-Doping & Clean Sport Policy',
   description:
     'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols, prohibited substances list, TUE exemptions, and clean athlete education.',
   alternates: {
     canonical: '/anti-doping',
-    languages: {
-      'en': '/anti-doping',
-      'km': '/anti-doping',
-      'zh': '/anti-doping',
-      'ko': '/anti-doping',
-      'x-default': '/anti-doping',
-    },
   },
   openGraph: {
     title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
@@ -87,24 +80,24 @@ export default function AntiDopingPage() {
       policyType="anti-doping"
     >
       {/* Executive Summary */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Zap className="w-4 h-4" /> At A Glance: Clean Sport &amp; Fair Play
         </div>
-        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+        <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
           Infinity Taekwondo upholds the fundamental spirit of fair play, ethical martial conduct, and physical health protection. We strictly prohibit the use of performance-enhancing drugs (PEDs), prohibited masking agents, and illicit methods in full accordance with the <strong>World Anti-Doping Code (WADA)</strong> and <strong>World Taekwondo (WT) Anti-Doping Rules</strong>.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Global Standard</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Global Standard</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">100% WADA Code Alignment</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Legal Doctrine</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Legal Doctrine</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Strict Liability Rule</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Testing Authorization</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Testing Authorization</span>
             <strong className="text-xs font-bold text-brand-red">In- &amp; Out-of-Competition</strong>
           </div>
         </div>
@@ -227,19 +220,19 @@ export default function AntiDopingPage() {
         <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
           8. Integrity Hotline &amp; Clean Sport Desk
         </h2>
-        <div className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
+        <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Anti-Doping Compliance Bureau
           </div>
           <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
             <div>
-              <span className="text-[10px] text-zinc-400 block">Clean Sport Inquiries &amp; TUEs:</span>
+              <span className="text-[11px] text-zinc-400 block">Clean Sport Inquiries &amp; TUEs:</span>
               <a href="mailto:antidoping@infinitytkd.com" className="text-brand-red font-bold hover:underline">
                 antidoping@infinitytkd.com
               </a>
             </div>
             <div>
-              <span className="text-[10px] text-zinc-400 block">Confidential Whistleblower Desk:</span>
+              <span className="text-[11px] text-zinc-400 block">Confidential Whistleblower Desk:</span>
               <a href="mailto:integrity@infinitytkd.com" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 integrity@infinitytkd.com
               </a>

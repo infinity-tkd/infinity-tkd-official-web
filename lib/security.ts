@@ -23,9 +23,8 @@ export function sanitizeInput(
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove <script> tags
     .replace(/<[^>]+>/g, '') // Strip remaining HTML tags
     .replace(/javascript:/gi, '') // Neutralize javascript: pseudo-protocol
-    .replace(/data:/gi, '') // Neutralize data: URIs in raw text
+    .replace(/data:text\/html/gi, '') // Neutralize HTML data: URIs (leave ordinary "data:" prose intact)
     .replace(/vbscript:/gi, '') // Neutralize vbscript:
-    .replace(/on\w+\s*=/gi, '') // Remove inline event handlers (onload=, onclick=)
     .trim()
 
   return sanitized.slice(0, maxLength)
@@ -195,34 +194,53 @@ export function validateCsrfToken(tokenA: string, tokenB: string): boolean {
 }
 
 /**
- * Detects common malicious injection vectors in input text (SQLi, XSS, Path Traversal, Command Injection, Prototype Pollution).
+ * Markup / script-injection signatures. These are never legitimate in any form field,
+ * so they are checked for every input regardless of mode.
  */
-export function detectMaliciousPayload(input: string): boolean {
+const MARKUP_PATTERNS: RegExp[] = [
+  /<script\b/i,
+  /<iframe\b/i,
+  /<embed\b/i,
+  /<object\b/i,
+  /javascript:/i,
+  /vbscript:/i,
+  /data:text\/html/i,
+  /<[^>]*\son[a-z]{3,15}\s*=/i, // inline event handler inside a tag
+  /document\.(?:cookie|domain)/i,
+  /__proto__/i,
+  /__defineGetter__/i,
+  /__lookupGetter__/i,
+]
+
+/**
+ * Probe signatures (SQL tautologies, traversal, prototype pollution). Only applied to short,
+ * structured fields (name, email). They are deliberately NOT applied to free-text messages:
+ * this site never builds SQL or shell commands from user text, and ordinary sentences such as
+ * "please select a class from your schedule" would otherwise be rejected as attacks.
+ */
+const PROBE_PATTERNS: RegExp[] = [
+  /union\s+select/i,
+  /\bdrop\b\s+\btable\b/i,
+  /waitfor\s+delay/i,
+  /sleep\(\s*\d+\s*\)/i,
+  /\.\.[\\/]/,
+  /%2e%2e[\\/]/i,
+  /constructor\s*[.\[]/i,
+  /prototype\s*[.\[]/i,
+]
+
+export interface PayloadCheckOptions {
+  /** Free-text prose field (message, statement). Skips probe signatures to avoid false positives. */
+  prose?: boolean
+}
+
+/**
+ * Detects injection vectors in input text.
+ * Use `{ prose: true }` for free-text fields; structured fields get the strict check.
+ */
+export function detectMaliciousPayload(input: string, options: PayloadCheckOptions = {}): boolean {
   if (!input || typeof input !== 'string') return false
-  const suspiciousPatterns = [
-    /<script\b/i,
-    /<iframe\b/i,
-    /<embed\b/i,
-    /<object\b/i,
-    /javascript:/i,
-    /vbscript:/i,
-    /data:text\/html/i,
-    /\bon[a-z]{3,15}\s*=/i,
-    /document\.(?:cookie|domain)/i,
-    /union\s+select/i,
-    /\bselect\b.+\bfrom\b/i,
-    /\binsert\b.+\binto\b/i,
-    /\bdrop\b\s+\btable\b/i,
-    /\b(?:exec|execute)\b/i,
-    /waitfor\s+delay/i,
-    /sleep\(\s*\d+\s*\)/i,
-    /\.\.[\\/]/,
-    /%2e%2e[\\/]/i,
-    /__proto__/i,
-    /constructor\s*[.\[]/i,
-    /prototype\s*[.\[]/i,
-    /__defineGetter__/i,
-    /__lookupGetter__/i,
-  ]
-  return suspiciousPatterns.some((pattern) => pattern.test(input))
+  if (MARKUP_PATTERNS.some((pattern) => pattern.test(input))) return true
+  if (options.prose) return false
+  return PROBE_PATTERNS.some((pattern) => pattern.test(input))
 }

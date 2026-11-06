@@ -115,7 +115,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
                   <span className="text-base">{lang.flag}</span>
                   <div>
                     <span className="block font-bold">{lang.nativeName}</span>
-                    <span className="text-[10px] text-zinc-400 font-normal">{lang.label}</span>
+                    <span className="text-[11px] text-zinc-400 font-normal">{lang.label}</span>
                   </div>
                 </div>
                 {isSelected && <Check className="w-4 h-4 text-brand-red" />}
