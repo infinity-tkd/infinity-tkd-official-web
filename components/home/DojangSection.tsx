@@ -72,7 +72,7 @@ export function DojangSection() {
                 <div className="relative z-10 h-[320px] overflow-hidden rounded-2xl border border-zinc-200 shadow-2xl dark:border-zinc-800 sm:h-[400px] md:h-[460px] lg:h-[520px]">
                   <OptimizedImage
                     src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2070&auto=format&fit=crop"
-                    alt="Infinity Taekwondo students in action sparring"
+                    alt="Infinity Taekwondo students training in the dojang"
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     quality={70}

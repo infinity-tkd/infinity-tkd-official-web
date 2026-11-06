@@ -428,6 +428,7 @@ export const ko: Translations = {
     colBranches: '도장 지점 & 커뮤니티',
     colLegal: '윤리 규정 & 법적 고지',
     syllabus: '승단 심사 요강',
+    beltJourney: '띠 승급 로드맵',
     community: '지도진 및 수련생',
     achievements: '대회 수상 실적',
     pricing: '수련비 및 회원권',

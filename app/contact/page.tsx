@@ -227,7 +227,7 @@ function ContactContent() {
     <div className="bg-zinc-50 dark:bg-black min-h-screen pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-500 font-sans selection:bg-brand-red selection:text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Page Header */}
-        <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto pt-6 sm:pt-8">
+        <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto pt-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5" /> {t.contact.badge}
           </div>

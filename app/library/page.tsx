@@ -162,7 +162,7 @@ export default function LibraryPage() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Header Banner */}
-        <div className="text-center max-w-3xl mx-auto pt-6 sm:pt-10 mb-10 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto pt-4 mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <BookOpen className="w-3.5 h-3.5" /> {t.library.badge}
           </div>

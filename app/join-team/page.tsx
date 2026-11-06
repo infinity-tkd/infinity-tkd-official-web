@@ -48,7 +48,7 @@ const jobOpenings: JobOpening[] = [
     branch: 'Olympic HQ & Kouk Khleang Branch',
     minDan: 'Kukkiwon 2nd Dan or higher',
     description:
-      'Lead daily classes for junior warriors and adult athletes. Emphasize Taegeuk recognized poomsae, Olympic sparring footwork, and respectful dojang etiquette.',
+      'Lead daily classes for junior warriors and adult athletes. Emphasize recognized and freestyle poomsae, demonstration, hosinsul, and respectful dojang etiquette.',
     responsibilities: [
       'Conduct dynamic, structured 60-minute classes according to the Infinity curriculum',
       'Assess student readiness for quarterly color belt and Dan promotion examinations',
@@ -229,7 +229,7 @@ export default function JoinTeamPage() {
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500">
       {/* Hero Header */}
-      <section className="relative pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
+      <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/10 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">

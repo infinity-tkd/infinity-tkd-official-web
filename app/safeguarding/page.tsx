@@ -202,7 +202,7 @@ export default function SafeguardingPage() {
           6. Anti-Bullying &amp; Hazing Zero-Tolerance
         </h2>
         <p>
-          Bullying, peer intimidation, verbal mockery, deliberate excessive striking in sparring, or traditional "hazing" rituals are strictly forbidden. Any student found engaging in bullying will face progressive disciplinary action, including suspension or permanent expulsion from the academy.
+          Bullying, peer intimidation, verbal mockery, deliberate excessive striking in partner drills, or traditional "hazing" rituals are strictly forbidden. Any student found engaging in bullying will face progressive disciplinary action, including suspension or permanent expulsion from the academy.
         </p>
       </section>
 

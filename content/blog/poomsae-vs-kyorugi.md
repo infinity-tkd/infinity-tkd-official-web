@@ -1,6 +1,6 @@
 ---
 title: "Poomsae vs. Kyorugi: The Two Sides of Taekwondo"
-description: Patterns or sparring? Understand what each discipline trains, how they are scored in World Taekwondo competition, and why serious students benefit from both.
+description: Patterns or sparring? Understand what each discipline trains, how each is scored in World Taekwondo competition, and where Infinity Taekwondo focuses its training.
 date: 2026-11-03
 author: Infinity Taekwondo Coaching Team
 category: Training
@@ -51,7 +51,7 @@ Kyorugi is free sparring between two athletes. It is fast, tactical and physical
 
 In World Taekwondo competition, athletes wear protective equipment, including a trunk protector, head guard and mouthguard. Matches are contested over **three rounds of two minutes** with short rest periods, and points are awarded for valid kicks and punches to legal scoring areas. Modern events use **electronic scoring** so that valid contact is recorded consistently.
 
-Sparring in the dojang is always supervised and graded to ability — beginners start with controlled drills long before full-contact work.
+Where sparring is taught, it is supervised and graded to ability — beginners start with controlled drills long before full-contact work.
 
 ## Which one should you choose?
 
@@ -62,6 +62,8 @@ You do not have to choose. The two disciplines complement each other:
 
 Some students lean toward one — that is fine. A strong foundation in both makes you a more complete martial artist, and many athletes discover a passion for the one they expected to like least.
 
-## Where to start
+## Where Infinity Taekwondo focuses
 
-If you are new, begin with the fundamentals and let your instructor guide you toward whichever discipline fits your goals. You can preview the forms in our [poomsae curriculum library](/library/poomsae) and the kicking techniques in the [kicking fundamentals section](/library/kicking-fundamentals), or [book a free trial class](/contact?subject=Free%20Trial%20Booking) to try both on the mat.
+Our programs are built around poomsae: Recognized Poomsae, the Kukkiwon New Poomsae and Freestyle Poomsae, together with demonstration, tricking, hosinsul self-defense and board breaking. Those are the skills our students train, test and compete in.
+
+Preview the forms in our [poomsae curriculum library](/library/poomsae), follow the [belt journey](/belt-journey) from white belt to 2nd Dan, or [book a free trial class](/contact?subject=Free%20Trial%20Booking) to start on the mat.

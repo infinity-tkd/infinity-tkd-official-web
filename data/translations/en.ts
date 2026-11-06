@@ -426,6 +426,7 @@ export const en = {
     colBranches: 'Branches & Community',
     colLegal: 'Governance, Ethics & Policy',
     syllabus: 'Academy Syllabus',
+    beltJourney: 'Belt Journey',
     community: 'Coaches & Students',
     achievements: 'Achievements & Medals',
     pricing: 'Memberships & Pricing',

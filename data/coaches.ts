@@ -50,7 +50,7 @@ export const coachFaculty: CoachProfile[] = [
     experience: '18+ Years',
     bio: 'A high-ranking 5th Dan Kukkiwon Master and national team poomsae coach. Master Sovan is renowned for his surgical eye in correcting stance angles, rhythmic breathing, and executing traditional forms with unyielding power.',
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80',
-    specialties: ['Kukkiwon Poomsae (Taegeuk to Ilyo)', 'Dan Examination Grading', 'Biomechanical Stance Alignment', 'Kyorugi Sparring'],
+    specialties: ['Kukkiwon Poomsae (Taegeuk to Ilyo)', 'Dan Examination Grading', 'Biomechanical Stance Alignment'],
     certifications: ['5th Dan Kukkiwon Master Certificate', 'WT International Referee License', 'National Team Head Coach'],
     philosophy: 'A mountain never shakes in the wind; in the same way, a true martial artist remains calm, rooted, and honorable under pressure.',
     socials: { instagram: '#', facebook: '#' },

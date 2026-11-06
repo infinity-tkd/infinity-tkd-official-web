@@ -61,7 +61,7 @@ export const dojangBranches: DojangBranch[] = [
     features: [
       'National Olympic Stadium Legacy & Prestigious Central Location',
       'WT Certified Orthodox Competition Mat Flooring',
-      'Weekend Intensive Poomsae & Olympic Kyorugi Sparring Focus',
+      'Weekend Intensive Poomsae, Demonstration & Tricking Focus',
       'Direct Dan Promotion Testing & National Athlete Pathways',
       'Air-Conditioned Training Hall & Dedicated Viewing Area for Parents',
       'Free & Spacious On-Site Parking at Olympic Sports Complex',
@@ -87,7 +87,7 @@ export const dojangBranches: DojangBranch[] = [
         features: [
           'ទីតាំងប្រវត្តិសាស្ត្រពហុកីឡដ្ឋានជាតិអូឡាំពិក និងបរិយាកាសកីឡាជាតិ',
           'កម្រាលពូកហ្វឹកហាត់ខ្នាតអន្តរជាតិ WT Certified Competition Mats',
-          'ការហ្វឹកហាត់ក្បាច់គុនមេគុន Poomsae និងក្បាច់ប្រយុទ្ធ Kyorugi ចុងសប្តាហ៍',
+          'ការហ្វឹកហាត់ក្បាច់គុនមេគុន Poomsae ការសម្តែង (Demonstration) និង Tricking ចុងសប្តាហ៍',
           'ឱកាសប្រឡងដំឡើងខ្សែក្រវាត់ Dan Kukkiwon និងឈានទៅក្រុមកីឡាករជម្រើសជាតិ',
           'សាលាហ្វឹកហាត់មានផាសុកភាព ម៉ាស៊ីនត្រជាក់ និងកន្លែងអង្កេតសម្រាប់អាណាព្យាបាល',
           'ចំណតរថយន្ត និងម៉ូតូធំទូលាយ ងាយស្រួលធ្វើដំណើរ',
@@ -112,7 +112,7 @@ export const dojangBranches: DojangBranch[] = [
         features: [
           '国家奥林匹克体育中心核心地标、正统武道历史传承',
           'WT 世跆联国际认证专业竞技比赛级高回弹地垫',
-          '周末公认品势（Poomsae）与奥运竞技实战（Kyorugi）专项集训',
+          '周末公认品势（Poomsae）、表演示范与特技（Tricking）专项集训',
           '直通韩国国技院（Kukkiwon）正品品/段位官方审核通道',
           '全冷气舒适训练馆、配备家长专注观摩与休憩专区',
           '奥林匹克体育场超大专属免费停车区、交通枢纽极其便利',
@@ -137,7 +137,7 @@ export const dojangBranches: DojangBranch[] = [
         features: [
           '국가 올림픽 경기장 중심부의 역사적 무도 인프라',
           'WT 세계태권도연맹 공인 경기용 탄성 매트 완비',
-          '주말 집중 공인품새 정밀 교정 및 올림픽 겨루기 실전 훈련',
+          '주말 집중 공인품새 정밀 교정, 시범 및 트릭킹 훈련',
           '국기원 공인 단증 심사 및 국가대표 상비군 파이프라인 연계',
           '풀 에어컨 쾌적한 도장 환경 및 학부모 전용 참관 라운지',
           '올림픽 경기장 내 넓고 편리한 전용 주차 공간 완비',
@@ -198,8 +198,8 @@ export const dojangBranches: DojangBranch[] = [
     ],
     features: [
       'Comprehensive 7-Day Flexible Class Timing Options (Morning, Afternoon & Evening)',
-      'Dual World Taekwondo Recognized Regulation Sparring & Poomsae Rings',
-      'Electronic Daedo PSS Sensor Gear & Kick Speed Telemetry Practice',
+      'Dual World Taekwondo Regulation Poomsae & Demonstration Rings',
+      'Electronic Kick Speed & Power Measurement Practice',
       'Youth Little Tigers, Cadets, Juniors & Adult White-to-Black Belt Syllabus',
       'Calisthenics Conditioning Rig, Flexibility Stations & Crash Mats',
       'Modern Pro Shop with Official Doboks, Protective Equipment & Gear',
@@ -247,8 +247,8 @@ export const dojangBranches: DojangBranch[] = [
         ],
         features: [
           'ជម្រើសម៉ោងហ្វឹកហាត់បត់បែនច្រើនពេល (ព្រឹក រសៀល និងពេលល្ងាច)',
-          'ទីលានប្រកួតខ្នាតអន្តរជាតិទ្វេដងសម្រាប់ Poomsae & Kyorugi Sparring',
-          'ឧបករណ៍ហ្វឹកហាត់អេឡិចត្រូនិក Daedo PSS សម្រាប់វាស់ល្បឿន និងកម្លាំងទាត់',
+          'ទីលានប្រកួតខ្នាតអន្តរជាតិទ្វេដងសម្រាប់ Poomsae & ការសម្តែង (Demonstration)',
+          'ឧបករណ៍អេឡិចត្រូនិកសម្រាប់វាស់ល្បឿន និងកម្លាំងទាត់',
           'កម្មវិធីសិក្សាសម្រាប់កុមារ Little Tigers យុវជន និងមនុស្សពេញវ័យពីខ្សែក្រវាត់សដល់ខ្មៅ',
           'កន្លែងហ្វឹកហាត់ពង្រឹងសាច់ដុំ បត់បែនរាងកាយ និងពូកសុវត្ថិភាពស្តង់ដារ',
           'ហាងទំនិញ Infinity Pro Shop លក់ឯកសណ្ឋាន Dobok ខ្សែក្រវាត់ និងសម្ភារៈការពារ',
@@ -295,8 +295,8 @@ export const dojangBranches: DojangBranch[] = [
         ],
         features: [
           '早间、午后、晚间多时段超灵活班次设置，满足各年龄段训练需求',
-          '双场地世跆联标准品势与竞技实战对抗专用道垫',
-          '配置 Daedo 电子感应护具系统及踢击速度力量测算设备',
+          '双场地世跆联标准品势与表演示范专用道垫',
+          '配置电子踢击速度与力量测算设备',
           '涵盖小老虎幼儿启蒙、青少年竞技梯队及成人白带至黑带晋级全体系',
           '自重体适能核心体能架、柔韧性拉伸区与高密度防护摔垫',
           '官方正品装备专营店（道服、腰带、专业护具一站式配齐）',
@@ -343,8 +343,8 @@ export const dojangBranches: DojangBranch[] = [
         ],
         features: [
           '오전·오후·야간 등 라이프스타일에 맞춘 다채로운 수련 타임테이블',
-          'WT 세계태권도연맹 규격 듀얼 품새 및 겨루기 정규 경기장 매트',
-          '대도(Daedo) 전자호구 센서 시스템 및 타격 속도 측정 훈련 시설',
+          'WT 세계태권도연맹 규격 듀얼 품새 및 시범 정규 경기장 매트',
+          '전자 발차기 속도 및 파워 측정 훈련 시설',
           '유아 리틀 타이거즈, 유소년 상비군, 성인부 백띠~검은띠 승단 체계',
           '맨몸 칼리스데닉스 근력 트레이닝 랙, 유연성 스테이션 및 안전 매트',
           '공식 도복, 공인 띠, 안전 보호구 구비 도장 내 전용 프로샵 운영',

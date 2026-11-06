@@ -89,7 +89,7 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
     id: 'white-belt',
     rank: 'White Belt (10th & 9th Geup)',
     geup: '10th & 9th Geup',
-    koreanRank: '백띠 (10급 & 9급)',
+    koreanRank: '흰띠 (10급 & 9급)',
     beltColor: '#F4F4F5',
     textColor: '#18181B',
     borderColor: '#E4E4E7',
@@ -362,7 +362,7 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
     id: 'yellow-belt',
     rank: 'Yellow Belt (8th & 7th Geup)',
     geup: '8th & 7th Geup',
-    koreanRank: '노랑띠 (8급 & 7급)',
+    koreanRank: '노란띠 (8급 & 7급)',
     beltColor: '#FFD505',
     textColor: '#18181B',
     borderColor: '#EAB308',
@@ -908,7 +908,7 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
     id: 'blue-belt',
     rank: 'Blue Belt (4th & 3rd Geup)',
     geup: '4th & 3rd Geup',
-    koreanRank: '파랑띠 (4급 & 3급)',
+    koreanRank: '파란띠 (4급 & 3급)',
     beltColor: '#0042EA',
     textColor: '#FFFFFF',
     borderColor: '#2563EB',
@@ -1165,13 +1165,13 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
   },
 
   // ===========================================================================
-  // BROWN BELT (3rd & 2nd Geup)
+  // BROWN BELT (2nd & 1st Geup)
   // ===========================================================================
   {
     id: 'brown-belt',
-    rank: 'Brown Belt (3rd & 2nd Geup)',
-    geup: '3rd & 2nd Geup',
-    koreanRank: '밤띠 (3급 & 2급)',
+    rank: 'Brown Belt (2nd & 1st Geup)',
+    geup: '2nd & 1st Geup',
+    koreanRank: '갈색띠 (2급 & 1급)',
     beltColor: '#8B4513',
     textColor: '#FFFFFF',
     borderColor: '#78350F',
@@ -1428,13 +1428,13 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
   },
 
   // ===========================================================================
-  // RED BELT (2nd & 1st Geup)
+  // RED BELT (Dan candidate)
   // ===========================================================================
   {
     id: 'red-belt',
-    rank: 'Red Belt (2nd & 1st Geup)',
-    geup: '2nd & 1st Geup',
-    koreanRank: '빨간띠 (2급 & 1급)',
+    rank: 'Red Belt (Dan candidate)',
+    geup: 'Dan candidate (Cho Dan Bo)',
+    koreanRank: '빨간띠 (초단보)',
     beltColor: '#EF2F38',
     textColor: '#FFFFFF',
     borderColor: '#DC2626',

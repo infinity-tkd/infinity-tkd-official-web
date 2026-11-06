@@ -124,7 +124,7 @@ export default function PrivacyPage() {
           <strong>Student &amp; Guardian Identity:</strong> Full legal name, preferred name, date of birth, gender, home address, emergency telephone numbers, and national identification/passport numbers (required specifically for international Kukkiwon Black Belt Dan registration).
         </li>
         <li>
-          <strong>Medical &amp; Physical Safety Disclosures:</strong> Known allergies, respiratory conditions (e.g. asthma), cardiovascular history, prior musculoskeletal or joint injuries, and emergency physician contact info. This information is vital to prevent sparring injuries and calibrate cardiovascular loads.
+          <strong>Medical &amp; Physical Safety Disclosures:</strong> Known allergies, respiratory conditions (e.g. asthma), cardiovascular history, prior musculoskeletal or joint injuries, and emergency physician contact info. This information is vital to prevent training injuries and calibrate cardiovascular loads.
         </li>
         <li>
           <strong>Attendance &amp; Syllabus Analytics:</strong> Mat check-ins, Poomsae accuracy scores, quarterly belt examination histories, competition records, and physical skill assessment metrics.
@@ -139,7 +139,7 @@ export default function PrivacyPage() {
       <p>Your information is used strictly for legitimate dojang operational and instructional purposes:</p>
       <ul>
         <li>
-          <strong>Class &amp; Safety Management:</strong> Informing instructors of student physical limitations or injury recovery requirements before high-impact sparring or tricking drills.
+          <strong>Class &amp; Safety Management:</strong> Informing instructors of student physical limitations or injury recovery requirements before high-impact tricking, board breaking or partner drills.
         </li>
         <li>
           <strong>Curriculum &amp; Promotion Tracking:</strong> Verifying that minimum training hours and Poomsae requirements are completed before issuing formal belt promotion invitations.

@@ -144,7 +144,7 @@ export default function EqualityPage() {
           Infinity Taekwondo actively promotes female participation, leadership, and athletic excellence:
         </p>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Equal Mat Time &amp; Division Access:</strong> Female athletes receive equal coaching resources, sparring partner rotations, and tournament sponsorship opportunities as male counterparts.</li>
+          <li><strong>Equal Mat Time &amp; Division Access:</strong> Female athletes receive equal coaching resources, training partner rotations, and tournament sponsorship opportunities as male counterparts.</li>
           <li><strong>Female Leadership Pathway:</strong> We actively train, mentor, and promote female assistant instructors into certified Kukkiwon Masters and International Referees.</li>
           <li><strong>Women’s Self-Defense &amp; Empowerment:</strong> Regular community workshops tailored to physical confidence, spatial awareness, and boundary assertion.</li>
         </ul>

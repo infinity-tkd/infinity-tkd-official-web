@@ -9,6 +9,7 @@ import {
   Award,
   Briefcase,
   CreditCard,
+  Milestone,
   GraduationCap,
   HeartHandshake,
   Info,
@@ -54,6 +55,12 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: GraduationCap,
       },
       {
+        href: '/belt-journey',
+        label: (t) => t.footer.beltJourney,
+        description: 'White belt to 2nd Dan: forms and training at every rank',
+        icon: Milestone,
+      },
+      {
         href: '/pricing',
         label: (t) => t.footer.pricing,
         description: 'Flexible monthly plans & family packages',
@@ -68,7 +75,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         href: '/contact?subject=pro-shop',
         label: (t) => t.footer.store,
-        description: 'Official Doboks, sparring gear & equipment',
+        description: 'Official doboks, belts & training equipment',
         icon: ShoppingBag,
       },
     ],

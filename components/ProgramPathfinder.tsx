@@ -113,7 +113,7 @@ const experienceOptions: OptionItem<ExperienceId>[] = [
     labelKm: 'កម្រិតខ្ពស់ / ខ្សែក្រវាត់ខ្មៅ (Dan)',
     labelZh: '高阶精进 / 黑带段位持有者',
     labelKo: '고급 수련생 / 유단자 (블랙벨트)',
-    sublabelEn: 'Competitive sparring or Dan certification',
+    sublabelEn: 'Competition poomsae, demonstration or Dan certification',
   },
 ]
 

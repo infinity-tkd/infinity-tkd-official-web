@@ -428,6 +428,7 @@ export const km: Translations = {
     colBranches: 'សាខា & សហគមន៍',
     colLegal: 'អភិបាលកិច្ច & ក្រមសីលធម៌',
     syllabus: 'កម្មវិធីសិក្សាតាមខ្សែក្រវាត់',
+    beltJourney: 'ដំណើរឡើងខ្សែក្រវាត់',
     community: 'គ្រូបង្វឹក & សិស្សានុសិស្ស',
     achievements: 'សមិទ្ធផល & មេដាយ',
     pricing: 'តម្លៃសមាជិកភាព',

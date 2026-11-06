@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('', 1.0, 'weekly'),
     entry('/about', 0.9, 'monthly'),
     entry('/academy', 0.9, 'monthly'),
+    entry('/belt-journey', 0.85, 'monthly'),
     entry('/library', 0.95, 'weekly'),
     entry('/locations', 0.85, 'monthly'),
     entry('/pricing', 0.85, 'monthly'),

@@ -84,8 +84,8 @@ export default function CollaborationsPage() {
                 <strong className="text-zinc-900 dark:text-white text-xs sm:text-sm font-black truncate block" title="100% Kukkiwon">100% Kukkiwon</strong>
               </div>
               <div className="min-w-0">
-                <span className="text-zinc-400 block text-[11px] truncate">PSS Technology</span>
-                <strong className="text-zinc-900 dark:text-white text-xs sm:text-sm font-black truncate block" title="Daedo Gen-2">Daedo Gen-2</strong>
+                <span className="text-zinc-400 block text-[11px] truncate">Specialty</span>
+                <strong className="text-zinc-900 dark:text-white text-xs sm:text-sm font-black truncate block" title="Poomsae & Demonstration">Poomsae &amp; Demo</strong>
               </div>
               <div className="min-w-0">
                 <span className="text-zinc-400 block text-[11px] truncate">Community Reach</span>

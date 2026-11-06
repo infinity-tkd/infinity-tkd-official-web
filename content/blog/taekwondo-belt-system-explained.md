@@ -28,10 +28,13 @@ Colour sequences differ slightly between schools, and many schools place two geu
 | Yellow | Earth, from which a seed begins to take root |
 | Green | Growth, as the plant rises and strengthens |
 | Blue | The sky, toward which the plant reaches |
+| Brown | Ripening and solidity; a firm foundation |
 | Red | Danger and power; the need for self-control |
 | Black | Maturity and mastery; also the beginning of deeper study |
 
 These meanings are traditional teaching aids rather than strict rules, so you may hear slightly different versions at different schools.
+
+At **Infinity Taekwondo** the ladder has eight ranks: White, Yellow, Green, Blue, Brown and Red, then Black Belt 1st Dan and 2nd Dan. Each colour belt adds new Taegeuk forms, Red belt learns Koryo, and the black belts learn the remaining black belt forms plus New and Freestyle Poomsae. You can see every rank, its forms and its training in the [belt journey](/belt-journey).
 
 ## Black belt is a beginning, not an ending
 
@@ -49,8 +52,8 @@ Grading (or belt testing) is a structured assessment, usually held several times
 
 1. **Basic techniques** — stances, blocks, punches and kicks.
 2. **Poomsae** — the pattern required for your level.
-3. **Sparring or step-sparring**, as appropriate to rank and age.
-4. **Breaking** (board breaking), at higher levels.
+3. **Demonstration, tricking and self-defense (hosinsul)** skills, as appropriate to rank and age.
+4. **Breaking** (board breaking), with more boards and harder techniques as you progress.
 5. **Knowledge** — terminology, rules and etiquette.
 
 Your instructor decides when you are ready to test. They look at technique, attendance, attitude and understanding — not only how well you perform on the day.
@@ -62,4 +65,4 @@ Your instructor decides when you are ready to test. They look at technique, atte
 - **Ask questions.** Understanding *why* a movement works makes it easier to remember.
 - **Be patient with plateaus.** Everyone has them; they usually come just before a breakthrough.
 
-Curious about where you would start? Explore the [academy programs and belt pathway](/academy), or read the full [curriculum library](/library) to see how techniques build from one level to the next.
+Curious about where you would start? Follow the [belt journey](/belt-journey) from white belt to 2nd Dan, explore the [academy programs](/academy), or read the full [curriculum library](/library) to see how techniques build from one level to the next.

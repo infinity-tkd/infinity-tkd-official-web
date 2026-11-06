@@ -1,8 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import { beltProgression, type BeltRank } from '@/data/belts'
+import Link from 'next/link'
+import { TRAINING_DISCIPLINES, beltProgression, type BeltRank } from '@/data/belts'
+import type { BeltFormLink } from '@/lib/beltForms'
+import { DanBars } from '@/components/belts/DanBars'
 import {
+  ArrowUpRight,
   Award,
   BookOpen,
   CheckCircle2,
@@ -10,6 +14,8 @@ import {
   ChevronRight,
   Clock,
   Flame,
+  Footprints,
+  Layers,
   LayoutGrid,
   ListOrdered,
   Target,
@@ -25,9 +31,44 @@ interface Motion {
 
 const MOTION_QUERY = '(prefers-reduced-motion: no-preference)'
 
-/** Highlight colour: the belt's own colour, except white and black, which use brand red. */
+/** Highlight colour: the belt's own colour, except white and black belts, which use brand red. */
 function accentFor(belt: BeltRank) {
-  return belt.id === 'white' || belt.id === 'black' ? '#EF2F38' : belt.hex
+  return belt.hex === '#FFFFFF' || belt.hex === '#000000' ? '#EF2F38' : belt.hex
+}
+
+/** A belt's forms as library links, with a badge on forms that have an animated walkthrough. */
+function FormLinks({ belt, forms, chipAttr = false }: { belt: BeltRank; forms: Record<string, BeltFormLink>; chipAttr?: boolean }) {
+  const links = belt.forms.map((id) => forms[id]).filter(Boolean)
+  if (!links.length && !belt.alsoTrains?.length) return null
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {links.map((form) => (
+        <Link
+          key={form.id}
+          href={form.href}
+          data-card-chip={chipAttr || undefined}
+          className="group inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-bold text-zinc-800 transition-colors hover:border-brand-red hover:text-brand-red dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200"
+        >
+          {form.name}
+          {form.hasWalkthrough && (
+            <span className="inline-flex items-center gap-1 rounded-md bg-brand-red/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-red">
+              <Footprints className="h-3 w-3" aria-hidden="true" /> Walkthrough
+            </span>
+          )}
+          <ArrowUpRight className="h-3 w-3 text-zinc-400 transition-colors group-hover:text-brand-red" aria-hidden="true" />
+        </Link>
+      ))}
+      {belt.alsoTrains?.map((extra) => (
+        <span
+          key={extra}
+          data-card-chip={chipAttr || undefined}
+          className="inline-flex items-center rounded-lg border border-dashed border-zinc-300 px-2.5 py-1.5 text-xs font-semibold text-zinc-600 dark:border-zinc-700 dark:text-zinc-400"
+        >
+          + {extra}
+        </span>
+      ))}
+    </div>
+  )
 }
 
 /** The colour word of the Korean belt name, e.g. "노란띠 (Noran-tti)" -> "노란". */
@@ -52,7 +93,16 @@ function cardTimeline(gsap: Gsap, card: HTMLElement, direction: number) {
     .fromTo(q('[data-card-chip]'), { autoAlpha: 0, scale: 0.8 }, { autoAlpha: 1, scale: 1, duration: 0.35, stagger: 0.025, ease: 'back.out(2)' }, 0.25)
 }
 
-export function BeltProgressionGuide() {
+interface BeltProgressionGuideProps {
+  /** Library links for the belts' forms, built on the server by getBeltFormLinks(). */
+  forms?: Record<string, BeltFormLink>
+  /** Keep the selected belt in the URL hash (#blue) so a belt can be linked to directly. */
+  syncHash?: boolean
+  /** Hide the guide's own title block (for pages that already have a hero heading). */
+  hideIntro?: boolean
+}
+
+export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro = false }: BeltProgressionGuideProps) {
   const { t, localizeList } = useLanguage()
   const belts = React.useMemo(() => localizeList(beltProgression), [localizeList])
   const [selectedIndex, setSelectedIndex] = React.useState(0)
@@ -248,6 +298,26 @@ export function BeltProgressionGuide() {
     return () => ctx.revert()
   }, [viewMode, motionReady])
 
+  // Deep links: /belt-journey#blue opens on that belt, and choosing a belt updates the hash.
+  React.useEffect(() => {
+    if (!syncHash) return
+    const fromHash = () => {
+      const index = belts.findIndex((belt) => `#${belt.id}` === window.location.hash)
+      if (index >= 0) setSelectedIndex(index)
+    }
+    fromHash()
+    window.addEventListener('hashchange', fromHash)
+    return () => window.removeEventListener('hashchange', fromHash)
+  }, [syncHash, belts])
+
+  React.useEffect(() => {
+    if (!syncHash) return
+    const hash = `#${belts[selectedIndex]?.id}`
+    if (window.location.hash !== hash && (selectedIndex > 0 || window.location.hash)) {
+      window.history.replaceState(null, '', hash)
+    }
+  }, [syncHash, selectedIndex, belts])
+
   const selectBelt = (index: number) => {
     const next = Math.min(lastIndex, Math.max(0, index))
     if (next !== selectedIndex) setSelectedIndex(next)
@@ -294,22 +364,30 @@ export function BeltProgressionGuide() {
         style={{ backgroundColor: accent }}
       />
 
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-zinc-200 dark:border-zinc-800 gap-4">
-        <div>
-          <div
-            data-guide-intro
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20"
-          >
-            <Award className="w-3.5 h-3.5" /> {t.beltGuide.badge}
+      {/* Header (the title block is hidden when the page already has its own hero) */}
+      <div
+        className={
+          hideIntro
+            ? 'flex justify-end mb-6 pb-5 border-b border-zinc-200 dark:border-zinc-800'
+            : 'flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-zinc-200 dark:border-zinc-800 gap-4'
+        }
+      >
+        {!hideIntro && (
+          <div>
+            <div
+              data-guide-intro
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20"
+            >
+              <Award className="w-3.5 h-3.5" /> {t.beltGuide.badge}
+            </div>
+            <h3 data-guide-intro className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+              {t.beltGuide.title1} <span className="text-brand-red">{t.beltGuide.title2}</span>
+            </h3>
+            <p data-guide-intro className="text-zinc-500 dark:text-zinc-400 text-[13px] sm:text-sm mt-1 max-w-xl">
+              Interactive syllabus roadmap detailing required Poomsae forms, philosophical milestones, and Dan examination criteria.
+            </p>
           </div>
-          <h3 data-guide-intro className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-            {t.beltGuide.title1} <span className="text-brand-red">{t.beltGuide.title2}</span>
-          </h3>
-          <p data-guide-intro className="text-zinc-500 dark:text-zinc-400 text-[13px] sm:text-sm mt-1 max-w-xl">
-            Interactive syllabus roadmap detailing required Poomsae forms, philosophical milestones, and Dan examination criteria.
-          </p>
-        </div>
+        )}
 
         {/* View switcher & belt navigation */}
         <div data-guide-intro className="flex flex-wrap items-center gap-2.5 self-end md:self-auto">
@@ -356,7 +434,7 @@ export function BeltProgressionGuide() {
               <div
                 ref={stripRef}
                 onKeyDown={onStripKeyDown}
-                className="relative z-10 -mx-1.5 flex snap-x touch-pan-x gap-2.5 overflow-x-auto px-1.5 pb-3 pt-1.5 scrollbar-hide sm:m-0 sm:grid sm:grid-cols-4 sm:overflow-visible sm:p-0 lg:grid-cols-7"
+                className="relative z-10 -mx-1.5 flex snap-x touch-pan-x gap-2.5 overflow-x-auto px-1.5 pb-3 pt-1.5 scrollbar-hide sm:m-0 sm:grid sm:grid-cols-4 sm:overflow-visible sm:p-0 lg:grid-cols-8"
               >
                 <div
                   ref={indicatorRef}
@@ -395,14 +473,14 @@ export function BeltProgressionGuide() {
                         } ${isSelected ? 'scale-105 shadow-md' : 'group-hover:scale-[1.03]'}`}
                         style={{ backgroundColor: belt.hex }}
                       >
-                        {belt.stripe && <div className="absolute inset-y-0 right-1/4 w-1.5" style={{ backgroundColor: belt.stripe }} />}
+                        <DanBars count={belt.danBars} className="right-1/4" />
                         {isSelected && (
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[pulse_2s_ease-in-out_infinite]" />
                         )}
                       </div>
 
                       <span className="text-xs font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
-                        {belt.name.replace(' Belt', '')}
+                        {belt.name.replace(' Belt', '').replace(' · ', ' ')}
                       </span>
                       <span className="text-[11px] text-zinc-400 font-medium truncate max-w-full">{belt.rankTitle}</span>
                     </button>
@@ -464,45 +542,58 @@ export function BeltProgressionGuide() {
                   </div>
 
                   {/* Poomsae */}
-                  <div data-card-item className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-1.5">
+                  <div data-card-item className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2.5">
                     <div className="flex items-center gap-2">
                       <BookOpen className="w-4 h-4 text-brand-red" />
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">Required Poomsae Form</span>
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">Poomsae at this belt</span>
                     </div>
                     <h5 className="text-sm font-bold text-zinc-900 dark:text-white">{activeBelt.poomsae}</h5>
+                    <FormLinks belt={activeBelt} forms={forms} chipAttr />
                     <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{activeBelt.poomsaeMeaning}</p>
                   </div>
 
                   {/* Timeline & board breaking */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div data-card-item className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <div className="p-2 rounded-lg" style={{ backgroundColor: `${accent}18`, color: accent }}>
+                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: `${accent}18`, color: accent }}>
                         <Clock className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">Estimated Timeline</span>
+                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">Typical time from start</span>
                         <span className="font-bold text-zinc-900 dark:text-white">{activeBelt.timeline}</span>
                       </div>
                     </div>
 
-                    {activeBelt.breakingRequirement && (
-                      <div data-card-item className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accent}18`, color: accent }}>
-                          <Zap className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <span className="text-zinc-400 font-bold uppercase text-[11px] block">Board Breaking (Kyokpa)</span>
-                          <span className="font-bold text-zinc-900 dark:text-white text-xs truncate block">
-                            {activeBelt.breakingRequirement.split(' with ')[0]}
-                          </span>
-                        </div>
+                    <div data-card-item className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: `${accent}18`, color: accent }}>
+                        <Zap className="w-4 h-4" />
                       </div>
-                    )}
+                      <div>
+                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">Board breaking (Kyokpa)</span>
+                        <span className="font-bold text-zinc-900 dark:text-white text-xs block">{activeBelt.tracks.breaking}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Right column: goals, skills, exam checklist */}
+                {/* Right column: training tracks, goals, skills, exam checklist */}
                 <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2 flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-brand-red" /> Training at this belt
+                    </span>
+                    <dl className="divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950">
+                      {TRAINING_DISCIPLINES.map((track) => (
+                        <div key={track.key} data-card-item className="grid grid-cols-[112px_minmax(0,1fr)] gap-3 px-3.5 py-2.5 text-xs sm:grid-cols-[140px_minmax(0,1fr)]">
+                          <dt className="font-bold text-zinc-900 dark:text-white">
+                            {track.label} <span className="type-hangul text-zinc-400">{track.korean}</span>
+                          </dt>
+                          <dd className="leading-relaxed text-zinc-600 dark:text-zinc-300">{activeBelt.tracks[track.key]}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+
                   <div>
                     <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2 flex items-center gap-1.5">
                       <Target className="w-3.5 h-3.5 text-brand-red" /> Stage Syllabus Goals &amp; Competencies
@@ -577,8 +668,9 @@ export function BeltProgressionGuide() {
             {belts.map((belt) => (
               <div
                 key={belt.id}
+                id={`journey-${belt.id}`}
                 data-journey-card
-                className="relative p-6 sm:p-8 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-brand-red/40 transition-colors duration-300"
+                className="relative scroll-mt-28 p-6 sm:p-8 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-brand-red/40 transition-colors duration-300"
               >
                 {/* Node on the line */}
                 <div
@@ -605,15 +697,25 @@ export function BeltProgressionGuide() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                  <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">Required Poomsae Form</span>
+                  <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2.5">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">Poomsae at this belt</span>
                     <p className="font-bold text-zinc-900 dark:text-white">{belt.poomsae}</p>
+                    <FormLinks belt={belt} forms={forms} />
                   </div>
                   <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                     <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">Key Technical Focus</span>
                     <p className="font-bold text-zinc-900 dark:text-white">{belt.focus}</p>
                   </div>
                 </div>
+
+                <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 text-xs sm:grid-cols-2">
+                  {TRAINING_DISCIPLINES.filter((track) => track.key !== 'poomsae').map((track) => (
+                    <div key={track.key} className="flex gap-2">
+                      <dt className="w-28 shrink-0 font-bold text-zinc-900 dark:text-white">{track.label}</dt>
+                      <dd className="text-zinc-600 dark:text-zinc-400">{belt.tracks[track.key]}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             ))}
           </div>

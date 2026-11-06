@@ -16,7 +16,7 @@ export function RecordsSection() {
   const records = React.useMemo(() => localizeList(tournamentAchievements).slice(0, FEATURED_COUNT), [localizeList])
 
   return (
-    <section className="border-t border-zinc-200 bg-zinc-50 py-16 transition-colors duration-500 dark:border-zinc-900 dark:bg-zinc-950 sm:py-20">
+    <section className="border-t border-zinc-200 bg-zinc-50 py-16 transition-colors duration-500 dark:border-zinc-900 dark:bg-zinc-950 sm:py-20 lg:py-24">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-12 sm:flex-row sm:items-center">

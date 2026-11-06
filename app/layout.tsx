@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 
 const DEFAULT_TITLE = 'Infinity Taekwondo | Elite Martial Arts & Sport Science Academy Phnom Penh'
 const DEFAULT_DESCRIPTION =
-  'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Olympic sparring, recognized Poomsae, sports biomechanics, and martial leadership for kids and adults at Olympic Stadium & Sen Sok.'
+  'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking for kids and adults at Olympic Stadium & Sen Sok.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://infinitytaekwondo.com'),
@@ -60,7 +60,9 @@ export const metadata: Metadata = {
     'Sen Sok Taekwondo',
     'Poomsae Training Cambodia',
     'Martial Arts Tricking Phnom Penh',
-    'Kyorugi Sparring',
+    'Freestyle Poomsae Cambodia',
+    'Taekwondo Demonstration Team',
+    'Hosinsul Self-Defense',
     'After school sports Phnom Penh',
   ],
   // Note: no site-wide `alternates`. Language is switched client-side on the same URL, so there
@@ -97,7 +99,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description:
-      'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Olympic sparring, recognized Poomsae, sports biomechanics, and martial leadership.',
+      'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking and Hosinsul self-defense.',
     images: ['/opengraph-image'],
   },
   icons: {

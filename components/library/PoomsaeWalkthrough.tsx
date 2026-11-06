@@ -63,23 +63,63 @@ const KEY_TO_FACING: Record<string, Facing> = { ArrowUp: 'N', ArrowRight: 'E', A
 
 const clamp = (min: number, max: number, value: number) => Math.min(max, Math.max(min, value))
 
-/** Foot positions in the body's own frame (facing up / -y). The rear foot turns out slightly. */
+/**
+ * Foot positions in the body's own frame (facing up / -y), written for a left-foot-forward stance
+ * and mirrored for right. `front` is the lead foot, `rear` the other one.
+ */
+const LEFT_LEAD_POSES: Record<'walking' | 'front' | 'back' | 'tiger' | 'cross', { front: FootPose; rear: FootPose }> = {
+  walking: { front: { x: -5, y: -7, rotation: 0 }, rear: { x: 5, y: 7, rotation: 20 } },
+  front: { front: { x: -7, y: -12, rotation: 0 }, rear: { x: 7, y: 12, rotation: 30 } },
+  back: { front: { x: -3, y: -10, rotation: 0 }, rear: { x: 5, y: 8, rotation: 90 } },
+  tiger: { front: { x: -4, y: -8, rotation: 0 }, rear: { x: 4, y: 4, rotation: 25 } },
+  cross: { front: { x: 1, y: -5, rotation: 0 }, rear: { x: -3, y: 4, rotation: -20 } },
+}
+const SYMMETRIC_POSES: Record<'ready' | 'parallel' | 'ease' | 'closed' | 'horse', number> = {
+  ready: 7,
+  parallel: 7,
+  ease: 7,
+  closed: 3.5,
+  horse: 12,
+}
+
 function stancePose(stance: Stance): { left: FootPose; right: FootPose } {
-  if (stance.type === 'ready') {
-    return { left: { x: -7, y: 0, rotation: 0 }, right: { x: 7, y: 0, rotation: 0 } }
+  if (stance.type in SYMMETRIC_POSES) {
+    const half = SYMMETRIC_POSES[stance.type as keyof typeof SYMMETRIC_POSES]
+    return { left: { x: -half, y: 0, rotation: 0 }, right: { x: half, y: 0, rotation: 0 } }
   }
-  const half = stance.type === 'front' ? 12 : 7
-  const width = stance.type === 'front' ? 7 : 5
-  const turnOut = stance.type === 'front' ? 30 : 20
-  return stance.lead === 'left'
-    ? { left: { x: -width, y: -half, rotation: 0 }, right: { x: width, y: half, rotation: turnOut } }
-    : { left: { x: -width, y: half, rotation: -turnOut }, right: { x: width, y: -half, rotation: 0 } }
+  const pose = LEFT_LEAD_POSES[stance.type as keyof typeof LEFT_LEAD_POSES]
+  const mirror = (foot: FootPose): FootPose => ({ x: -foot.x, y: foot.y, rotation: -foot.rotation })
+  return stance.lead === 'right' ? { left: mirror(pose.rear), right: mirror(pose.front) } : { left: pose.front, right: pose.rear }
+}
+
+const STANCE_NAMES: Record<Stance['type'], string> = {
+  ready: 'Ready stance · Gibon Joonbi',
+  parallel: 'Parallel stance · Naranhi-seogi',
+  ease: 'Ease stance · Pyeonhi-seogi',
+  closed: 'Closed stance · Moa-seogi',
+  horse: 'Riding stance · Juchum-seogi',
+  walking: 'walking stance · Ap-seogi',
+  front: 'front stance · Ap-kubi',
+  back: 'Back stance · Dwit-kubi',
+  tiger: 'Tiger stance · Beom-seogi',
+  cross: 'Cross stance · Kkoa-seogi',
 }
 
 function stanceLabel(stance: Stance): string {
-  if (stance.type === 'ready') return 'Ready stance · Joonbi'
+  const name = STANCE_NAMES[stance.type]
+  if (!stance.lead) return name
   const side = stance.lead === 'left' ? 'Left' : 'Right'
-  return stance.type === 'front' ? `${side} front stance · Ap-kubi` : `${side} walking stance · Ap-seogi`
+  // Walking and front stances are named after the front foot; for the others, say which foot leads.
+  return stance.type === 'walking' || stance.type === 'front' ? `${side} ${name}` : `${name} (${stance.lead} foot forward)`
+}
+
+/** Rotation needed to face `target`: the stated direction when given, otherwise the short way. */
+function turnDelta(current: number, target: number, turn?: 'cw' | 'ccw') {
+  const clockwise = (((target - current) % 360) + 360) % 360 // 0..359
+  if (clockwise === 0) return 0
+  if (turn === 'cw') return clockwise
+  if (turn === 'ccw') return clockwise - 360
+  return clockwise > 180 ? clockwise - 360 : clockwise
 }
 
 /** Splits each step into straight segments: previous position -> via points -> landing point. */
@@ -94,15 +134,41 @@ function buildSegments(walkthrough: WalkthroughData): Segment[][] {
   )
 }
 
-/** Offsets the number badge when two steps land on the same spot (e.g. step 16 ends at the start). */
-function buildBadgeOffsets(walkthrough: WalkthroughData): number[] {
-  const seen = new Map<string, number>([[`${walkthrough.start.x},${walkthrough.start.y}`, 1]])
-  return walkthrough.steps.map((step) => {
-    const key = `${step.to.x},${step.to.y}`
-    const count = seen.get(key) ?? 0
-    seen.set(key, count + 1)
-    return count * 20
-  })
+/**
+ * Places each step's number badge without overlapping earlier ones.
+ * Natural spot: 20 units above the landing point. On the centre spine the badge sits beside it
+ * instead (spine steps are often only half a line apart), on whichever side has fewer side-line
+ * steps nearby; on a tie, right on the way up and left on the way down. When the spot is taken
+ * (a kick returning to its stance, a path crossing itself), nearby spots are tried in a fixed
+ * order, so the layout is the same on every render.
+ */
+const BADGE_GAP = 17
+function layoutBadges(walkthrough: WalkthroughData): FloorPoint[] {
+  const placed: FloorPoint[] = []
+  const isFree = (p: FloorPoint) =>
+    p.x >= 9 && p.x <= VIEW_W - 9 && p.y >= 9 && p.y <= VIEW_H - 9 && placed.every((q) => Math.hypot(p.x - q.x, p.y - q.y) >= BADGE_GAP)
+  const sideLineBadges = walkthrough.steps.filter((s) => s.to.x !== walkthrough.start.x).map((s) => ({ x: s.to.x, y: s.to.y - 20 }))
+  const crowding = (p: FloorPoint) => sideLineBadges.filter((q) => Math.abs(q.x - p.x) < 32 && Math.abs(q.y - p.y) < 30).length
+  let previousY = walkthrough.start.y
+  for (const step of walkthrough.steps) {
+    const direction = step.to.y > previousY ? -1 : 1 // moving down the floor -> left
+    previousY = step.to.y
+    const onSpine = step.to.x === walkthrough.start.x
+    let side = direction
+    if (onSpine) {
+      const left = crowding({ x: step.to.x - 17, y: step.to.y - 10 })
+      const right = crowding({ x: step.to.x + 17, y: step.to.y - 10 })
+      if (left !== right) side = left < right ? -1 : 1
+    }
+    const base = onSpine ? { x: step.to.x + side * 17, y: step.to.y - 10 } : { x: step.to.x, y: step.to.y - 20 }
+    const nudges = [
+      [0, 0], [0, -18], [side * 18, 0], [0, -36], [side * 36, 0], [-side * 18, 0],
+      [side * 18, -18], [-side * 18, -18], [0, 18], [0, -54], [side * 54, 0], [-side * 36, 0],
+    ]
+    const spot = nudges.map(([dx, dy]) => ({ x: base.x + dx, y: base.y + dy })).find(isFree) ?? base
+    placed.push(spot)
+  }
+  return placed
 }
 
 /** Static footprints + arrow, used for the hover preview. */
@@ -139,7 +205,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
 
   const total = walkthrough.steps.length
   const segments = React.useMemo(() => buildSegments(walkthrough), [walkthrough])
-  const badgeOffsets = React.useMemo(() => buildBadgeOffsets(walkthrough), [walkthrough])
+  const badgeSpots = React.useMemo(() => layoutBadges(walkthrough), [walkthrough])
 
   useGSAP(
     () => {
@@ -190,23 +256,22 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
           tl.addLabel('s0', 0)
           let rotation = FACING_DEGREES[walkthrough.startFacing]
           let previousPose = startPose
+          let position = walkthrough.start
 
           walkthrough.steps.forEach((step, index) => {
             const stepNumber = index + 1
             const pose = stancePose(step.stance)
-            const isKick = step.techniques.some((t) => t.includes('Ap-chagi'))
+            const isKick = Boolean(step.kick) || step.techniques.some((t) => /chagi|Mureup/i.test(t))
             const hasPunch = step.techniques.some((t) => t.includes('jireugi'))
 
             // Reduced motion: moves are instant, so pause *before* each step to keep labels distinct.
             if (reduce) tl.to({}, { duration: HOLD_SECONDS })
 
             // 1. Pivot to face the new direction (springy, like a real turn on the ball of the foot).
-            const target = FACING_DEGREES[step.facing]
-            let delta = ((target - (((rotation % 360) + 360) % 360) + 540) % 360) - 180
-            if (Math.abs(delta) === 180) delta = step.turn === 'ccw' ? -180 : 180
+            const delta = turnDelta(((rotation % 360) + 360) % 360, FACING_DEGREES[step.facing], step.turn)
             if (delta !== 0) {
               rotation += delta
-              tl.to(body, { rotation, duration: dur(TURN_SECONDS), ease: 'back.out(1.6)' })
+              tl.to(body, { rotation, duration: dur(TURN_SECONDS * Math.max(1, Math.abs(delta) / 180)), ease: 'back.out(1.6)' })
             }
 
             // 2. Travel the floor line, drawing the trail (plus a soft glow) behind the marker.
@@ -220,11 +285,23 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
             })
             if (isKick) moveDuration = Math.max(moveDuration, dur(0.8))
 
-            // 3. Feet: the stepping foot lifts (and snaps out on a front kick); the other slides into place.
-            const leftMovesForward = pose.left.y - previousPose.left.y < pose.right.y - previousPose.right.y
-            const [stepFoot, stepPose, plantFoot, plantPose] = leftMovesForward
+            // 3. Feet: the stepping foot lifts (and snaps out on a kick); the other slides into place.
+            //    The stepping foot is the one that travels furthest across the floor: the body's own
+            //    movement (turned into the body's frame) plus the change in foot position. This also
+            //    picks the right foot when stepping backward.
+            const radians = (rotation * Math.PI) / 180
+            const moveX = step.to.x - position.x
+            const moveY = step.to.y - position.y
+            const bodyX = moveX * Math.cos(radians) + moveY * Math.sin(radians)
+            const bodyY = -moveX * Math.sin(radians) + moveY * Math.cos(radians)
+            const travel = (now: FootPose, before: FootPose) => Math.hypot(now.x - before.x + bodyX, now.y - before.y + bodyY)
+            const leftSteps = step.kick
+              ? step.kick === 'left'
+              : travel(pose.left, previousPose.left) >= travel(pose.right, previousPose.right)
+            const [stepFoot, stepPose, plantFoot, plantPose] = leftSteps
               ? [leftFoot, pose.left, rightFoot, pose.right]
               : [rightFoot, pose.right, leftFoot, pose.left]
+            position = step.to
 
             tl.to(plantFoot, { ...plantPose, duration: moveDuration }, moveStart)
             tl.to(stepFoot, { x: stepPose.x, rotation: stepPose.rotation, duration: moveDuration }, moveStart)
@@ -237,7 +314,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                       { y: stepPose.y, scale: 1, duration: moveDuration * 0.55, ease: 'power2.inOut' },
                     ]
                   : [
-                      { y: (stepPose.y + (leftMovesForward ? previousPose.left.y : previousPose.right.y)) / 2, scale: 1.3, duration: moveDuration / 2, ease: 'sine.out' },
+                      { y: (stepPose.y + (leftSteps ? previousPose.left.y : previousPose.right.y)) / 2, scale: 1.3, duration: moveDuration / 2, ease: 'sine.out' },
                       { y: stepPose.y, scale: 1, duration: moveDuration / 2, ease: 'sine.in' },
                     ],
               },
@@ -562,8 +639,8 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                   onMouseLeave={mode === 'watch' ? () => setPreview(null) : undefined}
                 >
                   <g data-badge={i}>
-                    <circle cx={step.to.x + badgeOffsets[i]} cy={step.to.y - 20} r="8" fill={step.kihap ? '#EF2F38' : '#27272a'} />
-                    <text x={step.to.x + badgeOffsets[i]} y={step.to.y - 17} textAnchor="middle" fill="#fafafa" fontSize="8" fontWeight="700">
+                    <circle cx={badgeSpots[i].x} cy={badgeSpots[i].y} r="8" fill={step.kihap ? '#EF2F38' : '#27272a'} />
+                    <text x={badgeSpots[i].x} y={badgeSpots[i].y + 3} textAnchor="middle" fill="#fafafa" fontSize="8" fontWeight="700">
                       {i + 1}
                     </text>
                   </g>

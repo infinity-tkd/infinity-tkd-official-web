@@ -428,6 +428,7 @@ export const zh: Translations = {
     colBranches: '校区与社区',
     colLegal: '合规、道德与政策',
     syllabus: '段位晋级大纲',
+    beltJourney: '腰带晋级之路',
     community: '教练与学员专区',
     achievements: '荣誉榜与奖牌',
     pricing: '会员与学费方案',

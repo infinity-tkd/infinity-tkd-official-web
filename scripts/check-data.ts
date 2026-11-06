@@ -6,6 +6,7 @@
  *   - duplicate ids in any exported list, duplicate library slugs, unknown library categories
  *   - local files referenced by data ("/images/x.jpg", "/docs/x.pdf") missing from public/
  *   - poomsae walkthroughs whose form or step count does not match the library entry
+ *   - belts listing a form id that does not exist in the poomsae library
  *   - blog posts with missing front matter or a missing cover image
  *   - UI dictionary keys present in English but missing in km / zh / ko (warning only)
  */
@@ -114,6 +115,14 @@ if (library) {
   }
   for (const category of categories) {
     if (!library.libraryItems.some((item) => item.category === category)) warn(`library category "${category}" has no items`)
+  }
+}
+
+// Belt structure: every form a belt lists must exist in the poomsae library.
+const belts = (modules.get('data/belts.ts') as { beltProgression?: { id: string; forms: string[] }[] } | undefined)?.beltProgression ?? []
+for (const belt of belts) {
+  for (const form of belt.forms) {
+    if (!poomsaeById.has(form)) error(`belt "${belt.id}": form "${form}" is not a poomsae id in data/library/poomsae/poomsae.ts`)
   }
 }
 

@@ -206,7 +206,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       ? '세계연맹 공인 표준 (겨루기 & 품새)'
                       : 'Official WT Standards (Kyorugi & Poomsae)'
                     : isPoomsaeCategory
-                    ? `${items.length} Patterns &bull; 3 Master Series`
+                    ? `${items.length} Patterns • 3 Master Series`
                     : `${items.length} Documented Techniques`}{' '}
                   &bull; Kukkiwon WT Standards
                 </span>

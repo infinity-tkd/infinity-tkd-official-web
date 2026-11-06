@@ -42,6 +42,7 @@ import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
+import { beltProgression } from '@/data/belts'
 
 export default function AboutPage() {
   const { t, localizeList, language } = useLanguage()
@@ -81,78 +82,18 @@ export default function AboutPage() {
     }
   }, [selectedMember])
 
-  const beltPalette = [
-    {
-      name: 'White Belt',
-      korean: '백띠 (10th-9th Geup)',
-      hex: '#FFFFFF',
-      border: '#d4d4d8',
-      textDark: true,
-      meaning: "Purity & Beginner's Mind (Baek-ji)",
-      philosophy: 'The blank slate and fertile soil where martial discipline, respect, and fundamental stances take root.',
-      timeline: '2-3 Months',
-    },
-    {
-      name: 'Yellow Belt',
-      korean: '노란띠 (8th-7th Geup)',
-      hex: '#FFD505',
-      border: '#D4AF37',
-      textDark: true,
-      meaning: 'The Rising Sun & Earth Roots',
-      philosophy: 'The earth where the seed of martial arts sprouts, building balance in Ap-seogi and basic front kicks.',
-      timeline: '3-4 Months',
-    },
-    {
-      name: 'Green Belt',
-      korean: '초록띠 (6th-5th Geup)',
-      hex: '#09BB00',
-      border: '#078800',
-      textDark: false,
-      meaning: 'Growth & Sprouting Power',
-      philosophy: 'The tree developing strong leaves as turning kicks, side kicks, and Taegeuk 3-4 precision take shape.',
-      timeline: '4-6 Months',
-    },
-    {
-      name: 'Blue Belt',
-      korean: '파란띠 (4th-3rd Geup)',
-      hex: '#0042EA',
-      border: '#002BB0',
-      textDark: false,
-      meaning: 'Sky & Upward Martial Ambition',
-      philosophy: 'Reaching toward the heavens as sparring strategy, spinning kicks, and aerial velocity mature.',
-      timeline: '6-8 Months',
-    },
-    {
-      name: 'Brown Belt',
-      korean: '밤띠 (2nd-1st Geup)',
-      hex: '#A05B00',
-      border: '#6F3E00',
-      textDark: false,
-      meaning: 'Grounded Stability & Ripening Skill',
-      philosophy: 'Deep roots anchoring the athlete in tactical patience, sparring composure, and junior leadership.',
-      timeline: '6-8 Months',
-    },
-    {
-      name: 'Red Belt',
-      korean: '빨간띠 (Candidate Dan)',
-      hex: '#EF2F38',
-      border: '#B12027',
-      textDark: false,
-      meaning: 'Danger, Intense Energy & Supreme Restraint',
-      philosophy: 'Immense kinetic force requiring supreme mental self-control, emotional poise, and humility.',
-      timeline: '8-12 Months',
-    },
-    {
-      name: 'Black Belt (1st-5th Dan)',
-      korean: '검은띠 (Kukkiwon Dan)',
-      hex: '#000000',
-      border: '#3f3f46',
-      textDark: false,
-      meaning: 'Mastery & The Dawn of True Learning',
-      philosophy: 'Total synthesis of mind, body, and spirit. The end of one journey and the true beginning of leadership.',
-      timeline: '3-4+ Years',
-    },
-  ]
+  // Belt marks come from the shared belt structure (data/belts.ts), so names, colours and
+  // timelines always match the belt journey.
+  const beltPalette = beltProgression.map((belt) => ({
+    name: belt.name,
+    korean: `${belt.koreanName.split(' (')[0]} · ${belt.rankTitle}`,
+    hex: belt.hex,
+    border: belt.borderHex,
+    textDark: belt.textColor === '#000000',
+    meaning: belt.meaning,
+    philosophy: belt.philosophy,
+    timeline: belt.timeline,
+  }))
 
   const quadPillars = [
     {
@@ -218,7 +159,7 @@ export default function AboutPage() {
       number: '02',
       title: 'Microsecond Decision Latency',
       korean: '반응 속도와 전술 인지',
-      desc: 'Olympic-level sparring demands instant recognition of open guard angles in under 180 milliseconds, training the brain to strike decisively ahead of the opponent’s kinetic telegraph.',
+      desc: 'Freestyle poomsae, demonstration and hosinsul demand split-second timing: landing a 540° kick on the beat or reacting to a partner’s grab trains the brain to respond in under 180 milliseconds.',
       metric: '<180ms Neural Reaction Latency',
       icon: Target,
     },
@@ -437,10 +378,10 @@ export default function AboutPage() {
       subtitle: 'Telemetry, Sensors & Calisthenics',
       badge: 'Technology',
       badgeColor: '#09BB00',
-      desc: 'Pioneered Cambodia’s first martial arts sport science laboratory. Deployed Daedo electronic sparring sensors, 240 FPS kinematic cameras, and tendon durability conditioning.',
+      desc: 'Pioneered Cambodia’s first martial arts sport science laboratory. Deployed electronic kick-impact sensors, 240 FPS kinematic cameras, and tendon durability conditioning.',
       metrics: { label: 'Telemetry Precision', value: '240 FPS Video Rig' },
       highlights: [
-        'Daedo Electronic Sensor Body Protector Scoring Ring',
+        'Electronic kick-impact and speed measurement',
         'Kinematic high-speed camera joint angle audit',
         'Calisthenics tendon conditioning & relative strength lab',
       ],
@@ -453,9 +394,9 @@ export default function AboutPage() {
         km: {
           title: 'មន្ទីរពិសោធន៍វិទ្យាសាស្ត្រកីឡា & ជីវមេកានិច',
           subtitle: 'ទិន្នន័យ Telemetry ឧបករណ៏ Sensor & Calisthenics',
-          desc: 'ត្រួសត្រាយផ្លូវមន្ទីរពិសោធន៍វិទ្យាសាស្ត្រកីឡាក្បាច់គុនដំបូងបង្អស់នៅកម្ពុជា។ បំពាក់ Daedo Sensor ប្រព័ន្ធកាមេរ៉ាល្បឿនលឿន ២៤០ FPS និងការការពារសរសៃសន្លាក់។',
+          desc: 'ត្រួសត្រាយផ្លូវមន្ទីរពិសោធន៍វិទ្យាសាស្ត្រកីឡាក្បាច់គុនដំបូងបង្អស់នៅកម្ពុជា។ បំពាក់ឧបករណ៍ Sensor វាស់កម្លាំងទាត់ ប្រព័ន្ធកាមេរ៉ាល្បឿនលឿន ២៤០ FPS និងការការពារសរសៃសន្លាក់។',
           highlights: [
-            'ទីលានប្រកួតពិន្ទុអេឡិចត្រូនិច Daedo Sensor',
+            'ការវាស់កម្លាំង និងល្បឿនទាត់តាមអេឡិចត្រូនិច',
             'ការវិភាគមុំសន្លាក់តាមរយៈកាមេរ៉ាល្បឿនលឿន',
             'មន្ទីរពិសោធន៍កម្លាំងកាយ Calisthenics & ពង្រឹងសរសៃពួរ',
           ],
@@ -463,19 +404,19 @@ export default function AboutPage() {
         zh: {
           title: '运动生物力学与运动科学实验室',
           subtitle: '传感器遥测、高速运镜与自重相对力量强化',
-          desc: '开创全柬首个武道运动科学实验室。引入 Daedo 电子护具打分系统、240帧高速关节角度捕捉以及肌腱韧性抗伤协议。',
+          desc: '开创全柬首个武道运动科学实验室。引入电子踢击冲击力传感器、240帧高速关节角度捕捉以及肌腱韧性抗伤协议。',
           highlights: [
-            '配备 Daedo 国际电子感应竞技实战八角台',
+            '电子踢击冲击力与速度测量系统',
             '高速摄影机 240FPS 动作姿态与发力角度审计',
             '街头健身相对力量与肌腱抗负荷强化系统',
           ],
         },
         ko: {
           title: '스포츠 생체역학 과학 연구 랩 구축',
-          subtitle: '전자호구 센서 시스템, 고속 촬영 & 근력 강화',
-          desc: '캄보디아 최초의 무도 스포츠 사이언스 연구실을 출범. 대도(Daedo) 전자호구 시스템과 240 FPS 초고속 카메라 관절 궤적 분석을 도입했습니다.',
+          subtitle: '전자 타격 센서 시스템, 고속 촬영 & 근력 강화',
+          desc: '캄보디아 최초의 무도 스포츠 사이언스 연구실을 출범. 전자 타격 센서와 240 FPS 초고속 카메라 관절 궤적 분석을 도입했습니다.',
           highlights: [
-            '대도(Daedo) 전자 센서 전자호구 겨루기 경기장 완비',
+            '전자 발차기 타격력 및 속도 측정 시스템 완비',
             '초고속 240 FPS 모션 캡처 관절 각도 정밀 분석',
             '캘리스데닉스 기반 건(Tendon) 강화 및 코어 안정화',
           ],
@@ -794,7 +735,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
               {beltPalette.map((belt) => {
                 const isSelected = selectedBeltColor === belt.name
                 return (
@@ -812,7 +753,7 @@ export default function AboutPage() {
                       style={{ backgroundColor: belt.hex, borderColor: belt.border }}
                     />
                     <span className="text-xs font-bold text-zinc-900 dark:text-white leading-tight">
-                      {belt.name.replace(' (1st-5th Dan)', '')}
+                      {belt.name.replace(' Belt', '')}
                     </span>
                   </button>
                 )
@@ -857,7 +798,7 @@ export default function AboutPage() {
 
                   <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
                     <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm">
-                      Timeline: {activeBeltObj.timeline}
+                      Typical time from start: {activeBeltObj.timeline}
                     </span>
                     <span className="text-xs font-mono text-zinc-400">
                       HEX: {activeBeltObj.hex}

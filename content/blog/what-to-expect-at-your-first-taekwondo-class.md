@@ -29,7 +29,7 @@ Every school has its own rhythm, but most classes follow the same four-part flow
 
 1. **Bow-in and warm-up.** The class lines up, bows to the flag and the instructor, then warms up with light cardio, joint mobility and stretching.
 2. **Fundamentals.** Basic stances, blocks, punches and kicks, practised slowly and repeated until the movement feels natural.
-3. **Skill work.** Depending on the day, this could be *poomsae* (patterns), target-kicking drills, partner work or, for experienced students, light sparring.
+3. **Skill work.** Depending on the day, this could be *poomsae* (patterns), target-kicking drills, partner work or, for experienced students, tricking and board breaking.
 4. **Cool-down and bow-out.** A short stretch, a few words from the instructor, and a final bow.
 
 As a beginner you will be guided through the basics and are never expected to keep up with the advanced students. Working at your own level is part of the culture.
@@ -58,7 +58,7 @@ Many children are shy at first. A few things that help:
 
 **Do I need to be flexible?** No. Flexibility is *built* through training, not required for it.
 
-**Is it safe?** Classes are structured and supervised, and beginners start with controlled technique. Protective gear is used for sparring, which comes later.
+**Is it safe?** Classes are structured and supervised, and beginners start with controlled technique. Mats, pads and spotting are used for partner drills, tricking and board breaking, which come later.
 
 **How soon will I see progress?** Most students feel more coordinated and confident within a few weeks of regular practice, and belt progression gives clear milestones to aim for.
 

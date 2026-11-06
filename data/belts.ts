@@ -1,23 +1,40 @@
 /**
- * ==============================================================================
- * BELT PROGRESSION & POOMSAE ROADMAP DATA
- * ==============================================================================
- * Centralized data source for the Interactive Belt Progression Roadmap.
- * All belt stages, required Poomsae forms, syllabus goals, philosophical
- * meanings, exam checklists, and timeline milestones are configured here.
- * ==============================================================================
+ * Infinity Taekwondo belt structure: the single source for every belt shown on the site
+ * (home page belt journey, the full /belt-journey page, About page palette).
+ *
+ * Ranks: White, Yellow, Green, Blue, Brown, Red, Black 1st Dan and Black 2nd Dan.
+ * Students under 15 receive the equivalent Kukkiwon Poom instead of a Dan.
+ *
+ * `forms` lists library poomsae ids (see data/library/poomsae/poomsae.ts); the site links each
+ * one to its library page and shows a walkthrough badge when an animated walkthrough exists.
+ * `timeline` is the typical time from a student's first class, not the time spent at that belt.
  */
+
+/** What each Infinity TKD discipline covers at a belt. */
+export interface BeltTracks {
+  poomsae: string
+  demonstration: string
+  tricking: string
+  hosinsul: string
+  breaking: string
+}
 
 export interface BeltRank {
   id: string
   name: string
   koreanName: string
-  rankTitle: string // e.g. "10th - 9th Geup"
+  rankTitle: string
   hex: string
   borderHex: string
   textColor: string
-  stripe?: string
+  /** Gold Dan bars on black belts (1 = 1st Dan, 2 = 2nd Dan). */
+  danBars?: number
+  /** Display summary of the forms learned at this belt. */
   poomsae: string
+  /** Library poomsae ids learned at this belt, in teaching order. */
+  forms: string[]
+  /** Training beyond the listed forms, e.g. New Poomsae and Freestyle Poomsae. */
+  alsoTrains?: string[]
   poomsaeMeaning: string
   meaning: string
   philosophy: string
@@ -25,7 +42,7 @@ export interface BeltRank {
   focus: string
   syllabusGoals: string[]
   physicalSkills: string[]
-  breakingRequirement?: string
+  tracks: BeltTracks
   requirements: string[]
 }
 
@@ -33,35 +50,42 @@ export const beltProgression: BeltRank[] = [
   {
     id: 'white',
     name: 'White Belt',
-    koreanName: '백띠 (Baek-tti)',
+    koreanName: '흰띠 (Huin-tti)',
     rankTitle: '10th – 9th Geup',
     hex: '#FFFFFF',
     borderHex: '#D0D0D0',
     textColor: '#000000',
-    poomsae: 'Basic Forms (Kibon 1-3) & Taegeuk 1 (Il Jang)',
-    poomsaeMeaning: 'Taegeuk Il Jang represents Keon (Heaven and Light)—the creation of all things and the beginning of martial discipline.',
-    meaning: 'Innocence & Purity — Signifies the clean slate of a student who has no prior knowledge of Taekwondo.',
-    philosophy: 'Empty your cup to be filled. Humility, respect for the Dojang, and foundational stance stability (Ap-seogi, Ap-koobi).',
+    poomsae: 'Basic movements (Kibon) & Taegeuk 1 (Il Jang)',
+    forms: ['taegeuk-1'],
+    poomsaeMeaning: 'Taegeuk Il Jang represents Keon (Heaven and Light), the creation of all things and the beginning of martial discipline.',
+    meaning: 'Innocence & Purity: the clean slate of a student who has no prior knowledge of Taekwondo.',
+    philosophy: 'Empty your cup to be filled. Humility, respect for the Dojang, and foundational stance stability (Ap-seogi, Ap-kubi).',
     timeline: '1 – 3 Months',
-    focus: 'Fundamental stances, low block (Arae-makki), middle punch (Momtong-jireugi), and front snap kick (Ap-chagi).',
+    focus: 'Basic stances, low block (Arae-makki), middle punch (Momtong-jireugi) and front kick (Ap-chagi).',
     syllabusGoals: [
-      'Master the 5 Tenets: Courtesy, Integrity, Perseverance, Self-Control, Indomitable Spirit',
+      'Live the 5 Tenets: Courtesy, Integrity, Perseverance, Self-Control, Indomitable Spirit',
       'Develop hip-chambering alignment for basic strikes and low blocks',
-      'Achieve upright posture and balance during forward stepping transitions',
+      'Keep upright posture and balance while stepping forward and turning',
     ],
     physicalSkills: [
-      'Forward Walking Stance (Ap-seogi)',
-      'Forward Long Stance (Ap-koobi)',
+      'Walking Stance (Ap-seogi)',
+      'Front Stance (Ap-kubi)',
       'Low Block (Arae-makki)',
-      'Front Snap Kick (Ap-chagi) with chamber & re-chamber',
+      'Front Kick (Ap-chagi) with chamber and re-chamber',
     ],
-    breakingRequirement: 'Single Pine Board with Front Snap Kick or Palm Strike',
+    tracks: {
+      poomsae: 'Taegeuk 1 with correct stances, facing and rhythm',
+      demonstration: 'Group bowing, line-ups and counting in Korean',
+      tricking: 'Safe falls, rolls and flexibility foundations',
+      hosinsul: 'Wrist-grab releases and keeping a safe distance',
+      breaking: 'One board: front kick or palm strike',
+    },
     requirements: [
-      'Basic Stances: Walking stance & Forward long stance',
-      'Fundamental striking: Middle punch & high punch',
-      'Fundamental blocking: Arae-makki (Low block)',
-      'Basic front snap kick with proper chamber & re-chamber',
-      'Dojang etiquette, Korean bowing & counting (Hana, Dul, Set)',
+      'Basic stances: walking stance and front stance',
+      'Middle punch and high punch',
+      'Low block (Arae-makki)',
+      'Front kick with proper chamber and re-chamber',
+      'Dojang etiquette, Korean bowing and counting (Hana, Dul, Set)',
     ],
   },
   {
@@ -72,30 +96,37 @@ export const beltProgression: BeltRank[] = [
     hex: '#FFD505',
     borderHex: '#D4AF37',
     textColor: '#000000',
-    poomsae: 'Taegeuk 2 (Ee Jang) - Joy & Firmness',
-    poomsaeMeaning: 'Taegeuk Ee Jang represents Tae (Lake)—inner firmness with outward gentleness, joy, and serene concentration.',
-    meaning: 'The Rising Sun & Fertile Earth — Signifies the earth where the seed of martial discipline takes root and sprouts.',
-    philosophy: 'Patience and nurturing the mind. Developing balance, dynamic focus, and the joy of martial movement.',
+    poomsae: 'Taegeuk 2 (Ee Jang) & Taegeuk 3 (Sam Jang)',
+    forms: ['taegeuk-2', 'taegeuk-3'],
+    poomsaeMeaning: 'Ee Jang represents Tae (Lake): inner firmness with outward gentleness. Sam Jang represents Ri (Fire): passion, speed and brightness.',
+    meaning: 'The Rising Sun & Fertile Earth: the earth where the seed of martial discipline takes root and sprouts.',
+    philosophy: 'Patience and nurturing the mind. Developing balance, focus and the joy of martial movement.',
     timeline: '3 – 6 Months',
-    focus: 'Dynamic balance, middle block (Momtong An-makki), and roundhouse kick (Dollyo-chagi).',
+    focus: 'Inside block (Momtong An-makki), high block (Olgul-makki), knife-hand strikes, back stance and roundhouse kick (Dollyo-chagi).',
     syllabusGoals: [
-      'Establish rotational hip power for roundhouse kicking mechanics',
-      'Execute continuous two-action combinations without loss of stance balance',
-      'Understand target distancing in 1-step cooperative sparring',
+      'Build rotational hip power for roundhouse kicks',
+      'Link two techniques in a row without losing stance balance',
+      'Understand target distance through partner pad drills',
     ],
     physicalSkills: [
-      'Roundhouse Kick (Dollyo-chagi) to solar plexus target',
-      'Inside-Middle Block (Momtong An-makki)',
-      'Face Block (Olgul-makki)',
-      '1-Step Cooperative Distance Sparring',
+      'Roundhouse Kick (Dollyo-chagi)',
+      'Inside Middle Block (Momtong An-makki)',
+      'High Block (Olgul-makki)',
+      'Knife-hand Neck Strike (Hansonnal Mok-chigi)',
     ],
-    breakingRequirement: 'Single Pine Board with Roundhouse Kick (Dollyo-chagi)',
+    tracks: {
+      poomsae: 'Taegeuk 2 & 3: rhythm, double punches and kicks with balance',
+      demonstration: 'Synchronised group forms in lines',
+      tricking: 'Cartwheel, round-off and jump kick foundations',
+      hosinsul: 'Escapes from clothing grabs',
+      breaking: 'One board: roundhouse kick',
+    },
     requirements: [
-      'Perform Taegeuk 1 & Taegeuk 2 with correct rhythm and breath',
-      'Momtong An-makki (Inside-middle block) & Olgul-makki (High block)',
-      'Dollyo-chagi (Roundhouse kick) targeting mid-section and head',
-      '1-step sparring fundamentals & safe distancing control',
-      'Light target pad striking and core conditioning',
+      'Perform Taegeuk 1, 2 and 3 with correct rhythm and breathing',
+      'Inside middle block and high block',
+      'Roundhouse kick to body and head height',
+      'Knife-hand strike and back stance basics',
+      'Partner pad drills with safe distance control',
     ],
   },
   {
@@ -106,30 +137,37 @@ export const beltProgression: BeltRank[] = [
     hex: '#09BB00',
     borderHex: '#078800',
     textColor: '#FFFFFF',
-    poomsae: 'Taegeuk 3 (Sam Jang) & Taegeuk 4 (Sa Jang)',
-    poomsaeMeaning: 'Taegeuk Sam Jang represents Ri (Fire/Sun) with passion and speed; Sa Jang represents Jin (Thunder) with explosive kinetic power.',
-    meaning: 'Growth & Vitality — Signifies the green plant sprouting and growing strong as technical skills deepen.',
-    philosophy: 'Developing kinetic speed and fluid adaptability. The martial artist learns to harness explosive energy like fire and thunder.',
+    poomsae: 'Taegeuk 4 (Sa Jang) & Taegeuk 5 (Oh Jang)',
+    forms: ['taegeuk-4', 'taegeuk-5'],
+    poomsaeMeaning: 'Sa Jang represents Jin (Thunder): courage and explosive power. Oh Jang represents Seon (Wind): gentle flexibility with relentless force.',
+    meaning: 'Growth & Vitality: the green plant sprouting and growing strong as technical skills deepen.',
+    philosophy: 'Developing speed and fluid adaptability. The martial artist learns to harness explosive energy like thunder and wind.',
     timeline: '6 – 9 Months',
-    focus: 'Knife-hand strikes (Sonnal), side kick (Yop-chagi), back stance (Dwit-koobi), and continuous Olympic sparring movement.',
+    focus: 'Knife-hand blocks (Sonnal), spear-hand thrust, side kick (Yeop-chagi), back stance (Dwit-kubi), hammer-fist and elbow strikes.',
     syllabusGoals: [
-      'Master the knife-hand guard and rotational blade edge strikes',
-      'Deliver full-extension Side Kicks with heel drive and locked pelvic alignment',
-      'Introduce Olympic sparring footwork (switch-step, slide-back, counter-tempo)',
+      'Master the knife-hand guard and knife-hand blocks',
+      'Deliver full-extension side kicks with heel drive and locked hips',
+      'Begin freestyle poomsae foundations: jumping kicks and rhythm',
     ],
     physicalSkills: [
-      'Side Kick (Yop-chagi) with locked hip and heel point',
-      'Back Stance (Dwit-koobi) with 70/30 weight distribution',
-      'Double Knife-Hand Block (Sonnal Momtong-makki)',
-      'Continuous Olympic Sparring Movement Drills',
+      'Side Kick (Yeop-chagi) with locked hip and heel',
+      'Back Stance (Dwit-kubi) with 70/30 weight',
+      'Double Knife-hand Block (Sonnal Momtong-makki)',
+      'Elbow Strike (Palkup-chigi)',
     ],
-    breakingRequirement: 'Single Hardwood Board with Side Kick (Yop-chagi)',
+    tracks: {
+      poomsae: 'Taegeuk 4 & 5: back stance, knife-hand, side kicks and elbow strikes',
+      demonstration: 'Team patterns with kicks and synchronised timing',
+      tricking: 'Butterfly kick and 360° jump kick foundations',
+      hosinsul: 'Arm locks against wrist grabs (Kukkiwon hosinsul basics)',
+      breaking: 'One board: side kick',
+    },
     requirements: [
-      'Mastery of Taegeuk 3 and Taegeuk 4',
-      'Sonnal Momtong-makki (Double knife-hand block)',
-      'Yop-chagi (Side kick) with full hip extension and heel point',
-      'Basic continuous Olympic sparring movement and head-gear drills',
-      'Board breaking: Side kick & palm thrust execution',
+      'Taegeuk 4 and Taegeuk 5',
+      'Double knife-hand block (Sonnal Momtong-makki)',
+      'Side kick (Yeop-chagi) with full hip extension and heel',
+      'Hammer-fist and elbow strikes',
+      'Board breaking: side kick and palm strike',
     ],
   },
   {
@@ -140,30 +178,37 @@ export const beltProgression: BeltRank[] = [
     hex: '#0042EA',
     borderHex: '#002BB0',
     textColor: '#FFFFFF',
-    poomsae: 'Taegeuk 5 (Oh Jang) & Taegeuk 6 (Yook Jang)',
-    poomsaeMeaning: 'Taegeuk Oh Jang represents Seon (Wind)—flexibility and unrelenting momentum; Yook Jang represents Gam (Water)—fluidity and continuous adaptation.',
-    meaning: 'The Boundless Sky — Represents the heaven and sky toward which the plant matures into a towering tree.',
-    philosophy: 'Flow like water, strike like wind. Cultivating mental calmness under tournament stress and mastering aerial control.',
+    poomsae: 'Taegeuk 6 (Yuk Jang) & Taegeuk 7 (Chil Jang)',
+    forms: ['taegeuk-6', 'taegeuk-7'],
+    poomsaeMeaning: 'Yuk Jang represents Gam (Water): fluid, continuous adaptation. Chil Jang represents Gan (Mountain): stillness and unshakeable stability.',
+    meaning: 'The Boundless Sky: the heaven toward which the plant matures into a towering tree.',
+    philosophy: 'Flow like water, stand like a mountain. Cultivating calm under pressure and control in the air.',
     timeline: '9 – 14 Months',
-    focus: 'Back kick (Dwit-chagi), spinning hook kick (Huryeo-chagi), and fluid counter-attacks.',
+    focus: 'Tiger stance (Beom-seogi), riding stance, scissors and X-blocks, knee strikes, crescent kick, back kick and spinning kicks.',
     syllabusGoals: [
-      'Execute blind spinning back kicks with high-speed hip rotation',
-      'Integrate deceptive feints and electronic scoring strategies',
-      'Begin introductory acrobatic tricking setups (Cheat 360 & Tornado kick)',
+      'Control transitions through tiger stance and riding stance',
+      'Execute spinning back kicks with fast hip rotation',
+      'Add freestyle poomsae elements: tornado kick and 540° setup',
     ],
     physicalSkills: [
-      'Spinning Back Kick (Dwit-chagi) counter-strike',
-      'Spinning Hook Kick (Huryeo-chagi) to head axis',
-      'Elbow Strikes (Palkoop-chigi) & Cross Stance (Koa-seogi)',
-      'Acrobatic Tricking: Tornado Kick & Jump Roundhouse',
+      'Back Kick (Dwit-chagi)',
+      'Spinning Hook Kick (Huryeo-chagi)',
+      'Tiger Stance (Beom-seogi) & Knee Strike (Mureup-chigi)',
+      'Tornado Kick & Jumping Roundhouse',
     ],
-    breakingRequirement: 'Hardwood Board with Spinning Back Kick (Dwit-chagi)',
+    tracks: {
+      poomsae: 'Taegeuk 6 & 7: slow movements, tiger stance and mountain stability',
+      demonstration: 'Demonstration routines with partner timing',
+      tricking: 'Tornado kick, cheat 360 and aerial basics',
+      hosinsul: 'Defences against chokes and bear hugs',
+      breaking: 'One board: spinning back kick',
+    },
     requirements: [
-      'Mastery of Taegeuk 5 and Taegeuk 6',
-      'Dwit-chagi (Back thrust kick) with high-speed accuracy',
-      'Huryeo-chagi (Spin hook kick) targeting head level',
-      'Introductory acrobatic tricking: Cheat 360 kick & Tornado kick',
-      'Electronic sensor scoring rules & sparring tactical flow',
+      'Taegeuk 6 and Taegeuk 7',
+      'Back kick (Dwit-chagi) with accuracy',
+      'Spinning hook kick (Huryeo-chagi) at head height',
+      'Tricking: cheat 360 and tornado kick',
+      'Hosinsul: escapes from chokes and bear hugs',
     ],
   },
   {
@@ -174,30 +219,38 @@ export const beltProgression: BeltRank[] = [
     hex: '#A05B00',
     borderHex: '#6F3E00',
     textColor: '#FFFFFF',
-    poomsae: 'Taegeuk 7 (Chil Jang) - Mountain Stability',
-    poomsaeMeaning: 'Taegeuk Chil Jang represents Gan (Mountain)—unshakeable stability, supreme rootedness, and tactical patience.',
-    meaning: 'Ripening & Solidity — Symbolizes the earth solidifying into immovable rock. The student possesses unshakeable foundation.',
+    poomsae: 'Taegeuk 8 (Pal Jang) & mastery of the full Taegeuk series',
+    forms: ['taegeuk-8'],
+    alsoTrains: ['Full Taegeuk series review (Taegeuk 1–8)'],
+    poomsaeMeaning: 'Pal Jang represents Gon (Earth): the source of life and the completion of the Taegeuk cycle, preparing the student for the black belt forms.',
+    meaning: 'Ripening & Solidity: the earth solidifying into immovable rock. The student has an unshakeable foundation.',
     philosophy: 'Steadfastness and character leadership. The martial artist anchors themselves against adversity and begins guiding junior ranks.',
     timeline: '14 – 18 Months',
-    focus: 'Scissor blocks (Kawi-makki), cat stance (Beom-seogi), jumping kicks, and explosive multi-strike combinations.',
+    focus: 'Double jumping front kick (Dubal Dangsang-chagi), mountain block (Oesanteul-makki), and polishing all eight Taegeuk forms.',
     syllabusGoals: [
-      'Achieve rock-solid grounding in Cat Stance (Beom-seogi) transitions',
-      'Deliver multi-target aerial strikes with controlled landings',
-      'Demonstrate assistant coaching leadership in junior classes',
+      'Perform all eight Taegeuk forms to competition standard',
+      'Control aerial kicks and landings in Taegeuk 8',
+      'Assist instructors in junior classes',
     ],
     physicalSkills: [
-      'Scissor Block (Kawi-makki)',
-      'Cat Stance (Beom-seogi) & Tiger Knee Strike',
-      'Jumping Front Kick (Twio-ap-chagi) over high obstacle',
-      'Intermediate Freestyle Tricking: 540 Kick setup & landing',
+      'Double Jumping Front Kick (Dubal Dangsang-chagi)',
+      'Mountain Block (Oesanteul-makki)',
+      'Jumping Front Kick (Twieo Ap-chagi)',
+      'Tricking: 540° kick setup and landing',
     ],
-    breakingRequirement: 'Dual Board Breaking: Jumping Front Kick + Spinning Back Kick',
+    tracks: {
+      poomsae: 'Taegeuk 8 and a full review of Taegeuk 1–8',
+      demonstration: 'Lead a team line in demonstration routines',
+      tricking: '540° kick and butterfly twist progressions',
+      hosinsul: 'Defences against strikes and grabs from behind',
+      breaking: 'Two boards: jumping front kick + spinning back kick',
+    },
     requirements: [
-      'Flawless execution of Taegeuk 7 with mountain-like stability',
-      'Beom-seogi (Tiger/Cat stance) weight distribution',
-      'Twio-ap-chagi (Jumping front kick) high obstacle clearance',
-      'Intermediate Freestyle tricking: 540 Kick setup & Landing',
-      'Assistant coaching mentorship & class leadership',
+      'Taegeuk 8 with a full Taegeuk 1–8 review',
+      'Double jumping front kick with a controlled landing',
+      'Jumping front kick over an obstacle',
+      'Tricking: 540° kick setup and landing',
+      'Assistant coaching in junior classes',
     ],
   },
   {
@@ -208,65 +261,181 @@ export const beltProgression: BeltRank[] = [
     hex: '#EF2F38',
     borderHex: '#B12027',
     textColor: '#FFFFFF',
-    poomsae: 'Taegeuk 8 (Pal Jang) - Earth & Rebirth',
-    poomsaeMeaning: 'Taegeuk Pal Jang represents Gon (Earth)—the source of life, yielding the harvest and preparing for rebirth into Black Belt.',
-    meaning: 'Danger & Fire — Signifies immense physical power. The student must exercise supreme self-restraint, modesty, and mental composure.',
-    philosophy: 'Power without restraint is destructive. Red belt requires absolute emotional discipline, moral integrity, and preparation for the Dan examination.',
+    poomsae: 'Koryo, the first black belt form',
+    forms: ['koryo'],
+    alsoTrains: ['Full Taegeuk series review (Taegeuk 1–8)'],
+    poomsaeMeaning: 'Koryo (고려) honours the Goryeo dynasty and the seonbi spirit: strong conviction and an unyielding will. Its 士 floor pattern means “scholar-warrior”.',
+    meaning: 'Danger & Fire: immense physical power. The student must exercise supreme self-restraint, modesty and composure.',
+    philosophy: 'Power without restraint is destructive. Red belt requires emotional discipline, moral integrity and preparation for the Dan examination.',
     timeline: '18 – 24 Months',
-    focus: 'Jumping side kicks, multi-target breaking, sparring blitzes, and Kukkiwon pre-grading examination.',
+    focus: 'Koryo, knife-hand and target strikes, jumping side kick, and preparation for the Kukkiwon Dan / Poom examination.',
     syllabusGoals: [
-      'Master the entire 8-form Taegeuk syllabus with zero deduction errors',
-      'Execute high-altitude aerial breaking and butterfly twist choreography',
-      'Author candidate Dan dissertation on martial philosophy and leadership',
+      'Perform Koryo with control, power and the correct 士 pattern',
+      'Review the full Taegeuk series with no deductions',
+      'Prepare for the Kukkiwon Dan / Poom examination',
     ],
     physicalSkills: [
-      'Jumping Side Kick (Twio-yop-chagi) distance clearance',
-      'Jumping Double Front Kick (Twio-ap-chagi)',
-      '540 Roundhouse & Butterfly Twist aerial execution',
-      'Tournament referee hand signals and electronic scoring protocols',
+      'Koryo double side kick (Yeop-chagi)',
+      'Knife-hand outer strike and target strikes',
+      'Jumping Side Kick (Twieo Yeop-chagi)',
+      '540° kick & butterfly twist',
     ],
-    breakingRequirement: '3-Target Aerial Combination: Jump Kick + 360 Spin + Knife-Hand Break',
+    tracks: {
+      poomsae: 'Koryo, plus the full Taegeuk series',
+      demonstration: 'Solo segment in team demonstration shows',
+      tricking: '540° kick and butterfly twist',
+      hosinsul: 'Knife and stick defence basics',
+      breaking: 'Three targets: jumping kick, 360° spin kick and knife-hand',
+    },
     requirements: [
-      'Comprehensive mastery of all 8 Taegeuk Poomsae',
-      'High-altitude aerial board breaking (3-target aerial combination)',
-      '540 Roundhouse & Butterfly Twist execution',
-      'Referee hand signals, scoring criteria, and tournament readiness',
-      'Written thesis on Taekwondo philosophy, Perseverance, & Integrity',
+      'Koryo to examination standard',
+      'Full Taegeuk 1–8 review',
+      'Three-target breaking combination',
+      '540° kick and butterfly twist',
+      'Written essay on Taekwondo philosophy and the five tenets',
     ],
   },
   {
-    id: 'black',
-    name: 'Black Belt (1st – 5th Dan)',
-    koreanName: '검은띠 (Geomeun-tti)',
-    rankTitle: 'Kukkiwon Certified Master Dan',
+    id: 'black-1',
+    name: 'Black Belt · 1st Dan',
+    koreanName: '검은띠 1단 (Il-dan)',
+    rankTitle: '1st Dan · 1st Poom (under 15)',
     hex: '#000000',
     borderHex: '#333333',
     textColor: '#FFFFFF',
-    stripe: '#EF2F38',
-    poomsae: 'Koryo, Keumgang, Taebaek, Pyongwon, Shipjin, Jitae, Cheonkwon, Hansu, Ilyo',
-    poomsaeMeaning: 'High-Dan forms embody Korean martial heritage: Koryo (ancient warrior spirit), Keumgang (diamond hardness), Taebaek (sacred mountain of light).',
-    meaning: 'Mastery & Dawn of New Beginning — The synthesis of all colors. Signifies that the student has mastered the basics and is now ready to begin true training.',
-    philosophy: 'The Black Belt is a White Belt who never gave up. Lifelong pursuit of perfection, athletic science innovation, and selfless community mentorship.',
-    timeline: '2+ Years of Dedicated Mastery',
-    focus: 'Official Kukkiwon World Taekwondo Dan Certification, leadership, freestyle creation, and lifelong discipline.',
+    danBars: 1,
+    poomsae: 'Keumgang, Taebaek, Pyongwon, Sipjin & Jitae, plus New Poomsae and Freestyle Poomsae',
+    forms: ['keumgang', 'taebaek', 'pyongwon', 'sipjin', 'jitae'],
+    alsoTrains: ['New Poomsae (for your age division)', 'Freestyle Poomsae'],
+    poomsaeMeaning: 'The black belt (Yudanja) forms: Keumgang (diamond strength), Taebaek (the sacred bright mountain), Pyongwon (the vast plain), Sipjin (ten longevities) and Jitae (a person standing on the earth).',
+    meaning: 'Mastery & a New Beginning: the synthesis of all colours. The student has mastered the basics and is ready to begin true training.',
+    philosophy: 'A black belt is a white belt who never gave up. A lifelong pursuit of perfection and selfless mentorship.',
+    timeline: '2+ Years',
+    focus: 'All black belt forms through Jitae, New Poomsae for your age division, freestyle poomsae choreography and Kukkiwon Dan / Poom certification.',
     syllabusGoals: [
-      'Represent Infinity Academy at national and international WT championships',
-      'Master high-Dan forms (Koryo, Keumgang, Taebaek) with referee-level precision',
-      'Direct and choreograph live demonstration and action cinema projects',
+      'Perform Keumgang to Jitae with competition-level precision',
+      'Learn the New Poomsae for your age division',
+      'Choreograph a freestyle poomsae routine to music',
     ],
     physicalSkills: [
-      'Koryo & Keumgang Poomsae Mastery',
-      'High-Altitude 720° Aerial Board Breaking',
-      'Force-Plate Telemetry & Biomechanical Coaching',
-      'Kukkiwon 1st Class International Examiner Standards',
+      'Keumgang crane stance and diamond blocks',
+      'Freestyle Poomsae: jumping kicks, spins and acrobatics',
+      'New Poomsae (by age division)',
+      '720° aerial board breaking',
     ],
-    breakingRequirement: '720° Spinning Hook Kick + Suspended Apple/Target Blindfolded Strike',
+    tracks: {
+      poomsae: 'Keumgang, Taebaek, Pyongwon, Sipjin and Jitae + New Poomsae',
+      demonstration: 'Perform and help choreograph demonstration routines',
+      tricking: 'Advanced combinations for freestyle poomsae (540°, 720°, flips)',
+      hosinsul: 'Full Kukkiwon hosinsul syllabus, including weapon defence',
+      breaking: '720° spinning kick and multi-board speed breaks',
+    },
     requirements: [
-      'Official Kukkiwon Dan Certification Examination',
-      'Mastery of Dan Poomsae: Koryo, Keumgang, Taebaek',
-      'Elite competitive performance or international demo routine',
-      'Sport science biomechanics analysis & mentoring junior ranks',
-      'Commitment to the eternal loop of self-refinement (Infinity Mindset)',
+      'Official Kukkiwon Dan / Poom examination',
+      'Keumgang, Taebaek, Pyongwon, Sipjin and Jitae',
+      'A freestyle poomsae routine and the New Poomsae for your age division',
+      'A performance in a team demonstration show',
+      'Mentoring junior ranks (the Infinity mindset)',
     ],
+  },
+  {
+    id: 'black-2',
+    name: 'Black Belt · 2nd Dan',
+    koreanName: '검은띠 2단 (Ee-dan)',
+    rankTitle: '2nd Dan · 2nd Poom (under 15)',
+    hex: '#000000',
+    borderHex: '#333333',
+    textColor: '#FFFFFF',
+    danBars: 2,
+    poomsae: 'Cheonkwon, Hansu & Ilyeo, plus advanced Freestyle and New Poomsae',
+    forms: ['cheonkwon', 'hansu', 'ilyeo'],
+    alsoTrains: ['Advanced Freestyle Poomsae', 'New Poomsae (advanced)'],
+    poomsaeMeaning: 'The highest black belt forms: Cheonkwon (the great power of heaven), Hansu (water, softness that overcomes hardness) and Ilyeo (oneness of body and mind).',
+    meaning: 'Depth & Responsibility: the second Dan deepens mastery and turns the student into a role model for the next generation.',
+    philosophy: 'Mastery is shared, not kept. The 2nd Dan refines every form and begins to coach, judge and lead.',
+    timeline: '3+ Years (at least 1 year after 1st Dan)',
+    focus: 'Cheonkwon, Hansu and Ilyeo, advanced freestyle poomsae, demonstration leadership and assistant coaching.',
+    syllabusGoals: [
+      'Perform Cheonkwon, Hansu and Ilyeo with depth and control',
+      'Create and lead advanced freestyle and demonstration routines',
+      'Assist instructors and mentor colour-belt students',
+    ],
+    physicalSkills: [
+      'Cheonkwon slow, circular movements (Nalgae-pyeogi)',
+      'Hansu and Ilyeo balance and flow',
+      'Advanced freestyle poomsae combinations',
+      'Coaching and judging fundamentals',
+    ],
+    tracks: {
+      poomsae: 'Cheonkwon, Hansu and Ilyeo + advanced New Poomsae',
+      demonstration: 'Choreograph and lead full demonstration shows',
+      tricking: 'Advanced aerials for freestyle and demonstration (720°, flips, twists)',
+      hosinsul: 'Teach hosinsul to junior students',
+      breaking: 'Creative breaking sequences for demonstrations',
+    },
+    requirements: [
+      'Kukkiwon 2nd Dan / 2nd Poom examination (at least 1 year after 1st Dan)',
+      'Cheonkwon, Hansu and Ilyeo',
+      'An advanced freestyle poomsae routine',
+      'Leading a demonstration routine',
+      'Assistant instructor hours with junior classes',
+    ],
+  },
+]
+
+export interface TrainingDiscipline {
+  key: keyof BeltTracks
+  label: string
+  korean: string
+  /** One line for compact lists (home page). */
+  summary: string
+  /** A short paragraph for the full belt journey page. */
+  description: string
+  /** Library page with more detail, when there is one. */
+  href?: string
+}
+
+/**
+ * The disciplines trained at Infinity Taekwondo (traditional Kukkiwon Taekwondo), in the order the
+ * belt tracks show them.
+ */
+export const TRAINING_DISCIPLINES: TrainingDiscipline[] = [
+  {
+    key: 'poomsae',
+    label: 'Poomsae',
+    korean: '품새',
+    summary: 'Recognized, New and Freestyle Poomsae',
+    description: 'Recognized Poomsae (the Taegeuk series and the black belt forms), the Kukkiwon New Poomsae for black belts, and Freestyle Poomsae choreographed to music.',
+    href: '/library/poomsae',
+  },
+  {
+    key: 'demonstration',
+    label: 'Demonstration',
+    korean: '시범',
+    summary: 'Team shows and choreography',
+    description: 'Team demonstration routines that combine poomsae, kicks, breaking and acrobatics, performed at shows, festivals and events.',
+  },
+  {
+    key: 'tricking',
+    label: 'Tricking',
+    korean: '트릭킹',
+    summary: 'Aerial kicks, flips and twists',
+    description: 'Progressive aerial kicks, flips and twists on spring floors and foam pits, building the skills used in freestyle poomsae and demonstrations.',
+    href: '/library/tricking-acrobatics',
+  },
+  {
+    key: 'hosinsul',
+    label: 'Hosinsul',
+    korean: '호신술',
+    summary: 'Practical Kukkiwon self-defense',
+    description: 'Kukkiwon self-defense taught belt by belt: escapes from grabs and chokes, joint locks, throws, and weapon defence for senior ranks.',
+    href: '/library/hosinsul',
+  },
+  {
+    key: 'breaking',
+    label: 'Board breaking',
+    korean: '격파',
+    summary: 'Power, speed and accuracy',
+    description: 'Board breaking (Kyokpa) tests power, speed and accuracy, from a single board at white belt to multi-target breaks for demonstrations.',
   },
 ]

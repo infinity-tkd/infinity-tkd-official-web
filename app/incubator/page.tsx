@@ -202,7 +202,7 @@ const tracks: IncubatorTrack[] = [
     tag: 'Youth Leadership',
     badgeColor: '#A855F7',
     description:
-      'Design, organize, and host intra-dojang sparring tournaments, poomsae festivals, or tricking jam battles.',
+      'Design, organize, and host intra-dojang poomsae festivals, demonstration showcases, or tricking jam battles.',
     deliverables: [
       'Operational seed budget and venue logistics support',
       'Custom championship medals, trophies, and official certificates',
@@ -212,7 +212,7 @@ const tracks: IncubatorTrack[] = [
       km: {
         title: 'ភាពជាអ្នកដឹកនាំដូជ៉ាង & ការរៀបចំការប្រកួត',
         tag: 'ភាពជាអ្នកដឹកនាំយុវជន',
-        description: 'រៀបចំ និងធ្វើជាម្ចាស់ផ្ទះការប្រកួតកីឡាតេក្វាន់ដូក្នុងដូជ៉ាង មហោស្រព Poomsae ឬការប្រកួត Tricking។',
+        description: 'រៀបចំ និងធ្វើជាម្ចាស់ផ្ទះមហោស្រព Poomsae ការសម្តែង (Demonstration) ឬការប្រកួត Tricking ក្នុងដូជ៉ាង។',
         deliverables: [
           'ថវិកាប្រតិបត្តិការ និងការគាំទ្រទីតាំងរៀបចំ',
           'មេដាយ ពានរង្វាន់ និងវិញ្ញាបនប័ត្រផ្លូវការ',
@@ -222,7 +222,7 @@ const tracks: IncubatorTrack[] = [
       zh: {
         title: '道场领袖孵化与品牌赛事统筹',
         tag: '青年商业领导力',
-        description: '全流程策划并主办道馆内部对抗赛、品势艺术节或街头极限特技对决 (Tricking Jam)。',
+        description: '全流程策划并主办道馆内部品势艺术节、表演展示会或街头极限特技对决 (Tricking Jam)。',
         deliverables: [
           '提供赛事专项启动预算与场地后勤物资支持',
           '定制化奖牌、总冠军奖杯与官方证书物料',
@@ -232,7 +232,7 @@ const tracks: IncubatorTrack[] = [
       ko: {
         title: '도장 경영 리더십 & 대회 기획 총괄',
         tag: '청년 리더십 아카데미',
-        description: '관내 친선 겨루기 대회, 공인품새 페스티벌 또는 마샬아츠 트릭킹 배틀을 직접 기획하고 총괄 운영합니다.',
+        description: '관내 공인품새 페스티벌, 시범 공연 또는 마샬아츠 트릭킹 배틀을 직접 기획하고 총괄 운영합니다.',
         deliverables: [
           '행사 운영 초기 예산 및 도장 대관 물류 전폭 지원',
           '자체 챔피언십 메달, 트로피 및 공인 상장 제작 지원',
@@ -396,7 +396,7 @@ export default function IncubatorPage() {
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
-      <section className="relative pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
+      <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">

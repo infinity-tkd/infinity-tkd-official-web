@@ -4,7 +4,7 @@ import { academyCourses } from '@/data/academy'
 export const metadata: Metadata = {
   title: 'Academy Training Programs & Syllabus',
   description:
-    'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery: Little Tigers, Cadet Elite, High-Performance Kyorugi, and Freestyle Poomsae in Cambodia.',
+    'Traditional Kukkiwon Taekwondo from White Belt to 2nd Dan: Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking in Cambodia.',
   alternates: {
     canonical: '/academy',
   },
