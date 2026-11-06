@@ -14,7 +14,7 @@ import {
   User,
   Filter,
 } from 'lucide-react'
-import { historyTimelineData, type TimelineMilestone } from '@/data/library/historyTimeline'
+import { historyTimelineData, type TimelineMilestone } from '@/data/library/history/historyTimeline'
 import { SafeImage } from '@/components/SafeImage'
 
 export function HistoryTimetable() {
@@ -42,7 +42,7 @@ export function HistoryTimetable() {
   return (
     <div className="space-y-6">
       {/* Control Toolbar (Era Filters & View Switcher) */}
-      <div className="p-5 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Era Filter Pills */}
         <div className="flex flex-wrap items-center gap-1.5">
           {eras.map((era) => (
@@ -93,7 +93,7 @@ export function HistoryTimetable() {
           {filteredData.map((item, idx) => (
             <div
               key={item.id}
-              className="p-5 sm:p-7 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center group"
+              className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center group"
             >
               {/* Left Column: Contextual Historical Photography */}
               <div className="md:col-span-4 relative h-44 sm:h-52 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">
@@ -106,16 +106,16 @@ export function HistoryTimetable() {
 
                 {/* Year Pill over photo */}
                 <div className="absolute top-2.5 left-2.5 z-10">
-                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
+                  <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
                     {item.year}
                   </span>
                 </div>
 
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-                  <span className="text-[10px] font-mono font-bold block opacity-90 truncate" style={{ color: item.tagColor }}>
+                  <span className="text-[11px] font-mono font-bold block opacity-90 truncate" style={{ color: item.tagColor }}>
                     {item.era}
                   </span>
-                  <span className="text-[11px] font-mono block opacity-80 truncate">
+                  <span className="text-xs font-mono block opacity-80 truncate">
                     {item.koreanTitle.split('(')[0]}
                   </span>
                 </div>
@@ -137,7 +137,7 @@ export function HistoryTimetable() {
                   {item.title}
                 </h4>
 
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+                <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                   {item.summary}
                 </p>
 
@@ -160,10 +160,10 @@ export function HistoryTimetable() {
       {/* VIEW MODE 2: HIGH-DENSITY CHRONOLOGICAL TABLE */}
       {/* -------------------------------------------------------------------- */}
       {viewStyle === 'table' && (
-        <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-x-auto">
+        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse min-w-[700px]">
             <thead>
-              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[10px] font-mono">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px] font-mono">
                 <th className="py-3 px-4">Year / Date</th>
                 <th className="py-3 px-4">Photo Preview</th>
                 <th className="py-3 px-4">Historical Milestone &amp; Korean Name</th>
@@ -186,15 +186,15 @@ export function HistoryTimetable() {
                     <strong className="text-zinc-900 dark:text-white font-bold block mb-0.5">
                       {item.title}
                     </strong>
-                    <span className="text-[10px] font-mono text-zinc-400 block">
+                    <span className="text-[11px] font-mono text-zinc-400 block">
                       {item.koreanTitle}
                     </span>
-                    <span className="text-[9px] font-mono text-brand-red uppercase">
+                    <span className="text-[11px] font-mono text-brand-red uppercase">
                       {item.era}
                     </span>
                   </td>
                   <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300 align-top">
-                    <span className="font-mono text-[11px] block">{item.keyFigures}</span>
+                    <span className="font-mono text-xs block">{item.keyFigures}</span>
                   </td>
                   <td className="py-4 px-4 text-zinc-600 dark:text-zinc-400 font-light align-top leading-relaxed max-w-sm">
                     {item.summary}

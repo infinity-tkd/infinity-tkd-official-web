@@ -3,778 +3,346 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  ArrowRight,
-  ChevronDown,
-  BookOpen,
-  Zap,
-  Flame,
-  Shield,
-  Layers,
-  Sparkles,
-  Award,
-  Users,
-  CreditCard,
-  Info,
-  X,
-  MapPin,
-  HeartHandshake,
-  GraduationCap,
-  Briefcase,
-  Lightbulb,
-  Building2,
-  ShoppingBag,
-  Newspaper,
-  ExternalLink,
-} from 'lucide-react'
+import { ArrowRight, BookOpen, ChevronDown, Flame, Layers, Shield, Sparkles, X, Zap } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
 import { InfinityLogo } from './InfinityLogo'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useLanguage } from '@/context/LanguageContext'
 import { useScrollNavContext } from '@/context/ScrollNavContext'
-import { siteSettings } from '@/config/siteSettings'
+import { NAV_GROUPS, isGroupActive, type NavGroup } from '@/config/navigation'
 import { libraryCategoriesMeta } from '@/data/library'
 import { cn } from '@/lib/utils'
 
-const iconMap: Record<string, React.ElementType> = {
-  BookOpen,
-  Zap,
-  Flame,
-  Shield,
-  Layers,
-  Sparkles,
-}
+const categoryIcons: Record<string, React.ElementType> = { BookOpen, Zap, Flame, Shield, Layers, Sparkles }
+
+const triggerClass =
+  'relative flex items-center gap-1.5 py-2 whitespace-nowrap text-xs font-bold uppercase tracking-wider transition-colors duration-300 hover:text-brand-red'
 
 export function Navbar() {
   const { isNavVisible, isScrolled, isMobileMenuOpen, setIsMobileMenuOpen } = useScrollNavContext()
-  
-  // Dropdown states
-  const [isAcademyMenuOpen, setIsAcademyMenuOpen] = React.useState(false)
-  const [isLibraryMenuOpen, setIsLibraryMenuOpen] = React.useState(false)
-  const [isCommunityMenuOpen, setIsCommunityMenuOpen] = React.useState(false)
-  const [isAboutMenuOpen, setIsAboutMenuOpen] = React.useState(false)
-
+  const [openMenu, setOpenMenu] = React.useState<NavGroup['id'] | null>(null)
   const pathname = usePathname()
-  const { t, language } = useLanguage()
+  const { t, localizeList } = useLanguage()
 
-  const academyMenuRef = React.useRef<HTMLDivElement>(null)
-  const libraryMenuRef = React.useRef<HTMLDivElement>(null)
-  const communityMenuRef = React.useRef<HTMLDivElement>(null)
-  const aboutMenuRef = React.useRef<HTMLDivElement>(null)
+  const categories = React.useMemo(() => localizeList(libraryCategoriesMeta), [localizeList])
 
-  // Auto-close mobile menu on desktop resize
+  // Close every menu on navigation.
   React.useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
+    setOpenMenu(null)
+    setIsMobileMenuOpen(false)
+  }, [pathname, setIsMobileMenuOpen])
+
+  // Escape closes menus; growing past the mobile breakpoint closes the drawer.
+  React.useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpenMenu(null)
         setIsMobileMenuOpen(false)
-        document.body.style.overflow = ''
       }
     }
-    window.addEventListener('resize', handleResize, { passive: true })
-    return () => window.removeEventListener('resize', handleResize)
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setIsMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('resize', onResize)
+    }
   }, [setIsMobileMenuOpen])
 
-  // Lock body scroll when mobile menu is active
+  // Lock page scroll while the mobile drawer is open.
   React.useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
   }, [isMobileMenuOpen])
 
-  const isAcademyActive = pathname === '/academy' || pathname === '/pricing' || pathname === '/incubator'
-  const isLibraryActive = pathname?.startsWith('/library')
-  const isCommunityActive = pathname === '/community' || pathname === '/achievements' || pathname === '/join-team'
-  const isAboutActive = pathname === '/about' || pathname === '/collaborations' || pathname === '/locations'
+  const closeMobile = () => setIsMobileMenuOpen(false)
+
+  const renderCategoryGrid = (variant: 'desktop' | 'mobile') =>
+    categories.map((cat) => {
+      const Icon = categoryIcons[cat.iconName] || BookOpen
+      const iconStyle = { backgroundColor: `${cat.accentColor}20`, color: cat.accentColor }
+
+      if (variant === 'desktop') {
+        return (
+          <Link
+            key={cat.id}
+            href={`/library/${cat.id}`}
+            onClick={() => setOpenMenu(null)}
+            className="group/item flex flex-col justify-between rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 p-2.5 transition-all hover:border-brand-red/50 hover:bg-white dark:hover:bg-zinc-900"
+          >
+            <div className="mb-1 flex items-center gap-2">
+              <div className="shrink-0 rounded-lg p-1.5 transition-transform group-hover/item:scale-110" style={iconStyle}>
+                <Icon className="h-3.5 w-3.5" />
+              </div>
+              <span className="type-hangul truncate text-brand-red">{cat.koreanTitle.split('(')[0]}</span>
+            </div>
+            <h5 className="truncate text-[11px] font-bold uppercase leading-tight text-zinc-900 dark:text-white transition-colors group-hover/item:text-brand-red">
+              {cat.title}
+            </h5>
+          </Link>
+        )
+      }
+
+      return (
+        <Link
+          key={cat.id}
+          href={`/library/${cat.id}`}
+          onClick={closeMobile}
+          className="flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-2.5"
+        >
+          <div className="shrink-0 rounded-md p-1" style={iconStyle}>
+            <Icon className="h-3.5 w-3.5" />
+          </div>
+          <span className="truncate text-[11px] font-bold uppercase text-zinc-900 dark:text-white">{cat.title}</span>
+        </Link>
+      )
+    })
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-all duration-300 ease-in-out',
+        'fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] border-b transition-[background-color,border-color,transform] duration-300 ease-out-expo',
         isScrolled
-          ? 'bg-white/95 dark:bg-black/95 backdrop-blur-xl border-b border-zinc-200/80 dark:border-zinc-900/80 shadow-sm'
-          : 'bg-gradient-to-b from-black/40 via-black/10 to-transparent',
+          ? 'border-zinc-200/70 dark:border-white/[0.06] bg-white/80 dark:bg-black/75 backdrop-blur-xl backdrop-saturate-150'
+          : 'border-transparent bg-gradient-to-b from-white/70 to-transparent dark:from-black/40 dark:via-black/10',
         !isNavVisible && !isMobileMenuOpen ? '-translate-y-full lg:translate-y-0' : 'translate-y-0'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* LOGO */}
+      <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* 64px bar at every breakpoint: slimmer and calmer than the old 80px desktop header. */}
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2 sm:gap-3 transition-transform duration-300 hover:scale-[1.02] shrink-0"
+            className="group flex shrink-0 items-center gap-2 transition-transform duration-300 hover:scale-[1.02] sm:gap-3"
             aria-label="Infinity Taekwondo Home"
           >
             <InfinityLogo
               variant="full"
-              className="h-8 sm:h-9 md:h-10 w-auto drop-shadow-sm group-hover:drop-shadow-[0_0_12px_rgba(239,47,56,0.4)] transition-all duration-300"
+              className="h-8 w-auto transition-opacity duration-300 group-hover:opacity-90 sm:h-9"
             />
           </Link>
 
-          {/* ================================================================== */}
-          {/* DESKTOP RESTRUCTURED DROPDOWN NAVIGATION (1024px+) */}
-          {/* ================================================================== */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {/* 1. Academy Dropdown (Syllabus, Pricing, Incubator, Pro Shop) */}
-            <div
-              ref={academyMenuRef}
-              className="relative"
-              onMouseEnter={() => setIsAcademyMenuOpen(true)}
-              onMouseLeave={() => setIsAcademyMenuOpen(false)}
-              onFocus={() => setIsAcademyMenuOpen(true)}
-              onBlur={(e) => {
-                if (!academyMenuRef.current?.contains(e.relatedTarget as Node)) {
-                  setIsAcademyMenuOpen(false)
-                }
-              }}
-            >
-              <Link
-                href="/academy"
-                aria-expanded={isAcademyMenuOpen}
-                aria-haspopup="true"
-                className={cn(
-                  'relative text-xs font-bold tracking-wider uppercase hover:text-brand-red transition-colors duration-300 flex items-center gap-1.5 py-2 whitespace-nowrap',
-                  isAcademyActive ? 'text-brand-red font-black' : 'text-zinc-700 dark:text-zinc-300'
-                )}
-              >
-                <span>{t.nav.academy}</span>
-                <ChevronDown
-                  className={cn(
-                    'w-3.5 h-3.5 transition-transform duration-300 opacity-60',
-                    isAcademyMenuOpen ? 'rotate-180 text-brand-red opacity-100' : ''
-                  )}
-                />
-                <span
-                  className={cn(
-                    'absolute -bottom-0.5 left-0 right-0 h-0.5 bg-brand-red transition-all duration-300 rounded-full',
-                    isAcademyActive ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </Link>
+          {/* Desktop navigation */}
+          <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex xl:gap-8">
+            {NAV_GROUPS.map((group) => {
+              const isOpen = openMenu === group.id
+              const active = isGroupActive(pathname, group)
+              const isMega = group.kind === 'mega'
 
-              {/* Academy Dropdown Panel */}
-              {isAcademyMenuOpen && (
-                <div className="absolute top-full left-0 w-72 pt-2 animate-fade-in-up z-50 pointer-events-auto">
-                  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] shadow-2xl p-2.5 overflow-hidden backdrop-blur-2xl space-y-1">
-                    <Link
-                      href="/academy"
-                      onClick={() => setIsAcademyMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-brand-red/10 text-brand-red shrink-0 group-hover:scale-105 transition-transform">
-                        <GraduationCap className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.syllabus}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Age divisions, belts &amp; weekly class formats</p>
-                      </div>
-                    </Link>
+              return (
+                <div
+                  key={group.id}
+                  // The mega menu is positioned against the header container (not its trigger),
+                  // so its wrapper must not establish a containing block.
+                  className={isMega ? 'static' : 'relative'}
+                  onMouseEnter={() => setOpenMenu(group.id)}
+                  onMouseLeave={() => setOpenMenu(null)}
+                  onFocus={() => setOpenMenu(group.id)}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpenMenu(null)
+                  }}
+                >
+                  <Link
+                    href={group.href}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                    className={cn(
+                      triggerClass,
+                      active ? 'font-black text-brand-red' : 'text-zinc-700 dark:text-zinc-300'
+                    )}
+                  >
+                    <span>{group.label(t)}</span>
+                    <ChevronDown
+                      aria-hidden="true"
+                      className={cn(
+                        'h-3.5 w-3.5 opacity-60 transition-transform duration-300',
+                        isOpen && 'rotate-180 text-brand-red opacity-100'
+                      )}
+                    />
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        '-bottom-0.5 absolute inset-x-0 h-0.5 rounded-full bg-brand-red transition-opacity duration-300',
+                        active ? 'opacity-100' : 'opacity-0'
+                      )}
+                    />
+                  </Link>
 
-                    <Link
-                      href="/pricing"
-                      onClick={() => setIsAcademyMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <CreditCard className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.pricing}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Flexible monthly plans &amp; family packages</p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/incubator"
-                      onClick={() => setIsAcademyMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <Lightbulb className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.incubator}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Cadet research &amp; martial leadership grants</p>
-                      </div>
-                    </Link>
-
-                    <a
-                      href={siteSettings.navigation.externalLinks?.store || '#'}
-                      onClick={() => setIsAcademyMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group border-t border-zinc-100 dark:border-zinc-800/80"
-                    >
-                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <ShoppingBag className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors flex items-center gap-1">
-                          {t.footer.store} <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Official Doboks, sparring gear &amp; equipment</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 2. Visual Mega-Menu: Curriculum Library */}
-            <div
-              ref={libraryMenuRef}
-              className="relative"
-              onMouseEnter={() => setIsLibraryMenuOpen(true)}
-              onMouseLeave={() => setIsLibraryMenuOpen(false)}
-              onFocus={() => setIsLibraryMenuOpen(true)}
-              onBlur={(e) => {
-                if (!libraryMenuRef.current?.contains(e.relatedTarget as Node)) {
-                  setIsLibraryMenuOpen(false)
-                }
-              }}
-            >
-              <Link
-                href="/library"
-                aria-expanded={isLibraryMenuOpen}
-                aria-haspopup="true"
-                className={cn(
-                  'relative text-xs font-bold tracking-wider uppercase hover:text-brand-red transition-colors duration-300 flex items-center gap-1.5 py-2 whitespace-nowrap',
-                  isLibraryActive ? 'text-brand-red font-black' : 'text-zinc-700 dark:text-zinc-300'
-                )}
-              >
-                <span>{t.nav.library}</span>
-                <ChevronDown
-                  className={cn(
-                    'w-3.5 h-3.5 transition-transform duration-300 opacity-60',
-                    isLibraryMenuOpen ? 'rotate-180 text-brand-red opacity-100' : ''
-                  )}
-                />
-                <span
-                  className={cn(
-                    'absolute -bottom-0.5 left-0 right-0 h-0.5 bg-brand-red transition-all duration-300 rounded-full',
-                    isLibraryActive ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </Link>
-
-              {/* Visual Mega-Menu Dropdown Panel (14px radius) */}
-              {isLibraryMenuOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[680px] pt-2 animate-fade-in-up z-50 pointer-events-auto">
-                  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] shadow-2xl p-5 overflow-hidden backdrop-blur-2xl">
-                    {/* Mega Menu Header */}
-                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-100 dark:border-zinc-800">
-                      <div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block">
-                          Kukkiwon Standard Encyclopedia
-                        </span>
-                        <h4 className="text-xs sm:text-sm font-black uppercase text-zinc-900 dark:text-white">
-                          Curriculum Knowledge Hub
-                        </h4>
-                      </div>
-                      <Link
-                        href="/library"
-                        onClick={() => setIsLibraryMenuOpen(false)}
-                        className="text-[11px] font-bold uppercase tracking-wider text-brand-red hover:underline flex items-center gap-1"
-                      >
-                        View All {libraryCategoriesMeta.length} Disciplines <ArrowRight className="w-3 h-3" />
-                      </Link>
-                    </div>
-
-                    {/* 9 Disciplines Visual Grid */}
-                    <div className="grid grid-cols-3 gap-2">
-                      {libraryCategoriesMeta.map((cat) => {
-                        const Icon = iconMap[cat.iconName] || BookOpen
-
-                        return (
+                  {isOpen && isMega && (
+                    // Centered with auto margins (not a translate): the fade-in-up animation owns `transform`.
+                    <div className="pointer-events-auto absolute inset-x-0 top-full z-50 mx-auto w-[min(680px,calc(100vw-2rem))] animate-fade-in-up pt-2">
+                      <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5 shadow-2xl backdrop-blur-2xl">
+                        <div className="mb-3 flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+                          <div>
+                            <span className="block text-[11px] font-bold uppercase tracking-widest text-brand-red">
+                              Kukkiwon Standard Encyclopedia
+                            </span>
+                            <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white">Curriculum Knowledge Hub</h4>
+                          </div>
                           <Link
-                            key={cat.id}
-                            href={`/library/${cat.id}`}
-                            onClick={() => setIsLibraryMenuOpen(false)}
-                            className="group/item p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-brand-red/50 hover:bg-white dark:hover:bg-zinc-900 transition-all flex flex-col justify-between"
+                            href="/library"
+                            onClick={() => setOpenMenu(null)}
+                            className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-red hover:underline"
                           >
-                            <div className="flex items-center gap-2 mb-1">
-                              <div
-                                className="p-1.5 rounded-lg shrink-0 transition-transform group-hover/item:scale-110"
-                                style={{
-                                  backgroundColor: `${cat.accentColor}20`,
-                                  color: cat.accentColor,
-                                }}
-                              >
-                                <Icon className="w-3.5 h-3.5" />
-                              </div>
-                              <span className="text-[9px] font-mono uppercase text-brand-red truncate">
-                                {cat.koreanTitle.split('(')[0]}
-                              </span>
-                            </div>
-
-                            <div>
-                              <h5 className="text-[11px] font-bold uppercase text-zinc-900 dark:text-white truncate group-hover/item:text-brand-red transition-colors leading-tight">
-                                {cat.title}
-                              </h5>
-                            </div>
+                            View all {categories.length} disciplines <ArrowRight className="h-3 w-3" />
                           </Link>
-                        )
-                      })}
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">{renderCategoryGrid('desktop')}</div>
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {isOpen && !isMega && (
+                    <div
+                      className={cn(
+                        'pointer-events-auto absolute top-full z-50 w-80 animate-fade-in-up pt-2',
+                        // Keep right-most menu on-screen at narrow desktop widths.
+                        group.id === 'about' ? 'right-0' : 'left-0'
+                      )}
+                    >
+                      <ul className="space-y-1 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-2.5 shadow-2xl backdrop-blur-2xl">
+                        {group.items.map((item) => {
+                          const Icon = item.icon
+                          return (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setOpenMenu(null)}
+                                className="group flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+                              >
+                                <span className="shrink-0 rounded-lg bg-brand-red/10 p-2 text-brand-red transition-transform group-hover:scale-105">
+                                  <Icon className="h-4 w-4" aria-hidden="true" />
+                                </span>
+                                <span>
+                                  <span className="block text-xs font-bold uppercase text-zinc-900 dark:text-white transition-colors group-hover:text-brand-red">
+                                    {item.label(t)}
+                                  </span>
+                                  <span className="block text-[13px] leading-snug text-zinc-500">{item.description}</span>
+                                </span>
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            {/* 3. Community Dropdown (Coaches, Achievements, Join Team) */}
-            <div
-              ref={communityMenuRef}
-              className="relative"
-              onMouseEnter={() => setIsCommunityMenuOpen(true)}
-              onMouseLeave={() => setIsCommunityMenuOpen(false)}
-              onFocus={() => setIsCommunityMenuOpen(true)}
-              onBlur={(e) => {
-                if (!communityMenuRef.current?.contains(e.relatedTarget as Node)) {
-                  setIsCommunityMenuOpen(false)
-                }
-              }}
-            >
-              <Link
-                href="/community"
-                aria-expanded={isCommunityMenuOpen}
-                aria-haspopup="true"
-                className={cn(
-                  'relative text-xs font-bold tracking-wider uppercase hover:text-brand-red transition-colors duration-300 flex items-center gap-1.5 py-2 whitespace-nowrap',
-                  isCommunityActive ? 'text-brand-red font-black' : 'text-zinc-700 dark:text-zinc-300'
-                )}
-              >
-                <span>{t.nav.community}</span>
-                <ChevronDown
-                  className={cn(
-                    'w-3.5 h-3.5 transition-transform duration-300 opacity-60',
-                    isCommunityMenuOpen ? 'rotate-180 text-brand-red opacity-100' : ''
-                  )}
-                />
-                <span
-                  className={cn(
-                    'absolute -bottom-0.5 left-0 right-0 h-0.5 bg-brand-red transition-all duration-300 rounded-full',
-                    isCommunityActive ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </Link>
-
-              {/* Community Dropdown Panel */}
-              {isCommunityMenuOpen && (
-                <div className="absolute top-full left-0 w-72 pt-2 animate-fade-in-up z-50 pointer-events-auto">
-                  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] shadow-2xl p-2.5 overflow-hidden backdrop-blur-2xl space-y-1">
-                    <Link
-                      href="/community"
-                      onClick={() => setIsCommunityMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <Users className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.community}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Kukkiwon certified Master faculty &amp; demo team</p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/achievements"
-                      onClick={() => setIsCommunityMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <Award className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.achievements}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">National &amp; international championship records</p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/join-team"
-                      onClick={() => setIsCommunityMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <Briefcase className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.coachingCareers}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Instructor careers &amp; assistant internships</p>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 4. About & Organization Dropdown (Philosophy, Collaborations, Locations, Journal) */}
-            <div
-              ref={aboutMenuRef}
-              className="relative"
-              onMouseEnter={() => setIsAboutMenuOpen(true)}
-              onMouseLeave={() => setIsAboutMenuOpen(false)}
-              onFocus={() => setIsAboutMenuOpen(true)}
-              onBlur={(e) => {
-                if (!aboutMenuRef.current?.contains(e.relatedTarget as Node)) {
-                  setIsAboutMenuOpen(false)
-                }
-              }}
-            >
-              <Link
-                href="/about"
-                aria-expanded={isAboutMenuOpen}
-                aria-haspopup="true"
-                className={cn(
-                  'relative text-xs font-bold tracking-wider uppercase hover:text-brand-red transition-colors duration-300 flex items-center gap-1.5 py-2 whitespace-nowrap',
-                  isAboutActive ? 'text-brand-red font-black' : 'text-zinc-700 dark:text-zinc-300'
-                )}
-              >
-                <span>{t.nav.about}</span>
-                <ChevronDown
-                  className={cn(
-                    'w-3.5 h-3.5 transition-transform duration-300 opacity-60',
-                    isAboutMenuOpen ? 'rotate-180 text-brand-red opacity-100' : ''
-                  )}
-                />
-                <span
-                  className={cn(
-                    'absolute -bottom-0.5 left-0 right-0 h-0.5 bg-brand-red transition-all duration-300 rounded-full',
-                    isAboutActive ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
-              </Link>
-
-              {/* About Dropdown Panel */}
-              {isAboutMenuOpen && (
-                <div className="absolute top-full right-0 w-80 pt-2 animate-fade-in-up z-50 pointer-events-auto">
-                  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[14px] shadow-2xl p-2.5 overflow-hidden backdrop-blur-2xl space-y-1">
-                    <Link
-                      href="/about"
-                      onClick={() => setIsAboutMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-brand-red/10 text-brand-red shrink-0 group-hover:scale-105 transition-transform">
-                        <Info className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.philosophy}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Founding journey, core tenets &amp; executive faculty</p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/collaborations"
-                      onClick={() => setIsAboutMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <HeartHandshake className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.collaborations}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">World Taekwondo, Kukkiwon &amp; academic alliances</p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/locations"
-                      onClick={() => setIsAboutMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group"
-                    >
-                      <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <MapPin className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors">
-                          {t.footer.branchesLink}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Facility specifications, schedules &amp; interactive maps</p>
-                      </div>
-                    </Link>
-
-                    <a
-                      href={siteSettings.navigation.externalLinks?.blog || '#'}
-                      onClick={() => setIsAboutMenuOpen(false)}
-                      className="p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors flex items-start gap-3 group border-t border-zinc-100 dark:border-zinc-800/80"
-                    >
-                      <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0 group-hover:scale-105 transition-transform">
-                        <Newspaper className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors flex items-center gap-1">
-                          {t.footer.blog} <ExternalLink className="w-2.5 h-2.5 text-zinc-400" />
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-light">Articles, tournament recaps &amp; master perspectives</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              )}
-            </div>
+              )
+            })}
           </nav>
 
-          {/* ================================================================== */}
-          {/* DESKTOP RIGHT ACTIONS (10-14px radius) */}
-          {/* ================================================================== */}
-          <div className="hidden lg:flex items-center gap-2.5 xl:gap-3 shrink-0">
+          {/* Desktop actions */}
+          <div className="hidden shrink-0 items-center gap-2.5 lg:flex xl:gap-3">
             <LanguageSwitcher variant="header" />
             <ThemeToggle />
-
             <Link
               href="/contact"
-              className="group relative px-4 py-2 rounded-xl bg-brand-red text-white font-bold text-[11px] tracking-widest uppercase transition-all duration-300 hover:shadow-brand-glow overflow-hidden shadow-sm touch-press"
+              className="group relative overflow-hidden rounded-xl bg-brand-red px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-white shadow-sm transition-all duration-300 hover:shadow-brand-glow touch-press"
             >
-              <span className="relative z-10 flex items-center gap-1.5 group-hover:text-black transition-colors duration-300">
-                {t.nav.bookTrial} <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+              <span className="relative z-10 flex items-center gap-1.5 transition-colors duration-300 group-hover:text-black">
+                {t.nav.bookTrial} <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-              <div className="absolute inset-0 bg-white transform translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 translate-y-full bg-white transition-transform duration-300 group-hover:translate-y-0"
+              />
             </Link>
           </div>
 
-          {/* ================================================================== */}
-          {/* MOBILE RIGHT CONTROLS (<1024px) */}
-          {/* ================================================================== */}
-          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
+          {/* Mobile / tablet actions */}
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
             <LanguageSwitcher variant="header" />
             <ThemeToggle />
-
-            {/* Tablet Direct CTA Button (640px - 1023px) */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[44px] rounded-xl bg-brand-red text-white font-bold text-xs tracking-wider uppercase transition-all duration-300 hover:shadow-brand-glow shadow-sm touch-press"
+              className="hidden min-h-[44px] items-center gap-1.5 rounded-xl bg-brand-red px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:shadow-brand-glow sm:inline-flex touch-press"
             >
               <span>{t.nav.bookTrial}</span>
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="h-3 w-3" />
             </Link>
-
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 min-w-[44px] min-h-[44px] rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-white transition-colors touch-press cursor-pointer"
-              aria-label={isMobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-2.5 text-zinc-900 dark:text-white transition-colors touch-press"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : (
-                <div className="flex flex-col gap-1 w-4">
-                  <span className="h-0.5 w-full bg-current rounded-full" />
-                  <span className="h-0.5 w-full bg-current rounded-full" />
-                  <span className="h-0.5 w-3/4 bg-current rounded-full self-end" />
-                </div>
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <span className="flex w-4 flex-col gap-1" aria-hidden="true">
+                  <span className="h-0.5 w-full rounded-full bg-current" />
+                  <span className="h-0.5 w-full rounded-full bg-current" />
+                  <span className="h-0.5 w-3/4 self-end rounded-full bg-current" />
+                </span>
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* ==================================================================== */}
-      {/* MOBILE FULLSCREEN ACCORDION DRAWER (<1024px) */}
-      {/* ==================================================================== */}
+      {/* Mobile / tablet drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-16 sm:top-20 z-50 bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-900 overflow-y-auto animate-fade-in touch-scroll pb-28 h-[calc(100dvh-4rem)] sm:h-[calc(100dvh-5rem)]">
-          <div className="container mx-auto px-4 py-6 space-y-6">
-            {/* Primary Nav Hubs */}
-            <div className="divide-y divide-zinc-100 dark:divide-zinc-900 font-bold uppercase text-xs sm:text-sm">
-              {/* Academy Hub */}
-              <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">01. {t.footer.colAcademy}</span>
-                <Link
-                  href="/academy"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <GraduationCap className="w-4 h-4 text-brand-red" />
-                    {t.footer.syllabus}
+        <div
+          id="mobile-menu"
+          className="fixed inset-x-0 top-16 z-50 h-[calc(100dvh-4rem)] animate-fade-in overflow-y-auto border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black pb-28 touch-scroll lg:hidden"
+        >
+          <nav aria-label="Mobile" className="container mx-auto space-y-6 px-4 py-6">
+            <div className="divide-y divide-zinc-100 dark:divide-zinc-900">
+              {NAV_GROUPS.filter((group) => group.kind !== 'mega').map((group, index) => (
+                <div key={group.id} className="space-y-1 py-2">
+                  <span className="block px-3 pt-1 font-mono text-[11px] text-zinc-500">
+                    {String(index + 1).padStart(2, '0')}. {group.label(t)}
                   </span>
-                </Link>
-                <Link
-                  href="/pricing"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <CreditCard className="w-4 h-4 text-emerald-500" />
-                    {t.footer.pricing}
-                  </span>
-                </Link>
-                <Link
-                  href="/incubator"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Lightbulb className="w-4 h-4 text-amber-500" />
-                    {t.footer.incubator}
-                  </span>
-                </Link>
-                <a
-                  href={siteSettings.navigation.externalLinks?.store || '#'}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <ShoppingBag className="w-4 h-4 text-purple-500" />
-                    {t.footer.store}
-                  </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
-                </a>
-              </div>
-
-              {/* Community Hub */}
-              <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">02. {t.nav.community}</span>
-                <Link
-                  href="/community"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Users className="w-4 h-4 text-blue-500" />
-                    {t.footer.community}
-                  </span>
-                </Link>
-                <Link
-                  href="/achievements"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Award className="w-4 h-4 text-amber-500" />
-                    {t.footer.achievements}
-                  </span>
-                </Link>
-                <Link
-                  href="/join-team"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Briefcase className="w-4 h-4 text-purple-500" />
-                    {t.footer.coachingCareers}
-                  </span>
-                </Link>
-              </div>
-
-              {/* About & Organization Hub */}
-              <div className="py-2 space-y-1">
-                <span className="text-[10px] font-mono text-zinc-400 block px-3 pt-1">03. {t.nav.about}</span>
-                <Link
-                  href="/about"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Info className="w-4 h-4 text-brand-red" />
-                    {t.footer.philosophy}
-                  </span>
-                </Link>
-                <Link
-                  href="/collaborations"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <HeartHandshake className="w-4 h-4 text-blue-500" />
-                    {t.footer.collaborations}
-                  </span>
-                </Link>
-                <Link
-                  href="/locations"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <MapPin className="w-4 h-4 text-emerald-500" />
-                    {t.footer.branchesLink}
-                  </span>
-                </Link>
-                <a
-                  href={siteSettings.navigation.externalLinks?.blog || '#'}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-zinc-600 dark:text-zinc-400"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Newspaper className="w-4 h-4 text-amber-500" />
-                    {t.footer.blog}
-                  </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
-                </a>
-              </div>
+                  {group.items.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={closeMobile}
+                        className="flex items-center gap-2.5 rounded-xl p-3 text-xs font-bold uppercase text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 sm:text-sm"
+                      >
+                        <Icon className="h-4 w-4 text-brand-red" aria-hidden="true" />
+                        {item.label(t)}
+                      </Link>
+                    )
+                  })}
+                </div>
+              ))}
             </div>
 
-            {/* Curriculum Library Mega Sub-Section (14px radius) */}
-            <div className="p-4 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-3">
+            {/* Curriculum library */}
+            <div className="space-y-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red">
-                  {t.nav.library} ({libraryCategoriesMeta.length} Disciplines)
+                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red">
+                  {t.nav.library} ({categories.length})
                 </span>
                 <Link
                   href="/library"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red"
+                  onClick={closeMobile}
+                  className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red"
                 >
-                  View All →
+                  View all →
                 </Link>
               </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                {libraryCategoriesMeta.map((cat) => {
-                  const Icon = iconMap[cat.iconName] || BookOpen
-
-                  return (
-                    <Link
-                      key={cat.id}
-                      href={`/library/${cat.id}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="p-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2"
-                    >
-                      <div
-                        className="p-1 rounded-md shrink-0"
-                        style={{
-                          backgroundColor: `${cat.accentColor}20`,
-                          color: cat.accentColor,
-                        }}
-                      >
-                        <Icon className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-[10px] font-bold uppercase text-zinc-900 dark:text-white truncate">
-                        {cat.title}
-                      </span>
-                    </Link>
-                  )
-                })}
-              </div>
+              <div className="grid grid-cols-2 gap-2">{renderCategoryGrid('mobile')}</div>
             </div>
 
-            {/* Mobile Lead Gen CTA */}
-            <div className="pt-2">
-              <Link
-                href="/contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full p-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-brand-glow touch-press"
-              >
-                {t.nav.bookTrial} <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
+            <Link
+              href="/contact"
+              onClick={closeMobile}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-red p-4 text-xs font-bold uppercase tracking-widest text-white shadow-brand-glow touch-press"
+            >
+              {t.nav.bookTrial} <ArrowRight className="h-4 w-4" />
+            </Link>
+          </nav>
         </div>
       )}
     </header>

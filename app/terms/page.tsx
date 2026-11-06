@@ -3,23 +3,16 @@ import type { Metadata } from 'next'
 import { Shield, Award, AlertTriangle, CreditCard, Scale, CheckCircle2, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Infinity Taekwondo',
+  title: 'Terms of Service',
   description:
-    'Infinity Taekwondo Terms of Service - Academy membership rules, liability and sparring waivers, dojang code of conduct, and Kukkiwon grading policies.',
+    'Infinity Taekwondo Terms of Service - Academy membership rules, liability and training waivers, dojang code of conduct, and Kukkiwon grading policies.',
   alternates: {
     canonical: '/terms',
-    languages: {
-      'en': '/terms',
-      'km': '/terms',
-      'zh': '/terms',
-      'ko': '/terms',
-      'x-default': '/terms',
-    },
   },
   openGraph: {
     title: 'Terms of Service | Infinity Taekwondo',
     description:
-      'Infinity Taekwondo Terms of Service - Academy membership rules, liability and sparring waivers, dojang code of conduct, and Kukkiwon grading policies.',
+      'Infinity Taekwondo Terms of Service - Academy membership rules, liability and training waivers, dojang code of conduct, and Kukkiwon grading policies.',
     url: '/terms',
     type: 'website',
     images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Infinity Taekwondo Terms of Service' }],
@@ -28,7 +21,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Terms of Service | Infinity Taekwondo',
     description:
-      'Infinity Taekwondo Terms of Service - Academy membership rules, sparring waivers, and Kukkiwon standards.',
+      'Infinity Taekwondo Terms of Service - Academy membership rules, training waivers, and Kukkiwon standards.',
     images: ['/twitter-image'],
   },
 }
@@ -46,7 +39,7 @@ export default function TermsPage() {
         2. Dojang Code of Conduct
       </a>
       <a href="#liability" className="sidebar-link">
-        3. Physical Liability &amp; Sparring Waiver
+        3. Physical Liability &amp; Training Waiver
       </a>
       <a href="#gradings" className="sidebar-link">
         4. Belt Promotions &amp; Standards
@@ -81,12 +74,12 @@ export default function TermsPage() {
       policyType="terms"
     >
       {/* Executive Summary Callout Grid */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Scale className="w-4 h-4" /> At A Glance: Key Membership &amp; Dojang Terms
         </div>
         <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
-          Welcome to <strong>Infinity Taekwondo</strong> (태권도 INFINITY). By training at our academy, participating in sparring, or enrolling a student, you agree to these legal conditions and martial standards.
+          Welcome to <strong>Infinity Taekwondo</strong> (태권도 INFINITY). By training at our academy, taking part in demonstrations or events, or enrolling a student, you agree to these legal conditions and martial standards.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -101,7 +94,7 @@ export default function TermsPage() {
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               ⚠️ Inherent Risk &amp; Safety Gear
             </span>
-            <span className="text-zinc-500 font-light">World Taekwondo approved protective equipment is mandatory during sparring.</span>
+            <span className="text-zinc-500 font-light">Protective equipment is mandatory for contact drills, Hosinsul practice and board breaking.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
@@ -148,13 +141,13 @@ export default function TermsPage() {
       </ul>
 
       {/* SECTION 3 */}
-      <h2 id="liability">3. Physical Liability &amp; Sparring Waiver</h2>
-      <div className="p-5 rounded-[14px] bg-red-500/10 border border-red-500/30 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 space-y-2 mb-4">
+      <h2 id="liability">3. Physical Liability &amp; Training Waiver</h2>
+      <div className="p-5 rounded-2xl bg-red-500/10 border border-red-500/30 text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 space-y-2 mb-4">
         <div className="flex items-center gap-2 font-black uppercase text-brand-red tracking-wider">
           <AlertTriangle className="w-4 h-4" /> Assumption of Inherent Martial Arts Risk
         </div>
         <p className="font-light leading-relaxed">
-          Martial arts training, Olympic sparring (Kyorugi), high-altitude acrobatic tricking, board breaking (Kyukpa), and physical conditioning involve inherent risks of injury (including sprains, fractures, concussions, and muscular strain).
+          Martial arts training, partner self-defense (Hosinsul) drills, high-altitude acrobatic tricking, board breaking (Kyukpa), and physical conditioning involve inherent risks of injury (including sprains, fractures, concussions, and muscular strain).
         </p>
       </div>
 
@@ -169,7 +162,7 @@ export default function TermsPage() {
           You release and hold harmless Infinity Taekwondo, its Master Instructors, coaches, employees, and facility landlords from any liability, claims, or damages arising from physical injury sustained during training or sanctioned tournaments.
         </li>
         <li>
-          <strong>Mandatory Protective Equipment:</strong> World Taekwondo approved protective gear (chest guard Hogu, headgear, mouthguard, shin/forearm guards, and groin guard) must be worn during all full-contact sparring sessions.
+          <strong>Mandatory Protective Equipment:</strong> Appropriate protective gear (mouthguard, shin/forearm guards and, where instructed, padded body protection) must be worn during contact drills, Hosinsul practice and board breaking.
         </li>
       </ul>
 
@@ -180,7 +173,7 @@ export default function TermsPage() {
       </p>
       <ul>
         <li>
-          <strong>Merit-Based Progression:</strong> Belt promotions are earned through technical precision, required Poomsae forms, sparring ability, board breaking, and demonstrated moral discipline.
+          <strong>Merit-Based Progression:</strong> Belt promotions are earned through technical precision, required Poomsae forms, demonstration, tricking and Hosinsul skills, board breaking, and demonstrated moral discipline.
         </li>
         <li>
           <strong>Attendance Is Not a Guarantee:</strong> Meeting minimum class attendance hours is a prerequisite to qualify for testing, but does <em>not</em> guarantee automatic promotion.
@@ -243,7 +236,7 @@ export default function TermsPage() {
       <p>
         These Terms of Service are governed by the laws of the Kingdom of Cambodia. For any legal inquiries or membership administration:
       </p>
-      <div className="p-5 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
+      <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
         <p className="font-bold text-zinc-900 dark:text-white">Infinity Taekwondo Administration Directorate</p>
         <p className="text-zinc-500">📍 Olympic Branch (HQ) &bull; National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh</p>
         <p className="text-zinc-500">📍 Kouk Khleang Branch &bull; Kouk Khleang, Sen Sok, Phnom Penh</p>

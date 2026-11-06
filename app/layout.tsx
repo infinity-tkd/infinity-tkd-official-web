@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Montserrat, Kantumruy_Pro } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { Navbar } from '@/components/Navbar'
@@ -8,8 +9,23 @@ import { ScrollNavProvider } from '@/context/ScrollNavContext'
 import { AutoErrorHandler } from '@/components/AutoErrorHandler'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { BackToTop } from '@/components/ui/BackToTop'
-import { siteSettings } from '@/config/siteSettings'
+import { buildSiteJsonLd, jsonLdString } from '@/lib/structuredData'
 import './globals.css'
+
+// Self-hosted at build time by next/font: no render-blocking third-party CSS, no layout shift.
+// Both are variable fonts, so a single file per script covers every weight.
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat',
+})
+
+const kantumruy = Kantumruy_Pro({
+  subsets: ['khmer', 'latin'],
+  display: 'swap',
+  variable: '--font-kantumruy',
+  preload: false, // only fetched when Khmer text is actually rendered
+})
 
 export const viewport: Viewport = {
   themeColor: [
@@ -22,24 +38,36 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 }
 
+const DEFAULT_TITLE = 'Infinity Taekwondo | Elite Martial Arts & Sport Science Academy Phnom Penh'
+const DEFAULT_DESCRIPTION =
+  'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking for kids and adults at Olympic Stadium & Sen Sok.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://infinitytaekwondo.com'),
   title: {
-    default: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
+    default: DEFAULT_TITLE,
     template: '%s | Infinity Taekwondo',
   },
-  description:
-    'To provide world-class training that blends athletic science with the artistry of freestyle Taekwondo, empowering students to achieve limitless potential.',
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en': '/',
-      'km': '/',
-      'zh': '/',
-      'ko': '/',
-      'x-default': '/',
-    },
-  },
+  description: DEFAULT_DESCRIPTION,
+  keywords: [
+    'Taekwondo Cambodia',
+    'Infinity Taekwondo',
+    'Taekwondo Phnom Penh',
+    'Kukkiwon Black Belt Cambodia',
+    'World Taekwondo Phnom Penh',
+    'Olympic Stadium Martial Arts',
+    'Kids Martial Arts Phnom Penh',
+    'Sen Sok Taekwondo',
+    'Poomsae Training Cambodia',
+    'Martial Arts Tricking Phnom Penh',
+    'Freestyle Poomsae Cambodia',
+    'Taekwondo Demonstration Team',
+    'Hosinsul Self-Defense',
+    'After school sports Phnom Penh',
+  ],
+  // Note: no site-wide `alternates`. Language is switched client-side on the same URL, so there
+  // are no per-language URLs to declare, and a root canonical would be inherited by every page.
+  // Each page sets its own canonical.
   robots: {
     index: true,
     follow: true,
@@ -52,10 +80,11 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
-    description: 'Empowering boundless potential from white belt to black belt mastery in Phnom Penh, Cambodia.',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     url: 'https://infinitytaekwondo.com',
     siteName: 'Infinity Taekwondo',
+    locale: 'en_US',
     type: 'website',
     images: [
       {
@@ -68,8 +97,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Infinity Taekwondo | Elite Martial Arts & Sport Science',
-    description: 'Empowering boundless potential from white belt to black belt mastery in Phnom Penh, Cambodia.',
+    title: DEFAULT_TITLE,
+    description:
+      'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking and Hosinsul self-defense.',
     images: ['/opengraph-image'],
   },
   icons: {
@@ -78,87 +108,24 @@ export const metadata: Metadata = {
       { url: '/icon', sizes: '32x32', type: 'image/png' },
     ],
     shortcut: '/favicon.svg',
-    apple: [
-      { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
+  },
+  alternates: {
+    types: { 'application/rss+xml': '/blog/feed.xml' },
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SportsClub',
-    name: 'Infinity Taekwondo Academy',
-    alternateName: 'Infinity TKD',
-    url: 'https://infinitytaekwondo.com',
-    logo: 'https://infinitytaekwondo.com/favicon.svg',
-    image: 'https://infinitytaekwondo.com/opengraph-image',
-    description:
-      'Elite Kukkiwon & World Taekwondo curriculum blending athletic science with freestyle Taekwondo martial discipline in Phnom Penh, Cambodia.',
-    telephone: siteSettings.contact.hotlinePhone,
-    email: siteSettings.contact.generalEmail,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: siteSettings.contact.headquartersAddress.street,
-      addressLocality: siteSettings.contact.headquartersAddress.city,
-      addressRegion: siteSettings.contact.headquartersAddress.district,
-      addressCountry: 'KH',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 11.5562607,
-      longitude: 104.9115537,
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '06:00',
-        closes: '21:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Saturday'],
-        opens: '07:00',
-        closes: '19:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Sunday'],
-        opens: '08:00',
-        closes: '17:00',
-      },
-    ],
-    sameAs: siteSettings.socials.map((s) => s.url),
-    priceRange: '$$',
-  }
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
+      className={`${montserrat.variable} ${kantumruy.variable}`}
     >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
-        />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-        />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdString(buildSiteJsonLd()) }}
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans selection:bg-brand-red selection:text-white">

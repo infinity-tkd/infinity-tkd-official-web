@@ -18,6 +18,7 @@ import {
   Sparkles,
   Loader2,
   AlertCircle,
+  MessageCircle,
 } from 'lucide-react'
 import {
   sanitizeInput,
@@ -50,6 +51,7 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 const socials = [
+  { name: 'WhatsApp', icon: MessageCircle, link: 'https://wa.me/85512220124?text=Hello%20Infinity%20Taekwondo%2C%20I%20would%20like%20to%20inquire%20about%20booking%20a%20free%20trial%20class.' },
   { name: 'Telegram', icon: Send, link: 'https://t.me/infinitytaekwondo' },
   { name: 'Instagram', icon: Instagram, link: 'https://instagram.com/infinitytaekwondo' },
   { name: 'YouTube', icon: Youtube, link: 'https://youtube.com/@infinitytaekwondo' },
@@ -159,9 +161,9 @@ function ContactContent() {
     if (
       detectMaliciousPayload(formData.name) ||
       detectMaliciousPayload(formData.email) ||
-      detectMaliciousPayload(formData.message)
+      detectMaliciousPayload(formData.message, { prose: true })
     ) {
-      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
+      setErrorMsg('Please remove any HTML or code from your message and try again.')
       return
     }
 
@@ -225,7 +227,7 @@ function ContactContent() {
     <div className="bg-zinc-50 dark:bg-black min-h-screen pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-500 font-sans selection:bg-brand-red selection:text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Page Header */}
-        <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto pt-6 sm:pt-8">
+        <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto pt-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5" /> {t.contact.badge}
           </div>
@@ -240,16 +242,47 @@ function ContactContent() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12">
           {/* LEFT COLUMN: Info & 2 Branches */}
           <div className="md:col-span-5 space-y-5 sm:space-y-6">
+            {/* Quick Messaging Conversion Card */}
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-zinc-900/60 to-black border border-emerald-500/30 backdrop-blur-md shadow-lg space-y-3">
+              <div className="flex items-center gap-2 text-emerald-500 dark:text-emerald-400 text-xs font-black uppercase tracking-wider">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                Instant Inquiry &amp; Trial Booking
+              </div>
+              <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Need fastest confirmation? Chat with our Olympic HQ coordinators directly:
+              </p>
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
+                <a
+                  href="https://wa.me/85512220124?text=Hello%20Infinity%20Taekwondo%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20class!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md touch-press"
+                  aria-label="Chat on WhatsApp"
+                >
+                  <MessageCircle className="w-4 h-4" /> WhatsApp
+                </a>
+                <a
+                  href="https://t.me/infinitytaekwondo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-[#229ED9] hover:bg-[#1E88E5] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md touch-press"
+                  aria-label="Chat on Telegram"
+                >
+                  <Send className="w-4 h-4" /> Telegram
+                </a>
+              </div>
+            </div>
+
             {/* Branch 01 Card (14px radius) */}
             <Card3D max={4} depth={3} className="w-full">
-              <div className="bg-white dark:bg-zinc-900/50 rounded-[14px] p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm space-y-4">
+              <div className="bg-white dark:bg-zinc-900/50 rounded-2xl p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg bg-brand-red text-white">
+                  <span className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-lg bg-brand-red text-white">
                     {t.common.headquarters}
                   </span>
                   <Link
                     href="/locations"
-                    className="text-[11px] font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
+                    className="text-xs font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
                   >
                     {t.common.viewDetails} <ArrowRight className="w-3 h-3" />
                   </Link>
@@ -281,14 +314,14 @@ function ContactContent() {
 
             {/* Branch 02 Card (14px radius) */}
             <Card3D max={4} depth={3} className="w-full">
-              <div className="bg-white dark:bg-zinc-900/50 rounded-[14px] p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm space-y-4">
+              <div className="bg-white dark:bg-zinc-900/50 rounded-2xl p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-lg bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-lg bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
                     {t.common.branch02}
                   </span>
                   <Link
                     href="/locations"
-                    className="text-[11px] font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
+                    className="text-xs font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
                   >
                     {t.common.viewDetails} <ArrowRight className="w-3 h-3" />
                   </Link>
@@ -320,7 +353,7 @@ function ContactContent() {
 
             {/* Socials Card (14px radius) */}
             <Card3D max={3} depth={2} className="w-full">
-              <div className="bg-white dark:bg-zinc-900/50 rounded-[14px] p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm">
+              <div className="bg-white dark:bg-zinc-900/50 rounded-2xl p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-4">
                   Official Channels
                 </h3>
@@ -359,12 +392,12 @@ function ContactContent() {
 
           {/* RIGHT COLUMN: Form (14px radius) */}
           <div className="md:col-span-7" id="contact-form">
-            <div className="bg-white dark:bg-zinc-900 rounded-[14px] p-6 sm:p-8 md:p-10 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/50 dark:shadow-black/50 h-full flex flex-col justify-center">
+            <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 sm:p-8 md:p-10 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/50 dark:shadow-black/50 h-full flex flex-col justify-center">
               <div className="mb-6 sm:mb-8">
                 <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   {t.contact.sendMessageTitle}
                 </h2>
-                <p className="text-xs sm:text-sm text-zinc-500 mt-1 font-light">
+                <p className="text-[13px] sm:text-sm text-zinc-500 mt-1">
                   {t.contact.sendMessageSubtitle}
                 </p>
               </div>
@@ -404,7 +437,7 @@ function ContactContent() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div className="space-y-1.5">
-                      <label htmlFor="contact-name" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="contact-name" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.contact.fullName} *
                       </label>
                       <input
@@ -421,7 +454,7 @@ function ContactContent() {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="contact-email" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="contact-email" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.contact.emailAddress} *
                       </label>
                       <input
@@ -442,7 +475,7 @@ function ContactContent() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div className="space-y-1.5">
-                      <label htmlFor="contact-branch" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="contact-branch" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.contact.preferredBranch}
                       </label>
                       <div className="relative">
@@ -461,7 +494,7 @@ function ContactContent() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label htmlFor="contact-subject" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="contact-subject" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.contact.subject}
                       </label>
                       <div className="relative">
@@ -485,7 +518,7 @@ function ContactContent() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="contact-message" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                    <label htmlFor="contact-message" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                       {t.contact.message} *
                     </label>
                     <textarea

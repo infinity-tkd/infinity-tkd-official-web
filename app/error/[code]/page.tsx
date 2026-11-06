@@ -23,7 +23,7 @@ interface ErrorPageProps {
 export async function generateMetadata({ params }: ErrorPageProps): Promise<Metadata> {
   const { code } = await params
   return {
-    title: `Error ${code} | Infinity Taekwondo`,
+    title: `Error ${code}`,
     robots: {
       index: false,
       follow: false,

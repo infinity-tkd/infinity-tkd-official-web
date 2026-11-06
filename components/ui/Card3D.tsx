@@ -6,33 +6,47 @@ import { cn } from '@/lib/utils'
 export interface Card3DProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   className?: string
-  /** Maximum tilt angle in degrees. Default: 5 (restrained, luxury feel) */
+  /** Maximum tilt angle in degrees. Capped at 4deg for a restrained, premium feel. */
   maxTilt?: number
   /** Alias for maxTilt */
   max?: number
-  /** Depth translation factor */
+  /** Kept for API compatibility; depth is implied by the perspective. */
   depth?: number
-  /** Scale multiplier on hover. Default: 1.015 */
+  /** Scale on hover. Default: 1.01 */
   scale?: number
-  /** Enables dynamic radial light glare tracking. Default: true */
+  /** Soft light that follows the pointer. Default: true */
   glare?: boolean
-  /** Disabled 3D effect completely (e.g. for static states). Default: false */
+  /** Disable the effect entirely. */
   disabled?: boolean
 }
 
+const MAX_TILT_DEG = 4
+
+/** True only for a real mouse/trackpad and when the visitor has not asked for reduced motion. */
+function canTilt(): boolean {
+  if (typeof window === 'undefined') return false
+  return (
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+}
+
 /**
- * Card3D: Lightweight, 60/120fps hardware-accelerated 3D tilt component.
- * - Uses direct DOM CSS variable manipulation via requestAnimationFrame (0 React re-renders).
- * - Graceful fallback on touch/mobile devices and prefers-reduced-motion.
- * - Dynamic lighting and specular glare reflection.
+ * Card3D: subtle pointer-driven 3D tilt.
+ *
+ * Performance:
+ * - No React state: transforms are written straight to the DOM inside requestAnimationFrame.
+ * - The card's rect is measured once on pointer-enter (not on every move), so moves never force layout.
+ * - `will-change` is applied only while hovered; idle cards don't pin a GPU layer each.
+ * - Completely inert on touch devices and with prefers-reduced-motion.
  */
 export function Card3D({
   children,
   className,
   maxTilt,
   max,
-  depth,
-  scale = 1.015,
+  depth: _depth,
+  scale = 1.01,
   glare = true,
   disabled = false,
   ...props
@@ -40,77 +54,78 @@ export function Card3D({
   const cardRef = React.useRef<HTMLDivElement>(null)
   const glareRef = React.useRef<HTMLDivElement>(null)
   const rafRef = React.useRef<number | null>(null)
-  const effectiveMaxTilt = maxTilt ?? max ?? 5
+  const rectRef = React.useRef<DOMRect | null>(null)
+  const [enabled, setEnabled] = React.useState(false)
+  const tilt = Math.min(maxTilt ?? max ?? MAX_TILT_DEG, MAX_TILT_DEG)
 
-  const handleMouseMove = React.useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (disabled || !cardRef.current) return
+  React.useEffect(() => {
+    if (disabled) return
+    setEnabled(canTilt())
+  }, [disabled])
 
-      // Cancel previous frame if pending
+  const reset = React.useCallback(() => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    const card = cardRef.current
+    if (!card) return
+    card.style.transform = ''
+    card.style.willChange = ''
+    if (glareRef.current) glareRef.current.style.opacity = '0'
+    rectRef.current = null
+  }, [])
+
+  const handlePointerEnter = React.useCallback(() => {
+    const card = cardRef.current
+    if (!enabled || !card) return
+    rectRef.current = card.getBoundingClientRect()
+    card.style.willChange = 'transform'
+  }, [enabled])
+
+  const handlePointerMove = React.useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
+      if (!enabled || e.pointerType !== 'mouse') return
+      const { clientX, clientY } = e
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
       rafRef.current = requestAnimationFrame(() => {
         const card = cardRef.current
-        if (!card) return
+        const rect = rectRef.current ?? card?.getBoundingClientRect()
+        if (!card || !rect) return
 
-        const rect = card.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
+        const px = (clientX - rect.left) / rect.width // 0..1
+        const py = (clientY - rect.top) / rect.height // 0..1
+        const rotateX = (0.5 - py) * 2 * tilt
+        const rotateY = (px - 0.5) * 2 * tilt
 
-        const centerX = rect.width / 2
-        const centerY = rect.height / 2
-
-        // Normalized offsets (-1 to 1)
-        const normX = (x - centerX) / centerX
-        const normY = (y - centerY) / centerY
-
-        // Rotations: moving mouse up (negative normY) tilts card back (positive rotateX)
-        const rotateX = -normY * effectiveMaxTilt
-        const rotateY = normX * effectiveMaxTilt
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`
+        card.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(${scale})`
 
         if (glare && glareRef.current) {
-          const glareX = (x / rect.width) * 100
-          const glareY = (y / rect.height) * 100
-          glareRef.current.style.opacity = '0.35'
-          glareRef.current.style.background = `radial-gradient(circle 240px at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.25), transparent 70%)`
+          glareRef.current.style.opacity = '1'
+          glareRef.current.style.background = `radial-gradient(circle 260px at ${(px * 100).toFixed(1)}% ${(py * 100).toFixed(1)}%, rgba(255,255,255,0.12), transparent 70%)`
         }
       })
     },
-    [disabled, effectiveMaxTilt, scale, glare]
+    [enabled, tilt, scale, glare]
   )
 
-  const handleMouseLeave = React.useCallback(() => {
-    if (disabled || !cardRef.current) return
-
+  React.useEffect(() => () => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current)
-
-    const card = cardRef.current
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
-
-    if (glare && glareRef.current) {
-      glareRef.current.style.opacity = '0'
-    }
-  }, [disabled, glare])
+  }, [])
 
   return (
     <div
       ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={cn(
-        'relative preserve-3d will-change-transform transition-transform duration-300 ease-out',
-        className
-      )}
+      onPointerEnter={handlePointerEnter}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={reset}
+      className={cn('relative transition-transform duration-[400ms] ease-out-expo', enabled && 'preserve-3d', className)}
       {...props}
     >
       {children}
-      {glare && !disabled && (
+      {glare && enabled && (
         <div
           ref={glareRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-30 rounded-[inherit] opacity-0 transition-opacity duration-300"
+          className="pointer-events-none absolute inset-0 z-30 rounded-2xl opacity-0 transition-opacity duration-300"
         />
       )}
     </div>

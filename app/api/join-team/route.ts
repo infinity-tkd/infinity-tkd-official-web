@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
   sanitizeInput,
@@ -8,205 +7,74 @@ import {
   validateHoneypot,
   detectMaliciousPayload,
 } from '@/lib/security'
-
-// In-memory rate limiting map for API endpoint (IP-based, sliding window)
-const ipRateLimitMap = new Map<string, { count: number; expiresAt: number }>()
-const RATE_LIMIT_WINDOW_MS = 60 * 1000 // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 5
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const entry = ipRateLimitMap.get(ip)
-
-  if (!entry || entry.expiresAt < now) {
-    ipRateLimitMap.set(ip, { count: 1, expiresAt: now + RATE_LIMIT_WINDOW_MS })
-    return false
-  }
-
-  if (entry.count >= MAX_REQUESTS_PER_WINDOW) {
-    return true
-  }
-
-  entry.count += 1
-  return false
-}
+import { dispatchLead } from '@/lib/notify'
+import {
+  dispatchFailureResponse,
+  jsonError,
+  jsonOk,
+  readJsonBody,
+  rejectCrossOrigin,
+  rejectIfRateLimited,
+  str,
+} from '@/lib/formApi'
 
 export async function POST(request: NextRequest) {
   try {
-    // 0. Cross-Origin (CSRF) Guard
-    const origin = request.headers.get('origin')
-    const host = request.headers.get('host')
-    const secFetchSite = request.headers.get('sec-fetch-site')
+    const blocked = rejectCrossOrigin(request) ?? rejectIfRateLimited(request, 'join-team')
+    if (blocked) return blocked
 
-    if (secFetchSite && secFetchSite === 'cross-site') {
-      return NextResponse.json(
-        { error: 'Forbidden cross-origin request.' },
-        { status: 403 }
-      )
+    const body = await readJsonBody(request)
+    if (!body) return jsonError('Invalid JSON payload format.', 400)
+
+    if (!validateHoneypot(str(body.hp_security_token))) {
+      return jsonOk('Application submitted.')
     }
 
-    if (origin && host) {
-      try {
-        const originHost = new URL(origin).host
-        if (originHost !== host && !originHost.includes('localhost')) {
-          return NextResponse.json(
-            { error: 'Unauthorized origin.' },
-            { status: 403 }
-          )
-        }
-      } catch {
-        return NextResponse.json(
-          { error: 'Malformed origin header.' },
-          { status: 400 }
-        )
-      }
-    }
+    const name = str(body.name)
+    const email = str(body.email)
+    const whyJoin = str(body.whyJoin)
 
-    // 1. IP extraction & Rate limiting
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      request.headers.get('x-real-ip') ||
-      'unknown-ip'
-
-    if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please wait a moment before trying again.' },
-        { status: 429, headers: { 'Retry-After': '60' } }
-      )
-    }
-
-    // 2. Parse & validate JSON body
-    let body: any
-    try {
-      body = await request.json()
-    } catch {
-      return NextResponse.json(
-        { error: 'Invalid JSON payload format.' },
-        { status: 400 }
-      )
-    }
-
-    const {
-      name,
-      phone,
-      email,
-      danRank,
-      experience,
-      whyJoin,
-      jobTitle,
-      hp_security_token,
-    } = body
-
-    // 3. Honeypot check (Silent tarpit for automated bots)
-    if (!validateHoneypot(hp_security_token)) {
-      return NextResponse.json(
-        { success: true, message: 'Application submitted.' },
-        { status: 200 }
-      )
-    }
-
-    // 4. Payload validation & threat detection
     if (
       detectMaliciousPayload(name) ||
       detectMaliciousPayload(email) ||
-      detectMaliciousPayload(whyJoin)
+      detectMaliciousPayload(whyJoin, { prose: true })
     ) {
-      return NextResponse.json(
-        { error: 'Disallowed characters or security filter trigger detected.' },
-        { status: 400 }
-      )
+      return jsonError('Your application contains characters that are not allowed. Please remove any HTML or code.', 400)
     }
 
-    const cleanName = sanitizeInput(name || '', 100)
-    const cleanPhone = sanitizePhone(phone || '')
-    const cleanEmail = sanitizeEmail(email || '')
-    const cleanDan = sanitizeInput(danRank || 'Kukkiwon Dan', 100)
-    const cleanJob = sanitizeInput(jobTitle || 'Coaching Staff', 100)
-    const cleanExp = sanitizeInput(experience || '', 100)
-    const cleanWhyJoin = sanitizeInput(whyJoin || '', 3000)
+    const cleanName = sanitizeInput(name, 100)
+    const cleanPhone = sanitizePhone(str(body.phone))
+    const cleanEmail = sanitizeEmail(email)
+    const cleanDan = sanitizeInput(str(body.danRank) || 'Kukkiwon Dan', 100)
+    const cleanJob = sanitizeInput(str(body.jobTitle) || 'Coaching Staff', 100)
+    const cleanExp = sanitizeInput(str(body.experience), 100)
+    const cleanWhyJoin = sanitizeInput(whyJoin, 3000)
 
     if (!cleanName || !cleanEmail || !cleanPhone || !cleanWhyJoin) {
-      return NextResponse.json(
-        { error: 'Please provide all required fields: name, phone, email, and statement.' },
-        { status: 400 }
-      )
+      return jsonError('Please provide all required fields: name, phone, email, and statement.', 400)
     }
-
     if (!isValidEmail(cleanEmail)) {
-      return NextResponse.json(
-        { error: 'Please provide a valid email address.' },
-        { status: 400 }
-      )
+      return jsonError('Please provide a valid email address.', 400)
     }
 
-    // 5. Dispatch notification
-    const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN
-    const telegramChatId = process.env.TELEGRAM_CHAT_ID
-    const webhookUrl = process.env.CAREER_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL
+    const result = await dispatchLead({
+      source: 'join-team',
+      title: 'New Infinity TKD Coaching Application',
+      fields: [
+        { label: 'Position', value: cleanJob },
+        { label: 'Name', value: cleanName },
+        { label: 'Phone', value: cleanPhone },
+        { label: 'Email', value: cleanEmail },
+        { label: 'Dan Rank', value: cleanDan },
+        { label: 'Experience', value: cleanExp || 'Not provided' },
+      ],
+      body: cleanWhyJoin,
+    })
+    if (!result.ok) return dispatchFailureResponse(result)
 
-    if (telegramBotToken && telegramChatId) {
-      try {
-        const text = `🥋 *New Infinity TKD Coaching Application*\n\n*Position:* ${cleanJob}\n*Name:* ${cleanName}\n*Phone:* ${cleanPhone}\n*Email:* ${cleanEmail}\n*Dan Rank:* ${cleanDan}\n*Experience:* ${cleanExp}\n\n*Statement:*\n${cleanWhyJoin}`
-        await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: telegramChatId,
-            text,
-            parse_mode: 'Markdown',
-          }),
-        })
-      } catch (tgErr) {
-        console.error('Failed to dispatch Telegram notification:', tgErr)
-      }
-    } else if (webhookUrl) {
-      try {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            source: 'infinity-tkd-career',
-            jobTitle: cleanJob,
-            name: cleanName,
-            phone: cleanPhone,
-            email: cleanEmail,
-            danRank: cleanDan,
-            experience: cleanExp,
-            whyJoin: cleanWhyJoin,
-            timestamp: new Date().toISOString(),
-          }),
-        })
-      } catch (webhookErr) {
-        console.error('Failed to dispatch webhook notification:', webhookErr)
-      }
-    } else {
-      console.log('Infinity TKD Career Form Submission (Console Dispatch):', {
-        jobTitle: cleanJob,
-        name: cleanName,
-        phone: cleanPhone,
-        email: cleanEmail,
-        danRank: cleanDan,
-        experience: cleanExp,
-        whyJoin: cleanWhyJoin,
-        timestamp: new Date().toISOString(),
-      })
-    }
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Your application has been submitted successfully. We will review it and get in touch.',
-      },
-      {
-        status: 200,
-        headers: { 'Cache-Control': 'no-store' },
-      }
-    )
-  } catch (err: any) {
+    return jsonOk('Your application has been submitted successfully. We will review it and get in touch.')
+  } catch (err) {
     console.error('Career application submission error:', err)
-    return NextResponse.json(
-      { error: 'An unexpected error occurred while processing your application.' },
-      { status: 500 }
-    )
+    return jsonError('An unexpected error occurred while processing your application.', 500)
   }
 }

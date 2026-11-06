@@ -1,13 +1,26 @@
 'use client'
 
 import * as React from 'react'
-import { translations, type Language, languages, type LanguageOption } from '@/data/translations'
+import {
+  isLanguage,
+  languages,
+  loadTranslations,
+  translationsEn,
+  type Language,
+  type LanguageOption,
+  type Translations,
+} from '@/data/translations'
 import { getLocalizedField, getLocalizedItem, getLocalizedList } from '@/lib/i18n'
+
+const STORAGE_KEY = 'infinity_tkd_lang'
+const PRETENDARD_STYLESHEET_ID = 'pretendard-css'
+const PRETENDARD_STYLESHEET_URL =
+  'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css'
 
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: typeof translations.en
+  t: Translations
   currentLanguageOption: LanguageOption
   availableLanguages: LanguageOption[]
   localize: <T extends Record<string, any>>(item: T | null | undefined) => T
@@ -17,70 +30,82 @@ interface LanguageContextType {
 
 const LanguageContext = React.createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = React.useState<Language>('en')
-  const [mounted, setMounted] = React.useState(false)
+/** Korean typography uses Pretendard; it is only fetched when Korean is actually selected. */
+function ensurePretendardLoaded() {
+  if (document.getElementById(PRETENDARD_STYLESHEET_ID)) return
+  const link = document.createElement('link')
+  link.id = PRETENDARD_STYLESHEET_ID
+  link.rel = 'stylesheet'
+  link.href = PRETENDARD_STYLESHEET_URL
+  document.head.appendChild(link)
+}
 
-  React.useEffect(() => {
-    setMounted(true)
-    const saved = localStorage.getItem('infinity_tkd_lang') as Language
-    if (saved && (saved === 'en' || saved === 'km' || saved === 'zh' || saved === 'ko')) {
-      setLanguageState(saved)
-      document.documentElement.lang = saved
+function readSavedLanguage(): Language | null {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    return isLanguage(saved) ? saved : null
+  } catch {
+    return null // storage unavailable (private mode / blocked)
+  }
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  // `language` and its dictionary always change together, so the UI never shows a
+  // mismatched pair (e.g. Khmer language code with English labels).
+  const [state, setState] = React.useState<{ language: Language; t: Translations }>({
+    language: 'en',
+    t: translationsEn,
+  })
+  const latestRequest = React.useRef(0)
+
+  const applyLanguage = React.useCallback(async (lang: Language) => {
+    const requestId = ++latestRequest.current
+    try {
+      const dictionary = await loadTranslations(lang)
+      if (requestId !== latestRequest.current) return // a newer selection superseded this one
+      if (lang === 'ko') ensurePretendardLoaded()
+      document.documentElement.lang = lang
+      setState({ language: lang, t: dictionary })
+    } catch (err) {
+      console.error(`[i18n] Failed to load "${lang}" dictionary; keeping current language.`, err)
     }
   }, [])
 
-  const setLanguage = React.useCallback((lang: Language) => {
-    setLanguageState(lang)
-    localStorage.setItem('infinity_tkd_lang', lang)
-    document.documentElement.lang = lang
-  }, [])
+  // Restore the visitor's saved language after hydration (server HTML is always English).
+  React.useEffect(() => {
+    const saved = readSavedLanguage()
+    if (saved && saved !== 'en') void applyLanguage(saved)
+  }, [applyLanguage])
 
-  const currentLanguageOption = React.useMemo(() => {
-    return languages.find((l) => l.code === language) || languages[0]
-  }, [language])
-
-  const t = React.useMemo(() => {
-    return translations[language] || translations.en
-  }, [language])
-
-  const localize = React.useCallback(
-    <T extends Record<string, any>>(item: T | null | undefined): T => {
-      return getLocalizedItem(item, language)
+  const setLanguage = React.useCallback(
+    (lang: Language) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, lang)
+      } catch {
+        // Non-fatal: the choice just won't persist across visits.
+      }
+      void applyLanguage(lang)
     },
-    [language]
+    [applyLanguage]
   )
 
-  const localizeField = React.useCallback(
-    <T extends Record<string, any>>(item: T | null | undefined, field: keyof T): any => {
-      return getLocalizedField(item, field, language)
-    },
-    [language]
+  const { language, t } = state
+
+  const value = React.useMemo<LanguageContextType>(
+    () => ({
+      language,
+      setLanguage,
+      t,
+      currentLanguageOption: languages.find((l) => l.code === language) ?? languages[0],
+      availableLanguages: languages,
+      localize: (item) => getLocalizedItem(item, language),
+      localizeField: (item, field) => getLocalizedField(item, field, language),
+      localizeList: (items) => getLocalizedList(items, language),
+    }),
+    [language, setLanguage, t]
   )
 
-  const localizeList = React.useCallback(
-    <T extends Record<string, any>>(items: T[] | null | undefined): T[] => {
-      return getLocalizedList(items, language)
-    },
-    [language]
-  )
-
-  return (
-    <LanguageContext.Provider
-      value={{
-        language,
-        setLanguage,
-        t,
-        currentLanguageOption,
-        availableLanguages: languages,
-        localize,
-        localizeField,
-        localizeList,
-      }}
-    >
-      {children}
-    </LanguageContext.Provider>
-  )
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }
 
 export function useLanguage() {

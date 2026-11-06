@@ -68,78 +68,50 @@ export function MobileBottomNav() {
     },
   ]
 
+  // Native-style tab bar: frosted glass, hairline edge, tint-only active state, sentence-case labels.
   return (
     <nav
-      aria-label="Mobile Navigation"
+      aria-label="Mobile navigation"
       className={cn(
-        'lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-zinc-200/80 dark:border-zinc-900/80 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)] pb-[env(safe-area-inset-bottom,0px)] transition-transform duration-300 ease-in-out',
+        'lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-zinc-200/70 dark:border-white/[0.06] bg-white/85 dark:bg-black/80 backdrop-blur-xl backdrop-saturate-150 pb-[env(safe-area-inset-bottom,0px)] transition-transform duration-300 ease-out-expo',
         isNavVisible ? 'translate-y-0' : 'translate-y-full'
       )}
     >
-      <div className="grid grid-cols-5 h-14 sm:h-16 items-center px-1 max-w-lg mx-auto">
+      <div className="mx-auto grid h-14 max-w-lg grid-cols-5 items-center px-1">
         {navItems.map((item) => {
           const Icon = item.icon
-
-          if (item.isSpecial) {
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="flex flex-col items-center justify-center py-1 group min-h-[44px] touch-press cursor-pointer"
-                aria-label={item.label}
-              >
-                <div
-                  className={cn(
-                    'w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center transition-all duration-300 shadow-brand-glow',
-                    item.isActive
-                      ? 'bg-brand-red text-white scale-105 ring-2 ring-brand-red/30'
-                      : 'bg-brand-red/10 text-brand-red hover:bg-brand-red hover:text-white'
-                  )}
-                >
-                  <Icon className="w-4 h-4" />
-                </div>
-                <span
-                  className={cn(
-                    'text-[9px] sm:text-[10px] font-bold uppercase tracking-tight sm:tracking-wider mt-0.5 transition-colors',
-                    item.isActive ? 'text-brand-red' : 'text-zinc-600 dark:text-zinc-400'
-                  )}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            )
-          }
+          const labelClass = cn(
+            'mt-1 max-w-full truncate px-1 text-[10px] font-semibold leading-none transition-colors',
+            item.isActive ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400'
+          )
 
           return (
             <Link
               key={item.href}
               href={item.href}
-              className="flex flex-col items-center justify-center py-1 group relative min-h-[44px] touch-press cursor-pointer"
-              aria-label={item.label}
+              aria-current={item.isActive ? 'page' : undefined}
+              className="group flex min-h-[44px] cursor-pointer flex-col items-center justify-center touch-press"
             >
-              <div className="relative">
-                <Icon
+              {item.isSpecial ? (
+                <span
                   className={cn(
-                    'w-5 h-5 transition-all duration-300',
-                    item.isActive
-                      ? 'text-brand-red scale-110'
-                      : 'text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white'
+                    'flex h-7 w-7 items-center justify-center rounded-xl transition-colors duration-200',
+                    item.isActive ? 'bg-brand-red text-white' : 'bg-brand-red/10 text-brand-red group-hover:bg-brand-red group-hover:text-white'
                   )}
+                >
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </span>
+              ) : (
+                <Icon
+                  aria-hidden="true"
+                  className={cn(
+                    'h-[22px] w-[22px] transition-colors duration-200',
+                    item.isActive ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white'
+                  )}
+                  strokeWidth={item.isActive ? 2.25 : 1.75}
                 />
-                {item.isActive && (
-                  <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full bg-brand-red shadow-[0_0_6px_#EF2F38]" />
-                )}
-              </div>
-              <span
-                className={cn(
-                  'text-[9px] sm:text-[10px] uppercase font-bold tracking-tight sm:tracking-wider mt-1 transition-colors truncate max-w-full px-1',
-                  item.isActive
-                    ? 'text-brand-red font-black'
-                    : 'text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white'
-                )}
-              >
-                {item.label}
-              </span>
+              )}
+              <span className={labelClass}>{item.label}</span>
             </Link>
           )
         })}

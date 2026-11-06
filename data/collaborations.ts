@@ -78,15 +78,15 @@ export const collaborationsData: CollaborationItem[] = [
     background:
       'World Taekwondo (WT) is the sole International Olympic Committee (IOC) recognized governing body for Taekwondo globally, overseeing Olympic Games integration, World Championships, and Grand Prix circuits across 213 member nations.',
     partnershipScope:
-      'Infinity Taekwondo adheres 100% to official World Taekwondo competition rules, referee evaluation standards, and electronic PSS sensor protocols. Infinity athletes compete under WT-sanctioned pathways with official Global Athlete License (GAL) registration.',
+      'Infinity Taekwondo adheres 100% to official World Taekwondo poomsae competition rules and referee evaluation standards. Infinity athletes compete under WT-sanctioned pathways with official Global Athlete License (GAL) registration.',
     keyHighlights: [
-      'Full compliance with the latest WT 2026 Best-of-Three round Olympic sparring rules',
+      'Full compliance with the latest WT poomsae competition rules',
       'Global Athlete License (GAL) registration for Infinity high-performance competition squad',
-      'Continuous adoption of Daedo electronic protector and scoring system (PSS) standards',
+      'Continuous adoption of the latest WT Recognized and Freestyle Poomsae scoring standards',
       'Participation in official WT International Coach & Referee certification clinics',
     ],
     activeInitiatives: [
-      'Olympic & World Championship cadet and junior athlete qualification pipelines',
+      'World Poomsae Championship cadet and junior athlete qualification pipelines',
       'Annual technical seminars on WT Recognized & Freestyle Poomsae scoring updates',
       'Regional WT coach education exchange and anti-doping integrity programs',
     ],
@@ -95,21 +95,21 @@ export const collaborationsData: CollaborationItem[] = [
       km: {
         name: 'សហព័ន្ធតេក្វាន់ដូពិភពលោក (WT)',
         partnerType: 'ស្ថាប័នគ្រប់គ្រងកីឡាអូឡាំពិកពិភពលោក',
-        summary: 'ការតម្រឹមបច្ចេកទេស និងការប្រកួតប្រជែងតាមស្តង់ដារអូឡាំពិក World Taekwondo និងប្រព័ន្ធដាក់ពិន្ទុអេឡិចត្រូនិក។',
+        summary: 'ការតម្រឹមបច្ចេកទេស និងការប្រកួត Poomsae តាមស្តង់ដារ World Taekwondo និងអាជ្ញាប័ណ្ណកីឡាករ GAL។',
         background: 'World Taekwondo (WT) គឺជាស្ថាប័នកីឡាតែមួយគត់ដែលត្រូវបានទទួលស្គាល់ជាផ្លូវការដោយគណៈកម្មាធិការអូឡាំពិកអន្តរជាតិ (IOC)។',
         partnershipScope: 'Infinity Taekwondo អនុវត្តតាមច្បាប់ប្រកួតផ្លូវការរបស់ WT យ៉ាងតឹងរ៉ឹង រួមទាំងការចុះបញ្ជីអាជ្ញាប័ណ្ណកីឡាករអន្តរជាតិ GAL។',
       },
       zh: {
         name: '世界跆拳道联合会 (WT)',
         partnerType: '官方奥运国际主管组织',
-        summary: '全面对标世跆联WT官方竞技规则、电子护具计分系统及全球运动员GAL认证体系。',
+        summary: '全面对标世跆联WT官方品势竞赛规则、评分标准及全球运动员GAL认证体系。',
         background: '世界跆拳道联合会（WT）是国际奥委会（IOC）唯一承认的全球跆拳道最高主管组织，管辖全球213个会员协会。',
-        partnershipScope: 'Infinity 跆拳道全方位执行世跆联2026年最新竞技三局两胜制与电子护具标准，为精英队员提供直通国际世锦赛的官方注册通道。',
+        partnershipScope: 'Infinity 跆拳道全方位执行世跆联最新品势竞赛规则与裁判评分标准，为精英队员提供直通国际赛事的官方注册通道。',
       },
       ko: {
         name: '세계태권도연맹 (WT)',
         partnerType: '공인 올림픽 종목 관리 기구',
-        summary: '세계태권도연맹(WT) 올림픽 경기 규정, 전자호구(PSS) 채점 및 국제 공인 자격 연계.',
+        summary: '세계태권도연맹(WT) 품새 경기 규정, 채점 기준 및 국제 공인 자격 연계.',
         background: '세계태권도연맹(WT)은 국제올림픽위원회(IOC) 공인 글로벌 태권도 총괄 기구로서 전 세계 213개 회원국을 관할합니다.',
         partnershipScope: '인피니티 태권도는 WT 공인 경기 규칙 및 심판 기준을 100% 준수하며, 소속 선수들의 글로벌 선수 라이선스(GAL) 등록 및 출전을 지원합니다.',
       },
@@ -202,16 +202,16 @@ export const collaborationsData: CollaborationItem[] = [
     background:
       'The Cambodia Taekwondo Federation (CTF) is the recognized national authority affiliated with the National Olympic Committee of Cambodia (NOCC) and Ministry of Education, Youth and Sport (MoEYS).',
     partnershipScope:
-      'Infinity Taekwondo is an officially registered and fully accredited club under CTF. We collaborate on national championship hosting, elite sparring camps, and preparing national squad representatives.',
+      'Infinity Taekwondo is an officially registered and fully accredited club under CTF. We collaborate on national championship hosting, elite poomsae and demonstration camps, and preparing national squad representatives.',
     keyHighlights: [
       'Official CTF Club Accreditation (#042-PP-2020) and voting federation delegate',
       'Annual participation in the Cambodia National Taekwondo Championships',
-      'Co-hosting national referee calibration workshops and electronic scoring clinics',
+      'Co-hosting national referee calibration workshops and poomsae judging clinics',
       'Direct talent pathway from Infinity Cadet team into Cambodian National Squad',
     ],
     activeInitiatives: [
       'National Youth Championship tournament team delegation',
-      'Joint training camps with the Cambodian National Taekwondo Sparring Team',
+      'Joint training camps with the Cambodian National Taekwondo Poomsae Team',
       'Grassroots school sports outreach in collaboration with MoEYS & NOCC',
     ],
     badgeColor: '#0042EA',
@@ -228,7 +228,7 @@ export const collaborationsData: CollaborationItem[] = [
         partnerType: '国家级官方主管组织',
         summary: '柬埔寨国家奥委会（NOCC）认证机构，主导全国锦标赛选拔与国家队梯队共建。',
         background: '柬埔寨跆拳道联合会（CTF）是柬埔寨主管官方跆拳道运动的唯一国家级协会，统筹全国俱乐部认证与东南亚运动会（SEA Games）备战。',
-        partnershipScope: 'Infinity 跆拳道为联合会核心认证会员馆，共同组织全国裁判培训班、电子护具实战集训，并输送青年梯队人才至国家代表队。',
+        partnershipScope: 'Infinity 跆拳道为联合会核心认证会员馆，共同组织全国裁判培训班、品势与表演集训，并输送青年梯队人才至国家代表队。',
       },
       ko: {
         name: '캄보디아 태권도 연맹 (CTF)',
@@ -260,19 +260,19 @@ export const collaborationsData: CollaborationItem[] = [
     partnershipSince: '2021',
     websiteUrl: 'https://infinitytkd.com/academy',
     summary:
-      'Collaborative master instructor mentorship, advanced sparring sparring exchange, and national poomsae perfection workshops.',
+      'Collaborative master instructor mentorship, demonstration team exchanges, and national poomsae perfection workshops.',
     background:
       'The Cambodia Taekwondo Academy (CTA) serves as a premier technical training and instructor development center in Phnom Penh, dedicated to raising the standard of martial pedagogy and high-performance youth training.',
     partnershipScope:
-      'Infinity Taekwondo and CTA conduct joint sparring simulations, master instructor exchange modules, and high-intensity competition squad conditioning camps.',
+      'Infinity Taekwondo and CTA run joint poomsae clinics, master instructor exchange modules, and demonstration team conditioning camps.',
     keyHighlights: [
-      'Joint sparring sparring leagues for elite cadets and juniors',
+      'Joint poomsae and freestyle poomsae leagues for elite cadets and juniors',
       'Technical Poomsae sync camps and performance video telemetry',
       'Assistant instructor teaching practicums and leadership certifications',
       'Shared athletic conditioning facilities and high-speed crash mats',
     ],
     activeInitiatives: [
-      'Quarterly Inter-Academy Sparring Scrimmages with Daedo electronic PSS gear',
+      'Quarterly inter-academy poomsae and demonstration showcases',
       'Joint National Team Demonstration squad training and choreography',
       'Youth Martial Arts Leadership summer boot camps',
     ],
@@ -281,23 +281,23 @@ export const collaborationsData: CollaborationItem[] = [
       km: {
         name: 'បណ្ឌិត្យសភាតេក្វាន់ដូកម្ពុជា (CTA)',
         partnerType: 'បណ្ឌិត្យសភាបណ្តុះបណ្តាលគ្រូ និងកីឡាករកម្រិតខ្ពស់',
-        summary: 'កិច្ចសហការបណ្តុះបណ្តាលគ្រូបង្វឹក ការហ្វឹកហាត់ប្រយុទ្ធរួមគ្នា និងការកែលម្អគុណភាពបច្ចេកទេសមេគុន។',
+        summary: 'កិច្ចសហការបណ្តុះបណ្តាលគ្រូបង្វឹក ការហ្វឹកហាត់ការសម្តែងរួមគ្នា និងការកែលម្អគុណភាពបច្ចេកទេសមេគុន។',
         background: 'បណ្ឌិត្យសភាតេក្វាន់ដូកម្ពុជា (CTA) ជាមជ្ឈមណ្ឌលបណ្តុះបណ្តាលបច្ចេកទេសកម្រិតខ្ពស់សម្រាប់គ្រូ និងកីឡាករឆ្នើមនៅរាជធានីភ្នំពេញ។',
         partnershipScope: 'Infinity Taekwondo និង CTA រួមគ្នារៀបចំការហ្វឹកហាត់កីឡាករជម្រើសពិសេស និងការដោះដូរគ្រូបង្វឹក។',
       },
       zh: {
         name: '柬埔寨跆拳道学院 (CTA)',
         partnerType: '师范进修与高水平运动员集训学院',
-        summary: '联合开展高级实战对抗联赛、品势细节精进研讨会及青年教练教学法认证。',
+        summary: '联合开展品势与自由品势联赛、品势细节精进研讨会及青年教练教学法认证。',
         background: '柬埔寨跆拳道学院（CTA）是金边顶尖的专业跆拳道技术培训基地，专注师范教学法传承与竞技精英选拔。',
-        partnershipScope: 'Infinity 与 CTA 定期举办跨校区电子护具实战对抗赛、表演团空翻特技编排及青少年领导力夏令营。',
+        partnershipScope: 'Infinity 与 CTA 定期举办跨校区品势与表演交流赛、表演团空翻特技编排及青少年领导力夏令营。',
       },
       ko: {
         name: '캄보디아 태권도 아카데미 (CTA)',
         partnerType: '지도자 연수 및 전문 선수 양성 아카데미',
-        summary: '전문 겨루기 합동 훈련, 품새 세미나 및 주니어 지도자 인턴십 협력.',
+        summary: '시범단 합동 훈련, 품새 세미나 및 주니어 지도자 인턴십 협력.',
         background: '캄보디아 태권도 아카데미(CTA)는 프놈펜의 대표적인 전문 사범 양성 및 엘리트 선수 육성 전문 기관입니다.',
-        partnershipScope: '인피니티 태권도와 CTA는 분기별 전자호구 겨루기 리그, 시범단 아크로바틱 안무 및 사범 지도법 교류를 진행합니다.',
+        partnershipScope: '인피니티 태권도와 CTA는 분기별 품새·자유품새 리그, 시범단 아크로바틱 안무 및 사범 지도법 교류를 진행합니다.',
       },
     },
   },
@@ -336,7 +336,7 @@ export const collaborationsData: CollaborationItem[] = [
     activeInitiatives: [
       'Biomechanical Kicking Trajectory Video Series for the Curriculum Library',
       'Annual Athlete Spotlight Reels for university scholarship portfolios',
-      'Live-streaming infrastructure for national sparring tournaments',
+      'Live-streaming infrastructure for national poomsae tournaments',
     ],
     badgeColor: '#FF5733',
     translations: {

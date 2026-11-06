@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { dojangBranches } from '@/data/locations'
 
 export const metadata: Metadata = {
   title: 'Dojang Branches & Training Centers',
@@ -6,13 +7,6 @@ export const metadata: Metadata = {
     'Train at our Olympic-standard dojang branches in Phnom Penh: Olympic Branch (National Olympic Stadium Complex) and Kouk Khleang Branch (Sen Sok). View training schedules, maps, and amenities.',
   alternates: {
     canonical: '/locations',
-    languages: {
-      'en': '/locations',
-      'km': '/locations',
-      'zh': '/locations',
-      'ko': '/locations',
-      'x-default': '/locations',
-    },
   },
   openGraph: {
     title: 'Dojang Branches & Training Centers | Infinity Taekwondo',
@@ -29,5 +23,37 @@ export const metadata: Metadata = {
 }
 
 export default function LocationsLayout({ children }: { children: React.ReactNode }) {
-  return children
+  const locationsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: dojangBranches.map((branch, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'SportsActivityLocation',
+        name: `Infinity Taekwondo - ${branch.name}`,
+        description: branch.tagline,
+        telephone: branch.phone,
+        url: 'https://infinitytaekwondo.com/locations',
+        hasMap: branch.googleMapsUrl,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: branch.address.street,
+          addressLocality: branch.address.city,
+          addressRegion: branch.address.district,
+          addressCountry: branch.address.country,
+        },
+      },
+    })),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(locationsSchema) }}
+      />
+      {children}
+    </>
+  )
 }

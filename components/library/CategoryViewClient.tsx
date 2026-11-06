@@ -83,8 +83,8 @@ const AdvancedKickingMasterExplorer = dynamic(
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 import {
   BookOpen,
   Zap,
@@ -168,7 +168,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
         </div>
 
         {/* HERO BANNER (14px radius) */}
-        <div className="relative p-8 sm:p-12 md:p-14 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden mb-10">
+        <div className="relative p-8 sm:p-12 md:p-14 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden mb-10">
           <div
             className="absolute top-0 right-0 w-[500px] h-[500px] blur-[140px] rounded-full pointer-events-none opacity-20"
             style={{ backgroundColor: categoryMeta.accentColor }}
@@ -206,7 +206,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                       ? '세계연맹 공인 표준 (겨루기 & 품새)'
                       : 'Official WT Standards (Kyorugi & Poomsae)'
                     : isPoomsaeCategory
-                    ? `${items.length} Patterns &bull; 3 Master Series`
+                    ? `${items.length} Patterns • 3 Master Series`
                     : `${items.length} Documented Techniques`}{' '}
                   &bull; Kukkiwon WT Standards
                 </span>
@@ -364,7 +364,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                     <Card3D key={item.id} maxTilt={2} scale={1.005} className="w-full">
                       <div
                         id={item.slug}
-                        className="p-6 sm:p-8 md:p-10 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
+                        className="p-6 sm:p-8 md:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
                       >
                         {isPoomsae && item.diagramSymbol && (
                           <div className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40">
@@ -384,13 +384,13 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                               <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-10">
-                                <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
+                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
                                   {item.beltLevel}
                                 </span>
                               </div>
 
                               <div className="absolute bottom-3 left-3 right-3 text-white">
-                                <span className="text-[10px] font-mono text-zinc-300 font-bold block">
+                                <span className="text-[11px] font-mono text-zinc-300 font-bold block">
                                   {item.koreanName}
                                 </span>
                                 <h3 className="text-xl font-black uppercase tracking-tight">
@@ -402,7 +402,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {/* Stance Weight Distribution Meter */}
                             {isStance && item.weightDistribution && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                                <div className="flex justify-between items-center text-[10px] font-mono font-bold uppercase">
+                                <div className="flex justify-between items-center text-[11px] font-mono font-bold uppercase">
                                   <span className="text-zinc-400">{t.library.rearLeg}: <strong className="text-amber-500">{rearPercent}%</strong></span>
                                   <span className="text-zinc-400">{t.library.frontLeg}: <strong className="text-emerald-500">{frontPercent}%</strong></span>
                                 </div>
@@ -416,7 +416,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                                     style={{ width: `${frontPercent}%` }}
                                   />
                                 </div>
-                                <p className="text-[10px] text-zinc-400 font-light text-center">
+                                <p className="text-[13px] text-zinc-400 text-center">
                                   {item.weightDistribution}
                                 </p>
                               </div>
@@ -425,7 +425,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {/* Philosophical Meaning / Origin */}
                             {item.meaning && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-1">
-                                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-brand-red block">
+                                <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-brand-red block">
                                   {isHistory ? t.library.historicalSignificance : t.library.martialPhilosophy}
                                 </span>
                                 <p className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
@@ -450,7 +450,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                               <h3 className="text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                                 {item.name}
                               </h3>
-                              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed mt-2">
+                              <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed mt-2">
                                 {item.summary}
                               </p>
                             </div>
@@ -467,7 +467,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                                       key={idx}
                                       className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 flex items-start gap-2.5"
                                     >
-                                      <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-black text-[10px] shrink-0 mt-0.5">
+                                      <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-black text-[11px] shrink-0 mt-0.5">
                                         {idx + 1}
                                       </span>
                                       <span className="leading-relaxed font-medium">{step}</span>

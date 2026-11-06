@@ -6,13 +6,6 @@ export const metadata: Metadata = {
     'Discover Infinity Taekwondo: traditional Korean martial discipline synthesized with modern sports biomechanics, Olympic pedagogy, and world-class faculty in Phnom Penh.',
   alternates: {
     canonical: '/about',
-    languages: {
-      'en': '/about',
-      'km': '/about',
-      'zh': '/about',
-      'ko': '/about',
-      'x-default': '/about',
-    },
   },
   openGraph: {
     title: 'About Our Legacy & Philosophy | Infinity Taekwondo',

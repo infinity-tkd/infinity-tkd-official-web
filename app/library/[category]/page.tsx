@@ -21,12 +21,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   if (!categoryMeta) {
     return {
-      title: 'Discipline Not Found | Infinity Taekwondo',
+      title: 'Discipline Not Found',
     }
   }
 
-  const title = `${categoryMeta.title} (${categoryMeta.koreanTitle}) - Curriculum Library`
-  const description = `${categoryMeta.subtitle}. ${categoryMeta.description}`.slice(0, 160)
+  // e.g. "Poomsae (Forms) · Curriculum Library | Infinity Taekwondo" (brand added by the layout template)
+  const title = `${categoryMeta.title} · Curriculum Library`
+  const description = `${categoryMeta.koreanTitle}: ${categoryMeta.subtitle}. ${categoryMeta.description}`.slice(0, 160)
 
   return {
     title,

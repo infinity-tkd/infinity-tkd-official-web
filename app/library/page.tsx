@@ -47,8 +47,8 @@ import {
   HosinsulCard,
 } from '@/components/library/TechniqueDisciplineCards'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
+import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
+import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
 import dynamic from 'next/dynamic'
 
 const CompetitionRulesViewer = dynamic(
@@ -162,7 +162,7 @@ export default function LibraryPage() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Header Banner */}
-        <div className="text-center max-w-3xl mx-auto pt-6 sm:pt-10 mb-10 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto pt-4 mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <BookOpen className="w-3.5 h-3.5" /> {t.library.badge}
           </div>
@@ -182,76 +182,75 @@ export default function LibraryPage() {
         <section className="mb-12 sm:mb-16">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-0.5">
-                {t.library.disciplinesBadge}
-              </span>
+              <span className="type-kicker mb-1 block text-brand-red">{t.library.disciplinesBadge}</span>
               <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 {t.library.disciplinesTitle}
               </h2>
             </div>
-            <span className="text-xs text-zinc-500 font-mono">
-              {libraryItems.length} Curricula Documented
-            </span>
+            <span className="type-meta">{libraryItems.length} techniques documented</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {localizedCategories.map((cat) => {
               const Icon = iconMap[cat.iconName] || BookOpen
               const isSelected = selectedCategory === cat.id
               const count = libraryItems.filter((i) => i.category === cat.id).length
+              const toggle = () => setSelectedCategory(isSelected ? 'all' : cat.id)
 
               return (
-                <Card3D key={cat.id} maxTilt={3} className="h-full">
-                  <div
-                    onClick={() => setSelectedCategory(isSelected ? 'all' : cat.id)}
-                    className={`group h-full p-4 sm:p-5 rounded-[14px] border transition-all duration-300 flex flex-col justify-between cursor-pointer relative overflow-hidden ${
-                      isSelected
-                        ? 'bg-zinc-900 text-white dark:bg-zinc-900 border-brand-red shadow-lg shadow-brand-red/10 scale-101'
-                        : 'bg-white dark:bg-zinc-900/60 text-zinc-900 dark:text-white border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 hover:-translate-y-0.5'
-                    }`}
-                  >
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <div
-                          className="p-2.5 rounded-xl"
-                          style={{
-                            backgroundColor: `${cat.accentColor}20`,
-                            color: cat.accentColor,
-                          }}
-                        >
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                          {count} Entries
-                        </span>
-                      </div>
-
-                      <div className="mb-1.5">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-brand-red block">
-                          {cat.koreanTitle}
-                        </span>
-                        <h3 className="text-base font-black uppercase tracking-tight">
-                          {cat.title}
-                        </h3>
-                      </div>
-
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 font-light leading-relaxed line-clamp-2 mb-3">
-                        {cat.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-2.5 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-brand-red">
-                      <span>{isSelected ? 'Selected' : 'Filter'}</span>
-                      <Link
-                        href={`/library/${cat.id}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-red hover:text-white text-zinc-700 dark:text-zinc-300 text-[10px] font-bold flex items-center gap-1 transition-all touch-press"
+                <div
+                  key={cat.id}
+                  onClick={toggle}
+                  className={`group relative flex h-full cursor-pointer flex-col justify-between rounded-2xl border p-4 transition-[border-color,box-shadow,transform] duration-300 ease-out-expo sm:p-5 ${
+                    isSelected
+                      ? 'border-brand-red bg-zinc-900 text-white shadow-lg shadow-brand-red/10'
+                      : 'border-zinc-200 bg-white text-zinc-900 hover:-translate-y-0.5 hover:border-brand-red/40 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-white'
+                  }`}
+                >
+                  <div>
+                    <div className="mb-4 flex items-center justify-between gap-2">
+                      <span
+                        className="rounded-xl p-2.5"
+                        style={{ backgroundColor: `${cat.accentColor}1f`, color: cat.accentColor }}
                       >
-                        Hub Page <ArrowRight className="w-2.5 h-2.5" />
-                      </Link>
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="type-meta">
+                        {count} {count === 1 ? 'entry' : 'entries'}
+                      </span>
                     </div>
+
+                    <span className="type-hangul mb-0.5 block text-brand-red">{cat.koreanTitle}</span>
+                    <h3 className="text-base font-black uppercase tracking-tight">
+                      {/* Real control for keyboard / screen readers; the tile handles mouse clicks. */}
+                      <button
+                        type="button"
+                        aria-pressed={isSelected}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggle()
+                        }}
+                        className="text-left uppercase focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+                      >
+                        {cat.title}
+                      </button>
+                    </h3>
+                    <p className={`type-body-sm mt-1.5 line-clamp-2 ${isSelected ? 'text-zinc-400' : ''}`}>{cat.description}</p>
                   </div>
-                </Card3D>
+
+                  <div className="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 text-xs font-semibold dark:border-zinc-800/80">
+                    <span className={isSelected ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400'}>
+                      {isSelected ? 'Showing below' : 'Filter list'}
+                    </span>
+                    <Link
+                      href={`/library/${cat.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 text-brand-red transition-opacity hover:opacity-80"
+                    >
+                      Open hub <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </div>
               )
             })}
           </div>
@@ -266,8 +265,8 @@ export default function LibraryPage() {
               <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 {t.library.encyclopediaTitle1} <span className="text-brand-red">{t.library.encyclopediaTitle2}</span>
               </h2>
-              <p className="text-xs text-zinc-500 uppercase tracking-wider mt-0.5">
-                Showing {filteredItems.length} of {libraryItems.length} records &bull; Compact high-density view
+              <p className="type-meta mt-1">
+                Showing {filteredItems.length} of {libraryItems.length} techniques
               </p>
             </div>
 
@@ -282,7 +281,7 @@ export default function LibraryPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   aria-label="Search curriculum encyclopedia"
-                  className="w-full sm:w-56 pl-9 pr-3 py-2 text-base sm:text-xs min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full sm:w-56 pl-9 pr-3 py-2 text-base sm:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
 
@@ -292,10 +291,11 @@ export default function LibraryPage() {
                   <button
                     key={diff}
                     onClick={() => setSelectedDifficulty(diff)}
-                    className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                    aria-pressed={selectedDifficulty === diff}
+                    className={`type-label min-h-[36px] rounded-lg border px-3 py-1.5 transition-colors duration-200 cursor-pointer ${
                       selectedDifficulty === diff
-                        ? 'bg-brand-red text-white shadow-brand-glow'
-                        : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
+                        ? 'border-brand-red bg-brand-red text-white'
+                        : 'border-zinc-200 bg-white text-zinc-600 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400'
                     }`}
                   >
                     {diff === 'all' ? t.library.allRanks : diff}
@@ -350,10 +350,10 @@ export default function LibraryPage() {
               })}
             </SafeGrid>
           ) : (
-            <div className="p-12 text-center rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
+            <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
               <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
               <h4 className="text-base font-bold text-zinc-900 dark:text-white mb-1">No Entries Found</h4>
-              <p className="text-xs text-zinc-500 mb-4 font-light">No curriculum records match your query.</p>
+              <p className="text-[13px] text-zinc-500 mb-4">No curriculum records match your query.</p>
               <button
                 onClick={() => {
                   setSearchQuery('')
@@ -385,7 +385,7 @@ export default function LibraryPage() {
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Media Frame */}
@@ -422,7 +422,7 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {safeActiveVideoUrl && (
                 <div className="space-y-2">
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
                     <Play className="w-3 h-3 text-brand-red" /> {t.library.videoDemonstration}
                   </h4>
                   <div className="relative aspect-video rounded-xl overflow-hidden bg-black border border-zinc-200 dark:border-zinc-800 shadow-inner">
@@ -476,7 +476,7 @@ export default function LibraryPage() {
                   {/* Historical Milestones */}
                   {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">
                         {t.library.chronologicalMilestones}
                       </h4>
                       {modalItem.steps.map((step, i) => (
@@ -511,7 +511,7 @@ export default function LibraryPage() {
                           <h5 className="text-xs font-bold text-zinc-900 dark:text-white">
                             {t.library.officialCitation}
                           </h5>
-                          <span className="text-[10px] text-zinc-400 font-mono">
+                          <span className="text-[11px] text-zinc-400 font-mono">
                             {t.library.officialStandards}
                           </span>
                         </div>
@@ -529,7 +529,7 @@ export default function LibraryPage() {
                   {/* Scoring Rules Breakdown */}
                   {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">
                         {t.library.rulebookProtocols}
                       </h4>
                       {modalItem.steps.map((step, i) => (
@@ -554,7 +554,7 @@ export default function LibraryPage() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
                     {modalItem.diagramSymbol && (
                       <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
-                        <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
+                        <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
                           Trigram / Symbol
                         </span>
                         <span className="text-2xl font-serif font-black text-brand-red">
@@ -563,7 +563,7 @@ export default function LibraryPage() {
                       </div>
                     )}
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center">
-                      <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
+                      <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
                         {t.library.totalSteps}
                       </span>
                       <span className="text-xl font-mono font-bold text-zinc-900 dark:text-white">
@@ -571,7 +571,7 @@ export default function LibraryPage() {
                       </span>
                     </div>
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center col-span-2 sm:col-span-1">
-                      <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
+                      <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
                         {t.library.allRanks}
                       </span>
                       <span className="text-xs font-bold text-brand-red">
@@ -582,7 +582,7 @@ export default function LibraryPage() {
 
                   {modalItem.meaning && (
                     <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">
                         {t.library.martialPhilosophy}
                       </span>
                       <p className="text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
@@ -594,7 +594,7 @@ export default function LibraryPage() {
                   {/* Execution Steps */}
                   {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">
                         {t.library.poomsaeSequence}
                       </h4>
                       {modalItem.steps.map((step, i) => (
@@ -602,7 +602,7 @@ export default function LibraryPage() {
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
                         >
-                          <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-mono font-black text-[10px] shrink-0 mt-0.5">
+                          <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-mono font-black text-[11px] shrink-0 mt-0.5">
                             {i + 1}
                           </span>
                           <span className="text-zinc-800 dark:text-zinc-200 font-medium">{step}</span>
@@ -629,7 +629,7 @@ export default function LibraryPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                       {modalItem.strikingSurface && (
                         <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                          <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
+                          <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
                             {t.library.strikingWeaponLabel}
                           </span>
                           <strong className="text-zinc-900 dark:text-white">
@@ -639,7 +639,7 @@ export default function LibraryPage() {
                       )}
                       {modalItem.targetArea && (
                         <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                          <span className="text-[10px] text-zinc-400 font-bold uppercase block mb-1">
+                          <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
                             {t.library.targetAnatomyLabel}
                           </span>
                           <strong className="text-zinc-900 dark:text-white">
@@ -653,7 +653,7 @@ export default function LibraryPage() {
                   {/* Step by step tutorial instructions */}
                   {modalItem.steps && modalItem.steps.length > 0 && (
                     <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                      <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">
                         {t.library.stepByStepTutorial}
                       </h4>
                       {modalItem.steps.map((step, i) => (
@@ -661,7 +661,7 @@ export default function LibraryPage() {
                           key={i}
                           className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-xs"
                         >
-                          <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-mono font-black text-[10px] shrink-0 mt-0.5">
+                          <span className="w-5 h-5 rounded-lg bg-brand-red text-white flex items-center justify-center font-mono font-black text-[11px] shrink-0 mt-0.5">
                             {i + 1}
                           </span>
                           <span className="text-zinc-800 dark:text-zinc-200 font-medium">{step}</span>
@@ -677,7 +677,7 @@ export default function LibraryPage() {
               {/* -------------------------------------------------------------- */}
               {modalItem.keyDetails && modalItem.keyDetails.length > 0 && (
                 <div>
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
                     {t.library.cuesTitle}
                   </h4>
                   <div className="space-y-1.5">
@@ -693,7 +693,7 @@ export default function LibraryPage() {
 
               {modalItem.commonMistakes && modalItem.commonMistakes.length > 0 && (
                 <div>
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 mb-2">
                     {t.library.errorsTitle}
                   </h4>
                   <div className="space-y-1.5">
@@ -713,7 +713,7 @@ export default function LibraryPage() {
               {modalItem.sourceUrl && (
                 <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
                   <div className="min-w-0 pr-2">
-                    <span className="text-[10px] text-zinc-400 font-bold uppercase block">
+                    <span className="text-[11px] text-zinc-400 font-bold uppercase block">
                       {t.library.officialCitation}
                     </span>
                     <span className="font-medium text-zinc-900 dark:text-white truncate block">
@@ -733,7 +733,7 @@ export default function LibraryPage() {
 
               {/* Footer Actions */}
               <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-                <span className="text-[10px] font-mono text-zinc-400">ID: {modalItem.id}</span>
+                <span className="text-[11px] font-mono text-zinc-400">ID: {modalItem.id}</span>
                 <Link
                   href={`/library/${modalItem.category}/${modalItem.slug}`}
                   className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors shadow-brand-glow inline-flex items-center gap-1.5"

@@ -48,7 +48,7 @@ const jobOpenings: JobOpening[] = [
     branch: 'Olympic HQ & Kouk Khleang Branch',
     minDan: 'Kukkiwon 2nd Dan or higher',
     description:
-      'Lead daily classes for junior warriors and adult athletes. Emphasize Taegeuk recognized poomsae, Olympic sparring footwork, and respectful dojang etiquette.',
+      'Lead daily classes for junior warriors and adult athletes. Emphasize recognized and freestyle poomsae, demonstration, hosinsul, and respectful dojang etiquette.',
     responsibilities: [
       'Conduct dynamic, structured 60-minute classes according to the Infinity curriculum',
       'Assess student readiness for quarterly color belt and Dan promotion examinations',
@@ -161,9 +161,9 @@ export default function JoinTeamPage() {
     if (
       detectMaliciousPayload(formData.name) ||
       detectMaliciousPayload(formData.email) ||
-      detectMaliciousPayload(formData.whyJoin)
+      detectMaliciousPayload(formData.whyJoin, { prose: true })
     ) {
-      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
+      setErrorMsg('Please remove any HTML or code from your statement and try again.')
       return
     }
 
@@ -229,7 +229,7 @@ export default function JoinTeamPage() {
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500">
       {/* Hero Header */}
-      <section className="relative pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
+      <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/10 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -255,7 +255,7 @@ export default function JoinTeamPage() {
             return (
               <Card3D key={perk.title} max={4} depth={3} className="h-full">
                 <div
-                  className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm h-full flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm h-full flex flex-col justify-between"
                 >
                   <div>
                     <div className="p-3 bg-brand-red/10 text-brand-red rounded-xl w-fit mb-4">
@@ -264,7 +264,7 @@ export default function JoinTeamPage() {
                     <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-1.5">
                       {perk.title}
                     </h3>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {perk.desc}
                     </p>
                   </div>
@@ -295,14 +295,14 @@ export default function JoinTeamPage() {
                 <Card3D key={job.id} max={4} depth={3} className="w-full">
                   <div
                     onClick={() => setSelectedJob(job)}
-                    className={`p-6 sm:p-7 rounded-[14px] border transition-all duration-300 cursor-pointer ${
+                    className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 cursor-pointer ${
                       isSelected
                         ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20'
                         : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/40 hover:border-zinc-400 dark:hover:border-zinc-700'
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                      <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white">
+                      <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white">
                         {job.type}
                       </span>
                       <span className="text-xs text-zinc-400 font-semibold">{job.branch}</span>
@@ -311,12 +311,12 @@ export default function JoinTeamPage() {
                     <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-2">
                       {job.title}
                     </h3>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
                       {job.description}
                     </p>
 
                     <div className="space-y-2 mb-4">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
                         {t.joinTeam.keyResponsibilities}:
                       </span>
                       {job.responsibilities.slice(0, 2).map((resp, i) => (
@@ -329,7 +329,7 @@ export default function JoinTeamPage() {
 
                     <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs">
                       <span className="text-zinc-500 font-medium">Rank: {job.minDan}</span>
-                      <span className="font-bold text-brand-red uppercase text-[10px]">
+                      <span className="font-bold text-brand-red uppercase text-[11px]">
                         {isSelected ? 'Selected' : 'Click to Apply'}
                       </span>
                     </div>
@@ -341,15 +341,15 @@ export default function JoinTeamPage() {
 
           {/* Right: Application Form */}
           <div className="lg:col-span-6">
-            <div className="p-6 sm:p-8 md:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl">
+            <div className="p-6 sm:p-8 md:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl">
               <div className="mb-6">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
                   {t.joinTeam.applyFor}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                   {selectedJob.title}
                 </h3>
-                <p className="text-xs text-zinc-500 mt-1 font-light">
+                <p className="text-[13px] text-zinc-500 mt-1">
                   {selectedJob.branch} • {selectedJob.minDan}
                 </p>
               </div>
@@ -388,7 +388,7 @@ export default function JoinTeamPage() {
                   )}
 
                   <div className="space-y-1.5">
-                    <label htmlFor="join-name" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                    <label htmlFor="join-name" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                       {t.joinTeam.fullName} *
                     </label>
                     <input
@@ -407,7 +407,7 @@ export default function JoinTeamPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label htmlFor="join-phone" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="join-phone" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.joinTeam.phoneWhatsapp} *
                       </label>
                       <input
@@ -426,7 +426,7 @@ export default function JoinTeamPage() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label htmlFor="join-email" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                      <label htmlFor="join-email" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                         {t.joinTeam.emailAddress} *
                       </label>
                       <input
@@ -446,7 +446,7 @@ export default function JoinTeamPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="join-dan" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                    <label htmlFor="join-dan" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                       {t.joinTeam.danRank}
                     </label>
                     <input
@@ -460,7 +460,7 @@ export default function JoinTeamPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="join-why" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                    <label htmlFor="join-why" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                       {t.joinTeam.teachingBackground} *
                     </label>
                     <textarea

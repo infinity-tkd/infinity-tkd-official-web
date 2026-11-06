@@ -81,7 +81,7 @@ class GridItemBoundary extends React.Component<ItemBoundaryProps, ErrorBoundaryS
         <div
           role="alert"
           aria-live="assertive"
-          className="p-5 sm:p-6 rounded-[14px] border border-red-500/30 bg-red-50/60 dark:bg-red-950/20 text-zinc-900 dark:text-zinc-100 flex flex-col justify-between min-h-[160px] transition-all backdrop-blur-sm"
+          className="p-5 sm:p-6 rounded-2xl border border-red-500/30 bg-red-50/60 dark:bg-red-950/20 text-zinc-900 dark:text-zinc-100 flex flex-col justify-between min-h-[160px] transition-all backdrop-blur-sm"
         >
           <div>
             <div className="flex items-center gap-2 text-brand-red mb-2 font-bold text-xs uppercase tracking-wider">
@@ -92,14 +92,14 @@ class GridItemBoundary extends React.Component<ItemBoundaryProps, ErrorBoundaryS
               {this.props.fallbackTitle || 'Unable to display this item'}
             </p>
             {process.env.NODE_ENV !== 'production' && this.state.error?.message && (
-              <p className="text-[11px] font-mono text-red-600 dark:text-red-400 mt-2 p-2 rounded bg-black/5 dark:bg-white/5 truncate">
+              <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-2 p-2 rounded bg-black/5 dark:bg-white/5 truncate">
                 {this.state.error.message}
               </p>
             )}
           </div>
 
           <div className="mt-4 pt-3 border-t border-red-200/50 dark:border-red-900/40 flex items-center justify-between">
-            <span className="text-[11px] text-zinc-500 dark:text-zinc-400">
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
               Retried {this.state.retryCount} time{this.state.retryCount === 1 ? '' : 's'}
             </span>
             <button
@@ -179,7 +179,7 @@ class GridContainerBoundary extends React.Component<
           role="alert"
           aria-live="assertive"
           className={cn(
-            'w-full rounded-[14px] border border-red-500/30 bg-zinc-50 dark:bg-zinc-900/80 p-6 sm:p-8 text-center relative overflow-hidden transition-all shadow-lg',
+            'w-full rounded-2xl border border-red-500/30 bg-zinc-50 dark:bg-zinc-900/80 p-6 sm:p-8 text-center relative overflow-hidden transition-all shadow-lg',
             this.props.className
           )}
         >
@@ -206,13 +206,13 @@ class GridContainerBoundary extends React.Component<
                 <button
                   type="button"
                   onClick={() => this.setState((prev) => ({ showDetails: !prev.showDetails }))}
-                  className="flex items-center gap-1 font-mono text-[11px] text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-1 cursor-pointer"
+                  className="flex items-center gap-1 font-mono text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 mb-1 cursor-pointer"
                 >
                   {this.state.showDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                   {this.state.showDetails ? 'Hide error stack' : 'Inspect error stack'}
                 </button>
                 {this.state.showDetails && (
-                  <div className="p-3 bg-zinc-900 text-red-300 dark:bg-black/90 dark:text-red-400 rounded-lg font-mono text-[10px] overflow-x-auto max-h-40 border border-zinc-800">
+                  <div className="p-3 bg-zinc-900 text-red-300 dark:bg-black/90 dark:text-red-400 rounded-lg font-mono text-[11px] overflow-x-auto max-h-40 border border-zinc-800">
                     <p className="font-bold">{this.state.error.toString()}</p>
                     {this.state.errorInfo?.componentStack && (
                       <pre className="mt-2 whitespace-pre-wrap opacity-75 leading-tight">
@@ -272,7 +272,7 @@ export function SafeGrid({
           <div
             key={`skeleton-${idx}`}
             className={cn(
-              'w-full rounded-[14px] border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/40 p-6 animate-pulse flex flex-col justify-between',
+              'w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/40 p-6 animate-pulse flex flex-col justify-between',
               skeletonHeight
             )}
           >
@@ -303,7 +303,7 @@ export function SafeGrid({
 
     return (
       <div className={cn(className)} {...props}>
-        <div className="col-span-full p-8 sm:p-10 rounded-[14px] border border-dashed border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20 text-center flex flex-col items-center justify-center">
+        <div className="col-span-full p-8 sm:p-10 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20 text-center flex flex-col items-center justify-center">
           <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-600 flex items-center justify-center mb-3">
             <Inbox className="w-6 h-6" />
           </div>

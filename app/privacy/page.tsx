@@ -3,18 +3,11 @@ import type { Metadata } from 'next'
 import { Shield, Lock, Eye, FileCheck, AlertCircle, Mail, MapPin, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Infinity Taekwondo',
+  title: 'Privacy Policy',
   description:
     'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights across our Phnom Penh branches.',
   alternates: {
     canonical: '/privacy',
-    languages: {
-      'en': '/privacy',
-      'km': '/privacy',
-      'zh': '/privacy',
-      'ko': '/privacy',
-      'x-default': '/privacy',
-    },
   },
   openGraph: {
     title: 'Privacy Policy | Infinity Taekwondo',
@@ -78,7 +71,7 @@ export default function PrivacyPage() {
       policyType="privacy"
     >
       {/* Executive Summary Callout Grid */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Shield className="w-4 h-4" /> At A Glance: Student Data Protection Commitment
         </div>
@@ -131,7 +124,7 @@ export default function PrivacyPage() {
           <strong>Student &amp; Guardian Identity:</strong> Full legal name, preferred name, date of birth, gender, home address, emergency telephone numbers, and national identification/passport numbers (required specifically for international Kukkiwon Black Belt Dan registration).
         </li>
         <li>
-          <strong>Medical &amp; Physical Safety Disclosures:</strong> Known allergies, respiratory conditions (e.g. asthma), cardiovascular history, prior musculoskeletal or joint injuries, and emergency physician contact info. This information is vital to prevent sparring injuries and calibrate cardiovascular loads.
+          <strong>Medical &amp; Physical Safety Disclosures:</strong> Known allergies, respiratory conditions (e.g. asthma), cardiovascular history, prior musculoskeletal or joint injuries, and emergency physician contact info. This information is vital to prevent training injuries and calibrate cardiovascular loads.
         </li>
         <li>
           <strong>Attendance &amp; Syllabus Analytics:</strong> Mat check-ins, Poomsae accuracy scores, quarterly belt examination histories, competition records, and physical skill assessment metrics.
@@ -146,7 +139,7 @@ export default function PrivacyPage() {
       <p>Your information is used strictly for legitimate dojang operational and instructional purposes:</p>
       <ul>
         <li>
-          <strong>Class &amp; Safety Management:</strong> Informing instructors of student physical limitations or injury recovery requirements before high-impact sparring or tricking drills.
+          <strong>Class &amp; Safety Management:</strong> Informing instructors of student physical limitations or injury recovery requirements before high-impact tricking, board breaking or partner drills.
         </li>
         <li>
           <strong>Curriculum &amp; Promotion Tracking:</strong> Verifying that minimum training hours and Poomsae requirements are completed before issuing formal belt promotion invitations.
@@ -241,7 +234,7 @@ export default function PrivacyPage() {
       <p>
         If you have any questions, requests, or privacy concerns, please contact our Data Protection &amp; Operations Team:
       </p>
-      <div className="p-5 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
+      <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
         <p className="font-bold text-zinc-900 dark:text-white">Infinity Taekwondo Operations Directorate</p>
         <p className="text-zinc-500">📍 Olympic Branch (HQ) &bull; National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh</p>
         <p className="text-zinc-500">📍 Kouk Khleang Branch &bull; Kouk Khleang, Sen Sok, Phnom Penh</p>

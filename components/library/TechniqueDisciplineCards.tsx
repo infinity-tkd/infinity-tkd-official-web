@@ -2,469 +2,222 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import {
-  BookOpen,
-  Zap,
-  Flame,
-  Shield,
-  Layers,
-  Sparkles,
-  ExternalLink,
-  Award,
-  ShieldCheck,
-  Scale,
-  Calendar,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { LibraryItem } from '@/data/library'
 import { SafeImage } from '@/components/SafeImage'
-import { Card3D } from '@/components/ui/Card3D'
+import { cn } from '@/lib/utils'
 
 interface DisciplineCardProps {
   item: LibraryItem
   onSelect: (item: LibraryItem) => void
 }
 
-// ==============================================================================
-// 1. POOMSAE (FORMS) CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function PoomsaeCard({ item, onSelect }: DisciplineCardProps) {
+type Accent = 'red' | 'amber' | 'emerald' | 'blue' | 'purple'
+
+// Full class strings (no interpolation) so Tailwind can see them.
+const ACCENTS: Record<Accent, { hangul: string; link: string; hover: string }> = {
+  red: {
+    hangul: 'text-red-300',
+    link: 'text-brand-red',
+    hover: 'hover:border-brand-red/50',
+  },
+  amber: {
+    hangul: 'text-amber-300',
+    link: 'text-amber-600 dark:text-amber-400',
+    hover: 'hover:border-amber-500/50',
+  },
+  emerald: {
+    hangul: 'text-emerald-300',
+    link: 'text-emerald-600 dark:text-emerald-400',
+    hover: 'hover:border-emerald-500/50',
+  },
+  blue: {
+    hangul: 'text-blue-300',
+    link: 'text-blue-600 dark:text-blue-400',
+    hover: 'hover:border-blue-500/50',
+  },
+  purple: {
+    hangul: 'text-purple-300',
+    link: 'text-purple-600 dark:text-purple-400',
+    hover: 'hover:border-purple-500/50',
+  },
+}
+
+interface ShellProps extends DisciplineCardProps {
+  accent: Accent
+  /** Short line under the image (description, key fact...). */
+  children?: React.ReactNode
+  /** Left side of the footer (belt level, read time...). */
+  meta?: React.ReactNode
+}
+
+/**
+ * Shared card shell for the curriculum encyclopedia grid.
+ * The title <button> is the real (keyboard / screen-reader) control that opens the quick view; the
+ * whole card also responds to mouse clicks for convenience. The footer link to the full page stops
+ * propagation, so the two actions never collide and no interactive element is nested in another.
+ */
+function DisciplineCard({ item, onSelect, accent, children, meta }: ShellProps) {
+  const a = ACCENTS[accent]
+
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-brand-red/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-brand-red font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          {item.meaning && (
-            <p className="text-[11px] text-zinc-600 dark:text-zinc-300 font-light line-clamp-2 leading-relaxed mb-2.5">
-              {item.meaning}
-            </p>
-          )}
-
-          <div className="flex items-center justify-between text-[10px] mb-2 text-zinc-500">
-            <span>{item.beltLevel}</span>
-            <strong className="font-mono text-zinc-900 dark:text-zinc-200 font-bold">
-              {item.totalMovements || 18} Steps
-            </strong>
-          </div>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-brand-red">
-          <span className="flex items-center gap-1">
-            <BookOpen className="w-3 h-3" /> Details
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-red hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
+    <article
+      onClick={() => onSelect(item)}
+      className={cn(
+        'group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70',
+        'transition-[border-color,box-shadow,transform] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-lg',
+        a.hover
+      )}
+    >
+      <div className="relative h-36 overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+        <SafeImage
+          src={item.image}
+          alt=""
+          className="h-full w-full object-cover grayscale transition-[filter,transform] duration-500 group-hover:scale-[1.03] group-hover:grayscale-0"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+        <div className="absolute inset-x-3.5 bottom-3 text-white sm:inset-x-4">
+          <span className={cn('type-hangul block truncate', a.hangul)}>{item.koreanName}</span>
+          <h3 className="truncate text-[15px] font-black uppercase leading-tight tracking-tight">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                onSelect(item)
+              }}
+              aria-label={`Quick view: ${item.name}`}
+              // Buttons don't inherit text-transform (Tailwind preflight resets it), so restate it.
+              className="max-w-full truncate text-left uppercase focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+            >
+              {item.name}
+            </button>
+          </h3>
         </div>
       </div>
-    </Card3D>
+
+      <div className="flex flex-1 flex-col gap-3 p-3.5 sm:p-4">{children}</div>
+
+      <div className="flex items-center justify-between gap-3 border-t border-zinc-100 px-3.5 py-2.5 dark:border-zinc-800 sm:px-4">
+        <span className="type-meta truncate">{meta}</span>
+        <Link
+          href={`/library/${item.category}/${item.slug}`}
+          onClick={(e) => e.stopPropagation()}
+          className={cn(
+            'inline-flex shrink-0 items-center gap-1 text-xs font-semibold transition-opacity hover:opacity-80',
+            a.link
+          )}
+        >
+          Open <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </article>
   )
 }
 
-// ==============================================================================
-// 2. STANCES (SEOGI) CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function StanceCard({ item, onSelect }: DisciplineCardProps) {
+function Summary({ children }: { children?: React.ReactNode }) {
+  if (!children) return null
+  return <p className="type-body-sm line-clamp-2">{children}</p>
+}
+
+/** "Label: value" fact line used by kicking / hand cards. */
+function Fact({ label, value }: { label: string; value?: string }) {
+  if (!value) return null
+  return (
+    <p className="type-body-sm truncate">
+      <span className="text-zinc-500 dark:text-zinc-500">{label} </span>
+      <span className="font-medium text-zinc-800 dark:text-zinc-200">{value}</span>
+    </p>
+  )
+}
+
+export function PoomsaeCard(props: DisciplineCardProps) {
+  const { item } = props
+  return (
+    <DisciplineCard {...props} accent="red" meta={`${item.totalMovements || 18} movements · ${item.beltLevel}`}>
+      <Summary>{item.meaning || item.summary}</Summary>
+    </DisciplineCard>
+  )
+}
+
+export function StanceCard(props: DisciplineCardProps) {
+  const { item } = props
   const rearPercent = item.weightDistribution?.includes('70%')
     ? 70
     : item.weightDistribution?.includes('90%')
-    ? 90
-    : item.weightDistribution?.includes('65%')
-    ? 35
-    : 50
+      ? 90
+      : item.weightDistribution?.includes('65%')
+        ? 35
+        : 50
   const frontPercent = 100 - rearPercent
 
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-amber-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-amber-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800/80 mb-2.5 space-y-1">
-            <div className="flex justify-between text-[10px]">
-              <span className="text-zinc-500">Weight Distribution</span>
-              <span className="font-mono font-bold text-amber-500">
-                {frontPercent}% / {rearPercent}%
-              </span>
-            </div>
-            <div className="w-full h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full flex overflow-hidden">
-              <div className="bg-amber-400 h-full" style={{ width: `${frontPercent}%` }} />
-              <div className="bg-amber-600 h-full" style={{ width: `${rearPercent}%` }} />
-            </div>
-          </div>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-amber-500">
-          <span className="flex items-center gap-1">
-            <Layers className="w-3 h-3" /> Details
+    <DisciplineCard {...props} accent="amber" meta={item.beltLevel}>
+      <div className="space-y-1.5">
+        <div className="flex items-baseline justify-between">
+          <span className="type-meta">Weight front / rear</span>
+          <span className="text-xs font-semibold tabular-nums text-amber-600 dark:text-amber-400">
+            {frontPercent}% / {rearPercent}%
           </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-amber-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
+        </div>
+        <div className="flex h-1 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800" aria-hidden="true">
+          <div className="h-full bg-amber-400" style={{ width: `${frontPercent}%` }} />
+          <div className="h-full bg-amber-600" style={{ width: `${rearPercent}%` }} />
         </div>
       </div>
-    </Card3D>
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 3. KICKING CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function KickingCard({ item, onSelect }: DisciplineCardProps) {
+export function KickingCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-emerald-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          {item.strikingSurface && (
-            <div className="text-[10px] text-zinc-500 dark:text-zinc-400 mb-2 truncate">
-              <span className="text-zinc-400">Impact: </span>
-              <strong className="text-zinc-800 dark:text-zinc-200 font-medium">
-                {item.strikingSurface}
-              </strong>
-            </div>
-          )}
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-emerald-500">
-          <span className="flex items-center gap-1">
-            <Zap className="w-3 h-3" /> Details
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-emerald-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="emerald" meta={item.beltLevel}>
+      <Fact label="Impact:" value={item.strikingSurface} />
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 4. HAND TECHNIQUES CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function HandCard({ item, onSelect }: DisciplineCardProps) {
+export function HandCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-blue-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-blue-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          {item.targetArea && (
-            <div className="text-[10px] text-zinc-500 dark:text-zinc-400 mb-2 truncate">
-              <span className="text-zinc-400">Target: </span>
-              <strong className="text-zinc-800 dark:text-zinc-200 font-medium">
-                {item.targetArea}
-              </strong>
-            </div>
-          )}
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-blue-500">
-          <span className="flex items-center gap-1">
-            <Shield className="w-3 h-3" /> Details
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-blue-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="blue" meta={item.beltLevel}>
+      <Fact label="Target:" value={item.targetArea} />
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 5. TRICKING & ACROBATICS CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function AcrobaticCard({ item, onSelect }: DisciplineCardProps) {
+export function AcrobaticCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-purple-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-purple-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          <p className="text-[11px] text-zinc-600 dark:text-zinc-300 font-light line-clamp-2 leading-relaxed mb-2">
-            {item.summary}
-          </p>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-purple-500">
-          <span className="flex items-center gap-1">
-            <Sparkles className="w-3 h-3" /> Details
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-purple-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="purple" meta={item.difficulty}>
+      <Summary>{item.summary}</Summary>
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 6. HISTORY & HERITAGE CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function HistoryCard({ item, onSelect }: DisciplineCardProps) {
+export function HistoryCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-red-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-red-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-red-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          <p className="text-[11px] text-zinc-600 dark:text-zinc-300 font-light line-clamp-2 leading-relaxed mb-2">
-            {item.summary}
-          </p>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-brand-red">
-          <span className="flex items-center gap-1">
-            <Calendar className="w-3 h-3" /> Heritage
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-red hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="red" meta={item.readTime ?? 'Heritage'}>
+      <Summary>{item.summary}</Summary>
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 7. COMPETITION RULES CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function RuleCard({ item, onSelect }: DisciplineCardProps) {
+export function RuleCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-blue-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-blue-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-blue-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          <p className="text-[11px] text-zinc-600 dark:text-zinc-300 font-light line-clamp-2 leading-relaxed mb-2">
-            {item.summary}
-          </p>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-blue-500">
-          <span className="flex items-center gap-1">
-            <Scale className="w-3 h-3" /> Rulebook
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-blue-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="blue" meta={item.sourceName ?? 'Rulebook'}>
+      <Summary>{item.summary}</Summary>
+    </DisciplineCard>
   )
 }
 
-// ==============================================================================
-// 8. HOSINSUL (SELF-DEFENSE) CLEAN CARD (NO BADGES)
-// ==============================================================================
-export function HosinsulCard({ item, onSelect }: DisciplineCardProps) {
+export function HosinsulCard(props: DisciplineCardProps) {
+  const { item } = props
   return (
-    <Card3D maxTilt={6} scale={1.02} className="h-full">
-      <div
-        onClick={() => onSelect(item)}
-        className="h-full group relative p-3.5 sm:p-4 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/60 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 overflow-hidden touch-press"
-      >
-        <div>
-          <div className="relative h-32 sm:h-36 rounded-xl overflow-hidden mb-3 border border-zinc-100 dark:border-zinc-800 shadow-inner">
-            <SafeImage
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-              <span className="text-[9px] font-mono text-emerald-400 font-bold block">
-                {item.koreanName}
-              </span>
-              <h3 className="text-sm sm:text-base font-black uppercase tracking-tight truncate">
-                {item.name}
-              </h3>
-            </div>
-          </div>
-
-          <p className="text-[11px] text-zinc-600 dark:text-zinc-300 font-light line-clamp-2 leading-relaxed mb-2">
-            {item.summary}
-          </p>
-        </div>
-
-        <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-wider text-emerald-500">
-          <span className="flex items-center gap-1">
-            <ShieldCheck className="w-3 h-3" /> Self-Defense
-          </span>
-          <Link
-            href={`/library/${item.category}/${item.slug}`}
-            onClick={(e) => e.stopPropagation()}
-            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-emerald-500 hover:text-white text-zinc-700 dark:text-zinc-300 flex items-center gap-1 transition-all touch-press"
-          >
-            View <ExternalLink className="w-2.5 h-2.5" />
-          </Link>
-        </div>
-      </div>
-    </Card3D>
+    <DisciplineCard {...props} accent="emerald" meta={item.beltLevel}>
+      <Summary>{item.summary}</Summary>
+    </DisciplineCard>
   )
 }

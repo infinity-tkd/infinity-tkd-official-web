@@ -67,7 +67,7 @@ export default function PricingPage() {
         {/* ==================================================================== */}
         {/* 1. HERO SECTION */}
         {/* ==================================================================== */}
-        <div className="text-center max-w-3xl mx-auto pt-6 sm:pt-10 mb-10 sm:mb-14">
+        <div className="text-center max-w-3xl mx-auto pt-4 mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5" /> {t.pricing.badge}
           </div>
@@ -103,7 +103,7 @@ export default function PricingPage() {
                 }`}
               >
                 <span>{t.common.annual}</span>
-                <span className="px-1.5 py-0.5 rounded-md text-[9px] font-black uppercase bg-amber-400 text-black">
+                <span className="px-1.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-amber-400 text-black">
                   -{annualSavingsPercent}%
                 </span>
               </button>
@@ -131,7 +131,7 @@ export default function PricingPage() {
               >
                 <Users className="w-3.5 h-3.5" />
                 <span>Family Pack</span>
-                <span className="px-1.5 py-0.5 rounded-md text-[9px] font-black uppercase bg-brand-red text-white">
+                <span className="px-1.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-brand-red text-white">
                   -{familySavingsPercent}%
                 </span>
               </button>
@@ -178,7 +178,7 @@ export default function PricingPage() {
             return (
               <Card3D key={plan.id} maxTilt={plan.popular ? 4 : 3} className="h-full">
                 <div
-                  className={`relative group h-full p-6 sm:p-8 rounded-[14px] border transition-all duration-300 flex flex-col justify-between overflow-hidden backdrop-blur-xl ${
+                  className={`relative group h-full p-6 sm:p-8 rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden backdrop-blur-xl ${
                     plan.popular
                       ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-2xl shadow-brand-red/10 lg:-translate-y-2'
                       : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-zinc-300 dark:hover:border-zinc-700'
@@ -201,7 +201,7 @@ export default function PricingPage() {
 
                     {plan.badge && (
                       <span
-                        className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-xs ${
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider shadow-xs ${
                           plan.badgeType === 'popular'
                             ? 'bg-brand-red text-white shadow-brand-glow animate-pulse'
                             : plan.badgeType === 'beginner'
@@ -218,7 +218,7 @@ export default function PricingPage() {
                     {plan.name}
                   </h3>
 
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 font-light mb-6 leading-relaxed">
+                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
                     {plan.description}
                   </p>
 
@@ -243,7 +243,7 @@ export default function PricingPage() {
 
                     {/* Sub-price breakdown */}
                     {!isCustom && (
-                      <p className="text-[11px] text-zinc-400 font-mono mt-1">
+                      <p className="text-xs text-zinc-400 font-mono mt-1">
                         {membershipType === 'family' ? 'Per family student' : 'Standard tuition rate'}
                         {billingCycle === 'annual' && ' • Paid annually'}
                       </p>
@@ -252,7 +252,7 @@ export default function PricingPage() {
 
                   {/* Features List */}
                   <div className="space-y-3 mb-6">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
                       Plan Inclusions
                     </span>
                     {plan.features.map((feature, idx) => (
@@ -306,7 +306,7 @@ export default function PricingPage() {
               <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                 100% Free Trial
               </h5>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-light mt-0.5">
+              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                 First session free with zero lock-in commitment.
               </p>
             </div>
@@ -318,7 +318,7 @@ export default function PricingPage() {
               <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                 Kukkiwon Standard
               </h5>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-light mt-0.5">
+              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                 Internationally recognized belt credentials.
               </p>
             </div>
@@ -330,7 +330,7 @@ export default function PricingPage() {
               <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                 Freeze Anytime
               </h5>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-light mt-0.5">
+              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                 Pause up to 30 days for exams or vacations.
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function PricingPage() {
               <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                 Sibling Savings
               </h5>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-light mt-0.5">
+              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                 25% automatic discount for family bundles.
               </p>
             </div>
@@ -369,7 +369,7 @@ export default function PricingPage() {
             </h3>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[14px] overflow-x-auto shadow-xl">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-x-auto shadow-xl">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
@@ -485,7 +485,7 @@ export default function PricingPage() {
                   <div
                     id={`faq-answer-${idx}`}
                     role="region"
-                    className="px-4 sm:px-5 pb-5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed border-t border-zinc-100 dark:border-zinc-800 pt-3 animate-fade-in"
+                    className="px-4 sm:px-5 pb-5 text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-800 pt-3 animate-fade-in"
                   >
                     {faq.a}
                   </div>
@@ -498,7 +498,7 @@ export default function PricingPage() {
         {/* ==================================================================== */}
         {/* 7. HIGH-CONVERTING VIP TRIAL PASS BANNER (14px radius) */}
         {/* ==================================================================== */}
-        <div className="p-6 sm:p-10 rounded-[14px] bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 max-w-5xl mx-auto shadow-2xl">
+        <div className="p-6 sm:p-10 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 max-w-5xl mx-auto shadow-2xl">
           <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-xl">
@@ -508,7 +508,7 @@ export default function PricingPage() {
             <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-2">
               Experience The Dojang First
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+            <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
               Step onto the spring floors, meet our certified 5th Dan Head Masters, and experience our science-backed training with zero financial obligation.
             </p>
           </div>

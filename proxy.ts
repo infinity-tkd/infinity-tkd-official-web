@@ -95,11 +95,14 @@ export function proxy(request: NextRequest) {
 
     if (sourceHost && host) {
       const isSelfHost = sourceHost === host
+      // Compare the hostname exactly (port stripped) so look-alikes such as
+      // `localhost.evil.com` or `evilinfinitytaekwondo.com` are not accepted.
+      const sourceHostname = sourceHost.replace(/:\d+$/, '')
       const isAllowedDomain =
-        sourceHost === 'infinitytaekwondo.com' ||
-        sourceHost.endsWith('.infinitytaekwondo.com') ||
-        sourceHost.startsWith('localhost') ||
-        sourceHost.startsWith('127.0.0.1')
+        sourceHostname === 'infinitytaekwondo.com' ||
+        sourceHostname.endsWith('.infinitytaekwondo.com') ||
+        sourceHostname === 'localhost' ||
+        sourceHostname === '127.0.0.1'
 
       if (!isSelfHost && !isAllowedDomain) {
         return new NextResponse(

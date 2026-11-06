@@ -2,20 +2,12 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import {
-  Instagram,
-  Facebook,
-  Youtube,
-  Linkedin,
-  ShieldCheck,
-  Zap,
-  Heart,
-  Scale,
-  Shield,
-} from 'lucide-react'
+import { Facebook, Instagram, Linkedin, MessageCircle, Rss, Send, Youtube } from 'lucide-react'
 import { InfinityLogo } from './InfinityLogo'
 import { siteSettings } from '@/config/siteSettings'
+import { FOOTER_COLUMNS, MESSAGING_LINKS } from '@/config/navigation'
 import { useLanguage } from '@/context/LanguageContext'
+import { cn } from '@/lib/utils'
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -30,205 +22,100 @@ function TikTokIcon({ className }: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      aria-hidden="true"
     >
       <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
     </svg>
   )
 }
 
+/** Icons are matched by platform NAME, so reordering `siteSettings.socials` can never mislabel a link. */
+const SOCIAL_ICONS: Record<string, React.ElementType> = {
+  Instagram,
+  Facebook,
+  YouTube: Youtube,
+  LinkedIn: Linkedin,
+  TikTok: TikTokIcon,
+}
+
+const iconLinkClass =
+  'flex h-11 w-11 min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-brand-red hover:text-white touch-press'
+
 export function Footer() {
   const { t } = useLanguage()
 
+  const channels = [
+    { label: 'WhatsApp', href: MESSAGING_LINKS.whatsapp, icon: MessageCircle },
+    { label: 'Telegram', href: MESSAGING_LINKS.telegram, icon: Send },
+    ...siteSettings.socials
+      .filter((social) => SOCIAL_ICONS[social.platform])
+      .map((social) => ({ label: social.platform, href: social.url, icon: SOCIAL_ICONS[social.platform] })),
+  ]
+
   return (
-    <footer className="bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-900 pt-16 pb-24 lg:pb-12 font-sans transition-colors duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        {/* MAIN MINIMALIST GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-zinc-200/80 dark:border-zinc-900">
-          
-          {/* Brand Identity & Social Channels (5 cols on desktop, full width on tablet/mobile) */}
-          <div className="sm:col-span-2 lg:col-span-5 space-y-4">
-            <Link href="/" className="inline-block group" aria-label="Infinity Taekwondo Home">
+    <footer className="border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black pb-24 pt-16 font-sans transition-colors duration-300 lg:pb-12">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 border-b border-zinc-200/80 dark:border-zinc-900 pb-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-12">
+          {/* Brand + channels */}
+          <div className="space-y-4 sm:col-span-2 lg:col-span-4">
+            <Link href="/" className="group inline-block" aria-label="Infinity Taekwondo Home">
               <InfinityLogo
                 variant="full"
                 className="h-8 w-auto transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </Link>
 
-            <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm font-light leading-relaxed max-w-sm">
+            <p className="max-w-sm text-xs font-light leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-sm">
               {t.footer.tagline}
             </p>
 
-            {/* Minimalist Social Icon Links */}
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <a
-                href={siteSettings.socials[0].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-brand-red dark:hover:bg-brand-red transition-colors flex items-center justify-center touch-press cursor-pointer"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={siteSettings.socials[2].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-brand-red dark:hover:bg-brand-red transition-colors flex items-center justify-center touch-press cursor-pointer"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href={siteSettings.socials[1].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-brand-red dark:hover:bg-brand-red transition-colors flex items-center justify-center touch-press cursor-pointer"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a
-                href={siteSettings.socials[3].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-brand-red dark:hover:bg-brand-red transition-colors flex items-center justify-center touch-press cursor-pointer"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={siteSettings.socials[4].url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-brand-red dark:hover:bg-brand-red transition-colors flex items-center justify-center touch-press cursor-pointer"
-                aria-label="TikTok"
-              >
-                <TikTokIcon className="w-4 h-4" />
-              </a>
+            <ul className="flex flex-wrap items-center gap-2 pt-2">
+              {channels.map(({ label, href, icon: Icon }) => (
+                <li key={label}>
+                  <a href={href} target="_blank" rel="noopener noreferrer" className={iconLinkClass} aria-label={label}>
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/blog/feed.xml" className={iconLinkClass} aria-label="Blog RSS feed">
+                  <Rss className="h-4 w-4" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Link columns */}
+          {FOOTER_COLUMNS.map((column) => (
+            <div
+              key={column.title(t)}
+              className={cn('space-y-3', column.wide ? 'sm:col-span-2 lg:col-span-3' : 'lg:col-span-2')}
+            >
+              <span className="block text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
+                {column.title(t)}
+              </span>
+              <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="block py-0.5 transition-colors hover:text-brand-red dark:hover:text-white">
+                      {link.label(t)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {/* 1. Academy (2 cols on desktop, 1 col on tablet) */}
-          <div className="sm:col-span-1 lg:col-span-2 space-y-3">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              {t.footer.colAcademy}
-            </span>
-            <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-              <li>
-                <Link href="/academy" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.syllabus}
-                </Link>
-              </li>
-              <li>
-                <Link href="/library" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.nav.library}
-                </Link>
-              </li>
-              <li>
-                <Link href="/community" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.community}
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.pricing}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 2. Organization (2 cols on desktop, 1 col on tablet) */}
-          <div className="sm:col-span-1 lg:col-span-2 space-y-3">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              {t.footer.colBranches}
-            </span>
-            <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-              <li>
-                <Link href="/about" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.philosophy}
-                </Link>
-              </li>
-              <li>
-                <Link href="/collaborations" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5 font-medium text-zinc-900 dark:text-zinc-200">
-                  {t.footer.collaborations}
-                </Link>
-              </li>
-              <li>
-                <Link href="/locations" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.branchesLink}
-                </Link>
-              </li>
-              <li>
-                <Link href="/achievements" className="hover:text-brand-red dark:hover:text-white transition-colors block py-0.5">
-                  {t.footer.achievements}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 3. Governance & Ethics (3 cols on desktop, 2 cols on tablet) */}
-          <div className="sm:col-span-2 lg:col-span-3 space-y-3">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-900 dark:text-white block">
-              {t.footer.colLegal}
-            </span>
-            <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
-              <li>
-                <Link
-                  href="/safeguarding"
-                  className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                  {t.footer.safeguarding}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/anti-doping"
-                  className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
-                >
-                  <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                  {t.footer.antiDoping}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/equality"
-                  className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5 font-medium text-zinc-900 dark:text-zinc-200"
-                >
-                  <Heart className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                  {t.footer.equality}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy"
-                  className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5"
-                >
-                  <Shield className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                  {t.footer.privacy}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="hover:text-brand-red dark:hover:text-white transition-colors flex items-center gap-1.5 py-0.5"
-                >
-                  <Scale className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                  {t.footer.terms}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          ))}
         </div>
 
-        {/* MINIMALIST BOTTOM BAR */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400 font-light">
-          <p>© {new Date().getFullYear()} Infinity Taekwondo. {t.footer.copyright}</p>
-          <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-600 dark:text-zinc-400">
+        <div className="flex flex-col items-center justify-between gap-3 pt-8 text-xs font-light text-zinc-500 dark:text-zinc-400 sm:flex-row">
+          <p>
+            © {new Date().getFullYear()} Infinity Taekwondo. {t.footer.copyright}
+          </p>
+          <p className="flex items-center gap-2 font-mono text-[11px] text-zinc-600 dark:text-zinc-400">
             <span>Kukkiwon Dan Certified</span>
-            <span>&bull;</span>
+            <span aria-hidden="true">&bull;</span>
             <span>World Taekwondo Standard</span>
-          </div>
+          </p>
         </div>
       </div>
     </footer>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { ErrorScreen } from '@/components/ErrorScreen'
 
 export const metadata: Metadata = {
-  title: 'Page Not Found (404) | Infinity Taekwondo',
+  title: 'Page Not Found (404)',
   robots: {
     index: false,
     follow: false,

@@ -100,7 +100,7 @@ export function CollaborationShowcase() {
       {/* -------------------------------------------------------------------- */}
       {/* FILTER & SEARCH TOOLBAR (14px radius) */}
       {/* -------------------------------------------------------------------- */}
-      <div className="p-4 sm:p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Category Filter Pills (responsive scroll on mobile) */}
         <div className="flex overflow-x-auto sm:flex-wrap items-center gap-1.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-2 px-2 sm:mx-0 sm:px-0">
           {collaborationCategories.map((cat) => {
@@ -150,7 +150,7 @@ export function CollaborationShowcase() {
       {/* PARTNER CARDS GRID (14px radius, clean, zero badge clutter) */}
       {/* -------------------------------------------------------------------- */}
       {filteredPartners.length === 0 ? (
-        <div className="p-12 text-center rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 space-y-2">
+        <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 space-y-2">
           <p className="text-sm font-medium">No collaboration partners found matching your filter.</p>
           <button
             onClick={() => {
@@ -204,7 +204,7 @@ export function CollaborationShowcase() {
               <Card3D key={partner.id} max={5} depth={4} className="h-full">
                 <div
                   onClick={() => setActiveModalPartner(partner)}
-                  className="p-6 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 transition-all duration-300 flex flex-col justify-between group cursor-pointer hover:shadow-xl relative overflow-hidden h-full"
+                  className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 transition-all duration-300 flex flex-col justify-between group cursor-pointer hover:shadow-xl relative overflow-hidden h-full"
                 >
                   <div className="space-y-4">
                     {/* Card Header with Logo Preview & Fallback */}
@@ -235,7 +235,7 @@ export function CollaborationShowcase() {
 
                       <div className="text-right min-w-0">
                         <span
-                          className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider inline-block truncate max-w-[140px] sm:max-w-[160px]"
+                          className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider inline-block truncate max-w-[140px] sm:max-w-[160px]"
                           style={{
                             backgroundColor: `${partner.badgeColor}15`,
                             color: partner.badgeColor,
@@ -244,7 +244,7 @@ export function CollaborationShowcase() {
                         >
                           {partner.tier}
                         </span>
-                        <span className="text-[10px] font-mono text-zinc-400 block mt-1 truncate">
+                        <span className="text-[11px] font-mono text-zinc-400 block mt-1 truncate">
                           Est. {partner.establishedYear} &bull; Since {partner.partnershipSince}
                         </span>
                       </div>
@@ -253,27 +253,27 @@ export function CollaborationShowcase() {
                     {/* Title & Category Sub-label */}
                     <div>
                       {partner.koreanName && (
-                        <span className="text-[11px] font-mono font-bold text-zinc-400 block mb-0.5">
+                        <span className="text-xs font-mono font-bold text-zinc-400 block mb-0.5">
                           {partner.koreanName}
                         </span>
                       )}
                       <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight group-hover:text-brand-red transition-colors line-clamp-1">
                         {partnerName}
                       </h3>
-                      <span className="text-[11px] font-mono text-brand-red font-bold block mt-0.5">
+                      <span className="text-xs font-mono text-brand-red font-bold block mt-0.5">
                         {partnerType}
                       </span>
                     </div>
 
                     {/* Background / Summary */}
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed line-clamp-3">
+                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
                       {summary}
                     </p>
                   </div>
 
                   {/* Footer Telemetry */}
                   <div className="pt-4 mt-5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs min-w-0">
-                    <span className="flex items-center gap-1.5 text-zinc-500 font-mono text-[11px] truncate min-w-0 mr-2" title={`${partner.location}, ${partner.country}`}>
+                    <span className="flex items-center gap-1.5 text-zinc-500 font-mono text-xs truncate min-w-0 mr-2" title={`${partner.location}, ${partner.country}`}>
                       <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                       <span className="truncate">{partner.location}, {partner.country}</span>
                     </span>
@@ -305,7 +305,7 @@ export function CollaborationShowcase() {
           <div className="absolute inset-0 bg-black/85 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-[20px] sm:rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Bar */}
@@ -382,13 +382,13 @@ export function CollaborationShowcase() {
                       <h3 className="text-base sm:text-2xl font-black uppercase tracking-tight truncate">
                         {activeModalPartner.name}
                       </h3>
-                      <span className="text-[11px] sm:text-xs font-mono text-zinc-300 block truncate">
+                      <span className="text-xs sm:text-xs font-mono text-zinc-300 block truncate">
                         {activeModalPartner.partnerType}
                       </span>
                     </div>
                   </div>
 
-                  <span className="px-2.5 py-1 rounded-lg text-[10px] sm:text-xs font-mono font-bold uppercase bg-black/80 text-white backdrop-blur-md border border-white/20 shrink-0 hidden md:inline-block">
+                  <span className="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-mono font-bold uppercase bg-black/80 text-white backdrop-blur-md border border-white/20 shrink-0 hidden md:inline-block">
                     {activeModalPartner.tier}
                   </span>
                 </div>
@@ -397,24 +397,24 @@ export function CollaborationShowcase() {
               {/* Comprehensive Telemetry Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-xs font-mono">
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-w-0">
-                  <span className="text-[10px] text-zinc-400 block mb-0.5 truncate">Location</span>
+                  <span className="text-[11px] text-zinc-400 block mb-0.5 truncate">Location</span>
                   <strong className="text-zinc-900 dark:text-white font-bold block truncate" title={activeModalPartner.location}>{activeModalPartner.location}</strong>
-                  <span className="text-[10px] text-zinc-500 block truncate" title={activeModalPartner.country}>{activeModalPartner.country}</span>
+                  <span className="text-[11px] text-zinc-500 block truncate" title={activeModalPartner.country}>{activeModalPartner.country}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-w-0">
-                  <span className="text-[10px] text-zinc-400 block mb-0.5 truncate">Established</span>
+                  <span className="text-[11px] text-zinc-400 block mb-0.5 truncate">Established</span>
                   <strong className="text-zinc-900 dark:text-white font-bold block truncate">Year {activeModalPartner.establishedYear}</strong>
-                  <span className="text-[10px] text-zinc-500 block truncate">Founded</span>
+                  <span className="text-[11px] text-zinc-500 block truncate">Founded</span>
                 </div>
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-w-0">
-                  <span className="text-[10px] text-zinc-400 block mb-0.5 truncate">Partner Since</span>
+                  <span className="text-[11px] text-zinc-400 block mb-0.5 truncate">Partner Since</span>
                   <strong className="text-brand-red font-bold block truncate">Year {activeModalPartner.partnershipSince}</strong>
-                  <span className="text-[10px] text-zinc-500 block truncate">Official Alliance</span>
+                  <span className="text-[11px] text-zinc-500 block truncate">Official Alliance</span>
                 </div>
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 min-w-0">
-                  <span className="text-[10px] text-zinc-400 block mb-0.5 truncate">Category</span>
+                  <span className="text-[11px] text-zinc-400 block mb-0.5 truncate">Category</span>
                   <strong className="text-zinc-900 dark:text-white font-bold block uppercase truncate">{activeModalPartner.category}</strong>
-                  <span className="text-[10px] text-zinc-500 block truncate" title={activeModalPartner.tier}>{activeModalPartner.tier}</span>
+                  <span className="text-[11px] text-zinc-500 block truncate" title={activeModalPartner.tier}>{activeModalPartner.tier}</span>
                 </div>
               </div>
 
@@ -423,7 +423,7 @@ export function CollaborationShowcase() {
                 <h5 className="text-xs font-bold uppercase tracking-widest text-brand-red flex items-center gap-1.5">
                   <Info className="w-3.5 h-3.5" /> Background &amp; Institutional Profile
                 </h5>
-                <p className="text-xs sm:text-sm font-light leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="text-[13px] sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
                   {language === 'km' && activeModalPartner.translations?.km?.background
                     ? activeModalPartner.translations.km.background
                     : language === 'zh' && activeModalPartner.translations?.zh?.background
@@ -439,7 +439,7 @@ export function CollaborationShowcase() {
                 <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
                   <Shield className="w-3.5 h-3.5 text-brand-red" /> Partnership Scope &amp; Objectives
                 </h5>
-                <p className="text-xs sm:text-sm font-light leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="text-[13px] sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
                   {language === 'km' && activeModalPartner.translations?.km?.partnershipScope
                     ? activeModalPartner.translations.km.partnershipScope
                     : language === 'zh' && activeModalPartner.translations?.zh?.partnershipScope

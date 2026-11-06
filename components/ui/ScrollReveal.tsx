@@ -61,23 +61,21 @@ export function ScrollReveal({
     return () => observer.disconnect()
   }, [threshold, once])
 
-  const getInitialTransform = () => {
-    switch (direction) {
-      case 'up':
-        return 'translate3d(0, 24px, 0)'
-      case 'down':
-        return 'translate3d(0, -24px, 0)'
-      case 'left':
-        return 'translate3d(24px, 0, 0)'
-      case 'right':
-        return 'translate3d(-24px, 0, 0)'
-      case 'zoom':
-        return 'scale3d(0.96, 0.96, 1)'
-      case 'fade':
-      default:
-        return 'translate3d(0, 0, 0)'
-    }
-  }
+  // Uses the individual `translate`/`scale` properties and resets them to `none` once revealed.
+  // A lingering transform would make this wrapper the containing block for any `position: fixed`
+  // descendant (modals, drawers) and clip/misplace them.
+  const initialMotion: React.CSSProperties =
+    direction === 'up'
+      ? { translate: '0 16px' }
+      : direction === 'down'
+        ? { translate: '0 -16px' }
+        : direction === 'left'
+          ? { translate: '16px 0' }
+          : direction === 'right'
+            ? { translate: '-16px 0' }
+            : direction === 'zoom'
+              ? { scale: '0.97' }
+              : {}
 
   return (
     <div
@@ -85,12 +83,12 @@ export function ScrollReveal({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate3d(0, 0, 0) scale3d(1, 1, 1)' : getInitialTransform(),
-        transitionProperty: 'opacity, transform',
+        ...(isVisible ? { translate: 'none', scale: 'none' } : initialMotion),
+        transitionProperty: 'opacity, translate, scale',
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
         transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        willChange: isVisible ? 'auto' : 'opacity, transform',
+        willChange: isVisible ? undefined : 'opacity, translate',
       }}
       {...rest}
     >

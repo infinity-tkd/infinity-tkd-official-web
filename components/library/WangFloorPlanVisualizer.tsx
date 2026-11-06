@@ -169,7 +169,7 @@ export function WangFloorPlanVisualizer({
         <div className="w-full flex items-center justify-between gap-2 pb-3 mb-2 border-b border-zinc-800/80 z-10 text-xs flex-wrap sm:flex-nowrap">
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse shrink-0" />
-            <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider shrink-0">
+            <span className="text-[11px] uppercase font-bold text-zinc-400 tracking-wider shrink-0">
               {t.characterWangFloor}
             </span>
             {formName && (
@@ -182,7 +182,7 @@ export function WangFloorPlanVisualizer({
           {trigramSymbol && (
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-brand-red text-xs font-bold shrink-0">
               <span className="text-sm font-serif">{trigramSymbol}</span>
-              {elementName && <span className="text-[10px] text-zinc-300 font-sans">{elementName}</span>}
+              {elementName && <span className="text-[11px] text-zinc-300 font-sans">{elementName}</span>}
             </div>
           )}
         </div>
@@ -399,7 +399,7 @@ export function WangFloorPlanVisualizer({
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 pt-2 border-t border-zinc-800/80 w-full text-[10px] text-zinc-400 flex-wrap">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 pt-2 border-t border-zinc-800/80 w-full text-[11px] text-zinc-400 flex-wrap">
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-3.5 h-1.5 rounded-sm bg-emerald-500" />
             <span>{t.solidYang}</span>
@@ -419,11 +419,11 @@ export function WangFloorPlanVisualizer({
             <>
               <div className="flex items-center justify-between text-zinc-300">
                 <strong className="text-white font-bold">{wangFloorPlanLines.line1Top.name}</strong>
-                <span className="text-[10px] text-brand-red font-bold">
+                <span className="text-[11px] text-brand-red font-bold">
                   {wangFloorPlanLines.line1Top.stepsRange}
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-light font-sans leading-relaxed">
+              <p className="text-[13px] text-zinc-400 font-sans leading-relaxed">
                 {wangFloorPlanLines.line1Top.explanation}
               </p>
             </>
@@ -433,11 +433,11 @@ export function WangFloorPlanVisualizer({
             <>
               <div className="flex items-center justify-between text-zinc-300">
                 <strong className="text-white font-bold">{wangFloorPlanLines.line2Middle.name}</strong>
-                <span className="text-[10px] text-amber-400 font-bold">
+                <span className="text-[11px] text-amber-400 font-bold">
                   {wangFloorPlanLines.line2Middle.stepsRange}
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-light font-sans leading-relaxed">
+              <p className="text-[13px] text-zinc-400 font-sans leading-relaxed">
                 {wangFloorPlanLines.line2Middle.explanation}
               </p>
             </>
@@ -447,11 +447,11 @@ export function WangFloorPlanVisualizer({
             <>
               <div className="flex items-center justify-between text-zinc-300">
                 <strong className="text-white font-bold">{wangFloorPlanLines.line3Bottom.name}</strong>
-                <span className="text-[10px] text-blue-400 font-bold">
+                <span className="text-[11px] text-blue-400 font-bold">
                   {wangFloorPlanLines.line3Bottom.stepsRange}
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-400 font-light font-sans leading-relaxed">
+              <p className="text-[13px] text-zinc-400 font-sans leading-relaxed">
                 {wangFloorPlanLines.line3Bottom.explanation}
               </p>
             </>
@@ -490,10 +490,10 @@ export function ClockCompassDial({
       <div className="flex items-center justify-between pb-2 border-b border-zinc-800 text-xs">
         <div className="flex items-center gap-1.5 text-zinc-300">
           <Compass className="w-3.5 h-3.5 text-brand-red" />
-          <span className="text-[10px] uppercase font-bold text-zinc-400">{t.clockVector}</span>
+          <span className="text-[11px] uppercase font-bold text-zinc-400">{t.clockVector}</span>
         </div>
         {currentDirection && (
-          <span className="px-2 py-0.5 rounded bg-brand-red/20 text-brand-red font-bold text-[10px]">
+          <span className="px-2 py-0.5 rounded bg-brand-red/20 text-brand-red font-bold text-[11px]">
             {t.facing}: {currentDirection}
           </span>
         )}
@@ -540,8 +540,8 @@ export function ClockCompassDial({
       </div>
 
       {trajectory && (
-        <div className="pt-2 border-t border-zinc-800 text-[10px] text-zinc-400 space-y-1">
-          <span className="uppercase text-[9px] text-zinc-500 block font-bold">{t.trajectory}</span>
+        <div className="pt-2 border-t border-zinc-800 text-[11px] text-zinc-400 space-y-1">
+          <span className="uppercase text-[11px] text-zinc-500 block font-bold">{t.trajectory}</span>
           <p className="text-zinc-300 font-bold overflow-x-auto whitespace-nowrap">
             {trajectory}
           </p>

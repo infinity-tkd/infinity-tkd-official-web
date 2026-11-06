@@ -6,13 +6,6 @@ export const metadata: Metadata = {
     'Meet the Kukkiwon-certified Master instructors, international medalists, and inspiring student community powering Infinity Taekwondo in Cambodia.',
   alternates: {
     canonical: '/community',
-    languages: {
-      'en': '/community',
-      'km': '/community',
-      'zh': '/community',
-      'ko': '/community',
-      'x-default': '/community',
-    },
   },
   openGraph: {
     title: 'Coaches, Faculty & Athlete Community | Infinity Taekwondo',

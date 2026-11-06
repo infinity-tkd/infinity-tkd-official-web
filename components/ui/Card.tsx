@@ -19,7 +19,7 @@ export function Card({
   const content = (
     <div
       className={cn(
-        'rounded-[14px] overflow-hidden transition-all duration-300',
+        'rounded-2xl overflow-hidden transition-all duration-300',
         glass
           ? 'card-glass'
           : 'bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm',

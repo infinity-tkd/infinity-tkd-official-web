@@ -26,7 +26,7 @@ import {
   Layers,
   CircleDot,
 } from 'lucide-react'
-import { historyItems } from '@/data/library/history'
+import { historyItems } from '@/data/library/history/history'
 import { useLanguage } from '@/context/LanguageContext'
 import { HistoryTimetable } from './HistoryTimetable'
 import { SafeImage } from '@/components/SafeImage'
@@ -47,27 +47,27 @@ export function HistoryChronicleReader() {
       {/* -------------------------------------------------------------------- */}
       {/* HISTORICAL CHRONICLE BANNER (14px radius) */}
       {/* -------------------------------------------------------------------- */}
-      <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red">
                 Taekwondo Scholarly Chronicle
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[10px] font-mono text-zinc-500">History &bull; Uniforms &bull; Belts &bull; Theory</span>
+              <span className="text-[11px] font-mono text-zinc-500">History &bull; Uniforms &bull; Belts &bull; Theory</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
               Taekwondo History, Philosophy &amp; Heritage
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-500 font-light mt-1 max-w-2xl">
+            <p className="text-[13px] sm:text-sm text-zinc-500 mt-1 max-w-2xl">
               An academic curriculum tracking ancient Three Kingdoms origins, Dobok &amp; Belt cosmology, WT vs ITF federations, the 5 Tenets, and the Theory of Power.
             </p>
           </div>
 
           {/* Reader Preferences (Font Size Toggle) */}
           <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 self-start md:self-auto shrink-0">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase px-2">Font:</span>
+            <span className="text-[11px] font-bold text-zinc-400 uppercase px-2">Font:</span>
             {(['sm', 'base', 'lg'] as const).map((size) => (
               <button
                 key={size}
@@ -98,7 +98,7 @@ export function HistoryChronicleReader() {
                     : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40'
                 }`}
               >
-                <span className="text-[9px] font-mono block opacity-70 mb-0.5">Lesson {idx + 1}</span>
+                <span className="text-[11px] font-mono block opacity-70 mb-0.5">Lesson {idx + 1}</span>
                 <h4 className="text-[11px] font-bold uppercase tracking-tight line-clamp-2 leading-snug">
                   {item.name.split('(')[0].trim()}
                 </h4>
@@ -192,7 +192,7 @@ export function HistoryChronicleReader() {
       {/* TAB 1: EDITORIAL ARTICLE VIEW (14px radius) */}
       {/* -------------------------------------------------------------------- */}
       {activeTab === 'article' && (
-        <div className="p-6 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl grid lg:grid-cols-12 gap-8 items-start relative overflow-hidden">
+        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl grid lg:grid-cols-12 gap-8 items-start relative overflow-hidden">
           {/* Left Column: Image & Citations */}
           <div className="lg:col-span-5 space-y-4">
             <div className="relative h-60 sm:h-72 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md">
@@ -216,14 +216,14 @@ export function HistoryChronicleReader() {
             {/* Author & Source */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase">Author / Archival Body</span>
+                <span className="text-[11px] font-mono text-zinc-400 uppercase">Author / Archival Body</span>
                 <strong className="text-zinc-900 dark:text-white font-bold">
                   {activeLesson.author || 'Infinity TKD Directorate'}
                 </strong>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase">Primary Source</span>
-                <span className="text-zinc-600 dark:text-zinc-400 font-mono text-[11px] truncate max-w-[200px]">
+                <span className="text-[11px] font-mono text-zinc-400 uppercase">Primary Source</span>
+                <span className="text-zinc-600 dark:text-zinc-400 font-mono text-xs truncate max-w-[200px]">
                   {activeLesson.sourceName || 'Kukkiwon Archives'}
                 </span>
               </div>
@@ -250,9 +250,9 @@ export function HistoryChronicleReader() {
                 {activeLesson.blogContent.map((paragraph, i) => (
                   <p
                     key={i}
-                    className={`text-zinc-700 dark:text-zinc-300 font-light leading-relaxed ${
+                    className={`text-zinc-700 dark:text-zinc-300 leading-relaxed ${
                       fontSize === 'sm'
-                        ? 'text-xs leading-relaxed'
+                        ? 'text-[13px] leading-relaxed'
                         : fontSize === 'base'
                         ? 'text-sm leading-relaxed'
                         : 'text-base leading-loose'
@@ -266,7 +266,7 @@ export function HistoryChronicleReader() {
 
             {/* Historical Milestones */}
             <div className="space-y-2 pt-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
                 Key Lesson Checkpoints:
               </span>
               {activeLesson.steps.map((item, i) => (
@@ -274,7 +274,7 @@ export function HistoryChronicleReader() {
                   key={i}
                   className="flex items-start gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300"
                 >
-                  <span className="w-4 h-4 rounded-full bg-brand-red/10 text-brand-red font-mono font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="w-4 h-4 rounded-full bg-brand-red/10 text-brand-red font-mono font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <span className="leading-relaxed font-medium">{item}</span>
@@ -300,15 +300,15 @@ export function HistoryChronicleReader() {
       {activeTab === 'dobok' && (
         <div className="space-y-8 animate-fade-in">
           {/* Cheon-Ji-In Cosmology Banner */}
-          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Sacred Garment Cosmology
               </span>
               <h4 className="text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                 The Cheon-Ji-In (천지인 / 天地人) Principle of the Dobok
               </h4>
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light mt-1">
+              <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
                 The Dobok represents the physical manifestation of the cosmos, harmonizing the practitioner with Heaven, Earth, and Universal Energy.
               </p>
             </div>
@@ -341,9 +341,9 @@ export function HistoryChronicleReader() {
           </div>
 
           {/* Dobok Uniform Styles Comparison */}
-          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Uniform Styles &amp; Standards
               </span>
               <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -353,7 +353,7 @@ export function HistoryChronicleReader() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[10px] font-mono text-zinc-400 uppercase block">Kukkiwon Standard</span>
+                <span className="text-[11px] font-mono text-zinc-400 uppercase block">Kukkiwon Standard</span>
                 <strong className="text-zinc-900 dark:text-white block">Standard V-Neck Dobok</strong>
                 <p className="text-zinc-500 font-light leading-relaxed">
                   White collar for Geup color belts; Red-and-black collar for junior Poom black belts under 15; Black collar for adult Dan ranks.
@@ -361,7 +361,7 @@ export function HistoryChronicleReader() {
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[10px] font-mono text-amber-500 uppercase block">WT Official Poomsae</span>
+                <span className="text-[11px] font-mono text-amber-500 uppercase block">WT Official Poomsae</span>
                 <strong className="text-zinc-900 dark:text-white block">Competition Poomsae Dobok</strong>
                 <p className="text-zinc-500 font-light leading-relaxed">
                   Color-coded by age &amp; gender: Cadet blue/red pants, Junior dark blue pants, Senior gold jackets with blue pants, Master gold &amp; navy.
@@ -369,7 +369,7 @@ export function HistoryChronicleReader() {
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[10px] font-mono text-blue-500 uppercase block">ITF Traditional</span>
+                <span className="text-[11px] font-mono text-blue-500 uppercase block">ITF Traditional</span>
                 <strong className="text-zinc-900 dark:text-white block">Cross-Over Wrap Dobok</strong>
                 <p className="text-zinc-500 font-light leading-relaxed">
                   Open crossover jacket with Velcro/ties, featuring black ribbon hem piping along jacket borders for Black Belt Dan ranks.
@@ -377,7 +377,7 @@ export function HistoryChronicleReader() {
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[10px] font-mono text-emerald-500 uppercase block">Olympic Combat</span>
+                <span className="text-[11px] font-mono text-emerald-500 uppercase block">Olympic Combat</span>
                 <strong className="text-zinc-900 dark:text-white block">Aerodynamic PSS Dobok</strong>
                 <p className="text-zinc-500 font-light leading-relaxed">
                   Ultra-lightweight moisture-wicking stretch fabric engineered to interface seamlessly with electronic sensor Hogu and headgear.
@@ -387,9 +387,9 @@ export function HistoryChronicleReader() {
           </div>
 
           {/* Belt Color Progression Matrix */}
-          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                 The Spiritual Path of the Belt (Ddi / 띠)
               </span>
               <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -409,13 +409,13 @@ export function HistoryChronicleReader() {
               ].map((b, i) => (
                 <div key={i} className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
                   <div>
-                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase block mb-2 text-center border ${b.bg}`}>
+                    <span className={`px-2 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase block mb-2 text-center border ${b.bg}`}>
                       {b.color}
                     </span>
-                    <span className="text-[11px] font-mono font-bold text-zinc-800 dark:text-zinc-200 block mb-1">
+                    <span className="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-200 block mb-1">
                       {b.korean}
                     </span>
-                    <p className="text-[11px] text-zinc-500 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-500 leading-relaxed">
                       {b.meaning}
                     </p>
                   </div>
@@ -440,9 +440,9 @@ export function HistoryChronicleReader() {
       {/* TAB 3: ORGANIZATIONS COMPARATIVE MATRIX (WT vs ITF vs ATA) */}
       {/* -------------------------------------------------------------------- */}
       {activeTab === 'organizations' && (
-        <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
+        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
           <div>
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
               Comparative Analysis
             </span>
             <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -453,7 +453,7 @@ export function HistoryChronicleReader() {
           <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
             <table className="w-full text-left text-xs border-collapse min-w-[650px]">
             <thead>
-              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[10px] font-mono">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px] font-mono">
                 <th className="py-3 px-4">Organization / Style</th>
                 <th className="py-3 px-4">Inception &amp; Founder</th>
                 <th className="py-3 px-4">Sparring Format &amp; Gear</th>
@@ -468,7 +468,7 @@ export function HistoryChronicleReader() {
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   1972 (Kukkiwon) / 1973 (WT)<br />
-                  <span className="text-[10px] text-zinc-400">Seoul, South Korea</span>
+                  <span className="text-[11px] text-zinc-400">Seoul, South Korea</span>
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Full-contact Olympic; Chest guard (Hogu), helmet, sensor socks (PSS).
@@ -487,7 +487,7 @@ export function HistoryChronicleReader() {
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   1966<br />
-                  <span className="text-[10px] text-zinc-400">Gen. Choi Hong-hi</span>
+                  <span className="text-[11px] text-zinc-400">Gen. Choi Hong-hi</span>
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Semi-contact / continuous; hand &amp; foot pads only; <strong>no chest protector (hogu)</strong>.
@@ -506,7 +506,7 @@ export function HistoryChronicleReader() {
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   1969<br />
-                  <span className="text-[10px] text-zinc-400">Haeng Ung Lee (USA)</span>
+                  <span className="text-[11px] text-zinc-400">Haeng Ung Lee (USA)</span>
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Point / continuous sparring; full gear pads; integrated traditional weapons.
@@ -569,7 +569,7 @@ export function HistoryChronicleReader() {
             ].map((tenet, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-[14px] bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between"
               >
                 <div>
                   <span className="text-3xl font-serif font-black text-zinc-200 dark:text-zinc-800 block mb-2">
@@ -584,7 +584,7 @@ export function HistoryChronicleReader() {
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-2">
                     {tenet.english}
                   </h4>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {tenet.desc}
                   </p>
                 </div>
@@ -593,8 +593,8 @@ export function HistoryChronicleReader() {
           </div>
 
           {/* 4 Core Pillars of Curriculum */}
-          <div className="p-6 sm:p-8 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
               Curriculum Quadrant
             </span>
             <h4 className="text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-4">
@@ -634,10 +634,10 @@ export function HistoryChronicleReader() {
       {/* TAB 5: THEORY OF POWER & BIOMECHANICS (힘의 원리) */}
       {/* -------------------------------------------------------------------- */}
       {activeTab === 'power' && (
-        <div className="p-6 sm:p-10 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
+        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Kinetic Martial Physics
               </span>
               <h4 className="text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -649,43 +649,43 @@ export function HistoryChronicleReader() {
             </div>
           </div>
 
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+          <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
             The Theory of Power establishes that kinetic energy scales <strong>quadratically with velocity</strong> (v&sup2;), proving that relaxed acceleration, hip drive, and millisecond snap generate vastly more destructive impact than raw muscle bulk.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">01. Reaction Force (반동력)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">01. Reaction Force (반동력)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Newton&apos;s Third Law</strong>
               <p className="text-zinc-500 font-light">Pulling the opposite reaction hand to the hip doubles the acceleration of the striking weapon.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">02. Concentration (집중)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">02. Concentration (집중)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Focal Pressure Area</strong>
               <p className="text-zinc-500 font-light">Focusing total kinetic energy onto the smallest striking tool (ball of foot, knife hand) at exact impact.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">03. Equilibrium (균형)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">03. Equilibrium (균형)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Center of Mass</strong>
               <p className="text-zinc-500 font-light">Maintaining dynamic balance so body mass translates cleanly without postural collapse.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">04. Breath Control (호흡)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">04. Breath Control (호흡)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Kihap Core Brace</strong>
               <p className="text-zinc-500 font-light">Sharp exhalation at the instant of impact tightens the abdominal girdle and protects internal organs.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">05. Mass (질량)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">05. Mass (질량)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Pelvic Kinetic Chain</strong>
               <p className="text-zinc-500 font-light">Engaging hip rotation and ground reaction force to drive total body mass behind the attack.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase block mb-1">06. Speed (속도)</span>
+              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">06. Speed (속도)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Velocity Squared</strong>
               <p className="text-zinc-500 font-light">Doubling striking velocity quadruples the impact energy delivered into the target.</p>
             </div>
@@ -704,7 +704,7 @@ export function HistoryChronicleReader() {
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-[14px] border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-950 shadow-2xl rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[90vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/60">

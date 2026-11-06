@@ -1,18 +1,12 @@
 import type { Metadata } from 'next'
+import { academyCourses } from '@/data/academy'
 
 export const metadata: Metadata = {
   title: 'Academy Training Programs & Syllabus',
   description:
-    'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery: Little Tigers, Cadet Elite, High-Performance Kyorugi, and Freestyle Poomsae in Cambodia.',
+    'Traditional Kukkiwon Taekwondo from White Belt to 2nd Dan: Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking in Cambodia.',
   alternates: {
     canonical: '/academy',
-    languages: {
-      'en': '/academy',
-      'km': '/academy',
-      'zh': '/academy',
-      'ko': '/academy',
-      'x-default': '/academy',
-    },
   },
   openGraph: {
     title: 'Academy Training Programs & Syllabus | Infinity Taekwondo',
@@ -29,5 +23,32 @@ export const metadata: Metadata = {
 }
 
 export default function AcademyLayout({ children }: { children: React.ReactNode }) {
-  return children
+  const courseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: academyCourses.map((course, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Course',
+        name: course.title,
+        description: course.description,
+        provider: {
+          '@type': 'Organization',
+          name: 'Infinity Taekwondo Academy',
+          sameAs: 'https://infinitytaekwondo.com',
+        },
+      },
+    })),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
+      {children}
+    </>
+  )
 }

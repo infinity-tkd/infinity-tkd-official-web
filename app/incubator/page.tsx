@@ -202,7 +202,7 @@ const tracks: IncubatorTrack[] = [
     tag: 'Youth Leadership',
     badgeColor: '#A855F7',
     description:
-      'Design, organize, and host intra-dojang sparring tournaments, poomsae festivals, or tricking jam battles.',
+      'Design, organize, and host intra-dojang poomsae festivals, demonstration showcases, or tricking jam battles.',
     deliverables: [
       'Operational seed budget and venue logistics support',
       'Custom championship medals, trophies, and official certificates',
@@ -212,7 +212,7 @@ const tracks: IncubatorTrack[] = [
       km: {
         title: 'ភាពជាអ្នកដឹកនាំដូជ៉ាង & ការរៀបចំការប្រកួត',
         tag: 'ភាពជាអ្នកដឹកនាំយុវជន',
-        description: 'រៀបចំ និងធ្វើជាម្ចាស់ផ្ទះការប្រកួតកីឡាតេក្វាន់ដូក្នុងដូជ៉ាង មហោស្រព Poomsae ឬការប្រកួត Tricking។',
+        description: 'រៀបចំ និងធ្វើជាម្ចាស់ផ្ទះមហោស្រព Poomsae ការសម្តែង (Demonstration) ឬការប្រកួត Tricking ក្នុងដូជ៉ាង។',
         deliverables: [
           'ថវិកាប្រតិបត្តិការ និងការគាំទ្រទីតាំងរៀបចំ',
           'មេដាយ ពានរង្វាន់ និងវិញ្ញាបនប័ត្រផ្លូវការ',
@@ -222,7 +222,7 @@ const tracks: IncubatorTrack[] = [
       zh: {
         title: '道场领袖孵化与品牌赛事统筹',
         tag: '青年商业领导力',
-        description: '全流程策划并主办道馆内部对抗赛、品势艺术节或街头极限特技对决 (Tricking Jam)。',
+        description: '全流程策划并主办道馆内部品势艺术节、表演展示会或街头极限特技对决 (Tricking Jam)。',
         deliverables: [
           '提供赛事专项启动预算与场地后勤物资支持',
           '定制化奖牌、总冠军奖杯与官方证书物料',
@@ -232,7 +232,7 @@ const tracks: IncubatorTrack[] = [
       ko: {
         title: '도장 경영 리더십 & 대회 기획 총괄',
         tag: '청년 리더십 아카데미',
-        description: '관내 친선 겨루기 대회, 공인품새 페스티벌 또는 마샬아츠 트릭킹 배틀을 직접 기획하고 총괄 운영합니다.',
+        description: '관내 공인품새 페스티벌, 시범 공연 또는 마샬아츠 트릭킹 배틀을 직접 기획하고 총괄 운영합니다.',
         deliverables: [
           '행사 운영 초기 예산 및 도장 대관 물류 전폭 지원',
           '자체 챔피언십 메달, 트로피 및 공인 상장 제작 지원',
@@ -325,10 +325,10 @@ export default function IncubatorPage() {
     if (
       detectMaliciousPayload(formData.studentName) ||
       detectMaliciousPayload(formData.email) ||
-      detectMaliciousPayload(formData.title) ||
-      detectMaliciousPayload(formData.summary)
+      detectMaliciousPayload(formData.title, { prose: true }) ||
+      detectMaliciousPayload(formData.summary, { prose: true })
     ) {
-      setErrorMsg('Disallowed character sequences or security filter trigger detected.')
+      setErrorMsg('Please remove any HTML or code from your pitch and try again.')
       return
     }
 
@@ -351,28 +351,52 @@ export default function IncubatorPage() {
     }
 
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 600))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        studentName: '',
-        beltRank: 'Blue Belt',
-        phone: '',
-        email: '',
-        track: 'Martial Arts Cinema & Stunts',
-        title: '',
-        summary: '',
-        hp_security_token: '',
+    try {
+      const res = await fetch('/api/incubator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studentName: cleanStudentName,
+          beltRank: cleanBelt,
+          phone: cleanPhone,
+          email: cleanEmail,
+          track: cleanTrack,
+          title: cleanTitle,
+          summary: cleanSummary,
+          hp_security_token: formData.hp_security_token,
+        }),
       })
-    }, 4000)
+
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to submit your pitch.')
+      }
+
+      setSubmitted(true)
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({
+          studentName: '',
+          beltRank: 'Blue Belt',
+          phone: '',
+          email: '',
+          track: 'Martial Arts Cinema & Stunts',
+          title: '',
+          summary: '',
+          hp_security_token: '',
+        })
+      }, 4000)
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
-      <section className="relative pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
+      <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -392,7 +416,7 @@ export default function IncubatorPage() {
 
       {/* Incubation Process 4-Stage Roadmap (14px radius) */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20 max-w-7xl">
-        <div className="p-6 sm:p-10 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+        <div className="p-6 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
               From Concept to Reality
@@ -415,7 +439,7 @@ export default function IncubatorPage() {
                   <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1.5">
                     {s.title}
                   </h3>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                  <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {s.desc}
                   </p>
                 </div>
@@ -442,7 +466,7 @@ export default function IncubatorPage() {
             return (
               <Card3D key={res.title} max={4} depth={3} className="h-full">
                 <div
-                  className="p-6 sm:p-8 rounded-[14px] bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full"
+                  className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full"
                 >
                   <div>
                     <div className="p-3 bg-brand-red/10 text-brand-red rounded-xl w-fit mb-4">
@@ -451,7 +475,7 @@ export default function IncubatorPage() {
                     <h3 className="text-lg font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-2">
                       {res.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {res.desc}
                     </p>
                   </div>
@@ -492,11 +516,11 @@ export default function IncubatorPage() {
             return (
               <Card3D key={track.id} max={5} depth={4} className="h-full">
                 <div
-                  className="p-6 sm:p-8 rounded-[14px] bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 transition-all duration-300 shadow-sm flex flex-col justify-between h-full"
+                  className="p-6 sm:p-8 rounded-2xl bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 transition-all duration-300 shadow-sm flex flex-col justify-between h-full"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20">
+                      <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20">
                         {track.tag}
                       </span>
                       <div
@@ -514,12 +538,12 @@ export default function IncubatorPage() {
                       {track.koreanTitle}
                     </span>
 
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+                    <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       {localizedDesc}
                     </p>
 
                     <div className="space-y-2 mb-6">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
                         Track Support Included:
                       </span>
                       {localizedDeliverables.map((del, i) => (
@@ -551,15 +575,15 @@ export default function IncubatorPage() {
 
       {/* Pitch Submission Form (14px radius) */}
       <section id="pitch-form-section" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <div className="p-6 sm:p-10 md:p-12 rounded-[14px] bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl">
+        <div className="p-6 sm:p-10 md:p-12 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl">
           <div className="mb-8 text-center sm:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
               Apply For Grant &amp; Support
             </span>
             <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
               {t.incubator.pitchTitle1} <span className="text-brand-red">{t.incubator.pitchTitle2}</span>
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1 font-light">
+            <p className="text-[13px] sm:text-sm text-zinc-500 mt-1">
               {t.incubator.pitchSubtitle}
             </p>
           </div>
@@ -599,7 +623,7 @@ export default function IncubatorPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     {t.incubator.studentName} *
                   </label>
                   <input
@@ -616,7 +640,7 @@ export default function IncubatorPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     {t.incubator.beltRank} *
                   </label>
                   <input
@@ -634,7 +658,7 @@ export default function IncubatorPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     WhatsApp / Phone *
                   </label>
                   <input
@@ -652,7 +676,7 @@ export default function IncubatorPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     Email Address *
                   </label>
                   <input
@@ -671,7 +695,7 @@ export default function IncubatorPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                   {t.incubator.projectTrack} *
                 </label>
                 <select
@@ -687,7 +711,7 @@ export default function IncubatorPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                   {t.incubator.conceptSummary} *
                 </label>
                 <textarea

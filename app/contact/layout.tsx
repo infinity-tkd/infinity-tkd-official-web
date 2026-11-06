@@ -6,13 +6,6 @@ export const metadata: Metadata = {
     'Get in touch with admissions, schedule a free introductory Taekwondo trial session, or inquire about private training in Phnom Penh, Cambodia.',
   alternates: {
     canonical: '/contact',
-    languages: {
-      'en': '/contact',
-      'km': '/contact',
-      'zh': '/contact',
-      'ko': '/contact',
-      'x-default': '/contact',
-    },
   },
   openGraph: {
     title: 'Contact Admissions & Book Free Trial | Infinity Taekwondo',

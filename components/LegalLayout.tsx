@@ -88,7 +88,7 @@ export function LegalLayout({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Policy Switcher Pill Bar */}
         <div className="mb-6 overflow-x-auto pb-2">
-          <div className="flex items-center gap-1.5 p-1.5 rounded-[14px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm w-max min-w-full sm:min-w-0">
+          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm w-max min-w-full sm:min-w-0">
             {legalPolicies.map((pol) => {
               const isCurrent = pathname === pol.href
               const Icon = pol.icon
@@ -120,10 +120,10 @@ export function LegalLayout({
         </div>
 
         {/* Hero Header Banner (14px radius) */}
-        <div className="mb-8 p-6 sm:p-10 md:p-12 rounded-[14px] bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+        <div className="mb-8 p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-3 border border-brand-red/20">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-3 border border-brand-red/20">
                 <ShieldCheck className="w-3.5 h-3.5" /> {subtitle}
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
@@ -156,18 +156,18 @@ export function LegalLayout({
           {/* Sidebar Navigation */}
           <aside className="lg:w-72 shrink-0 lg:sticky lg:top-28 w-full space-y-4">
             {/* Desktop TOC (14px radius) */}
-            <div className="hidden lg:block p-5 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            <div className="hidden lg:block p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
               <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-zinc-200 dark:border-zinc-800">
                 <span className="font-bold uppercase tracking-widest text-xs text-zinc-400">
                   Navigation Index
                 </span>
-                <span className="text-[10px] font-mono text-zinc-400">Jump To Section</span>
+                <span className="text-[11px] font-mono text-zinc-400">Jump To Section</span>
               </div>
               <nav className="space-y-1">{sidebar}</nav>
             </div>
 
             {/* Mobile Collapsible TOC (14px radius) */}
-            <div className="lg:hidden w-full border border-zinc-200 dark:border-zinc-800 rounded-[14px] bg-white dark:bg-zinc-900/60 shadow-sm overflow-hidden">
+            <div className="lg:hidden w-full border border-zinc-200 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900/60 shadow-sm overflow-hidden">
               <button
                 onClick={() => setIsTocOpen(!isTocOpen)}
                 className="w-full flex items-center justify-between p-4 min-h-[44px] text-left font-bold text-xs text-zinc-900 dark:text-white uppercase tracking-wider cursor-pointer touch-press"
@@ -187,11 +187,11 @@ export function LegalLayout({
             </div>
 
             {/* Governance Contact Card */}
-            <div className="p-5 rounded-[14px] bg-zinc-900 text-white border border-zinc-800 space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block">
+            <div className="p-5 rounded-2xl bg-zinc-900 text-white border border-zinc-800 space-y-3">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block">
                 Compliance &amp; Ethics Desk
               </span>
-              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+              <p className="text-[13px] text-zinc-400 leading-relaxed">
                 Have questions regarding safeguarding, anti-doping, or equal access at Infinity TKD?
               </p>
               <a
@@ -205,7 +205,7 @@ export function LegalLayout({
 
           {/* Legal Article Body */}
           <main className="flex-1 w-full min-w-0">
-            <article className="legal-article p-6 sm:p-10 md:p-12 rounded-[14px] bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-8 text-zinc-700 dark:text-zinc-300 font-light text-xs sm:text-sm leading-relaxed">
+            <article className="legal-article p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-8 text-zinc-700 dark:text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
               {children}
             </article>
           </main>

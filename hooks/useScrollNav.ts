@@ -5,12 +5,8 @@ import * as React from 'react'
 export interface ScrollNavState {
   /** True when navigation should be visible (scrolling up or near top) */
   isNavVisible: boolean
-  /** True when user has scrolled past initial offset (> 15px) */
+  /** True when user has scrolled past the initial offset (> 15px) */
   isScrolled: boolean
-  /** Current window scroll Y coordinate */
-  scrollY: number
-  /** Direction of the last scroll change */
-  scrollDirection: 'up' | 'down' | null
 }
 
 export interface UseScrollNavOptions {
@@ -25,84 +21,65 @@ export interface UseScrollNavOptions {
 }
 
 /**
- * High-performance scroll navigation hook with requestAnimationFrame throttling,
- * edge overscroll protection, and hysteresis to prevent jitter.
+ * Scroll-driven navigation visibility.
+ *
+ * Performance: the scroll handler is rAF-throttled and only calls `setState` when a boolean
+ * actually flips (React bails out on identical values), so scrolling does not re-render the
+ * navigation on every frame. The raw scroll position is intentionally not exposed as state.
  */
 export function useScrollNav(options?: UseScrollNavOptions): ScrollNavState {
-  const {
-    downThreshold = 10,
-    upThreshold = 6,
-    minScrollY = 60,
-    disabled = false,
-  } = options || {}
+  const { downThreshold = 10, upThreshold = 6, minScrollY = 60, disabled = false } = options || {}
 
   const [isNavVisible, setIsNavVisible] = React.useState(true)
   const [isScrolled, setIsScrolled] = React.useState(false)
-  const [scrollY, setScrollY] = React.useState(0)
-  const [scrollDirection, setScrollDirection] = React.useState<'up' | 'down' | null>(null)
 
   const lastScrollYRef = React.useRef(0)
   const tickingRef = React.useRef(false)
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') return
-
     if (disabled) {
       setIsNavVisible(true)
       return
     }
 
-    const handleScroll = () => {
-      if (!tickingRef.current) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = Math.max(0, window.scrollY)
-          const previousScrollY = lastScrollYRef.current
-          const diff = currentScrollY - previousScrollY
+    const update = () => {
+      tickingRef.current = false
 
-          // 1. Scrolled background styling threshold
-          setIsScrolled(currentScrollY > 15)
-          setScrollY(currentScrollY)
+      const currentScrollY = Math.max(0, window.scrollY)
+      const diff = currentScrollY - lastScrollYRef.current
 
-          // 2. Near top of page: always keep navigation visible
-          if (currentScrollY <= minScrollY) {
-            setIsNavVisible(true)
-            setScrollDirection(null)
-            lastScrollYRef.current = currentScrollY
-            tickingRef.current = false
-            return
-          }
+      setIsScrolled(currentScrollY > 15)
 
-          // 3. Prevent glitching during iOS Safari rubber-band overscroll at bottom
-          const maxScrollY = document.documentElement.scrollHeight - window.innerHeight
-          if (currentScrollY >= maxScrollY - 20) {
-            tickingRef.current = false
-            return
-          }
+      // Near the top: navigation is always visible.
+      if (currentScrollY <= minScrollY) {
+        setIsNavVisible(true)
+        lastScrollYRef.current = currentScrollY
+        return
+      }
 
-          // 4. Directional threshold checks with hysteresis
-          if (diff > downThreshold) {
-            // Scrolling down -> hide header and mobile footer nav
-            setIsNavVisible(false)
-            setScrollDirection('down')
-            lastScrollYRef.current = currentScrollY
-          } else if (diff < -upThreshold) {
-            // Scrolling up -> smoothly reveal header and mobile footer nav
-            setIsNavVisible(true)
-            setScrollDirection('up')
-            lastScrollYRef.current = currentScrollY
-          }
+      // Ignore iOS Safari rubber-band overscroll at the bottom of the page.
+      const maxScrollY = document.documentElement.scrollHeight - window.innerHeight
+      if (currentScrollY >= maxScrollY - 20) return
 
-          tickingRef.current = false
-        })
-        tickingRef.current = true
+      if (diff > downThreshold) {
+        setIsNavVisible(false)
+        lastScrollYRef.current = currentScrollY
+      } else if (diff < -upThreshold) {
+        setIsNavVisible(true)
+        lastScrollYRef.current = currentScrollY
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      if (tickingRef.current) return
+      tickingRef.current = true
+      window.requestAnimationFrame(update)
     }
+
+    update() // sync initial state (e.g. page restored mid-scroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [downThreshold, upThreshold, minScrollY, disabled])
 
-  return { isNavVisible, isScrolled, scrollY, scrollDirection }
+  return { isNavVisible, isScrolled }
 }

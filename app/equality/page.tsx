@@ -17,18 +17,11 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
+  title: 'Equality, Diversity & Inclusion Policy',
   description:
     'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, Para-Taekwondo adaptive training, and cultural mutual respect across all academies.',
   alternates: {
     canonical: '/equality',
-    languages: {
-      'en': '/equality',
-      'km': '/equality',
-      'zh': '/equality',
-      'ko': '/equality',
-      'x-default': '/equality',
-    },
   },
   openGraph: {
     title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
@@ -89,24 +82,24 @@ export default function EqualityPage() {
       policyType="equality"
     >
       {/* Executive Summary */}
-      <div id="summary" className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
+      <div id="summary" className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
           <Heart className="w-4 h-4" /> At A Glance: Equal Dignity On &amp; Off the Mats
         </div>
-        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+        <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
           Infinity Taekwondo believes that martial arts belongs to everyone. We are committed to fostering an inclusive, welcoming, and equitable community where every individual—regardless of gender, nationality, race, religion, age, physical ability, or economic background—is treated with unreserved dignity, respect, and fairness.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Gender Equality</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Gender Equality</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">50/50 Leadership Parity</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Para-Taekwondo</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Para-Taekwondo</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Adaptive Training Pathways</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[10px] font-mono text-zinc-400 block mb-1">Zero Discrimination</span>
+            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Zero Discrimination</span>
             <strong className="text-xs font-bold text-brand-red">Strict Non-Harassment Rule</strong>
           </div>
         </div>
@@ -151,7 +144,7 @@ export default function EqualityPage() {
           Infinity Taekwondo actively promotes female participation, leadership, and athletic excellence:
         </p>
         <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Equal Mat Time &amp; Division Access:</strong> Female athletes receive equal coaching resources, sparring partner rotations, and tournament sponsorship opportunities as male counterparts.</li>
+          <li><strong>Equal Mat Time &amp; Division Access:</strong> Female athletes receive equal coaching resources, training partner rotations, and tournament sponsorship opportunities as male counterparts.</li>
           <li><strong>Female Leadership Pathway:</strong> We actively train, mentor, and promote female assistant instructors into certified Kukkiwon Masters and International Referees.</li>
           <li><strong>Women’s Self-Defense &amp; Empowerment:</strong> Regular community workshops tailored to physical confidence, spatial awareness, and boundary assertion.</li>
         </ul>
@@ -211,19 +204,19 @@ export default function EqualityPage() {
         <h2 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
           8. Equal Opportunity Inquiries &amp; Reporting
         </h2>
-        <div className="p-6 rounded-[14px] bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
+        <div className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-3">
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Diversity &amp; Inclusion Bureau
           </div>
           <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
             <div>
-              <span className="text-[10px] text-zinc-400 block">General Inclusion Inquiries:</span>
+              <span className="text-[11px] text-zinc-400 block">General Inclusion Inquiries:</span>
               <a href="mailto:equality@infinitytkd.com" className="text-brand-red font-bold hover:underline">
                 equality@infinitytkd.com
               </a>
             </div>
             <div>
-              <span className="text-[10px] text-zinc-400 block">Scholarship Inquiries:</span>
+              <span className="text-[11px] text-zinc-400 block">Scholarship Inquiries:</span>
               <a href="mailto:scholarships@infinitytkd.com" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 scholarships@infinitytkd.com
               </a>

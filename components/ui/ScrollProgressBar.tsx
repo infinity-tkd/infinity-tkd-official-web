@@ -2,54 +2,47 @@
 
 import * as React from 'react'
 
+/**
+ * Thin reading-progress line under the top edge.
+ * Updates the bar's transform directly (no React re-render per scroll frame).
+ */
 export function ScrollProgressBar() {
-  const [progress, setProgress] = React.useState(0)
+  const barRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
     let ticking = false
 
-    const updateProgress = () => {
-      const scrollY = window.scrollY
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      if (docHeight > 0) {
-        const currentProgress = Math.min(1, Math.max(0, scrollY / docHeight))
-        setProgress(currentProgress)
-      } else {
-        setProgress(0)
-      }
+    const update = () => {
       ticking = false
+      const bar = barRef.current
+      if (!bar) return
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0
+      bar.style.transform = `scaleX(${progress})`
+      bar.style.opacity = progress > 0.005 ? '1' : '0'
     }
 
     const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateProgress)
-        ticking = true
-      }
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(update)
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll, { passive: true })
-    updateProgress()
-
+    update()
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
   }, [])
 
-  if (progress <= 0.005) return null
-
   return (
-    <div
-      aria-hidden="true"
-      className="fixed top-0 left-0 right-0 h-[2.5px] z-[60] pointer-events-none bg-transparent"
-    >
+    <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-0.5">
       <div
-        className="h-full bg-gradient-to-r from-brand-red via-red-500 to-amber-500 shadow-[0_0_10px_rgba(239,47,56,0.8)] origin-left transition-transform duration-75 ease-out"
-        style={{
-          transform: `scaleX(${progress})`,
-          willChange: 'transform',
-        }}
+        ref={barRef}
+        className="h-full origin-left bg-brand-red opacity-0 transition-opacity duration-200"
+        style={{ transform: 'scaleX(0)' }}
       />
     </div>
   )

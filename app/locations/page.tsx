@@ -32,7 +32,7 @@ export default function LocationsPage() {
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500">
       {/* Hero Header */}
-      <section className="relative pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
+      <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/10 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -66,7 +66,7 @@ export default function LocationsPage() {
                   type="button"
                   onClick={() => setActiveBranchId(branch.id)}
                   aria-pressed={isSelected}
-                  className={`w-full h-full p-5 sm:p-6 rounded-[14px] border transition-all duration-300 text-left flex flex-col justify-between cursor-pointer touch-press ${
+                  className={`w-full h-full p-5 sm:p-6 rounded-2xl border transition-all duration-300 text-left flex flex-col justify-between cursor-pointer touch-press ${
                     isSelected
                       ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20'
                       : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/40 hover:border-zinc-400 dark:hover:border-zinc-700'
@@ -75,7 +75,7 @@ export default function LocationsPage() {
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span
-                        className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest ${
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest ${
                           branch.isHeadquarters
                             ? 'bg-brand-red text-white'
                             : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
@@ -90,7 +90,7 @@ export default function LocationsPage() {
                     <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mt-1">
                       {branch.name}
                     </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-light leading-relaxed">
+                    <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
                       {branch.tagline}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ export default function LocationsPage() {
                       <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" /> {branch.address.district}
                     </span>
                     <span
-                      className={`font-black uppercase text-[10px] tracking-wider ${
+                      className={`font-bold uppercase text-[11px] tracking-wider ${
                         isSelected ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400'
                       }`}
                     >
@@ -117,7 +117,7 @@ export default function LocationsPage() {
       {/* Selected Branch Detail Hero (14px radius) */}
       {activeBranch && (
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl animate-fade-in">
-          <div className="rounded-[14px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 shadow-xl">
+          <div className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 shadow-xl">
             {/* Cover Image */}
             <div className="relative aspect-[16/9] md:aspect-[21/9] bg-zinc-950 overflow-hidden">
               <SafeImage
@@ -129,13 +129,13 @@ export default function LocationsPage() {
 
               <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 z-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                  <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
+                  <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
                     {activeBranch.isHeadquarters ? t.common.headquarters : t.common.branch02}
                   </span>
                   <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-white leading-none">
                     {activeBranch.name}
                   </h2>
-                  <p className="text-xs sm:text-sm text-zinc-300 mt-2 flex items-center gap-1.5 font-light">
+                  <p className="text-[13px] sm:text-sm text-zinc-300 mt-2 flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-brand-red shrink-0" />{' '}
                     {activeBranch.address.street}, {activeBranch.address.district}, {activeBranch.address.city}
                   </p>
@@ -173,7 +173,7 @@ export default function LocationsPage() {
                             {group.label}
                           </span>
                           <span
-                            className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${
+                            className={`px-2 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider ${
                               group.badge.toLowerCase().includes('weekend') ||
                               group.badge.includes('ចុងសប្តាហ៍') ||
                               group.badge.includes('周末') ||
@@ -208,7 +208,7 @@ export default function LocationsPage() {
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
-                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1">
                         Desk Phone
                       </span>
                       <a
@@ -219,7 +219,7 @@ export default function LocationsPage() {
                       </a>
                     </div>
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
-                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1">
                         Admissions Email
                       </span>
                       <a
@@ -230,7 +230,7 @@ export default function LocationsPage() {
                       </a>
                     </div>
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 sm:col-span-2">
-                      <span className="text-[10px] font-bold uppercase text-zinc-400 block mb-1">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1">
                         WhatsApp Hotline
                       </span>
                       <a
@@ -268,7 +268,7 @@ export default function LocationsPage() {
                 </div>
 
                 {/* Interactive Map Embed */}
-                <div className="rounded-[14px] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner bg-zinc-100 dark:bg-zinc-950">
+                <div className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner bg-zinc-100 dark:bg-zinc-950">
                   <div className="p-3 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
                     <span className="font-bold uppercase tracking-wider text-[11px] text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-brand-red" /> {activeBranch.name} Map
@@ -277,7 +277,7 @@ export default function LocationsPage() {
                       href={activeBranch.googleMapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-bold text-brand-red hover:underline flex items-center gap-1"
+                      className="text-xs font-bold text-brand-red hover:underline flex items-center gap-1"
                     >
                       Full Map <Navigation className="w-3 h-3" />
                     </a>
@@ -299,13 +299,13 @@ export default function LocationsPage() {
                 <Card3D maxTilt={5} scale={1.01} className="w-full">
                   <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4 shadow-xl">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-brand-red block mb-1">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
                         Free Trial Booking
                       </span>
                       <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
                         Train At {activeBranch.name.split(' (')[0]}
                       </h3>
-                      <p className="text-xs text-zinc-400 font-light mt-1 leading-relaxed">
+                      <p className="text-[13px] text-zinc-400 mt-1 leading-relaxed">
                         Step onto the mat, experience our high-caliber coaching, and tour the facilities firsthand.
                       </p>
                     </div>

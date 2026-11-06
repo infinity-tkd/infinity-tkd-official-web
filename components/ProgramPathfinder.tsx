@@ -113,7 +113,7 @@ const experienceOptions: OptionItem<ExperienceId>[] = [
     labelKm: 'កម្រិតខ្ពស់ / ខ្សែក្រវាត់ខ្មៅ (Dan)',
     labelZh: '高阶精进 / 黑带段位持有者',
     labelKo: '고급 수련생 / 유단자 (블랙벨트)',
-    sublabelEn: 'Competitive sparring or Dan certification',
+    sublabelEn: 'Competition poomsae, demonstration or Dan certification',
   },
 ]
 
@@ -197,18 +197,18 @@ export function ProgramPathfinder() {
   const rec = getRecommendation()
 
   return (
-    <div className="w-full bg-gradient-to-br from-zinc-950 via-black to-zinc-950 border border-brand-red/30 rounded-[14px] p-5 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden text-white">
+    <div className="w-full bg-gradient-to-br from-zinc-950 via-black to-zinc-950 border border-brand-red/30 rounded-2xl p-5 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden text-white">
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red text-[10px] font-bold uppercase tracking-widest mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-3">
           <Sparkles className="w-3 h-3 animate-pulse" /> {t.pathfinder.badge}
         </div>
         <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
           {t.pathfinder.title1} <span className="text-brand-red">{t.pathfinder.title2}</span>
         </h3>
-        <p className="text-zinc-400 text-xs md:text-sm mt-2 font-light">
+        <p className="text-zinc-400 text-[13px] md:text-sm mt-2">
           {t.pathfinder.subtitle}
         </p>
       </div>
@@ -245,7 +245,7 @@ export function ProgramPathfinder() {
                   {getLocalizedLabel(item)}
                 </span>
                 {item.sublabelEn && (
-                  <span className="text-[10px] text-zinc-500 mt-1 font-light block">
+                  <span className="text-[13px] text-zinc-500 mt-1 block">
                     {item.sublabelEn}
                   </span>
                 )}
@@ -276,7 +276,7 @@ export function ProgramPathfinder() {
                     {getLocalizedLabel(item)}
                   </span>
                   {item.sublabelEn && (
-                    <span className="text-[10px] text-zinc-500 font-light mt-0.5 block">
+                    <span className="text-[13px] text-zinc-500 mt-0.5 block">
                       {item.sublabelEn}
                     </span>
                   )}
@@ -308,7 +308,7 @@ export function ProgramPathfinder() {
                   {getLocalizedLabel(item)}
                 </span>
                 {item.sublabelEn && (
-                  <span className="text-[10px] text-zinc-500 mt-1 font-light block">
+                  <span className="text-[13px] text-zinc-500 mt-1 block">
                     {item.sublabelEn}
                   </span>
                 )}
@@ -325,7 +325,7 @@ export function ProgramPathfinder() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
               <div>
                 <span
-                  className="text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-lg text-white inline-block mb-1 shadow-sm"
+                  className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-lg text-white inline-block mb-1 shadow-sm"
                   style={{ backgroundColor: rec.badgeColor }}
                 >
                   {rec.division}
@@ -347,14 +347,14 @@ export function ProgramPathfinder() {
               </button>
             </div>
 
-            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
+            <p className="text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
               {rec.description}
             </p>
 
             <div className="p-4 bg-black/60 rounded-xl border border-zinc-800 flex items-center gap-3 text-xs">
               <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
               <div>
-                <span className="text-zinc-400 uppercase font-bold text-[10px] block">
+                <span className="text-zinc-400 uppercase font-bold text-[11px] block">
                   {t.pathfinder.recommendedRhythm}
                 </span>
                 <span className="font-semibold text-white">{rec.pathway}</span>
