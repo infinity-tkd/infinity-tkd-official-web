@@ -26,9 +26,8 @@ export default function HomePage() {
 
       <section className="py-16 sm:py-20 lg:py-24 bg-white transition-colors duration-500 dark:bg-black">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal direction="up">
-            <BeltProgressionGuide />
-          </ScrollReveal>
+          {/* Has its own staged entrance and transitions (GSAP, loaded on approach). */}
+          <BeltProgressionGuide />
         </div>
       </section>
 

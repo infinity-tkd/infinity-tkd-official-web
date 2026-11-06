@@ -38,8 +38,15 @@ import {
   WangFloorPlanVisualizer,
   ClockCompassDial,
 } from '@/components/library/WangFloorPlanVisualizer'
+import dynamic from 'next/dynamic'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
+import { getWalkthrough } from '@/data/library/poomsaeWalkthroughs'
+
+// Code-split: GSAP is only downloaded on forms that have a walkthrough.
+const PoomsaeWalkthrough = dynamic(() => import('@/components/library/PoomsaeWalkthrough'), {
+  loading: () => <div className="h-[460px] animate-pulse rounded-2xl border border-zinc-800 bg-zinc-950" aria-hidden="true" />,
+})
 import { useLanguage } from '@/context/LanguageContext'
 import { decoratePoomsaeItem } from '@/data/library/poomsaeTranslations'
 import { getLocalizedKickingItem } from '@/data/library/kickingTranslationsDetailed'
@@ -74,6 +81,11 @@ export function TechniqueDetailClient({
     }
     return localize(rawItem)
   }, [rawItem, isPoomsae, isKicking, language, localize])
+
+  const walkthrough = React.useMemo(
+    () => (isPoomsae ? getWalkthrough(rawItem.id, item.steps.length) : null),
+    [isPoomsae, rawItem.id, item.steps.length]
+  )
 
   // Stance weight distribution calculation
   const rearPercent = item.weightDistribution?.includes('70%')
@@ -348,6 +360,11 @@ export function TechniqueDetailClient({
         {/* ------------------------------------------------------------------ */}
         {item.taegeukPhilosophy && (
           <div className="space-y-10 mb-10">
+            {/* Animated step-by-step walkthrough (only for forms that have walkthrough geometry) */}
+            {walkthrough && (
+              <PoomsaeWalkthrough formName={item.name} stepTexts={item.steps} walkthrough={walkthrough} />
+            )}
+
             {/* Visualizer Interactive Floor Plan */}
             <WangFloorPlanVisualizer
               trigramLines={item.taegeukPhilosophy.trigramLines}
