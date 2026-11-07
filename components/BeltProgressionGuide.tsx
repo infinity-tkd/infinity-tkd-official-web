@@ -37,7 +37,17 @@ function accentFor(belt: BeltRank) {
 }
 
 /** A belt's forms as library links, with a badge on forms that have an animated walkthrough. */
-function FormLinks({ belt, forms, chipAttr = false }: { belt: BeltRank; forms: Record<string, BeltFormLink>; chipAttr?: boolean }) {
+function FormLinks({
+  belt,
+  forms,
+  walkthroughLabel,
+  chipAttr = false,
+}: {
+  belt: BeltRank
+  forms: Record<string, BeltFormLink>
+  walkthroughLabel: string
+  chipAttr?: boolean
+}) {
   const links = belt.forms.map((id) => forms[id]).filter(Boolean)
   if (!links.length && !belt.alsoTrains?.length) return null
   return (
@@ -52,7 +62,7 @@ function FormLinks({ belt, forms, chipAttr = false }: { belt: BeltRank; forms: R
           {form.name}
           {form.hasWalkthrough && (
             <span className="inline-flex items-center gap-1 rounded-md bg-brand-red/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-red">
-              <Footprints className="h-3 w-3" aria-hidden="true" /> Walkthrough
+              <Footprints className="h-3 w-3" aria-hidden="true" /> {walkthroughLabel}
             </span>
           )}
           <ArrowUpRight className="h-3 w-3 text-zinc-400 transition-colors group-hover:text-brand-red" aria-hidden="true" />
@@ -105,6 +115,8 @@ interface BeltProgressionGuideProps {
 export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro = false }: BeltProgressionGuideProps) {
   const { t, localizeList } = useLanguage()
   const belts = React.useMemo(() => localizeList(beltProgression), [localizeList])
+  const disciplines = React.useMemo(() => localizeList(TRAINING_DISCIPLINES), [localizeList])
+  const labels = t.beltGuide
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [viewMode, setViewMode] = React.useState<'horizontal' | 'vertical'>('horizontal')
   const [motionReady, setMotionReady] = React.useState(false)
@@ -378,13 +390,13 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
               data-guide-intro
               className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-2 border border-brand-red/20"
             >
-              <Award className="w-3.5 h-3.5" /> {t.beltGuide.badge}
+              <Award className="w-3.5 h-3.5" /> {labels.badge}
             </div>
             <h3 data-guide-intro className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-              {t.beltGuide.title1} <span className="text-brand-red">{t.beltGuide.title2}</span>
+              {labels.title1} <span className="text-brand-red">{labels.title2}</span>
             </h3>
             <p data-guide-intro className="text-zinc-500 dark:text-zinc-400 text-[13px] sm:text-sm mt-1 max-w-xl">
-              Interactive syllabus roadmap detailing required Poomsae forms, philosophical milestones, and Dan examination criteria.
+              {labels.subtitle}
             </p>
           </div>
         )}
@@ -394,8 +406,8 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
           <div className="inline-flex items-center p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             {(
               [
-                ['horizontal', 'Focus View', LayoutGrid],
-                ['vertical', 'Full Journey', ListOrdered],
+                ['horizontal', labels.focusView, LayoutGrid],
+                ['vertical', labels.fullJourney, ListOrdered],
               ] as const
             ).map(([mode, label, Icon]) => (
               <button
@@ -414,10 +426,10 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
           {viewMode === 'horizontal' && (
             <div className="flex items-center gap-1.5">
-              <button type="button" onClick={() => selectBelt(selectedIndex - 1)} disabled={selectedIndex === 0} aria-label="Previous Belt Rank" className={navButtonClass}>
+              <button type="button" onClick={() => selectBelt(selectedIndex - 1)} disabled={selectedIndex === 0} aria-label={labels.previousBelt} className={navButtonClass}>
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button type="button" onClick={() => selectBelt(selectedIndex + 1)} disabled={selectedIndex === lastIndex} aria-label="Next Belt Rank" className={navButtonClass}>
+              <button type="button" onClick={() => selectBelt(selectedIndex + 1)} disabled={selectedIndex === lastIndex} aria-label={labels.nextBelt} className={navButtonClass}>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -457,7 +469,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                         tabRefs.current[index] = el
                       }}
                       onClick={() => selectBelt(index)}
-                      aria-label={`Select ${belt.name} syllabus`}
+                      aria-label={labels.selectBelt.replace('{belt}', belt.name)}
                       aria-pressed={isSelected}
                       className={`group relative p-3 rounded-xl border transition-[border-color,background-color,box-shadow] duration-300 flex flex-col items-center text-center cursor-pointer min-h-[82px] min-w-[125px] sm:min-w-0 shrink-0 sm:shrink justify-center snap-center ${
                         isSelected
@@ -480,7 +492,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                       </div>
 
                       <span className="text-xs font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
-                        {belt.name.replace(' Belt', '').replace(' · ', ' ')}
+                        {belt.shortName}
                       </span>
                       <span className="text-[11px] text-zinc-400 font-medium truncate max-w-full">{belt.rankTitle}</span>
                     </button>
@@ -490,7 +502,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
               {/* Connector line behind the tabs (desktop) */}
               <div className="hidden lg:block absolute top-[28px] left-8 right-8 h-1 bg-gradient-to-r from-zinc-200 via-brand-red/40 to-black/80 dark:from-zinc-800 dark:via-brand-red/60 dark:to-white/80 rounded-full z-0 opacity-40 pointer-events-none" />
-              <p className="type-meta mt-1 sm:hidden">Swipe the card or tap a belt</p>
+              <p className="type-meta mt-1 sm:hidden">{labels.swipeHint}</p>
             </div>
 
             {/* Belt detail card (re-mounted per belt; GSAP reveals it from the travel direction) */}
@@ -534,7 +546,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
                   {/* Meaning & philosophy */}
                   <div data-card-item className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">Belt Symbolism &amp; Meaning</span>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">{labels.symbolism}</span>
                     <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">{activeBelt.meaning}</p>
                     <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed italic border-t border-zinc-100 dark:border-zinc-800/80 pt-2">
                       &ldquo;{activeBelt.philosophy}&rdquo;
@@ -545,10 +557,10 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                   <div data-card-item className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2.5">
                     <div className="flex items-center gap-2">
                       <BookOpen className="w-4 h-4 text-brand-red" />
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">Poomsae at this belt</span>
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">{labels.poomsaeAtBelt}</span>
                     </div>
                     <h5 className="text-sm font-bold text-zinc-900 dark:text-white">{activeBelt.poomsae}</h5>
-                    <FormLinks belt={activeBelt} forms={forms} chipAttr />
+                    <FormLinks belt={activeBelt} forms={forms} walkthroughLabel={labels.walkthrough} chipAttr />
                     <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{activeBelt.poomsaeMeaning}</p>
                   </div>
 
@@ -559,7 +571,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                         <Clock className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">Typical time from start</span>
+                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">{labels.timeFromStart}</span>
                         <span className="font-bold text-zinc-900 dark:text-white">{activeBelt.timeline}</span>
                       </div>
                     </div>
@@ -569,7 +581,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                         <Zap className="w-4 h-4" />
                       </div>
                       <div>
-                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">Board breaking (Kyokpa)</span>
+                        <span className="text-zinc-400 font-bold uppercase text-[11px] block">{labels.boardBreaking}</span>
                         <span className="font-bold text-zinc-900 dark:text-white text-xs block">{activeBelt.tracks.breaking}</span>
                       </div>
                     </div>
@@ -580,13 +592,14 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 <div className="lg:col-span-7 space-y-6">
                   <div>
                     <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2 flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-brand-red" /> Training at this belt
+                      <Layers className="w-3.5 h-3.5 text-brand-red" /> {labels.trainingAtBelt}
                     </span>
                     <dl className="divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950">
-                      {TRAINING_DISCIPLINES.map((track) => (
+                      {disciplines.map((track) => (
                         <div key={track.key} data-card-item className="grid grid-cols-[112px_minmax(0,1fr)] gap-3 px-3.5 py-2.5 text-xs sm:grid-cols-[140px_minmax(0,1fr)]">
                           <dt className="font-bold text-zinc-900 dark:text-white">
-                            {track.label} <span className="type-hangul text-zinc-400">{track.korean}</span>
+                            {track.label}
+                            {track.korean !== track.label && <span className="type-hangul text-zinc-400"> {track.korean}</span>}
                           </dt>
                           <dd className="leading-relaxed text-zinc-600 dark:text-zinc-300">{activeBelt.tracks[track.key]}</dd>
                         </div>
@@ -596,7 +609,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
                   <div>
                     <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2 flex items-center gap-1.5">
-                      <Target className="w-3.5 h-3.5 text-brand-red" /> Stage Syllabus Goals &amp; Competencies
+                      <Target className="w-3.5 h-3.5 text-brand-red" /> {labels.goals}
                     </span>
                     <div className="grid grid-cols-1 gap-2.5">
                       {activeBelt.syllabusGoals.map((goal, i) => (
@@ -619,7 +632,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
                   <div>
                     <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2 flex items-center gap-1.5">
-                      <Flame className="w-3.5 h-3.5 text-brand-red" /> Physical Weaponry &amp; Stances
+                      <Flame className="w-3.5 h-3.5 text-brand-red" /> {labels.skills}
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {activeBelt.physicalSkills.map((skill, i) => (
@@ -636,7 +649,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
                   <div>
                     <span data-card-item className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2.5 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-red" /> Promotion Exam Testing Checklist
+                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-red" /> {labels.examChecklist}
                     </span>
                     <div className="space-y-2">
                       {activeBelt.requirements.map((req, i) => (
@@ -698,18 +711,18 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-4 border-t border-zinc-200 dark:border-zinc-800">
                   <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2.5">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">Poomsae at this belt</span>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">{labels.poomsaeAtBelt}</span>
                     <p className="font-bold text-zinc-900 dark:text-white">{belt.poomsae}</p>
-                    <FormLinks belt={belt} forms={forms} />
+                    <FormLinks belt={belt} forms={forms} walkthroughLabel={labels.walkthrough} />
                   </div>
                   <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">Key Technical Focus</span>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">{labels.keyFocus}</span>
                     <p className="font-bold text-zinc-900 dark:text-white">{belt.focus}</p>
                   </div>
                 </div>
 
                 <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2 text-xs sm:grid-cols-2">
-                  {TRAINING_DISCIPLINES.filter((track) => track.key !== 'poomsae').map((track) => (
+                  {disciplines.filter((track) => track.key !== 'poomsae').map((track) => (
                     <div key={track.key} className="flex gap-2">
                       <dt className="w-28 shrink-0 font-bold text-zinc-900 dark:text-white">{track.label}</dt>
                       <dd className="text-zinc-600 dark:text-zinc-400">{belt.tracks[track.key]}</dd>
