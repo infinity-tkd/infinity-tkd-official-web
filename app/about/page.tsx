@@ -50,7 +50,7 @@ export default function AboutPage() {
   const [activeTab, setActiveTab] = React.useState<
     'story' | 'mind' | 'quad' | 'values' | 'tenets' | 'journey' | 'faculty'
   >('story')
-  const [selectedBeltColor, setSelectedBeltColor] = React.useState<string>('Red Belt')
+  const [selectedBeltColor, setSelectedBeltColor] = React.useState<string>('red')
 
   const localizedTeam = React.useMemo(() => {
     return localizeList(teamMembers)
@@ -83,9 +83,11 @@ export default function AboutPage() {
   }, [selectedMember])
 
   // Belt marks come from the shared belt structure (data/belts.ts), so names, colours and
-  // timelines always match the belt journey.
-  const beltPalette = beltProgression.map((belt) => ({
+  // timelines always match the belt journey (in the visitor's language).
+  const beltPalette = localizeList(beltProgression).map((belt) => ({
+    id: belt.id,
     name: belt.name,
+    shortName: belt.shortName,
     korean: `${belt.koreanName.split(' (')[0]} · ${belt.rankTitle}`,
     hex: belt.hex,
     border: belt.borderHex,
@@ -737,11 +739,11 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
               {beltPalette.map((belt) => {
-                const isSelected = selectedBeltColor === belt.name
+                const isSelected = selectedBeltColor === belt.id
                 return (
                   <button
-                    key={belt.name}
-                    onClick={() => setSelectedBeltColor(belt.name)}
+                    key={belt.id}
+                    onClick={() => setSelectedBeltColor(belt.id)}
                     className={`p-3.5 sm:p-4 rounded-xl border text-center transition-all duration-300 flex flex-col items-center justify-between gap-2 touch-press cursor-pointer ${
                       isSelected
                         ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900 shadow-lg scale-105 ring-2 ring-brand-red/30'
@@ -753,7 +755,7 @@ export default function AboutPage() {
                       style={{ backgroundColor: belt.hex, borderColor: belt.border }}
                     />
                     <span className="text-xs font-bold text-zinc-900 dark:text-white leading-tight">
-                      {belt.name.replace(' Belt', '')}
+                      {belt.shortName}
                     </span>
                   </button>
                 )
@@ -762,10 +764,10 @@ export default function AboutPage() {
 
             {/* Selected Belt Details Card */}
             {(() => {
-              const activeBeltObj = beltPalette.find((b) => b.name === selectedBeltColor) || beltPalette[5]
+              const activeBeltObj = beltPalette.find((b) => b.id === selectedBeltColor) || beltPalette[5]
               return (
                 <div
-                  key={activeBeltObj.name}
+                  key={activeBeltObj.id}
                   className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto shadow-md animate-fade-in"
                 >
                   <div className="flex items-center gap-4">
@@ -798,7 +800,7 @@ export default function AboutPage() {
 
                   <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
                     <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm">
-                      Typical time from start: {activeBeltObj.timeline}
+                      {t.beltGuide.timeFromStart}: {activeBeltObj.timeline}
                     </span>
                     <span className="text-xs font-mono text-zinc-400">
                       HEX: {activeBeltObj.hex}

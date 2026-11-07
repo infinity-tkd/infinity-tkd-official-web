@@ -7,6 +7,7 @@
  *   - local files referenced by data ("/images/x.jpg", "/docs/x.pdf") missing from public/
  *   - poomsae walkthroughs whose form or step count does not match the library entry
  *   - belts listing a form id that does not exist in the poomsae library
+ *   - belt translations missing a field or with a different number of list items (warning only)
  *   - blog posts with missing front matter or a missing cover image
  *   - UI dictionary keys present in English but missing in km / zh / ko (warning only)
  */
@@ -119,10 +120,36 @@ if (library) {
 }
 
 // Belt structure: every form a belt lists must exist in the poomsae library.
-const belts = (modules.get('data/belts.ts') as { beltProgression?: { id: string; forms: string[] }[] } | undefined)?.beltProgression ?? []
+type BeltData = { id: string; forms: string[]; translations?: Record<string, Record<string, unknown> | undefined> } & Record<string, unknown>
+const belts = (modules.get('data/belts.ts') as { beltProgression?: BeltData[] } | undefined)?.beltProgression ?? []
 for (const belt of belts) {
   for (const form of belt.forms) {
     if (!poomsaeById.has(form)) error(`belt "${belt.id}": form "${form}" is not a poomsae id in data/library/poomsae/poomsae.ts`)
+  }
+}
+
+// Belt translations: each language covers every text field, with as many list items as English.
+const BELT_TEXT_FIELDS = ['name', 'shortName', 'rankTitle', 'poomsae', 'alsoTrains', 'poomsaeMeaning', 'meaning', 'philosophy', 'timeline', 'focus', 'syllabusGoals', 'physicalSkills', 'tracks', 'requirements']
+for (const belt of belts) {
+  for (const language of ['km', 'zh', 'ko']) {
+    const translated = belt.translations?.[language]
+    const where = `belt "${belt.id}" (${language})`
+    if (!translated) {
+      warn(`${where}: no translation, so it shows in English`)
+      continue
+    }
+    for (const field of BELT_TEXT_FIELDS) {
+      const english = belt[field]
+      const value = translated[field]
+      if (english === undefined) continue
+      if (value === undefined) warn(`${where}: "${field}" is not translated`)
+      else if (Array.isArray(english) && (!Array.isArray(value) || value.length !== english.length)) {
+        warn(`${where}: "${field}" has ${Array.isArray(value) ? value.length : 0} item(s), English has ${english.length}`)
+      } else if (english && typeof english === 'object' && !Array.isArray(english)) {
+        const missing = Object.keys(english).filter((key) => !(value as Record<string, unknown>)[key])
+        if (missing.length) warn(`${where}: "${field}" is missing ${missing.join(', ')}`)
+      }
+    }
   }
 }
 
