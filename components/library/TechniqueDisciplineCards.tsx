@@ -87,7 +87,7 @@ function DisciplineCard({ item, onSelect, accent, children, meta }: ShellProps) 
               }}
               aria-label={`Quick view: ${item.name}`}
               // Buttons don't inherit text-transform (Tailwind preflight resets it), so restate it.
-              className="max-w-full truncate text-left uppercase focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+              className="max-w-full min-h-[28px] truncate text-left uppercase focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
             >
               {item.name}
             </button>
@@ -103,7 +103,7 @@ function DisciplineCard({ item, onSelect, accent, children, meta }: ShellProps) 
           href={`/library/${item.category}/${item.slug}`}
           onClick={(e) => e.stopPropagation()}
           className={cn(
-            'inline-flex shrink-0 items-center gap-1 text-xs font-semibold transition-opacity hover:opacity-80',
+            'inline-flex min-h-[32px] shrink-0 items-center gap-1 text-xs font-semibold transition-opacity hover:opacity-80',
             a.link
           )}
         >

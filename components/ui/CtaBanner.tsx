@@ -10,10 +10,13 @@ interface CtaBannerProps {
   label: string
 }
 
-/** Dark call-to-action band used at the end of content pages. */
+/**
+ * Dark call-to-action band used at the end of content pages. It is dark in both themes, so it
+ * carries the `dark` class: its text uses the dark-surface colours (see globals.css).
+ */
 export function CtaBanner({ eyebrow, title, description, href, label }: CtaBannerProps) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-brand-red/40 bg-zinc-900 p-8 sm:p-12 text-white">
+    <div className="dark relative overflow-hidden rounded-2xl border border-brand-red/40 bg-zinc-900 p-8 sm:p-12 text-white">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-red/20 blur-[100px]"

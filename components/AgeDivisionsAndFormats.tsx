@@ -269,7 +269,7 @@ export function AgeDivisionsAndFormats() {
                     </span>
                     <Link
                       href={`/contact?subject=Inquiry%20regarding%20${encodeURIComponent(format.title)}`}
-                      className="font-bold text-brand-red hover:underline inline-flex items-center gap-1 text-[11px] uppercase tracking-wider touch-press"
+                      className="font-bold text-brand-red hover:underline inline-flex min-h-[32px] items-center gap-1 text-[11px] uppercase tracking-wider touch-press"
                     >
                       Inquire <ChevronRight className="w-3 h-3" />
                     </Link>

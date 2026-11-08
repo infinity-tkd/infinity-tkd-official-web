@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { pricingFaqs } from '@/data/pricing'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Memberships & Tuition Plans',
@@ -13,12 +14,14 @@ export const metadata: Metadata = {
     description:
       'Transparent tuition pricing, flexible monthly memberships, and family training packages in Phnom Penh.',
     url: 'https://infinitytaekwondo.com/pricing',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Memberships & Tuition Plans | Infinity Taekwondo',
     description:
       'Transparent tuition pricing, flexible monthly memberships, and family training packages in Phnom Penh.',
+    images: [TWITTER_IMAGE],
   },
 }
 

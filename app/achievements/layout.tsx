@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Championship Achievements & Medal Record',
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
     description:
       'Official championship records, national gold medals, and tournament milestones of Infinity Taekwondo athletes.',
     url: 'https://infinitytaekwondo.com/achievements',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Championship Achievements & Medal Record | Infinity Taekwondo',
     description:
       'Official championship records, national gold medals, and tournament milestones of Infinity Taekwondo athletes.',
+    images: [TWITTER_IMAGE],
   },
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { academyCourses } from '@/data/academy'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Academy Training Programs & Syllabus',
@@ -13,12 +14,14 @@ export const metadata: Metadata = {
     description:
       'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery across all age divisions.',
     url: 'https://infinitytaekwondo.com/academy',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Academy Training Programs & Syllabus | Infinity Taekwondo',
     description:
       'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery across all age divisions.',
+    images: [TWITTER_IMAGE],
   },
 }
 

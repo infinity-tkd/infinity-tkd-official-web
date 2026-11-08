@@ -131,13 +131,13 @@ export function TechniqueDetailClient({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400 mb-6 flex-wrap">
-          <Link href="/library" className="hover:text-brand-red transition-colors">
+          <Link href="/library" className="inline-flex min-h-[32px] items-center hover:text-brand-red transition-colors">
             {t.library.heroTitle1} {t.library.heroTitle2}
           </Link>
           <span>/</span>
           <Link
             href={`/library/${item.category}`}
-            className="hover:text-brand-red transition-colors text-brand-red"
+            className="inline-flex min-h-[32px] items-center hover:text-brand-red transition-colors text-brand-red"
           >
             {categoryMeta?.title || item.category}
           </Link>
@@ -957,6 +957,7 @@ export function TechniqueDetailClient({
                     <SafeImage
                       src={rel.image}
                       alt={rel.name}
+                      sizes="48px"
                       className="w-12 h-12 rounded-lg object-cover grayscale group-hover:grayscale-0 transition-all shrink-0"
                     />
                     <div className="min-w-0">
@@ -975,7 +976,7 @@ export function TechniqueDetailClient({
         )}
 
         {/* Lead Gen Banner (14px radius) */}
-        <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="dark p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-lg">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
               {t.library.inPersonMastery}

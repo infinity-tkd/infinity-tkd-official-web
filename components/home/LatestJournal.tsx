@@ -26,7 +26,7 @@ export function LatestJournal() {
 
           <Link
             href="/blog"
-            className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
+            className="inline-flex min-h-[32px] shrink-0 items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
           >
             All articles <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

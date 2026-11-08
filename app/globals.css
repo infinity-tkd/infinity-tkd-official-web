@@ -23,7 +23,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
-    --color-brand-text: #D0272F; /* WCAG AA 4.88:1 on light surface */
+    --color-brand-text: #C81E27; /* small red text: 5.7:1 on white, 4.7:1+ on brand-tint pills */
     --color-brand-muted: rgba(239, 47, 56, 0.1);
     --color-brand-glow: rgba(239, 47, 56, 0.35);
   }
@@ -42,7 +42,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
-    --color-brand-text: #EF2F38; /* WCAG AA 5.26:1 on dark surface */
+    --color-brand-text: #F43F48; /* small red text: 5.6:1 on black, 4.7:1+ on zinc-900 cards */
     --color-brand-muted: rgba(239, 47, 56, 0.15);
     --color-brand-glow: rgba(239, 47, 56, 0.5);
   }
@@ -67,13 +67,50 @@
     transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* WCAG 2.2 AA Compliance: Ensure text-zinc-400 in light mode meets 4.5:1 contrast against white surfaces */
-  html:not(.dark) .text-zinc-400 {
-    color: #71717a !important; /* Zinc-500: 4.54:1 contrast ratio against #FFFFFF */
+  /* ---------------------------------------------------------------------------------------------
+     WCAG 2.2 AA text contrast (4.5:1 for normal text).
+     Colour utilities that are too faint on the surface they sit on are corrected here once rather
+     than in every component. "Light surface" means not inside a `.dark` element: `.dark` is on
+     <html> in dark mode, and panels that are dark in both themes (CTA banners, rule readers, the
+     walkthrough) carry their own `dark` class so they keep their dark-theme colours.
+     These rules add one class of specificity and no !important, so hover/focus/dark: variants
+     written on the element still win.
+     --------------------------------------------------------------------------------------------- */
+
+  /* Grey text on light surfaces: zinc-400 (2.5:1) -> zinc-500 (4.8:1), zinc-500 -> zinc-600 (7.7:1). */
+  .text-zinc-400:not(.dark *) {
+    color: #71717a;
+  }
+  .text-zinc-500:not(.dark *) {
+    color: #52525b;
   }
 
-  html:not(.dark) .text-zinc-500 {
-    color: #52525b !important; /* Zinc-600: 5.74:1 contrast ratio against #FFFFFF */
+  /* Grey text on dark surfaces: zinc-500 is 3.7-4.3:1 on black / zinc-900 -> zinc-400 (6.3:1+). */
+  .dark .text-zinc-500 {
+    color: #a1a1aa;
+  }
+
+  /* Emerald / amber labels on light surfaces: the 500-600 shades are 2.5-3.8:1 -> 700 shades (5:1+). */
+  .text-emerald-500:not(.dark *),
+  .text-emerald-600:not(.dark *) {
+    color: #047857;
+  }
+  .text-amber-500:not(.dark *),
+  .text-amber-600:not(.dark *) {
+    color: #b45309;
+  }
+
+  /* Small brand-red text (labels, eyebrows, chips, inline links) uses the accessible red for its
+     surface; large display text keeps the signature #EF2F38. */
+  :is(.text-xs, .text-sm, .text-base, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\], .type-label, .type-meta).text-brand-red,
+  :is(.text-xs, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\]) .text-brand-red {
+    color: var(--color-brand-text);
+  }
+
+  /* Small white text on a brand-red fill: the deeper brand red #D0272F gives 5.2:1 (#EF2F38 is 4.1:1).
+     :where() keeps this at the same weight as hover:bg-* utilities, which therefore still apply. */
+  :where(.text-xs, .text-sm, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\]).bg-brand-red.text-white {
+    background-color: #d0272f;
   }
 
   /* Universal Accessible Keyboard Focus Rings (WCAG 2.4.7 / 2.4.11) */

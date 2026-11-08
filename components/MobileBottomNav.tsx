@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { prefetchFor } from '@/config/navigation'
 import { useLanguage } from '@/context/LanguageContext'
 import { useScrollNavContext } from '@/context/ScrollNavContext'
 
@@ -81,7 +82,7 @@ export function MobileBottomNav() {
         {navItems.map((item) => {
           const Icon = item.icon
           const labelClass = cn(
-            'mt-1 max-w-full truncate px-1 text-[10px] font-semibold leading-none transition-colors',
+            'mt-1 max-w-full truncate px-1 text-[11px] font-semibold leading-none transition-colors',
             item.isActive ? 'text-brand-red' : 'text-zinc-500 dark:text-zinc-400'
           )
 
@@ -89,6 +90,7 @@ export function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={prefetchFor(item.href)}
               aria-current={item.isActive ? 'page' : undefined}
               className="group flex min-h-[44px] cursor-pointer flex-col items-center justify-center touch-press"
             >

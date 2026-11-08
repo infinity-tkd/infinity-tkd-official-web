@@ -414,7 +414,7 @@ export function WangFloorPlanVisualizer({
 
       {/* Explanatory Callout when a line is hovered or selected */}
       {activeHighlight && wangFloorPlanLines && (
-        <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs space-y-1 animate-fade-in">
+        <div className="dark p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs space-y-1 animate-fade-in">
           {activeHighlight === 1 && (
             <>
               <div className="flex items-center justify-between text-zinc-300">

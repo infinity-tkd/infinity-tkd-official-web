@@ -422,6 +422,7 @@ export default function AchievementsPage() {
                                       key={idx}
                                       src={student.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                                       alt={student.name}
+                                      sizes="24px"
                                       className="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-zinc-900 object-cover"
                                     />
                                   ))}
@@ -505,6 +506,7 @@ export default function AchievementsPage() {
                               <SafeImage
                                 src={student.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'}
                                 alt={student.name}
+                                sizes="48px"
                                 className="w-12 h-12 rounded-xl object-cover border-2 border-brand-red/40 shadow-sm group-hover:scale-105 transition-transform"
                               />
                               <div>
@@ -613,7 +615,7 @@ export default function AchievementsPage() {
             </button>
 
             {/* Modal Header Banner */}
-            <div className="relative p-6 sm:p-8 bg-zinc-900 text-white overflow-hidden border-b border-zinc-800">
+            <div className="dark relative p-6 sm:p-8 bg-zinc-900 text-white overflow-hidden border-b border-zinc-800">
               <div className="absolute top-0 right-0 w-72 h-72 bg-brand-red/15 blur-[90px] rounded-full pointer-events-none" />
 
               <div className="relative z-10 pr-8">
@@ -694,6 +696,7 @@ export default function AchievementsPage() {
                             <SafeImage
                               src={student.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop'}
                               alt={student.name}
+                              sizes="40px"
                               className="w-10 h-10 rounded-xl object-cover border border-brand-red/30 shrink-0"
                             />
                             <div>
@@ -836,6 +839,7 @@ export default function AchievementsPage() {
                 <SafeImage
                   src={selectedCompetitor.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'}
                   alt={selectedCompetitor.name}
+                  sizes="80px"
                   className="w-20 h-20 rounded-xl object-cover border-2 border-brand-red shadow-md shrink-0"
                 />
                 <div>

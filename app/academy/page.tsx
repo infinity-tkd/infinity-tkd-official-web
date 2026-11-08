@@ -1,5 +1,6 @@
 'use client'
 
+import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import Link from 'next/link'
 import { academyCourses, type AcademyCourse } from '@/data/academy'
@@ -239,8 +240,8 @@ export default function AcademyPage() {
 
                             <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
                               <span
-                                className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-md"
-                                style={{ backgroundColor: badgeColor }}
+                                className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-md"
+                                style={badgeColors(badgeColor)}
                               >
                                 {course.badge}
                               </span>
@@ -379,8 +380,8 @@ export default function AcademyPage() {
 
               <div className="absolute bottom-6 left-6 right-6 z-20">
                 <span
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-md inline-block mb-2"
-                  style={{ backgroundColor: getDivisionBadgeColor(activeCourse.division) }}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-md inline-block mb-2"
+                  style={badgeColors(getDivisionBadgeColor(activeCourse.division))}
                 >
                   {activeCourse.badge}
                 </span>

@@ -29,7 +29,7 @@ export function BlackBeltStripesBadge({
         ))}
       </div>
       {roman && (
-        <span className="text-[10px] font-mono font-black tracking-wider text-amber-400">
+        <span className="text-[11px] font-mono font-black tracking-wider text-amber-400">
           {roman}
         </span>
       )}

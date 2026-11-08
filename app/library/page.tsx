@@ -245,7 +245,7 @@ export default function LibraryPage() {
                     <Link
                       href={`/library/${cat.id}`}
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 text-brand-red transition-opacity hover:opacity-80"
+                      className="inline-flex min-h-[32px] items-center gap-1 text-brand-red transition-opacity hover:opacity-80"
                     >
                       Open hub <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>

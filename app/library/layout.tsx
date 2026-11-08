@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   // A plain string here would drop the root "%s | Infinity Taekwondo" template for every
@@ -17,12 +18,14 @@ export const metadata: Metadata = {
     description:
       'Explore official Kukkiwon Poomsae breakdowns, Olympic kicking biomechanics, and technical martial arts dossiers.',
     url: 'https://infinitytaekwondo.com/library',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Official Curriculum Library & Knowledge Base | Infinity Taekwondo',
     description:
       'Explore official Kukkiwon Poomsae breakdowns, Olympic kicking biomechanics, and technical martial arts dossiers.',
+    images: [TWITTER_IMAGE],
   },
 }
 

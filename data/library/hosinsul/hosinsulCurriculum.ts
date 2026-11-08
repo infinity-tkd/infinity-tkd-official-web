@@ -637,7 +637,7 @@ export const hosinsulCurriculum: HosinsulBeltCurriculum[] = [
     geup: '6th & 5th Geup',
     koreanRank: '초록띠 (6급 & 5급)',
     beltColor: '#09BB00',
-    textColor: '#FFFFFF',
+    textColor: '#000000', // white on this green is 2.6:1; black is 8:1
     borderColor: '#16A34A',
     defensiveObjective:
       'Manage cervical spine threats, survive respiratory/vascular chokes, execute 45-degree angle evasion (Cheon-ji movement), and counter headlocks.',

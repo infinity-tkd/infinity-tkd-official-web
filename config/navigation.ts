@@ -164,6 +164,17 @@ export function isGroupActive(pathname: string | null, group: NavGroup): boolean
   return group.items.some((item) => isPathActive(pathname, item.href))
 }
 
+/**
+ * `prefetch` value for links in the site chrome (header, bottom bar, footer), which are on every page.
+ * Library pages ship the technique dataset (~230 KB compressed), and Next.js would otherwise
+ * prefetch it on every page view because a "Library" link is always visible. Library links load
+ * on click instead; every other link keeps the default prefetching.
+ */
+export function prefetchFor(href: string): false | undefined {
+  const path = pathOf(href)
+  return path === '/library' || path.startsWith('/library/') ? false : undefined
+}
+
 /* -------------------------------------------------------------------------------------------
  * Footer
  * ----------------------------------------------------------------------------------------- */

@@ -1,5 +1,6 @@
 'use client'
 
+import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import Link from 'next/link'
 import {
@@ -239,7 +240,7 @@ export function HistoryHeritageMaster() {
                   value={timelineSearch}
                   onChange={(e) => setTimelineSearch(e.target.value)}
                   placeholder={ht.searchPlaceholder}
-                  className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-brand-red transition-all"
+                  className="w-full pl-9 pr-4 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-base sm:text-xs min-h-[44px] font-mono text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-brand-red transition-all"
                 />
                 {timelineSearch && (
                   <button
@@ -482,7 +483,7 @@ export function HistoryHeritageMaster() {
                         <span className="text-xl font-bold font-mono px-2.5 py-0.5 rounded bg-white dark:bg-zinc-900 border text-zinc-900 dark:text-white">
                           {ideology.hanja}
                         </span>
-                        <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded text-white" style={{ backgroundColor: ideology.badgeColor }}>
+                        <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded" style={badgeColors(ideology.badgeColor)}>
                           {ideology.direction}
                         </span>
                       </div>

@@ -1,6 +1,8 @@
 'use client'
 
+import { badgeColors } from '@/lib/color'
 import * as React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowUpRight,
@@ -681,7 +683,7 @@ export default function AboutPage() {
 
           {/* Logo Formula & Visual Equation */}
           <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/30 text-center relative overflow-hidden shadow-xl">
+            <div className="dark p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/30 text-center relative overflow-hidden shadow-xl">
               <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[120px] rounded-full pointer-events-none" />
 
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
@@ -901,8 +903,8 @@ export default function AboutPage() {
                     <div>
                       <div className="flex justify-between items-start mb-6">
                         <span
-                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                          style={{ backgroundColor: pillar.color }}
+                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-sm"
+                          style={badgeColors(pillar.color)}
                         >
                           {pillar.badge}
                         </span>
@@ -1189,8 +1191,8 @@ export default function AboutPage() {
                     <div className="md:col-span-7 space-y-4">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <span
-                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                          style={{ backgroundColor: currentM.badgeColor }}
+                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-sm"
+                          style={badgeColors(currentM.badgeColor)}
                         >
                           {currentM.badge}
                         </span>
@@ -1302,8 +1304,8 @@ export default function AboutPage() {
                             </span>
                           </div>
                           <span
-                            className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                            style={{ backgroundColor: m.badgeColor }}
+                            className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-sm"
+                            style={badgeColors(m.badgeColor)}
                           >
                             {m.badge}
                           </span>
@@ -1433,7 +1435,8 @@ export default function AboutPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="w-12 h-12 rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1">
-                        <SafeImage src={partner.logo} alt={partner.name} className="w-full h-full object-cover rounded grayscale group-hover:grayscale-0 transition-all" />
+                        {/* next/image: the source PNGs are up to ~1 MB; this serves a 40px WebP. */}
+                        <Image src={partner.logo} alt={partner.name} width={40} height={40} className="w-full h-full object-cover rounded grayscale group-hover:grayscale-0 transition-all" />
                       </div>
                       <span className="px-2 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
                         {partner.tier}
@@ -1471,7 +1474,7 @@ export default function AboutPage() {
       {/* BOTTOM CTA BANNER */}
       {/* ==================================================================== */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
-        <div className="p-8 sm:p-12 md:p-14 rounded-2xl bg-zinc-900 text-white border border-zinc-800 text-center relative overflow-hidden shadow-2xl">
+        <div className="dark p-8 sm:p-12 md:p-14 rounded-2xl bg-zinc-900 text-white border border-zinc-800 text-center relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/15 blur-[140px] rounded-full pointer-events-none" />
 
           <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">

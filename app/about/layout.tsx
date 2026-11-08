@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'About Our Legacy & Philosophy',
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
     description:
       'Traditional Korean martial discipline synthesized with modern sports biomechanics and Olympic pedagogy.',
     url: 'https://infinitytaekwondo.com/about',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About Our Legacy & Philosophy | Infinity Taekwondo',
     description:
       'Traditional Korean martial discipline synthesized with modern sports biomechanics and Olympic pedagogy.',
+    images: [TWITTER_IMAGE],
   },
 }
 

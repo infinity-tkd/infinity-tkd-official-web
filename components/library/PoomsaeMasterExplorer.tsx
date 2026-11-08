@@ -519,7 +519,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={pt.searchPlaceholder}
-                  className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-brand-red transition-all"
+                  className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-base sm:text-xs min-h-[44px] font-mono text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-brand-red transition-all"
                 />
                 {searchQuery && (
                   <button

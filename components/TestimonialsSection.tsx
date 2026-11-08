@@ -91,6 +91,7 @@ export function TestimonialsSection() {
                   <SafeImage
                     src={item.avatar}
                     alt={item.name}
+                    sizes="44px"
                     className="w-11 h-11 rounded-xl object-cover border border-brand-red/30 shadow-sm"
                   />
                   <div>

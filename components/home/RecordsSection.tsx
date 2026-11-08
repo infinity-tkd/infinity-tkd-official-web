@@ -29,7 +29,7 @@ export function RecordsSection() {
 
             <Link
               href="/achievements"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
+              className="inline-flex min-h-[32px] items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
             >
               {t.community.viewTrophyWall} <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

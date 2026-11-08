@@ -230,7 +230,7 @@ export function InfinityBrainAnimation() {
   }, [])
 
   return (
-    <div className="relative rounded-2xl bg-zinc-950 border border-zinc-800/90 overflow-hidden shadow-2xl p-5 sm:p-8 md:p-10 text-white font-sans">
+    <div className="dark relative rounded-2xl bg-zinc-950 border border-zinc-800/90 overflow-hidden shadow-2xl p-5 sm:p-8 md:p-10 text-white font-sans">
       {/* Subtle Background Glow Aura */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,47,56,0.1),_transparent_70%)] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-brand-red/10 blur-[140px] rounded-full pointer-events-none" />
@@ -306,7 +306,7 @@ export function InfinityBrainAnimation() {
             <div className="relative p-5 sm:p-6 rounded-full bg-black/80 border border-brand-red/40 shadow-brand-glow backdrop-blur-md">
               <InfinityLogo variant="symbol" className="w-24 sm:w-32 h-auto text-brand-red" animated={true} />
             </div>
-            <span className="text-[10px] font-black uppercase tracking-widest text-brand-red mt-2.5 bg-black/70 px-3 py-1 rounded-lg border border-brand-red/20">
+            <span className="text-[11px] font-black uppercase tracking-widest text-brand-red mt-2.5 bg-black/70 px-3 py-1 rounded-lg border border-brand-red/20">
               The Eternal Loop
             </span>
           </div>
@@ -382,7 +382,7 @@ export function InfinityBrainAnimation() {
             {/* Metric Callout Card */}
             <div className="grid grid-cols-2 gap-3 mb-5 p-3.5 rounded-xl bg-black/50 border border-zinc-800/80">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
                   {activeNode.metricLabel}
                 </span>
                 <div className="flex items-baseline gap-1 mt-0.5">
@@ -393,7 +393,7 @@ export function InfinityBrainAnimation() {
                 </div>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
                   Cognitive Channel
                 </span>
                 <span className="text-xs font-mono font-bold text-emerald-400 mt-1.5 block">
@@ -476,7 +476,7 @@ export function InfinityBrainAnimation() {
             {testState === 'result' && (
               <div className="flex items-center gap-4 bg-black/60 p-3 px-5 rounded-xl border border-zinc-700 min-h-[44px]">
                 <div className="text-left">
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 block">Your Score</span>
+                  <span className="text-[11px] uppercase font-bold text-zinc-400 block">Your Score</span>
                   <span className="text-2xl font-black font-mono text-white">
                     {reactionTime} <span className="text-xs text-brand-red font-bold">ms</span>
                   </span>

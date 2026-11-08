@@ -1,5 +1,6 @@
 'use client'
 
+import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import {
   Shield,
@@ -865,8 +866,8 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
                     {/* Top Metadata */}
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <span
-                        className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider text-white"
-                        style={{ backgroundColor: item.badgeColor }}
+                        className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider"
+                        style={badgeColors(item.badgeColor)}
                       >
                         {item.difficulty}
                       </span>
@@ -1417,8 +1418,8 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span
-                    className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase text-white"
-                    style={{ backgroundColor: activeTechnique.badgeColor }}
+                    className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase"
+                    style={badgeColors(activeTechnique.badgeColor)}
                   >
                     {activeTechnique.difficulty}
                   </span>

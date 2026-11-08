@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { dojangBranches } from '@/data/locations'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Dojang Branches & Training Centers',
@@ -13,12 +14,14 @@ export const metadata: Metadata = {
     description:
       'Explore our state-of-the-art Taekwondo facilities in Phnom Penh: Olympic Branch & Kouk Khleang Branch.',
     url: 'https://infinitytaekwondo.com/locations',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Dojang Branches & Training Centers | Infinity Taekwondo',
     description:
       'Explore our state-of-the-art Taekwondo facilities in Phnom Penh: Olympic Branch & Kouk Khleang Branch.',
+    images: [TWITTER_IMAGE],
   },
 }
 

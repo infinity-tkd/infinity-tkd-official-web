@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Coaches, Faculty & Athlete Community',
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
     description:
       'Meet the Kukkiwon-certified Master instructors and student leaders shaping martial arts excellence in Cambodia.',
     url: 'https://infinitytaekwondo.com/community',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Coaches, Faculty & Athlete Community | Infinity Taekwondo',
     description:
       'Meet the Kukkiwon-certified Master instructors and student leaders shaping martial arts excellence in Cambodia.',
+    images: [TWITTER_IMAGE],
   },
 }
 

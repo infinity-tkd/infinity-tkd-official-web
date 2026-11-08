@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { BeltJourneyPageContent } from '@/components/belts/BeltJourneyPageContent'
 import { getBeltFormLinks } from '@/lib/beltForms'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 const DESCRIPTION =
   'The Infinity Taekwondo belt journey from white belt to 2nd Dan: the poomsae at every rank, plus demonstration, tricking, hosinsul and board breaking in traditional Kukkiwon Taekwondo.'
@@ -13,11 +14,13 @@ export const metadata: Metadata = {
     title: 'Belt Journey: White Belt to 2nd Dan | Infinity Taekwondo',
     description: DESCRIPTION,
     url: '/belt-journey',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Belt Journey: White Belt to 2nd Dan | Infinity Taekwondo',
     description: DESCRIPTION,
+    images: [TWITTER_IMAGE],
   },
 }
 
