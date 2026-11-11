@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { InfinityLogo } from '@/components/InfinityLogo'
+import { InfinityMotion } from '@/components/InfinityMotion'
 
 export default function Loading() {
   return (
@@ -10,7 +10,7 @@ export default function Loading() {
       aria-label="Loading page content"
     >
       <div className="relative p-6 sm:p-8 rounded-full bg-zinc-950/80 border border-brand-red/30 shadow-brand-glow backdrop-blur-md mb-6">
-        <InfinityLogo variant="symbol" className="w-20 sm:w-28 h-auto text-brand-red" animated={true} />
+        <InfinityMotion variant="loader" className="w-20 sm:w-28 h-auto" />
       </div>
 
       <div className="flex items-center gap-2 mb-2">

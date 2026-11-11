@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Building2, ChevronDown, Sparkles } from 'lucide-react'
+import { ArrowRight, Building2, ChevronDown } from 'lucide-react'
+import { InfinityMotion } from '@/components/InfinityMotion'
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
 import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
@@ -29,21 +30,10 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Hangul watermark */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[12vw] font-black uppercase tracking-tighter text-black/[0.03] dark:text-white/[0.03] sm:text-[14vw]"
-      >
-        태권도 INFINITY
-      </div>
-
       <div className="container relative z-20 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <div className="mb-4 inline-block animate-fade-in-up sm:mb-6">
-          <span className="inline-flex items-center gap-2 rounded-xl border border-brand-red/30 bg-brand-red/5 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-red backdrop-blur-md">
-
-            <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /> {t.hero.badge}
-          </span>
-        </div>
+        {/* Brand moment: the belt ties itself into the Infinity loop above the name, forming the
+            logo lockup. Larger on tall tablet screens, where it also fills the hero's upper space. */}
+        <InfinityMotion label={t.hero.badge} className="mx-auto mb-5 h-auto w-44 sm:mb-7 sm:w-56 md:w-72 xl:w-80" />
 
         <h1
           className="mb-4 animate-fade-in-up break-words text-4xl font-black uppercase leading-[0.95] tracking-tight text-zinc-900 dark:text-white sm:mb-6 sm:text-6xl sm:leading-none md:text-7xl lg:text-8xl xl:text-9xl"
