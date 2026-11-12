@@ -27,7 +27,7 @@ function MasterExplorerSkeleton({ title }: { title: string }) {
         <div className="w-8 h-8 rounded-lg bg-zinc-800" />
         <div className="h-5 w-48 rounded bg-zinc-800" />
       </div>
-      <p className="text-xs text-zinc-500 font-mono">{title}</p>
+      <p className="text-xs text-zinc-500">{title}</p>
       <div className="h-44 w-full rounded-xl bg-zinc-800/40" />
     </div>
   )
@@ -277,7 +277,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                   onClick={() => setViewMode('detailed')}
                   className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer touch-press ${
                     viewMode === 'detailed'
-                      ? 'bg-brand-red text-white shadow-brand-glow'
+                      ? 'bg-brand-red text-white'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                   }`}
                 >
@@ -288,7 +288,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                   onClick={() => setViewMode('highlight')}
                   className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer touch-press ${
                     viewMode === 'highlight'
-                      ? 'bg-brand-red text-white shadow-brand-glow'
+                      ? 'bg-brand-red text-white'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                   }`}
                 >
@@ -351,7 +351,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                     <Card3D key={item.id} maxTilt={2} scale={1.005} className="w-full">
                       <div
                         id={item.slug}
-                        className="p-6 sm:p-8 md:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
+                        className="p-6 sm:p-8 md:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 transition-all duration-300 relative overflow-hidden group hover:shadow-xl"
                       >
                         {isPoomsae && item.diagramSymbol && (
                           <div className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40">
@@ -371,13 +371,13 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                               <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-10">
-                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
+                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/10">
                                   {item.beltLevel}
                                 </span>
                               </div>
 
                               <div className="absolute bottom-3 left-3 right-3 text-white">
-                                <span className="text-[11px] font-mono text-zinc-300 font-bold block">
+                                <span className="text-[11px] text-zinc-300 font-bold block">
                                   {item.koreanName}
                                 </span>
                                 <h3 className="text-xl font-black uppercase tracking-tight">
@@ -389,7 +389,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {/* Stance Weight Distribution Meter */}
                             {isStance && item.weightDistribution && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                                <div className="flex justify-between items-center text-[11px] font-mono font-bold uppercase">
+                                <div className="flex justify-between items-center text-[11px] font-bold uppercase">
                                   <span className="text-zinc-400">{t.library.rearLeg}: <strong className="text-amber-500">{rearPercent}%</strong></span>
                                   <span className="text-zinc-400">{t.library.frontLeg}: <strong className="text-emerald-500">{frontPercent}%</strong></span>
                                 </div>
@@ -412,10 +412,10 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             {/* Philosophical Meaning / Origin */}
                             {item.meaning && (
                               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-1">
-                                <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-brand-red block">
+                                <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block">
                                   {isHistory ? t.library.historicalSignificance : t.library.martialPhilosophy}
                                 </span>
-                                <p className="text-zinc-600 dark:text-zinc-300 font-light leading-relaxed">
+                                <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                                   {item.meaning}
                                 </p>
                               </div>
@@ -426,11 +426,11 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                           <div className="lg:col-span-7 space-y-5">
                             <div>
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="text-xs font-mono font-bold uppercase text-brand-red">
+                                <span className="text-xs font-bold uppercase text-brand-red">
                                   {item.romanized || item.koreanName}
                                 </span>
                                 <span className="text-zinc-400">&bull;</span>
-                                <span className="text-xs font-mono text-zinc-500">
+                                <span className="text-xs text-zinc-500">
                                   {item.difficulty} Level
                                 </span>
                               </div>
@@ -509,7 +509,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
 
                               <Link
                                 href={`/contact?subject=Trial%20Booking%20for%20${encodeURIComponent(item.name)}`}
-                                className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors inline-flex items-center gap-1 shadow-brand-glow touch-press"
+                                className="px-4 py-2 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors inline-flex items-center gap-1 touch-press"
                               >
                                 {t.library.bookTrialClass} <ArrowRight className="w-3 h-3" />
                               </Link>

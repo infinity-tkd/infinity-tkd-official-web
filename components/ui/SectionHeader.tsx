@@ -5,7 +5,10 @@ import { Eyebrow } from './PageHero'
 interface SectionHeaderProps {
   eyebrow?: string
   eyebrowIcon?: React.ElementType
-  /** pill (default): the red badge. text: a quiet grey label, for pages with many sections. */
+  /**
+   * text (default): a quiet grey label. pill: the red badge, which the calm design system keeps for
+   * the page hero (PageHero) only.
+   */
   eyebrowStyle?: 'pill' | 'text'
   title: string
   /** Optional trailing words rendered in brand red. */
@@ -25,7 +28,7 @@ interface SectionHeaderProps {
 export function SectionHeader({
   eyebrow,
   eyebrowIcon: EyebrowIcon,
-  eyebrowStyle = 'pill',
+  eyebrowStyle = 'text',
   title,
   accent,
   description,

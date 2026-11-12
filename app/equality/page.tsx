@@ -91,15 +91,15 @@ export default function EqualityPage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Gender Equality</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Gender Equality</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">50/50 Leadership Parity</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Para-Taekwondo</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Para-Taekwondo</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Adaptive Training Pathways</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Zero Discrimination</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Zero Discrimination</span>
             <strong className="text-xs font-bold text-brand-red">Strict Non-Harassment Rule</strong>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function EqualityPage() {
         <p>
           This policy protects all students, parents, master instructors, coaches, referees, employees, and volunteers across all Infinity facilities. No individual shall be discriminated against based on:
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
           <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-center font-bold">Gender &amp; Sex</div>
           <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-center font-bold">Race &amp; Ethnicity</div>
           <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-center font-bold">Nationality &amp; Origin</div>
@@ -160,7 +160,7 @@ export default function EqualityPage() {
         </p>
         <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2 text-xs">
           <strong className="text-brand-red block text-sm">Adaptive Curriculum Modifications</strong>
-          <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+          <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
             Poomsae forms, striking targets, and testing requirements are modified to accommodate physical biomechanics while preserving the authentic discipline, focus, and core principles of Taekwondo.
           </p>
         </div>
@@ -208,16 +208,16 @@ export default function EqualityPage() {
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Diversity &amp; Inclusion Bureau
           </div>
-          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
+          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
             <div>
               <span className="text-[11px] text-zinc-400 block">General Inclusion Inquiries:</span>
-              <a href="mailto:equality@infinitytkd.com" className="text-brand-red font-bold hover:underline">
+              <a href="mailto:equality@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-brand-red font-bold hover:underline">
                 equality@infinitytkd.com
               </a>
             </div>
             <div>
               <span className="text-[11px] text-zinc-400 block">Scholarship Inquiries:</span>
-              <a href="mailto:scholarships@infinitytkd.com" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
+              <a href="mailto:scholarships@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 scholarships@infinitytkd.com
               </a>
             </div>

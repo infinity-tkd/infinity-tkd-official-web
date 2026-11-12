@@ -378,11 +378,6 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
       ref={rootRef}
       className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden relative transition-colors duration-500"
     >
-      {/* Ambient glow in the active belt's colour */}
-      <div
-        className="absolute top-0 right-0 w-96 h-96 blur-[130px] rounded-full pointer-events-none opacity-20 transition-colors duration-700"
-        style={{ backgroundColor: accent }}
-      />
 
       {/* Header (the title block is hidden when the page already has its own hero) */}
       <div
@@ -400,9 +395,9 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
             >
               <Award className="w-3.5 h-3.5" /> {labels.badge}
             </div>
-            <h3 data-guide-intro className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+            <h2 data-guide-intro className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
               {labels.title1} <span className="text-brand-red">{labels.title2}</span>
-            </h3>
+            </h2>
             <p data-guide-intro className="text-zinc-500 dark:text-zinc-400 text-[13px] sm:text-sm mt-1 max-w-xl">
               {labels.subtitle}
             </p>
@@ -424,7 +419,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 onClick={() => setViewMode(mode)}
                 aria-pressed={viewMode === mode}
                 className={`px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-colors duration-300 flex items-center gap-1 cursor-pointer ${
-                  viewMode === mode ? 'bg-brand-red text-white shadow-brand-glow' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                  viewMode === mode ? 'bg-brand-red text-white' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
                 <Icon className="w-3 h-3" /> {label}
@@ -460,11 +455,9 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                   ref={indicatorRef}
                   data-guide-indicator
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-0 top-0 z-20 rounded-xl border-2 opacity-0 transition-[border-color,box-shadow] duration-500"
-                  style={{ borderColor: accent, boxShadow: `0 0 20px ${accent}35` }}
-                >
-                  <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: accent }} />
-                </div>
+                  className="pointer-events-none absolute left-0 top-0 z-20 rounded-xl border-2 opacity-0 transition-[border-color] duration-500"
+                  style={{ borderColor: accent }}
+                />
 
                 {belts.map((belt, index) => {
                   const isSelected = selectedIndex === index
@@ -490,13 +483,10 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                         data-guide-pill
                         className={`w-full h-3 rounded-lg mb-2 shadow-inner border relative overflow-hidden transition-transform duration-300 ${
                           belt.id === 'white' ? 'border-zinc-300 dark:border-zinc-600' : 'border-black/20'
-                        } ${isSelected ? 'scale-105 shadow-md' : 'group-hover:scale-[1.03]'}`}
+                        } ${isSelected ? 'scale-105' : 'group-hover:scale-[1.03]'}`}
                         style={{ backgroundColor: belt.hex }}
                       >
                         <DanBars count={belt.danBars} className="right-1/4" />
-                        {isSelected && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[pulse_2s_ease-in-out_infinite]" />
-                        )}
                       </div>
 
                       <span className="text-xs font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
@@ -509,7 +499,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
               </div>
 
               {/* Connector line behind the tabs (desktop) */}
-              <div className="hidden lg:block absolute top-[28px] left-8 right-8 h-1 bg-gradient-to-r from-zinc-200 via-brand-red/40 to-black/80 dark:from-zinc-800 dark:via-brand-red/60 dark:to-white/80 rounded-full z-0 opacity-40 pointer-events-none" />
+              <div className="hidden lg:block absolute top-[28px] left-8 right-8 h-px bg-zinc-200 dark:bg-zinc-800 z-0 pointer-events-none" />
               <p className="type-meta mt-1 sm:hidden">{labels.swipeHint}</p>
             </div>
 
@@ -539,17 +529,17 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 {/* Left column: belt info & philosophy */}
                 <div className="lg:col-span-5 space-y-5 sm:space-y-6">
                   <div className="flex items-center gap-4">
-                    <div data-card-bar className="w-3.5 h-12 rounded-lg shrink-0 border border-black/20 shadow-md" style={{ backgroundColor: activeBelt.hex }} />
+                    <div data-card-bar className="w-3.5 h-12 rounded-lg shrink-0 border border-black/20" style={{ backgroundColor: activeBelt.hex }} />
                     <div data-card-item>
                       <div className="flex items-center gap-2">
                         <span className={`text-xs font-bold uppercase tracking-widest block transition-colors duration-300 ${accentInkClass}`}>
                           {activeBelt.koreanName}
                         </span>
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                        <span className="text-[11px] px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                           {activeBelt.rankTitle}
                         </span>
                       </div>
-                      <h4 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">{activeBelt.name}</h4>
+                      <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">{activeBelt.name}</h2>
                     </div>
                   </div>
 
@@ -568,7 +558,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                       <BookOpen className="w-4 h-4 text-brand-red" />
                       <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400">{labels.poomsaeAtBelt}</span>
                     </div>
-                    <h5 className="text-sm font-bold text-zinc-900 dark:text-white">{activeBelt.poomsae}</h5>
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{activeBelt.poomsae}</h3>
                     <FormLinks belt={activeBelt} forms={forms} walkthroughLabel={labels.walkthrough} chipAttr />
                     <p className="text-[13px] text-zinc-500 dark:text-zinc-400 leading-relaxed">{activeBelt.poomsaeMeaning}</p>
                   </div>
@@ -683,7 +673,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
             <div className="absolute left-3 sm:left-5 top-4 bottom-4 w-1 rounded-full bg-zinc-200/60 dark:bg-zinc-800/60" aria-hidden="true">
               <div
                 data-journey-fill
-                className="h-full w-full rounded-full bg-gradient-to-b from-zinc-200 via-brand-red to-black dark:from-zinc-800 dark:via-brand-red dark:to-white"
+                className="h-full w-full rounded-full bg-brand-red"
               />
             </div>
 
@@ -697,7 +687,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 {/* Node on the line */}
                 <div
                   data-journey-node
-                  className="absolute -left-5 sm:-left-7 top-8 w-5 h-5 rounded-lg border-2 border-white dark:border-zinc-950 shadow-md"
+                  className="absolute -left-5 sm:-left-7 top-8 w-5 h-5 rounded-lg border-2 border-white dark:border-zinc-950"
                   style={{ backgroundColor: belt.hex }}
                 />
 
@@ -705,11 +695,11 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold uppercase tracking-widest text-brand-red">{belt.koreanName}</span>
-                      <span className="text-[11px] font-mono text-zinc-400">{belt.rankTitle}</span>
+                      <span className="text-[11px] text-zinc-400">{belt.rankTitle}</span>
                     </div>
-                    <h4 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white">{belt.name}</h4>
+                    <h2 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white">{belt.name}</h2>
                   </div>
-                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 self-start sm:self-auto font-mono">
+                  <span className="px-3 py-1 rounded-lg text-xs font-bold bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 self-start sm:self-auto">
                     {belt.timeline}
                   </span>
                 </div>

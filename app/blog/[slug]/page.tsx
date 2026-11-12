@@ -99,15 +99,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           {/* Breadcrumbs */}
           <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-1.5 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-            <Link href="/" className="hover:text-brand-red transition-colors">
+            <Link href="/" className="inline-flex min-h-[32px] items-center transition-colors hover:text-zinc-900 dark:hover:text-white">
               Home
             </Link>
             <ChevronRight className="w-3 h-3" aria-hidden="true" />
-            <Link href="/blog" className="hover:text-brand-red transition-colors">
+            <Link href="/blog" className="inline-flex min-h-[32px] items-center transition-colors hover:text-zinc-900 dark:hover:text-white">
               Blog
             </Link>
             <ChevronRight className="w-3 h-3" aria-hidden="true" />
-            <Link href={`/blog/category/${post.categorySlug}`} className="hover:text-brand-red transition-colors">
+            <Link
+              href={`/blog/category/${post.categorySlug}`}
+              className="inline-flex min-h-[32px] items-center transition-colors hover:text-zinc-900 dark:hover:text-white"
+            >
               {post.category}
             </Link>
           </nav>
@@ -121,7 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
               <span className="inline-flex items-center gap-1.5 font-medium text-zinc-700 dark:text-zinc-300">
-                <UserRound className="w-4 h-4 text-brand-red" aria-hidden="true" />
+                <UserRound className="w-4 h-4 text-zinc-400" aria-hidden="true" />
                 {post.author}
               </span>
               <time dateTime={post.date}>{formatPostDate(post.date)}</time>
@@ -187,7 +190,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <ShareButtons url={absoluteUrl} title={post.title} />
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline"
+                  className="inline-flex min-h-[44px] items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red hover:underline"
                 >
                   <ArrowLeft className="w-4 h-4" aria-hidden="true" /> All articles
                 </Link>

@@ -51,7 +51,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
         <Send className="w-4 h-4" />
       </a>
       <button type="button" onClick={copyLink} className={buttonClass} aria-label={copied ? 'Link copied' : 'Copy link'}>
-        {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Link2 className="w-4 h-4" />}
+        {copied ? <Check className="w-4 h-4 text-zinc-500" /> : <Link2 className="w-4 h-4" />}
       </button>
       <span role="status" aria-live="polite" className="sr-only">
         {copied ? 'Link copied to clipboard' : ''}

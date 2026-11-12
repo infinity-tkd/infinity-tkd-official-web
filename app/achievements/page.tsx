@@ -35,6 +35,7 @@ import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
+import { pressable } from '@/lib/a11y'
 
 export default function AchievementsPage() {
   const { t, localizeList } = useLanguage()
@@ -209,7 +210,6 @@ export default function AchievementsPage() {
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
       <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/10 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4">
@@ -234,7 +234,7 @@ export default function AchievementsPage() {
               key={metric.label}
               className="p-5 sm:p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm text-center flex flex-col justify-center items-center transform transition-all duration-300 hover:border-brand-red/40"
             >
-              <span className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-brand-red mb-1 font-mono">
+              <span className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-brand-red mb-1">
                 <AnimatedCounter value={metric.value} duration={1800} />
               </span>
               <span className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white mb-1.5 sm:mb-2 break-words">
@@ -255,7 +255,7 @@ export default function AchievementsPage() {
             onClick={() => setSelectedView('all')}
             className={`flex-1 min-w-[120px] py-2.5 rounded-lg text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${
               selectedView === 'all'
-                ? 'bg-brand-red text-white shadow-brand-glow'
+                ? 'bg-brand-red text-white'
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
@@ -266,7 +266,7 @@ export default function AchievementsPage() {
             onClick={() => setSelectedView('students')}
             className={`flex-1 min-w-[120px] py-2.5 rounded-lg text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${
               selectedView === 'students'
-                ? 'bg-brand-red text-white shadow-brand-glow'
+                ? 'bg-brand-red text-white'
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
@@ -312,7 +312,7 @@ export default function AchievementsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search tournament records and student competitors"
-                className="w-full sm:w-72 pl-9 pr-8 py-2.5 text-base sm:text-xs min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
+                className="w-full sm:w-72 pl-9 pr-8 py-2.5 text-base lg:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
               />
               {searchQuery && (
                 <button
@@ -337,7 +337,7 @@ export default function AchievementsPage() {
                     onClick={() => setSelectedCategory(cat.id)}
                     className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedCategory === cat.id
-                        ? 'bg-brand-red text-white shadow-brand-glow'
+                        ? 'bg-brand-red text-white'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                     }`}
                   >
@@ -346,7 +346,7 @@ export default function AchievementsPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-xs font-mono text-zinc-400">
+              <div className="text-xs text-zinc-400">
                 Displaying individual student athletes across official tournaments
               </div>
             )}
@@ -384,13 +384,13 @@ export default function AchievementsPage() {
                   return (
                     <Card3D key={record.id} maxTilt={3} className="h-full">
                       <div
-                        onClick={() => openTrophyModal(record)}
+                        {...pressable(() => openTrophyModal(record))}
                         className={`group h-full p-6 sm:p-7 rounded-2xl bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer ${styles.accentBorder} relative overflow-hidden`}
                       >
                         <div>
                           {/* Header: Year & Medal Tag */}
                           <div className="flex items-center justify-between gap-2 mb-4">
-                            <span className="text-xs font-bold text-zinc-400 font-mono">
+                            <span className="text-xs font-bold text-zinc-400">
                               {record.year}
                             </span>
                             <span
@@ -496,7 +496,7 @@ export default function AchievementsPage() {
                   return (
                     <Card3D key={student.id || idx} maxTilt={3} className="h-full">
                       <div
-                        onClick={() => openCompetitorModal(student)}
+                        {...pressable(() => openCompetitorModal(student))}
                         className="h-full p-6 rounded-2xl bg-zinc-50/70 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl cursor-pointer group"
                       >
                         <div>
@@ -552,7 +552,7 @@ export default function AchievementsPage() {
 
                         {/* Footer: Score / Action */}
                         <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs">
-                          <span className="text-zinc-400 font-mono text-xs">
+                          <span className="text-zinc-400 text-xs">
                             {student.score ? `Score: ${student.score}` : 'Official Podium Finish'}
                           </span>
                           <span className="font-bold text-brand-red group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 text-[11px] uppercase tracking-wide">
@@ -616,14 +616,13 @@ export default function AchievementsPage() {
 
             {/* Modal Header Banner */}
             <div className="dark relative p-6 sm:p-8 bg-zinc-900 text-white overflow-hidden border-b border-zinc-800">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-brand-red/15 blur-[90px] rounded-full pointer-events-none" />
 
               <div className="relative z-10 pr-8">
                 <div className="flex flex-wrap items-center gap-2.5 mb-3">
                   <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white">
                     {selectedTrophy.category}
                   </span>
-                  <span className="text-xs font-mono font-bold text-zinc-400">
+                  <span className="text-xs font-bold text-zinc-400">
                     {selectedTrophy.year} Tournament Season
                   </span>
                   {selectedTrophy.score && (
@@ -674,7 +673,7 @@ export default function AchievementsPage() {
                     <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-brand-red" /> Participating Student Competitors &amp; Medalists
                     </h4>
-                    <span className="text-[11px] font-mono text-zinc-400">
+                    <span className="text-[11px] text-zinc-400">
                       {selectedTrophy.studentCompetitors.length} Fielded Athletes
                     </span>
                   </div>
@@ -686,10 +685,10 @@ export default function AchievementsPage() {
                       return (
                         <div
                           key={idx}
-                          onClick={() => {
+                          {...pressable(() => {
                             closeTrophyModal()
                             openCompetitorModal(student)
-                          }}
+                          })}
                           className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-brand-red/50 transition-colors cursor-pointer"
                         >
                           <div className="flex items-center gap-3">
@@ -800,7 +799,7 @@ export default function AchievementsPage() {
                 </span>
                 <Link
                   href={`/contact?subject=Inquiry%20regarding%20${encodeURIComponent(selectedTrophy.tournament)}`}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow text-center flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all text-center flex items-center justify-center gap-2"
                 >
                   Join Competition Team <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -840,7 +839,7 @@ export default function AchievementsPage() {
                   src={selectedCompetitor.image || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'}
                   alt={selectedCompetitor.name}
                   sizes="80px"
-                  className="w-20 h-20 rounded-xl object-cover border-2 border-brand-red shadow-md shrink-0"
+                  className="w-20 h-20 rounded-xl object-cover border-2 border-brand-red shrink-0"
                 />
                 <div>
                   <span
@@ -872,7 +871,7 @@ export default function AchievementsPage() {
                   {selectedCompetitor.division}
                 </p>
                 {selectedCompetitor.score && (
-                  <p className="text-xs font-mono text-zinc-500 font-medium">
+                  <p className="text-xs text-zinc-500 font-medium">
                     Official Match Score: {selectedCompetitor.score}
                   </p>
                 )}
@@ -892,7 +891,7 @@ export default function AchievementsPage() {
               <div className="pt-2 flex items-center justify-between gap-3">
                 <Link
                   href={`/contact?subject=Inquiry%20to%20train%20with%20${encodeURIComponent(selectedCompetitor.name)}`}
-                  className="w-full py-3.5 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow text-center flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all text-center flex items-center justify-center gap-2"
                 >
                   Start Training Like {selectedCompetitor.name.split(' ')[0]} <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -905,7 +904,6 @@ export default function AchievementsPage() {
       {/* Audition Banner (14px radius) */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24 max-w-5xl">
         <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-xl">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-2">
@@ -921,7 +919,7 @@ export default function AchievementsPage() {
 
           <Link
             href="/contact?subject=Team%20Audition%20Inquiry"
-            className="relative z-10 w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-brand-glow whitespace-nowrap text-center"
+            className="relative z-10 w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all whitespace-nowrap text-center"
           >
             {t.achievements.auditionBtn}
           </Link>

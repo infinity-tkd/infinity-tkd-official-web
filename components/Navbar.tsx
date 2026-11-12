@@ -65,7 +65,6 @@ export function Navbar() {
   const renderCategoryGrid = (variant: 'desktop' | 'mobile') =>
     categories.map((cat) => {
       const Icon = categoryIcons[cat.iconName] || BookOpen
-      const iconStyle = { backgroundColor: `${cat.accentColor}20`, color: cat.accentColor }
 
       if (variant === 'desktop') {
         return (
@@ -74,13 +73,13 @@ export function Navbar() {
             href={`/library/${cat.id}`}
             prefetch={false}
             onClick={() => setOpenMenu(null)}
-            className="group/item flex flex-col justify-between rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 p-2.5 transition-all hover:border-brand-red/50 hover:bg-white dark:hover:bg-zinc-900"
+            className="group/item flex flex-col justify-between rounded-xl border border-zinc-200 dark:border-zinc-800 p-2.5 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
           >
             <div className="mb-1 flex items-center gap-2">
-              <div className="shrink-0 rounded-lg p-1.5 transition-transform group-hover/item:scale-110" style={iconStyle}>
-                <Icon className="h-3.5 w-3.5" />
+              <div className="shrink-0 rounded-lg bg-zinc-100 p-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                <Icon className="h-3.5 w-3.5" aria-hidden="true" />
               </div>
-              <span className="type-hangul truncate text-brand-red">{cat.koreanTitle.split('(')[0]}</span>
+              <span className="type-hangul truncate text-zinc-500">{cat.koreanTitle.split('(')[0]}</span>
             </div>
             <h5 className="truncate text-[11px] font-bold uppercase leading-tight text-zinc-900 dark:text-white transition-colors group-hover/item:text-brand-red">
               {cat.title}
@@ -97,8 +96,8 @@ export function Navbar() {
           onClick={closeMobile}
           className="flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-2.5"
         >
-          <div className="shrink-0 rounded-md p-1" style={iconStyle}>
-            <Icon className="h-3.5 w-3.5" />
+          <div className="shrink-0 rounded-md bg-zinc-100 p-1 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+            <Icon className="h-3.5 w-3.5" aria-hidden="true" />
           </div>
           <span className="truncate text-[11px] font-bold uppercase text-zinc-900 dark:text-white">{cat.title}</span>
         </Link>
@@ -248,15 +247,10 @@ export function Navbar() {
             <ThemeToggle />
             <Link
               href="/contact"
-              className="group relative overflow-hidden rounded-xl bg-brand-red px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-white shadow-sm transition-all duration-300 hover:shadow-brand-glow touch-press"
+              className="group flex min-h-[40px] items-center gap-1.5 rounded-xl bg-brand-red px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-brand-700 touch-press"
             >
-              <span className="relative z-10 flex items-center gap-1.5 transition-colors duration-300 group-hover:text-black">
-                {t.nav.bookTrial} <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 translate-y-full bg-white transition-transform duration-300 group-hover:translate-y-0"
-              />
+              {t.nav.bookTrial}
+              <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
             </Link>
           </div>
 
@@ -266,7 +260,7 @@ export function Navbar() {
             <ThemeToggle />
             <Link
               href="/contact"
-              className="hidden min-h-[44px] items-center gap-1.5 rounded-xl bg-brand-red px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all duration-300 hover:shadow-brand-glow sm:inline-flex touch-press"
+              className="hidden min-h-[44px] items-center gap-1.5 rounded-xl bg-brand-red px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white transition-colors duration-300 hover:bg-brand-700 sm:inline-flex touch-press"
             >
               <span>{t.nav.bookTrial}</span>
               <ArrowRight className="h-3 w-3" />
@@ -301,10 +295,10 @@ export function Navbar() {
         >
           <nav aria-label="Mobile" className="container mx-auto space-y-6 px-4 py-6">
             <div className="divide-y divide-zinc-100 dark:divide-zinc-900">
-              {NAV_GROUPS.filter((group) => group.kind !== 'mega').map((group, index) => (
+              {NAV_GROUPS.filter((group) => group.kind !== 'mega').map((group) => (
                 <div key={group.id} className="space-y-1 py-2">
-                  <span className="block px-3 pt-1 font-mono text-[11px] text-zinc-500">
-                    {String(index + 1).padStart(2, '0')}. {group.label(t)}
+                  <span className="block px-3 pt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                    {group.label(t)}
                   </span>
                   {group.items.map((item) => {
                     const Icon = item.icon
@@ -316,7 +310,7 @@ export function Navbar() {
                         onClick={closeMobile}
                         className="flex items-center gap-2.5 rounded-xl p-3 text-xs font-bold uppercase text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 sm:text-sm"
                       >
-                        <Icon className="h-4 w-4 text-brand-red" aria-hidden="true" />
+                        <Icon className="h-4 w-4 text-zinc-400" aria-hidden="true" />
                         {item.label(t)}
                       </Link>
                     )
@@ -346,7 +340,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={closeMobile}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-red p-4 text-xs font-bold uppercase tracking-widest text-white shadow-brand-glow touch-press"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-red p-4 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-brand-700 touch-press"
             >
               {t.nav.bookTrial} <ArrowRight className="h-4 w-4" />
             </Link>

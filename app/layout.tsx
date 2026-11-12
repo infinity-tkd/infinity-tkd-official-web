@@ -10,6 +10,7 @@ import { AutoErrorHandler } from '@/components/AutoErrorHandler'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { BackToTop } from '@/components/ui/BackToTop'
 import { buildSiteJsonLd, jsonLdString } from '@/lib/structuredData'
+import { CORE_KEYWORDS, SHARE_IMAGE, SITE_NAME, SITE_URL, TWITTER_IMAGE } from '@/lib/seo'
 import './globals.css'
 
 // Self-hosted at build time by next/font: no render-blocking third-party CSS, no layout shift.
@@ -38,33 +39,38 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 }
 
-const DEFAULT_TITLE = 'Infinity Taekwondo | Elite Martial Arts & Sport Science Academy Phnom Penh'
+const DEFAULT_TITLE = 'Infinity Taekwondo | Taekwondo Academy in Phnom Penh, Cambodia'
 const DEFAULT_DESCRIPTION =
-  'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking for kids and adults at Olympic Stadium & Sen Sok.'
+  'Infinity Taekwondo: Kukkiwon-certified Taekwondo classes in Phnom Penh, Cambodia for kids, teens and adults. Poomsae, kicks, self-defense and black belt.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://infinitytaekwondo.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: DEFAULT_TITLE,
     template: '%s | Infinity Taekwondo',
   },
   description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
-    'Taekwondo Cambodia',
-    'Infinity Taekwondo',
-    'Taekwondo Phnom Penh',
-    'Kukkiwon Black Belt Cambodia',
-    'World Taekwondo Phnom Penh',
-    'Olympic Stadium Martial Arts',
-    'Kids Martial Arts Phnom Penh',
+    ...CORE_KEYWORDS,
+    'Taekwondo classes',
+    'Taekwondo for kids',
+    'Taekwondo black belt',
+    'Kukkiwon black belt Cambodia',
+    'Poomsae',
+    'Taegeuk Poomsae',
+    'Freestyle Poomsae',
+    'Taekwondo kicks',
+    'Hosinsul self-defense',
+    'Martial arts Phnom Penh',
+    'Kids martial arts Phnom Penh',
+    'Olympic Stadium Taekwondo',
     'Sen Sok Taekwondo',
-    'Poomsae Training Cambodia',
-    'Martial Arts Tricking Phnom Penh',
-    'Freestyle Poomsae Cambodia',
-    'Taekwondo Demonstration Team',
-    'Hosinsul Self-Defense',
-    'After school sports Phnom Penh',
   ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: 'sports',
   // Note: no site-wide `alternates`. Language is switched client-side on the same URL, so there
   // are no per-language URLs to declare, and a root canonical would be inherited by every page.
   // Each page sets its own canonical.
@@ -82,25 +88,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    url: 'https://infinitytaekwondo.com',
-    siteName: 'Infinity Taekwondo',
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: 'en_US',
     type: 'website',
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Infinity Taekwondo Academy Phnom Penh',
-      },
-    ],
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
-    description:
-      'Premier World Taekwondo & Kukkiwon certified academy in Phnom Penh, Cambodia. Recognized, New and Freestyle Poomsae, demonstration, tricking and Hosinsul self-defense.',
-    images: ['/opengraph-image'],
+    description: DEFAULT_DESCRIPTION,
+    images: [TWITTER_IMAGE],
   },
   icons: {
     icon: [

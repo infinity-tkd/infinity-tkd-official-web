@@ -1,28 +1,12 @@
-import type { Metadata } from 'next'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Championship Achievements & Medal Record',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Competition Results & Medals',
   description:
-    'Official tournament records, national gold medals, Southeast Asian podium finishes, and Kukkiwon Dan certifications achieved by Infinity Taekwondo athletes.',
-  alternates: {
-    canonical: '/achievements',
-  },
-  openGraph: {
-    title: 'Championship Achievements & Medal Record | Infinity Taekwondo',
-    description:
-      'Official championship records, national gold medals, and tournament milestones of Infinity Taekwondo athletes.',
-    url: 'https://infinitytaekwondo.com/achievements',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Championship Achievements & Medal Record | Infinity Taekwondo',
-    description:
-      'Official championship records, national gold medals, and tournament milestones of Infinity Taekwondo athletes.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'The Infinity Taekwondo tournament record: national and Southeast Asian Poomsae, freestyle and demonstration medals won by our athletes from Phnom Penh.',
+  path: '/achievements',
+  keywords: ['Taekwondo competition Cambodia', 'Poomsae championship', 'Taekwondo medals', 'Cambodia Taekwondo athletes'],
+})
 
 export default function AchievementsLayout({ children }: { children: React.ReactNode }) {
   return children

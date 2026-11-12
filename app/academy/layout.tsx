@@ -1,29 +1,13 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { academyCourses } from '@/data/academy'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Academy Training Programs & Syllabus',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Classes for Kids, Teens & Adults',
   description:
-    'Traditional Kukkiwon Taekwondo from White Belt to 2nd Dan: Recognized, New and Freestyle Poomsae, demonstration, tricking, Hosinsul self-defense and board breaking in Cambodia.',
-  alternates: {
-    canonical: '/academy',
-  },
-  openGraph: {
-    title: 'Academy Training Programs & Syllabus | Infinity Taekwondo',
-    description:
-      'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery across all age divisions.',
-    url: 'https://infinitytaekwondo.com/academy',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Academy Training Programs & Syllabus | Infinity Taekwondo',
-    description:
-      'Comprehensive Taekwondo curriculum from White Belt to Black Belt Dan mastery across all age divisions.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'Taekwondo classes at Infinity Taekwondo, Phnom Penh: Kukkiwon Poomsae, freestyle, self-defense, competition teams and private coaching for all ages.',
+  path: '/academy',
+  keywords: ['Taekwondo classes Phnom Penh', 'Taekwondo for kids Phnom Penh', 'Taekwondo for adults', 'Poomsae classes', 'Freestyle Poomsae', 'Taekwondo tricking', 'Hosinsul self-defense'],
+})
 
 export default function AcademyLayout({ children }: { children: React.ReactNode }) {
   const courseSchema = {

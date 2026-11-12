@@ -8,10 +8,10 @@ const baseStyles =
   'inline-flex items-center justify-center gap-2 font-sans font-bold cursor-pointer select-none transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2'
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    'bg-brand-red text-white hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black shadow-brand-glow hover:shadow-brand-glow-lg border border-transparent',
-  'brand-glow':
-    'bg-brand-red text-white shadow-brand-glow-lg hover:shadow-[0_0_35px_rgba(239,47,56,0.7)] border border-white/20',
+  // Small white-on-red text already sits on the deeper #D0272F (globals.css), so hover goes one step darker.
+  primary: 'bg-brand-red text-white hover:bg-brand-700 border border-transparent',
+  // Kept as an alias of primary: the calm design system has no glowing buttons.
+  'brand-glow': 'bg-brand-red text-white hover:bg-brand-700 border border-transparent',
   secondary:
     'bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800',
   outline:

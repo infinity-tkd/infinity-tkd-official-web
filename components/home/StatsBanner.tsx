@@ -3,6 +3,7 @@
 import { AnimatedCounter } from '@/components/AnimatedCounter'
 import { useLanguage } from '@/context/LanguageContext'
 
+/** Three headline numbers on a quiet strip under the hero; they count up once when seen. */
 export function StatsBanner() {
   const { t } = useLanguage()
 
@@ -13,27 +14,21 @@ export function StatsBanner() {
   ]
 
   return (
-    <section id="brand-stats" className="relative z-20 scroll-mt-20 overflow-hidden bg-brand-red py-8 text-white shadow-xl sm:py-9">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.15),transparent_60%)]"
-      />
-      <div className="container relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-6 divide-y divide-white/20 text-center sm:grid-cols-3 sm:gap-4 sm:divide-x sm:divide-y-0 md:gap-8">
-          {stats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className={`flex flex-col items-center justify-center py-2 ${index > 0 ? 'pt-4 sm:pt-2' : ''}`}
-            >
-              <span className="text-3xl font-black leading-none tracking-tight sm:text-4xl md:text-5xl">
+    <section
+      id="brand-stats"
+      className="scroll-mt-20 border-y border-zinc-200 bg-zinc-50 py-8 sm:py-10 dark:border-zinc-900 dark:bg-zinc-950"
+    >
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+        <dl className="grid grid-cols-1 divide-y divide-zinc-200 text-center sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-zinc-800">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col-reverse items-center justify-center py-4 sm:py-2">
+              <dt className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-zinc-500 sm:text-xs">{stat.label}</dt>
+              <dd className="text-3xl font-black leading-none tracking-tight text-zinc-900 sm:text-4xl md:text-5xl dark:text-white">
                 <AnimatedCounter value={stat.value} duration={stat.duration} />
-              </span>
-              <span className="mt-1.5 text-[11px] font-bold uppercase tracking-widest text-white/90 sm:text-xs md:text-sm">
-                {stat.label}
-              </span>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   )

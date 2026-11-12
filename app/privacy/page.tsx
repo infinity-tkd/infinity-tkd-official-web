@@ -84,28 +84,28 @@ export default function PrivacyPage() {
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               🛡️ Zero Data Brokering
             </span>
-            <span className="text-zinc-500 font-light">Student and parent records are never sold to external advertisers.</span>
+            <span className="text-zinc-500">Student and parent records are never sold to external advertisers.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               🏥 Medical Confidentiality
             </span>
-            <span className="text-zinc-500 font-light">Allergy and injury records accessible only by certified head instructors.</span>
+            <span className="text-zinc-500">Allergy and injury records accessible only by certified head instructors.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               🥋 Kukkiwon Dan Verification
             </span>
-            <span className="text-zinc-500 font-light">Official examination metrics transmitted securely to Seoul, South Korea.</span>
+            <span className="text-zinc-500">Official examination metrics transmitted securely to Seoul, South Korea.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               📸 Media Opt-Out Rights
             </span>
-            <span className="text-zinc-500 font-light">Parents can opt-out of promotional photography via front desk form.</span>
+            <span className="text-zinc-500">Parents can opt-out of promotional photography via front desk form.</span>
           </div>
         </div>
       </div>

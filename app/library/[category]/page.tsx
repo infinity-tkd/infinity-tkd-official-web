@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { libraryCategoriesMeta } from '@/data/library'
+import { libraryCategoriesMeta, libraryItems } from '@/data/library'
 import { CategoryViewClient } from '@/components/library/CategoryViewClient'
+import { pageMetadata, snippet } from '@/lib/seo'
+import { buildBreadcrumbJsonLd, buildCollectionJsonLd, jsonLdString } from '@/lib/structuredData'
 
 interface CategoryPageProps {
   params: Promise<{
@@ -15,56 +17,64 @@ export function generateStaticParams() {
   }))
 }
 
+/** "Taekwondo Poomsae (Forms): Complete Guide" and a snippet that names the brand and the sport. */
+function categorySeo(categoryId: string) {
+  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === categoryId)
+  if (!categoryMeta) return null
+  const items = libraryItems.filter((i) => i.category === categoryId)
+  const title = `Taekwondo ${categoryMeta.title}: Complete Guide`
+  // Brand and sport first: the snippet is trimmed at about 158 characters.
+  const description = snippet(`Infinity Taekwondo guide to ${categoryMeta.title} in Taekwondo: ${categoryMeta.description}`)
+  return { categoryMeta, items, title, description }
+}
+
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category } = await params
-  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === category)
+  const seo = categorySeo(category)
+  if (!seo) return { title: 'Discipline Not Found' }
 
-  if (!categoryMeta) {
-    return {
-      title: 'Discipline Not Found',
-    }
-  }
-
-  // e.g. "Poomsae (Forms) · Curriculum Library | Infinity Taekwondo" (brand added by the layout template)
-  const title = `${categoryMeta.title} · Curriculum Library`
-  const description = `${categoryMeta.koreanTitle}: ${categoryMeta.subtitle}. ${categoryMeta.description}`.slice(0, 160)
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/library/${category}`,
-    },
-    openGraph: {
-      title: `${title} | Infinity Taekwondo`,
-      description,
-      type: 'website',
-      url: `/library/${category}`,
-      images: [
-        {
-          url: '/opengraph-image',
-          width: 1200,
-          height: 630,
-          alt: `${categoryMeta.title} - Infinity Taekwondo Curriculum`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${title} | Infinity Taekwondo`,
-      description,
-      images: ['/twitter-image'],
-    },
-  }
+  return pageMetadata({
+    title: seo.title,
+    description: seo.description,
+    path: `/library/${category}`,
+    keywords: [
+      `Taekwondo ${seo.categoryMeta.title}`,
+      seo.categoryMeta.koreanTitle,
+      seo.categoryMeta.subtitle,
+      ...seo.items.slice(0, 12).map((item) => item.name),
+    ],
+  })
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params
-  const categoryMeta = libraryCategoriesMeta.find((c) => c.id === category)
+  const seo = categorySeo(category)
 
-  if (!categoryMeta) {
+  if (!seo) {
     notFound()
   }
 
-  return <CategoryViewClient category={category} />
+  const path = `/library/${category}`
+  const jsonLd = [
+    buildCollectionJsonLd({
+      name: seo.title,
+      description: seo.description,
+      path,
+      items: seo.items.map((item) => ({ name: item.name, path: `${path}/${item.slug}` })),
+    }),
+    buildBreadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Taekwondo Library', path: '/library' },
+      { name: seo.categoryMeta.title, path },
+    ]),
+  ]
+
+  return (
+    <>
+      {jsonLd.map((data, index) => (
+        <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(data) }} />
+      ))}
+      <CategoryViewClient category={category} />
+    </>
+  )
 }

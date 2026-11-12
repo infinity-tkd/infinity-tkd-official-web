@@ -44,15 +44,15 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
       {/* -------------------------------------------------------------------- */}
       {/* HEADER & RULEBOOK SELECTOR BAR (14px radius) */}
       {/* -------------------------------------------------------------------- */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red">
                 World Taekwondo Sanctioned
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[11px] font-mono text-zinc-500">{currentPdf.edition}</span>
+              <span className="text-[11px] text-zinc-500">{currentPdf.edition}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
               Competition Rulebook &amp; Scoring Matrix
@@ -67,7 +67,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
             <div className="flex flex-wrap items-center gap-2.5 shrink-0">
               <button
                 onClick={() => setIsPdfModalOpen(true)}
-                className="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-brand-glow inline-flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-brand-red hover:bg-zinc-900 text-white text-xs font-bold uppercase tracking-wider transition-all inline-flex items-center gap-2 cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5" /> Open PDF Reader Mode
               </button>
@@ -89,7 +89,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
             onClick={() => setActiveRuleType('kyorugi')}
             className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
               activeRuleType === 'kyorugi'
-                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-md'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black'
                 : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400'
             }`}
           >
@@ -100,11 +100,11 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
             onClick={() => setActiveRuleType('poomsae')}
             className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
               activeRuleType === 'poomsae'
-                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-md'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black'
                 : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400'
             }`}
           >
-            <Award className="w-3.5 h-3.5 text-blue-500" /> World Poomsae (Forms) Scoring Rules
+            <Award className="w-3.5 h-3.5 text-zinc-500" /> World Poomsae (Forms) Scoring Rules
           </button>
         </div>
       </div>
@@ -116,57 +116,57 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Point Values Card */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-2">
               WT Point Value Matrix
             </span>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-600 dark:text-zinc-300">Punch to Body</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">1 Point</span>
+                <span className="font-bold text-zinc-900 dark:text-white">1 Point</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-600 dark:text-zinc-300">Direct Body Kick (Hogu)</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">2 Points</span>
+                <span className="font-bold text-zinc-900 dark:text-white">2 Points</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-600 dark:text-zinc-300">Direct Head Kick</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">3 Points</span>
+                <span className="font-bold text-zinc-900 dark:text-white">3 Points</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-600 dark:text-zinc-300">Turning Kick to Body</span>
-                <span className="font-mono font-bold text-brand-red">4 Points (+2 Bonus)</span>
+                <span className="font-bold text-brand-red">4 Points (+2 Bonus)</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-600 dark:text-zinc-300">Turning Kick to Head</span>
-                <span className="font-mono font-bold text-brand-red">5 Points (+2 Bonus)</span>
+                <span className="font-bold text-brand-red">5 Points (+2 Bonus)</span>
               </div>
             </div>
           </div>
 
           {/* Gam-Jeom Penalties Card */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-500 block mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
               Gam-Jeom Infraction Codes
             </span>
             <ul className="space-y-1.5 text-[13px] text-zinc-600 dark:text-zinc-400">
               <li className="flex items-start gap-1.5">
-                <span className="text-amber-500 font-bold">&bull;</span>
+                <span className="text-zinc-500 font-bold">&bull;</span>
                 <span>Crossing boundary line with any foot.</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-amber-500 font-bold">&bull;</span>
+                <span className="text-zinc-500 font-bold">&bull;</span>
                 <span>Falling down to evade attack.</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-amber-500 font-bold">&bull;</span>
+                <span className="text-zinc-500 font-bold">&bull;</span>
                 <span>Holding, grabbing, or pushing opponent.</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-amber-500 font-bold">&bull;</span>
+                <span className="text-zinc-500 font-bold">&bull;</span>
                 <span>Lifting leg for &gt;3s without kicking (cut-kick stalling).</span>
               </li>
               <li className="flex items-start gap-1.5">
-                <span className="text-amber-500 font-bold">&bull;</span>
+                <span className="text-zinc-500 font-bold">&bull;</span>
                 <strong className="text-zinc-800 dark:text-zinc-200">5 Gam-Jeoms in 1 round = Round Forfeit.</strong>
               </li>
             </ul>
@@ -174,14 +174,14 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
 
           {/* Best-of-3 & IVR Card */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-500 block mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
               Best-of-3 &amp; IVR Quota
             </span>
             <div className="space-y-2 text-[13px] text-zinc-600 dark:text-zinc-400">
               <p>
                 Matches are contested in <strong>3 independent 2-minute rounds</strong>. The first athlete to win 2 rounds claims victory immediately.
               </p>
-              <div className="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs">
+              <div className="p-2.5 rounded-lg bg-zinc-500/10 border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 text-xs">
                 <strong>IVR Video Card:</strong> Coach has 1 challenge card per match. Retained if successful; forfeited if overturned.
               </div>
             </div>
@@ -191,38 +191,38 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Accuracy Card */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-purple-500 block mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
               Accuracy Scoring (4.0 Max Base)
             </span>
             <div className="space-y-2 text-xs">
               <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <strong className="text-zinc-900 dark:text-white block mb-0.5">-0.1 Minor Deduction</strong>
-                <span className="text-zinc-500 font-light">Slight tremor, incorrect eye focus, improper hand chambering.</span>
+                <span className="text-zinc-500">Slight tremor, incorrect eye focus, improper hand chambering.</span>
               </div>
               <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <strong className="text-zinc-900 dark:text-white block mb-0.5">-0.3 Major Deduction</strong>
-                <span className="text-zinc-500 font-light">Wrong stance length (Ap-koobi/Dwit-koobi), missed movement, loud breathing.</span>
+                <span className="text-zinc-500">Wrong stance length (Ap-koobi/Dwit-koobi), missed movement, loud breathing.</span>
               </div>
             </div>
           </div>
 
           {/* Presentation Card */}
           <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-500 block mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
               Presentation Scoring (6.0 Max Base)
             </span>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-700 dark:text-zinc-300">Speed &amp; Power</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
+                <span className="font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-700 dark:text-zinc-300">Rhythm &amp; Tempo Control</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
+                <span className="font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <span className="text-zinc-700 dark:text-zinc-300">Expression of Energy &amp; Kihap</span>
-                <span className="font-mono font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
+                <span className="font-bold text-zinc-900 dark:text-white">2.0 Points Max</span>
               </div>
             </div>
           </div>
@@ -251,7 +251,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                   <h4 className="text-xs sm:text-sm font-bold truncate max-w-xs sm:max-w-md">
                     {currentPdf.title}
                   </h4>
-                  <span className="text-[11px] text-zinc-400 font-mono block">
+                  <span className="text-[11px] text-zinc-400 block">
                     {currentPdf.edition} &bull; {currentPdf.pages} Pages &bull; {currentPdf.inForceDate}
                   </span>
                 </div>
@@ -266,7 +266,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-xs font-mono px-2 text-zinc-400">{pdfZoom}%</span>
+                <span className="text-xs px-2 text-zinc-400">{pdfZoom}%</span>
                 <button
                   onClick={() => setPdfZoom((z) => Math.min(200, z + 15))}
                   className="p-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs"
@@ -295,7 +295,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
 
                 <button
                   onClick={() => setIsPdfModalOpen(false)}
-                  className="p-2 rounded-lg bg-zinc-900 hover:bg-red-600 text-white text-xs transition-colors ml-1"
+                  className="dark p-2 rounded-lg bg-zinc-900 hover:bg-red-600 text-white text-xs transition-colors ml-1"
                   aria-label="Close"
                 >
                   <X className="w-4 h-4" />

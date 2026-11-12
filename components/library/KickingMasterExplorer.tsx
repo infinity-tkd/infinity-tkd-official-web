@@ -35,6 +35,7 @@ import { badgeColors } from '@/lib/color'
 import { useLanguage } from '@/context/LanguageContext'
 import { getKickingOverview, kickingI18n } from '@/data/library/kicking/kickingTranslations'
 import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
+import { pressable } from '@/lib/a11y'
 
 interface KickingMasterExplorerProps {
   items: LibraryItem[]
@@ -107,7 +108,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
       {/* ==================================================================== */}
       {/* 1. MASTER PHILOSOPHY & 3 BIOMECHANICAL TENETS (ACCORDION GUIDE)       */}
       {/* ==================================================================== */}
-      <div className="rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md overflow-hidden">
+      <div className="rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 overflow-hidden">
         <button
           onClick={() => setShowPhilosophyGuide((prev) => !prev)}
           className="w-full p-6 sm:p-7 flex items-center justify-between gap-4 text-left transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
@@ -118,11 +119,11 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand-red">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red">
                   {overview.koreanTitle}
                 </span>
                 <span className="text-zinc-400 text-xs">&bull;</span>
-                <span className="text-[11px] font-mono text-zinc-500 uppercase">
+                <span className="text-[11px] text-zinc-500 uppercase">
                   {t.philosophyGuide}
                 </span>
               </div>
@@ -132,7 +133,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400">
+          <div className="flex items-center gap-2 text-xs font-bold text-zinc-500 dark:text-zinc-400">
             <span className="hidden sm:inline">{t.toggleGuide}</span>
             {showPhilosophyGuide ? (
               <ChevronUp className="w-4 h-4 text-brand-red" />
@@ -160,9 +161,9 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                       <span className="w-5 h-5 rounded-full bg-brand-red text-white flex items-center justify-center text-[11px] font-bold">
                         0{idx + 1}
                       </span>
-                      <h4 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
+                      <h3 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                         {tenet.title}
-                      </h4>
+                      </h3>
                     </div>
                     <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {tenet.desc}
@@ -187,7 +188,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.searchPlaceholder}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-base sm:text-xs min-h-[44px] bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red dark:text-white placeholder:text-zinc-400 font-sans"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-base lg:text-sm min-h-[44px] bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red dark:text-white placeholder:text-zinc-400 font-sans"
           />
         </div>
 
@@ -226,7 +227,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           return (
             <div
               key={kick.id}
-              onClick={() => handleSelectKick(kick.id)}
+              {...pressable(() => handleSelectKick(kick.id))}
               className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between group ${
                 isSelected
                   ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/20 scale-[1.02]'
@@ -236,7 +237,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               <div>
                 <div className="flex items-center justify-between gap-1 mb-2">
                   <span
-                    className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
+                    className={`text-[11px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
                       isSelected ? 'bg-white/20 text-white' : ''
                     }`}
                     style={isSelected ? undefined : badgeColors(kick.badgeColor)}
@@ -244,7 +245,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                     {localizedKick.difficulty || kick.difficulty}
                   </span>
                   <span
-                    className={`text-[11px] font-mono ${
+                    className={`text-[11px] ${
                       isSelected ? 'text-white/80' : 'text-zinc-400'
                     }`}
                   >
@@ -253,7 +254,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 </div>
 
                 <span
-                  className={`text-xs font-mono font-bold block mb-0.5 ${
+                  className={`text-xs font-bold block mb-0.5 ${
                     isSelected ? 'text-white/90' : 'text-brand-red'
                   }`}
                 >
@@ -293,18 +294,18 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
       {activeKick && (
         <div className="space-y-6">
           {/* Active Kick Header Card */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 shadow-md">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800">
             {/* Top Navigation & Jump Controls */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
               <div className="flex items-center gap-2">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase"
+                  className="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase"
                   style={badgeColors(activeKick.badgeColor)}
                 >
                   {activeKick.difficulty}
                 </span>
-                <span className="text-xs font-mono text-zinc-400">&bull; {activeKick.beltLevel}</span>
-                <span className="text-xs font-mono text-zinc-400">
+                <span className="text-xs text-zinc-400">&bull; {activeKick.beltLevel}</span>
+                <span className="text-xs text-zinc-400">
                   &bull; Trajectory: {activeKick.kickTrajectory?.toUpperCase()}
                 </span>
               </div>
@@ -320,7 +321,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   <span className="hidden sm:inline">{t.prevKick}</span>
                 </button>
 
-                <span className="text-xs font-mono text-zinc-400">
+                <span className="text-xs text-zinc-400">
                   {currentKickIndex + 1} / {items.length}
                 </span>
 
@@ -342,13 +343,13 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   <h2 className="text-2xl sm:text-3xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {activeKick.name}
                   </h2>
-                  <span className="text-sm font-mono font-bold text-brand-red">
+                  <span className="text-sm font-bold text-brand-red">
                     {activeKick.koreanName} ({activeKick.romanized})
                   </span>
                 </div>
 
                 {activeKick.meaning && (
-                  <p className="text-xs font-mono font-semibold text-zinc-500 dark:text-zinc-400 mt-1">
+                  <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mt-1">
                     {lang === 'km'
                       ? 'អត្ថន័យទស្សនវិជ្ជា'
                       : lang === 'zh'
@@ -364,7 +365,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               {/* Striking Surface & Target Area Badges */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 min-w-[150px]">
-                  <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                  <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-0.5">
                     {t.strikingSurface}
                   </span>
                   <span className="text-xs font-bold text-zinc-900 dark:text-white">
@@ -373,7 +374,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 min-w-[150px]">
-                  <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                  <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-0.5">
                     {t.targetArea}
                   </span>
                   <span className="text-xs font-bold text-brand-red">
@@ -385,7 +386,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
             {/* Quick Kick Jump Strip */}
             <div className="pt-4 flex items-center gap-1.5 overflow-x-auto pb-1">
-              <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 shrink-0 mr-1">
+              <span className="text-[11px] font-bold uppercase text-zinc-400 shrink-0 mr-1">
                 {t.quickJump}:
               </span>
               {items.map((k, idx) => {
@@ -394,7 +395,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   <button
                     key={k.id}
                     onClick={() => handleSelectKick(k.id)}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold shrink-0 transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-bold shrink-0 transition-all ${
                       isCurrent
                         ? 'bg-brand-red text-white shadow-sm'
                         : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
@@ -430,7 +431,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   onClick={() => setActiveTab(tab.id as DetailTabType)}
                   className={`flex-1 min-w-[150px] py-3 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                     isActive
-                      ? 'bg-brand-red text-white shadow-md'
+                      ? 'bg-brand-red text-white'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-zinc-800/50'
                   }`}
                 >
@@ -465,7 +466,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
               {/* Core Principles Matrix */}
               {activeKick.corePrinciples && activeKick.corePrinciples.length > 0 && (
-                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800">
                   <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
                     <Compass className="w-5 h-5 text-brand-red" />
                     <span>{t.corePrinciples}</span>
@@ -496,7 +497,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
               {/* Skill Prerequisites Triad */}
               {activeKick.skillPrerequisites && (
-                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
+                <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800">
                   <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-2">
                     <Award className="w-5 h-5 text-brand-red" />
                     <span>{t.prerequisites}</span>
@@ -505,7 +506,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   <div className="grid md:grid-cols-3 gap-6">
                     {/* Physical */}
                     <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                      <h4 className="text-xs font-mono font-bold uppercase text-brand-red mb-3 flex items-center gap-1.5">
+                      <h4 className="text-xs font-bold uppercase text-brand-red mb-3 flex items-center gap-1.5">
                         <Activity className="w-4 h-4" />
                         <span>{t.prereqPhysical}</span>
                       </h4>
@@ -524,7 +525,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                     {/* Technical */}
                     <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                      <h4 className="text-xs font-mono font-bold uppercase text-blue-500 mb-3 flex items-center gap-1.5">
+                      <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3 flex items-center gap-1.5">
                         <Zap className="w-4 h-4" />
                         <span>{t.prereqTechnical}</span>
                       </h4>
@@ -534,7 +535,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                             key={idx}
                             className="text-xs text-zinc-700 dark:text-zinc-300 flex items-start gap-2 leading-relaxed"
                           >
-                            <span className="text-blue-500 font-bold">&bull;</span>
+                            <span className="text-zinc-500 font-bold">&bull;</span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -543,7 +544,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                     {/* Mental */}
                     <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                      <h4 className="text-xs font-mono font-bold uppercase text-emerald-500 mb-3 flex items-center gap-1.5">
+                      <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3 flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4" />
                         <span>{t.prereqMental}</span>
                       </h4>
@@ -553,7 +554,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                             key={idx}
                             className="text-xs text-zinc-700 dark:text-zinc-300 flex items-start gap-2 leading-relaxed"
                           >
-                            <span className="text-emerald-500 font-bold">&bull;</span>
+                            <span className="text-zinc-500 font-bold">&bull;</span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -569,7 +570,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           {/* TAB 2: 5-STEP TRAINING PROCESS                                   */}
           {/* ================================================================ */}
           {activeTab === 'process' && activeKick.trainingProcess && (
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-6">
               {/* Header with Mode Switcher */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
@@ -577,7 +578,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                     <Layers className="w-5 h-5 text-brand-red" />
                     <span>{t.stepSequence}</span>
                   </h3>
-                  <span className="text-xs font-mono text-zinc-400">
+                  <span className="text-xs text-zinc-400">
                     {processViewMode === 'card'
                       ? `${currentStepIndex + 1} of ${activeKick.trainingProcess.length}`
                       : `${activeKick.trainingProcess.length} Comprehensive Milestones`}
@@ -635,7 +636,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                             : 'bg-zinc-50 dark:bg-zinc-800/60 text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                         }`}
                       >
-                        <span className="block text-[11px] font-mono opacity-60">
+                        <span className="block text-[11px] opacity-60">
                           {t.stepNumber} {idx + 1}
                         </span>
                         <span className="truncate block">{st.title.split(' ')[0]}</span>
@@ -731,7 +732,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           {/* TAB 3: DRILLING METHODS & WORKOUTS                               */}
           {/* ================================================================ */}
           {activeTab === 'drills' && activeKick.drillingMethods && (
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <Dumbbell className="w-5 h-5 text-brand-red" />
                 <span>{t.drillingMethods}</span>
@@ -740,7 +741,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Isolation Drills */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-brand-red mb-3">
+                  <h4 className="text-xs font-bold uppercase text-brand-red mb-3">
                     {t.isolationDrills}
                   </h4>
                   <ul className="space-y-2">
@@ -754,7 +755,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                 {/* Speed & Timing */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-blue-500 mb-3">
+                  <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3">
                     {t.speedDrills}
                   </h4>
                   <ul className="space-y-2">
@@ -769,7 +770,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 {/* Power & Heavy Bag */}
                 {activeKick.drillingMethods.power && activeKick.drillingMethods.power.length > 0 && (
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                    <h4 className="text-xs font-mono font-bold uppercase text-amber-500 mb-3">
+                    <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3">
                       {t.powerDrills}
                     </h4>
                     <ul className="space-y-2">
@@ -785,7 +786,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 {/* Freestyle & Tricking Adaptations */}
                 {activeKick.drillingMethods.freestyleTricking && activeKick.drillingMethods.freestyleTricking.length > 0 && (
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                    <h4 className="text-xs font-mono font-bold uppercase text-purple-500 mb-3">
+                    <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3">
                       {t.freestyleTricking}
                     </h4>
                     <ul className="space-y-2">
@@ -801,17 +802,17 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
               {/* Spotting & Safety Box */}
               {activeKick.drillingMethods.safety && (
-                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <div className="p-4 rounded-xl bg-zinc-500/10 border border-zinc-500/30 flex items-start gap-3">
+                  <Shield className="w-5 h-5 text-zinc-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-xs font-bold text-amber-800 dark:text-amber-300 mb-1">
+                    <h5 className="text-xs font-bold text-zinc-800 dark:text-zinc-300 mb-1">
                       {t.spottingSafety}
                     </h5>
                     <ul className="space-y-1">
                       {activeKick.drillingMethods.safety.map((rule, idx) => (
                         <li
                           key={idx}
-                          className="text-xs text-amber-900/80 dark:text-amber-200/90 leading-relaxed"
+                          className="text-xs text-zinc-900/80 dark:text-zinc-200/90 leading-relaxed"
                         >
                           &bull; {rule}
                         </li>
@@ -827,7 +828,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           {/* TAB 4: MISTAKES & SURGICAL CORRECTIONS                           */}
           {/* ================================================================ */}
           {activeTab === 'mistakes' && activeKick.commonMistakesAndCorrections && (
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-brand-red" />
                 <span>{t.commonMistakes}</span>
@@ -843,7 +844,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                     <div className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-brand-red flex-shrink-0 mt-0.5" />
                       <div>
-                        <span className="text-[11px] font-mono font-bold uppercase text-brand-red block mb-0.5">
+                        <span className="text-[11px] font-bold uppercase text-brand-red block mb-0.5">
                           {t.mistakeLabel} 0{idx + 1}
                         </span>
                         <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 font-semibold leading-relaxed">
@@ -854,9 +855,9 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                     {/* Correction */}
                     <div className="flex items-start gap-3 sm:border-l sm:border-zinc-200 dark:sm:border-zinc-700/60 sm:pl-4">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-5 h-5 text-zinc-500 flex-shrink-0 mt-0.5" />
                       <div>
-                        <span className="text-[11px] font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400 block mb-0.5">
+                        <span className="text-[11px] font-bold uppercase text-zinc-600 dark:text-zinc-400 block mb-0.5">
                           {t.correctionLabel}
                         </span>
                         <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
@@ -874,7 +875,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           {/* TAB 5: COMPETITION, POOMSAE & TRICKING COMBOS                    */}
           {/* ================================================================ */}
           {activeTab === 'application' && activeKick.performanceAndApplication && (
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <Target className="w-5 h-5 text-brand-red" />
                 <span>{t.performanceTitle}</span>
@@ -883,14 +884,14 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Kyorugi & Poomsae */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-brand-red mb-2">
+                  <h4 className="text-xs font-bold uppercase text-brand-red mb-2">
                     {t.kyorugiApplication}
                   </h4>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-3">
                     {activeKick.performanceAndApplication.competition}
                   </p>
                   {activeKick.performanceAndApplication.poomsae && (
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
                       Poomsae: {activeKick.performanceAndApplication.poomsae}
                     </p>
                   )}
@@ -898,14 +899,14 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                 {/* Freestyle & Tricking */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-purple-500 mb-2">
+                  <h4 className="text-xs font-bold uppercase text-zinc-500 mb-2">
                     {t.trickingApplication}
                   </h4>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-2">
                     {activeKick.performanceAndApplication.freestyleTricking}
                   </p>
                   {activeKick.performanceAndApplication.demonstration && (
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
                       Breaking / Demo: {activeKick.performanceAndApplication.demonstration}
                     </p>
                   )}
@@ -915,7 +916,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               {/* Combos */}
               {activeKick.performanceAndApplication.combinations && (
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-zinc-400 mb-3">
+                  <h4 className="text-xs font-bold uppercase text-zinc-400 mb-3">
                     {t.kickCombos}
                   </h4>
                   <div className="space-y-2">
@@ -940,7 +941,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
           {/* TAB 6: RECOVERY & CONDITIONING                                   */}
           {/* ================================================================ */}
           {activeTab === 'recovery' && activeKick.recoveryAndConditioning && (
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-6">
               <h3 className="text-base font-black uppercase tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <HeartPulse className="w-5 h-5 text-brand-red" />
                 <span>{t.recoveryTitle}</span>
@@ -949,7 +950,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               <div className="grid md:grid-cols-3 gap-6">
                 {/* Flexibility */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-brand-red mb-3">
+                  <h4 className="text-xs font-bold uppercase text-brand-red mb-3">
                     {t.flexibilityMaint}
                   </h4>
                   <ul className="space-y-2">
@@ -963,7 +964,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                 {/* Strengthening */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                  <h4 className="text-xs font-mono font-bold uppercase text-blue-500 mb-3">
+                  <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3">
                     {t.strengthExercises}
                   </h4>
                   <ul className="space-y-2">
@@ -978,7 +979,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 {/* Mobility & Conditioning */}
                 {activeKick.recoveryAndConditioning.mobility && activeKick.recoveryAndConditioning.mobility.length > 0 && (
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                    <h4 className="text-xs font-mono font-bold uppercase text-emerald-500 mb-3">
+                    <h4 className="text-xs font-bold uppercase text-zinc-500 mb-3">
                       {t.mobilityRoll}
                     </h4>
                     <ul className="space-y-2">

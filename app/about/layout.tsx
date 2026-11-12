@@ -1,28 +1,12 @@
-import type { Metadata } from 'next'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'About Our Legacy & Philosophy',
+export const metadata = pageMetadata({
+  title: 'About Us: Story, Masters & Philosophy',
   description:
-    'Discover Infinity Taekwondo: traditional Korean martial discipline synthesized with modern sports biomechanics, Olympic pedagogy, and world-class faculty in Phnom Penh.',
-  alternates: {
-    canonical: '/about',
-  },
-  openGraph: {
-    title: 'About Our Legacy & Philosophy | Infinity Taekwondo',
-    description:
-      'Traditional Korean martial discipline synthesized with modern sports biomechanics and Olympic pedagogy.',
-    url: 'https://infinitytaekwondo.com/about',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'About Our Legacy & Philosophy | Infinity Taekwondo',
-    description:
-      'Traditional Korean martial discipline synthesized with modern sports biomechanics and Olympic pedagogy.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'Founded in Phnom Penh in 2020 by Masters Keo Moni and Chon Sovan, Infinity Taekwondo joins Kukkiwon tradition with sport science. Meet our masters.',
+  path: '/about',
+  keywords: ['Taekwondo masters Phnom Penh', 'Taekwondo philosophy', 'Taekwondo tenets', 'Kukkiwon black belt masters'],
+})
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return children

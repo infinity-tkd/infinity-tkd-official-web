@@ -36,8 +36,8 @@ interface PageHeroProps {
 }
 
 /**
- * Standard page header: soft red glow, eyebrow pill, heavy uppercase title with a red accent
- * word, and a light supporting paragraph. Clears the fixed navbar.
+ * Standard page header: eyebrow pill, heavy uppercase title with a red accent word, and a light
+ * supporting paragraph, on the plain page background. Clears the fixed navbar.
  */
 export function PageHero({
   eyebrow,
@@ -51,12 +51,8 @@ export function PageHero({
   const centered = align === 'center'
 
   return (
-    <section className="relative pt-24 sm:pt-28 pb-10 sm:pb-12 overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[420px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none"
-      />
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="relative pt-24 sm:pt-28 pb-10 sm:pb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className={cn('max-w-3xl', centered && 'mx-auto text-center')}>
           <Eyebrow icon={eyebrowIcon} className="mb-4 sm:mb-5">
             {eyebrow}

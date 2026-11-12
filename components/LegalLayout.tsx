@@ -79,13 +79,8 @@ export function LegalLayout({
   ]
 
   return (
-    <div className="bg-zinc-50 dark:bg-black min-h-screen pt-24 pb-20 transition-colors duration-500 font-sans relative selection:bg-brand-red selection:text-white">
-      {/* Ambient Background Glow */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-red/5 blur-[160px] rounded-full" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+    <div className="min-h-screen pt-24 pb-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Policy Switcher Pill Bar */}
         <div className="mb-6 overflow-x-auto pb-2">
           <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm w-max min-w-full sm:min-w-0">
@@ -107,7 +102,7 @@ export function LegalLayout({
                   href={pol.href}
                   className={`px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap flex items-center gap-1.5 touch-press ${
                     isCurrent
-                      ? 'bg-brand-red text-white shadow-brand-glow'
+                      ? 'bg-brand-red text-white'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'
                   }`}
                 >
@@ -120,7 +115,7 @@ export function LegalLayout({
         </div>
 
         {/* Hero Header Banner (14px radius) */}
-        <div className="mb-8 p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+        <div className="mb-8 p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-brand-red/10 text-brand-red text-[11px] sm:text-xs font-bold uppercase tracking-widest mb-3 border border-brand-red/20">
@@ -129,7 +124,7 @@ export function LegalLayout({
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
                 {title}
               </h1>
-              <div className="flex items-center gap-2 text-zinc-500 text-xs mt-2 font-mono">
+              <div className="flex items-center gap-2 text-zinc-500 text-xs mt-2">
                 <span>Last Revised:</span>
                 <span className="font-bold text-zinc-800 dark:text-zinc-200 px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
                   {lastUpdated}
@@ -161,7 +156,7 @@ export function LegalLayout({
                 <span className="font-bold uppercase tracking-widest text-xs text-zinc-400">
                   Navigation Index
                 </span>
-                <span className="text-[11px] font-mono text-zinc-400">Jump To Section</span>
+                <span className="text-[11px] text-zinc-400">Jump To Section</span>
               </div>
               <nav className="space-y-1">{sidebar}</nav>
             </div>
@@ -205,7 +200,7 @@ export function LegalLayout({
 
           {/* Legal Article Body */}
           <main className="flex-1 w-full min-w-0">
-            <article className="legal-article p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-8 text-zinc-700 dark:text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
+            <article className="legal-article p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-8 text-zinc-700 dark:text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
               {children}
             </article>
           </main>

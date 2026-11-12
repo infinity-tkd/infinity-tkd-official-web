@@ -65,7 +65,7 @@ export function Footer() {
               />
             </Link>
 
-            <p className="max-w-sm text-xs font-light leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-sm">
+            <p className="max-w-sm text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               {t.footer.tagline}
             </p>
 
@@ -107,11 +107,11 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 pt-8 text-xs font-light text-zinc-500 dark:text-zinc-400 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 pt-8 text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row">
           <p>
             © {new Date().getFullYear()} Infinity Taekwondo. {t.footer.copyright}
           </p>
-          <p className="flex items-center gap-2 font-mono text-[11px] text-zinc-600 dark:text-zinc-400">
+          <p className="flex items-center gap-2 text-[11px] text-zinc-500">
             <span>Kukkiwon Dan Certified</span>
             <span aria-hidden="true">&bull;</span>
             <span>World Taekwondo Standard</span>

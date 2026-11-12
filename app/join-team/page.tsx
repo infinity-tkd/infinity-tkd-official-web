@@ -28,6 +28,7 @@ import {
 } from '@/lib/security'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
+import { pressable } from '@/lib/a11y'
 
 interface JobOpening {
   id: string
@@ -230,7 +231,6 @@ export default function JoinTeamPage() {
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500">
       {/* Hero Header */}
       <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/10 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4">
@@ -249,6 +249,8 @@ export default function JoinTeamPage() {
 
       {/* Perks Grid (14px radius) */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20 max-w-7xl">
+        {/* The perk cards read as one list; this heading keeps the outline h1 -> h2 -> h3 for screen readers. */}
+        <h2 className="sr-only">Why coach at Infinity Taekwondo</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {coachPerks.map((perk) => {
             const Icon = perk.icon
@@ -294,7 +296,7 @@ export default function JoinTeamPage() {
               return (
                 <Card3D key={job.id} max={4} depth={3} className="w-full">
                   <div
-                    onClick={() => setSelectedJob(job)}
+                    {...pressable(() => setSelectedJob(job))}
                     className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 cursor-pointer ${
                       isSelected
                         ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-xl ring-2 ring-brand-red/20'
@@ -371,7 +373,7 @@ export default function JoinTeamPage() {
                     name="hp_security_token"
                     value={formData.hp_security_token}
                     onChange={(e) => setFormData({ ...formData, hp_security_token: e.target.value })}
-                    className="hidden"
+                    className="hidden text-base lg:text-sm"
                     tabIndex={-1}
                     autoComplete="off"
                     aria-hidden="true"
@@ -401,7 +403,7 @@ export default function JoinTeamPage() {
                       placeholder="Master John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
+                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
                     />
                   </div>
 
@@ -421,7 +423,7 @@ export default function JoinTeamPage() {
                         placeholder="+855 12 345 678"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
+                        className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
                       />
                     </div>
 
@@ -440,7 +442,7 @@ export default function JoinTeamPage() {
                         placeholder="coach@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
+                        className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
                       />
                     </div>
                   </div>
@@ -455,7 +457,7 @@ export default function JoinTeamPage() {
                       placeholder="e.g. Kukkiwon 3rd Dan / Acrobatics Coach"
                       value={formData.danRank}
                       onChange={(e) => setFormData({ ...formData, danRank: e.target.value })}
-                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
+                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 text-zinc-900 dark:text-white"
                     />
                   </div>
 
@@ -472,14 +474,14 @@ export default function JoinTeamPage() {
                       placeholder="Summarize your martial arts coaching history, tournament medals, and why you want to teach at Infinity..."
                       value={formData.whyJoin}
                       onChange={(e) => setFormData({ ...formData, whyJoin: e.target.value })}
-                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 resize-none text-zinc-900 dark:text-white"
+                      className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 resize-none text-zinc-900 dark:text-white"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press cursor-pointer"
+                    className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all flex items-center justify-center gap-2 touch-press cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
@@ -497,7 +499,7 @@ export default function JoinTeamPage() {
                       href="https://t.me/infinitytaekwondo"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-brand-red font-medium transition-colors"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 text-xs text-zinc-500 hover:text-brand-red font-medium transition-colors"
                     >
                       <span>Prefer direct messaging? Reach out on Telegram @infinitytaekwondo</span>
                     </a>

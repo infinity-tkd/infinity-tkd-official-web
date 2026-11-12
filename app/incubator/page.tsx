@@ -397,7 +397,6 @@ export default function IncubatorPage() {
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
       <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4">
@@ -433,7 +432,7 @@ export default function IncubatorPage() {
                 className="p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-3xl sm:text-4xl font-black text-brand-red/40 font-mono block mb-2">
+                  <span className="text-3xl sm:text-4xl font-black text-brand-red/40 block mb-2">
                     {s.step}
                   </span>
                   <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1.5">
@@ -523,11 +522,8 @@ export default function IncubatorPage() {
                       <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20">
                         {track.tag}
                       </span>
-                      <div
-                        className="p-2.5 rounded-xl"
-                        style={{ backgroundColor: `${track.badgeColor}15`, color: track.badgeColor }}
-                      >
-                        <Icon className="w-4 h-4" />
+                      <div className="p-2.5 rounded-xl bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                        <Icon className="w-4 h-4" aria-hidden="true" />
                       </div>
                     </div>
 
@@ -605,7 +601,7 @@ export default function IncubatorPage() {
                 name="hp_security_token"
                 value={formData.hp_security_token}
                 onChange={(e) => setFormData({ ...formData, hp_security_token: e.target.value })}
-                className="hidden"
+                className="hidden text-base lg:text-sm"
                 tabIndex={-1}
                 autoComplete="off"
                 aria-hidden="true"
@@ -635,7 +631,7 @@ export default function IncubatorPage() {
                     placeholder="Your Full Name"
                     value={formData.studentName}
                     onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
-                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
+                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
                   />
                 </div>
 
@@ -651,7 +647,7 @@ export default function IncubatorPage() {
                     placeholder="e.g. Green Belt, 1st Dan"
                     value={formData.beltRank}
                     onChange={(e) => setFormData({ ...formData, beltRank: e.target.value })}
-                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
+                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -671,7 +667,7 @@ export default function IncubatorPage() {
                     placeholder="+855 12 345 678"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
+                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
                   />
                 </div>
 
@@ -689,7 +685,7 @@ export default function IncubatorPage() {
                     placeholder="student@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
+                    className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -701,7 +697,7 @@ export default function IncubatorPage() {
                 <select
                   value={formData.track}
                   onChange={(e) => setFormData({ ...formData, track: e.target.value })}
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red text-zinc-700 dark:text-zinc-300"
+                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-700 dark:text-zinc-300"
                 >
                   <option>Martial Arts Cinema & Stunts</option>
                   <option>Community Outreach & Youth Clinics</option>
@@ -722,14 +718,14 @@ export default function IncubatorPage() {
                   placeholder="Describe your project, target audience, timeline, and what equipment or grant support you need..."
                   value={formData.summary}
                   onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red resize-none text-zinc-900 dark:text-white"
+                  className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red resize-none text-zinc-900 dark:text-white"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press cursor-pointer"
+                className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all flex items-center justify-center gap-2 touch-press cursor-pointer"
               >
                 {isSubmitting ? (
                   <>

@@ -92,7 +92,7 @@ const components: Components = {
   strong: ({ children }) => <strong className="font-bold text-zinc-900 dark:text-white">{children}</strong>,
   em: ({ children }) => <em className="italic">{children}</em>,
   code: ({ children }) => (
-    <code className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 font-mono text-[0.9em] text-zinc-800 dark:text-zinc-200">
+    <code className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-[0.9em] text-zinc-800 dark:text-zinc-200">
       {children}
     </code>
   ),
@@ -121,7 +121,7 @@ const components: Components = {
     <th className="px-4 py-3 text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">{children}</th>
   ),
   td: ({ children }) => (
-    <td className="border-t border-zinc-200 dark:border-zinc-800 px-4 py-3 font-light text-zinc-700 dark:text-zinc-300">
+    <td className="border-t border-zinc-200 dark:border-zinc-800 px-4 py-3 text-zinc-700 dark:text-zinc-300">
       {children}
     </td>
   ),

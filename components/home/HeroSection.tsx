@@ -16,8 +16,8 @@ export function HeroSection() {
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden pb-20 pt-16 sm:pt-20 md:min-h-[94vh] md:pt-24 lg:min-h-screen">
       {/* Background */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-brand-red/10 via-white to-white opacity-90 dark:from-brand-red/20 dark:via-black dark:to-black" />
-        <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-red/15 via-transparent to-transparent opacity-80" />
+        {/* A neutral fade over the photo: the page colour, never a tint. */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/70 via-white/90 to-white dark:from-black/40 dark:via-black/85 dark:to-black" />
         {/* Static (no looping animation): a full-bleed animated image forces constant repaints. */}
         <OptimizedImage
           src={HERO_IMAGE}
@@ -57,7 +57,7 @@ export function HeroSection() {
             {t.hero.ctaPrimary} <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <Link href="/locations" className={buttonStyles({ variant: 'outline', size: 'lg', className: 'w-full sm:w-auto' })}>
-            <Building2 className="h-4 w-4 text-brand-red" aria-hidden="true" /> {t.nav.locations}
+            <Building2 className="h-4 w-4" aria-hidden="true" /> {t.nav.locations}
           </Link>
         </div>
       </div>
@@ -65,9 +65,9 @@ export function HeroSection() {
       <a
         href="#brand-stats"
         aria-label="Scroll to dojang overview and statistics"
-        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 animate-bounce rounded-full p-2 text-zinc-400 transition-colors hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red dark:text-zinc-500"
+        className="absolute bottom-6 left-1/2 z-20 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full text-zinc-400 transition-colors hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red dark:text-zinc-500 dark:hover:text-white"
       >
-        <ChevronDown className="h-6 w-6" />
+        <ChevronDown className="h-6 w-6" aria-hidden="true" />
       </a>
     </section>
   )

@@ -542,7 +542,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 px-5 py-4 sm:px-6">
         <div>
           <span className="type-kicker block text-brand-red">Floor-pattern walkthrough</span>
-          <h3 className="text-lg font-black uppercase tracking-tight">{formName}</h3>
+          <h2 className="text-lg font-black uppercase tracking-tight">{formName}</h2>
           {!walkthrough.verified && <span className="type-meta">Schematic preview · pending coach review</span>}
         </div>
         <div className="inline-flex rounded-xl border border-zinc-800 bg-zinc-900 p-1" role="group" aria-label="Mode">
@@ -729,7 +729,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                 defaultValue={0}
                 onInput={(e) => scrub(Number(e.currentTarget.value))}
                 aria-label="Scrub through the form"
-                className="mt-4 w-full accent-brand-red"
+                className="mt-4 h-6 w-full cursor-pointer accent-brand-red"
               />
               <p className="type-meta mt-2 hidden text-center sm:block">Keys: Space play · ← → step · Home restart</p>
             </>
@@ -797,7 +797,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                               wrong
                                 ? 'border-zinc-800 bg-zinc-900 text-zinc-600'
                                 : isAnswer
-                                  ? 'border-emerald-500 bg-emerald-500/15 text-emerald-300'
+                                  ? 'border-zinc-500 bg-zinc-500/15 text-zinc-300'
                                   : 'border-zinc-700 bg-zinc-900 text-zinc-200 hover:border-brand-red hover:text-white'
                             )}
                           >
@@ -810,7 +810,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                         you
                       </span>
                     </div>
-                    <p role="status" className={cn('mt-3 h-5 text-center text-xs font-semibold', feedback === 'correct' ? 'text-emerald-400' : 'text-amber-400')}>
+                    <p role="status" className={cn('mt-3 h-5 text-center text-xs font-semibold', feedback === 'correct' ? 'text-zinc-400' : 'text-zinc-400')}>
                       {feedback === 'correct' ? (
                         <span className="inline-flex items-center gap-1">
                           <Check className="h-3.5 w-3.5" /> Correct

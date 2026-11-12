@@ -1,6 +1,5 @@
 'use client'
 
-import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import Link from 'next/link'
 import { academyCourses, type AcademyCourse } from '@/data/academy'
@@ -9,7 +8,6 @@ import { ClassScheduleTable } from '@/components/ClassScheduleTable'
 import { AgeDivisionsAndFormats } from '@/components/AgeDivisionsAndFormats'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
-import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
 import {
   BookOpen,
@@ -94,24 +92,10 @@ export default function AcademyPage() {
     })
   }, [selectedDivision, searchQuery, localizedCourses])
 
-  const getDivisionBadgeColor = (div: string) => {
-    switch (div) {
-      case 'taekwondo':
-        return '#EF2F38'
-      case 'science':
-        return '#09BB00'
-      case 'studio':
-        return '#A855F7'
-      default:
-        return '#EF2F38'
-    }
-  }
-
   return (
     <div className="bg-zinc-50 dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
       <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4">
@@ -136,7 +120,7 @@ export default function AcademyPage() {
               onClick={() => setCurrentView('courses')}
               className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'courses'
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
@@ -147,7 +131,7 @@ export default function AcademyPage() {
               onClick={() => setCurrentView('ages')}
               className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'ages'
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
@@ -158,7 +142,7 @@ export default function AcademyPage() {
               onClick={() => setCurrentView('belts')}
               className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'belts'
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
@@ -169,7 +153,7 @@ export default function AcademyPage() {
               onClick={() => setCurrentView('schedule')}
               className={`px-4 sm:px-5 py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 currentView === 'schedule'
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
@@ -193,7 +177,7 @@ export default function AcademyPage() {
                     onClick={() => setSelectedDivision(tab.id)}
                     className={`px-3.5 py-2 min-h-[38px] rounded-xl text-[11px] sm:text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedDivision === tab.id
-                        ? 'bg-brand-red text-white shadow-brand-glow'
+                        ? 'bg-brand-red text-white'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                     }`}
                   >
@@ -211,7 +195,7 @@ export default function AcademyPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   aria-label="Search academy programs"
-                  className="w-full pl-9 pr-3 py-2 text-base sm:text-xs min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full pl-9 pr-3 py-2 text-base lg:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
             </div>
@@ -220,13 +204,12 @@ export default function AcademyPage() {
             {filteredCourses.length > 0 ? (
               <SafeGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" isolateItems>
                 {filteredCourses.map((course) => {
-                  const badgeColor = getDivisionBadgeColor(course.division)
-
                   return (
-                    <Card3D key={course.id} maxTilt={4} className="h-full">
+                    <div key={course.id} className="h-full">
                       <div
+                        // Mouse: the whole card opens the course. Keyboard: the "View syllabus" button inside.
                         onClick={() => setActiveCourse(course)}
-                        className="group h-full rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-xl hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+                        className="group h-full rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-[transform,border-color] duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700 motion-reduce:transition-none motion-reduce:hover:translate-y-0 flex flex-col justify-between cursor-pointer"
                       >
                         <div>
                           {/* Image Header with Badge Overlay */}
@@ -234,20 +217,17 @@ export default function AcademyPage() {
                             <SafeImage
                               src={course.image}
                               alt={course.title}
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+                              className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] motion-reduce:transition-none"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
                             <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
-                              <span
-                                className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-md"
-                                style={badgeColors(badgeColor)}
-                              >
+                              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white">
                                 {course.badge}
                               </span>
                               {course.beltRequirement && (
-                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-black/70 text-white backdrop-blur-md border border-white/10 flex items-center gap-1">
-                                  <Award className="w-3 h-3 text-brand-red" /> {course.beltRequirement}
+                                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-black/70 text-white border border-white/10 flex items-center gap-1">
+                                  <Award className="w-3 h-3" aria-hidden="true" /> {course.beltRequirement}
                                 </span>
                               )}
                             </div>
@@ -256,9 +236,9 @@ export default function AcademyPage() {
                               <p className="text-xs text-zinc-300 font-bold uppercase tracking-wider">
                                 {course.subtitle}
                               </p>
-                              <h3 className="text-lg sm:text-xl font-black uppercase text-white tracking-tight leading-tight mt-0.5 break-words">
+                              <h2 className="text-lg sm:text-xl font-black uppercase text-white tracking-tight leading-tight mt-0.5 break-words">
                                 {course.title}
-                              </h3>
+                              </h2>
                             </div>
                           </div>
 
@@ -282,12 +262,16 @@ export default function AcademyPage() {
                         </div>
 
                         <div className="p-5 sm:p-6 pt-0">
-                          <button className="w-full py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white group-hover:bg-brand-red group-hover:border-brand-red group-hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer touch-press">
-                            {t.academy.viewSyllabus} <ArrowRight className="w-3.5 h-3.5" />
+                          <button
+                            type="button"
+                            aria-haspopup="dialog"
+                            className="w-full min-h-[44px] py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white group-hover:border-zinc-400 dark:group-hover:border-zinc-600 transition-colors flex items-center justify-center gap-2 cursor-pointer touch-press"
+                          >
+                            {t.academy.viewSyllabus} <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                           </button>
                         </div>
                       </div>
-                    </Card3D>
+                    </div>
                   )
                 })}
               </SafeGrid>
@@ -295,9 +279,9 @@ export default function AcademyPage() {
               /* Empty State */
               <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
                 <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
-                <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
+                <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                   No Programs Found
-                </h4>
+                </h2>
                 <p className="text-[13px] text-zinc-500 mb-4">
                   No courses match your current search query.
                 </p>
@@ -379,10 +363,7 @@ export default function AcademyPage() {
               </button>
 
               <div className="absolute bottom-6 left-6 right-6 z-20">
-                <span
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest shadow-md inline-block mb-2"
-                  style={badgeColors(getDivisionBadgeColor(activeCourse.division))}
-                >
+                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest inline-block mb-2 bg-brand-red text-white">
                   {activeCourse.badge}
                 </span>
                 <p className="text-xs text-zinc-300 font-bold uppercase tracking-wider">
@@ -451,12 +432,12 @@ export default function AcademyPage() {
 
               {/* Modal Action CTA */}
               <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span className="text-xs text-zinc-500 font-mono">
+                <span className="text-xs text-zinc-500">
                   Program ID: {activeCourse.id}
                 </span>
                 <Link
                   href={`/contact?subject=Enrollment%20in%20${encodeURIComponent(activeCourse.title)}`}
-                  className="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow text-center flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all text-center flex items-center justify-center gap-2"
                 >
                   Enroll In Program <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

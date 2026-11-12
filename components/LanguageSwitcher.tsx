@@ -62,7 +62,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
             className={cn(
               'px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-1 cursor-pointer touch-press',
               language === lang.code
-                ? 'bg-brand-red text-white shadow-brand-glow'
+                ? 'bg-brand-red text-white'
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-brand-red'
             )}
           >
@@ -79,12 +79,12 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
     <div className={cn('relative inline-block text-left', className)} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80 hover:border-brand-red/40 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-300 text-xs font-bold text-zinc-700 dark:text-zinc-300 shadow-sm cursor-pointer touch-press"
+        className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80 hover:border-zinc-400 hover:bg-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 transition-colors duration-300 text-xs font-bold text-zinc-700 dark:text-zinc-300 cursor-pointer touch-press"
         aria-expanded={isOpen}
         aria-haspopup="true"
         aria-label="Select Language / ជ្រើសរើសភាសា / 选择语言 / 언어 선택"
       >
-        <Globe className="w-3.5 h-3.5 text-brand-red shrink-0" />
+        <Globe className="w-3.5 h-3.5 text-zinc-500 shrink-0" aria-hidden="true" />
         <span className="mr-0.5">{currentLanguageOption.flag}</span>
         <span className="hidden sm:inline-block font-semibold">{currentLanguageOption.nativeName}</span>
         <ChevronDown

@@ -1,28 +1,12 @@
-import type { Metadata } from 'next'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Student Project Incubator & Leadership Lab',
+export const metadata = pageMetadata({
+  title: 'Student Project Incubator',
   description:
-    'Fostering youth entrepreneurship, athletic innovation, and creative leadership through sports science and martial arts discipline at Infinity Taekwondo.',
-  alternates: {
-    canonical: '/incubator',
-  },
-  openGraph: {
-    title: 'Student Project Incubator & Leadership Lab | Infinity Taekwondo',
-    description:
-      'Empowering youth martial artists with real-world entrepreneurial, design, and leadership initiatives.',
-    url: 'https://infinitytaekwondo.com/incubator',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Student Project Incubator & Leadership Lab | Infinity Taekwondo',
-    description:
-      'Empowering youth martial artists with real-world entrepreneurial, design, and leadership initiatives.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'The Infinity Taekwondo incubator funds and mentors student projects in martial arts film, sport science, community outreach and dojang leadership.',
+  path: '/incubator',
+  keywords: ['Taekwondo student projects', 'martial arts film Cambodia', 'sport science Cambodia'],
+})
 
 export default function IncubatorLayout({ children }: { children: React.ReactNode }) {
   return children

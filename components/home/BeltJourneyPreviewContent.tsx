@@ -6,7 +6,6 @@ import { ArrowRight, Footprints, Milestone } from 'lucide-react'
 import { TRAINING_DISCIPLINES, beltProgression, type BeltRank } from '@/data/belts'
 import type { BeltFormLink } from '@/lib/beltForms'
 import { DanBars } from '@/components/belts/DanBars'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
@@ -33,21 +32,18 @@ export function BeltJourneyPreviewContent({ forms }: { forms: Record<string, Bel
   return (
     <section aria-label={copy.eyebrow} className="relative overflow-hidden bg-white py-16 transition-colors duration-500 sm:py-20 lg:py-24 dark:bg-black">
       <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <SectionHeader eyebrow={copy.eyebrow} eyebrowIcon={Milestone} title={copy.title} accent={copy.accent} description={copy.homeDescription} />
-        </ScrollReveal>
+        <SectionHeader eyebrow={copy.eyebrow} eyebrowIcon={Milestone} title={copy.title} accent={copy.accent} description={copy.homeDescription} />
 
         <ol className="relative mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-4 lg:grid-cols-8">
           {/* Thin line linking the belts on wide screens */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute left-6 right-6 top-[22px] hidden h-px bg-gradient-to-r from-zinc-200 via-brand-red/50 to-zinc-900 lg:block dark:from-zinc-800 dark:to-zinc-300"
+            className="pointer-events-none absolute left-6 right-6 top-[22px] hidden h-px bg-zinc-200 lg:block dark:bg-zinc-800"
           />
           {belts.map((belt, index) => {
             const hasWalkthrough = belt.forms.some((id) => forms[id]?.hasWalkthrough)
             return (
-              <li key={belt.id} className="relative">
-                <ScrollReveal direction="up" delay={index * 60} className="h-full">
+              <li key={belt.id} className="relative h-full">
                   <Link
                     href={`/belt-journey#${belt.id}`}
                     className="group flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-4 transition-colors duration-300 hover:border-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-brand-red"
@@ -78,13 +74,11 @@ export function BeltJourneyPreviewContent({ forms }: { forms: Record<string, Bel
                       {copy.view} <ArrowRight className="h-3 w-3" aria-hidden="true" />
                     </span>
                   </Link>
-                </ScrollReveal>
               </li>
             )
           })}
         </ol>
 
-        <ScrollReveal direction="up" delay={120}>
           <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-200 sm:grid-cols-2 lg:grid-cols-5 dark:border-zinc-800 dark:bg-zinc-800">
             {disciplines.map((discipline) => (
               <div key={discipline.key} className="bg-zinc-50 p-4 dark:bg-zinc-950">
@@ -96,7 +90,6 @@ export function BeltJourneyPreviewContent({ forms }: { forms: Record<string, Bel
               </div>
             ))}
           </div>
-        </ScrollReveal>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 text-center sm:flex-row">
           <Link href="/belt-journey" className={buttonStyles({ variant: 'primary', size: 'lg' })}>

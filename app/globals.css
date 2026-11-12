@@ -199,7 +199,10 @@
     font-family: var(--font-fallback-chinese), sans-serif !important;
     letter-spacing: 0.025em;
     line-height: 1.7;
-    word-break: break-all;
+    /* Chinese characters wrap between any two of them on their own; `break-all` also split the
+       Latin words mixed in ("BRANC / H"). Only a string too long for its line breaks mid-word. */
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   /* Korean Authentic, Clean, Dynamic Hangul Typography (Pretendard First) */

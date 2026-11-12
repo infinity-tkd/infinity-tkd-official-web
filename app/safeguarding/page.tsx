@@ -92,15 +92,15 @@ export default function SafeguardingPage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">100% Vetting</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">100% Vetting</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Criminal Background Checks</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Parental Visibility</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Parental Visibility</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">100% Open Glass Dojangs</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Confidential Hotline</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Confidential Hotline</span>
             <strong className="text-xs font-bold text-brand-red">Direct Safeguarding Officer</strong>
           </div>
         </div>
@@ -116,15 +116,15 @@ export default function SafeguardingPage() {
         </p>
         <div className="space-y-2">
           <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
             <span><strong>Universal Right to Safety:</strong> Every athlete has an equal, non-negotiable right to participate in martial arts free from all forms of harm and exploitation.</span>
           </div>
           <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
             <span><strong>Shared Responsibility:</strong> All master instructors, assistant coaches, administrative staff, and volunteer officials share mandatory legal and moral duty to uphold these standards.</span>
           </div>
           <div className="flex items-start gap-2.5 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
             <span><strong>Proactive Empowerment:</strong> Students are taught self-advocacy, bodily autonomy, and how to communicate boundaries without fear of athletic reprisal.</span>
           </div>
         </div>
@@ -156,12 +156,12 @@ export default function SafeguardingPage() {
         </p>
         <div className="grid sm:grid-cols-2 gap-3 text-xs">
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1">
-            <strong className="text-emerald-500 block">Required Standards</strong>
-            <p className="text-zinc-600 dark:text-zinc-400 font-light">Praise effort and character; maintain professional distance; address all students with dignity; model the 5 Tenets at all times.</p>
+            <strong className="text-zinc-500 block">Required Standards</strong>
+            <p className="text-zinc-600 dark:text-zinc-400">Praise effort and character; maintain professional distance; address all students with dignity; model the 5 Tenets at all times.</p>
           </div>
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1">
             <strong className="text-brand-red block">Strictly Prohibited</strong>
-            <p className="text-zinc-600 dark:text-zinc-400 font-light">No verbal degradation, physical punishments as humiliation, private unobserved 1-on-1 sessions, or non-educational physical contact.</p>
+            <p className="text-zinc-600 dark:text-zinc-400">No verbal degradation, physical punishments as humiliation, private unobserved 1-on-1 sessions, or non-educational physical contact.</p>
           </div>
         </div>
       </section>
@@ -248,16 +248,16 @@ export default function SafeguardingPage() {
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Safeguarding &amp; Welfare Desk
           </div>
-          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
+          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
             <div>
               <span className="text-[11px] text-zinc-400 block">Direct Welfare Email:</span>
-              <a href="mailto:safeguarding@infinitytkd.com" className="text-brand-red font-bold hover:underline">
+              <a href="mailto:safeguarding@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-brand-red font-bold hover:underline">
                 safeguarding@infinitytkd.com
               </a>
             </div>
             <div>
               <span className="text-[11px] text-zinc-400 block">Emergency Welfare Hotline:</span>
-              <a href="tel:012220124" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
+              <a href="tel:012220124" className="inline-flex min-h-[32px] items-center text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 012 220 124
               </a>
             </div>
