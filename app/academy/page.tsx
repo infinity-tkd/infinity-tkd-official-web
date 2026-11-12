@@ -206,7 +206,7 @@ export default function AcademyPage() {
             {/* Courses Responsive Grid (14px radius) */}
             {filteredCourses.length > 0 ? (
               <SafeGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" isolateItems>
-                {filteredCourses.map((course) => {
+                {filteredCourses.map((course, index) => {
                   return (
                     <div key={course.id} className="h-full">
                       <div
@@ -220,6 +220,9 @@ export default function AcademyPage() {
                             <SafeImage
                               src={course.image}
                               alt={course.title}
+                              // The first row is on screen at load: fetch it early (it is the page's largest image).
+                              priority={index < 3}
+                              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                               className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] motion-reduce:transition-none"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
