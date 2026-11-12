@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Careers & Join Our Coaching Staff',
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
     description:
       'Explore instructor opportunities and coaching careers at Infinity Taekwondo Phnom Penh.',
     url: 'https://infinitytaekwondo.com/join-team',
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Careers & Join Our Coaching Staff | Infinity Taekwondo',
     description:
       'Explore instructor opportunities and coaching careers at Infinity Taekwondo Phnom Penh.',
+    images: [TWITTER_IMAGE],
   },
 }
 

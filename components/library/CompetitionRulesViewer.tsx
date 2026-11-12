@@ -240,7 +240,7 @@ export function CompetitionRulesViewer({ onSelectRule }: CompetitionRulesViewerP
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
 
           <div
-            className="relative w-full max-w-5xl bg-zinc-900 text-white shadow-2xl rounded-2xl border border-zinc-800 overflow-hidden h-[92vh] flex flex-col z-10 animate-fade-in-up"
+            className="dark relative w-full max-w-5xl bg-zinc-900 text-white shadow-2xl rounded-2xl border border-zinc-800 overflow-hidden h-[92vh] flex flex-col z-10 animate-fade-in-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* PDF Viewer Control Bar */}

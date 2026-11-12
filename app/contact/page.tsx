@@ -60,9 +60,21 @@ const socials = [
   { name: 'TikTok', icon: TikTokIcon, link: 'https://tiktok.com/@infinitytaekwondo' },
 ]
 
+/**
+ * Reads the deep-link query (?subject=, ?branch=, ?plan=, ?coach=) in its own Suspense boundary.
+ * useSearchParams() opts its subtree out of static rendering, so keeping it in this tiny leaf lets
+ * the rest of the contact page (heading, addresses, form) ship as pre-rendered HTML.
+ */
+function ContactQueryPrefill({ onParams }: { onParams: (params: URLSearchParams) => void }) {
+  const searchParams = useSearchParams()
+  React.useEffect(() => {
+    if (searchParams) onParams(new URLSearchParams(searchParams.toString()))
+  }, [searchParams, onParams])
+  return null
+}
+
 function ContactContent() {
   const { t } = useLanguage()
-  const searchParams = useSearchParams()
 
   const [formData, setFormData] = React.useState({
     name: '',
@@ -77,8 +89,7 @@ function ContactContent() {
   const [errorMsg, setErrorMsg] = React.useState('')
 
   // Synchronize URL deep-link parameters into form state
-  React.useEffect(() => {
-    if (!searchParams) return
+  const applyDeepLink = React.useCallback((searchParams: URLSearchParams) => {
     const rawSubject = searchParams.get('subject') || ''
     const rawBranch = searchParams.get('branch') || ''
     const plan = searchParams.get('plan') || ''
@@ -137,7 +148,7 @@ function ContactContent() {
         formAnchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
-  }, [searchParams])
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -225,6 +236,9 @@ function ContactContent() {
 
   return (
     <div className="bg-zinc-50 dark:bg-black min-h-screen pt-20 sm:pt-24 pb-16 sm:pb-20 transition-colors duration-500 font-sans selection:bg-brand-red selection:text-white">
+      <React.Suspense fallback={null}>
+        <ContactQueryPrefill onParams={applyDeepLink} />
+      </React.Suspense>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Page Header */}
         <div className="mb-10 sm:mb-16 text-center max-w-3xl mx-auto pt-4">
@@ -300,7 +314,7 @@ function ContactContent() {
                 <div className="text-xs text-zinc-500 space-y-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                   <p className="flex items-center gap-2">
                     <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <a href="tel:012220124" className="hover:text-brand-red font-semibold">
+                    <a href="tel:012220124" className="inline-flex min-h-[32px] items-center hover:text-brand-red font-semibold">
                       012 220 124
                     </a>
                   </p>
@@ -339,7 +353,7 @@ function ContactContent() {
                 <div className="text-xs text-zinc-500 space-y-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                   <p className="flex items-center gap-2">
                     <Phone className="w-3.5 h-3.5 text-brand-red shrink-0" />
-                    <a href="tel:012220124" className="hover:text-brand-red font-semibold">
+                    <a href="tel:012220124" className="inline-flex min-h-[32px] items-center hover:text-brand-red font-semibold">
                       012 220 124
                     </a>
                   </p>
@@ -562,15 +576,5 @@ function ContactContent() {
 }
 
 export default function ContactPage() {
-  return (
-    <React.Suspense
-      fallback={
-        <div className="min-h-screen bg-zinc-50 dark:bg-black pt-28 flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-brand-red border-t-transparent rounded-full animate-spin" />
-        </div>
-      }
-    >
-      <ContactContent />
-    </React.Suspense>
-  )
+  return <ContactContent />
 }

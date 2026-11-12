@@ -274,7 +274,7 @@ export function CompetitionRulesReader() {
             <span className="text-xs font-mono text-zinc-400">{ruleT.mindmap.sub}</span>
           </div>
 
-          <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-6 overflow-x-auto">
+          <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-6 overflow-x-auto">
             <div className="flex justify-center">
               <div className="px-5 py-3 rounded-xl bg-brand-red text-white font-mono font-black text-xs uppercase tracking-wider shadow-brand-glow text-center">
                 {ruleT.mindmap.root}
@@ -488,7 +488,7 @@ export function CompetitionRulesReader() {
                   </span>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
+                <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
                   <div className="text-center mb-4">
                     <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-zinc-800 text-zinc-300 border border-zinc-700 inline-block">
                       {ruleT.overview.safetyOuter}
@@ -1833,7 +1833,7 @@ export function CompetitionRulesReader() {
                   </span>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
+                <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
                   <div className="text-center mb-4">
                     <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 inline-block">
                       Boundary Line #1 &bull; Front Judges (4 Judges: J1, J2, J3, J4 + Center Referee beside J1) &bull; Seated 1m back, 1m apart
@@ -2014,7 +2014,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* CUT-OFF SYSTEM OPERATING PROCEDURES FLOWCHART (Matching Official WT Schema) */}
-                <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-5">
+                <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-5">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
                     <div className="flex items-center gap-2">
                       <Network className="w-4 h-4 text-emerald-400" />

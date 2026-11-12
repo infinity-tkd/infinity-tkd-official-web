@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TRAINING_DISCIPLINES, beltProgression, type BeltRank } from '@/data/belts'
 import type { BeltFormLink } from '@/lib/beltForms'
 import { DanBars } from '@/components/belts/DanBars'
+import { badgeColors, readableOn } from '@/lib/color'
 import {
   ArrowUpRight,
   Award,
@@ -61,7 +62,7 @@ function FormLinks({
         >
           {form.name}
           {form.hasWalkthrough && (
-            <span className="inline-flex items-center gap-1 rounded-md bg-brand-red/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-red">
+            <span className="inline-flex items-center gap-1 rounded-md bg-brand-red/10 px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-red">
               <Footprints className="h-3 w-3" aria-hidden="true" /> {walkthroughLabel}
             </span>
           )}
@@ -137,6 +138,13 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
   const lastIndex = belts.length - 1
   const activeBelt = belts[selectedIndex] ?? belts[0]
   const accent = accentFor(activeBelt)
+  // The belt colour as readable text and icons: deepened on light cards, lifted on dark cards
+  // (e.g. yellow is 1.4:1 on white). Raw `accent` stays for bars, glows and frames.
+  const accentInk = {
+    '--belt-ink': readableOn(accent, '#fafafa'),
+    '--belt-ink-dark': readableOn(accent, '#18181b'),
+  } as React.CSSProperties
+  const accentInkClass = 'text-[color:var(--belt-ink)] dark:text-[color:var(--belt-ink-dark)]'
 
   /** Moves the glowing frame onto the selected belt tab; on the same row it stretches across, then snaps. */
   const placeIndicator = React.useCallback((animate: boolean) => {
@@ -516,6 +524,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 swipeStart.current = null
               }}
               className="bg-zinc-50 dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 sm:p-8 lg:p-10 relative overflow-hidden touch-pan-y"
+              style={accentInk}
             >
               {/* Korean colour word, oversized and faint */}
               <span
@@ -533,7 +542,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                     <div data-card-bar className="w-3.5 h-12 rounded-lg shrink-0 border border-black/20 shadow-md" style={{ backgroundColor: activeBelt.hex }} />
                     <div data-card-item>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold uppercase tracking-widest block transition-colors duration-300" style={{ color: accent }}>
+                        <span className={`text-xs font-bold uppercase tracking-widest block transition-colors duration-300 ${accentInkClass}`}>
                           {activeBelt.koreanName}
                         </span>
                         <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
@@ -567,7 +576,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                   {/* Timeline & board breaking */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div data-card-item className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: `${accent}18`, color: accent }}>
+                      <div className={`p-2 rounded-lg shrink-0 ${accentInkClass}`} style={{ backgroundColor: `${accent}18` }}>
                         <Clock className="w-4 h-4" />
                       </div>
                       <div>
@@ -577,7 +586,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                     </div>
 
                     <div data-card-item className="flex items-center gap-3 p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <div className="p-2 rounded-lg shrink-0" style={{ backgroundColor: `${accent}18`, color: accent }}>
+                      <div className={`p-2 rounded-lg shrink-0 ${accentInkClass}`} style={{ backgroundColor: `${accent}18` }}>
                         <Zap className="w-4 h-4" />
                       </div>
                       <div>
@@ -619,8 +628,8 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                           className="p-3.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 text-xs text-zinc-800 dark:text-zinc-200 flex items-start gap-2.5"
                         >
                           <span
-                            className="w-5 h-5 rounded-lg flex items-center justify-center font-black text-[11px] text-white shrink-0 mt-0.5"
-                            style={{ backgroundColor: accent }}
+                            className="w-5 h-5 rounded-lg flex items-center justify-center font-black text-[11px] shrink-0 mt-0.5"
+                            style={badgeColors(accent)}
                           >
                             {i + 1}
                           </span>
@@ -658,7 +667,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                           data-card-item
                           className="flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300"
                         >
-                          <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" style={{ color: accent }} />
+                          <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${accentInkClass}`} />
                           <span className="leading-relaxed font-medium">{req}</span>
                         </div>
                       ))}

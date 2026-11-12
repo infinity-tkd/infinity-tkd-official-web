@@ -5,6 +5,7 @@ import { PageHero } from '@/components/ui/PageHero'
 import { PostCard } from '@/components/blog/PostCard'
 import { CategoryNav } from '@/components/blog/CategoryNav'
 import { getAllPostMetas, getCategories, getPostsByCategory } from '@/lib/blog'
+import { SHARE_IMAGE } from '@/lib/seo'
 
 // Unknown categories 404 instead of rendering an empty archive.
 export const dynamicParams = false
@@ -29,7 +30,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     title,
     description,
     alternates: { canonical: `/blog/category/${slug}` },
-    openGraph: { title: `${title} | Infinity Taekwondo`, description, url: `/blog/category/${slug}`, type: 'website' },
+    openGraph: {
+      title: `${title} | Infinity Taekwondo`,
+      description,
+      url: `/blog/category/${slug}`,
+      type: 'website',
+      images: [SHARE_IMAGE],
+    },
   }
 }
 

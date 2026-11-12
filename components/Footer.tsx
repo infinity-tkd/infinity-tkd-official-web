@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Linkedin, MessageCircle, Rss, Send, Youtube } from 'lucide-react'
 import { InfinityLogo } from './InfinityLogo'
 import { siteSettings } from '@/config/siteSettings'
-import { FOOTER_COLUMNS, MESSAGING_LINKS } from '@/config/navigation'
+import { FOOTER_COLUMNS, MESSAGING_LINKS, prefetchFor } from '@/config/navigation'
 import { useLanguage } from '@/context/LanguageContext'
 import { cn } from '@/lib/utils'
 
@@ -97,7 +97,7 @@ export function Footer() {
               <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="block py-0.5 transition-colors hover:text-brand-red dark:hover:text-white">
+                    <Link href={link.href} prefetch={prefetchFor(link.href)} className="block py-1.5 transition-colors hover:text-brand-red dark:hover:text-white">
                       {link.label(t)}
                     </Link>
                   </li>

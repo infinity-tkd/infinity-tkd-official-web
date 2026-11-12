@@ -92,7 +92,7 @@ export function PillarsSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="pillars" className="py-16 sm:py-20 lg:py-24 relative scroll-mt-20 overflow-hidden bg-zinc-900 text-white dark:bg-black">
+    <section id="pillars" className="dark py-16 sm:py-20 lg:py-24 relative scroll-mt-20 overflow-hidden bg-zinc-900 text-white dark:bg-black">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] rounded-full bg-brand-red/5 blur-[140px]"

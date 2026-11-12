@@ -561,7 +561,7 @@ export default function IncubatorPage() {
                     </span>
                     <button
                       onClick={() => handleTrackSelect(track.title)}
-                      className="text-xs font-bold text-zinc-900 dark:text-white hover:text-brand-red inline-flex items-center gap-1 cursor-pointer transition-colors touch-press"
+                      className="text-xs font-bold text-zinc-900 dark:text-white hover:text-brand-red inline-flex min-h-[32px] items-center gap-1 cursor-pointer transition-colors touch-press"
                     >
                       Apply for this track &rarr;
                     </button>

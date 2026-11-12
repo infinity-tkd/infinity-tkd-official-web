@@ -371,7 +371,7 @@ export function FreestylePoomsaeScoreSimulator() {
       {/* ==================================================================== */}
       {/* 2. LIVE ELECTRONIC STADIUM SCOREBOARD BANNER                         */}
       {/* ==================================================================== */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950 text-white border border-zinc-800 shadow-2xl relative overflow-hidden">
+      <div className="dark p-6 sm:p-8 rounded-2xl bg-zinc-950 text-white border border-zinc-800 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
@@ -542,14 +542,14 @@ export function FreestylePoomsaeScoreSimulator() {
               value={courtNumber}
               onChange={(e) => setCourtNumber(e.target.value)}
               placeholder="Court #"
-              className="px-3 py-1.5 rounded-lg text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono"
+              className="px-3 py-1.5 rounded-lg text-base sm:text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono"
             />
             <input
               type="text"
               value={contestantInfo}
               onChange={(e) => setContestantInfo(e.target.value)}
               placeholder="Contestant #"
-              className="px-3 py-1.5 rounded-lg text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono w-full"
+              className="px-3 py-1.5 rounded-lg text-base sm:text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono w-full"
             />
           </div>
         </div>
@@ -558,7 +558,7 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* SECTION A: TECHNICAL SKILLS (6.0)                                  */}
         {/* ================================================================== */}
         <div className="border-b-2 border-zinc-900 dark:border-zinc-700">
-          <div className="bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
+          <div className="dark bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
             <span className="text-xs font-black uppercase tracking-wider font-mono">
               1. {t.technicalSkillsTitle} — {t.difficultyFootTitle} (5.0) + {t.basicMovementsTitle} (1.0)
             </span>
@@ -830,7 +830,7 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* SECTION B: PRESENTATION (4.0)                                      */}
         {/* ================================================================== */}
         <div className="border-b-2 border-zinc-900 dark:border-zinc-700">
-          <div className="bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
+          <div className="dark bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
             <span className="text-xs font-black uppercase tracking-wider font-mono">
               2. {t.presentationTitle} (4 Criteria, 1.0 Max Each)
             </span>
@@ -1025,7 +1025,7 @@ export function FreestylePoomsaeScoreSimulator() {
           </div>
 
           {/* Final Score Banner */}
-          <div className="p-5 rounded-xl bg-zinc-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="dark p-5 rounded-xl bg-zinc-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 block">
                 Total Score – Deductions =
@@ -1056,7 +1056,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeName}
                 onChange={(e) => setJudgeName(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base sm:text-xs"
               />
             </div>
 
@@ -1068,7 +1068,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeNation}
                 onChange={(e) => setJudgeNation(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base sm:text-xs"
               />
             </div>
 
@@ -1080,7 +1080,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeSignature}
                 onChange={(e) => setJudgeSignature(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans italic"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans italic text-base sm:text-xs"
               />
             </div>
           </div>

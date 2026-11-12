@@ -1,5 +1,6 @@
 'use client'
 
+import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import Link from 'next/link'
 import { Sparkles, ArrowRight, CheckCircle2, RotateCcw, Target } from 'lucide-react'
@@ -325,8 +326,8 @@ export function ProgramPathfinder() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
               <div>
                 <span
-                  className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-lg text-white inline-block mb-1 shadow-sm"
-                  style={{ backgroundColor: rec.badgeColor }}
+                  className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-lg inline-block mb-1 shadow-sm"
+                  style={badgeColors(rec.badgeColor)}
                 >
                   {rec.division}
                 </span>

@@ -297,7 +297,7 @@ export default function LocationsPage() {
 
                 {/* Free Trial Class Booking Card */}
                 <Card3D maxTilt={5} scale={1.01} className="w-full">
-                  <div className="p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4 shadow-xl">
+                  <div className="dark p-6 sm:p-8 rounded-xl bg-zinc-900 text-white border border-brand-red/30 space-y-4 shadow-xl">
                     <div>
                       <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
                         Free Trial Booking

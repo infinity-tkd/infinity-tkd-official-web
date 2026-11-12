@@ -1,56 +1,54 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import {
-  ArrowUpRight,
-  X,
+  Activity,
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  Brain,
+  Building2,
+  Check,
+  Compass,
+  Eye,
+  Facebook,
+  Flame,
   Instagram,
   Linkedin,
-  Facebook,
-  Youtube,
-  Eye,
-  Target,
-  Shield,
-  Zap,
-  Flame,
-  Award,
-  ArrowRight,
-  Sparkles,
-  BookOpen,
-  Users,
-  Compass,
-  CheckCircle2,
-  Quote,
-  Brain,
-  Rocket,
-  Heart,
-  Layers,
-  Palette,
-  Check,
-  Building2,
-  Calendar,
-  ChevronRight,
-  Activity,
   Milestone,
+  Rocket,
+  Shield,
+  Target,
+  Users,
+  X,
+  Zap,
 } from 'lucide-react'
 import { teamMembers, type TeamMember } from '@/data/team'
 import { collaborationsData } from '@/data/collaborations'
-import { InfinityLogo } from '@/components/InfinityLogo'
+import { InfinityLogo, INFINITY_SYMBOL } from '@/components/InfinityLogo'
 import { InfinityBrainAnimation } from '@/components/InfinityBrainAnimation'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
-import { Card3D } from '@/components/ui/Card3D'
+import { PageHero } from '@/components/ui/PageHero'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
+import { CtaBanner } from '@/components/ui/CtaBanner'
+import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
 import { beltProgression } from '@/data/belts'
+import { cn } from '@/lib/utils'
+
+type AboutTab = 'story' | 'mind' | 'quad' | 'values' | 'tenets' | 'journey' | 'faculty'
 
 export default function AboutPage() {
   const { t, localizeList, language } = useLanguage()
   const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null)
-  const [activeTab, setActiveTab] = React.useState<
-    'story' | 'mind' | 'quad' | 'values' | 'tenets' | 'journey' | 'faculty'
-  >('story')
+  const [activeTab, setActiveTab] = React.useState<AboutTab>('story')
   const [selectedBeltColor, setSelectedBeltColor] = React.useState<string>('red')
+  const panelRef = React.useRef<HTMLDivElement>(null)
+  const closeRef = React.useRef<HTMLButtonElement>(null)
 
   const localizedTeam = React.useMemo(() => {
     return localizeList(teamMembers)
@@ -64,21 +62,21 @@ export default function AboutPage() {
     setSelectedMember(null)
   }
 
+  // Profile dialog: focus moves to its close button, Escape closes it, and focus returns to the
+  // card that opened it.
   React.useEffect(() => {
+    if (!selectedMember) return
+    const opener = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedMember(null)
-      }
+      if (e.key === 'Escape') setSelectedMember(null)
     }
-    if (selectedMember) {
-      document.body.style.overflow = 'hidden'
-      window.addEventListener('keydown', handleKeyDown)
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
+      opener?.focus()
     }
   }, [selectedMember])
 
@@ -533,39 +531,7 @@ export default function AboutPage() {
     },
   ]
 
-  return (
-    <div className="bg-white dark:bg-black text-zinc-900 dark:text-white min-h-screen font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
-      {/* ==================================================================== */}
-      {/* HERO HEADER */}
-      {/* ==================================================================== */}
-      <section className="relative pt-24 sm:pt-28 pb-14 sm:pb-18 px-4 sm:px-6 overflow-hidden text-center">
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-red/10 via-white to-white dark:from-brand-red/20 dark:via-black dark:to-black z-10" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-brand-red/10 blur-[150px] rounded-full pointer-events-none" />
-        </div>
-
-        <div className="container mx-auto relative z-20 max-w-4xl">
-          <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md shadow-brand-glow">
-            <InfinityLogo variant="symbol" className="w-4 h-4" /> {t.about.badge}
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-4 sm:mb-6 uppercase leading-none text-zinc-900 dark:text-white break-words">
-            {t.about.heroTitle1} <span className="text-brand-red">{t.about.heroTitle2}</span>
-          </h1>
-
-          <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed font-light px-2">
-            {t.about.heroSubtitle}
-          </p>
-        </div>
-      </section>
-
-      {/* ==================================================================== */}
-      {/* INTERACTIVE PHILOSOPHY NAVIGATION TABS (12px radius, responsive scroll on mobile) */}
-      {/* ==================================================================== */}
-      <section className="py-3 sm:py-4 border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50/95 dark:bg-zinc-950/95 sticky top-16 sm:top-20 z-30 backdrop-blur-xl">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex overflow-x-auto sm:flex-wrap sm:justify-center gap-2 sm:gap-2.5 scrollbar-none pb-1 sm:pb-0 snap-x touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
-            {[
+  const tabs = [
               {
                 id: 'story',
                 label: language === 'km' ? 'និមិត្តសញ្ញា & អត្តសញ្ញាណ' : language === 'zh' ? '品牌标志与理念' : language === 'ko' ? '브랜드 로고 및 상징' : 'Logo & Identity',
@@ -601,1037 +567,754 @@ export default function AboutPage() {
                 label: language === 'km' ? 'គណៈគ្រូបង្វឹក' : language === 'zh' ? '教练导师团队' : language === 'ko' ? '수석 지도진' : 'Leadership Faculty',
                 icon: Users,
               },
-            ].map((tab) => {
-              const Icon = tab.icon
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 sm:px-5 py-2 sm:py-2.5 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider sm:tracking-widest transition-all duration-300 flex items-center gap-1.5 sm:gap-2 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
-                    activeTab === tab.id
-                      ? 'bg-brand-red text-white shadow-brand-glow'
-                      : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5 shrink-0" /> <span>{tab.label}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+  ] as { id: AboutTab; label: string; icon: React.ElementType }[]
 
-      {/* ==================================================================== */}
-      {/* TAB 1: LOGO DESIGN PHILOSOPHY & ANATOMY */}
-      {/* ==================================================================== */}
-      {activeTab === 'story' && (
-        <div className="animate-fade-in space-y-16 sm:space-y-24 py-16 sm:py-24">
-          {/* Logo Meaning Narrative */}
-          <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-            <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
-              <div className="md:col-span-5 flex justify-center">
-                <div className="relative p-6 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col items-center text-center w-full max-w-sm">
-                  <div className="relative">
-                    <InfinityLogo variant="seal" className="w-44 sm:w-56 h-44 sm:h-56 mb-4 sm:mb-6 drop-shadow-brand-glow" />
-                  </div>
-                  <span className="text-xs font-black uppercase tracking-widest text-brand-red">
-                    The Official Infinity Seal
-                  </span>
-                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+  // Switching section from deep inside a long one brings the new section's top into view.
+  const selectTab = (tab: AboutTab) => {
+    setActiveTab(tab)
+    const panel = panelRef.current
+    if (panel && panel.getBoundingClientRect().top < 150) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      panel.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
+    }
+  }
+
+  return (
+    <div className="overflow-x-hidden">
+      <PageHero
+        eyebrow={t.about.badge}
+        eyebrowIcon={InfinitySymbol}
+        title={t.about.heroTitle1}
+        accent={t.about.heroTitle2}
+        description={t.about.heroSubtitle}
+      />
+
+      {/* Section switcher: stays under the navbar while reading. */}
+      <div className="sticky top-16 z-30 border-y border-zinc-200 bg-white/90 py-2.5 backdrop-blur-md sm:top-20 dark:border-zinc-800 dark:bg-black/85">
+        <div className="container mx-auto flex max-w-7xl justify-center px-4 sm:px-6 lg:px-8">
+          <SegmentedControl
+            semantics="tabs"
+            idBase="about"
+            label="About Infinity Taekwondo"
+            value={activeTab}
+            onChange={selectTab}
+            scrollable
+            options={tabs.map(({ id, label, icon: Icon }) => ({
+              value: id,
+              label: (
+                <>
+                  <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span>{label}</span>
+                </>
+              ),
+            }))}
+          />
+        </div>
+      </div>
+
+      <div
+        ref={panelRef}
+        id="about-panel"
+        role="tabpanel"
+        aria-labelledby={`about-tab-${activeTab}`}
+        className="container mx-auto max-w-6xl scroll-mt-32 px-4 py-16 sm:scroll-mt-36 sm:px-6 sm:py-24 lg:px-8"
+      >
+        {/* ================================================================== */}
+        {/* LOGO & IDENTITY */}
+        {/* ================================================================== */}
+        {activeTab === 'story' && (
+          <div className="animate-fade-in space-y-24 sm:space-y-32">
+            <section className="grid items-center gap-10 md:grid-cols-12 md:gap-14">
+              <div className="md:col-span-5">
+                <div className="flex flex-col items-center rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-10 text-center dark:border-zinc-800 dark:bg-zinc-900/40">
+                  <InfinityLogo variant="seal" className="h-44 w-44 sm:h-52 sm:w-52" />
+                  <p className="mt-6 text-xs font-bold uppercase tracking-widest text-brand-red">The Official Infinity Seal</p>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                     Geometric precision incorporating the Taekwondo belt knot into an eternal loop.
                   </p>
                 </div>
               </div>
 
-              <div className="md:col-span-7 space-y-5 sm:space-y-6 text-zinc-700 dark:text-zinc-300 text-base sm:text-lg leading-relaxed font-light">
-                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red">
-                  <Sparkles className="w-3.5 h-3.5" /> Brand Identity Guidelines (Page 9)
+              <div className="md:col-span-7">
+                <SectionHeader
+                  align="left"
+                  size="md"
+                  eyebrowStyle="text"
+                  eyebrow="Brand Identity"
+                  title="The Philosophy of"
+                  accent="The Eternal Loop"
+                />
+                <div className="mt-6 space-y-4 text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
+                  <p>
+                    We utilized geometric precision to incorporate the signature{' '}
+                    <strong className="font-semibold text-zinc-900 dark:text-white">Taekwondo belt</strong> into an{' '}
+                    <strong className="font-semibold text-zinc-900 dark:text-white">eternal loop (∞)</strong>, representing an
+                    individual’s journey through discipline—a cycle of growth that has no end.
+                  </p>
+                  <p>
+                    This loop symbolizes the strength, agility, and unwavering focus required to master one’s craft. The icon
+                    bridges traditional martial arts philosophy with minimalist modern design.
+                  </p>
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                  The Philosophy of <span className="text-brand-red">The Eternal Loop</span>
-                </h2>
-                <p>
-                  We utilized geometric precision to incorporate the signature <strong>Taekwondo belt</strong> into an <strong>eternal loop (∞)</strong>, representing an individual’s journey through discipline—a cycle of growth that has no end.
-                </p>
-                <p>
-                  This loop symbolizes the strength, agility, and unwavering focus required to master one’s craft. The icon bridges traditional martial arts philosophy with minimalist modern design.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-1">
-                      Infinity Red (#EF2F38)
-                    </h4>
-                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-xl border border-zinc-200 p-5 dark:border-zinc-800">
+                    <dt className="flex items-center gap-2 text-sm font-bold text-zinc-900 dark:text-white">
+                      <span className="h-3 w-3 rounded-full bg-brand-red" aria-hidden="true" />
+                      Infinity Red #EF2F38
+                    </dt>
+                    <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                       Symbolizes vitality, energy, passion, and the intense indomitable warrior spirit of the practitioner.
-                    </p>
+                    </dd>
                   </div>
-                  <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-1">
-                      Korean Origin (태권도)
-                    </h4>
-                    <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  <div className="rounded-xl border border-zinc-200 p-5 dark:border-zinc-800">
+                    <dt className="text-sm font-bold text-zinc-900 dark:text-white">Korean Origin (태권도)</dt>
+                    <dd className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                       Honors the art’s traditional origins while positioning the brand for international recognition.
-                    </p>
+                    </dd>
                   </div>
-                </div>
+                </dl>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Logo Formula & Visual Equation */}
-          <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-            <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/30 text-center relative overflow-hidden shadow-xl">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[120px] rounded-full pointer-events-none" />
-
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
-                Design Anatomy
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight mb-8">
-                The Visual Equation
-              </h3>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
-                <div className="p-6 rounded-xl bg-white/5 border border-white/10 w-full sm:w-auto">
-                  <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
-                    <span className="text-3xl font-black">🥋</span>
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider block">Taekwondo Belt Knot</span>
-                  <span className="text-[11px] text-zinc-400">Traditional Root</span>
-                </div>
-
-                <span className="text-3xl font-black text-brand-red">+</span>
-
-                <div className="p-6 rounded-xl bg-white/5 border border-white/10 w-full sm:w-auto">
-                  <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
-                    <span className="text-4xl font-black text-brand-red">∞</span>
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider block">Eternal Loop</span>
-                  <span className="text-[11px] text-zinc-400">Limitless Growth</span>
-                </div>
-
-                <span className="text-3xl font-black text-brand-red">=</span>
-
-                <div className="p-6 rounded-xl bg-brand-red/10 border border-brand-red/40 w-full sm:w-auto shadow-brand-glow">
-                  <div className="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
-                    <InfinityLogo variant="symbol" className="w-12 h-12 text-brand-red" />
-                  </div>
-                  <span className="text-xs font-black uppercase tracking-wider block text-brand-red">Infinity TKD Mark</span>
-                  <span className="text-[11px] text-zinc-300">Global Martial Identity</span>
-                </div>
+            {/* The mark, built from its own parts. */}
+            <section>
+              <SectionHeader size="md" eyebrowStyle="text" eyebrow="Design Anatomy" title="The Visual" accent="Equation" />
+              <div className="mt-10 grid items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 sm:p-8 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-5 dark:border-zinc-800 dark:bg-zinc-900/40">
+                <EquationTerm label="Taekwondo Belt Knot" note="Traditional Root">
+                  <LogoParts parts={['knot']} viewBox="248 322 78 46" />
+                </EquationTerm>
+                <Operator symbol="+" label="plus" />
+                <EquationTerm label="Eternal Loop" note="Limitless Growth">
+                  <LogoParts parts={['left', 'right']} />
+                </EquationTerm>
+                <Operator symbol="=" label="equals" />
+                <EquationTerm label="Infinity TKD Mark" note="Global Martial Identity" highlight>
+                  <LogoParts parts={['left', 'knot', 'right']} />
+                </EquationTerm>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Interactive Belt Color Variations */}
-          <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
-                Dynamic Identity Standard (Brand Guide Page 14)
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                Rank-Based Belt Mark Variations
-              </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 font-light">
-                On official diplomas and certificates, our signature belt loop adapts to the athlete&apos;s earned rank color.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
-              {beltPalette.map((belt) => {
-                const isSelected = selectedBeltColor === belt.id
-                return (
-                  <button
-                    key={belt.id}
-                    onClick={() => setSelectedBeltColor(belt.id)}
-                    className={`p-3.5 sm:p-4 rounded-xl border text-center transition-all duration-300 flex flex-col items-center justify-between gap-2 touch-press cursor-pointer ${
-                      isSelected
-                        ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900 shadow-lg scale-105 ring-2 ring-brand-red/30'
-                        : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 hover:scale-102'
-                    }`}
-                  >
-                    <div
-                      className="w-7 h-7 rounded-lg border shadow-sm transition-transform duration-300"
-                      style={{ backgroundColor: belt.hex, borderColor: belt.border }}
-                    />
-                    <span className="text-xs font-bold text-zinc-900 dark:text-white leading-tight">
-                      {belt.shortName}
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
-
-            {/* Selected Belt Details Card */}
-            {(() => {
-              const activeBeltObj = beltPalette.find((b) => b.id === selectedBeltColor) || beltPalette[5]
-              return (
-                <div
-                  key={activeBeltObj.id}
-                  className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto shadow-md animate-fade-in"
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-16 h-16 rounded-xl border shadow-md flex items-center justify-center transition-all duration-300 transform hover:scale-105 shrink-0"
-                      style={{ backgroundColor: activeBeltObj.hex, borderColor: activeBeltObj.border }}
-                    >
-                      <InfinityLogo
-                        variant="symbol"
-                        className={`w-10 h-10 ${
-                          activeBeltObj.textDark ? 'text-black' : 'text-white'
-                        }`}
-                        colorScheme="custom"
-                        brandColor={activeBeltObj.textDark ? '#000000' : '#FFFFFF'}
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white">
-                          {activeBeltObj.name}
-                        </h4>
-                        <span className="text-xs font-mono font-bold text-brand-red">{activeBeltObj.korean}</span>
-                      </div>
-                      <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 mt-0.5">{activeBeltObj.meaning}</p>
-                      <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg leading-relaxed">
-                        {activeBeltObj.philosophy}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
-                    <span className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm">
-                      {t.beltGuide.timeFromStart}: {activeBeltObj.timeline}
-                    </span>
-                    <span className="text-xs font-mono text-zinc-400">
-                      HEX: {activeBeltObj.hex}
-                    </span>
-                  </div>
-                </div>
-              )
-            })()}
-          </section>
-        </div>
-      )}
-
-      {/* ==================================================================== */}
-      {/* TAB 2: INFINITY TKD BRAIN & MIND PHILOSOPHY */}
-      {/* ==================================================================== */}
-      {activeTab === 'mind' && (
-        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto space-y-16 sm:space-y-20">
-          <InfinityBrainAnimation />
-
-          <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-              Cognitive &amp; Neurological Alignment
-            </span>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-              The 4 Pillars of the <span className="text-brand-red">Martial Mind</span>
-            </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-              True mastery starts in the mind. At Infinity Taekwondo, physical strikes are merely the outer expression of inner psychological focus, emotional control, and scientific strategy.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {brainPrinciples.map((item) => {
-              const Icon = item.icon
-              return (
-                <Card3D key={item.number} max={5} depth={4} className="h-full">
-                  <div className="p-8 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
-                    <div>
-                      <div className="flex justify-between items-start mb-6">
-                        <span className="text-3xl sm:text-4xl font-black text-brand-red/40 font-mono">
-                          {item.number}
-                        </span>
-                        <div className="p-3.5 rounded-xl bg-brand-red/10 text-brand-red">
-                          <Icon className="w-6 h-6" />
-                        </div>
-                      </div>
-
-                      <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1">
-                        {item.title}
-                      </h3>
-                      <span className="text-xs font-bold text-brand-red uppercase tracking-widest block mb-4">
-                        {item.korean}
-                      </span>
-
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-
-                    <div className="mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs font-bold uppercase">
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
-                        <span>Cultivated Daily</span>
-                      </div>
-                      <span className="text-brand-red font-mono text-xs">{item.metric}</span>
-                    </div>
-                  </div>
-                </Card3D>
-              )
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* ==================================================================== */}
-      {/* TAB 3: VISION, MISSION, GOAL & DREAM QUAD-MATRIX */}
-      {/* ==================================================================== */}
-      {activeTab === 'quad' && (
-        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 animate-fade-in max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-              Direct from Brand Guide (Page 3)
-            </span>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-              Vision, Mission, <span className="text-brand-red">Goal &amp; Dream</span>
-            </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-              Our comprehensive directional framework driving every class, coach, curriculum, and athlete at Infinity Taekwondo.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {quadPillars.map((pillar) => {
-              const Icon = pillar.icon
-              return (
-                <Card3D key={pillar.id} max={5} depth={4} className="h-full">
-                  <div className="p-8 sm:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
-                    <div>
-                      <div className="flex justify-between items-start mb-6">
-                        <span
-                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                          style={{ backgroundColor: pillar.color }}
-                        >
-                          {pillar.badge}
-                        </span>
-                        <div
-                          className="p-3.5 rounded-xl"
-                          style={{ backgroundColor: `${pillar.color}15`, color: pillar.color }}
-                        >
-                          <Icon className="w-6 h-6" />
-                        </div>
-                      </div>
-
-                      <h3 className="text-2xl sm:text-3xl font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1">
-                        {pillar.title}
-                      </h3>
-                      <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
-                        {pillar.korean}
-                      </span>
-
-                      <p className="text-xs font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200 mb-3">
-                        &ldquo;{pillar.tagline}&rdquo;
-                      </p>
-
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
-                        {pillar.desc}
-                      </p>
-                    </div>
-
-                    <div className="mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-zinc-400">
-                      <span>Source: {pillar.source}</span>
-                      <span className="font-bold text-brand-red uppercase text-[11px]">{pillar.target}</span>
-                    </div>
-                  </div>
-                </Card3D>
-              )
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* ==================================================================== */}
-      {/* TAB 4: 3 CORE VALUES */}
-      {/* ==================================================================== */}
-      {activeTab === 'values' && (
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black animate-fade-in">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-                Foundational DNA (Brand Guide Page 4)
-              </span>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                {t.about.valuesTitle1} <span className="text-brand-red">{t.about.valuesTitle2}</span>
-              </h2>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-                {t.about.valuesSubtitle}
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              {coreValues.map((val) => {
-                const Icon = val.icon
-                return (
-                  <Card3D key={val.title} max={5} depth={4} className="h-full">
-                    <div className="p-6 sm:p-8 md:p-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red transition-all duration-300 shadow-sm hover:shadow-brand-glow flex flex-col justify-between h-full">
-                      <div>
-                        <div className="flex justify-between items-start mb-6 sm:mb-8">
-                          <span className="text-4xl sm:text-5xl font-black text-brand-red/40 font-mono">
-                            {val.number}
-                          </span>
-                          <div
-                            className="p-3.5 rounded-xl"
-                            style={{ backgroundColor: `${val.color}15`, color: val.color }}
-                          >
-                            <Icon className="w-6 h-6" />
-                          </div>
-                        </div>
-
-                        <div className="mb-4">
-                          <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
-                            {val.title}
-                          </h3>
-                          <span className="text-xs font-bold text-brand-red uppercase tracking-widest block mt-0.5">
-                            {val.korean}
-                          </span>
-                          <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase mt-2">
-                            &ldquo;{val.tagline}&rdquo;
-                          </p>
-                        </div>
-
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-light mb-4">
-                          {val.description}
-                        </p>
-
-                        <div className="p-3 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs italic text-zinc-500 dark:text-zinc-400 font-serif">
-                          &ldquo;{val.quote}&rdquo;
-                        </div>
-                      </div>
-
-                      <div className="mt-6 sm:mt-8 pt-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center gap-2 text-xs font-bold uppercase text-zinc-400">
-                        <CheckCircle2 className="w-4 h-4 text-brand-red" />
-                        <span>Embodied on the Mats</span>
-                      </div>
-                    </div>
-                  </Card3D>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ==================================================================== */}
-      {/* TAB 5: THE 5 DOJANG TENETS */}
-      {/* ==================================================================== */}
-      {activeTab === 'tenets' && (
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black animate-fade-in">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-                {t.tenets.badge}
-              </span>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                {t.about.tenetsTitle1} <span className="text-brand-red">{t.about.tenetsTitle2}</span>
-              </h2>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-                {t.about.tenetsSubtitle}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {dojangTenets.map((tenet) => (
-                <Card3D key={tenet.name} max={3} depth={2} className="w-full">
-                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div className="flex items-start md:items-center gap-4 sm:gap-6">
-                      <span className="text-3xl sm:text-4xl font-black text-brand-red/60 w-12 sm:w-14 shrink-0 font-mono">
-                        {tenet.number}
-                      </span>
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2.5 mb-1">
-                          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                            {tenet.name}
-                          </h3>
-                          <span className="text-xs font-bold text-brand-red">{tenet.korean}</span>
-                          <span className="text-xs font-mono text-zinc-400">[{tenet.pronunciation}]</span>
-                        </div>
-                        <p className="text-sm text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
-                          {tenet.principle}
-                        </p>
-                        <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
-                          <strong className="text-zinc-800 dark:text-zinc-200 font-bold uppercase text-[11px]">Daily Action:</strong> {tenet.application}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="shrink-0 self-end md:self-auto">
-                      <span className="px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red/10 text-brand-red border border-brand-red/20 shadow-sm">
-                        Dojang Standard
-                      </span>
-                    </div>
-                  </div>
-                </Card3D>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ==================================================================== */}
-      {/* TAB 6: OUR JOURNEY & TIMELINE */}
-      {/* ==================================================================== */}
-      {activeTab === 'journey' && (() => {
-        const activeMilestone = milestones.find((m) => m.year === selectedEraYear) || milestones[0]
-
-        const getLocalizedMilestone = (m: (typeof milestones)[0]) => {
-          if (language === 'en') return m
-          const trans = m.translations?.[language]
-          if (!trans) return m
-          return {
-            ...m,
-            title: trans.title || m.title,
-            subtitle: trans.subtitle || m.subtitle,
-            desc: trans.desc || m.desc,
-            highlights: trans.highlights || m.highlights,
-          }
-        }
-
-        const currentM = getLocalizedMilestone(activeMilestone)
-
-        return (
-          <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-                Evolution of Excellence
-              </span>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                The Journey of <span className="text-brand-red">Infinity TKD</span>
-              </h2>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-                From a dedicated grassroots dojang to Cambodia’s premier high-performance sport science and martial academy.
-              </p>
-
-              {/* View Switcher (Interactive Showcase vs Full Chronology) */}
-              <div className="inline-flex items-center p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mt-6 shadow-sm">
-                <button
-                  onClick={() => setJourneyViewMode('interactive')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                    journeyViewMode === 'interactive'
-                      ? 'bg-brand-red text-white shadow-brand-glow'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                  }`}
-                >
-                  Interactive Era Showcase
-                </button>
-                <button
-                  onClick={() => setJourneyViewMode('timeline')}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                    journeyViewMode === 'timeline'
-                      ? 'bg-brand-red text-white shadow-brand-glow'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                  }`}
-                >
-                  Full Chronology
-                </button>
-              </div>
-            </div>
-
-            {/* VIEW MODE 1: INTERACTIVE ERA SHOWCASE */}
-            {journeyViewMode === 'interactive' && (
-              <div className="space-y-8 animate-fade-in">
-                {/* Horizontal Interactive Timeline Track */}
-                <div className="p-3 sm:p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
-                    {milestones.map((m, idx) => {
-                      const isSelected = selectedEraYear === m.year
-                      const Icon = m.icon
-                      return (
-                        <button
-                          key={m.year}
-                          onClick={() => setSelectedEraYear(m.year)}
-                          className={`p-3 sm:p-4 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between gap-2 cursor-pointer group ${
-                            isSelected
-                              ? 'border-brand-red bg-white dark:bg-zinc-950 shadow-lg scale-102 ring-2 ring-brand-red/20'
-                              : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white/50 dark:bg-zinc-900/40'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span
-                              className={`text-lg sm:text-xl font-black font-mono tracking-tight ${
-                                isSelected ? 'text-brand-red' : 'text-zinc-900 dark:text-white'
-                              }`}
-                            >
-                              {m.year}
-                            </span>
-                            <div
-                              className="p-1.5 rounded-lg"
-                              style={{ backgroundColor: `${m.badgeColor}15`, color: m.badgeColor }}
-                            >
-                              <Icon className="w-3.5 h-3.5" />
-                            </div>
-                          </div>
-                          <div>
-                            <span className="text-[11px] font-bold uppercase tracking-wider block text-zinc-900 dark:text-white truncate">
-                              {m.era}
-                            </span>
-                            <span className="text-[11px] text-zinc-400 font-mono block truncate">
-                              {m.badge}
-                            </span>
-                          </div>
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Selected Era Spotlight Card (14px radius) */}
-                <div className="p-6 sm:p-10 md:p-12 rounded-2xl bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-2xl relative overflow-hidden animate-fade-in">
-                  <div
-                    className="absolute top-0 right-0 w-96 h-96 blur-[150px] rounded-full pointer-events-none opacity-20"
-                    style={{ backgroundColor: currentM.badgeColor }}
-                  />
-
-                  <div className="relative z-10 grid md:grid-cols-12 gap-8 items-start">
-                    {/* Left Column: Year Hero & Description */}
-                    <div className="md:col-span-7 space-y-4">
-                      <div className="flex flex-wrap items-center gap-2.5">
-                        <span
-                          className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                          style={{ backgroundColor: currentM.badgeColor }}
-                        >
-                          {currentM.badge}
-                        </span>
-                        <span className="text-xs font-mono font-bold text-zinc-400">
-                          {currentM.koreanEra}
-                        </span>
-                      </div>
-
-                      <div>
-                        <span className="text-4xl sm:text-6xl font-black font-mono text-brand-red tracking-tight leading-none block mb-2">
-                          {currentM.year}
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
-                          {currentM.title}
-                        </h3>
-                        <p className="text-xs sm:text-sm font-bold text-brand-red uppercase tracking-wider mt-1">
-                          {currentM.subtitle}
-                        </p>
-                      </div>
-
-                      <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 font-light leading-relaxed pt-2">
-                        {currentM.desc}
-                      </p>
-
-                      {/* Founder Quote */}
-                      <div className="p-4 rounded-xl bg-white dark:bg-zinc-950/80 border border-zinc-200 dark:border-zinc-800 shadow-sm mt-4">
-                        <p className="text-xs italic text-zinc-600 dark:text-zinc-300 font-serif leading-relaxed">
-                          &ldquo;{currentM.quote.text}&rdquo;
-                        </p>
-                        <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-brand-red block mt-2">
-                          &mdash; {currentM.quote.author}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Right Column: Key Breakthrough Highlights & Metrics */}
-                    <div className="md:col-span-5 space-y-4">
-                      {/* Metric Callout Card */}
-                      <div className="p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                        <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
-                          {currentM.metrics.label}
-                        </span>
-                        <span className="text-2xl sm:text-3xl font-black font-mono text-zinc-900 dark:text-white mt-1 block">
-                          {currentM.metrics.value}
-                        </span>
-                      </div>
-
-                      {/* Key Highlights List */}
-                      <div className="p-5 sm:p-6 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">
-                          Milestone Breakthroughs
-                        </h4>
-                        <div className="space-y-2.5">
-                          {currentM.highlights.map((h, i) => (
-                            <div key={i} className="flex items-start gap-2.5 text-[13px] text-zinc-700 dark:text-zinc-300">
-                              <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                              <span>{h}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Quick Era Prev/Next Buttons */}
-                      <div className="flex items-center justify-between gap-3 pt-2">
-                        <button
-                          onClick={() => {
-                            const currIdx = milestones.findIndex((m) => m.year === selectedEraYear)
-                            if (currIdx > 0) setSelectedEraYear(milestones[currIdx - 1].year)
-                          }}
-                          disabled={selectedEraYear === milestones[0].year}
-                          className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-brand-red hover:text-white transition-colors cursor-pointer"
-                        >
-                          &larr; Previous Era
-                        </button>
-                        <button
-                          onClick={() => {
-                            const currIdx = milestones.findIndex((m) => m.year === selectedEraYear)
-                            if (currIdx < milestones.length - 1) setSelectedEraYear(milestones[currIdx + 1].year)
-                          }}
-                          disabled={selectedEraYear === milestones[milestones.length - 1].year}
-                          className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-brand-red text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-zinc-900 transition-colors cursor-pointer shadow-brand-glow"
-                        >
-                          Next Era &rarr;
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* VIEW MODE 2: FULL CHRONOLOGICAL ROADMAP */}
-            {journeyViewMode === 'timeline' && (
-              <div className="relative border-l-2 border-brand-red/30 ml-4 sm:ml-8 space-y-10 sm:space-y-12 animate-fade-in">
-                {milestones.map((m) => {
-                  const localizedM = getLocalizedMilestone(m)
-                  const Icon = m.icon
+            {/* The mark in each rank colour. */}
+            <section>
+              <SectionHeader
+                size="md"
+                eyebrowStyle="text"
+                eyebrow="Rank-Based Identity"
+                title="Belt Mark"
+                accent="Variations"
+                description="On official diplomas and certificates, our signature belt loop adapts to the athlete's earned rank color."
+              />
+              <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-8">
+                {beltPalette.map((belt) => {
+                  const isSelected = selectedBeltColor === belt.id
                   return (
-                    <div key={m.year} className="relative pl-8 sm:pl-10">
-                      <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-red border-4 border-white dark:border-black shadow-brand-glow" />
-                      <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-brand-red/40 transition-all">
-                        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-                          <div className="flex items-center gap-3">
-                            <span className="text-3xl sm:text-4xl font-black text-brand-red font-mono">
-                              {m.year}
-                            </span>
-                            <span className="text-xs font-bold uppercase text-zinc-400">
-                              {m.koreanEra}
-                            </span>
-                          </div>
-                          <span
-                            className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest text-white shadow-sm"
-                            style={{ backgroundColor: m.badgeColor }}
-                          >
-                            {m.badge}
-                          </span>
-                        </div>
-
-                        <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1">
-                          {localizedM.title}
-                        </h3>
-                        <span className="text-xs font-bold uppercase tracking-wider text-brand-red block mb-3">
-                          {localizedM.subtitle}
-                        </span>
-
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
-                          {localizedM.desc}
-                        </p>
-
-                        {/* Highlights Pills */}
-                        <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-800">
-                          {localizedM.highlights.map((h, i) => (
-                            <span
-                              key={i}
-                              className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-medium"
-                            >
-                              &bull; {h}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    <button
+                      key={belt.id}
+                      type="button"
+                      onClick={() => setSelectedBeltColor(belt.id)}
+                      aria-pressed={isSelected}
+                      className={cn(
+                        'flex min-h-[76px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border bg-white p-3 text-center transition-colors duration-300 dark:bg-zinc-900/40',
+                        isSelected
+                          ? 'border-brand-red'
+                          : 'border-zinc-200 hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600'
+                      )}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="h-6 w-6 rounded-lg border"
+                        style={{ backgroundColor: belt.hex, borderColor: belt.border }}
+                      />
+                      <span className="text-xs font-bold leading-tight text-zinc-900 dark:text-white">{belt.shortName}</span>
+                    </button>
                   )
                 })}
               </div>
-            )}
-          </section>
-        )
-      })()}
 
-      {/* ==================================================================== */}
-      {/* TAB 7: LEADERSHIP TEAM */}
-      {/* ==================================================================== */}
-      {activeTab === 'faculty' && (
-        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black animate-fade-in">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2 block">
-                Executive Leadership
-              </span>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                {t.about.facultyTitle1} <span className="text-brand-red">{t.about.facultyTitle2}</span>
-              </h2>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base mt-2 font-light leading-relaxed">
-                {t.about.facultySubtitle}
-              </p>
-            </div>
-
-            <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8" isolateItems>
-              {localizedTeam.map((member) => (
-                <Card3D key={member.id} max={6} depth={5} className="h-full">
+              {(() => {
+                const belt = beltPalette.find((b) => b.id === selectedBeltColor) || beltPalette[5]
+                return (
                   <div
-                    className="group cursor-pointer relative h-full"
-                    onClick={() => openMember(member)}
+                    key={belt.id}
+                    className="mt-4 flex animate-fade-in flex-col gap-6 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 md:flex-row md:items-center dark:border-zinc-800 dark:bg-zinc-900/40"
                   >
-                    <div className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900 aspect-[3/4] rounded-xl mb-4 border border-zinc-200 dark:border-zinc-800 shadow-sm group-hover:shadow-brand-glow transition-all duration-500">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-70 group-hover:opacity-40 transition-opacity duration-500" />
-                      <SafeImage
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+                    <div
+                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border"
+                      style={{ backgroundColor: belt.hex, borderColor: belt.border }}
+                    >
+                      <InfinityLogo
+                        variant="symbol"
+                        className="h-10 w-10"
+                        colorScheme="custom"
+                        brandColor={belt.textDark ? '#000000' : '#FFFFFF'}
                       />
-
-                      <div className="absolute bottom-0 left-0 p-5 sm:p-6 z-20 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-lg sm:text-xl font-bold text-white uppercase leading-none mb-1">
-                          {member.name}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 className="text-lg font-black uppercase tracking-tight text-zinc-900 sm:text-xl dark:text-white">
+                          {belt.name}
                         </h3>
-                        <p className="text-brand-red text-xs font-bold uppercase tracking-widest">
-                          {member.role}
+                        <span className="text-xs font-bold text-brand-red">{belt.korean}</span>
+                      </div>
+                      <p className="mt-1 text-sm font-semibold text-zinc-800 dark:text-zinc-200">{belt.meaning}</p>
+                      <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{belt.philosophy}</p>
+                    </div>
+                    <dl className="shrink-0 md:text-right">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                        {t.beltGuide.timeFromStart}
+                      </dt>
+                      <dd className="mt-1 text-sm font-bold text-zinc-900 dark:text-white">{belt.timeline}</dd>
+                      <dd className="mt-1 text-xs text-zinc-500">{belt.hex}</dd>
+                    </dl>
+                  </div>
+                )
+              })()}
+            </section>
+          </div>
+        )}
+
+        {/* ================================================================== */}
+        {/* BRAIN & MIND */}
+        {/* ================================================================== */}
+        {activeTab === 'mind' && (
+          <div className="animate-fade-in space-y-24 sm:space-y-32">
+            <InfinityBrainAnimation />
+
+            <section>
+              <SectionHeader
+                size="md"
+                title="The 4 Pillars of the"
+                accent="Martial Mind"
+                description="True mastery starts in the mind. At Infinity Taekwondo, physical strikes are merely the outer expression of inner psychological focus, emotional control, and scientific strategy."
+              />
+              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:gap-6">
+                {brainPrinciples.map((item) => (
+                  <InfoCard
+                    key={item.number}
+                    icon={item.icon}
+                    number={item.number}
+                    title={item.title}
+                    korean={item.korean}
+                    footer={item.metric}
+                  >
+                    {item.desc}
+                  </InfoCard>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
+
+        {/* ================================================================== */}
+        {/* VISION, MISSION, GOAL & DREAM */}
+        {/* ================================================================== */}
+        {activeTab === 'quad' && (
+          <section className="animate-fade-in">
+            <SectionHeader
+              size="md"
+              eyebrowStyle="text"
+              eyebrow="Our Direction"
+              title="Vision, Mission,"
+              accent="Goal & Dream"
+              description="Our comprehensive directional framework driving every class, coach, curriculum, and athlete at Infinity Taekwondo."
+            />
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:gap-6">
+              {quadPillars.map((pillar) => (
+                <InfoCard
+                  key={pillar.id}
+                  icon={pillar.icon}
+                  kicker={pillar.badge}
+                  title={pillar.title}
+                  korean={pillar.korean}
+                  tagline={pillar.tagline}
+                  footer={pillar.target}
+                >
+                  {pillar.desc}
+                </InfoCard>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ================================================================== */}
+        {/* 3 CORE VALUES */}
+        {/* ================================================================== */}
+        {activeTab === 'values' && (
+          <section className="animate-fade-in">
+            <SectionHeader
+              size="md"
+              eyebrowStyle="text"
+              eyebrow="Foundational DNA"
+              title={t.about.valuesTitle1}
+              accent={t.about.valuesTitle2}
+              description={t.about.valuesSubtitle}
+            />
+            <div className="mt-10 grid gap-5 md:grid-cols-3 lg:gap-6">
+              {coreValues.map((val) => (
+                <InfoCard
+                  key={val.title}
+                  icon={val.icon}
+                  number={val.number}
+                  title={val.title}
+                  korean={val.korean}
+                  tagline={val.tagline}
+                  quote={val.quote}
+                >
+                  {val.description}
+                </InfoCard>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ================================================================== */}
+        {/* 5 DOJANG TENETS */}
+        {/* ================================================================== */}
+        {activeTab === 'tenets' && (
+          <section className="animate-fade-in">
+            <SectionHeader
+              size="md"
+              eyebrowStyle="text"
+              eyebrow={t.tenets.badge}
+              title={t.about.tenetsTitle1}
+              accent={t.about.tenetsTitle2}
+              description={t.about.tenetsSubtitle}
+            />
+            <ol className="mt-10 divide-y divide-zinc-200 rounded-2xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+              {dojangTenets.map((tenet) => (
+                <li key={tenet.name} className="flex gap-8 p-6 sm:p-8">
+                  <span aria-hidden="true" className="hidden w-12 shrink-0 text-3xl font-black text-zinc-400 sm:block">
+                    {tenet.number}
+                  </span>
+                  <div>
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span aria-hidden="true" className="text-xl font-black text-zinc-400 sm:hidden">
+                        {tenet.number}
+                      </span>
+                      <h3 className="text-xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">{tenet.name}</h3>
+                      <span className="text-sm font-bold text-brand-red">{tenet.korean}</span>
+                      <span className="text-xs text-zinc-500">[{tenet.pronunciation}]</span>
+                    </div>
+                    <p className="mt-2 text-sm font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">{tenet.principle}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      <span className="font-semibold text-zinc-900 dark:text-white">Daily action:</span> {tenet.application}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {/* ================================================================== */}
+        {/* OUR JOURNEY */}
+        {/* ================================================================== */}
+        {activeTab === 'journey' &&
+          (() => {
+            const getLocalizedMilestone = (m: (typeof milestones)[0]) => {
+              if (language === 'en') return m
+              const trans = m.translations?.[language]
+              if (!trans) return m
+              return {
+                ...m,
+                title: trans.title || m.title,
+                subtitle: trans.subtitle || m.subtitle,
+                desc: trans.desc || m.desc,
+                highlights: trans.highlights || m.highlights,
+              }
+            }
+            const currentIndex = Math.max(0, milestones.findIndex((m) => m.year === selectedEraYear))
+            const currentM = getLocalizedMilestone(milestones[currentIndex])
+
+            return (
+              <section className="animate-fade-in">
+                <SectionHeader
+                  size="md"
+                  eyebrowStyle="text"
+                  eyebrow="Evolution of Excellence"
+                  title="The Journey of"
+                  accent="Infinity TKD"
+                  description="From a dedicated grassroots dojang to Cambodia’s premier high-performance sport science and martial academy."
+                />
+                <div className="mt-8 flex justify-center">
+                  <SegmentedControl
+                    label="Journey view"
+                    value={journeyViewMode}
+                    onChange={setJourneyViewMode}
+                    options={[
+                      { value: 'interactive', label: 'Era Showcase' },
+                      { value: 'timeline', label: 'Full Chronology' },
+                    ]}
+                  />
+                </div>
+
+                {journeyViewMode === 'interactive' && (
+                  <div className="mt-10 animate-fade-in space-y-4">
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 sm:gap-3">
+                      {milestones.map((m) => {
+                        const isSelected = selectedEraYear === m.year
+                        return (
+                          <button
+                            key={m.year}
+                            type="button"
+                            onClick={() => setSelectedEraYear(m.year)}
+                            aria-pressed={isSelected}
+                            className={cn(
+                              'flex min-h-[76px] cursor-pointer flex-col items-start justify-center gap-1 rounded-xl border bg-white p-4 text-left transition-colors duration-300 dark:bg-zinc-900/40',
+                              isSelected
+                                ? 'border-brand-red'
+                                : 'border-zinc-200 hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600'
+                            )}
+                          >
+                            <span
+                              className={cn(
+                                'text-xl font-black tabular-nums tracking-tight',
+                                isSelected ? 'text-brand-red' : 'text-zinc-900 dark:text-white'
+                              )}
+                            >
+                              {m.year}
+                            </span>
+                            <span className="w-full truncate text-xs font-semibold text-zinc-500">{m.era}</span>
+                          </button>
+                        )
+                      })}
+                    </div>
+
+                    <div
+                      key={currentM.year}
+                      className="grid animate-fade-in gap-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 md:grid-cols-12 dark:border-zinc-800 dark:bg-zinc-900/40"
+                    >
+                      <div className="md:col-span-7">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                          <span className="rounded-lg bg-zinc-200/70 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                            {currentM.badge}
+                          </span>
+                          <span className="text-xs font-semibold text-zinc-500">{currentM.koreanEra}</span>
+                        </div>
+                        <p className="mt-5 text-5xl font-black leading-none tracking-tight text-brand-red tabular-nums sm:text-6xl">
+                          {currentM.year}
                         </p>
+                        <h3 className="mt-3 text-2xl font-black uppercase tracking-tight text-zinc-900 sm:text-3xl dark:text-white">
+                          {currentM.title}
+                        </h3>
+                        <p className="mt-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{currentM.subtitle}</p>
+                        <p className="mt-4 text-sm leading-relaxed text-zinc-600 sm:text-base dark:text-zinc-400">{currentM.desc}</p>
+                        <figure className="mt-6 border-l-2 border-brand-red/40 pl-4">
+                          <blockquote className="text-sm italic leading-relaxed text-zinc-700 dark:text-zinc-300">
+                            “{currentM.quote.text}”
+                          </blockquote>
+                          <figcaption className="mt-2 text-xs font-semibold text-zinc-500">— {currentM.quote.author}</figcaption>
+                        </figure>
                       </div>
 
-                      <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-brand-red text-white flex items-center justify-center shadow-lg">
-                          <ArrowUpRight className="w-4 h-4" />
+                      <div className="space-y-4 md:col-span-5">
+                        <div className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{currentM.metrics.label}</p>
+                          <p className="mt-1 text-2xl font-black tracking-tight text-zinc-900 sm:text-3xl dark:text-white">
+                            {currentM.metrics.value}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Milestone Breakthroughs</p>
+                          <ul className="mt-3 space-y-2.5">
+                            {currentM.highlights.map((h, i) => (
+                              <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-700 dark:text-zinc-300">
+                                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
+                                <span className="leading-snug">{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="flex gap-3">
+                          <button
+                            type="button"
+                            onClick={() => setSelectedEraYear(milestones[currentIndex - 1].year)}
+                            disabled={currentIndex === 0}
+                            className={buttonStyles({ variant: 'outline', size: 'sm', className: 'flex-1' })}
+                          >
+                            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Previous Era
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedEraYear(milestones[currentIndex + 1].year)}
+                            disabled={currentIndex === milestones.length - 1}
+                            className={buttonStyles({ variant: 'outline', size: 'sm', className: 'flex-1' })}
+                          >
+                            Next Era <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                </Card3D>
+                )}
+
+                {journeyViewMode === 'timeline' && (
+                  <ol className="relative ml-2 mt-10 animate-fade-in space-y-6 border-l border-zinc-200 sm:ml-4 dark:border-zinc-800">
+                    {milestones.map((m) => {
+                      const lm = getLocalizedMilestone(m)
+                      return (
+                        <li key={m.year} className="relative pl-6 sm:pl-10">
+                          <span
+                            aria-hidden="true"
+                            className="absolute -left-[5.5px] top-7 h-2.5 w-2.5 rounded-full bg-brand-red ring-4 ring-white sm:top-9 dark:ring-black"
+                          />
+                          <article className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900/40">
+                            <div className="flex flex-wrap items-center justify-between gap-3">
+                              <p className="flex items-baseline gap-3">
+                                <span className="text-3xl font-black tabular-nums text-brand-red">{m.year}</span>
+                                <span className="text-xs font-semibold text-zinc-500">{m.koreanEra}</span>
+                              </p>
+                              <span className="rounded-lg bg-zinc-100 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                                {m.badge}
+                              </span>
+                            </div>
+                            <h3 className="mt-3 text-xl font-black uppercase tracking-tight text-zinc-900 sm:text-2xl dark:text-white">
+                              {lm.title}
+                            </h3>
+                            <p className="mt-1 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{lm.subtitle}</p>
+                            <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{lm.desc}</p>
+                            <ul className="mt-4 flex flex-wrap gap-2 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+                              {lm.highlights.map((h, i) => (
+                                <li
+                                  key={i}
+                                  className="rounded-lg bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                                >
+                                  {h}
+                                </li>
+                              ))}
+                            </ul>
+                          </article>
+                        </li>
+                      )
+                    })}
+                  </ol>
+                )}
+              </section>
+            )
+          })()}
+
+        {/* ================================================================== */}
+        {/* LEADERSHIP FACULTY */}
+        {/* ================================================================== */}
+        {activeTab === 'faculty' && (
+          <section className="animate-fade-in">
+            <SectionHeader
+              size="md"
+              eyebrowStyle="text"
+              eyebrow="Executive Leadership"
+              title={t.about.facultyTitle1}
+              accent={t.about.facultyTitle2}
+              description={t.about.facultySubtitle}
+            />
+            <SafeGrid className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4" isolateItems>
+              {localizedTeam.map((member) => (
+                <button
+                  key={member.id}
+                  type="button"
+                  onClick={() => openMember(member)}
+                  aria-haspopup="dialog"
+                  className="group block w-full cursor-pointer text-left"
+                >
+                  <span className="block aspect-[3/4] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+                    <SafeImage
+                      src={member.image}
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out-expo group-hover:scale-[1.03] motion-reduce:transition-none"
+                    />
+                  </span>
+                  <span className="mt-4 block text-base font-black uppercase leading-tight tracking-tight text-zinc-900 transition-colors group-hover:text-brand-red sm:text-lg dark:text-white">
+                    {member.name}
+                  </span>
+                  <span className="mt-1 block text-xs font-bold uppercase tracking-wider text-brand-red">{member.role}</span>
+                </button>
               ))}
             </SafeGrid>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
+      </div>
 
       {/* ==================================================================== */}
-      {/* INSTITUTIONAL COLLABORATIONS & GOVERNING ALLIANCES (14px radius) */}
+      {/* COLLABORATIONS */}
       {/* ==================================================================== */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
-        <div className="p-8 sm:p-12 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
-                Institutional Ecosystem
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                Global Collaborations &amp; Alliances
-              </h2>
-              <p className="text-[13px] sm:text-sm text-zinc-500 mt-1 max-w-2xl">
-                Infinity Taekwondo aligns with international governing bodies, Seoul Kukkiwon headquarters, sport universities, and performance gear innovators.
-              </p>
-            </div>
-
+      <section className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="border-t border-zinc-200 pt-16 sm:pt-24 dark:border-zinc-800">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <SectionHeader
+              align="left"
+              size="md"
+              eyebrowStyle="text"
+              eyebrow="Institutional Ecosystem"
+              title="Global Collaborations"
+              accent="& Alliances"
+              description="Infinity Taekwondo aligns with international governing bodies, Seoul Kukkiwon headquarters, sport universities, and performance gear innovators."
+              className="max-w-2xl"
+            />
             <Link
               href="/collaborations"
-              className="px-5 py-2.5 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors shadow-brand-glow inline-flex items-center gap-1.5 self-start md:self-auto shrink-0 touch-press"
+              className={buttonStyles({ variant: 'outline', className: 'shrink-0 self-start md:self-auto' })}
             >
-              Explore All Partners <ArrowRight className="w-3.5 h-3.5" />
+              Explore All Partners <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
 
-          <SafeGrid className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" isolateItems>
+          <SafeGrid className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" isolateItems>
             {collaborationsData.slice(0, 4).map((partner) => (
-              <Card3D key={partner.id} max={5} depth={3} className="h-full">
-                <Link
-                  href="/collaborations"
-                  className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all flex flex-col justify-between group h-full touch-press"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1">
-                        <SafeImage src={partner.logo} alt={partner.name} className="w-full h-full object-cover rounded grayscale group-hover:grayscale-0 transition-all" />
-                      </div>
-                      <span className="px-2 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
-                        {partner.tier}
-                      </span>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xs sm:text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight group-hover:text-brand-red transition-colors line-clamp-1">
-                        {partner.name}
-                      </h3>
-                      <span className="text-[11px] font-mono text-zinc-400 block mt-0.5 truncate">
-                        {partner.partnerType}
-                      </span>
-                    </div>
-
-                    <p className="text-[13px] text-zinc-500 line-clamp-2 leading-relaxed">
-                      {partner.summary}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 mt-4 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                    <span>{partner.country}</span>
-                    <span className="text-brand-red font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
-                      View <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </Link>
-              </Card3D>
+              <Link
+                key={partner.id}
+                href="/collaborations"
+                className="group flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 transition-[transform,border-color] duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-zinc-300 motion-reduce:transition-none motion-reduce:hover:translate-y-0 dark:border-zinc-800 dark:bg-zinc-900/40 dark:hover:border-zinc-700"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-zinc-200 bg-white p-1 dark:border-zinc-800">
+                    {/* next/image: the source PNGs are up to ~1 MB; this serves a 40px WebP. */}
+                    <Image
+                      src={partner.logo}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-full w-full rounded object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                    />
+                  </span>
+                  <span className="rounded-md bg-zinc-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                    {partner.tier}
+                  </span>
+                </div>
+                <h3 className="mt-4 line-clamp-1 text-sm font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                  {partner.name}
+                </h3>
+                <p className="mt-0.5 truncate text-xs text-zinc-500">{partner.partnerType}</p>
+                <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{partner.summary}</p>
+                <div className="mt-auto flex items-center justify-between pt-4 text-xs text-zinc-500">
+                  <span>{partner.country}</span>
+                  <span className="inline-flex items-center gap-1 font-bold uppercase tracking-wider text-brand-red">
+                    View
+                    <ArrowRight
+                      className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+              </Link>
             ))}
           </SafeGrid>
         </div>
       </section>
 
       {/* ==================================================================== */}
-      {/* BOTTOM CTA BANNER */}
+      {/* CLOSING CALL TO ACTION */}
       {/* ==================================================================== */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-20">
-        <div className="p-8 sm:p-12 md:p-14 rounded-2xl bg-zinc-900 text-white border border-zinc-800 text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/15 blur-[140px] rounded-full pointer-events-none" />
-
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-3">
-            Experience The Standard
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight mb-4 leading-tight">
-            Train Where Discipline Meets <span className="text-brand-red">Limitless Potential</span>
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-400 font-light max-w-2xl mx-auto mb-8 leading-relaxed">
-            Step onto the mats at our Factory Phnom Penh HQ or BKK1 Elite Center. Experience world-class instruction, athletic testing, and personalized mentorship.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto px-8 py-4 bg-brand-red text-white font-bold uppercase text-xs tracking-widest rounded-xl hover:bg-white hover:text-black transition-all duration-300 shadow-brand-glow flex items-center justify-center gap-2 touch-press"
-            >
-              Book Free Trial <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/locations"
-              className="w-full sm:w-auto px-8 py-4 border border-zinc-700 text-white font-bold uppercase text-xs tracking-widest rounded-xl hover:border-brand-red hover:text-brand-red transition-all duration-300 flex items-center justify-center gap-2 touch-press"
-            >
-              <Building2 className="w-4 h-4" /> View Dojang Branches
-            </Link>
-          </div>
-        </div>
+      <section className="container mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <CtaBanner
+          eyebrow="Experience The Standard"
+          title="Train Where Discipline Meets Limitless Potential"
+          description="Step onto the mats at our Factory Phnom Penh HQ or BKK1 Elite Center. Experience world-class instruction, athletic testing, and personalized mentorship."
+          href="/contact"
+          label="Book Free Trial"
+          secondary={{ href: '/locations', label: 'View Dojang Branches' }}
+        />
       </section>
 
       {/* ==================================================================== */}
-      {/* LEADERSHIP MODAL (Responsive Sheet on Mobile, Centered on Desktop) */}
+      {/* LEADERSHIP PROFILE (sheet on phones, centred dialog from tablet up) */}
       {/* ==================================================================== */}
       {selectedMember && (
         <div
-          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
+          className="fixed inset-0 z-[60] flex animate-fade-in items-end justify-center p-0 sm:items-center sm:p-6"
           onClick={closeMember}
           role="dialog"
           aria-modal="true"
           aria-labelledby="member-modal-title"
         >
-          <div className="absolute inset-0 bg-black/85 backdrop-blur-2xl" />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
           <div
-            className="relative w-full max-w-4xl bg-white dark:bg-zinc-950 shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh] sm:max-h-[90vh] z-10 rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800"
+            className="relative z-10 flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-2xl border border-zinc-200 bg-white shadow-2xl sm:max-h-[90vh] sm:rounded-2xl md:flex-row dark:border-zinc-800 dark:bg-zinc-950"
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              ref={closeRef}
+              type="button"
               onClick={closeMember}
-              className="absolute top-4 right-4 z-30 p-2.5 rounded-xl bg-black/40 text-white hover:bg-brand-red transition-colors backdrop-blur-md cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="absolute right-4 top-4 z-30 flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl bg-black/50 text-white backdrop-blur-md transition-colors hover:bg-black/70"
               aria-label="Close dialog"
             >
-              <X className="w-5 h-5" />
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
 
-            <div className="w-full md:w-5/12 h-56 sm:h-80 md:h-auto relative bg-zinc-950 shrink-0">
-              <SafeImage
-                src={selectedMember.image}
-                alt={selectedMember.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white inline-block mb-2 shadow-md">
-                  {selectedMember.role}
-                </span>
-                <h3 id="member-modal-title" className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-none">
-                  {selectedMember.name}
-                </h3>
-                <p className="text-xs text-zinc-300 font-bold mt-1">
-                  {selectedMember.division}
-                </p>
-              </div>
+            <div className="relative h-56 w-full shrink-0 bg-zinc-100 sm:h-80 md:h-auto md:w-5/12 dark:bg-zinc-900">
+              <SafeImage src={selectedMember.image} alt={selectedMember.name} className="h-full w-full object-cover" />
             </div>
 
-            <div className="w-full md:w-7/12 p-6 sm:p-8 md:p-10 overflow-y-auto space-y-6 touch-scroll">
+            <div className="touch-scroll w-full space-y-6 overflow-y-auto p-6 sm:p-8 md:w-7/12 md:p-10">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
-                  Executive Faculty Profile
-                </span>
-                <h4 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-red">{selectedMember.role}</p>
+                <h3
+                  id="member-modal-title"
+                  className="mt-2 text-2xl font-black uppercase tracking-tight text-zinc-900 sm:text-3xl dark:text-white"
+                >
                   {selectedMember.name}
-                </h4>
+                </h3>
+                <p className="mt-1 text-sm font-semibold text-zinc-500">{selectedMember.division}</p>
               </div>
 
-              <div className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-[13px] sm:text-sm">
-                {selectedMember.bio}
-              </div>
+              <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{selectedMember.bio}</div>
 
-              {/* Credentials */}
               <div>
-                <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                  Credentials &amp; Dan Ranks
-                </h5>
-                <div className="flex flex-wrap gap-2">
+                <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Credentials &amp; Dan Ranks</h4>
+                <ul className="mt-2 flex flex-wrap gap-2">
                   {selectedMember.credentials.map((cred) => (
-                    <span
+                    <li
                       key={cred}
-                      className="px-2.5 py-1 bg-brand-red/10 border border-brand-red/20 text-brand-red text-xs font-bold uppercase tracking-wide rounded-lg"
+                      className="rounded-lg bg-zinc-100 px-2.5 py-1 text-xs font-semibold text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200"
                     >
                       {cred}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap gap-2">
                 {selectedMember.tags.map((tag) => (
-                  <span
+                  <li
                     key={tag}
-                    className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 text-xs font-medium uppercase tracking-wide text-zinc-500 rounded-lg"
+                    className="rounded-lg border border-zinc-200 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:text-zinc-400"
                   >
                     {tag}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div className="flex flex-col items-center justify-between gap-4 border-t border-zinc-200 pt-5 sm:flex-row dark:border-zinc-800">
                 <div className="flex gap-2">
-                  {selectedMember.socials?.instagram && (
-                    <a
-                      href={selectedMember.socials.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-brand-red hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
-                      aria-label="Instagram"
-                    >
-                      <Instagram className="w-4 h-4" />
-                    </a>
-                  )}
-                  {selectedMember.socials?.linkedin && (
-                    <a
-                      href={selectedMember.socials.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-brand-red hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                  )}
-                  {selectedMember.socials?.facebook && (
-                    <a
-                      href={selectedMember.socials.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-brand-red hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
-                      aria-label="Facebook"
-                    >
-                      <Facebook className="w-4 h-4" />
-                    </a>
-                  )}
+                  {(
+                    [
+                      ['instagram', Instagram, 'Instagram'],
+                      ['linkedin', Linkedin, 'LinkedIn'],
+                      ['facebook', Facebook, 'Facebook'],
+                    ] as const
+                  ).map(([key, Icon, name]) => {
+                    const href = selectedMember.socials?.[key]
+                    if (!href) return null
+                    return (
+                      <a
+                        key={key}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={name}
+                        className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-colors hover:border-zinc-400 hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-white"
+                      >
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                    )
+                  })}
                 </div>
 
                 <Link
                   href={`/contact?subject=Direct%20Inquiry%20with%20${encodeURIComponent(selectedMember.name)}`}
-                  className="w-full sm:w-auto px-6 py-3 bg-brand-red text-white font-bold uppercase text-xs tracking-widest rounded-xl hover:bg-zinc-900 transition-colors shadow-brand-glow text-center flex items-center justify-center gap-2"
+                  className={buttonStyles({ variant: 'primary', className: 'w-full sm:w-auto' })}
                 >
-                  Contact Dojang <ArrowRight className="w-3.5 h-3.5" />
+                  Contact Dojang <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -1639,5 +1322,116 @@ export default function AboutPage() {
         </div>
       )}
     </div>
+  )
+}
+
+/* ------------------------------------------------------------------------------------------------
+   Building blocks used by the sections above.
+   ------------------------------------------------------------------------------------------------ */
+
+/** The Infinity symbol sized for the page-hero eyebrow. */
+function InfinitySymbol({ className }: { className?: string }) {
+  return <InfinityLogo variant="symbol" className={className} />
+}
+
+type LogoPart = 'left' | 'knot' | 'right'
+
+/** Draws parts of the Infinity mark from the logo's own paths (fills with the text colour). */
+function LogoParts({ parts, viewBox = INFINITY_SYMBOL.viewBox }: { parts: LogoPart[]; viewBox?: string }) {
+  return (
+    <svg viewBox={viewBox} className="h-full w-auto fill-current" aria-hidden="true" focusable="false">
+      {parts.map((part) => (
+        <path key={part} d={INFINITY_SYMBOL[part]} />
+      ))}
+    </svg>
+  )
+}
+
+function EquationTerm({
+  label,
+  note,
+  highlight = false,
+  children,
+}: {
+  label: string
+  note: string
+  highlight?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <div
+      className={cn(
+        'flex flex-col items-center rounded-xl border bg-white px-4 py-7 text-center dark:bg-zinc-950',
+        highlight ? 'border-brand-red/40' : 'border-zinc-200 dark:border-zinc-800'
+      )}
+    >
+      <div className={cn('h-12', highlight ? 'text-brand-red' : 'text-zinc-800 dark:text-zinc-200')}>{children}</div>
+      <p className={cn('mt-5 text-xs font-bold uppercase tracking-wider', highlight ? 'text-brand-red' : 'text-zinc-900 dark:text-white')}>
+        {label}
+      </p>
+      <p className="mt-1 text-xs text-zinc-500">{note}</p>
+    </div>
+  )
+}
+
+function Operator({ symbol, label }: { symbol: string; label: string }) {
+  return (
+    <span className="text-center text-2xl font-light text-zinc-400">
+      <span aria-hidden="true">{symbol}</span>
+      <span className="sr-only">{label}</span>
+    </span>
+  )
+}
+
+/** One card style for the pillars, values and directions: icon, title, Korean term, copy. */
+function InfoCard({
+  icon: Icon,
+  kicker,
+  number,
+  title,
+  korean,
+  tagline,
+  quote,
+  footer,
+  children,
+}: {
+  icon: React.ElementType
+  kicker?: string
+  number?: string
+  title: string
+  korean?: string
+  tagline?: string
+  quote?: string
+  footer?: string
+  children: React.ReactNode
+}) {
+  return (
+    <article className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900/40">
+      <div className="flex items-center justify-between gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+          <Icon className="h-5 w-5" aria-hidden="true" />
+        </span>
+        {kicker && <span className="text-right text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{kicker}</span>}
+        {number && (
+          <span aria-hidden="true" className="text-sm font-bold tabular-nums text-zinc-500">
+            {number}
+          </span>
+        )}
+      </div>
+      <h3 className="mt-6 text-xl font-black uppercase tracking-tight text-zinc-900 sm:text-2xl dark:text-white">{title}</h3>
+      {korean && <p className="mt-1 text-xs font-bold tracking-wide text-brand-red">{korean}</p>}
+      {tagline && <p className="mt-4 text-sm font-semibold leading-snug text-zinc-800 dark:text-zinc-200">{tagline}</p>}
+      <p className={cn('text-sm leading-relaxed text-zinc-600 dark:text-zinc-400', tagline ? 'mt-2' : 'mt-4')}>{children}</p>
+      {quote && (
+        <blockquote className="mt-5 border-l-2 border-brand-red/40 pl-4 text-sm italic leading-relaxed text-zinc-600 dark:text-zinc-400">
+          “{quote}”
+        </blockquote>
+      )}
+      {footer && (
+        <div className="mt-auto pt-6">
+          <p className="border-t border-zinc-200 pt-4 text-xs font-semibold text-zinc-500 dark:border-zinc-800">{footer}</p>
+        </div>
+      )}
+    </article>
   )
 }

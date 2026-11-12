@@ -537,7 +537,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
       ref={rootRef}
       onKeyDown={onKeyDown}
       aria-label={`${formName} floor-pattern walkthrough`}
-      className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 text-white"
+      className="dark overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 text-white"
     >
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 px-5 py-4 sm:px-6">
         <div>
@@ -806,7 +806,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
                           </button>
                         )
                       })}
-                      <span className="col-start-2 row-start-2 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-900 text-[10px] text-zinc-500">
+                      <span className="col-start-2 row-start-2 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-900 text-[11px] text-zinc-500">
                         you
                       </span>
                     </div>

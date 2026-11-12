@@ -187,7 +187,7 @@ export function LegalLayout({
             </div>
 
             {/* Governance Contact Card */}
-            <div className="p-5 rounded-2xl bg-zinc-900 text-white border border-zinc-800 space-y-3">
+            <div className="dark p-5 rounded-2xl bg-zinc-900 text-white border border-zinc-800 space-y-3">
               <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block">
                 Compliance &amp; Ethics Desk
               </span>
@@ -196,7 +196,7 @@ export function LegalLayout({
               </p>
               <a
                 href="mailto:compliance@infinitytkd.com"
-                className="text-xs font-bold text-brand-red hover:underline block truncate"
+                className="text-xs font-bold text-brand-red hover:underline block truncate py-1.5"
               >
                 compliance@infinitytkd.com
               </a>

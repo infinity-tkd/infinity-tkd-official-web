@@ -31,6 +31,7 @@ import {
   Eye,
 } from 'lucide-react'
 import type { LibraryItem } from '@/data/library/types'
+import { badgeColors } from '@/lib/color'
 import { useLanguage } from '@/context/LanguageContext'
 import { getKickingOverview, kickingI18n } from '@/data/library/kicking/kickingTranslations'
 import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
@@ -186,7 +187,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.searchPlaceholder}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-xs bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red dark:text-white placeholder:text-zinc-400 font-sans"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl text-base sm:text-xs min-h-[44px] bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red dark:text-white placeholder:text-zinc-400 font-sans"
           />
         </div>
 
@@ -236,9 +237,9 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 <div className="flex items-center justify-between gap-1 mb-2">
                   <span
                     className={`text-[11px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
-                      isSelected ? 'bg-white/20 text-white' : 'text-white'
+                      isSelected ? 'bg-white/20 text-white' : ''
                     }`}
-                    style={{ backgroundColor: isSelected ? undefined : kick.badgeColor }}
+                    style={isSelected ? undefined : badgeColors(kick.badgeColor)}
                   >
                     {localizedKick.difficulty || kick.difficulty}
                   </span>
@@ -297,8 +298,8 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
               <div className="flex items-center gap-2">
                 <span
-                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase text-white"
-                  style={{ backgroundColor: activeKick.badgeColor }}
+                  className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase"
+                  style={badgeColors(activeKick.badgeColor)}
                 >
                   {activeKick.difficulty}
                 </span>

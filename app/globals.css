@@ -23,7 +23,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
-    --color-brand-text: #D0272F; /* WCAG AA 4.88:1 on light surface */
+    --color-brand-text: #C81E27; /* small red text: 5.7:1 on white, 4.7:1+ on brand-tint pills */
     --color-brand-muted: rgba(239, 47, 56, 0.1);
     --color-brand-glow: rgba(239, 47, 56, 0.35);
   }
@@ -42,7 +42,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
-    --color-brand-text: #EF2F38; /* WCAG AA 5.26:1 on dark surface */
+    --color-brand-text: #F43F48; /* small red text: 5.6:1 on black, 4.7:1+ on zinc-900 cards */
     --color-brand-muted: rgba(239, 47, 56, 0.15);
     --color-brand-glow: rgba(239, 47, 56, 0.5);
   }
@@ -67,13 +67,76 @@
     transition: background-color 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* WCAG 2.2 AA Compliance: Ensure text-zinc-400 in light mode meets 4.5:1 contrast against white surfaces */
-  html:not(.dark) .text-zinc-400 {
-    color: #71717a !important; /* Zinc-500: 4.54:1 contrast ratio against #FFFFFF */
+  /* ---------------------------------------------------------------------------------------------
+     WCAG 2.2 AA text contrast (4.5:1 for normal text).
+     Colour utilities that are too faint on the surface they sit on are corrected here once rather
+     than in every component. "Light surface" means not inside a `.dark` element: `.dark` is on
+     <html> in dark mode, and panels that are dark in both themes (CTA banners, rule readers, the
+     walkthrough) carry their own `dark` class so they keep their dark-theme colours.
+     These rules add one class of specificity and no !important, so hover/focus/dark: variants
+     written on the element still win.
+     --------------------------------------------------------------------------------------------- */
+
+  /* Grey text on light surfaces: zinc-400 (2.5:1) -> zinc-500 (4.8:1), zinc-500 -> zinc-600 (7.7:1). */
+  .text-zinc-400:not(.dark *) {
+    color: #71717a;
+  }
+  .text-zinc-500:not(.dark *) {
+    color: #52525b;
   }
 
-  html:not(.dark) .text-zinc-500 {
-    color: #52525b !important; /* Zinc-600: 5.74:1 contrast ratio against #FFFFFF */
+  /* Grey text on dark surfaces: zinc-500 is 3.7-4.3:1 on black / zinc-900 -> zinc-400 (6.3:1+). */
+  .dark .text-zinc-500 {
+    color: #a1a1aa;
+  }
+
+  /* Emerald / amber labels on light surfaces: the 500-600 shades are 2.5-3.8:1 -> 700 shades (5:1+). */
+  .text-emerald-500:not(.dark *),
+  .text-emerald-600:not(.dark *) {
+    color: #047857;
+  }
+  .text-amber-500:not(.dark *),
+  .text-amber-600:not(.dark *) {
+    color: #b45309;
+  }
+
+  /* Small brand-red text (labels, eyebrows, chips, inline links) uses the accessible red for its
+     surface; large display text keeps the signature #EF2F38. */
+  :is(.text-xs, .text-sm, .text-base, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\], .type-label, .type-meta).text-brand-red,
+  :is(.text-xs, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\]) .text-brand-red {
+    color: var(--color-brand-text);
+  }
+
+  /* ---------------------------------------------------------------------------------------------
+     Readable copy. Many paragraphs were hand-set at 12-13px, which reads small on every device.
+     Paragraphs in page content step up one size on phones and two from tablet up (12 -> 13 / 14px,
+     13 -> 14 / 15px, 14 -> 15px on tablet+). Labels, badges and buttons are not <p> and keep their
+     sizes; uppercase and monospace paragraphs (labels, data) and paragraphs that already set a size
+     per breakpoint (sm:/md:/lg:/xl:text-*) are left alone.
+     --------------------------------------------------------------------------------------------- */
+  main p:is(.text-xs, .text-\[12px\]):not(.uppercase, .font-mono, [class*='sm:text-'], [class*='md:text-'], [class*='lg:text-'], [class*='xl:text-']) {
+    font-size: 0.8125rem;
+  }
+  main p.text-\[13px\]:not(.uppercase, .font-mono, [class*='sm:text-'], [class*='md:text-'], [class*='lg:text-'], [class*='xl:text-']) {
+    font-size: 0.875rem;
+  }
+  /* text-xs / text-sm carry a tight line-height for single lines; give multi-line copy room. */
+  main p:is(.text-xs, .text-\[12px\], .text-\[13px\], .text-sm):not(.uppercase, .font-mono, [class*='leading-']) {
+    line-height: 1.6;
+  }
+  @media (min-width: 768px) {
+    main p:is(.text-xs, .text-\[12px\]):not(.uppercase, .font-mono, [class*='sm:text-'], [class*='md:text-'], [class*='lg:text-'], [class*='xl:text-']) {
+      font-size: 0.875rem;
+    }
+    main p:is(.text-\[13px\], .text-sm):not(.uppercase, .font-mono, [class*='sm:text-'], [class*='md:text-'], [class*='lg:text-'], [class*='xl:text-']) {
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* Small white text on a brand-red fill: the deeper brand red #D0272F gives 5.2:1 (#EF2F38 is 4.1:1).
+     :where() keeps this at the same weight as hover:bg-* utilities, which therefore still apply. */
+  :where(.text-xs, .text-sm, .text-\[10px\], .text-\[11px\], .text-\[12px\], .text-\[13px\]).bg-brand-red.text-white {
+    background-color: #d0272f;
   }
 
   /* Universal Accessible Keyboard Focus Rings (WCAG 2.4.7 / 2.4.11) */
@@ -168,7 +231,7 @@
  *   type-kicker   11px uppercase label above a heading. Max one per block.
  *   type-label    12px uppercase for tabs, filter pills and small buttons.
  *   type-meta     12px sentence-case metadata: counts, dates, belt levels.
- *   type-body-sm  13px readable copy for card descriptions and dense UI.
+ *   type-body-sm  14px (15px from tablet up) readable copy for card descriptions and dense UI.
  *   type-hangul   Korean / romanized subtitles: no monospace, no tracking, no uppercase.
  */
 @layer components {
@@ -182,7 +245,7 @@
     @apply text-xs font-medium normal-case tracking-normal text-zinc-500 dark:text-zinc-400;
   }
   .type-body-sm {
-    @apply text-[13px] font-normal leading-relaxed text-zinc-600 dark:text-zinc-400;
+    @apply text-sm font-normal leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-[15px];
   }
   .type-hangul {
     @apply font-sans text-xs font-normal normal-case tracking-normal;
@@ -225,6 +288,275 @@
 
 .animate-slide-in-left {
   animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/*
+ * Infinity belt-loop motion (components/InfinityMotion.tsx). The logo's belt draws itself into the
+ * Infinity loop, fills with Infinity Red, then a soft highlight travels along each loop. The
+ * component sets --len / --travel per path (its outline length), so each part draws exactly once.
+ * SVG + CSS only; stroke-dashoffset on a small mark repaints a few hundred pixels per frame.
+ */
+@layer components {
+  .infinity-motion {
+    color: #ef2f38;
+    overflow: visible;
+  }
+  .infinity-motion .im-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: im-draw 1.5s cubic-bezier(0.65, 0, 0.35, 1) var(--delay) forwards;
+  }
+  .infinity-motion .im-fill {
+    fill: currentColor;
+    opacity: 0;
+    animation: im-fade-in 0.7s ease-out 1.55s forwards;
+  }
+  .infinity-motion .im-glint {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dashoffset: 0;
+    opacity: 0;
+    animation:
+      im-glint-in 0.9s ease-out 2.3s forwards,
+      im-travel 7s linear 2.3s infinite;
+  }
+  /* The two loops' highlights run in opposite directions, like one line crossing at the knot. */
+  .infinity-motion .im-glint.is-reverse {
+    animation-direction: normal, reverse;
+  }
+  /* Settled (highlight="once"): one pass of the highlight after the mark fills, then it rests. */
+  .infinity-motion.is-settled .im-glint {
+    animation: im-glint-once 2.2s cubic-bezier(0.45, 0, 0.25, 1) 2.2s both;
+  }
+  .infinity-motion.is-settled .im-glint.is-reverse {
+    animation-direction: reverse;
+  }
+  /* Loader: thicker line (the mark is small) that draws, holds, then clears, on a loop. */
+  .infinity-motion.is-loader .im-line {
+    stroke-width: 6;
+    animation: im-loop 2.4s cubic-bezier(0.65, 0, 0.35, 1) var(--delay) infinite;
+  }
+  /* Off-screen: hold every animation (the browser already pauses background tabs). */
+  .infinity-motion[data-paused] path {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes im-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes im-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes im-glint-in {
+  to {
+    opacity: 0.85;
+  }
+}
+@keyframes im-travel {
+  to {
+    stroke-dashoffset: var(--travel);
+  }
+}
+@keyframes im-glint-once {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: var(--travel);
+    opacity: 0;
+  }
+}
+@keyframes im-loop {
+  0% {
+    stroke-dashoffset: var(--len);
+  }
+  50%,
+  62% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: var(--travel);
+  }
+}
+
+/* Reduced motion: the finished mark, still. */
+@media (prefers-reduced-motion: reduce) {
+  .infinity-motion .im-line,
+  .infinity-motion.is-loader .im-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .infinity-motion .im-fill {
+    animation: none;
+    opacity: 1;
+  }
+  .infinity-motion .im-glint {
+    display: none;
+  }
+}
+
+/*
+ * BorderTrace (components/ui/BorderTrace.tsx): a light that runs once around a card's inside edge
+ * when the card comes into view, and again when the pointer enters it; at rest it is invisible.
+ * A conic gradient masked to a 1.5px ring; @property lets its angle animate (browsers without
+ * @property fade a still highlight in and out instead).
+ */
+@property --trace-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@layer components {
+  .border-trace {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--trace-angle),
+      transparent 0deg 270deg,
+      rgb(239 47 56 / 0.4) 312deg,
+      #ef2f38 346deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+  }
+  .border-trace.is-tracing {
+    animation: trace-lap 2.6s cubic-bezier(0.45, 0.05, 0.25, 1) both;
+  }
+  /* On dark surfaces the beam gets a near-white tip, like the belt highlight in the hero. */
+  .dark .border-trace {
+    background: conic-gradient(
+      from var(--trace-angle),
+      transparent 0deg 270deg,
+      rgb(239 47 56 / 0.5) 312deg,
+      #ef2f38 338deg,
+      #ffd2d4 350deg,
+      transparent 360deg
+    );
+  }
+}
+@keyframes trace-lap {
+  0% {
+    --trace-angle: 0deg;
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    --trace-angle: 360deg;
+    opacity: 0;
+  }
+}
+
+/*
+ * Brain & Mind neural map (components/InfinityBrainAnimation.tsx). When the tab opens, the synapse
+ * lines draw out from the Infinity mark and the brain-region buttons fade in; each time a region is
+ * chosen, a signal runs out along its line twice, then the map rests. The component sets --len /
+ * --travel / --delay / --signal-delay (lengths in pixels).
+ */
+@layer components {
+  .bm-synapse {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: im-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) var(--delay) forwards;
+    transition:
+      stroke 0.3s ease,
+      opacity 0.3s ease;
+  }
+  .bm-signal {
+    stroke-dasharray: 18 var(--len);
+    stroke-dashoffset: 18;
+    opacity: 0;
+    animation: bm-signal 1.4s cubic-bezier(0.4, 0, 0.2, 1) var(--signal-delay, 0.1s) 2 both;
+  }
+  .bm-node {
+    animation: bm-node-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both;
+  }
+  .bm-pop {
+    animation: bm-pop 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes bm-signal {
+  0% {
+    stroke-dashoffset: 18;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  75% {
+    stroke-dashoffset: var(--travel);
+    opacity: 1;
+  }
+  85%,
+  100% {
+    stroke-dashoffset: var(--travel);
+    opacity: 0;
+  }
+}
+@keyframes bm-node-in {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes bm-pop {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-synapse {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .bm-signal {
+    display: none;
+  }
+  /* No travelling light: the featured card keeps its tinted border and badge. */
+  .border-trace {
+    display: none;
+  }
+  .bm-node,
+  .bm-pop {
+    animation: none;
+  }
 }
 
 /* Universal Layout & Touch Safety */

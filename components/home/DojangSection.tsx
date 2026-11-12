@@ -55,7 +55,7 @@ export function DojangSection() {
 
             <Link
               href="/academy"
-              className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red transition-colors hover:text-zinc-900 dark:hover:text-white touch-press"
+              className="group inline-flex min-h-[32px] items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-red transition-colors hover:text-zinc-900 dark:hover:text-white touch-press"
             >
               <span>{t.dojang.btn}</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true" />

@@ -61,7 +61,7 @@ export function PageHero({
           <Eyebrow icon={eyebrowIcon} className="mb-4 sm:mb-5">
             {eyebrow}
           </Eyebrow>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight leading-[0.95] text-zinc-900 dark:text-white break-words">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.95] text-zinc-900 dark:text-white break-words">
             {title}
             {accent && (
               <>

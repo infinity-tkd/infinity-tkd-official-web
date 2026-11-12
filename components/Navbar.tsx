@@ -9,8 +9,9 @@ import { InfinityLogo } from './InfinityLogo'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useLanguage } from '@/context/LanguageContext'
 import { useScrollNavContext } from '@/context/ScrollNavContext'
-import { NAV_GROUPS, isGroupActive, type NavGroup } from '@/config/navigation'
-import { libraryCategoriesMeta } from '@/data/library'
+import { NAV_GROUPS, isGroupActive, prefetchFor, type NavGroup } from '@/config/navigation'
+// The small categories module, not the '@/data/library' barrel (which assembles the full technique list).
+import { libraryCategoriesMeta } from '@/data/library/categories'
 import { cn } from '@/lib/utils'
 
 const categoryIcons: Record<string, React.ElementType> = { BookOpen, Zap, Flame, Shield, Layers, Sparkles }
@@ -71,6 +72,7 @@ export function Navbar() {
           <Link
             key={cat.id}
             href={`/library/${cat.id}`}
+            prefetch={false}
             onClick={() => setOpenMenu(null)}
             className="group/item flex flex-col justify-between rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 p-2.5 transition-all hover:border-brand-red/50 hover:bg-white dark:hover:bg-zinc-900"
           >
@@ -91,6 +93,7 @@ export function Navbar() {
         <Link
           key={cat.id}
           href={`/library/${cat.id}`}
+          prefetch={false}
           onClick={closeMobile}
           className="flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-2.5"
         >
@@ -149,6 +152,7 @@ export function Navbar() {
                 >
                   <Link
                     href={group.href}
+                    prefetch={prefetchFor(group.href)}
                     aria-expanded={isOpen}
                     aria-haspopup="true"
                     className={cn(
@@ -186,6 +190,7 @@ export function Navbar() {
                           </div>
                           <Link
                             href="/library"
+                            prefetch={false}
                             onClick={() => setOpenMenu(null)}
                             className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-red hover:underline"
                           >
@@ -212,6 +217,7 @@ export function Navbar() {
                             <li key={item.href}>
                               <Link
                                 href={item.href}
+                                prefetch={prefetchFor(item.href)}
                                 onClick={() => setOpenMenu(null)}
                                 className="group flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
                               >
@@ -306,6 +312,7 @@ export function Navbar() {
                       <Link
                         key={item.href}
                         href={item.href}
+                        prefetch={prefetchFor(item.href)}
                         onClick={closeMobile}
                         className="flex items-center gap-2.5 rounded-xl p-3 text-xs font-bold uppercase text-zinc-800 dark:text-zinc-200 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 sm:text-sm"
                       >
@@ -326,6 +333,7 @@ export function Navbar() {
                 </span>
                 <Link
                   href="/library"
+                  prefetch={false}
                   onClick={closeMobile}
                   className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red"
                 >

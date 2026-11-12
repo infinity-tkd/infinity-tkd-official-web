@@ -140,15 +140,15 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
   const isKickingAdvancedCategory = categoryMeta.id === 'kicking-advanced'
 
   return (
-    <div className="bg-zinc-50 dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
+    <div className="overflow-x-hidden pb-20 pt-24 sm:pb-28 sm:pt-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Top Breadcrumb & Back Link */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center justify-between gap-4">
           <Link
             href="/library"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors touch-press"
+            className="inline-flex min-h-[44px] items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-500 transition-colors hover:text-zinc-900 touch-press dark:hover:text-white"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             <span>
               {language === 'km'
                 ? 'ត្រឡប់ទៅមជ្ឈមណ្ឌលមេរៀន'
@@ -160,34 +160,26 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
             </span>
           </Link>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-            <span>{t.nav.library}</span>
-            <span>/</span>
-            <span className="text-brand-red font-bold uppercase">{categoryMeta.title}</span>
-          </div>
-        </div>
+          <ol className="hidden items-center gap-2 text-xs text-zinc-500 sm:flex">
+            <li>
+              <Link href="/library" className="transition-colors hover:text-zinc-900 dark:hover:text-white">
+                {t.nav.library}
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" className="font-semibold text-zinc-900 dark:text-white">
+              {categoryMeta.title}
+            </li>
+          </ol>
+        </nav>
 
-        {/* HERO BANNER (14px radius) */}
-        <div className="relative p-8 sm:p-12 md:p-14 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-hidden mb-10">
-          <div
-            className="absolute top-0 right-0 w-[500px] h-[500px] blur-[140px] rounded-full pointer-events-none opacity-20"
-            style={{ backgroundColor: categoryMeta.accentColor }}
-          />
-
-          <div className="relative z-10 max-w-4xl">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <div
-                className="p-3.5 rounded-xl shadow-sm"
-                style={{
-                  backgroundColor: `${categoryMeta.accentColor}20`,
-                  color: categoryMeta.accentColor,
-                }}
-              >
-                <Icon className="w-7 h-7" />
-              </div>
-              <div>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red block">
-                  {categoryMeta.koreanTitle} &bull;{' '}
+        {/* Header */}
+        <header className="mb-10 mt-8 max-w-4xl sm:mb-14 sm:mt-10">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold uppercase tracking-widest text-zinc-500">
+            <Icon className="h-4 w-4 text-brand-red" aria-hidden="true" />
+            <span>{categoryMeta.koreanTitle}</span>
+            <span aria-hidden="true">·</span>
+            <span>
                   {language === 'km'
                     ? 'សព្វវចនាធិប្បាយឯកទេស'
                     : language === 'zh'
@@ -195,8 +187,9 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                     : language === 'ko'
                     ? '공인 백과사전'
                     : 'Section Encyclopedia'}
-                </span>
-                <span className="text-xs text-zinc-400 font-mono">
+            </span>
+          </p>
+          <p className="mt-2 text-sm text-zinc-500">
                   {isCompetitionRulesCategory
                     ? language === 'km'
                       ? 'ស្តង់ដារផ្លូវការ WT (Kyorugi & Poomsae)'
@@ -208,26 +201,20 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                     : isPoomsaeCategory
                     ? `${items.length} Patterns • 3 Master Series`
                     : `${items.length} Documented Techniques`}{' '}
-                  &bull; Kukkiwon WT Standards
-                </span>
-              </div>
-            </div>
+            · Kukkiwon WT Standards
+          </p>
 
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-4">
-              {categoryMeta.title}
-            </h1>
-
-            <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
-              {categoryMeta.description}
-            </p>
-
-            {/* Subtitle / Philosophy Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-300">
-              <Info className="w-3.5 h-3.5 text-brand-red shrink-0" />
-              <span>{categoryMeta.subtitle}</span>
-            </div>
-          </div>
-        </div>
+          <h1 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-tight text-zinc-900 sm:text-6xl dark:text-white">
+            {categoryMeta.title}
+          </h1>
+          <p className="mt-5 max-w-3xl text-base font-light leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
+            {categoryMeta.description}
+          </p>
+          <p className="mt-4 inline-flex items-start gap-2 text-sm text-zinc-500">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
+            <span>{categoryMeta.subtitle}</span>
+          </p>
+        </header>
 
         {/* DEDICATED SPECIALIZED SUITE READERS */}
         {isCompetitionRulesCategory && (

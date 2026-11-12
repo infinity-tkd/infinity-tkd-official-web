@@ -3,32 +3,30 @@
 import * as React from 'react'
 import Link from 'next/link'
 import {
-  CheckCircle,
-  XCircle,
-  Sparkles,
-  Zap,
-  Shield,
-  Award,
-  ChevronDown,
-  Flame,
   Activity,
-  Camera,
-  Users,
-  Percent,
-  Smile,
-  Target,
   ArrowRight,
-  Clock,
-  ShieldCheck,
-  RefreshCw,
+  Award,
+  Camera,
+  Check,
+  ChevronDown,
   Gift,
-  HelpCircle,
+  Minus,
+  RefreshCw,
+  Shield,
+  Sparkles,
+  Users,
 } from 'lucide-react'
 import { pricingPlans, pricingComparison, pricingFaqs } from '@/data/pricing'
 import { AnimatedCounter } from '@/components/AnimatedCounter'
 import { AgeDivisionsAndFormats } from '@/components/AgeDivisionsAndFormats'
-import { Card3D } from '@/components/ui/Card3D'
+import { BorderTrace } from '@/components/ui/BorderTrace'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
+import { PageHero } from '@/components/ui/PageHero'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { CtaBanner } from '@/components/ui/CtaBanner'
+import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
+import { cn } from '@/lib/utils'
 
 const iconMap: Record<string, React.ElementType> = {
   taekwondo: Shield,
@@ -37,408 +35,304 @@ const iconMap: Record<string, React.ElementType> = {
   all: Sparkles,
 }
 
+const ANNUAL_SAVINGS = 20
+const FAMILY_SAVINGS = 25
+
+const assurances = [
+  { icon: Gift, title: '100% Free Trial', text: 'First session free with zero lock-in commitment.' },
+  { icon: Award, title: 'Kukkiwon Standard', text: 'Internationally recognized belt credentials.' },
+  { icon: RefreshCw, title: 'Freeze Anytime', text: 'Pause up to 30 days for exams or vacations.' },
+  { icon: Users, title: 'Sibling Savings', text: `${FAMILY_SAVINGS}% automatic discount for family bundles.` },
+]
+
+/** Small savings tag inside the membership switch. */
+function SavingsTag({ percent }: { percent: number }) {
+  return (
+    <span className="rounded-md bg-brand-red px-1.5 py-0.5 text-[10px] font-bold tracking-normal text-white">
+      -{percent}%
+    </span>
+  )
+}
+
+/** One cell of the comparison table: a tick, a dash, or a short value. */
+function MatrixCell({ value, featured }: { value: boolean | string; featured?: boolean }) {
+  if (value === true || value === false) {
+    const Icon = value ? Check : Minus
+    return (
+      <>
+        <Icon
+          aria-hidden="true"
+          className={cn(
+            'mx-auto h-4 w-4',
+            !value ? 'text-zinc-300 dark:text-zinc-700' : featured ? 'text-brand-red' : 'text-zinc-700 dark:text-zinc-300'
+          )}
+        />
+        <span className="sr-only">{value ? 'Included' : 'Not included'}</span>
+      </>
+    )
+  }
+  return (
+    <span className={cn('font-semibold', featured ? 'text-zinc-900 dark:text-white' : 'text-zinc-700 dark:text-zinc-300')}>
+      {value}
+    </span>
+  )
+}
+
 export default function PricingPage() {
   const { t, localizeList } = useLanguage()
   const [billingCycle, setBillingCycle] = React.useState<'monthly' | 'annual'>('monthly')
   const [membershipType, setMembershipType] = React.useState<'individual' | 'family'>('individual')
   const [openFaq, setOpenFaq] = React.useState<number | null>(null)
 
-  const localizedPlans = React.useMemo(() => {
-    return localizeList(pricingPlans)
-  }, [localizeList])
+  const localizedPlans = React.useMemo(() => localizeList(pricingPlans), [localizeList])
 
-  const toggleFaq = (index: number) => {
-    setOpenFaq(openFaq === index ? null : index)
-  }
-
-  // Calculate annual savings percentage display
-  const annualSavingsPercent = 20
-  const familySavingsPercent = 25
+  const family = membershipType === 'family'
+  const annual = billingCycle === 'annual'
+  const savingsNote =
+    family && annual
+      ? `Family (${FAMILY_SAVINGS}%) and annual (${ANNUAL_SAVINGS}%) discounts applied to every plan.`
+      : family
+        ? `Family sibling discount: ${FAMILY_SAVINGS}% savings applied across all plans.`
+        : annual
+          ? `Annual commitment: ${ANNUAL_SAVINGS}% discount applied, with 2 months free.`
+          : null
 
   return (
-    <div className="bg-zinc-50 dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
-      {/* Background Subtle Ambience */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-brand-red/5 blur-[150px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-zinc-400/5 dark:bg-zinc-800/10 blur-[150px] rounded-full pointer-events-none" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-        {/* ==================================================================== */}
-        {/* 1. HERO SECTION */}
-        {/* ==================================================================== */}
-        <div className="text-center max-w-3xl mx-auto pt-4 mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" /> {t.pricing.badge}
+    <div className="overflow-x-hidden pb-20 sm:pb-28">
+      <PageHero
+        eyebrow={t.pricing.badge}
+        eyebrowIcon={Sparkles}
+        title={t.pricing.heroTitle1}
+        accent={t.pricing.heroTitle2}
+        description={t.pricing.heroSubtitle}
+      >
+        {/* Billing and membership switches: the highlight slides to the chosen option. */}
+        <div className="flex w-full max-w-xl flex-col items-center gap-3">
+          <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+            <SegmentedControl
+              label="Billing period"
+              value={billingCycle}
+              onChange={setBillingCycle}
+              className="w-full justify-center sm:w-auto"
+              options={[
+                { value: 'monthly', label: t.common.monthly },
+                // The annual label already states the saving in every language.
+                { value: 'annual', label: t.common.annual },
+              ]}
+            />
+            <SegmentedControl
+              label="Membership type"
+              value={membershipType}
+              onChange={setMembershipType}
+              className="w-full justify-center sm:w-auto"
+              options={[
+                { value: 'individual', label: 'Single Student' },
+                {
+                  value: 'family',
+                  label: (
+                    <>
+                      <Users className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>Family Pack</span>
+                      <SavingsTag percent={FAMILY_SAVINGS} />
+                    </>
+                  ),
+                },
+              ]}
+            />
           </div>
-
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight mb-4 sm:mb-6 leading-none text-zinc-900 dark:text-white break-words">
-            {t.pricing.heroTitle1} <span className="text-brand-red">{t.pricing.heroTitle2}</span>
-          </h1>
-
-          <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 font-light max-w-3xl mx-auto leading-relaxed mb-8 px-2">
-            {t.pricing.heroSubtitle}
+          {/* The line keeps its height when empty, so switching never moves the plans. */}
+          <p aria-live="polite" className="flex min-h-[1.5rem] items-center justify-center gap-1.5 text-sm text-zinc-500">
+            {savingsNote && (
+              <>
+                <Check className="h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
+                <span>{savingsNote}</span>
+              </>
+            )}
           </p>
-
-          {/* DUAL INTERACTIVE SWITCHERS TOOLBAR (12px radius) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
-            {/* Switcher 1: Monthly vs Annual */}
-            <div className="inline-flex items-center p-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm w-full sm:w-auto justify-center">
-              <button
-                onClick={() => setBillingCycle('monthly')}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                  billingCycle === 'monthly'
-                    ? 'bg-brand-red text-white shadow-brand-glow'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                {t.common.monthly}
-              </button>
-              <button
-                onClick={() => setBillingCycle('annual')}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
-                  billingCycle === 'annual'
-                    ? 'bg-brand-red text-white shadow-brand-glow'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                <span>{t.common.annual}</span>
-                <span className="px-1.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-amber-400 text-black">
-                  -{annualSavingsPercent}%
-                </span>
-              </button>
-            </div>
-
-            {/* Switcher 2: Individual vs Family Pack */}
-            <div className="inline-flex items-center p-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm w-full sm:w-auto justify-center">
-              <button
-                onClick={() => setMembershipType('individual')}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                  membershipType === 'individual'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                Single Student
-              </button>
-              <button
-                onClick={() => setMembershipType('family')}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
-                  membershipType === 'family'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                <Users className="w-3.5 h-3.5" />
-                <span>Family Pack</span>
-                <span className="px-1.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-brand-red text-white">
-                  -{familySavingsPercent}%
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {/* Dynamic Savings Alert */}
-          {membershipType === 'family' ? (
-            <p className="text-xs text-brand-red font-bold uppercase tracking-wider mt-3 animate-fade-in flex items-center justify-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Family Sibling Discount: 25% savings automatically applied across all plans!
-            </p>
-          ) : billingCycle === 'annual' ? (
-            <p className="text-xs text-emerald-500 font-bold uppercase tracking-wider mt-3 animate-fade-in flex items-center justify-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Annual Commitment: 20% annual discount applied with 2 months free!
-            </p>
-          ) : null}
         </div>
+      </PageHero>
 
-        {/* ==================================================================== */}
-        {/* 2. TIERED PRICING CARDS GRID (14px radius) */}
-        {/* ==================================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10 max-w-7xl mx-auto mb-16 sm:mb-24">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Plans */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {localizedPlans.map((plan) => {
             const Icon = iconMap[plan.division] || Sparkles
+            const featured = Boolean(plan.popular)
 
-            // Compute exact numeric price based on toggles
-            let calculatedPrice: number | null = null
+            let price: number | null = null
             if (plan.monthlyIndividualPrice !== null) {
-              if (membershipType === 'family') {
-                calculatedPrice =
-                  billingCycle === 'annual'
-                    ? plan.annualFamilyPrice
-                    : plan.monthlyFamilyPrice
-              } else {
-                calculatedPrice =
-                  billingCycle === 'annual'
-                    ? plan.annualIndividualPrice
-                    : plan.monthlyIndividualPrice
-              }
+              price = family
+                ? annual
+                  ? plan.annualFamilyPrice
+                  : plan.monthlyFamilyPrice
+                : annual
+                  ? plan.annualIndividualPrice
+                  : plan.monthlyIndividualPrice
             }
 
-            const isCustom = calculatedPrice === null
-
             return (
-              <Card3D key={plan.id} maxTilt={plan.popular ? 4 : 3} className="h-full">
-                <div
-                  className={`relative group h-full p-6 sm:p-8 rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden backdrop-blur-xl ${
-                    plan.popular
-                      ? 'border-brand-red bg-zinc-50 dark:bg-zinc-900/90 shadow-2xl shadow-brand-red/10 lg:-translate-y-2'
-                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-zinc-300 dark:hover:border-zinc-700'
-                  }`}
-                >
-                {/* Popular Card Accent Ribbon */}
-                {plan.popular && (
-                  <div className="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-brand-red via-amber-400 to-brand-red" />
+              <article
+                key={plan.id}
+                className={cn(
+                  'relative flex h-full flex-col rounded-2xl border bg-white p-6 sm:p-8 dark:bg-zinc-900/40',
+                  featured ? 'border-brand-red/35' : 'border-zinc-200 dark:border-zinc-800'
                 )}
+              >
+                {/* Featured plan: a short light runs around its edge when it comes into view and on hover. */}
+                {featured && <BorderTrace />}
 
-                <div>
-                  {/* Top Target Audience & Status Badges */}
-                  <div className="flex justify-between items-start mb-5">
-                    <div
-                      className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest"
-                      style={{ color: plan.accentColor }}
-                    >
-                      <Icon className="w-4 h-4" /> {plan.targetAudience.split(' (')[0]}
-                    </div>
-
-                    {plan.badge && (
-                      <span
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider shadow-xs ${
-                          plan.badgeType === 'popular'
-                            ? 'bg-brand-red text-white shadow-brand-glow animate-pulse'
-                            : plan.badgeType === 'beginner'
-                            ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'
-                            : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200'
-                        }`}
-                      >
-                        {plan.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="text-2xl font-black uppercase tracking-tight mb-2 text-zinc-900 dark:text-white">
-                    {plan.name}
-                  </h3>
-
-                  <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
-                    {plan.description}
-                  </p>
-
-                  {/* Price Display */}
-                  <div className="mb-6 pb-6 border-b border-zinc-200 dark:border-zinc-800">
-                    <div className="flex items-baseline gap-1.5">
-                      {isCustom ? (
-                        <span className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-900 dark:text-white">
-                          Custom VIP
-                        </span>
-                      ) : (
-                        <>
-                          <span className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-900 dark:text-white font-mono">
-                            $<AnimatedCounter value={calculatedPrice!} duration={400} />
-                          </span>
-                          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                            / {billingCycle === 'annual' ? 'mo (billed annually)' : 'month'}
-                          </span>
-                        </>
+                {/* The badge row keeps its height, so plan titles line up across the cards. */}
+                <div className="flex min-h-[26px] items-start">
+                  {plan.badge && (
+                    <span
+                      className={cn(
+                        'rounded-lg px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider',
+                        featured ? 'bg-brand-red text-white' : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
                       )}
-                    </div>
-
-                    {/* Sub-price breakdown */}
-                    {!isCustom && (
-                      <p className="text-xs text-zinc-400 font-mono mt-1">
-                        {membershipType === 'family' ? 'Per family student' : 'Standard tuition rate'}
-                        {billingCycle === 'annual' && ' • Paid annually'}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Features List */}
-                  <div className="space-y-3 mb-6">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block">
-                      Plan Inclusions
+                    >
+                      {plan.badge}
                     </span>
-                    {plan.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs">
-                        <CheckCircle className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                        <span className="text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-
-                    {plan.notIncluded &&
-                      plan.notIncluded.map((feature, idx) => (
-                        <div
-                          key={`not-${idx}`}
-                          className="flex items-start gap-2.5 text-xs opacity-40"
-                        >
-                          <XCircle className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
-                          <span className="text-zinc-400 line-through leading-relaxed">{feature}</span>
-                        </div>
-                      ))}
-                  </div>
+                  )}
                 </div>
 
-                {/* Card Action Button (12px radius) */}
-                <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                <h2 className="mt-4 text-xl font-black uppercase tracking-tight text-zinc-900 sm:text-2xl dark:text-white">
+                  {plan.name}
+                </h2>
+                <p className="mt-2 flex items-start gap-1.5 text-xs font-semibold leading-snug text-zinc-500">
+                  <Icon className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span>{plan.targetAudience}</span>
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{plan.description}</p>
+
+                {/* Price */}
+                <div className="mt-6 flex min-h-[5.5rem] flex-col justify-center border-y border-zinc-200 py-5 dark:border-zinc-800">
+                  {price === null ? (
+                    <span className="text-3xl font-black tracking-tight text-zinc-900 sm:text-4xl dark:text-white">Custom VIP</span>
+                  ) : (
+                    <>
+                      <span className="flex flex-wrap items-baseline gap-x-1.5">
+                        <span className="text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl dark:text-white">
+                          $<AnimatedCounter value={price} duration={500} countUp={false} />
+                        </span>
+                        <span className="text-sm font-medium text-zinc-500">/ {annual ? 'mo, billed annually' : 'month'}</span>
+                      </span>
+                      <span className="mt-1 text-xs text-zinc-500">
+                        {family ? 'Per family student' : 'Standard tuition rate'}
+                        {annual && ' · Paid annually'}
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                {/* What is included */}
+                <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Plan inclusions</p>
+                <ul className="mt-3 space-y-2.5">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-zinc-700 dark:text-zinc-300">
+                      <Check
+                        aria-hidden="true"
+                        className={cn('mt-0.5 h-4 w-4 shrink-0', featured ? 'text-brand-red' : 'text-zinc-400 dark:text-zinc-500')}
+                      />
+                      <span className="leading-snug">{feature}</span>
+                    </li>
+                  ))}
+                  {plan.notIncluded?.map((feature, idx) => (
+                    <li key={`not-${idx}`} className="flex items-start gap-2.5 text-sm text-zinc-400 dark:text-zinc-500">
+                      <Minus aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
+                      <span className="leading-snug">
+                        {feature}
+                        <span className="sr-only"> (not included)</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto pt-8">
                   <Link
                     href={`/contact?subject=${encodeURIComponent(plan.ctaSubject)}`}
-                    className={`w-full py-3.5 rounded-xl font-bold uppercase tracking-wider text-xs transition-all duration-300 text-center flex items-center justify-center gap-2 cursor-pointer shadow-sm touch-press ${
-                      plan.popular
-                        ? 'bg-brand-red text-white hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black shadow-brand-glow'
-                        : 'bg-zinc-900 text-white dark:bg-white dark:text-black hover:bg-brand-red dark:hover:bg-brand-red dark:hover:text-white'
-                    }`}
+                    className={buttonStyles({ variant: featured ? 'primary' : 'outline', className: 'w-full' })}
                   >
-                    {plan.ctaText} <ArrowRight className="w-3.5 h-3.5" />
+                    {plan.ctaText} <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
-              </div>
-            </Card3D>
+              </article>
             )
           })}
         </div>
 
-        {/* ==================================================================== */}
-        {/* 3. CONFIDENCE & VALUE ASSURANCE BAR (12px radius) */}
-        {/* ==================================================================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 max-w-5xl mx-auto mb-16 sm:mb-24">
-          <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex items-start gap-3">
-            <Gift className="w-5 h-5 text-brand-red shrink-0 mt-0.5" />
-            <div>
-              <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
-                100% Free Trial
-              </h5>
-              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                First session free with zero lock-in commitment.
-              </p>
-            </div>
-          </div>
+        {/* Membership assurances */}
+        <ul className="mt-6 grid gap-6 rounded-2xl border border-zinc-200 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 dark:border-zinc-800">
+          {assurances.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="flex gap-3">
+              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-red" aria-hidden="true" />
+              <div>
+                <p className="text-sm font-bold text-zinc-900 dark:text-white">{title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
 
-          <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex items-start gap-3">
-            <Award className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-            <div>
-              <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
-                Kukkiwon Standard
-              </h5>
-              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Internationally recognized belt credentials.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex items-start gap-3">
-            <RefreshCw className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-            <div>
-              <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
-                Freeze Anytime
-              </h5>
-              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Pause up to 30 days for exams or vacations.
-              </p>
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex items-start gap-3">
-            <Users className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-            <div>
-              <h5 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
-                Sibling Savings
-              </h5>
-              <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                25% automatic discount for family bundles.
-              </p>
-            </div>
-          </div>
+        {/* Ages and class formats */}
+        <div className="mt-24 sm:mt-32">
+          <AgeDivisionsAndFormats />
         </div>
 
-        {/* ==================================================================== */}
-        {/* 4. ALL AGES & CLASS FORMATS SECTION */}
-        {/* ==================================================================== */}
-        <section className="mb-16 sm:mb-24">
-          <AgeDivisionsAndFormats />
-        </section>
-
-        {/* ==================================================================== */}
-        {/* 5. FULL FEATURE COMPARISON MATRIX (14px radius) */}
-        {/* ==================================================================== */}
-        <div className="mb-16 sm:mb-24 max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
-              Detailed Feature Matrix
-            </span>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-              {t.pricing.compareTitle1} <span className="text-brand-red">{t.pricing.compareTitle2}</span>
-            </h3>
-          </div>
-
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-x-auto shadow-xl">
-            <table className="w-full text-left border-collapse min-w-[600px]">
+        {/* Comparison */}
+        <section className="mx-auto mt-24 max-w-5xl sm:mt-32">
+          <SectionHeader
+            size="md"
+            eyebrowStyle="text"
+            eyebrow="Detailed feature matrix"
+            title={t.pricing.compareTitle1}
+            accent={t.pricing.compareTitle2}
+          />
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
-                  <th className="p-4 sm:p-5 text-xs font-black uppercase tracking-wider text-zinc-400">
-                    Feature &amp; Benefit
+                <tr className="border-b border-zinc-200 dark:border-zinc-800">
+                  <th scope="col" className="p-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500 sm:px-6">
+                    Feature &amp; benefit
                   </th>
-                  <th className="p-4 sm:p-5 text-xs font-black uppercase tracking-wider text-zinc-900 dark:text-white text-center">
+                  <th scope="col" className="p-4 text-center text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
                     Junior Warriors
                   </th>
-                  <th className="p-4 sm:p-5 text-xs font-black uppercase tracking-wider text-brand-red text-center bg-brand-red/5">
-                    Pro Athlete (Popular)
+                  <th scope="col" className="bg-brand-red/[0.05] p-4 text-center text-xs font-bold uppercase tracking-wider text-brand-red">
+                    Pro Athlete
+                    <span className="mt-0.5 block text-[11px] font-semibold normal-case tracking-normal text-zinc-500">
+                      Most popular
+                    </span>
                   </th>
-                  <th className="p-4 sm:p-5 text-xs font-black uppercase tracking-wider text-emerald-500 text-center">
+                  <th scope="col" className="p-4 text-center text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white">
                     Private Master
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-xs">
-                {pricingComparison.map((cat, catIdx) => (
-                  <React.Fragment key={catIdx}>
-                    <tr className="bg-zinc-100/60 dark:bg-zinc-950/60">
-                      <td
+              <tbody>
+                {pricingComparison.map((cat) => (
+                  <React.Fragment key={cat.category}>
+                    <tr className="bg-zinc-50 dark:bg-zinc-900/60">
+                      <th
+                        scope="colgroup"
                         colSpan={4}
-                        className="px-4 sm:px-5 py-2.5 font-bold uppercase tracking-wider text-brand-red text-[11px]"
+                        className="px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500 sm:px-6"
                       >
                         {cat.category}
-                      </td>
+                      </th>
                     </tr>
-                    {cat.features.map((feat, featIdx) => (
-                      <tr key={featIdx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                        <td className="p-4 sm:p-5 text-zinc-700 dark:text-zinc-300 font-medium">
+                    {cat.features.map((feat) => (
+                      <tr key={feat.name} className="border-t border-zinc-100 dark:border-zinc-800/70">
+                        <th scope="row" className="p-4 font-medium text-zinc-700 sm:px-6 dark:text-zinc-300">
                           {feat.name}
+                        </th>
+                        <td className="p-4 text-center">
+                          <MatrixCell value={feat.junior} />
                         </td>
-                        <td className="p-4 sm:p-5 text-center">
-                          {typeof feat.junior === 'boolean' ? (
-                            feat.junior ? (
-                              <CheckCircle className="w-4 h-4 text-emerald-500 mx-auto" />
-                            ) : (
-                              <XCircle className="w-4 h-4 text-zinc-300 dark:text-zinc-700 mx-auto" />
-                            )
-                          ) : (
-                            <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                              {feat.junior}
-                            </span>
-                          )}
+                        <td className="bg-brand-red/[0.05] p-4 text-center">
+                          <MatrixCell value={feat.athlete} featured />
                         </td>
-                        <td className="p-4 sm:p-5 text-center bg-brand-red/5">
-                          {typeof feat.athlete === 'boolean' ? (
-                            feat.athlete ? (
-                              <CheckCircle className="w-4 h-4 text-brand-red mx-auto" />
-                            ) : (
-                              <XCircle className="w-4 h-4 text-zinc-300 dark:text-zinc-700 mx-auto" />
-                            )
-                          ) : (
-                            <span className="font-bold text-brand-red">{feat.athlete}</span>
-                          )}
-                        </td>
-                        <td className="p-4 sm:p-5 text-center">
-                          {typeof feat.master === 'boolean' ? (
-                            feat.master ? (
-                              <CheckCircle className="w-4 h-4 text-emerald-500 mx-auto" />
-                            ) : (
-                              <XCircle className="w-4 h-4 text-zinc-300 dark:text-zinc-700 mx-auto" />
-                            )
-                          ) : (
-                            <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                              {feat.master}
-                            </span>
-                          )}
+                        <td className="p-4 text-center">
+                          <MatrixCell value={feat.master} />
                         </td>
                       </tr>
                     ))}
@@ -447,78 +341,72 @@ export default function PricingPage() {
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
 
-        {/* ==================================================================== */}
-        {/* 6. INTERACTIVE FAQS ACCORDION (12px radius) */}
-        {/* ==================================================================== */}
-        <div className="max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="text-center mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
-              Frequently Asked Questions
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-              {t.pricing.faqTitle1} <span className="text-brand-red">{t.pricing.faqTitle2}</span>
-            </h3>
-          </div>
-
-          <div className="space-y-3">
-            {pricingFaqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden shadow-xs"
-              >
-                <button
-                  onClick={() => toggleFaq(idx)}
-                  aria-expanded={openFaq === idx}
-                  aria-controls={`faq-answer-${idx}`}
-                  className="w-full p-4 sm:p-5 text-left flex justify-between items-center gap-4 font-bold text-xs sm:text-sm text-zinc-900 dark:text-white hover:text-brand-red dark:hover:text-brand-red transition-colors cursor-pointer"
-                >
-                  <span>{faq.q}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-zinc-400 shrink-0 transform transition-transform duration-300 ${
-                      openFaq === idx ? 'rotate-180 text-brand-red' : ''
-                    }`}
-                  />
-                </button>
-                {openFaq === idx && (
+        {/* Questions */}
+        <section className="mx-auto mt-24 max-w-3xl sm:mt-32">
+          <SectionHeader
+            size="md"
+            eyebrowStyle="text"
+            eyebrow="Frequently asked questions"
+            title={t.pricing.faqTitle1}
+            accent={t.pricing.faqTitle2}
+          />
+          <div className="mt-10 divide-y divide-zinc-200 overflow-hidden rounded-2xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+            {pricingFaqs.map((faq, idx) => {
+              const open = openFaq === idx
+              return (
+                <div key={faq.q}>
+                  <h3>
+                    <button
+                      type="button"
+                      id={`faq-question-${idx}`}
+                      onClick={() => setOpenFaq(open ? null : idx)}
+                      aria-expanded={open}
+                      aria-controls={`faq-answer-${idx}`}
+                      className="flex min-h-[56px] w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-50 sm:px-6 sm:text-base dark:text-white dark:hover:bg-zinc-900/60"
+                    >
+                      <span>{faq.q}</span>
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={cn(
+                          'h-4 w-4 shrink-0 text-zinc-400 transition-transform duration-300 ease-out-expo',
+                          open && 'rotate-180'
+                        )}
+                      />
+                    </button>
+                  </h3>
+                  {/* Opens smoothly: the row animates from 0fr to 1fr; closed answers are inert. */}
                   <div
-                    id={`faq-answer-${idx}`}
-                    role="region"
-                    className="px-4 sm:px-5 pb-5 text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-800 pt-3 animate-fade-in"
+                    className={cn(
+                      'grid transition-[grid-template-rows] duration-300 ease-out-expo motion-reduce:transition-none',
+                      open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                    )}
                   >
-                    {faq.a}
+                    <div
+                      id={`faq-answer-${idx}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${idx}`}
+                      inert={!open}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-5 pb-5 text-sm leading-relaxed text-zinc-600 sm:px-6 dark:text-zinc-400">{faq.a}</p>
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              )
+            })}
           </div>
-        </div>
+        </section>
 
-        {/* ==================================================================== */}
-        {/* 7. HIGH-CONVERTING VIP TRIAL PASS BANNER (14px radius) */}
-        {/* ==================================================================== */}
-        <div className="p-6 sm:p-10 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 max-w-5xl mx-auto shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-brand-red/10 blur-[100px] rounded-full pointer-events-none" />
-
-          <div className="relative z-10 max-w-xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-1">
-              Complimentary Dojang Pass
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-2">
-              Experience The Dojang First
-            </h3>
-            <p className="text-[13px] sm:text-sm text-zinc-400 leading-relaxed">
-              Step onto the spring floors, meet our certified 5th Dan Head Masters, and experience our science-backed training with zero financial obligation.
-            </p>
-          </div>
-
-          <Link
+        <div className="mt-24 sm:mt-32">
+          <CtaBanner
+            eyebrow="Complimentary Dojang Pass"
+            title="Experience The Dojang First"
+            description="Step onto the spring floors, meet our certified 5th Dan Head Masters, and experience our science-backed training with zero financial obligation."
             href="/contact?subject=Free%20Trial%20Booking"
-            className="relative z-10 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-brand-glow whitespace-nowrap text-center cursor-pointer shrink-0"
-          >
-            Claim Free Trial Pass
-          </Link>
+            label="Claim Free Trial Pass"
+          />
         </div>
       </div>
     </div>

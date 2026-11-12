@@ -105,7 +105,7 @@ export default function CollaborationsPage() {
         {/* PARTNER LEAD GENERATION CTA (14px radius) */}
         {/* ------------------------------------------------------------------ */}
         <Card3D maxTilt={4} scale={1.01} className="mt-16">
-          <div className="p-6 sm:p-10 md:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl">
+          <div className="dark p-6 sm:p-10 md:p-12 rounded-2xl bg-zinc-900 text-white border border-brand-red/40 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-2 max-w-xl">
               <span className="text-xs font-bold uppercase tracking-widest text-brand-red block">
                 Institutional Synergy
