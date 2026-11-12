@@ -1,5 +1,5 @@
 import { LegalLayout } from '@/components/LegalLayout'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import {
   Heart,
   ShieldCheck,
@@ -16,29 +16,13 @@ import {
   Accessibility,
 } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Equality, Diversity & Inclusion Policy',
   description:
-    'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, Para-Taekwondo adaptive training, and cultural mutual respect across all academies.',
-  alternates: {
-    canonical: '/equality',
-  },
-  openGraph: {
-    title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, anti-discrimination, and Para-Taekwondo adaptive training.',
-    url: '/equality',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Equality, Diversity & Inclusion Policy' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Equality, Diversity & Inclusion Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Equality, Diversity & Inclusion Policy - Commitment to equal access, gender equity, and safe martial sport.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo equality, diversity and inclusion policy: equal access, gender equity, anti-discrimination and adaptive Para-Taekwondo training for all.',
+  path: '/equality',
+  keywords: ['Taekwondo for everyone', 'Para-Taekwondo', 'inclusive martial arts', 'equality policy'],
+})
 
 export default function EqualityPage() {
   const sidebar = (

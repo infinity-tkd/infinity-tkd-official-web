@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useDialogFocus } from '@/lib/a11y'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -45,6 +46,8 @@ type AboutTab = 'story' | 'mind' | 'quad' | 'values' | 'tenets' | 'journey' | 'f
 export default function AboutPage() {
   const { t, localizeList, language } = useLanguage()
   const [selectedMember, setSelectedMember] = React.useState<TeamMember | null>(null)
+  const memberDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedMember), memberDialogRef)
   const [activeTab, setActiveTab] = React.useState<AboutTab>('story')
   const [selectedBeltColor, setSelectedBeltColor] = React.useState<string>('red')
   const panelRef = React.useRef<HTMLDivElement>(null)
@@ -1221,8 +1224,10 @@ export default function AboutPage() {
         <div
           className="fixed inset-0 z-[60] flex animate-fade-in items-end justify-center p-0 sm:items-center sm:p-6"
           onClick={closeMember}
+          ref={memberDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="member-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />

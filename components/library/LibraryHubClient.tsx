@@ -63,7 +63,7 @@ import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { getSafeVideoEmbedUrl } from '@/lib/videoHelper'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 const iconMap: Record<string, React.ElementType> = {
   BookOpen,
@@ -84,6 +84,8 @@ export function LibraryHubClient() {
   const [selectedDifficulty, setSelectedDifficulty] = React.useState<DifficultyLevel | 'all'>('all')
   const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [activeItem, setActiveItem] = React.useState<LibraryItem | null>(null)
+  const itemDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(activeItem), itemDialogRef)
 
   const localizedCategories = React.useMemo(() => {
     return localizeList(libraryCategoriesMeta)
@@ -372,8 +374,10 @@ export function LibraryHubClient() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setActiveItem(null)}
+          ref={itemDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="library-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />

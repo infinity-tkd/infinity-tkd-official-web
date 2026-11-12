@@ -147,15 +147,13 @@ export function TechniqueDetailClient({
 
         {/* Hero Banner (14px radius) */}
         <div className="p-8 sm:p-12 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl mb-10 relative overflow-hidden">
-          <div
-            className="absolute top-0 right-0 w-96 h-96 blur-[130px] rounded-full pointer-events-none opacity-20"
-            style={{ backgroundColor: item.badgeColor }}
-          />
-
+          {/* The form's floor-pattern glyph as a faint watermark: CSS-generated, so it is decoration, not text. */}
           {isPoomsae && item.diagramSymbol && (
-            <div className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40">
-              {item.diagramSymbol}
-            </div>
+            <div
+              aria-hidden="true"
+              data-glyph={item.diagramSymbol}
+              className="absolute -right-4 -top-6 text-9xl font-black text-zinc-100 dark:text-zinc-800/30 select-none pointer-events-none font-serif opacity-40 before:content-[attr(data-glyph)]"
+            />
           )}
 
           <div className="relative z-10">
@@ -169,11 +167,11 @@ export function TechniqueDetailClient({
                   roman={item.danMastery.beltStripeRoman}
                 />
               )}
-              <span className="text-zinc-400">&bull;</span>
+              <span className="text-zinc-400" aria-hidden="true">&bull;</span>
               <span className="text-[11px] text-zinc-500">{item.difficulty}</span>
               {item.danMastery && (
                 <>
-                  <span className="text-zinc-400">&bull;</span>
+                  <span className="text-zinc-400" aria-hidden="true">&bull;</span>
                   <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20">
                     {t.library.characteristicOfMaster} {item.danMastery.masterCharacteristic}
                   </span>
@@ -181,7 +179,7 @@ export function TechniqueDetailClient({
               )}
               {item.taegeukPhilosophy && (
                 <>
-                  <span className="text-zinc-400">&bull;</span>
+                  <span className="text-zinc-400" aria-hidden="true">&bull;</span>
                   <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-brand-red/10 text-brand-red border border-brand-red/20 flex items-center gap-1">
                     <span className="font-serif">{item.taegeukPhilosophy.trigramSymbol}</span>
                     <span>
@@ -193,12 +191,12 @@ export function TechniqueDetailClient({
               )}
               {item.newPoomsaeSpec && (
                 <>
-                  <span className="text-zinc-400">&bull;</span>
-                  <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-400 border border-zinc-500/20 flex items-center gap-1">
+                  <span className="text-zinc-400" aria-hidden="true">&bull;</span>
+                  <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20 flex items-center gap-1">
                     <span>Form #{item.newPoomsaeSpec.formNumber}</span>
-                    <span>&bull;</span>
+                    <span aria-hidden="true">&bull;</span>
                     <span>{item.newPoomsaeSpec.targetAge.split('(')[0].trim()}</span>
-                    <span>&bull;</span>
+                    <span aria-hidden="true">&bull;</span>
                     <span>{item.newPoomsaeSpec.officialDuration}</span>
                   </span>
                 </>
@@ -245,7 +243,7 @@ export function TechniqueDetailClient({
                     <span className="text-zinc-500 text-sm font-normal">
                       ({item.danMastery.koreanDanRank})
                     </span>
-                    <span className="text-zinc-600">&bull;</span>
+                    <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">&bull;</span>
                     <span className="text-zinc-600 dark:text-zinc-400">{item.danMastery.formName}</span>
                     <span className="text-zinc-600 dark:text-zinc-400 text-sm font-serif">
                       ({item.danMastery.koreanFormName})
@@ -489,7 +487,7 @@ export function TechniqueDetailClient({
                     <span className="text-zinc-500 text-sm font-normal">
                       ({item.newPoomsaeSpec.koreanName})
                     </span>
-                    <span className="text-zinc-600">&bull;</span>
+                    <span className="text-zinc-400 dark:text-zinc-500" aria-hidden="true">&bull;</span>
                     <span className="text-zinc-600 dark:text-zinc-400">{item.newPoomsaeSpec.targetAge}</span>
                   </h2>
                 </div>
@@ -609,7 +607,7 @@ export function TechniqueDetailClient({
                 )}
 
               {item.newPoomsaeSpec.etymologyOrigin && (
-                <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 text-xs text-zinc-300/90">
+                <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 text-xs text-zinc-700 dark:text-zinc-300">
                   <span className="font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider mr-2">
                     Classical Origin &amp; Etymology:
                   </span>
@@ -654,7 +652,7 @@ export function TechniqueDetailClient({
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5" /> {item.publishDate || 'August 2026'}
                 </span>
-                <span>&bull;</span>
+                <span aria-hidden="true">&bull;</span>
                 <span className="flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5 text-brand-red" /> {item.readTime || '5 min read'}
                 </span>

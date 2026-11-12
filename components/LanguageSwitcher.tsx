@@ -15,16 +15,27 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
   const { language, setLanguage, currentLanguageOption, availableLanguages } = useLanguage()
   const [isOpen, setIsOpen] = React.useState(false)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
 
-  // Close dropdown when clicking outside
+  // Close the dropdown on an outside click, or on Escape (focus goes back to the button).
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && dropdownRef.current?.contains(document.activeElement)) {
+        setIsOpen(false)
+        buttonRef.current?.focus()
+      }
+    }
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
   }, [])
 
   if (variant === 'mobile') {
@@ -33,6 +44,9 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
         {availableLanguages.map((lang) => (
           <button
             key={lang.code}
+            type="button"
+            lang={lang.code}
+            aria-pressed={language === lang.code}
             onClick={() => setLanguage(lang.code)}
             className={cn(
               'min-h-[44px] py-2 px-3 rounded-xl text-xs font-bold transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer touch-press',
@@ -41,7 +55,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
                 : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
             )}
           >
-            <span>{lang.flag}</span>
+            <span aria-hidden="true">{lang.flag}</span>
             <span className="truncate">{lang.nativeName}</span>
           </button>
         ))}
@@ -58,6 +72,9 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
         {availableLanguages.map((lang) => (
           <button
             key={lang.code}
+            type="button"
+            lang={lang.code}
+            aria-pressed={language === lang.code}
             onClick={() => setLanguage(lang.code)}
             className={cn(
               'px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 flex items-center gap-1 cursor-pointer touch-press',
@@ -66,7 +83,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-brand-red'
             )}
           >
-            <span>{lang.flag}</span>
+            <span aria-hidden="true">{lang.flag}</span>
             <span>{lang.nativeName}</span>
           </button>
         ))}
@@ -78,14 +95,16 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
   return (
     <div className={cn('relative inline-block text-left', className)} ref={dropdownRef}>
       <button
+        ref={buttonRef}
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/80 hover:border-zinc-400 hover:bg-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 transition-colors duration-300 text-xs font-bold text-zinc-700 dark:text-zinc-300 cursor-pointer touch-press"
         aria-expanded={isOpen}
-        aria-haspopup="true"
-        aria-label="Select Language / ជ្រើសរើសភាសា / 选择语言 / 언어 선택"
+        // The name starts with the visible language name (WCAG 2.5.3), then says what the button does.
+        aria-label={`${currentLanguageOption.nativeName} - Select language / ជ្រើសរើសភាសា / 选择语言 / 언어 선택`}
       >
         <Globe className="w-3.5 h-3.5 text-zinc-500 shrink-0" aria-hidden="true" />
-        <span className="mr-0.5">{currentLanguageOption.flag}</span>
+        <span className="mr-0.5" aria-hidden="true">{currentLanguageOption.flag}</span>
         <span className="hidden sm:inline-block font-semibold">{currentLanguageOption.nativeName}</span>
         <ChevronDown
           className={cn('w-3 h-3 text-zinc-400 transition-transform duration-300 shrink-0', isOpen && '-rotate-180')}
@@ -100,6 +119,9 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
             return (
               <button
                 key={lang.code}
+                type="button"
+                lang={lang.code}
+                aria-pressed={isSelected}
                 onClick={() => {
                   setLanguage(lang.code)
                   setIsOpen(false)
@@ -112,7 +134,7 @@ export function LanguageSwitcher({ variant = 'header', className }: LanguageSwit
                 )}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-base">{lang.flag}</span>
+                  <span className="text-base" aria-hidden="true">{lang.flag}</span>
                   <div>
                     <span className="block font-bold">{lang.nativeName}</span>
                     <span className="text-[11px] text-zinc-400 font-normal">{lang.label}</span>

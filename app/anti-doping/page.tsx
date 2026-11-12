@@ -1,5 +1,5 @@
 import { LegalLayout } from '@/components/LegalLayout'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import {
   Zap,
   ShieldCheck,
@@ -14,29 +14,13 @@ import {
   HeartPulse,
 } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Anti-Doping & Clean Sport Policy',
   description:
-    'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols, prohibited substances list, TUE exemptions, and clean athlete education.',
-  alternates: {
-    canonical: '/anti-doping',
-  },
-  openGraph: {
-    title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and Southeast Asian Anti-Doping Organization (SEARADO) protocols.',
-    url: '/anti-doping',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Anti-Doping & Clean Sport Policy' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Anti-Doping & Clean Sport Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Anti-Doping Policy - Full adherence to WADA, World Taekwondo (WT), and SEARADO protocols.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo anti-doping policy: clean sport under WADA, World Taekwondo and SEARADO rules, the prohibited list, TUE exemptions and athlete education.',
+  path: '/anti-doping',
+  keywords: ['Taekwondo anti-doping', 'WADA', 'clean sport', 'World Taekwondo anti-doping rules'],
+})
 
 export default function AntiDopingPage() {
   const sidebar = (

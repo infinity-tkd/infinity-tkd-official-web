@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { libraryCategoriesMeta, libraryItems } from '@/data/library'
 import { CategoryViewClient } from '@/components/library/CategoryViewClient'
-import { pageMetadata, snippet } from '@/lib/seo'
+import { pageMetadata, snippet, titleForms, withBrand } from '@/lib/seo'
 import { buildBreadcrumbJsonLd, buildCollectionJsonLd, jsonLdString } from '@/lib/structuredData'
 
 interface CategoryPageProps {
@@ -23,9 +23,11 @@ function categorySeo(categoryId: string) {
   if (!categoryMeta) return null
   const items = libraryItems.filter((i) => i.category === categoryId)
   const title = `Taekwondo ${categoryMeta.title}: Complete Guide`
+  // Long discipline names keep the brand and drop ": Complete Guide" rather than the other way round.
+  const titleCandidates = [withBrand(title), withBrand(`Taekwondo ${categoryMeta.title}`), ...titleForms(title).slice(1)]
   // Brand and sport first: the snippet is trimmed at about 158 characters.
   const description = snippet(`Infinity Taekwondo guide to ${categoryMeta.title} in Taekwondo: ${categoryMeta.description}`)
-  return { categoryMeta, items, title, description }
+  return { categoryMeta, items, title, titleCandidates, description }
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
@@ -35,6 +37,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   return pageMetadata({
     title: seo.title,
+    titleCandidates: seo.titleCandidates,
     description: seo.description,
     path: `/library/${category}`,
     keywords: [

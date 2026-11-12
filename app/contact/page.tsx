@@ -395,9 +395,10 @@ function ContactContent() {
                     href="https://t.me/infinitytaekwondo"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#229ED9]/10 text-[#229ED9] hover:bg-[#229ED9] hover:text-white transition-all text-xs font-bold uppercase tracking-wider touch-press"
+                    // Telegram blue, deepened where it carries small text: 4.9:1 on the tint, 5.5:1 under white.
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#229ED9]/10 text-[#1A6FA0] dark:text-[#229ED9] hover:bg-[#1A6FA0] hover:text-white dark:hover:text-white transition-all text-xs font-bold uppercase tracking-wider touch-press"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5" aria-hidden="true" />
                     Instant Admissions on Telegram
                   </a>
                 </div>

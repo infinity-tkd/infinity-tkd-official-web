@@ -22,7 +22,11 @@ function CoverImage({ post, priority, sizes }: { post: BlogPostMeta; priority?: 
         aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center overflow-hidden bg-zinc-100 dark:bg-zinc-900"
       >
-        <span className="select-none text-6xl sm:text-7xl font-black tracking-tighter text-zinc-300 dark:text-zinc-800">태권도</span>
+        {/* A faint watermark: CSS-generated, so it is decoration rather than text to read. */}
+        <span
+          data-glyph="태권도"
+          className="select-none text-6xl sm:text-7xl font-black tracking-tighter text-zinc-300 dark:text-zinc-800 before:content-[attr(data-glyph)]"
+        />
       </div>
     )
   }

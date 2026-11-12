@@ -470,7 +470,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                         tabRefs.current[index] = el
                       }}
                       onClick={() => selectBelt(index)}
-                      aria-label={labels.selectBelt.replace('{belt}', belt.name)}
+                      // Named by its visible text (belt and rank), so speech users can say what they see.
                       aria-pressed={isSelected}
                       className={`group relative p-3 rounded-xl border transition-[border-color,background-color,box-shadow] duration-300 flex flex-col items-center text-center cursor-pointer min-h-[82px] min-w-[125px] sm:min-w-0 shrink-0 sm:shrink justify-center snap-center ${
                         isSelected

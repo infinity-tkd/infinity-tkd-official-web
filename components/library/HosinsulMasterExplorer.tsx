@@ -49,7 +49,7 @@ import {
   getVitalPointsGuide,
   hosinsulI18n,
 } from '@/data/library/hosinsul/hosinsulTranslations'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 interface HosinsulMasterExplorerProps {
   items: LibraryItem[]
@@ -71,6 +71,8 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
   const [activeFilter, setActiveFilter] = React.useState<SubFilterType>('all')
   const [searchQuery, setSearchQuery] = React.useState('')
   const [selectedItem, setSelectedItem] = React.useState<LibraryItem | null>(null)
+  const techniqueDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedItem), techniqueDialogRef)
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0)
   const [stepMode, setStepMode] = React.useState<'interactive' | 'list'>('interactive')
   const [selectedVitalPointId, setSelectedVitalPointId] = React.useState<string>('vp-solar-plexus')
@@ -279,6 +281,8 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {/* ==================================================================== */}
       {activeTab === 'curriculum' && (
         <div className="space-y-8 animate-fade-in">
+          {/* The other tabs open with a visible h2; this one starts with its h3 sections. */}
+          <h2 className="sr-only">{t.tabs.curriculum}</h2>
           {/* 7-Belt Rank Selector Tabs */}
           <div className="flex overflow-x-auto gap-2 p-1.5 bg-white dark:bg-zinc-900/80 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm no-scrollbar">
             {hosinsulCurriculum.map((belt) => {
@@ -1404,8 +1408,10 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
       {/* ==================================================================== */}
       {activeTechnique && (
         <div
+          ref={techniqueDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="modal-technique-title"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in"
           onClick={() => setSelectedItem(null)}

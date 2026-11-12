@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useDialogFocus } from '@/lib/a11y'
 import Link from 'next/link'
 import { academyCourses, type AcademyCourse } from '@/data/academy'
 import { BeltProgressionGuide } from '@/components/BeltProgressionGuide'
@@ -29,6 +30,8 @@ export default function AcademyPage() {
   const [selectedDivision, setSelectedDivision] = React.useState<string>('all')
   const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [activeCourse, setActiveCourse] = React.useState<AcademyCourse | null>(null)
+  const courseDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(activeCourse), courseDialogRef)
   const [currentView, setCurrentView] = React.useState<'courses' | 'ages' | 'belts' | 'schedule'>('courses')
 
   const localizedCourses = React.useMemo(() => {
@@ -332,8 +335,10 @@ export default function AcademyPage() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setActiveCourse(null)}
+          ref={courseDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="course-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />

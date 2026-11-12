@@ -10,6 +10,7 @@ import { TableOfContents } from '@/components/blog/TableOfContents'
 import { CtaBanner } from '@/components/ui/CtaBanner'
 import { formatPostDate, getAllPosts, getPostBySlug, getRelatedPosts, toMeta } from '@/lib/blog'
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, jsonLdString } from '@/lib/structuredData'
+import { fitTitle, titleForms } from '@/lib/seo'
 import { siteSettings } from '@/config/siteSettings'
 
 // Unknown slugs 404 immediately instead of rendering on demand.
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const image = post.cover?.src ?? '/opengraph-image'
 
   return {
-    title: post.title,
+    // Long post titles drop the brand suffix rather than being cut off in search results.
+    title: { absolute: fitTitle(titleForms(post.title)) },
     description: post.description,
     authors: [{ name: post.author }],
     keywords: post.tags,
@@ -103,7 +105,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               Home
             </Link>
             <ChevronRight className="w-3 h-3" aria-hidden="true" />
-            <Link href="/blog" className="inline-flex min-h-[32px] items-center transition-colors hover:text-zinc-900 dark:hover:text-white">
+            <Link href="/blog" className="inline-flex min-h-[32px] min-w-[32px] items-center justify-center transition-colors hover:text-zinc-900 dark:hover:text-white">
               Blog
             </Link>
             <ChevronRight className="w-3 h-3" aria-hidden="true" />

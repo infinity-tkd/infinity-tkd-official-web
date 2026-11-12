@@ -43,6 +43,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { buttonStyles } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
+import { useDialogFocus } from '@/lib/a11y'
 import {
   poomsaeI18n,
   getLocalizedSeriesConfig,
@@ -212,6 +213,8 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
   const [subFilter, setSubFilter] = React.useState<string>('all')
   const [searchQuery, setSearchQuery] = React.useState('')
   const [selectedPoomsae, setSelectedPoomsae] = React.useState<LibraryItem | null>(null)
+  const dossierDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedPoomsae), dossierDialogRef)
 
   // Stepper state inside Modal
   const [stepViewMode, setStepViewMode] = React.useState<'list' | 'stepper'>('list')
@@ -463,7 +466,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                 label: (
                   <>
                     <span>{seriesConfig[key].title}</span>
-                    <span className="font-semibold tracking-normal opacity-60">{counts[key]}</span>
+                    <span className="font-normal tracking-normal">{counts[key]}</span>
                   </>
                 ),
               }))}
@@ -2295,8 +2298,10 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-10 bg-black/80 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelectedPoomsae(null)}
+          ref={dossierDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="poomsae-modal-title"
         >
           <div

@@ -198,12 +198,12 @@ export function LegalLayout({
             </div>
           </aside>
 
-          {/* Legal Article Body */}
-          <main className="flex-1 w-full min-w-0">
+          {/* Legal Article Body (the site layout already provides the page's one <main>) */}
+          <div className="flex-1 w-full min-w-0">
             <article className="legal-article p-6 sm:p-10 md:p-12 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-8 text-zinc-700 dark:text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
               {children}
             </article>
-          </main>
+          </div>
         </div>
       </div>
     </div>

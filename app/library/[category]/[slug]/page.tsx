@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { libraryItems, libraryCategoriesMeta, type LibraryItem } from '@/data/library'
 import { TechniqueDetailClient } from '@/components/library/TechniqueDetailClient'
 import { toLibraryCardStub } from '@/lib/libraryCards'
-import { LIBRARY_DISCIPLINE, pageMetadata, snippet } from '@/lib/seo'
+import { LIBRARY_DISCIPLINE, pageMetadata, snippet, titleForms, withoutAsides } from '@/lib/seo'
 import { buildBreadcrumbJsonLd, buildTechniqueJsonLd, jsonLdString } from '@/lib/structuredData'
 
 export function generateStaticParams() {
@@ -31,6 +31,15 @@ const findItem = (category: string, slug: string) =>
 function techniqueSeo(item: LibraryItem) {
   const discipline = LIBRARY_DISCIPLINE[item.category] ?? 'Technique'
   const title = `${item.name}: Taekwondo ${discipline} Guide`
+  // Long names give up the brand first (the Korean term is worth more in search), then their bracketed
+  // asides, then "Guide", then everything after their first clause.
+  const plainName = withoutAsides(item.name)
+  const firstClause = plainName.split(/: | & |, /)[0]
+  const titleCandidates = [
+    ...titleForms(title),
+    `${plainName}: Taekwondo ${discipline}`,
+    `${firstClause}: Taekwondo ${discipline} Guide`,
+  ]
   // Brand first (snippets are trimmed); the short Hangul name, without its own bracketed gloss.
   const korean = item.koreanName.split(' (')[0]
   const description = snippet(`Infinity Taekwondo guide to ${item.name} · ${korean}: ${item.summary} Belt level: ${item.beltLevel}.`)
@@ -43,7 +52,7 @@ function techniqueSeo(item: LibraryItem) {
     `how to do ${item.name}`,
     item.beltLevel,
   ].filter((value): value is string => Boolean(value))
-  return { discipline, title, description, keywords }
+  return { discipline, title, titleCandidates, description, keywords }
 }
 
 export async function generateMetadata({ params }: TechniquePageProps): Promise<Metadata> {
@@ -54,6 +63,7 @@ export async function generateMetadata({ params }: TechniquePageProps): Promise<
   const seo = techniqueSeo(item)
   return pageMetadata({
     title: seo.title,
+    titleCandidates: seo.titleCandidates,
     description: seo.description,
     path: `/library/${item.category}/${item.slug}`,
     keywords: seo.keywords,

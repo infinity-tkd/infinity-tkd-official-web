@@ -1,5 +1,5 @@
 import { LegalLayout } from '@/components/LegalLayout'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import {
   ShieldCheck,
   Heart,
@@ -14,29 +14,13 @@ import {
   Lock,
 } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Safeguarding & Safe Sport Policy',
   description:
-    'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, coach conduct rules, and confidential reporting channels across all Phnom Penh dojangs.',
-  alternates: {
-    canonical: '/safeguarding',
-  },
-  openGraph: {
-    title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, coach conduct rules, and confidential reporting channels.',
-    url: '/safeguarding',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Safeguarding & Safe Sport Policy' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Safeguarding & Safe Sport Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Safeguarding Policy - Child protection protocols, background check standards, and safe sport guidelines.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo safeguarding policy: child protection, coach background checks and conduct rules, and confidential reporting at our Phnom Penh dojangs.',
+  path: '/safeguarding',
+  keywords: ['Taekwondo safeguarding', 'child protection in sport', 'safe sport policy'],
+})
 
 export default function SafeguardingPage() {
   const sidebar = (

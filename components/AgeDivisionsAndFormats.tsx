@@ -50,7 +50,7 @@ export function AgeDivisionsAndFormats() {
               label: (
                 <>
                   <span>{division.name}</span>
-                  <span className="font-semibold tracking-normal opacity-60">{division.ageRange.replace('Ages ', '')}</span>
+                  <span className="font-normal tracking-normal">{division.ageRange.replace('Ages ', '')}</span>
                 </>
               ),
             }))}

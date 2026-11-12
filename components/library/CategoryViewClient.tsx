@@ -502,7 +502,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                             <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-3">
                               <Link
                                 href={`/library/${item.category}/${item.slug}`}
-                                className="text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors inline-flex items-center gap-1 touch-press"
+                                className="text-xs font-bold uppercase tracking-wider text-zinc-500 hover:text-brand-red transition-colors inline-flex min-h-[32px] items-center gap-1 touch-press"
                               >
                                 {t.library.dedicatedPage} <ArrowRight className="w-3 h-3" />
                               </Link>

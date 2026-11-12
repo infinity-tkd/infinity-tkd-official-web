@@ -1,30 +1,14 @@
 import { LegalLayout } from '@/components/LegalLayout'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { Shield, Lock, Eye, FileCheck, AlertCircle, Mail, MapPin, Phone } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
-    'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights across our Phnom Penh branches.',
-  alternates: {
-    canonical: '/privacy',
-  },
-  openGraph: {
-    title: 'Privacy Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Privacy Policy - How we handle student records, emergency medical disclosures, Kukkiwon Dan registry, and media likeness rights.',
-    url: '/privacy',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Infinity Taekwondo Privacy Policy' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Privacy Policy | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Privacy Policy - Student records, Kukkiwon Dan registry, and privacy safeguards.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo privacy policy: how we handle student records, emergency medical details, Kukkiwon Dan registration and photo consent at our dojangs.',
+  path: '/privacy',
+  keywords: ['Infinity Taekwondo privacy policy', 'student data protection'],
+})
 
 export default function PrivacyPage() {
   const sidebar = (

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
-import { pageMetadata } from '@/lib/seo'
+import { fitTitle, pageMetadata, titleForms } from '@/lib/seo'
+
+const TITLE = 'Taekwondo Library: Poomsae, Kicks & Self-Defense'
 
 const base = pageMetadata({
-  title: 'Taekwondo Library: Poomsae, Kicks & Self-Defense',
+  title: TITLE,
   description:
     'Free Taekwondo knowledge base by Infinity Taekwondo: every Kukkiwon Poomsae step by step, kicks, stances, hand techniques, self-defense, history and rules.',
   path: '/library',
@@ -20,10 +22,10 @@ const base = pageMetadata({
 
 export const metadata: Metadata = {
   ...base,
-  // A plain string here would drop the root "%s | Infinity Taekwondo" template for every
-  // category and technique page, so the template is repeated for this segment.
+  // The library hub's own title, plus the root "%s | Infinity Taekwondo" template repeated for any
+  // child page that sets a plain title (category and technique pages set fitted absolute titles).
   title: {
-    default: base.title as string,
+    absolute: fitTitle(titleForms(TITLE)),
     template: '%s | Infinity Taekwondo',
   },
 }
