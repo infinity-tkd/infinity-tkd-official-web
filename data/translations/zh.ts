@@ -47,6 +47,8 @@ export const zh: Translations = {
       '传统世界跆拳道（World Taekwondo）武道纪律与现代运动科学及自由式特技空翻（Freestyle Tricking）动作艺术的结合。赋能学员从第一条白带蜕变至黑带大师，开启无限潜能。',
     ctaPrimary: '开始训练',
     ctaSecondary: '教练与学员',
+    pauseMotion: '暂停标志动画',
+    playMotion: '播放标志动画',
   },
   // Stats Banner
   stats: {

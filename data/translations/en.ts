@@ -45,6 +45,8 @@ export const en = {
       'Where traditional martial discipline meets modern athletic science and cinematic artistry. Empowering students to achieve limitless potential from their first white belt to black belt mastery.',
     ctaPrimary: 'Start Training',
     ctaSecondary: 'Coaches & Students',
+    pauseMotion: 'Pause logo animation',
+    playMotion: 'Play logo animation',
   },
   // Stats Banner
   stats: {
