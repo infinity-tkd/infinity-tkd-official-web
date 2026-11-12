@@ -10,12 +10,32 @@ interface ErrorNotice {
   details?: string
 }
 
+const RELOAD_LOCK = 'chunk_reload_lock'
+
+/** A script chunk from an older deployment failed to load (the page is out of date). */
+const isStaleChunkError = (text: string) =>
+  text.includes('ChunkLoadError') || text.includes('Loading chunk') || text.includes('Failed to fetch dynamically imported module')
+
 /**
- * AutoErrorHandler: Global, full-auto error and network resilience listener.
- * - Auto-detects offline and online network transitions
- * - Traps unhandled promise rejections and global script runtime errors
- * - Automatically detects ChunkLoadErrors from new deployments and reloads bundle seamlessly
- * - Displays non-disruptive, auto-dismissing floating telemetry pills
+ * Reloads once to pick up the new deployment. The lock lives in sessionStorage, which can throw (blocked
+ * storage, some private modes); without a working lock it never reloads, so it can never loop.
+ */
+function reloadOnceForNewDeployment(): boolean {
+  try {
+    if (sessionStorage.getItem(RELOAD_LOCK)) return false
+    sessionStorage.setItem(RELOAD_LOCK, 'true')
+  } catch {
+    return false
+  }
+  window.location.reload()
+  return true
+}
+
+/**
+ * AutoErrorHandler: global error and network listener.
+ * - Tells the visitor when the connection drops and when it is back
+ * - Logs unhandled errors and promise rejections (and shows them as notices in development)
+ * - Reloads once when a script chunk from an older deployment fails to load
  */
 export function AutoErrorHandler() {
   const [notices, setNotices] = React.useState<ErrorNotice[]>([])
@@ -55,8 +75,8 @@ export function AutoErrorHandler() {
       addNotice(
         {
           type: 'offline',
-          message: 'Connection Lost • Offline Cached Mode',
-          details: 'You can still browse cached curriculum techniques and poomsae forms.',
+          message: 'You are offline',
+          details: 'This page stays open, but new pages will not load until the connection is back.',
         },
         0 // Sticky until restored
       )
@@ -69,8 +89,8 @@ export function AutoErrorHandler() {
       addNotice(
         {
           type: 'online',
-          message: 'Connection Restored • Synchronized',
-          details: 'Live sports science telemetry and video streaming are online.',
+          message: 'Back online',
+          details: 'Everything is available again.',
         },
         3500
       )
@@ -80,19 +100,10 @@ export function AutoErrorHandler() {
     const handleGlobalError = (event: ErrorEvent) => {
       const errorMsg = event.message || ''
 
-      // Auto-recover from stale Next.js deployment chunks
-      if (
-        errorMsg.includes('ChunkLoadError') ||
-        errorMsg.includes('Loading chunk') ||
-        errorMsg.includes('Failed to fetch dynamically imported module')
-      ) {
-        console.warn('[AutoErrorHandler] ChunkLoadError detected. Performing seamless bundle refresh.')
-        const hasReloaded = sessionStorage.getItem('chunk_reload_lock')
-        if (!hasReloaded) {
-          sessionStorage.setItem('chunk_reload_lock', 'true')
-          window.location.reload()
-          return
-        }
+      // A chunk from an older deployment: reload once to pick up the new one.
+      if (isStaleChunkError(errorMsg)) {
+        console.warn('[AutoErrorHandler] Stale script chunk; reloading once.')
+        if (reloadOnceForNewDeployment()) return
       }
 
       console.error('[AutoErrorHandler Auto-Captured Error]:', event.error || event.message)
@@ -115,19 +126,10 @@ export function AutoErrorHandler() {
       const reason = event.reason
       const reasonStr = typeof reason === 'string' ? reason : reason?.message || ''
 
-      // Auto-recover from dynamic chunk load failures
-      if (
-        reasonStr.includes('ChunkLoadError') ||
-        reasonStr.includes('Loading chunk') ||
-        reasonStr.includes('Failed to fetch dynamically imported module')
-      ) {
-        console.warn('[AutoErrorHandler] Unhandled Chunk rejection detected. Refreshing cache.')
-        const hasReloaded = sessionStorage.getItem('chunk_reload_lock')
-        if (!hasReloaded) {
-          sessionStorage.setItem('chunk_reload_lock', 'true')
-          window.location.reload()
-          return
-        }
+      // A chunk from an older deployment: reload once to pick up the new one.
+      if (isStaleChunkError(reasonStr)) {
+        console.warn('[AutoErrorHandler] Stale script chunk; reloading once.')
+        if (reloadOnceForNewDeployment()) return
       }
 
       console.error('[AutoErrorHandler Auto-Captured Rejection]:', reason)
@@ -150,9 +152,13 @@ export function AutoErrorHandler() {
     window.addEventListener('error', handleGlobalError)
     window.addEventListener('unhandledrejection', handleUnhandledRejection)
 
-    // Clear reload lock on successful mount after 5 seconds
+    // The page loaded fine: allow one reload again for the next deployment.
     const lockTimer = setTimeout(() => {
-      sessionStorage.removeItem('chunk_reload_lock')
+      try {
+        sessionStorage.removeItem(RELOAD_LOCK)
+      } catch {
+        // Storage unavailable: nothing to clear.
+      }
     }, 5000)
 
     return () => {
@@ -168,7 +174,7 @@ export function AutoErrorHandler() {
 
   return (
     <div
-      aria-live="assertive"
+      aria-live="polite"
       className="fixed top-20 sm:top-24 right-4 left-4 sm:left-auto sm:max-w-md z-[100] flex flex-col gap-2 pointer-events-none transition-all duration-300"
     >
       {notices.map((notice) => (

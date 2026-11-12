@@ -432,7 +432,7 @@ export default function IncubatorPage() {
                 className="p-5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-3xl sm:text-4xl font-black text-brand-red/40 block mb-2">
+                  <span className="text-3xl sm:text-4xl font-black text-zinc-400 block mb-2">
                     {s.step}
                   </span>
                   <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-1.5">
@@ -619,10 +619,11 @@ export default function IncubatorPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label htmlFor="incubator-name" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     {t.incubator.studentName} *
                   </label>
                   <input
+                    id="incubator-name"
                     type="text"
                     required
                     autoComplete="name"
@@ -636,10 +637,11 @@ export default function IncubatorPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label htmlFor="incubator-belt" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     {t.incubator.beltRank} *
                   </label>
                   <input
+                    id="incubator-belt"
                     type="text"
                     required
                     aria-required="true"
@@ -654,10 +656,11 @@ export default function IncubatorPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label htmlFor="incubator-phone" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     WhatsApp / Phone *
                   </label>
                   <input
+                    id="incubator-phone"
                     type="tel"
                     required
                     inputMode="tel"
@@ -672,10 +675,11 @@ export default function IncubatorPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                  <label htmlFor="incubator-email" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                     Email Address *
                   </label>
                   <input
+                    id="incubator-email"
                     type="email"
                     required
                     inputMode="email"
@@ -691,10 +695,11 @@ export default function IncubatorPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                <label htmlFor="incubator-track" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                   {t.incubator.projectTrack} *
                 </label>
                 <select
+                  id="incubator-track"
                   value={formData.track}
                   onChange={(e) => setFormData({ ...formData, track: e.target.value })}
                   className="w-full bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red text-zinc-700 dark:text-zinc-300"
@@ -707,10 +712,11 @@ export default function IncubatorPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
+                <label htmlFor="incubator-summary" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 ml-1">
                   {t.incubator.conceptSummary} *
                 </label>
                 <textarea
+                  id="incubator-summary"
                   rows={4}
                   required
                   aria-required="true"

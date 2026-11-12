@@ -65,7 +65,7 @@ import {
   getLocalizedOrganizationComparisonTable,
 } from '@/data/library/history/historyOrganizationsTranslations'
 import { SafeImage } from '@/components/SafeImage'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 type HistoryPillarKey = 'timeline' | 'philosophy' | 'heritage' | 'organizations'
 
@@ -95,6 +95,10 @@ export function HistoryHeritageMaster() {
 
   // 3. Heritage & Kwans State
   const [selectedKwan, setSelectedKwan] = React.useState<LocalizedKwanItem | null>(null)
+  const milestoneDialogRef = React.useRef<HTMLDivElement>(null)
+  const kwanDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedMilestone), milestoneDialogRef)
+  useDialogFocus(Boolean(selectedKwan), kwanDialogRef)
 
   // 4. Organizations State
   const [selectedOrgId, setSelectedOrgId] = React.useState<string>('matrix')
@@ -166,6 +170,8 @@ export function HistoryHeritageMaster() {
           return (
             <button
               key={pillar.key}
+              type="button"
+              aria-pressed={isActive}
               onClick={() => setActivePillar(pillar.key as HistoryPillarKey)}
               className={`text-left p-4 sm:p-5 rounded-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between cursor-pointer ${
                 isActive
@@ -188,10 +194,11 @@ export function HistoryHeritageMaster() {
               </div>
 
               <div>
-                <h3 className="text-sm sm:text-base font-black uppercase tracking-tight">
+                {/* Plain text: a heading may not sit inside a button. The section heading is the h2 below. */}
+                <span className="block text-sm sm:text-base font-black uppercase tracking-tight">
                   {pillar.title}
-                </h3>
-                <span className="text-[13px] text-zinc-400 block">
+                </span>
+                <span className="text-[13px] text-zinc-500 block">
                   {pillar.korean}
                 </span>
               </div>
@@ -203,6 +210,9 @@ export function HistoryHeritageMaster() {
           )
         })}
       </div>
+
+      {/* The open pillar's title, so its h3 sections sit under an h2 (the cards above show it visually). */}
+      <h2 className="sr-only">{pillars.find((pillar) => pillar.key === activePillar)?.title}</h2>
 
       {/* ==================================================================== */}
       {/* PILLAR 1: HISTORY TIMELINE & CHRONOMETER */}
@@ -323,7 +333,9 @@ export function HistoryHeritageMaster() {
                       </span>
                     </div>
                     <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-                      <span className="text-[11px] font-bold block" style={{ color: item.tagColor }}>
+                      {/* The era colour marks a dot; the label stays white on the photo's dark overlay. */}
+                      <span className="flex items-center gap-1.5 text-[11px] font-bold">
+                        <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: item.tagColor }} />
                         {item.era}
                       </span>
                       <span className="text-xs block opacity-80 truncate">
@@ -1150,8 +1162,10 @@ export function HistoryHeritageMaster() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-10 bg-black/80 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelectedMilestone(null)}
+          ref={milestoneDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="milestone-modal-title"
         >
           <div
@@ -1234,8 +1248,10 @@ export function HistoryHeritageMaster() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 md:p-10 bg-black/80 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelectedKwan(null)}
+          ref={kwanDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="kwan-modal-title"
         >
           <div

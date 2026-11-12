@@ -287,7 +287,13 @@ export default function PricingPage() {
             title={t.pricing.compareTitle1}
             accent={t.pricing.compareTitle2}
           />
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
+          {/* Focusable so keyboard users can scroll the matrix sideways on phones. */}
+          <div
+            role="region"
+            aria-label={`${t.pricing.compareTitle1} ${t.pricing.compareTitle2}`}
+            tabIndex={0}
+            className="mt-10 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+          >
             <table className="w-full min-w-[640px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-zinc-200 dark:border-zinc-800">

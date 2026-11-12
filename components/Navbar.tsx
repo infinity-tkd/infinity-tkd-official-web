@@ -13,6 +13,7 @@ import { NAV_GROUPS, isGroupActive, prefetchFor, type NavGroup } from '@/config/
 // The small categories module, not the '@/data/library' barrel (which assembles the full technique list).
 import { libraryCategoriesMeta } from '@/data/library/categories'
 import { cn } from '@/lib/utils'
+import { useDialogFocus } from '@/lib/a11y'
 
 const categoryIcons: Record<string, React.ElementType> = { BookOpen, Zap, Flame, Shield, Layers, Sparkles }
 
@@ -59,6 +60,10 @@ export function Navbar() {
       document.body.style.overflow = ''
     }
   }, [isMobileMenuOpen])
+
+  // Opening the drawer moves focus to its first link; closing it returns focus to the menu button.
+  const drawerRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(isMobileMenuOpen, drawerRef, { trap: false })
 
   const closeMobile = () => setIsMobileMenuOpen(false)
 
@@ -290,7 +295,9 @@ export function Navbar() {
       {/* Mobile / tablet drawer */}
       {isMobileMenuOpen && (
         <div
+          ref={drawerRef}
           id="mobile-menu"
+          tabIndex={-1}
           className="fixed inset-x-0 top-16 z-50 h-[calc(100dvh-4rem)] animate-fade-in overflow-y-auto border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black pb-28 touch-scroll lg:hidden"
         >
           <nav aria-label="Mobile" className="container mx-auto space-y-6 px-4 py-6">

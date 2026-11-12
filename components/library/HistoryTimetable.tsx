@@ -112,8 +112,10 @@ export function HistoryTimetable() {
                 </div>
 
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-                  <span className="text-[11px] font-bold block opacity-90 truncate" style={{ color: item.tagColor }}>
-                    {item.era}
+                  {/* The era colour marks a dot; the label stays white on the photo's dark overlay. */}
+                  <span className="flex min-w-0 items-center gap-1.5 text-[11px] font-bold">
+                    <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: item.tagColor }} />
+                    <span className="truncate">{item.era}</span>
                   </span>
                   <span className="text-xs block opacity-80 truncate">
                     {item.koreanTitle.split('(')[0]}

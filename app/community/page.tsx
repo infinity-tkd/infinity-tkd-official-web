@@ -39,7 +39,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 export default function CommunityPage() {
   const { t, localizeList } = useLanguage()
@@ -67,6 +67,10 @@ export default function CommunityPage() {
   // Modals
   const [selectedCoach, setSelectedCoach] = React.useState<CoachProfile | null>(null)
   const [selectedStudent, setSelectedStudent] = React.useState<StudentSpotlight | null>(null)
+  const coachDialogRef = React.useRef<HTMLDivElement>(null)
+  const studentDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedCoach), coachDialogRef)
+  useDialogFocus(Boolean(selectedStudent), studentDialogRef)
 
   // Body scroll lock & Escape key listener on modal open
   React.useEffect(() => {
@@ -268,7 +272,7 @@ export default function CommunityPage() {
 
                         <div className="absolute bottom-4 left-4 right-4">
                           {coach.koreanName && (
-                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest block mb-0.5">
+                            <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-widest block mb-0.5">
                               {coach.koreanName}
                             </span>
                           )}
@@ -530,8 +534,10 @@ export default function CommunityPage() {
         <div
           className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setSelectedCoach(null)}
+          ref={coachDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="coach-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
@@ -653,8 +659,10 @@ export default function CommunityPage() {
         <div
           className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setSelectedStudent(null)}
+          ref={studentDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="student-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />

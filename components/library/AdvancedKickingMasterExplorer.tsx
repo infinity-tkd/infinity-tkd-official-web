@@ -204,9 +204,9 @@ export function AdvancedKickingMasterExplorer({ items }: AdvancedKickingMasterEx
                       <span className="w-5 h-5 rounded-full bg-zinc-600 text-white flex items-center justify-center text-[11px] font-bold">
                         0{idx + 1}
                       </span>
-                      <h4 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
+                      <h3 className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
                         {tenet.title}
-                      </h4>
+                      </h3>
                     </div>
                     <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {tenet.desc}

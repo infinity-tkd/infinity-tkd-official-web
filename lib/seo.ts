@@ -52,11 +52,33 @@ export function snippet(text: string, max = 158): string {
   return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.\s]+$/, '')}…`
 }
 
+/** Search results show about 60 characters of a title and cut it off past about 70. */
+export const TITLE_MAX = 70
+
+export const withBrand = (title: string) => `${title} | ${SITE_NAME}`
+
+/** "Roundhouse Kick (Dollyo Chagi)" -> "Roundhouse Kick". */
+export const withoutAsides = (text: string) =>
+  text
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+/** The usual fallbacks for a title: with the brand, without it, then without its bracketed asides. */
+export const titleForms = (title: string) => [withBrand(title), title, withBrand(withoutAsides(title)), withoutAsides(title)]
+
+/** The first candidate that fits in TITLE_MAX characters (else the shortest), so no title is cut mid-phrase. */
+export function fitTitle(candidates: string[]): string {
+  return candidates.find((c) => c.length <= TITLE_MAX) ?? candidates.reduce((best, c) => (c.length < best.length ? c : best))
+}
+
 type SeoImage = string | { url: string; width?: number; height?: number; alt?: string }
 
 export interface PageSeo {
-  /** Page title without the brand: the layout template adds "| Infinity Taekwondo". */
+  /** Page title without the brand; " | Infinity Taekwondo" is added when the whole title still fits. */
   title: string
+  /** Full titles to try in order (default: `titleForms(title)`); the first within TITLE_MAX wins. */
+  titleCandidates?: string[]
   /** 120-160 characters: what the page offers, with "Taekwondo" and the brand in natural words. */
   description: string
   /** Path from the site root, e.g. "/academy" (becomes the canonical URL). */
@@ -72,10 +94,10 @@ export interface PageSeo {
  * Complete metadata for a page: title, description, keywords, canonical URL, and Open Graph and
  * Twitter cards that always carry the brand name and an image.
  */
-export function pageMetadata({ title, description, path, keywords = [], image, type = 'website' }: PageSeo): Metadata {
-  const socialTitle = `${title} | ${SITE_NAME}`
+export function pageMetadata({ title, titleCandidates, description, path, keywords = [], image, type = 'website' }: PageSeo): Metadata {
+  const socialTitle = withBrand(title)
   return {
-    title,
+    title: { absolute: fitTitle(titleCandidates ?? titleForms(title)) },
     description,
     keywords: [...new Set([...keywords, ...CORE_KEYWORDS])],
     alternates: { canonical: path },

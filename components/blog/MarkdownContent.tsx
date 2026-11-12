@@ -43,8 +43,9 @@ const components: Components = {
     <p className="mb-6 text-base sm:text-lg leading-8 font-light text-zinc-700 dark:text-zinc-300">{children}</p>
   ),
   a: ({ href = '', children }) => {
+    // The accessible text red (5.7:1 on white, see --color-brand-text): body links are 16-18px, too small for #EF2F38.
     const className =
-      'font-medium text-brand-red underline decoration-brand-red/30 underline-offset-4 hover:decoration-brand-red transition-colors'
+      'font-medium text-[color:var(--color-brand-text)] underline decoration-brand-red/30 underline-offset-4 hover:decoration-brand-red transition-colors'
     if (!isSafeHref(href)) return <span>{children}</span>
     if (isInternal(href)) {
       return href.startsWith('#') ? (
@@ -112,7 +113,13 @@ const components: Components = {
     />
   ),
   table: ({ children }) => (
-    <div className="my-8 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
+    // Focusable so keyboard users can scroll it sideways on phones.
+    <div
+      role="region"
+      aria-label="Table"
+      tabIndex={0}
+      className="my-8 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+    >
       <table className="w-full min-w-[420px] border-collapse text-left text-sm sm:text-base">{children}</table>
     </div>
   ),

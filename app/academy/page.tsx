@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useDialogFocus } from '@/lib/a11y'
 import Link from 'next/link'
 import { academyCourses, type AcademyCourse } from '@/data/academy'
 import { BeltProgressionGuide } from '@/components/BeltProgressionGuide'
@@ -29,6 +30,8 @@ export default function AcademyPage() {
   const [selectedDivision, setSelectedDivision] = React.useState<string>('all')
   const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [activeCourse, setActiveCourse] = React.useState<AcademyCourse | null>(null)
+  const courseDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(activeCourse), courseDialogRef)
   const [currentView, setCurrentView] = React.useState<'courses' | 'ages' | 'belts' | 'schedule'>('courses')
 
   const localizedCourses = React.useMemo(() => {
@@ -203,7 +206,7 @@ export default function AcademyPage() {
             {/* Courses Responsive Grid (14px radius) */}
             {filteredCourses.length > 0 ? (
               <SafeGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" isolateItems>
-                {filteredCourses.map((course) => {
+                {filteredCourses.map((course, index) => {
                   return (
                     <div key={course.id} className="h-full">
                       <div
@@ -217,6 +220,9 @@ export default function AcademyPage() {
                             <SafeImage
                               src={course.image}
                               alt={course.title}
+                              // The first row is on screen at load: fetch it early (it is the page's largest image).
+                              priority={index < 3}
+                              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                               className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] motion-reduce:transition-none"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
@@ -332,8 +338,10 @@ export default function AcademyPage() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setActiveCourse(null)}
+          ref={courseDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="course-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />

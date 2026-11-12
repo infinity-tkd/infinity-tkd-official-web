@@ -1,30 +1,14 @@
 import { LegalLayout } from '@/components/LegalLayout'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { Shield, Award, AlertTriangle, CreditCard, Scale, CheckCircle2, MapPin } from 'lucide-react'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Terms of Service',
   description:
-    'Infinity Taekwondo Terms of Service - Academy membership rules, liability and training waivers, dojang code of conduct, and Kukkiwon grading policies.',
-  alternates: {
-    canonical: '/terms',
-  },
-  openGraph: {
-    title: 'Terms of Service | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Terms of Service - Academy membership rules, liability and training waivers, dojang code of conduct, and Kukkiwon grading policies.',
-    url: '/terms',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Infinity Taekwondo Terms of Service' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Terms of Service | Infinity Taekwondo',
-    description:
-      'Infinity Taekwondo Terms of Service - Academy membership rules, training waivers, and Kukkiwon standards.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo terms of service: academy membership rules, liability and training waivers, the dojang code of conduct, and Kukkiwon grading policies.',
+  path: '/terms',
+  keywords: ['Infinity Taekwondo terms', 'Taekwondo membership terms'],
+})
 
 export default function TermsPage() {
   const sidebar = (

@@ -74,6 +74,9 @@ export function SafeImage({
   const srcSet = unsplashSrcSet(imgSrc)
 
   return (
+    // A plain img on purpose: Unsplash resizes on its own CDN (the srcSet above), and the fallback swap
+    // needs the element's own error event.
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={imgSrc}
       srcSet={srcSet}

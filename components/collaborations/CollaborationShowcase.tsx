@@ -32,7 +32,7 @@ import {
   Info,
   Building,
 } from 'lucide-react'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 const categoryIcons: Record<string, React.ElementType> = {
   all: Layers,
@@ -47,6 +47,8 @@ export function CollaborationShowcase() {
   const [selectedCategory, setSelectedCategory] = React.useState<string>('all')
   const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [activeModalPartner, setActiveModalPartner] = React.useState<CollaborationItem | null>(null)
+  const partnerDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(activeModalPartner), partnerDialogRef)
   
   // Track broken images for auto-fallback
   const [brokenImages, setBrokenImages] = React.useState<Record<string, boolean>>({})
@@ -232,8 +234,7 @@ export function CollaborationShowcase() {
 
                       <div className="text-right min-w-0">
                         <span
-                          className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold uppercase tracking-wider text-zinc-700 inline-block truncate max-w-[140px] sm:max-w-[160px] dark:bg-zinc-800 dark:text-zinc-300"
-                          title={partner.tier}
+                          className="px-2.5 py-1 rounded-lg bg-zinc-100 text-[11px] font-bold uppercase leading-snug tracking-wider text-zinc-700 inline-block max-w-[10rem] sm:max-w-[12rem] text-balance dark:bg-zinc-800 dark:text-zinc-300"
                         >
                           {partner.tier}
                         </span>
@@ -291,8 +292,10 @@ export function CollaborationShowcase() {
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={() => setActiveModalPartner(null)}
+          ref={partnerDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="collab-modal-title"
         >
           <div className="absolute inset-0 bg-black/85 backdrop-blur-2xl" />

@@ -42,7 +42,7 @@
     --color-text-muted: #71717A;
     --color-brand-primary: #EF2F38;
     --color-brand-hover: #D0272F;
-    --color-brand-text: #F43F48; /* small red text: 5.6:1 on black, 4.7:1+ on zinc-900 cards */
+    --color-brand-text: #F75A62; /* small red text: 6.6:1 on black, 5.5:1 on zinc-900 cards, 5.1:1+ on brand-tint pills */
     --color-brand-muted: rgba(239, 47, 56, 0.15);
     --color-brand-glow: rgba(239, 47, 56, 0.5);
   }
@@ -709,6 +709,17 @@
 .break-word-safe {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+/* Touch screens (iPads included, which reach the lg breakpoint) zoom into any field under 16px when it is
+   tapped; fields keep 16px text there whatever the width. */
+@media (pointer: coarse) {
+  /* The :not() parts lift these above single-class utilities such as lg:text-sm. */
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  select:not([data-zoom-ok]),
+  textarea:not([data-zoom-ok]) {
+    font-size: max(16px, 1em);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

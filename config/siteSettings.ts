@@ -268,7 +268,7 @@ export const siteSettings: SiteSettings = {
       xContentTypeOptions: 'nosniff',
       referrerPolicy: 'strict-origin-when-cross-origin',
       permissionsPolicy:
-        'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=(), display-capture=()',
+        'camera=(), microphone=(), geolocation=(), payment=(), usb=(), display-capture=()',
       strictTransportSecurity: 'max-age=63072000; includeSubDomains; preload',
       xXssProtection: '1; mode=block',
       crossOriginOpenerPolicy: 'same-origin',

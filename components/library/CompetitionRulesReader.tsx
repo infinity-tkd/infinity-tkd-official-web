@@ -194,10 +194,12 @@ export function CompetitionRulesReader() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           {/* Category 1: WT Kyorugi */}
           <button
+            type="button"
+            aria-pressed={masterCategory === 'kyorugi'}
             onClick={() => setMasterCategory('kyorugi')}
             className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
               masterCategory === 'kyorugi'
-                ? 'bg-brand-red text-white border-brand-red'
+                ? 'bg-brand-600 text-white border-brand-600'
                 : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-brand-red/50'
             }`}
           >
@@ -206,7 +208,7 @@ export function CompetitionRulesReader() {
                 <Zap className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.kyorugi.sub}</span>
+                <span className="text-[11px] uppercase block">{ruleT.masterCategories.kyorugi.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.kyorugi.label}</strong>
               </div>
             </div>
@@ -215,6 +217,8 @@ export function CompetitionRulesReader() {
 
           {/* Category 2: WT Poomsae */}
           <button
+            type="button"
+            aria-pressed={masterCategory === 'poomsae'}
             onClick={() => setMasterCategory('poomsae')}
             className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
               masterCategory === 'poomsae'
@@ -227,7 +231,7 @@ export function CompetitionRulesReader() {
                 <Award className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.poomsae.sub}</span>
+                <span className="text-[11px] uppercase block">{ruleT.masterCategories.poomsae.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.poomsae.label}</strong>
               </div>
             </div>
@@ -236,6 +240,8 @@ export function CompetitionRulesReader() {
 
           {/* Category 3: Hanmadang (Breaking & Festival) */}
           <button
+            type="button"
+            aria-pressed={masterCategory === 'hanmadang'}
             onClick={() => setMasterCategory('hanmadang')}
             className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
               masterCategory === 'hanmadang'
@@ -248,7 +254,7 @@ export function CompetitionRulesReader() {
                 <Flame className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.hanmadang.sub}</span>
+                <span className="text-[11px] uppercase block">{ruleT.masterCategories.hanmadang.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.hanmadang.label}</strong>
               </div>
             </div>
@@ -651,7 +657,7 @@ export function CompetitionRulesReader() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
                   {officials.map((off, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <strong className={`${off.color} block font-bold text-xs`}>{off.title}</strong>
+                      <strong className="block font-bold text-xs text-zinc-900 dark:text-white">{off.title}</strong>
                       <span className="text-zinc-500 text-[13px] leading-relaxed block">
                         {off.description}
                       </span>
@@ -1105,7 +1111,7 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
                   {prohibitedCategories.map((cat, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <strong className={`${cat.color} block font-bold text-xs`}>{cat.title}</strong>
+                      <strong className="block font-bold text-xs text-zinc-900 dark:text-white">{cat.title}</strong>
                       <span className="text-zinc-500 text-[13px] leading-relaxed block">
                         {cat.description}
                       </span>
@@ -1705,8 +1711,8 @@ export function CompetitionRulesReader() {
                   {kyorugiScenarios.map((sc, idx) => (
                     <div key={idx} className={`p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 ${idx === 4 ? 'md:col-span-2' : ''}`}>
                       <div className="flex items-center justify-between">
-                        <strong className={`${sc.color} font-bold text-xs uppercase`}>{sc.title}</strong>
-                        <span className={`px-2 py-0.5 rounded ${sc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-zinc-500/10'} text-[11px] font-bold`}>
+                        <strong className="font-bold text-xs uppercase text-zinc-900 dark:text-white">{sc.title}</strong>
+                        <span className="px-2 py-0.5 rounded bg-zinc-500/10 text-zinc-700 dark:text-zinc-300 text-[11px] font-bold">
                           {sc.points}
                         </span>
                       </div>
@@ -2952,8 +2958,8 @@ export function CompetitionRulesReader() {
                   {poomsaeCases.map((pc, idx) => (
                     <div key={idx} className={`p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 ${idx === 4 ? 'md:col-span-2' : ''}`}>
                       <div className="flex items-center justify-between">
-                        <strong className={`${pc.color} font-bold text-xs uppercase`}>{pc.title}</strong>
-                        <span className={`px-2 py-0.5 rounded ${pc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-zinc-500/10'} text-[11px] font-bold`}>
+                        <strong className="font-bold text-xs uppercase text-zinc-900 dark:text-white">{pc.title}</strong>
+                        <span className="px-2 py-0.5 rounded bg-zinc-500/10 text-zinc-700 dark:text-zinc-300 text-[11px] font-bold">
                           {pc.penalty}
                         </span>
                       </div>

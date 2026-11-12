@@ -230,7 +230,8 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               {...pressable(() => handleSelectKick(kick.id))}
               className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between group ${
                 isSelected
-                  ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/20 scale-[1.02]'
+                  ? // The deeper brand red keeps small white text readable (5.2:1).
+                    'bg-brand-600 text-white border-brand-600 shadow-lg scale-[1.02]'
                   : 'bg-white dark:bg-zinc-900/80 border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40 hover:shadow-md text-zinc-900 dark:text-white'
               }`}
             >
@@ -238,7 +239,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 <div className="flex items-center justify-between gap-1 mb-2">
                   <span
                     className={`text-[11px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
-                      isSelected ? 'bg-white/20 text-white' : ''
+                      isSelected ? 'bg-black/15 text-white' : ''
                     }`}
                     style={isSelected ? undefined : badgeColors(kick.badgeColor)}
                   >
@@ -246,7 +247,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                   </span>
                   <span
                     className={`text-[11px] ${
-                      isSelected ? 'text-white/80' : 'text-zinc-400'
+                      isSelected ? 'text-white' : 'text-zinc-400'
                     }`}
                   >
                     {kick.kickTrajectory?.toUpperCase()}
@@ -255,7 +256,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
 
                 <span
                   className={`text-xs font-bold block mb-0.5 ${
-                    isSelected ? 'text-white/90' : 'text-brand-red'
+                    isSelected ? 'text-white' : 'text-brand-red'
                   }`}
                 >
                   {kick.koreanName}
@@ -269,7 +270,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
               <div
                 className={`pt-2 border-t text-[11px] flex items-center justify-between ${
                   isSelected
-                    ? 'border-white/20 text-white/80'
+                    ? 'border-white/25 text-white'
                     : 'border-zinc-100 dark:border-zinc-800 text-zinc-400'
                 }`}
               >

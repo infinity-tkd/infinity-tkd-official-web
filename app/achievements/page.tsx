@@ -35,7 +35,7 @@ import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
-import { pressable } from '@/lib/a11y'
+import { pressable, useDialogFocus } from '@/lib/a11y'
 
 export default function AchievementsPage() {
   const { t, localizeList } = useLanguage()
@@ -45,6 +45,10 @@ export default function AchievementsPage() {
   const [searchQuery, setSearchQuery] = React.useState<string>('')
   const [selectedTrophy, setSelectedTrophy] = React.useState<TrophyRecord | null>(null)
   const [selectedCompetitor, setSelectedCompetitor] = React.useState<StudentCompetitor | null>(null)
+  const trophyDialogRef = React.useRef<HTMLDivElement>(null)
+  const competitorDialogRef = React.useRef<HTMLDivElement>(null)
+  useDialogFocus(Boolean(selectedTrophy), trophyDialogRef)
+  useDialogFocus(Boolean(selectedCompetitor), competitorDialogRef)
 
   const localizedAchievements = React.useMemo(() => {
     return localizeList(tournamentAchievements)
@@ -593,8 +597,10 @@ export default function AchievementsPage() {
         <div
           className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={closeTrophyModal}
+          ref={trophyDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="trophy-modal-title"
         >
           {/* Backdrop Blur */}
@@ -814,8 +820,10 @@ export default function AchievementsPage() {
         <div
           className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
           onClick={closeCompetitorModal}
+          ref={competitorDialogRef}
           role="dialog"
           aria-modal="true"
+          tabIndex={-1}
           aria-labelledby="competitor-modal-title"
         >
           <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
@@ -903,7 +911,8 @@ export default function AchievementsPage() {
 
       {/* Audition Banner (14px radius) */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-24 max-w-5xl">
-        <div className="p-8 sm:p-12 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
+        {/* Dark in both themes, so it is a `dark` scope: its text uses the dark-surface colours. */}
+        <div className="dark p-8 sm:p-12 rounded-2xl bg-zinc-900 dark:bg-black border border-brand-red/30 text-white relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
 
           <div className="relative z-10 max-w-xl">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-2">
