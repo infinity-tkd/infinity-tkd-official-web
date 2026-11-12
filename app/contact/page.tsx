@@ -29,6 +29,7 @@ import {
   detectMaliciousPayload,
 } from '@/lib/security'
 import { Card3D } from '@/components/ui/Card3D'
+import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
 
 function TikTokIcon({ className }: { className?: string }) {
@@ -257,9 +258,9 @@ function ContactContent() {
           {/* LEFT COLUMN: Info & 2 Branches */}
           <div className="md:col-span-5 space-y-5 sm:space-y-6">
             {/* Quick Messaging Conversion Card */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-zinc-900/60 to-black border border-emerald-500/30 backdrop-blur-md shadow-lg space-y-3">
-              <div className="flex items-center gap-2 text-emerald-500 dark:text-emerald-400 text-xs font-black uppercase tracking-wider">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="p-5 rounded-2xl border border-zinc-200 bg-zinc-50 space-y-3 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <div className="flex items-center gap-2 text-zinc-900 dark:text-white text-xs font-black uppercase tracking-wider">
+                <MessageCircle className="h-4 w-4 text-brand-red" aria-hidden="true" />
                 Instant Inquiry &amp; Trial Booking
               </div>
               <p className="text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -270,19 +271,19 @@ function ContactContent() {
                   href="https://wa.me/85512220124?text=Hello%20Infinity%20Taekwondo%2C%20I%20would%20like%20to%20book%20a%20free%20trial%20class!"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md touch-press"
+                  className={buttonStyles({ variant: 'outline', className: 'w-full' })}
                   aria-label="Chat on WhatsApp"
                 >
-                  <MessageCircle className="w-4 h-4" /> WhatsApp
+                  <MessageCircle className="w-4 h-4" aria-hidden="true" /> WhatsApp
                 </a>
                 <a
                   href="https://t.me/infinitytaekwondo"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-[#229ED9] hover:bg-[#1E88E5] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md touch-press"
+                  className={buttonStyles({ variant: 'outline', className: 'w-full' })}
                   aria-label="Chat on Telegram"
                 >
-                  <Send className="w-4 h-4" /> Telegram
+                  <Send className="w-4 h-4" aria-hidden="true" /> Telegram
                 </a>
               </div>
             </div>
@@ -296,16 +297,16 @@ function ContactContent() {
                   </span>
                   <Link
                     href="/locations"
-                    className="text-xs font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
+                    className="text-xs font-bold text-brand-red hover:underline flex min-h-[44px] items-center gap-1 touch-press"
                   >
                     {t.common.viewDetails} <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
 
                 <div>
-                  <h4 className="text-base font-black text-zinc-900 dark:text-white uppercase">
+                  <h2 className="text-base font-black text-zinc-900 dark:text-white uppercase">
                     Olympic Branch (HQ)
-                  </h4>
+                  </h2>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
                     National Olympic Stadium Complex, Charles de Gaulle Blvd, Phnom Penh
                   </p>
@@ -335,16 +336,16 @@ function ContactContent() {
                   </span>
                   <Link
                     href="/locations"
-                    className="text-xs font-bold text-brand-red hover:underline flex items-center gap-1 touch-press"
+                    className="text-xs font-bold text-brand-red hover:underline flex min-h-[44px] items-center gap-1 touch-press"
                   >
                     {t.common.viewDetails} <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
 
                 <div>
-                  <h4 className="text-base font-black text-zinc-900 dark:text-white uppercase">
+                  <h2 className="text-base font-black text-zinc-900 dark:text-white uppercase">
                     Kouk Khleang Branch
-                  </h4>
+                  </h2>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
                     Kouk Khleang, Sen Sok, Phnom Penh
                   </p>
@@ -368,9 +369,9 @@ function ContactContent() {
             {/* Socials Card (14px radius) */}
             <Card3D max={3} depth={2} className="w-full">
               <div className="bg-white dark:bg-zinc-900/50 rounded-2xl p-6 sm:p-8 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-sm">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-4">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-4">
                   Official Channels
-                </h3>
+                </h2>
                 <div className="flex flex-wrap gap-2.5 sm:gap-3">
                   {socials.map((social) => {
                     const Icon = social.icon
@@ -433,7 +434,7 @@ function ContactContent() {
                     name="hp_security_token"
                     value={formData.hp_security_token}
                     onChange={(e) => setFormData({ ...formData, hp_security_token: e.target.value })}
-                    className="hidden"
+                    className="hidden text-base lg:text-sm"
                     tabIndex={-1}
                     autoComplete="off"
                     aria-hidden="true"
@@ -464,7 +465,7 @@ function ContactContent() {
                         placeholder="Your Name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-zinc-900 dark:text-white"
+                        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-zinc-900 dark:text-white"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -482,7 +483,7 @@ function ContactContent() {
                         placeholder="name@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-zinc-900 dark:text-white"
+                        className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-zinc-900 dark:text-white"
                       />
                     </div>
                   </div>
@@ -497,7 +498,7 @@ function ContactContent() {
                           id="contact-branch"
                           value={formData.branch}
                           onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                          className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all text-zinc-700 dark:text-zinc-300 appearance-none"
+                          className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all text-zinc-700 dark:text-zinc-300 appearance-none"
                         >
                           <option>Olympic Branch (HQ)</option>
                           <option>Kouk Khleang Branch</option>
@@ -516,7 +517,7 @@ function ContactContent() {
                           id="contact-subject"
                           value={formData.subject}
                           onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all text-zinc-700 dark:text-zinc-300 appearance-none"
+                          className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all text-zinc-700 dark:text-zinc-300 appearance-none"
                         >
                           <option>General Inquiry</option>
                           <option>Free Trial Class Booking</option>
@@ -544,7 +545,7 @@ function ContactContent() {
                       placeholder="Tell us about your martial arts background, training goals, or questions..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base sm:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 resize-none text-zinc-900 dark:text-white"
+                      className="w-full bg-zinc-50 dark:bg-black border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3.5 text-base lg:text-sm focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/50 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 resize-none text-zinc-900 dark:text-white"
                     />
                   </div>
 
@@ -552,7 +553,7 @@ function ContactContent() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all duration-300 shadow-brand-glow hover:shadow-brand-glow-lg flex items-center justify-center gap-2 touch-press cursor-pointer"
+                      className="w-full py-4 rounded-xl bg-brand-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-all duration-300 hover:shadow-brand-glow-lg flex items-center justify-center gap-2 touch-press cursor-pointer"
                     >
                       {isSubmitting ? (
                         <>

@@ -199,7 +199,10 @@
     font-family: var(--font-fallback-chinese), sans-serif !important;
     letter-spacing: 0.025em;
     line-height: 1.7;
-    word-break: break-all;
+    /* Chinese characters wrap between any two of them on their own; `break-all` also split the
+       Latin words mixed in ("BRANC / H"). Only a string too long for its line breaks mid-word. */
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   /* Korean Authentic, Clean, Dynamic Hangul Typography (Pretendard First) */
@@ -408,6 +411,144 @@
     opacity: 1;
   }
   .infinity-motion .im-glint {
+    display: none;
+  }
+}
+
+/*
+ * Hero mark (components/home/HeroLogoMotion.tsx). Intro: each belt end wraps into its loop along the belt's
+ * centre line, the finished shape replaces the drawing, and the knot ties the loops together. Loop: a light runs
+ * through the belt (left loop, under the band, through the knot, under the other band, right loop) on an endless
+ * cycle, and the knot flexes as it passes. The component sets the per-path lengths and offsets as variables.
+ * Paused by the visitor (data-motion="paused") or off-screen: the loop holds where it is.
+ */
+@layer components {
+  .hero-mark {
+    --t0: 1.6s;
+    color: #ef2f38;
+    overflow: visible;
+  }
+  .hero-mark .hm-draw {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 28;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: var(--len) calc(var(--len) + 40);
+    stroke-dashoffset: var(--draw-from);
+    animation: hm-draw 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+  }
+  .hero-mark .hm-fill {
+    fill: currentColor;
+    opacity: 0;
+    animation: hm-show 0.01s linear 1.4s forwards;
+  }
+  .hero-mark .hm-tie {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hm-tie 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.15s forwards;
+  }
+  .hero-mark .hm-knot {
+    fill: currentColor;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hm-pulse var(--cycle) linear calc(var(--t0) + var(--pulse-shift)) infinite;
+  }
+  .hero-mark .hm-light {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 26;
+    stroke-linecap: butt;
+    stroke-linejoin: round;
+    stroke-dasharray: var(--dash) var(--gap);
+    stroke-dashoffset: var(--from);
+    opacity: var(--a);
+    animation: hm-flow var(--cycle) var(--flow-ease) var(--t0) infinite;
+  }
+  .hero-mark:is([data-motion='paused'], [data-offscreen]) :is(.hm-light, .hm-knot) {
+    animation-play-state: paused;
+  }
+  /* Hero motion button: Pause while the logo runs, Play while it rests (the reduced-motion case is below). */
+  .hero-motion-toggle[data-motion='playing'] .hm-when-paused,
+  .hero-motion-toggle[data-motion='paused'] .hm-when-running {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-motion-toggle[data-motion='auto'] .hm-when-paused {
+    display: none;
+  }
+}
+
+@keyframes hm-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hm-show {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hm-tie {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-14deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* A quick pop as the light bursts through the knot, then an unhurried release. */
+@keyframes hm-pulse {
+  0%,
+  47% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  50% {
+    transform: scale(1.13);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  63%,
+  100% {
+    transform: none;
+  }
+}
+@keyframes hm-flow {
+  from {
+    stroke-dashoffset: var(--from);
+  }
+  to {
+    stroke-dashoffset: var(--to);
+  }
+}
+
+/* Reduced motion: the finished mark, still; the light only runs if the visitor presses play. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-mark {
+    --t0: 0s;
+  }
+  .hero-mark .hm-draw {
+    display: none;
+  }
+  .hero-mark .hm-fill,
+  .hero-mark .hm-tie {
+    animation: none;
+    opacity: 1;
+  }
+  .hero-mark:not([data-motion='playing']) :is(.hm-light, .hm-knot) {
+    animation: none;
+  }
+  /* The visitor pressed play: let the loop run despite the site-wide reduced-motion reset. */
+  .hero-mark[data-motion='playing'] :is(.hm-light, .hm-knot) {
+    animation-duration: var(--cycle) !important;
+    animation-iteration-count: infinite !important;
+  }
+  .hero-motion-toggle[data-motion='auto'] .hm-when-running {
     display: none;
   }
 }

@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import { Quote, Star, Award, Sparkles } from 'lucide-react'
+import { Quote, Star } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
 import { SafeImage } from '@/components/SafeImage'
 import { SafeGrid } from '@/components/SafeGrid'
-import { Card3D } from '@/components/ui/Card3D'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 interface Testimonial {
   name: string
@@ -16,6 +16,7 @@ interface Testimonial {
   rating: number
 }
 
+// Sample testimonials: replace with real, consented quotes and photos before launch.
 const testimonials: Testimonial[] = [
   {
     name: 'Sokha Rith',
@@ -50,61 +51,48 @@ export function TestimonialsSection() {
   const { t } = useLanguage()
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-zinc-50 dark:bg-zinc-950 border-y border-zinc-200 dark:border-zinc-900 transition-colors duration-500 overflow-hidden relative font-sans">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-brand-red/5 blur-[140px] rounded-full pointer-events-none" />
+    <section className="border-t border-zinc-200 bg-zinc-50 py-16 sm:py-20 lg:py-24 dark:border-zinc-900 dark:bg-zinc-950">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          eyebrow={t.testimonials.badge}
+          title={t.testimonials.title1}
+          accent={t.testimonials.title2}
+          description={t.testimonials.subtitle}
+          className="mb-12 sm:mb-16"
+        />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5" /> {t.testimonials.badge}
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-            {t.testimonials.title1} <span className="text-brand-red">{t.testimonials.title2}</span>
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base mt-2 font-light">
-            {t.testimonials.subtitle}
-          </p>
-        </div>
-
-        <SafeGrid isolateItems className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <SafeGrid isolateItems className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6">
           {testimonials.map((item) => (
-            <Card3D key={item.name} maxTilt={6} scale={1.015} className="h-full">
-              <div className="h-full p-5 sm:p-6 lg:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-brand-glow hover:border-brand-red/40 transition-all duration-300 flex flex-col justify-between">
-                <div>
-                  {/* Rating stars & Quote Icon */}
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex gap-1 text-brand-red">
-                      {[...Array(item.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-brand-red" />
-                      ))}
-                    </div>
-                    <Quote className="w-8 h-8 text-zinc-200 dark:text-zinc-800" />
+            <figure
+              key={item.name}
+              className="flex h-full flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-6 lg:p-8 dark:border-zinc-800 dark:bg-zinc-900/40"
+            >
+              <div>
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex gap-0.5 text-zinc-900 dark:text-white" role="img" aria-label={`${item.rating} out of 5`}>
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                    ))}
                   </div>
-
-                  <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-6">
-                    &ldquo;{item.quote}&rdquo;
-                  </p>
+                  <Quote className="h-6 w-6 text-zinc-200 dark:text-zinc-800" aria-hidden="true" />
                 </div>
 
-                {/* Author Info */}
-                <div className="flex items-center gap-3.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                  <SafeImage
-                    src={item.avatar}
-                    alt={item.name}
-                    sizes="44px"
-                    className="w-11 h-11 rounded-xl object-cover border border-brand-red/30 shadow-sm"
-                  />
-                  <div>
-                    <h4 className="text-sm font-black uppercase tracking-tight text-zinc-900 dark:text-white leading-none">
-                      {item.name}
-                    </h4>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                      {item.role}
-                    </p>
-                  </div>
-                </div>
+                <blockquote className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">&ldquo;{item.quote}&rdquo;</blockquote>
               </div>
-            </Card3D>
+
+              <figcaption className="mt-6 flex items-center gap-3.5 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+                <SafeImage
+                  src={item.avatar}
+                  alt=""
+                  sizes="44px"
+                  className="h-11 w-11 rounded-xl border border-zinc-200 object-cover dark:border-zinc-800"
+                />
+                <div>
+                  <p className="text-sm font-black uppercase leading-none tracking-tight text-zinc-900 dark:text-white">{item.name}</p>
+                  <p className="mt-1 text-xs text-zinc-500">{item.role}</p>
+                </div>
+              </figcaption>
+            </figure>
           ))}
         </SafeGrid>
       </div>

@@ -22,24 +22,24 @@ const ACCENTS: Record<Accent, { hangul: string; link: string; hover: string }> =
     hover: 'hover:border-brand-red/50',
   },
   amber: {
-    hangul: 'text-amber-300',
-    link: 'text-amber-600 dark:text-amber-400',
-    hover: 'hover:border-amber-500/50',
+    hangul: 'text-zinc-300',
+    link: 'text-zinc-600 dark:text-zinc-400',
+    hover: 'hover:border-zinc-500/50',
   },
   emerald: {
-    hangul: 'text-emerald-300',
-    link: 'text-emerald-600 dark:text-emerald-400',
-    hover: 'hover:border-emerald-500/50',
+    hangul: 'text-zinc-300',
+    link: 'text-zinc-600 dark:text-zinc-400',
+    hover: 'hover:border-zinc-500/50',
   },
   blue: {
-    hangul: 'text-blue-300',
-    link: 'text-blue-600 dark:text-blue-400',
-    hover: 'hover:border-blue-500/50',
+    hangul: 'text-zinc-300',
+    link: 'text-zinc-600 dark:text-zinc-400',
+    hover: 'hover:border-zinc-500/50',
   },
   purple: {
-    hangul: 'text-purple-300',
-    link: 'text-purple-600 dark:text-purple-400',
-    hover: 'hover:border-purple-500/50',
+    hangul: 'text-zinc-300',
+    link: 'text-zinc-600 dark:text-zinc-400',
+    hover: 'hover:border-zinc-500/50',
   },
 }
 
@@ -155,13 +155,13 @@ export function StanceCard(props: DisciplineCardProps) {
       <div className="space-y-1.5">
         <div className="flex items-baseline justify-between">
           <span className="type-meta">Weight front / rear</span>
-          <span className="text-xs font-semibold tabular-nums text-amber-600 dark:text-amber-400">
+          <span className="text-xs font-semibold tabular-nums text-zinc-600 dark:text-zinc-400">
             {frontPercent}% / {rearPercent}%
           </span>
         </div>
         <div className="flex h-1 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800" aria-hidden="true">
-          <div className="h-full bg-amber-400" style={{ width: `${frontPercent}%` }} />
-          <div className="h-full bg-amber-600" style={{ width: `${rearPercent}%` }} />
+          <div className="h-full bg-zinc-400" style={{ width: `${frontPercent}%` }} />
+          <div className="h-full bg-zinc-600" style={{ width: `${rearPercent}%` }} />
         </div>
       </div>
     </DisciplineCard>

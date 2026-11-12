@@ -1,28 +1,12 @@
-import type { Metadata } from 'next'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Coaches, Faculty & Athlete Community',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Masters, Coaches & Students',
   description:
-    'Meet the Kukkiwon-certified Master instructors, international medalists, and inspiring student community powering Infinity Taekwondo in Cambodia.',
-  alternates: {
-    canonical: '/community',
-  },
-  openGraph: {
-    title: 'Coaches, Faculty & Athlete Community | Infinity Taekwondo',
-    description:
-      'Meet the Kukkiwon-certified Master instructors and student leaders shaping martial arts excellence in Cambodia.',
-    url: 'https://infinitytaekwondo.com/community',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Coaches, Faculty & Athlete Community | Infinity Taekwondo',
-    description:
-      'Meet the Kukkiwon-certified Master instructors and student leaders shaping martial arts excellence in Cambodia.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'Meet the Infinity Taekwondo masters and coaches, Kukkiwon Dan holders, and the students who train Taekwondo with us in Phnom Penh, Cambodia.',
+  path: '/community',
+  keywords: ['Taekwondo coaches Phnom Penh', 'Taekwondo masters Cambodia', 'Taekwondo students'],
+})
 
 export default function CommunityLayout({ children }: { children: React.ReactNode }) {
   return children

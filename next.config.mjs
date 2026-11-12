@@ -104,6 +104,10 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    // Browsers, link previews and crawlers still ask for /favicon.ico by default; answer with the generated PNG icon.
+    return [{ source: '/favicon.ico', destination: '/icon' }]
+  },
 }
 
 export default nextConfig

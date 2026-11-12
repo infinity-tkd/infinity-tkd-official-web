@@ -87,28 +87,28 @@ export default function TermsPage() {
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               🥋 Dojang Code of Conduct
             </span>
-            <span className="text-zinc-500 font-light">Respect masters, peers, and embody the 5 Tenets of Taekwondo at all times.</span>
+            <span className="text-zinc-500">Respect masters, peers, and embody the 5 Tenets of Taekwondo at all times.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               ⚠️ Inherent Risk &amp; Safety Gear
             </span>
-            <span className="text-zinc-500 font-light">Protective equipment is mandatory for contact drills, Hosinsul practice and board breaking.</span>
+            <span className="text-zinc-500">Protective equipment is mandatory for contact drills, Hosinsul practice and board breaking.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               🏆 Merit-Based Belt Advancement
             </span>
-            <span className="text-zinc-500 font-light">Promotions are earned through demonstrated proficiency and moral character.</span>
+            <span className="text-zinc-500">Promotions are earned through demonstrated proficiency and moral character.</span>
           </div>
 
           <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
             <span className="font-bold text-zinc-900 dark:text-white block mb-0.5">
               ⏸️ 60-Day Pause &amp; 30-Day Notice
             </span>
-            <span className="text-zinc-500 font-light">Members may freeze memberships up to 60 days/year with advance notice.</span>
+            <span className="text-zinc-500">Members may freeze memberships up to 60 days/year with advance notice.</span>
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@ export default function TermsPage() {
         <div className="flex items-center gap-2 font-black uppercase text-brand-red tracking-wider">
           <AlertTriangle className="w-4 h-4" /> Assumption of Inherent Martial Arts Risk
         </div>
-        <p className="font-light leading-relaxed">
+        <p className="leading-relaxed">
           Martial arts training, partner self-defense (Hosinsul) drills, high-altitude acrobatic tricking, board breaking (Kyukpa), and physical conditioning involve inherent risks of injury (including sprains, fractures, concussions, and muscular strain).
         </p>
       </div>

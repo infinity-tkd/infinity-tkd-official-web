@@ -477,7 +477,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={pt.searchPlaceholder}
                 aria-label={pt.searchPlaceholder}
-                className="min-h-[44px] w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-16 text-base text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none sm:text-sm dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-white dark:focus:border-zinc-600"
+                className="min-h-[44px] w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-16 text-base text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none lg:text-sm dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-white dark:focus:border-zinc-600"
               />
               {searchQuery && (
                 <button
@@ -840,7 +840,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
           {filteredItems.length === 0 && (
             <div className="rounded-2xl border border-dashed border-zinc-300 p-12 text-center dark:border-zinc-700">
               <BookOpen className="mx-auto h-8 w-8 text-zinc-400" aria-hidden="true" />
-              <h4 className="mt-3 text-base font-bold text-zinc-900 dark:text-white">{pt.noPoomsaeFoundTitle}</h4>
+              <h3 className="mt-3 text-base font-bold text-zinc-900 dark:text-white">{pt.noPoomsaeFoundTitle}</h3>
               <p className="mt-1 text-sm text-zinc-500">{pt.noPoomsaeFoundDesc}</p>
               <button
                 type="button"
@@ -2426,11 +2426,11 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
               {/* Taegeuk Jooyeok Trigram & Philosophical Directive Dossier (If Taegeuk) */}
               {selectedPoomsae.taegeukPhilosophy && (
-                <div className="dark p-6 sm:p-8 rounded-2xl bg-zinc-900 text-white border border-zinc-700/80 shadow-2xl space-y-5">
+                <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-300 dark:border-zinc-700/80 space-y-5">
                   {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-3xl font-serif text-brand-red font-bold select-none">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-3xl font-serif text-brand-red font-bold select-none">
                         {selectedPoomsae.taegeukPhilosophy.trigramSymbol}
                       </div>
                       <div>
@@ -2439,16 +2439,16 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                             {pt.jooyeokTrigramLineage}
                           </span>
                           <span className="text-zinc-500">&bull;</span>
-                          <span className="text-[11px] text-zinc-300 font-semibold">
+                          <span className="text-[11px] text-zinc-700 dark:text-zinc-300 font-semibold">
                             {pt.rankPrefix} {selectedPoomsae.taegeukPhilosophy.practitionerRank}
                           </span>
                           {selectedPoomsae.taegeukPhilosophy.flagPresence && (
-                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/20 text-zinc-300 border border-zinc-500/40">
+                            <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/20 text-zinc-700 dark:text-zinc-300 border border-zinc-500/40">
                               {pt.taegukkiTrigramBadge}
                             </span>
                           )}
                         </div>
-                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-white mt-0.5">
+                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-zinc-900 dark:text-white mt-0.5">
                           {selectedPoomsae.taegeukPhilosophy.trigramName} &bull; {selectedPoomsae.taegeukPhilosophy.koreanTrigramName} &bull; {selectedPoomsae.taegeukPhilosophy.naturalElement}
                         </h4>
                       </div>
@@ -2463,20 +2463,20 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Core Concept & Philosophical Directive */}
                   <div className="grid sm:grid-cols-2 gap-4 text-xs">
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-                      <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold block">
+                    <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1.5">
+                      <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold block">
                         {pt.coreUniversalConceptTitle}
                       </span>
-                      <p className="text-zinc-300 font-sans leading-relaxed text-[13px]">
+                      <p className="text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed text-[13px]">
                         {selectedPoomsae.taegeukPhilosophy.coreConcept}
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-                      <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold block">
+                    <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1.5">
+                      <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold block">
                         {pt.cosmicDialecticTitle}
                       </span>
-                      <p className="text-zinc-300 font-sans leading-relaxed text-[13px]">
+                      <p className="text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed text-[13px]">
                         {selectedPoomsae.taegeukPhilosophy.dialecticRole || 'Maintains universal equilibrium across the 8 trigrams.'}
                       </p>
                     </div>
@@ -2487,7 +2487,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                     <div className="flex items-center gap-2 text-brand-red font-bold text-xs uppercase tracking-wider">
                       <Sparkles className="w-3.5 h-3.5" /> {pt.philosophicalDirectiveTitle}
                     </div>
-                    <p className="text-zinc-200 font-sans leading-relaxed text-[13px] sm:text-sm">
+                    <p className="text-zinc-800 dark:text-zinc-200 font-sans leading-relaxed text-[13px] sm:text-sm">
                       {selectedPoomsae.taegeukPhilosophy.philosophicalDirective}
                     </p>
                   </div>
@@ -2495,14 +2495,14 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   {/* Introduced Key Techniques */}
                   {selectedPoomsae.taegeukPhilosophy.introducedKeyTechniques?.length > 0 && (
                     <div className="space-y-2 pt-1">
-                      <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold block">
+                      <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold block">
                         {pt.introducedKeyTechTitle}
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {selectedPoomsae.taegeukPhilosophy.introducedKeyTechniques.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-200 font-sans flex items-center gap-1.5"
+                            className="px-2.5 py-1 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 font-sans flex items-center gap-1.5"
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-brand-red shrink-0" />
                             {tech}
@@ -2514,13 +2514,13 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Wang (王) Floor Line & Stepping Law Matrix */}
                   {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines && (
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-4">
+                    <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
+                        <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
                           <Footprints className="w-4 h-4 text-brand-red" />
                           <span>{pt.wangFloorDynamicsTitle}</span>
                         </div>
-                        <span className="text-[11px] text-zinc-400">
+                        <span className="text-[11px] text-zinc-600 dark:text-zinc-400">
                           Southwick Stepping Rule
                         </span>
                       </div>
@@ -2540,7 +2540,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                         <div className="lg:col-span-7 space-y-2.5 text-xs">
                           {/* Line 1 Top */}
-                          <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="p-3 rounded-lg bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                             <div className="flex items-center justify-between">
                               <span className="text-[11px] font-bold text-brand-red">Line 1 (Top / Heaven)</span>
                               <span
@@ -2553,18 +2553,18 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                                 {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.isYang ? pt.solidYangBadge : pt.brokenUmBadge}
                               </span>
                             </div>
-                            <span className="text-[11px] text-zinc-400 block">
+                            <span className="text-[11px] text-zinc-600 dark:text-zinc-400 block">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.stepsRange}
                             </span>
-                            <p className="text-[13px] text-zinc-300 font-sans leading-relaxed">
+                            <p className="text-[13px] text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line1Top.explanation}
                             </p>
                           </div>
 
                           {/* Line 2 Middle */}
-                          <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="p-3 rounded-lg bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                             <div className="flex items-center justify-between">
-                              <span className="text-[11px] font-bold text-zinc-400">Line 2 (Middle / Man)</span>
+                              <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">Line 2 (Middle / Man)</span>
                               <span
                                 className={`text-[11px] px-1.5 py-0.5 rounded font-bold ${
                                   selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang
@@ -2575,18 +2575,18 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                                 {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.isYang ? pt.solidYangBadge : pt.brokenUmBadge}
                               </span>
                             </div>
-                            <span className="text-[11px] text-zinc-400 block">
+                            <span className="text-[11px] text-zinc-600 dark:text-zinc-400 block">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.stepsRange}
                             </span>
-                            <p className="text-[13px] text-zinc-300 font-sans leading-relaxed">
+                            <p className="text-[13px] text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line2Middle.explanation}
                             </p>
                           </div>
 
                           {/* Line 3 Bottom */}
-                          <div className="p-3 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-1.5">
+                          <div className="p-3 rounded-lg bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                             <div className="flex items-center justify-between">
-                              <span className="text-[11px] font-bold text-zinc-400">Line 3 (Bottom / Earth)</span>
+                              <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">Line 3 (Bottom / Earth)</span>
                               <span
                                 className={`text-[11px] px-1.5 py-0.5 rounded font-bold ${
                                   selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang
@@ -2597,10 +2597,10 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                                 {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.isYang ? pt.solidYangBadge : pt.brokenUmBadge}
                               </span>
                             </div>
-                            <span className="text-[11px] text-zinc-400 block">
+                            <span className="text-[11px] text-zinc-600 dark:text-zinc-400 block">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.stepsRange}
                             </span>
-                            <p className="text-[13px] text-zinc-300 font-sans leading-relaxed">
+                            <p className="text-[13px] text-zinc-700 dark:text-zinc-300 font-sans leading-relaxed">
                               {selectedPoomsae.taegeukPhilosophy.wangFloorPlanLines.line3Bottom.explanation}
                             </p>
                           </div>
@@ -2611,14 +2611,14 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Clock Trajectory & Kihap Indicator */}
                   {(selectedPoomsae.taegeukPhilosophy.clockTrajectory || selectedPoomsae.taegeukPhilosophy.kihapSteps) && (
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                    <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-3">
                       <div className="flex items-center justify-between flex-wrap gap-2">
-                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
-                          <Compass className="w-4 h-4 text-zinc-400" />
+                        <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <Compass className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
                           <span>{pt.fourPointClockTitle}</span>
                         </div>
                         {selectedPoomsae.taegeukPhilosophy.kihapSteps && (
-                          <div className="flex items-center gap-1.5 text-xs text-zinc-400 bg-zinc-400/10 px-2.5 py-0.5 rounded-full border border-zinc-400/20">
+                          <div className="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400 bg-zinc-400/10 px-2.5 py-0.5 rounded-full border border-zinc-400/20">
                             <Volume2 className="w-3.5 h-3.5" />
                             <span>{pt.kihapStepPrefix} {selectedPoomsae.taegeukPhilosophy.kihapSteps.join(' & ')}</span>
                           </div>
@@ -2637,13 +2637,13 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* WT Competition Scoring Guidelines */}
                   {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring && (
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                    <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-3">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-bold text-white uppercase tracking-wider">
-                          <Shield className="w-4 h-4 text-zinc-400" />
+                        <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <Shield className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
                           <span>{pt.wtCompetitionScoringTitle}</span>
                         </div>
-                        <span className="text-[11px] text-zinc-400">
+                        <span className="text-[11px] text-zinc-600 dark:text-zinc-400">
                           {pt.targetDurationPrefix} {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.targetDuration}
                         </span>
                       </div>
@@ -2651,13 +2651,13 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                       <div className="grid sm:grid-cols-2 gap-3 text-xs">
                         {/* Major Deductions */}
                         <div className="p-3 rounded-lg bg-red-950/30 border border-red-500/30 space-y-1.5">
-                          <span className="text-[11px] font-bold text-red-400 uppercase block">
+                          <span className="text-[11px] font-bold text-red-600 dark:text-red-400 uppercase block">
                             {pt.majorDeductionsTitle}
                           </span>
-                          <ul className="space-y-1 text-zinc-300 text-[13px]">
+                          <ul className="space-y-1 text-zinc-700 dark:text-zinc-300 text-[13px]">
                             {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.majorDeductions.map((ded, idx) => (
                               <li key={idx} className="flex items-start gap-1.5">
-                                <span className="text-red-400 mt-0.5">&bull;</span>
+                                <span className="text-red-600 dark:text-red-400 mt-0.5">&bull;</span>
                                 <span>{ded}</span>
                               </li>
                             ))}
@@ -2665,14 +2665,14 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                         </div>
 
                         {/* Minor Deductions */}
-                        <div className="p-3 rounded-lg bg-zinc-950/30 border border-zinc-500/30 space-y-1.5">
-                          <span className="text-[11px] font-bold text-zinc-400 uppercase block">
+                        <div className="p-3 rounded-lg bg-white dark:bg-zinc-950/30 border border-zinc-500/30 space-y-1.5">
+                          <span className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 uppercase block">
                             {pt.minorDeductionsTitle}
                           </span>
-                          <ul className="space-y-1 text-zinc-300 text-[13px]">
+                          <ul className="space-y-1 text-zinc-700 dark:text-zinc-300 text-[13px]">
                             {selectedPoomsae.taegeukPhilosophy.wtCompetitionScoring.minorDeductions.map((ded, idx) => (
                               <li key={idx} className="flex items-start gap-1.5">
-                                <span className="text-zinc-400 mt-0.5">&bull;</span>
+                                <span className="text-zinc-600 dark:text-zinc-400 mt-0.5">&bull;</span>
                                 <span>{ded}</span>
                               </li>
                             ))}
@@ -2685,15 +2685,15 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   {/* 8 Execution Principles Tailored to Form */}
                   {selectedPoomsae.taegeukPhilosophy.executionPrinciples &&
                     selectedPoomsae.taegeukPhilosophy.executionPrinciples.length > 0 && (
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
-                        <span className="text-xs font-bold text-white uppercase tracking-wider block">
+                      <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-2">
+                        <span className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider block">
                           {pt.eightPillarsCuesTitle}
                         </span>
                         <div className="grid sm:grid-cols-2 gap-2 text-xs font-sans">
                           {selectedPoomsae.taegeukPhilosophy.executionPrinciples.map((principle, idx) => (
                             <div
                               key={idx}
-                              className="p-2 rounded bg-zinc-900/90 border border-zinc-800 text-zinc-300 leading-relaxed flex items-start gap-1.5"
+                              className="p-2 rounded bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 leading-relaxed flex items-start gap-1.5"
                             >
                               <span className="text-brand-red font-bold mt-0.5">&bull;</span>
                               <span>{principle}</span>
@@ -2707,9 +2707,9 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
               {/* Black Belt Dan Mastery Specification Dossier (If High Dan) */}
               {selectedPoomsae.danMastery && (
-                <div className="dark p-6 sm:p-8 rounded-2xl bg-zinc-900 text-white border border-zinc-700/80 shadow-2xl space-y-5">
+                <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-300 dark:border-zinc-700/80 space-y-5">
                   {/* Banner Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
                     <div className="flex items-center gap-3">
                       <BlackBeltStripesBadge
                         stripes={selectedPoomsae.danMastery.beltStripes}
@@ -2717,22 +2717,22 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                       />
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
+                          <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold">
                             {pt.danMasteryOfficialTitle}
                           </span>
                           <span className="text-zinc-500">&bull;</span>
-                          <span className="text-[11px] text-zinc-400 font-semibold">
+                          <span className="text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold">
                             {selectedPoomsae.danMastery.danRank} ({selectedPoomsae.danMastery.koreanDanRank})
                           </span>
                         </div>
-                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-white mt-0.5">
+                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-zinc-900 dark:text-white mt-0.5">
                           {selectedPoomsae.danMastery.formName} ({selectedPoomsae.danMastery.koreanFormName})
                         </h4>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider bg-zinc-400/20 text-zinc-300 border border-zinc-400/40 shadow-sm">
+                      <span className="px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider bg-zinc-400/20 text-zinc-700 dark:text-zinc-300 border border-zinc-400/40 shadow-sm">
                         {pt.thDanMasterCharacteristic}: {selectedPoomsae.danMastery.masterCharacteristic}
                       </span>
                     </div>
@@ -2740,57 +2740,57 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* 4-Column Attribute Cards */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-400 uppercase block">{pt.thDanMeaningOfName}</span>
-                      <strong className="text-zinc-100 text-xs block">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-600 dark:text-zinc-400 uppercase block">{pt.thDanMeaningOfName}</span>
+                      <strong className="text-zinc-900 dark:text-zinc-100 text-xs block">
                         {selectedPoomsae.danMastery.meaningOfName}
                       </strong>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-400 uppercase block">{pt.thDanFloorPattern}</span>
-                      <strong className="text-zinc-400 text-xs block font-bold">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-600 dark:text-zinc-400 uppercase block">{pt.thDanFloorPattern}</span>
+                      <strong className="text-zinc-600 dark:text-zinc-400 text-xs block font-bold">
                         {selectedPoomsae.danMastery.floorPatternName}
                       </strong>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-400 uppercase block">{pt.thDanHanjaSymbol}</span>
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-600 dark:text-zinc-400 uppercase block">{pt.thDanHanjaSymbol}</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-xl font-black font-serif text-zinc-400">
+                        <span className="text-xl font-black font-serif text-zinc-600 dark:text-zinc-400">
                           {selectedPoomsae.danMastery.symbol}
                         </span>
-                        <strong className="text-zinc-200 text-xs truncate">
+                        <strong className="text-zinc-800 dark:text-zinc-200 text-xs truncate">
                           {selectedPoomsae.danMastery.meaningOfSymbol}
                         </strong>
                       </div>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-400 uppercase block">{pt.thDanMasterCharacteristic}</span>
-                      <strong className="text-zinc-300 text-xs block">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-600 dark:text-zinc-400 uppercase block">{pt.thDanMasterCharacteristic}</span>
+                      <strong className="text-zinc-700 dark:text-zinc-300 text-xs block">
                         {selectedPoomsae.danMastery.masterCharacteristic}
                       </strong>
                     </div>
                   </div>
 
                   {/* Master's Philosophical Mandate */}
-                  <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1.5 text-xs">
-                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
+                  <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs">
+                    <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
                       <Award className="w-3.5 h-3.5" /> {pt.danMasteryDoctrineTitle}
                     </div>
-                    <p className="text-zinc-300 leading-relaxed text-[13px]">
+                    <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-[13px]">
                       {selectedPoomsae.danMastery.philosophicalMandate}
                     </p>
                   </div>
 
                   {/* Ready Stance (Junbi-seogi) Callout */}
                   {selectedPoomsae.danMastery.junbiSeogi && (
-                    <div className="p-4 rounded-xl bg-zinc-950/30 border border-zinc-500/30 space-y-1.5 text-xs">
-                      <div className="flex items-center gap-2 text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
-                        <Footprints className="w-3.5 h-3.5 text-zinc-400" /> {pt.junbiSeogiTitle}
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-950/30 border border-zinc-500/30 space-y-1.5 text-xs">
+                      <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
+                        <Footprints className="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-400" /> {pt.junbiSeogiTitle}
                       </div>
-                      <p className="text-zinc-300 leading-relaxed text-[13px]">
+                      <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-[13px]">
                         {selectedPoomsae.danMastery.junbiSeogi}
                       </p>
                     </div>
@@ -2799,15 +2799,15 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   {/* Newly Introduced Key Techniques Chips */}
                   {selectedPoomsae.danMastery.introducedKeyTechniques &&
                     selectedPoomsae.danMastery.introducedKeyTechniques.length > 0 && (
-                      <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-2.5 text-xs">
-                        <div className="flex items-center gap-2 text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
+                      <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-2.5 text-xs">
+                        <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
                           <Sparkles className="w-3.5 h-3.5" /> {pt.introducedKeyTechTitle}
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           {selectedPoomsae.danMastery.introducedKeyTechniques.map((tech, idx) => (
                             <span
                               key={idx}
-                              className="px-2.5 py-1 rounded-md text-xs bg-zinc-800/90 text-zinc-200 border border-zinc-500/20 hover:border-zinc-400/40 transition-colors"
+                              className="px-2.5 py-1 rounded-md text-xs bg-zinc-100 dark:bg-zinc-800/90 text-zinc-800 dark:text-zinc-200 border border-zinc-500/20 hover:border-zinc-400/40 transition-colors"
                             >
                               {tech}
                             </span>
@@ -2818,11 +2818,11 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Movement Characteristics */}
                   {selectedPoomsae.danMastery.movementCharacteristics && (
-                    <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1.5 text-xs">
-                      <div className="flex items-center gap-2 text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs">
+                      <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 font-bold text-[11px] uppercase tracking-wider">
                         <Zap className="w-3.5 h-3.5" /> {pt.dynamicMovementCharsTitle}
                       </div>
-                      <p className="text-zinc-300 leading-relaxed text-[13px]">
+                      <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-[13px]">
                         {selectedPoomsae.danMastery.movementCharacteristics}
                       </p>
                     </div>
@@ -2830,11 +2830,11 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Classical Origin & Historical Lineage */}
                   {selectedPoomsae.danMastery.historicalEtymology && (
-                    <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1.5 text-xs">
-                      <div className="flex items-center gap-2 text-zinc-300 font-bold text-[11px] uppercase tracking-wider">
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs">
+                      <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 font-bold text-[11px] uppercase tracking-wider">
                         <BookOpen className="w-3.5 h-3.5" /> {pt.classicalLineageTitle}
                       </div>
-                      <p className="text-zinc-300 leading-relaxed text-[13px]">
+                      <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-[13px]">
                         {selectedPoomsae.danMastery.historicalEtymology}
                       </p>
                     </div>
@@ -2851,35 +2851,35 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
               {/* Kukkiwon New Poomsae Specification Dossier (If New Poomsae) */}
               {selectedPoomsae.newPoomsaeSpec && (
-                <div className="dark p-6 sm:p-8 rounded-2xl bg-zinc-900 text-white border border-zinc-500/30 shadow-2xl space-y-5 relative overflow-hidden">
+                <div className="p-6 sm:p-8 rounded-2xl bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-500/30 space-y-5 relative overflow-hidden">
 
                   {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800 relative z-10">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800 relative z-10">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-700/60 flex items-center justify-center text-lg font-black text-zinc-400 shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700/60 flex items-center justify-center text-lg font-black text-zinc-600 dark:text-zinc-400 shrink-0">
                         #{selectedPoomsae.newPoomsaeSpec.formNumber.toString().padStart(2, '0')}
                       </div>
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-bold">
+                          <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold">
                             {pt.newPoomsaeBadge}
                           </span>
                           <span className="text-zinc-500">&bull;</span>
-                          <span className="text-[11px] text-zinc-300 font-semibold">
+                          <span className="text-[11px] text-zinc-700 dark:text-zinc-300 font-semibold">
                             {selectedPoomsae.newPoomsaeSpec.targetAge}
                           </span>
                         </div>
-                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-white mt-0.5 flex items-center gap-2 flex-wrap">
+                        <h4 className="text-lg sm:text-xl font-black tracking-tight text-zinc-900 dark:text-white mt-0.5 flex items-center gap-2 flex-wrap">
                           <span>{selectedPoomsae.newPoomsaeSpec.koreanName}</span>
                           <span className="text-zinc-500 text-sm font-normal">({selectedPoomsae.romanized})</span>
                           <span className="text-zinc-600">&bull;</span>
-                          <span className="text-zinc-400">{selectedPoomsae.newPoomsaeSpec.englishConcept}</span>
+                          <span className="text-zinc-600 dark:text-zinc-400">{selectedPoomsae.newPoomsaeSpec.englishConcept}</span>
                         </h4>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider bg-zinc-500/20 text-zinc-300 border border-zinc-500/40 shadow-sm flex items-center gap-1.5">
+                      <span className="px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider bg-zinc-500/20 text-zinc-700 dark:text-zinc-300 border border-zinc-500/40 shadow-sm flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" />
                         {selectedPoomsae.newPoomsaeSpec.officialDuration}
                       </span>
@@ -2888,23 +2888,23 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* 3-Column Attribute Grid */}
                   <div className="grid sm:grid-cols-3 gap-3 text-xs relative z-10">
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-300 uppercase block font-bold">{pt.floorLineSymbolTitle}</span>
-                      <strong className="text-zinc-100 text-[13px] block leading-relaxed">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-700 dark:text-zinc-300 uppercase block font-bold">{pt.floorLineSymbolTitle}</span>
+                      <strong className="text-zinc-900 dark:text-zinc-100 text-[13px] block leading-relaxed">
                         {selectedPoomsae.newPoomsaeSpec.lineSymbolMeaning}
                       </strong>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-300 uppercase block font-bold">{pt.officialKukkiwonMeaningTitle}</span>
-                      <strong className="text-zinc-200 text-[13px] block leading-relaxed">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-700 dark:text-zinc-300 uppercase block font-bold">{pt.officialKukkiwonMeaningTitle}</span>
+                      <strong className="text-zinc-800 dark:text-zinc-200 text-[13px] block leading-relaxed">
                         {selectedPoomsae.newPoomsaeSpec.officialMeaning}
                       </strong>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                      <span className="text-[11px] text-zinc-300 uppercase block font-bold">{pt.targetAgeRationaleTitle}</span>
-                      <strong className="text-zinc-300 text-[13px] block leading-relaxed">
+                    <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
+                      <span className="text-[11px] text-zinc-700 dark:text-zinc-300 uppercase block font-bold">{pt.targetAgeRationaleTitle}</span>
+                      <strong className="text-zinc-700 dark:text-zinc-300 text-[13px] block leading-relaxed">
                         {selectedPoomsae.newPoomsaeSpec.developmentRationale || `Engineered specifically for ${selectedPoomsae.newPoomsaeSpec.targetAge}.`}
                       </strong>
                     </div>
@@ -2912,13 +2912,13 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
 
                   {/* Technical Characteristics (Kicks & Hands) */}
                   {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics && (
-                    <div className="p-4 rounded-xl bg-zinc-950/30 border border-zinc-800/40 space-y-3 relative z-10 text-xs">
+                    <div className="p-4 rounded-xl bg-white dark:bg-zinc-950/30 border border-zinc-200 dark:border-zinc-800/40 space-y-3 relative z-10 text-xs">
                       <div className="flex items-center justify-between flex-wrap gap-2">
-                        <div className="flex items-center gap-2 text-zinc-300 font-bold text-[11px] uppercase tracking-wider">
+                        <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 font-bold text-[11px] uppercase tracking-wider">
                           <Zap className="w-3.5 h-3.5" /> {pt.technicalArsenalTitle}
                         </div>
                         {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.specialtyFocus && (
-                          <span className="text-[11px] text-zinc-400 font-sans">
+                          <span className="text-[11px] text-zinc-600 dark:text-zinc-400 font-sans">
                             {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.specialtyFocus}
                           </span>
                         )}
@@ -2928,14 +2928,14 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                       {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureKicks &&
                         selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureKicks.length > 0 && (
                           <div className="space-y-1.5">
-                            <span className="text-[11px] uppercase text-zinc-400 font-bold block">
+                            <span className="text-[11px] uppercase text-zinc-600 dark:text-zinc-400 font-bold block">
                               {pt.signatureKicksTitle}
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureKicks.map((kick, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-200 font-sans flex items-center gap-1.5"
+                                  className="px-2.5 py-1 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 font-sans flex items-center gap-1.5"
                                 >
                                   <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 shrink-0" />
                                   {kick}
@@ -2949,14 +2949,14 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                       {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureHands &&
                         selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureHands.length > 0 && (
                           <div className="space-y-1.5 pt-1">
-                            <span className="text-[11px] uppercase text-zinc-400 font-bold block">
+                            <span className="text-[11px] uppercase text-zinc-600 dark:text-zinc-400 font-bold block">
                               {pt.signatureHandsTitle}
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {selectedPoomsae.newPoomsaeSpec.technicalCharacteristics.signatureHands.map((hand, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-200 font-sans flex items-center gap-1.5"
+                                  className="px-2.5 py-1 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 font-sans flex items-center gap-1.5"
                                 >
                                   <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 shrink-0" />
                                   {hand}

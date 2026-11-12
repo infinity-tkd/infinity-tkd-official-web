@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Newspaper } from 'lucide-react'
 import { PostCard } from '@/components/blog/PostCard'
-import { Eyebrow } from '@/components/ui/PageHero'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { getAllPostMetas } from '@/lib/blog'
 
 const TEASER_COUNT = 3
@@ -15,18 +15,17 @@ export function LatestJournal() {
     <section className="py-16 sm:py-20 lg:py-24 border-t border-zinc-200 bg-white transition-colors duration-500 dark:border-zinc-900 dark:bg-black">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:mb-12 sm:flex-row sm:items-end">
-          <div>
-            <Eyebrow icon={Newspaper} className="mb-4">
-              Martial Journal &amp; Blog
-            </Eyebrow>
-            <h2 className="text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white sm:text-5xl">
-              Latest from the <span className="text-brand-red">dojang</span>
-            </h2>
-          </div>
+          <SectionHeader
+            align="left"
+            eyebrow="Martial Journal & Blog"
+            eyebrowIcon={Newspaper}
+            title="Latest from the"
+            accent="dojang"
+          />
 
           <Link
             href="/blog"
-            className="inline-flex min-h-[32px] shrink-0 items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-brand-red hover:underline touch-press"
           >
             All articles <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

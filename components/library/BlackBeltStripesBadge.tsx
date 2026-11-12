@@ -22,14 +22,14 @@ export function BlackBeltStripesBadge({
         {Array.from({ length: safeCount }).map((_, i) => (
           <span
             key={i}
-            className={`bg-gradient-to-b from-amber-200 via-amber-400 to-amber-500 rounded-[1px] shadow-[0_0_3px_rgba(245,158,11,0.6)] ${
+            className={`bg-amber-400 rounded-[1px] ${
               compact ? 'w-0.5 h-3' : 'w-1 h-3.5'
             }`}
           />
         ))}
       </div>
       {roman && (
-        <span className="text-[11px] font-mono font-black tracking-wider text-amber-400">
+        <span className="text-[11px] font-black tracking-wider text-amber-400">
           {roman}
         </span>
       )}

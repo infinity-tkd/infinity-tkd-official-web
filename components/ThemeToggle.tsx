@@ -4,47 +4,32 @@ import * as React from 'react'
 import { useTheme } from 'next-themes'
 import { Sun, Moon } from 'lucide-react'
 
+const buttonClass =
+  'flex h-11 w-11 min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-700 ring-1 ring-zinc-200 transition-colors duration-300 hover:bg-zinc-200 hover:text-zinc-900 touch-press dark:bg-zinc-900/70 dark:text-zinc-300 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-white'
+
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
-  const [isRotating, setIsRotating] = React.useState(false)
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
+  // Same footprint before hydration (the theme is only known on the client), without a placeholder pulse.
   if (!mounted) {
-    return (
-      <div className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-zinc-900 ring-1 ring-zinc-200 dark:ring-zinc-800 animate-pulse" />
-    )
+    return <div aria-hidden="true" className="h-11 w-11 rounded-xl bg-zinc-100 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800" />
   }
 
   const isDark = resolvedTheme === 'dark'
 
-  const toggleTheme = () => {
-    setIsRotating(true)
-    setTheme(isDark ? 'light' : 'dark')
-    setTimeout(() => setIsRotating(false), 300)
-  }
-
   return (
     <button
       type="button"
-      onClick={toggleTheme}
-      className="relative p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/70 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 focus:outline-none ring-1 ring-zinc-200 dark:ring-zinc-800 cursor-pointer overflow-hidden group shadow-sm hover:shadow-brand-glow flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 touch-press"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className={buttonClass}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
-      <div
-        className={`transform transition-transform duration-300 ${
-          isRotating ? 'rotate-180 scale-90' : 'rotate-0 scale-100'
-        }`}
-      >
-        {isDark ? (
-          <Sun className="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform duration-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.5)]" />
-        ) : (
-          <Moon className="w-4 h-4 text-zinc-800 group-hover:-rotate-12 transition-transform duration-300 drop-shadow-[0_0_6px_rgba(0,0,0,0.3)]" />
-        )}
-      </div>
+      {isDark ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
     </button>
   )
 }

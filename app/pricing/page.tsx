@@ -48,7 +48,7 @@ const assurances = [
 /** Small savings tag inside the membership switch. */
 function SavingsTag({ percent }: { percent: number }) {
   return (
-    <span className="rounded-md bg-brand-red px-1.5 py-0.5 text-[10px] font-bold tracking-normal text-white">
+    <span className="rounded-md bg-brand-red px-1.5 py-0.5 text-[11px] font-bold tracking-normal text-white">
       -{percent}%
     </span>
   )

@@ -47,15 +47,15 @@ export function HistoryChronicleReader() {
       {/* -------------------------------------------------------------------- */}
       {/* HISTORICAL CHRONICLE BANNER (14px radius) */}
       {/* -------------------------------------------------------------------- */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red">
                 Taekwondo Scholarly Chronicle
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[11px] font-mono text-zinc-500">History &bull; Uniforms &bull; Belts &bull; Theory</span>
+              <span className="text-[11px] text-zinc-500">History &bull; Uniforms &bull; Belts &bull; Theory</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
               Taekwondo History, Philosophy &amp; Heritage
@@ -94,11 +94,11 @@ export function HistoryChronicleReader() {
                 onClick={() => setSelectedLessonIndex(idx)}
                 className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-black border-transparent shadow-md'
+                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-black border-transparent'
                     : 'bg-zinc-50 dark:bg-zinc-900/60 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-brand-red/40'
                 }`}
               >
-                <span className="text-[11px] font-mono block opacity-70 mb-0.5">Lesson {idx + 1}</span>
+                <span className="text-[11px] block opacity-70 mb-0.5">Lesson {idx + 1}</span>
                 <h4 className="text-[11px] font-bold uppercase tracking-tight line-clamp-2 leading-snug">
                   {item.name.split('(')[0].trim()}
                 </h4>
@@ -116,7 +116,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('article')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'article'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -127,7 +127,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('timetable')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'timetable'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -138,7 +138,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('dobok')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'dobok'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -149,7 +149,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('organizations')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'organizations'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -160,7 +160,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('philosophy')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'philosophy'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -171,7 +171,7 @@ export function HistoryChronicleReader() {
           onClick={() => setActiveTab('power')}
           className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'power'
-              ? 'bg-brand-red text-white shadow-brand-glow'
+              ? 'bg-brand-red text-white'
               : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400'
           }`}
         >
@@ -195,7 +195,7 @@ export function HistoryChronicleReader() {
         <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl grid lg:grid-cols-12 gap-8 items-start relative overflow-hidden">
           {/* Left Column: Image & Citations */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="relative h-60 sm:h-72 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md">
+            <div className="relative h-60 sm:h-72 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
               <SafeImage
                 src={activeLesson.image}
                 alt={activeLesson.name}
@@ -204,7 +204,7 @@ export function HistoryChronicleReader() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="text-xs font-mono text-brand-red font-bold block mb-0.5">
+                <span className="text-xs text-brand-red font-bold block mb-0.5">
                   {activeLesson.koreanName}
                 </span>
                 <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight">
@@ -216,14 +216,14 @@ export function HistoryChronicleReader() {
             {/* Author & Source */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase">Author / Archival Body</span>
+                <span className="text-[11px] text-zinc-400 uppercase">Author / Archival Body</span>
                 <strong className="text-zinc-900 dark:text-white font-bold">
                   {activeLesson.author || 'Infinity TKD Directorate'}
                 </strong>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase">Primary Source</span>
-                <span className="text-zinc-600 dark:text-zinc-400 font-mono text-xs truncate max-w-[200px]">
+                <span className="text-[11px] text-zinc-400 uppercase">Primary Source</span>
+                <span className="text-zinc-600 dark:text-zinc-400 text-xs truncate max-w-[200px]">
                   {activeLesson.sourceName || 'Kukkiwon Archives'}
                 </span>
               </div>
@@ -232,7 +232,7 @@ export function HistoryChronicleReader() {
 
           {/* Right Column: Narrative Body */}
           <div className="lg:col-span-7 space-y-5">
-            <div className="flex items-center justify-between gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800 text-xs text-zinc-500 font-mono">
+            <div className="flex items-center justify-between gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800 text-xs text-zinc-500">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-brand-red" /> {activeLesson.readTime}
               </span>
@@ -274,7 +274,7 @@ export function HistoryChronicleReader() {
                   key={i}
                   className="flex items-start gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300"
                 >
-                  <span className="w-4 h-4 rounded-full bg-brand-red/10 text-brand-red font-mono font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="w-4 h-4 rounded-full bg-brand-red/10 text-brand-red font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <span className="leading-relaxed font-medium">{item}</span>
@@ -302,7 +302,7 @@ export function HistoryChronicleReader() {
           {/* Cheon-Ji-In Cosmology Banner */}
           <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Sacred Garment Cosmology
               </span>
               <h4 className="text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -317,23 +317,23 @@ export function HistoryChronicleReader() {
               <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
                 <span className="text-2xl font-serif font-black text-brand-red">天 (Cheon)</span>
                 <h5 className="font-bold text-zinc-900 dark:text-white uppercase text-sm">Upper Jacket (Jeogori)</h5>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Represents <strong>Heaven</strong> and <strong>Yang</strong> energy. Constructed in a circular form wrapping around the upper torso, symbolizing infinite openness and moral conscience.
                 </p>
               </div>
 
               <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-2xl font-serif font-black text-blue-500">地 (Ji)</span>
+                <span className="text-2xl font-serif font-black text-zinc-500">地 (Ji)</span>
                 <h5 className="font-bold text-zinc-900 dark:text-white uppercase text-sm">Trousers (Baji)</h5>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Represents <strong>Earth</strong> and <strong>Yin</strong> energy. Constructed with dual square legs, symbolizing physical stability, grounding, and humility.
                 </p>
               </div>
 
               <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-2xl font-serif font-black text-amber-500">人 (In)</span>
+                <span className="text-2xl font-serif font-black text-zinc-500">人 (In)</span>
                 <h5 className="font-bold text-zinc-900 dark:text-white uppercase text-sm">Martial Belt (Ddi)</h5>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Represents the <strong>Human Being</strong>. Tied around the Danjeon (energy center), binding Heaven and Earth into undivided harmony and single-minded focus (Ilsim).
                 </p>
               </div>
@@ -343,7 +343,7 @@ export function HistoryChronicleReader() {
           {/* Dobok Uniform Styles Comparison */}
           <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Uniform Styles &amp; Standards
               </span>
               <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -353,33 +353,33 @@ export function HistoryChronicleReader() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase block">Kukkiwon Standard</span>
+                <span className="text-[11px] text-zinc-400 uppercase block">Kukkiwon Standard</span>
                 <strong className="text-zinc-900 dark:text-white block">Standard V-Neck Dobok</strong>
-                <p className="text-zinc-500 font-light leading-relaxed">
+                <p className="text-zinc-500 leading-relaxed">
                   White collar for Geup color belts; Red-and-black collar for junior Poom black belts under 15; Black collar for adult Dan ranks.
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[11px] font-mono text-amber-500 uppercase block">WT Official Poomsae</span>
+                <span className="text-[11px] text-zinc-500 uppercase block">WT Official Poomsae</span>
                 <strong className="text-zinc-900 dark:text-white block">Competition Poomsae Dobok</strong>
-                <p className="text-zinc-500 font-light leading-relaxed">
+                <p className="text-zinc-500 leading-relaxed">
                   Color-coded by age &amp; gender: Cadet blue/red pants, Junior dark blue pants, Senior gold jackets with blue pants, Master gold &amp; navy.
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[11px] font-mono text-blue-500 uppercase block">ITF Traditional</span>
+                <span className="text-[11px] text-zinc-500 uppercase block">ITF Traditional</span>
                 <strong className="text-zinc-900 dark:text-white block">Cross-Over Wrap Dobok</strong>
-                <p className="text-zinc-500 font-light leading-relaxed">
+                <p className="text-zinc-500 leading-relaxed">
                   Open crossover jacket with Velcro/ties, featuring black ribbon hem piping along jacket borders for Black Belt Dan ranks.
                 </p>
               </div>
 
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-2">
-                <span className="text-[11px] font-mono text-emerald-500 uppercase block">Olympic Combat</span>
+                <span className="text-[11px] text-zinc-500 uppercase block">Olympic Combat</span>
                 <strong className="text-zinc-900 dark:text-white block">Aerodynamic PSS Dobok</strong>
-                <p className="text-zinc-500 font-light leading-relaxed">
+                <p className="text-zinc-500 leading-relaxed">
                   Ultra-lightweight moisture-wicking stretch fabric engineered to interface seamlessly with electronic sensor Hogu and headgear.
                 </p>
               </div>
@@ -389,7 +389,7 @@ export function HistoryChronicleReader() {
           {/* Belt Color Progression Matrix */}
           <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
             <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
                 The Spiritual Path of the Belt (Ddi / 띠)
               </span>
               <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -400,19 +400,19 @@ export function HistoryChronicleReader() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 text-xs">
               {[
                 { color: 'White Belt', korean: '백띠 (Baektti)', meaning: 'Purity & innocence; the seed dormant beneath winter soil with zero prior knowledge.', bg: 'bg-white text-zinc-900 border-zinc-300' },
-                { color: 'Yellow Belt', korean: '노란띠 (Hwangtti)', meaning: 'The fertile earth; the seed germinates and plants first roots as basics take hold.', bg: 'bg-amber-400 text-black border-amber-500' },
-                { color: 'Green Belt', korean: '초록띠 (Noktti)', meaning: 'The green plant; rapid growth as kicking combinations and forms branch out.', bg: 'bg-emerald-600 text-white border-emerald-700' },
-                { color: 'Blue Belt', korean: '파란띠 (Cheongtti)', meaning: 'The vast sky; the growing plant reaches upward toward physical & mental maturity.', bg: 'bg-blue-600 text-white border-blue-700' },
+                { color: 'Yellow Belt', korean: '노란띠 (Hwangtti)', meaning: 'The fertile earth; the seed germinates and plants first roots as basics take hold.', bg: 'bg-zinc-400 text-black border-zinc-500' },
+                { color: 'Green Belt', korean: '초록띠 (Noktti)', meaning: 'The green plant; rapid growth as kicking combinations and forms branch out.', bg: 'bg-zinc-600 text-white border-zinc-700' },
+                { color: 'Blue Belt', korean: '파란띠 (Cheongtti)', meaning: 'The vast sky; the growing plant reaches upward toward physical & mental maturity.', bg: 'bg-zinc-600 text-white border-zinc-700' },
                 { color: 'Red Belt', korean: '빨간띠 (Hongtti)', meaning: 'Danger & fire; practicing mental restraint while warning opponents of lethal striking power.', bg: 'bg-brand-red text-white border-red-700' },
                 { color: 'Poom Belt', korean: '품띠 (Poomtti)', meaning: 'Half-red, half-black; junior Black Belt under 15 symbolizing the harmony of Um & Yang.', bg: 'bg-gradient-to-b from-brand-red to-black text-white border-zinc-700' },
                 { color: 'Black Belt', korean: '검은띠 (Heuktti)', meaning: 'Mastery & light; impervious to darkness. The true beginning of the lifelong martial path (Dan).', bg: 'bg-black text-white border-zinc-800' },
               ].map((b, i) => (
                 <div key={i} className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
                   <div>
-                    <span className={`px-2 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase block mb-2 text-center border ${b.bg}`}>
+                    <span className={`px-2 py-0.5 rounded-md text-[11px] font-bold uppercase block mb-2 text-center border ${b.bg}`}>
                       {b.color}
                     </span>
-                    <span className="text-xs font-mono font-bold text-zinc-800 dark:text-zinc-200 block mb-1">
+                    <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200 block mb-1">
                       {b.korean}
                     </span>
                     <p className="text-[13px] text-zinc-500 leading-relaxed">
@@ -442,7 +442,7 @@ export function HistoryChronicleReader() {
       {activeTab === 'organizations' && (
         <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
           <div>
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
               Comparative Analysis
             </span>
             <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -453,7 +453,7 @@ export function HistoryChronicleReader() {
           <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
             <table className="w-full text-left text-xs border-collapse min-w-[650px]">
             <thead>
-              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px] font-mono">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px]">
                 <th className="py-3 px-4">Organization / Style</th>
                 <th className="py-3 px-4">Inception &amp; Founder</th>
                 <th className="py-3 px-4">Sparring Format &amp; Gear</th>
@@ -476,13 +476,13 @@ export function HistoryChronicleReader() {
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Kicks to head allowed (3–5 pts); punches to head <strong>strictly forbidden</strong>.
                 </td>
-                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300 font-mono">
+                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   8 Taegeuk forms &amp; 9 Black Belt Yudanja Poomsae.
                 </td>
               </tr>
 
               <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors">
-                <td className="py-4 px-4 font-bold text-blue-500">
+                <td className="py-4 px-4 font-bold text-zinc-500">
                   International Taekwon-Do Federation (ITF)
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
@@ -495,13 +495,13 @@ export function HistoryChronicleReader() {
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Punches to the head <strong>permitted</strong>; emphasizes Sine Wave motion.
                 </td>
-                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300 font-mono">
+                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   24 Chang Hon Tul (Chon-Ji to Tong-Il).
                 </td>
               </tr>
 
               <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors">
-                <td className="py-4 px-4 font-bold text-purple-500">
+                <td className="py-4 px-4 font-bold text-zinc-500">
                   American Taekwondo Association (ATA)
                 </td>
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
@@ -514,7 +514,7 @@ export function HistoryChronicleReader() {
                 <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Light/controlled head contact depending on division; weapon sparring.
                 </td>
-                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300 font-mono">
+                <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300">
                   Songahm patterns (Songahm 1–18).
                 </td>
               </tr>
@@ -569,14 +569,14 @@ export function HistoryChronicleReader() {
             ].map((tenet, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between"
               >
                 <div>
                   <span className="text-3xl font-serif font-black text-zinc-200 dark:text-zinc-800 block mb-2">
                     {tenet.hanja}
                   </span>
                   <span
-                    className="text-xs font-mono font-bold uppercase tracking-wider block mb-1"
+                    className="text-xs font-bold uppercase tracking-wider block mb-1"
                     style={{ color: tenet.accent }}
                   >
                     {tenet.korean}
@@ -593,8 +593,8 @@ export function HistoryChronicleReader() {
           </div>
 
           {/* 4 Core Pillars of Curriculum */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
               Curriculum Quadrant
             </span>
             <h4 className="text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight mb-4">
@@ -603,25 +603,25 @@ export function HistoryChronicleReader() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
                 <strong className="text-brand-red block mb-1">1. Poomsae / Tul (품새)</strong>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light">
+                <p className="text-zinc-600 dark:text-zinc-400">
                   Standardized sequences testing lines of movement, chamber precision, and dynamic balance.
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                <strong className="text-blue-500 block mb-1">2. Gyeorugi (겨루기)</strong>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light">
+                <strong className="text-zinc-500 block mb-1">2. Gyeorugi (겨루기)</strong>
+                <p className="text-zinc-600 dark:text-zinc-400">
                   Free and electronic sensor sparring testing distance timing, counter-kicks, and ring tactical stamina.
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                <strong className="text-amber-500 block mb-1">3. Gyeokpa (격파)</strong>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light">
+                <strong className="text-zinc-500 block mb-1">3. Gyeokpa (격파)</strong>
+                <p className="text-zinc-600 dark:text-zinc-400">
                   Power breaking, speed breaking, and high-altitude jumping demonstration strikes.
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-                <strong className="text-emerald-500 block mb-1">4. Hosinsul (호신술)</strong>
-                <p className="text-zinc-600 dark:text-zinc-400 font-light">
+                <strong className="text-zinc-500 block mb-1">4. Hosinsul (호신술)</strong>
+                <p className="text-zinc-600 dark:text-zinc-400">
                   Joint manipulation locks, choke escapes, falling techniques (tteoreojigi), and weapon disarms.
                 </p>
               </div>
@@ -637,14 +637,14 @@ export function HistoryChronicleReader() {
         <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
             <div>
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-red block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">
                 Kinetic Martial Physics
               </span>
               <h4 className="text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                 The Biomechanical Theory of Power (힘의 원리)
               </h4>
             </div>
-            <div className="p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red font-mono font-black text-sm">
+            <div className="p-3 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red font-black text-sm">
               E = &frac12; &bull; m &bull; v&sup2;
             </div>
           </div>
@@ -655,39 +655,39 @@ export function HistoryChronicleReader() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">01. Reaction Force (반동력)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">01. Reaction Force (반동력)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Newton&apos;s Third Law</strong>
-              <p className="text-zinc-500 font-light">Pulling the opposite reaction hand to the hip doubles the acceleration of the striking weapon.</p>
+              <p className="text-zinc-500">Pulling the opposite reaction hand to the hip doubles the acceleration of the striking weapon.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">02. Concentration (집중)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">02. Concentration (집중)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Focal Pressure Area</strong>
-              <p className="text-zinc-500 font-light">Focusing total kinetic energy onto the smallest striking tool (ball of foot, knife hand) at exact impact.</p>
+              <p className="text-zinc-500">Focusing total kinetic energy onto the smallest striking tool (ball of foot, knife hand) at exact impact.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">03. Equilibrium (균형)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">03. Equilibrium (균형)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Center of Mass</strong>
-              <p className="text-zinc-500 font-light">Maintaining dynamic balance so body mass translates cleanly without postural collapse.</p>
+              <p className="text-zinc-500">Maintaining dynamic balance so body mass translates cleanly without postural collapse.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">04. Breath Control (호흡)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">04. Breath Control (호흡)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Kihap Core Brace</strong>
-              <p className="text-zinc-500 font-light">Sharp exhalation at the instant of impact tightens the abdominal girdle and protects internal organs.</p>
+              <p className="text-zinc-500">Sharp exhalation at the instant of impact tightens the abdominal girdle and protects internal organs.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">05. Mass (질량)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">05. Mass (질량)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Pelvic Kinetic Chain</strong>
-              <p className="text-zinc-500 font-light">Engaging hip rotation and ground reaction force to drive total body mass behind the attack.</p>
+              <p className="text-zinc-500">Engaging hip rotation and ground reaction force to drive total body mass behind the attack.</p>
             </div>
 
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800">
-              <span className="text-[11px] font-mono text-zinc-400 uppercase block mb-1">06. Speed (속도)</span>
+              <span className="text-[11px] text-zinc-400 uppercase block mb-1">06. Speed (속도)</span>
               <strong className="text-zinc-900 dark:text-white block mb-1">Velocity Squared</strong>
-              <p className="text-zinc-500 font-light">Doubling striking velocity quadruples the impact energy delivered into the target.</p>
+              <p className="text-zinc-500">Doubling striking velocity quadruples the impact energy delivered into the target.</p>
             </div>
           </div>
         </div>

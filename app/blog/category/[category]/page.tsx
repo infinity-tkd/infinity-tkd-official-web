@@ -5,7 +5,7 @@ import { PageHero } from '@/components/ui/PageHero'
 import { PostCard } from '@/components/blog/PostCard'
 import { CategoryNav } from '@/components/blog/CategoryNav'
 import { getAllPostMetas, getCategories, getPostsByCategory } from '@/lib/blog'
-import { SHARE_IMAGE } from '@/lib/seo'
+import { pageMetadata } from '@/lib/seo'
 
 // Unknown categories 404 instead of rendering an empty archive.
 export const dynamicParams = false
@@ -23,21 +23,12 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const category = getCategories().find((c) => c.slug === slug)
   if (!category) return { title: 'Category not found' }
 
-  const title = `${category.name} Articles`
-  const description = `Infinity Taekwondo articles about ${category.name.toLowerCase()}: practical guides and advice from our coaching team.`
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/blog/category/${slug}` },
-    openGraph: {
-      title: `${title} | Infinity Taekwondo`,
-      description,
-      url: `/blog/category/${slug}`,
-      type: 'website',
-      images: [SHARE_IMAGE],
-    },
-  }
+  return pageMetadata({
+    title: `Taekwondo ${category.name} Articles`,
+    description: `Infinity Taekwondo articles about ${category.name.toLowerCase()}: practical Taekwondo guides and advice from our coaching team in Phnom Penh.`,
+    path: `/blog/category/${slug}`,
+    keywords: [`Taekwondo ${category.name.toLowerCase()}`, 'Taekwondo blog', 'Taekwondo guides'],
+  })
 }
 
 export default async function BlogCategoryPage({ params }: CategoryPageProps) {
@@ -66,7 +57,7 @@ export default async function BlogCategoryPage({ params }: CategoryPageProps) {
           <ul className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, index) => (
               <li key={post.slug}>
-                <PostCard post={post} priority={index === 0} />
+                <PostCard post={post} priority={index === 0} headingLevel={2} />
               </li>
             ))}
           </ul>

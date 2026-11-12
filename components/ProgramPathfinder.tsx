@@ -1,11 +1,11 @@
 'use client'
 
-import { badgeColors } from '@/lib/color'
 import * as React from 'react'
 import Link from 'next/link'
-import { Sparkles, ArrowRight, CheckCircle2, RotateCcw, Target } from 'lucide-react'
+import { Sparkles, ArrowRight, CheckCircle2, RotateCcw } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext'
-import { Card3D } from '@/components/ui/Card3D'
+import { buttonStyles } from '@/components/ui/Button'
+import { cn } from '@/lib/utils'
 
 type AgeGroupId = 'kids' | 'teens' | 'adults'
 type GoalId = 'poomsae' | 'tricking' | 'strength' | 'cinema'
@@ -196,189 +196,161 @@ export function ProgramPathfinder() {
   }
 
   const rec = getRecommendation()
+  const optionClass =
+    'group flex min-h-[80px] cursor-pointer flex-col justify-center rounded-xl border border-zinc-200 bg-white p-4 transition-colors hover:border-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red touch-press dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600'
+  const optionLabelClass = 'text-sm font-bold text-zinc-900 transition-colors group-hover:text-brand-red dark:text-white'
+  const stepTitleClass = 'text-center text-xs font-bold uppercase tracking-widest text-zinc-500 sm:text-sm'
 
   return (
-    <div className="w-full bg-gradient-to-br from-zinc-950 via-black to-zinc-950 border border-brand-red/30 rounded-2xl p-5 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden text-white">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[120px] rounded-full pointer-events-none" />
-
+    <div className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 p-5 sm:p-8 md:p-12 dark:border-zinc-800 dark:bg-zinc-900/40">
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red text-[11px] font-bold uppercase tracking-widest mb-3">
-          <Sparkles className="w-3 h-3 animate-pulse" /> {t.pathfinder.badge}
-        </div>
-        <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight">
+      <div className="mx-auto mb-8 max-w-2xl text-center">
+        <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500">
+          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> {t.pathfinder.badge}
+        </p>
+        <h3 className="text-2xl font-black uppercase tracking-tight text-zinc-900 md:text-4xl dark:text-white">
           {t.pathfinder.title1} <span className="text-brand-red">{t.pathfinder.title2}</span>
         </h3>
-        <p className="text-zinc-400 text-[13px] md:text-sm mt-2">
-          {t.pathfinder.subtitle}
-        </p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{t.pathfinder.subtitle}</p>
       </div>
 
-      {/* Step Indicator */}
-      <div className="flex justify-center items-center gap-3 mb-8" aria-label={`Step ${step} of 3`}>
+      {/* Step indicator */}
+      <p className="sr-only" aria-live="polite">
+        {step <= 3 ? `Step ${step} of 3` : 'Your recommendation'}
+      </p>
+      <div className="mb-8 flex items-center justify-center gap-2" aria-hidden="true">
         {[1, 2, 3].map((s) => (
-          <div
+          <span
             key={s}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              step >= s ? 'w-12 bg-brand-red shadow-[0_0_8px_#EF2F38]' : 'w-6 bg-zinc-800'
-            }`}
+            className={cn(
+              'h-1.5 rounded-full transition-all duration-500',
+              step >= s ? 'w-12 bg-brand-red' : 'w-6 bg-zinc-200 dark:bg-zinc-800'
+            )}
           />
         ))}
       </div>
 
-      {/* Step 1: Age Selection */}
+      {/* Step 1: age */}
       {step === 1 && (
-        <div className="max-w-xl mx-auto space-y-4 animate-fade-in">
-          <h4 className="text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-300">
-            {t.pathfinder.step1Title}
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="mx-auto max-w-xl animate-fade-in space-y-4">
+          <h4 className={stepTitleClass}>{t.pathfinder.step1Title}</h4>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {ageGroupOptions.map((item) => (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => {
                   setAgeGroup(item.id)
                   setStep(2)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red touch-press"
+                className={cn(optionClass, 'items-center text-center')}
               >
-                <span className="font-bold text-sm text-white group-hover:text-brand-red transition-colors">
-                  {getLocalizedLabel(item)}
-                </span>
-                {item.sublabelEn && (
-                  <span className="text-[13px] text-zinc-500 mt-1 block">
-                    {item.sublabelEn}
-                  </span>
-                )}
+                <span className={optionLabelClass}>{getLocalizedLabel(item)}</span>
+                {item.sublabelEn && <span className="mt-1 block text-[13px] text-zinc-500">{item.sublabelEn}</span>}
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* Step 2: Training Goal */}
+      {/* Step 2: goal */}
       {step === 2 && (
-        <div className="max-w-xl mx-auto space-y-4 animate-fade-in">
-          <h4 className="text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-300">
-            {t.pathfinder.step2Title}
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="mx-auto max-w-xl animate-fade-in space-y-4">
+          <h4 className={stepTitleClass}>{t.pathfinder.step2Title}</h4>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {goalOptions.map((item) => (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => {
                   setGoal(item.id)
                   setStep(3)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-left flex items-center justify-between cursor-pointer group focus:outline-none focus:ring-2 focus:ring-brand-red min-h-[80px] touch-press"
+                className={cn(optionClass, 'flex-row items-center justify-between text-left')}
               >
-                <div>
-                  <span className="font-bold text-xs sm:text-sm text-white group-hover:text-brand-red transition-colors block">
-                    {getLocalizedLabel(item)}
-                  </span>
-                  {item.sublabelEn && (
-                    <span className="text-[13px] text-zinc-500 mt-0.5 block">
-                      {item.sublabelEn}
-                    </span>
-                  )}
-                </div>
-                <ArrowRight className="w-4 h-4 text-brand-red shrink-0 ml-2 group-hover:translate-x-1 transition-transform" />
+                <span>
+                  <span className={cn(optionLabelClass, 'block')}>{getLocalizedLabel(item)}</span>
+                  {item.sublabelEn && <span className="mt-0.5 block text-[13px] text-zinc-500">{item.sublabelEn}</span>}
+                </span>
+                <ArrowRight
+                  className="ml-2 h-4 w-4 shrink-0 text-zinc-400 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* Step 3: Experience Level */}
+      {/* Step 3: experience */}
       {step === 3 && (
-        <div className="max-w-xl mx-auto space-y-4 animate-fade-in">
-          <h4 className="text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-zinc-300">
-            {t.pathfinder.step3Title}
-          </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="mx-auto max-w-xl animate-fade-in space-y-4">
+          <h4 className={stepTitleClass}>{t.pathfinder.step3Title}</h4>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {experienceOptions.map((item) => (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => {
                   setExperience(item.id)
                   setStep(4)
                 }}
-                className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-brand-red hover:bg-zinc-800 transition-all text-center cursor-pointer min-h-[90px] flex flex-col items-center justify-center group focus:outline-none focus:ring-2 focus:ring-brand-red touch-press"
+                className={cn(optionClass, 'items-center text-center')}
               >
-                <span className="font-bold text-xs sm:text-sm text-white group-hover:text-brand-red transition-colors">
-                  {getLocalizedLabel(item)}
-                </span>
-                {item.sublabelEn && (
-                  <span className="text-[13px] text-zinc-500 mt-1 block">
-                    {item.sublabelEn}
-                  </span>
-                )}
+                <span className={optionLabelClass}>{getLocalizedLabel(item)}</span>
+                {item.sublabelEn && <span className="mt-1 block text-[13px] text-zinc-500">{item.sublabelEn}</span>}
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* Step 4: Output Recommendation Result */}
+      {/* Step 4: recommendation */}
       {step === 4 && (
-        <Card3D maxTilt={4} scale={1.01} className="max-w-2xl mx-auto">
-          <div className="w-full bg-zinc-900/90 border border-brand-red/40 rounded-xl p-6 md:p-8 animate-fade-in space-y-6 shadow-2xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
-              <div>
-                <span
-                  className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-lg inline-block mb-1 shadow-sm"
-                  style={badgeColors(rec.badgeColor)}
-                >
-                  {rec.division}
-                </span>
-                <h4 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-white tracking-tight leading-tight">
-                  {rec.title}
-                </h4>
-                <span className="text-xs text-zinc-400 font-mono mt-0.5 block">
-                  {rec.level}
-                </span>
-              </div>
-
-              <button
-                onClick={handleReset}
-                className="text-xs text-zinc-400 hover:text-white flex items-center gap-1.5 self-start sm:self-auto cursor-pointer px-3 py-2 min-h-[44px] rounded-lg hover:bg-zinc-800 transition-colors touch-press"
-                aria-label="Retake pathfinder assessment"
-              >
-                <RotateCcw className="w-3.5 h-3.5" /> {t.pathfinder.retake}
-              </button>
+        <div className="mx-auto max-w-2xl animate-fade-in space-y-6 rounded-xl border border-zinc-200 bg-white p-6 md:p-8 dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="flex flex-col justify-between gap-3 border-b border-zinc-200 pb-4 sm:flex-row sm:items-center dark:border-zinc-800">
+            <div>
+              <span className="mb-2 inline-block rounded-lg bg-zinc-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-widest text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                {rec.division}
+              </span>
+              <h4 className="text-xl font-black uppercase leading-tight tracking-tight text-zinc-900 sm:text-2xl md:text-3xl dark:text-white">
+                {rec.title}
+              </h4>
+              <span className="mt-1 block text-xs text-zinc-500">{rec.level}</span>
             </div>
 
-            <p className="text-zinc-300 text-[13px] sm:text-sm leading-relaxed">
-              {rec.description}
-            </p>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="flex min-h-[44px] cursor-pointer items-center gap-1.5 self-start rounded-lg px-3 py-2 text-xs text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 touch-press sm:self-auto dark:hover:bg-zinc-800 dark:hover:text-white"
+              aria-label="Retake pathfinder assessment"
+            >
+              <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> {t.pathfinder.retake}
+            </button>
+          </div>
 
-            <div className="p-4 bg-black/60 rounded-xl border border-zinc-800 flex items-center gap-3 text-xs">
-              <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0" />
-              <div>
-                <span className="text-zinc-400 uppercase font-bold text-[11px] block">
-                  {t.pathfinder.recommendedRhythm}
-                </span>
-                <span className="font-semibold text-white">{rec.pathway}</span>
-              </div>
-            </div>
+          <p className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{rec.description}</p>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-3">
-              <Link
-                href={`/contact?subject=Enrollment%20Pathfinder%20Result%3A%20${encodeURIComponent(rec.title)}`}
-                className="flex-1 py-3.5 px-6 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow text-center flex items-center justify-center gap-2 touch-press"
-              >
-                {t.pathfinder.claimTrial} <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <Link
-                href="/academy"
-                className="py-3.5 px-6 rounded-xl border border-zinc-700 text-white text-xs font-bold uppercase tracking-widest hover:border-brand-red hover:text-brand-red transition-all text-center touch-press"
-              >
-                {t.pathfinder.viewSyllabus}
-              </Link>
+          <div className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-xs dark:border-zinc-800 dark:bg-zinc-900">
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
+            <div>
+              <span className="block text-[11px] font-bold uppercase text-zinc-500">{t.pathfinder.recommendedRhythm}</span>
+              <span className="font-semibold text-zinc-900 dark:text-white">{rec.pathway}</span>
             </div>
           </div>
-        </Card3D>
+
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <Link
+              href={`/contact?subject=Enrollment%20Pathfinder%20Result%3A%20${encodeURIComponent(rec.title)}`}
+              className={buttonStyles({ variant: 'primary', size: 'lg', className: 'flex-1' })}
+            >
+              {t.pathfinder.claimTrial} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link href="/academy" className={buttonStyles({ variant: 'outline', size: 'lg' })}>
+              {t.pathfinder.viewSyllabus}
+            </Link>
+          </div>
+        </div>
       )}
     </div>
   )

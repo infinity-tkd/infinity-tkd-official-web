@@ -1,15 +1,23 @@
 'use client'
 
 import * as React from 'react'
+import { usePathname } from 'next/navigation'
+
+/** Blog articles only (/blog/<slug>): elsewhere the back-to-top ring already shows scroll progress. */
+const isArticle = (pathname: string | null) =>
+  !!pathname && /^\/blog\/[^/]+$/.test(pathname) && !pathname.endsWith('.xml')
 
 /**
- * Thin reading-progress line under the top edge.
+ * Thin reading-progress line under the top edge of a blog article.
  * Updates the bar's transform directly (no React re-render per scroll frame).
  */
 export function ScrollProgressBar() {
   const barRef = React.useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+  const show = isArticle(pathname)
 
   React.useEffect(() => {
+    if (!show) return
     let ticking = false
 
     const update = () => {
@@ -35,7 +43,9 @@ export function ScrollProgressBar() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [])
+  }, [show])
+
+  if (!show) return null
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-0.5">

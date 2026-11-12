@@ -42,7 +42,7 @@ export function HistoryTimetable() {
   return (
     <div className="space-y-6">
       {/* Control Toolbar (Era Filters & View Switcher) */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Era Filter Pills */}
         <div className="flex flex-wrap items-center gap-1.5">
           {eras.map((era) => (
@@ -51,7 +51,7 @@ export function HistoryTimetable() {
               onClick={() => setSelectedEra(era.id)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 selectedEra === era.id
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
@@ -93,7 +93,7 @@ export function HistoryTimetable() {
           {filteredData.map((item, idx) => (
             <div
               key={item.id}
-              className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-md hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center group"
+              className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center group"
             >
               {/* Left Column: Contextual Historical Photography */}
               <div className="md:col-span-4 relative h-44 sm:h-52 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">
@@ -106,16 +106,16 @@ export function HistoryTimetable() {
 
                 {/* Year Pill over photo */}
                 <div className="absolute top-2.5 left-2.5 z-10">
-                  <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
+                  <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-black/80 text-white backdrop-blur-md border border-white/20">
                     {item.year}
                   </span>
                 </div>
 
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 text-white z-10">
-                  <span className="text-[11px] font-mono font-bold block opacity-90 truncate" style={{ color: item.tagColor }}>
+                  <span className="text-[11px] font-bold block opacity-90 truncate" style={{ color: item.tagColor }}>
                     {item.era}
                   </span>
-                  <span className="text-xs font-mono block opacity-80 truncate">
+                  <span className="text-xs block opacity-80 truncate">
                     {item.koreanTitle.split('(')[0]}
                   </span>
                 </div>
@@ -124,10 +124,10 @@ export function HistoryTimetable() {
               {/* Right Column: Historical Summary & Bulleted Facts */}
               <div className="md:col-span-8 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-brand-red">
+                  <span className="text-xs font-bold text-brand-red">
                     {item.koreanTitle}
                   </span>
-                  <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono">
+                  <div className="flex items-center gap-1.5 text-xs text-zinc-500">
                     <User className="w-3.5 h-3.5 text-zinc-400" />
                     <span className="truncate max-w-[240px]">{item.keyFigures}</span>
                   </div>
@@ -163,7 +163,7 @@ export function HistoryTimetable() {
         <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse min-w-[700px]">
             <thead>
-              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px] font-mono">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 uppercase text-[11px]">
                 <th className="py-3 px-4">Year / Date</th>
                 <th className="py-3 px-4">Photo Preview</th>
                 <th className="py-3 px-4">Historical Milestone &amp; Korean Name</th>
@@ -174,7 +174,7 @@ export function HistoryTimetable() {
             <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
               {filteredData.map((item) => (
                 <tr key={item.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors">
-                  <td className="py-4 px-4 font-mono font-bold text-brand-red whitespace-nowrap align-top">
+                  <td className="py-4 px-4 font-bold text-brand-red whitespace-nowrap align-top">
                     {item.year}
                   </td>
                   <td className="py-4 px-4 align-top">
@@ -186,17 +186,17 @@ export function HistoryTimetable() {
                     <strong className="text-zinc-900 dark:text-white font-bold block mb-0.5">
                       {item.title}
                     </strong>
-                    <span className="text-[11px] font-mono text-zinc-400 block">
+                    <span className="text-[11px] text-zinc-400 block">
                       {item.koreanTitle}
                     </span>
-                    <span className="text-[11px] font-mono text-brand-red uppercase">
+                    <span className="text-[11px] text-brand-red uppercase">
                       {item.era}
                     </span>
                   </td>
                   <td className="py-4 px-4 text-zinc-700 dark:text-zinc-300 align-top">
-                    <span className="font-mono text-xs block">{item.keyFigures}</span>
+                    <span className="text-xs block">{item.keyFigures}</span>
                   </td>
-                  <td className="py-4 px-4 text-zinc-600 dark:text-zinc-400 font-light align-top leading-relaxed max-w-sm">
+                  <td className="py-4 px-4 text-zinc-600 dark:text-zinc-400 align-top leading-relaxed max-w-sm">
                     {item.summary}
                   </td>
                 </tr>

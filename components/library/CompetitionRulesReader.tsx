@@ -131,19 +131,19 @@ export function CompetitionRulesReader() {
       {/* ==================================================================== */}
       {/* 3 MASTER CATEGORIES SWITCHER BAR */}
       {/* ==================================================================== */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6 relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6 relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             {/* IN-FORCE REGULATION BADGE & ENFORCEMENT TIMELINE */}
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-red text-white">
+              <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-brand-red text-white">
                 {ruleT.badgeAssembly}
               </span>
-              <span className="px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">
+              <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">
                 📅 {ruleT.badgeInForce}
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[11px] font-mono text-zinc-500">{currentPdf.edition}</span>
+              <span className="text-[11px] text-zinc-500">{currentPdf.edition}</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -171,7 +171,7 @@ export function CompetitionRulesReader() {
                 onClick={() => setViewStyle('mindmap')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
                   viewStyle === 'mindmap'
-                    ? 'bg-brand-red text-white shadow-brand-glow font-black'
+                    ? 'bg-brand-red text-white font-black'
                     : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
@@ -182,7 +182,7 @@ export function CompetitionRulesReader() {
             {currentPdf.file && (
               <button
                 onClick={() => setIsPdfModalOpen(true)}
-                className="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-all shadow-md inline-flex items-center gap-2 cursor-pointer hover:bg-brand-red hover:text-white"
+                className="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider transition-all inline-flex items-center gap-2 cursor-pointer hover:bg-brand-red hover:text-white"
               >
                 <FileText className="w-3.5 h-3.5" /> {ruleT.btnPdf}
               </button>
@@ -197,7 +197,7 @@ export function CompetitionRulesReader() {
             onClick={() => setMasterCategory('kyorugi')}
             className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
               masterCategory === 'kyorugi'
-                ? 'bg-brand-red text-white border-brand-red shadow-brand-glow'
+                ? 'bg-brand-red text-white border-brand-red'
                 : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-brand-red/50'
             }`}
           >
@@ -206,7 +206,7 @@ export function CompetitionRulesReader() {
                 <Zap className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-mono uppercase block opacity-80">{ruleT.masterCategories.kyorugi.sub}</span>
+                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.kyorugi.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.kyorugi.label}</strong>
               </div>
             </div>
@@ -223,11 +223,11 @@ export function CompetitionRulesReader() {
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className={`p-2.5 rounded-lg ${masterCategory === 'poomsae' ? 'bg-zinc-800 text-white dark:bg-zinc-200 dark:text-black' : 'bg-blue-500/10 text-blue-500'}`}>
+              <div className={`p-2.5 rounded-lg ${masterCategory === 'poomsae' ? 'bg-zinc-800 text-white dark:bg-zinc-200 dark:text-black' : 'bg-zinc-500/10 text-zinc-500'}`}>
                 <Award className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-mono uppercase block opacity-80">{ruleT.masterCategories.poomsae.sub}</span>
+                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.poomsae.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.poomsae.label}</strong>
               </div>
             </div>
@@ -239,20 +239,20 @@ export function CompetitionRulesReader() {
             onClick={() => setMasterCategory('hanmadang')}
             className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
               masterCategory === 'hanmadang'
-                ? 'bg-amber-600 text-white border-amber-600 shadow-xl'
-                : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-amber-500/50'
+                ? 'bg-zinc-600 text-white border-zinc-600 shadow-xl'
+                : 'bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-500/50'
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className={`p-2.5 rounded-lg ${masterCategory === 'hanmadang' ? 'bg-white/20 text-white' : 'bg-amber-500/10 text-amber-500'}`}>
+              <div className={`p-2.5 rounded-lg ${masterCategory === 'hanmadang' ? 'bg-white/20 text-white' : 'bg-zinc-500/10 text-zinc-500'}`}>
                 <Flame className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-mono uppercase block opacity-80">{ruleT.masterCategories.hanmadang.sub}</span>
+                <span className="text-[11px] uppercase block opacity-80">{ruleT.masterCategories.hanmadang.sub}</span>
                 <strong className="text-sm font-black uppercase tracking-tight block">{ruleT.masterCategories.hanmadang.label}</strong>
               </div>
             </div>
-            <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-amber-500/20 text-amber-700 dark:text-amber-300">
+            <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-zinc-500/20 text-zinc-700 dark:text-zinc-300">
               {ruleT.previewBadge}
             </span>
           </button>
@@ -263,7 +263,7 @@ export function CompetitionRulesReader() {
       {/* GLOBAL MINDMAP / STRUCTURAL ARCHITECTURE TREE VIEW */}
       {/* ==================================================================== */}
       {viewStyle === 'mindmap' && (
-        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6 animate-fade-in">
+        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6 animate-fade-in">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Network className="w-5 h-5 text-brand-red" />
@@ -271,12 +271,12 @@ export function CompetitionRulesReader() {
                 {ruleT.mindmap.title}
               </h3>
             </div>
-            <span className="text-xs font-mono text-zinc-400">{ruleT.mindmap.sub}</span>
+            <span className="text-xs text-zinc-400">{ruleT.mindmap.sub}</span>
           </div>
 
           <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-6 overflow-x-auto">
             <div className="flex justify-center">
-              <div className="px-5 py-3 rounded-xl bg-brand-red text-white font-mono font-black text-xs uppercase tracking-wider shadow-brand-glow text-center">
+              <div className="px-5 py-3 rounded-xl bg-brand-red text-white font-black text-xs uppercase tracking-wider text-center">
                 {ruleT.mindmap.root}
               </div>
             </div>
@@ -284,42 +284,42 @@ export function CompetitionRulesReader() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 relative">
               {/* Branch 1: WT Kyorugi */}
               <div className="p-4 rounded-xl bg-zinc-900 border border-brand-red/40 space-y-3">
-                <div className="flex items-center gap-2 text-brand-red font-mono font-bold text-xs uppercase">
+                <div className="flex items-center gap-2 text-brand-red font-bold text-xs uppercase">
                   <Zap className="w-4 h-4" /> {ruleT.mindmap.kyorugiBranch}
                 </div>
-                <div className="space-y-1.5 text-xs font-mono text-zinc-300">
+                <div className="space-y-1.5 text-xs text-zinc-300">
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.k1}</span>
                     <span className="text-brand-red">{ruleT.mindmap.k1Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.k2}</span>
-                    <span className="text-emerald-400">{ruleT.mindmap.k2Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.k2Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.k3}</span>
-                    <span className="text-amber-400">{ruleT.mindmap.k3Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.k3Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.k4}</span>
-                    <span className="text-blue-400">{ruleT.mindmap.k4Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.k4Val}</span>
                   </div>
                 </div>
               </div>
 
               {/* Branch 2: WT Poomsae */}
-              <div className="p-4 rounded-xl bg-zinc-900 border border-blue-500/40 space-y-3">
-                <div className="flex items-center gap-2 text-blue-400 font-mono font-bold text-xs uppercase">
+              <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-500/40 space-y-3">
+                <div className="flex items-center gap-2 text-zinc-400 font-bold text-xs uppercase">
                   <Award className="w-4 h-4" /> {ruleT.mindmap.poomsaeBranch}
                 </div>
-                <div className="space-y-1.5 text-xs font-mono text-zinc-300">
+                <div className="space-y-1.5 text-xs text-zinc-300">
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.p1}</span>
-                    <span className="text-blue-400">{ruleT.mindmap.p1Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.p1Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.p2}</span>
-                    <span className="text-emerald-400">{ruleT.mindmap.p2Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.p2Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.p3}</span>
@@ -327,28 +327,28 @@ export function CompetitionRulesReader() {
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.p4}</span>
-                    <span className="text-purple-400">{ruleT.mindmap.p4Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.p4Val}</span>
                   </div>
                 </div>
               </div>
 
               {/* Branch 3: Hanmadang */}
-              <div className="p-4 rounded-xl bg-zinc-900 border border-amber-500/40 space-y-3">
-                <div className="flex items-center gap-2 text-amber-400 font-mono font-bold text-xs uppercase">
+              <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-500/40 space-y-3">
+                <div className="flex items-center gap-2 text-zinc-400 font-bold text-xs uppercase">
                   <Flame className="w-4 h-4" /> {ruleT.mindmap.hanmadangBranch}
                 </div>
-                <div className="space-y-1.5 text-xs font-mono text-zinc-300">
+                <div className="space-y-1.5 text-xs text-zinc-300">
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.h1}</span>
-                    <span className="text-amber-400">{ruleT.mindmap.h1Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.h1Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.h2}</span>
-                    <span className="text-emerald-400">{ruleT.mindmap.h2Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.h2Val}</span>
                   </div>
                   <div className="p-2 rounded bg-zinc-950 border border-zinc-800 flex justify-between">
                     <span>{ruleT.mindmap.h3}</span>
-                    <span className="text-blue-400">{ruleT.mindmap.h3Val}</span>
+                    <span className="text-zinc-400">{ruleT.mindmap.h3Val}</span>
                   </div>
                 </div>
               </div>
@@ -368,7 +368,7 @@ export function CompetitionRulesReader() {
               onClick={() => setKyorugiSubCategory('overview')}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 kyorugiSubCategory === 'overview'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
@@ -380,11 +380,11 @@ export function CompetitionRulesReader() {
               onClick={() => setKyorugiSubCategory('divisions')}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 kyorugiSubCategory === 'divisions'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Scale className="w-3.5 h-3.5 text-blue-500" />
+              <Scale className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.kyorugiTabs.divisions}</span>
             </button>
 
@@ -392,11 +392,11 @@ export function CompetitionRulesReader() {
               onClick={() => setKyorugiSubCategory('scoring')}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 kyorugiSubCategory === 'scoring'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Zap className="w-3.5 h-3.5 text-amber-500" />
+              <Zap className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.kyorugiTabs.scoring}</span>
             </button>
 
@@ -404,11 +404,11 @@ export function CompetitionRulesReader() {
               onClick={() => setKyorugiSubCategory('safety')}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 kyorugiSubCategory === 'safety'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Heart className="w-3.5 h-3.5 text-emerald-500" />
+              <Heart className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.kyorugiTabs.safety}</span>
             </button>
 
@@ -416,11 +416,11 @@ export function CompetitionRulesReader() {
               onClick={() => setKyorugiSubCategory('guide')}
               className={`flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 kyorugiSubCategory === 'guide'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-purple-500" />
+              <Sparkles className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.kyorugiTabs.guide}</span>
             </button>
           </div>
@@ -431,7 +431,7 @@ export function CompetitionRulesReader() {
           {kyorugiSubCategory === 'overview' && (
             <div className="space-y-6 animate-fade-in">
               {/* General Governance Card */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-brand-red" />
@@ -439,7 +439,7 @@ export function CompetitionRulesReader() {
                       {ruleT.overview.govTitle}
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red/10 text-brand-red uppercase">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-red/10 text-brand-red uppercase">
                     {ruleT.overview.govBadge}
                   </span>
                 </div>
@@ -451,21 +451,21 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.standardTitle}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.overview.standardDesc}
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.modTitle}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.overview.modDesc}
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.codeTitle}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.overview.codeDesc}
                     </span>
                   </div>
@@ -473,7 +473,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Competition Area & Visual Alert Area Map */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -483,24 +483,24 @@ export function CompetitionRulesReader() {
                       {ruleT.overview.fopSub}
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-500/10 text-amber-500 uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase self-start sm:self-auto">
                     {ruleT.overview.alertBadge}
                   </span>
                 </div>
 
                 <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
                   <div className="text-center mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-zinc-800 text-zinc-300 border border-zinc-700 inline-block">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-zinc-800 text-zinc-300 border border-zinc-700 inline-block">
                       {ruleT.overview.safetyOuter}
                     </span>
                   </div>
 
                   <div className="relative mx-auto max-w-lg h-64 sm:h-72 rounded-2xl bg-zinc-900 border-2 border-dashed border-zinc-700 p-3 flex flex-col justify-between items-center">
                     {/* 60cm Alert Area Band */}
-                    <div className="w-full h-full rounded-xl bg-amber-500/15 border-4 border-amber-500/60 p-3 flex flex-col justify-between items-center relative">
-                      <div className="w-full flex justify-between items-center text-[11px] font-mono text-amber-400">
+                    <div className="w-full h-full rounded-xl bg-zinc-500/15 border-4 border-zinc-500/60 p-3 flex flex-col justify-between items-center relative">
+                      <div className="w-full flex justify-between items-center text-[11px] text-zinc-400">
                         <span>{ruleT.overview.boundaryLine}</span>
-                        <span className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-[11px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-zinc-500/20 border border-zinc-500/40 text-[11px] font-bold">
                           {ruleT.overview.alertBand}
                         </span>
                         <span>{ruleT.overview.boundaryLine}</span>
@@ -508,15 +508,15 @@ export function CompetitionRulesReader() {
 
                       {/* Inner Contest Area */}
                       <div className="w-4/5 h-3/5 rounded-lg bg-zinc-950/90 border border-zinc-700 flex flex-col items-center justify-center space-y-1 text-center p-2">
-                        <span className="text-xs font-mono font-black text-white">
+                        <span className="text-xs font-black text-white">
                           {ruleT.overview.contestArea}
                         </span>
-                        <span className="text-[11px] font-mono text-zinc-400">
+                        <span className="text-[11px] text-zinc-400">
                           {ruleT.overview.contestSub}
                         </span>
                       </div>
 
-                      <div className="w-full flex justify-between items-center text-[11px] font-mono text-amber-400">
+                      <div className="w-full flex justify-between items-center text-[11px] text-zinc-400">
                         <span>{ruleT.overview.coachStation}</span>
                         <span className="text-zinc-500 text-[11px]">{ruleT.overview.noTapeNote}</span>
                         <span>{ruleT.overview.coachStation}</span>
@@ -525,14 +525,14 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="text-center mt-4">
-                    <span className="text-xs font-mono text-zinc-400">
+                    <span className="text-xs text-zinc-400">
                       {ruleT.overview.platformNote}
                     </span>
                   </div>
                 </div>
 
                 {/* Environmental Technical Standards Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.lightingTitle}</strong>
                     <span className="text-zinc-500 text-xs">&ge; 1,600 lux on FOP</span>
@@ -555,12 +555,12 @@ export function CompetitionRulesReader() {
               {/* Eligibility, 36-Month Nationality Transfer & Equipment Rules */}
               <div className="grid sm:grid-cols-2 gap-6">
                 {/* Athlete Eligibility */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {eligibilityAndGear.eligibilityTitle}
                     </h4>
-                    <span className="text-[11px] font-mono text-brand-red font-bold">{eligibilityAndGear.eligibilityBadge}</span>
+                    <span className="text-[11px] text-brand-red font-bold">{eligibilityAndGear.eligibilityBadge}</span>
                   </div>
                   <ul className="space-y-2 text-[13px] text-zinc-600 dark:text-zinc-400 list-disc pl-4 leading-relaxed">
                     {eligibilityAndGear.eligibilityItems.map((item, idx) => (
@@ -570,12 +570,12 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Uniform & Safety Equipment */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {eligibilityAndGear.gearTitle}
                     </h4>
-                    <span className="text-[11px] font-mono text-emerald-500 font-bold">{eligibilityAndGear.gearBadge}</span>
+                    <span className="text-[11px] text-zinc-500 font-bold">{eligibilityAndGear.gearBadge}</span>
                   </div>
                   <ul className="space-y-2 text-[13px] text-zinc-600 dark:text-zinc-400 list-disc pl-4 leading-relaxed">
                     {eligibilityAndGear.gearItems.map((item, idx) => (
@@ -586,7 +586,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* OCTAGON (OLYMPIC) VS SQUARE (CLUB) TACTICAL COMPARISON */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -596,12 +596,12 @@ export function CompetitionRulesReader() {
                       {ringDynamics.octagonDescription}
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-500/10 text-purple-500 uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase self-start sm:self-auto">
                     {ruleT.previewBadge}
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   {/* Octagon Shape */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <div className="flex items-center justify-between">
@@ -621,8 +621,8 @@ export function CompetitionRulesReader() {
                   {/* Square Shape */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <div className="flex items-center justify-between">
-                      <strong className="text-blue-500 uppercase font-bold text-xs">{ringDynamics.squareTitle}</strong>
-                      <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 text-[11px] font-bold">{ringDynamics.squareSubtitle}</span>
+                      <strong className="text-zinc-500 uppercase font-bold text-xs">{ringDynamics.squareTitle}</strong>
+                      <span className="px-2 py-0.5 rounded bg-zinc-500/10 text-zinc-500 text-[11px] font-bold">{ringDynamics.squareSubtitle}</span>
                     </div>
                     <p className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                       {ringDynamics.squareDescription}
@@ -637,18 +637,18 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* FIELD OFFICIALS & MATCH PERSONNEL ROLES */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-emerald-500" />
+                    <Users className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {ruleT.overview.officialsTitle}
                     </h4>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400">{ruleT.overview.officialsDesc}</span>
+                  <span className="text-xs text-zinc-400">{ruleT.overview.officialsDesc}</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
                   {officials.map((off, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <strong className={`${off.color} block font-bold text-xs`}>{off.title}</strong>
@@ -661,7 +661,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* OFFICIAL REFEREE COMMANDS, HAND SIGNALS & COUNTING MECHANICS */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Megaphone className="w-5 h-5 text-brand-red" />
@@ -669,12 +669,12 @@ export function CompetitionRulesReader() {
                       {ruleT.overview.signalsTitle}
                     </h4>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red/10 text-brand-red uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-red/10 text-brand-red uppercase self-start sm:self-auto">
                     {ruleT.overview.signalsSub}
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
                   {refereeSignals.map((sig, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                       <div className="flex justify-between items-center">
@@ -698,7 +698,7 @@ export function CompetitionRulesReader() {
           {kyorugiSubCategory === 'divisions' && (
             <div className="space-y-6 animate-fade-in">
               {/* Senior 8-Category vs 6-Category Matrix */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -708,7 +708,7 @@ export function CompetitionRulesReader() {
                       {ruleT.divisions.sub}
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500 uppercase">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase">
                     WT Article 4 &amp; 5
                   </span>
                 </div>
@@ -716,14 +716,14 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3 text-brand-red">{ruleT.divisions.worldSenior} (Men)</th>
-                        <th className="p-3 text-purple-500">{ruleT.divisions.worldSenior} (Women)</th>
-                        <th className="p-3 text-blue-500">6-Cat (Men)</th>
-                        <th className="p-3 text-emerald-500">6-Cat (Women)</th>
+                        <th className="p-3 text-zinc-500">{ruleT.divisions.worldSenior} (Women)</th>
+                        <th className="p-3 text-zinc-500">6-Cat (Men)</th>
+                        <th className="p-3 text-zinc-500">6-Cat (Women)</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono text-xs">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 text-xs">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-2.5">Under 54 kg (&le; 54.0 kg)</td>
                         <td className="p-2.5">Under 46 kg (&le; 46.0 kg)</td>
@@ -757,8 +757,8 @@ export function CompetitionRulesReader() {
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-2.5">Under 80 kg (74.1–80.0 kg)</td>
                         <td className="p-2.5">Under 67 kg (62.1–67.0 kg)</td>
-                        <td className="p-2.5 font-bold text-blue-400">Over 82 kg (&gt; 82.0 kg)</td>
-                        <td className="p-2.5 font-bold text-emerald-400">Over 70 kg (&gt; 70.0 kg)</td>
+                        <td className="p-2.5 font-bold text-zinc-400">Over 82 kg (&gt; 82.0 kg)</td>
+                        <td className="p-2.5 font-bold text-zinc-400">Over 70 kg (&gt; 70.0 kg)</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-2.5">Under 87 kg (80.1–87.0 kg)</td>
@@ -768,7 +768,7 @@ export function CompetitionRulesReader() {
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-2.5 font-bold text-brand-red">Over 87 kg (&gt; 87.0 kg)</td>
-                        <td className="p-2.5 font-bold text-purple-400">Over 73 kg (&gt; 73.0 kg)</td>
+                        <td className="p-2.5 font-bold text-zinc-400">Over 73 kg (&gt; 73.0 kg)</td>
                         <td className="p-2.5 text-zinc-400">—</td>
                         <td className="p-2.5 text-zinc-400">—</td>
                       </tr>
@@ -779,11 +779,11 @@ export function CompetitionRulesReader() {
 
               {/* Olympic & Youth Olympic Divisions */}
               <div className="grid sm:grid-cols-2 gap-6">
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.divisions.olympicMen} &amp; {ruleT.divisions.olympicWomen}
                   </h4>
-                  <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+                  <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <strong className="text-brand-red block font-bold">{ruleT.divisions.olympicMen}:</strong>
                       <div>&bull; Under 58 kg (&le; 58.0 kg)</div>
@@ -792,7 +792,7 @@ export function CompetitionRulesReader() {
                       <div>&bull; Over 80 kg (&gt; 80.0 kg)</div>
                     </div>
                     <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <strong className="text-purple-500 block font-bold">{ruleT.divisions.olympicWomen}:</strong>
+                      <strong className="text-zinc-500 block font-bold">{ruleT.divisions.olympicWomen}:</strong>
                       <div>&bull; Under 49 kg (&le; 49.0 kg)</div>
                       <div>&bull; Under 57 kg (49.1–57.0 kg)</div>
                       <div>&bull; Under 67 kg (57.1–67.0 kg)</div>
@@ -801,29 +801,29 @@ export function CompetitionRulesReader() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.mindmap.title}
                   </h4>
-                  <div className="space-y-1.5 text-xs font-mono">
+                  <div className="space-y-1.5 text-xs">
                     <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex justify-between">
                       <strong className="text-zinc-900 dark:text-white">Male Pair / Team (3):</strong>
                       <span className="text-brand-red font-bold">&le; 160 kg (Pair) / 240 kg (3)</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex justify-between">
                       <strong className="text-zinc-900 dark:text-white">Female Pair / Team (3):</strong>
-                      <span className="text-purple-500 font-bold">&le; 135 kg (Pair) / 200 kg (3)</span>
+                      <span className="text-zinc-500 font-bold">&le; 135 kg (Pair) / 200 kg (3)</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex justify-between">
                       <strong className="text-zinc-900 dark:text-white">Mixed Team (4: 2M + 2F):</strong>
-                      <span className="text-emerald-500 font-bold">2F &le; 135kg &bull; 2M &le; 160kg</span>
+                      <span className="text-zinc-500 font-bold">2F &le; 135kg &bull; 2M &le; 160kg</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* CADET HEIGHT CATEGORIES WITH MANDATORY MIN/MAX WEIGHT LIMITS */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -838,7 +838,7 @@ export function CompetitionRulesReader() {
                   <div className="p-1 rounded-xl bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center gap-1 self-start sm:self-auto">
                     <button
                       onClick={() => setSelectedCadetGender('Male')}
-                      className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         selectedCadetGender === 'Male'
                           ? 'bg-brand-red text-white shadow-sm'
                           : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
@@ -848,9 +848,9 @@ export function CompetitionRulesReader() {
                     </button>
                     <button
                       onClick={() => setSelectedCadetGender('Female')}
-                      className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                         selectedCadetGender === 'Female'
-                          ? 'bg-purple-600 text-white shadow-sm'
+                          ? 'bg-zinc-600 text-white shadow-sm'
                         : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
                       }`}
                     >
@@ -862,20 +862,20 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">{ruleT.divisions.colHeight}</th>
-                        <th className="p-3 text-emerald-500">{ruleT.divisions.colMinWeight}</th>
+                        <th className="p-3 text-zinc-500">{ruleT.divisions.colMinWeight}</th>
                         <th className="p-3 text-brand-red">{ruleT.divisions.colMaxWeight}</th>
                         <th className="p-3">Safety Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                       {cadetHeightWeightLimits
                         .filter((c) => c.gender === selectedCadetGender)
                         .map((ch, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-3 font-bold text-zinc-900 dark:text-white">{ch.heightClass}</td>
-                            <td className="p-3 text-emerald-600 dark:text-emerald-400 font-bold">{ch.minWeight}</td>
+                            <td className="p-3 text-zinc-600 dark:text-zinc-400 font-bold">{ch.minWeight}</td>
                             <td className="p-3 text-brand-red font-bold">{ch.maxWeight}</td>
                             <td className="p-3 text-xs text-zinc-500">WT Certified Safe Weight Range</td>
                           </tr>
@@ -886,26 +886,26 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Weigh-in Protocols & Random Rates */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Weigh-in Protocol, Random Selection &amp; Tolerances (Article 9)
                 </h4>
-                <div className="grid sm:grid-cols-3 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-3 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">General Weigh-in:</strong>
-                    <span className="text-zinc-500 font-light block">
+                    <span className="text-zinc-500 block">
                       1 day prior to competition (max 2 hours). 1 additional attempt granted within the official period.
                     </span>
                   </div>
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Random Weigh-in (+5%):</strong>
-                    <span className="text-zinc-500 font-light block">
+                    <span className="text-zinc-500 block">
                       Morning of competition (ends 30m prior). <strong>+5% weight tolerance</strong> allowed above division limit.
                     </span>
                   </div>
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Underwear Allowance:</strong>
-                    <span className="text-zinc-500 font-light block">
+                    <span className="text-zinc-500 block">
                       Cadet &amp; Junior athletes must wear underwear and receive a <strong>100g compensation allowance</strong>.
                     </span>
                   </div>
@@ -920,7 +920,7 @@ export function CompetitionRulesReader() {
           {kyorugiSubCategory === 'scoring' && (
             <div className="space-y-6 animate-fade-in">
               {/* BEST-OF-3 SYSTEM CORE FRAMEWORK & POINT GAP (PTG) CARD */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Flame className="w-5 h-5 text-brand-red" />
@@ -928,7 +928,7 @@ export function CompetitionRulesReader() {
                       {ruleT.scoring.bestOf3Title}
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red text-white uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-red text-white uppercase self-start sm:self-auto">
                     {ruleT.scoring.bestOf3Badge}
                   </span>
                 </div>
@@ -937,7 +937,7 @@ export function CompetitionRulesReader() {
                   {ruleT.scoring.bestOf3Desc}
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-brand-red block font-bold text-xs">Match Structure:</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
@@ -946,21 +946,21 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <strong className="text-blue-500 block font-bold text-xs">Round &amp; Match Winner:</strong>
+                    <strong className="text-zinc-500 block font-bold text-xs">Round &amp; Match Winner:</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
                       Most points scored in a round wins that round. The <strong>first fighter to win 2 rounds</strong> wins the match.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <strong className="text-amber-500 block font-bold text-xs">{ruleT.scoring.pointGapTitle}:</strong>
+                    <strong className="text-zinc-500 block font-bold text-xs">{ruleT.scoring.pointGapTitle}:</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
                       {ruleT.scoring.pointGapDesc}
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <strong className="text-purple-500 block font-bold text-xs">Penalty Cap (PUN):</strong>
+                    <strong className="text-zinc-500 block font-bold text-xs">Penalty Cap (PUN):</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
                       Accumulating <strong>5 Gam-Jeoms in a single round</strong> triggers an immediate round loss by punitive declaration.
                     </span>
@@ -969,7 +969,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Point Scoring Values Matrix Table with Scoring Mechanisms */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-brand-red" />
@@ -977,13 +977,13 @@ export function CompetitionRulesReader() {
                       {ruleT.scoring.pointsTitle}
                     </h4>
                   </div>
-                  <span className="text-[11px] font-mono text-zinc-400 uppercase">Daedo &bull; KP&amp;P Electronic System</span>
+                  <span className="text-[11px] text-zinc-400 uppercase">Daedo &bull; KP&amp;P Electronic System</span>
                 </div>
 
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3.5">{ruleT.scoring.colTechnique}</th>
                         <th className="p-3.5 text-center">{ruleT.scoring.colPoints}</th>
                         <th className="p-3.5">{ruleT.scoring.colTarget}</th>
@@ -991,13 +991,13 @@ export function CompetitionRulesReader() {
                         <th className="p-3.5">{ruleT.scoring.colDesc}</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                       {pointValues.map((pv, idx) => (
                         <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                           <td className="p-3.5 font-bold text-zinc-900 dark:text-white">{pv.technique}</td>
-                          <td className="p-3.5 font-mono font-black text-brand-red text-center whitespace-nowrap">{pv.points}</td>
-                          <td className="p-3.5 text-blue-600 dark:text-blue-400 font-mono text-xs">{pv.target}</td>
-                          <td className="p-3.5 font-mono text-emerald-500 font-bold">{pv.bonus}</td>
+                          <td className="p-3.5 font-black text-brand-red text-center whitespace-nowrap">{pv.points}</td>
+                          <td className="p-3.5 text-zinc-600 dark:text-zinc-400 text-xs">{pv.target}</td>
+                          <td className="p-3.5 text-zinc-500 font-bold">{pv.bonus}</td>
                           <td className="p-3.5 text-zinc-500 dark:text-zinc-400">{pv.description}</td>
                         </tr>
                       ))}
@@ -1005,12 +1005,12 @@ export function CompetitionRulesReader() {
                   </table>
                 </div>
 
-                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-zinc-500/10 border border-zinc-500/20 text-zinc-700 dark:text-zinc-300 text-xs">
                   * <strong>Back Kick (Dwichagi) Requirement:</strong> Must involve simultaneous rotation of head and shoulder to be validated as a turning kick for technical bonus points.
                 </div>
 
                 {/* Hand Techniques & Scoring Boundary Rules Card */}
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono pt-2">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs pt-2">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-brand-red font-bold uppercase block text-xs">
                       1. Legal Hand Techniques Limitation
@@ -1024,7 +1024,7 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
-                    <strong className="text-blue-500 font-bold uppercase block text-xs">
+                    <strong className="text-zinc-500 font-bold uppercase block text-xs">
                       2. Historical Context: Kyong-go vs Gam-jeom
                     </strong>
                     <p className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
@@ -1039,16 +1039,16 @@ export function CompetitionRulesReader() {
 
               {/* Best-of-3 Format, Tie-Breakers & Judge Thresholds */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
-                  <span className="text-xs font-mono font-bold uppercase text-brand-red block">
+                <div className="lg:col-span-5 p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
+                  <span className="text-xs font-bold uppercase text-brand-red block">
                     {ruleT.scoring.tieBreakTitle}
                   </span>
                   <p className="text-[13px] text-zinc-600 dark:text-zinc-300 leading-relaxed">
                     If a round ends in an equal score, the round winner is determined strictly by the following criteria in order:
                   </p>
                   
-                  <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 text-xs font-mono">
-                    <ol className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light list-decimal pl-4">
+                  <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 text-xs">
+                    <ol className="space-y-1 text-zinc-600 dark:text-zinc-400 list-decimal pl-4">
                       <li>{ruleT.scoring.tieBreak1}</li>
                       <li>{ruleT.scoring.tieBreak2}</li>
                       <li>{ruleT.scoring.tieBreak3}</li>
@@ -1056,7 +1056,7 @@ export function CompetitionRulesReader() {
                     </ol>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-mono">
+                  <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 text-xs">
                     <strong>Corner Judge Confirmation Thresholds:</strong><br />
                     &bull; 3 Corner Judges: Min 2 must confirm.<br />
                     &bull; 2 Corner Judges: Both 2 must confirm.<br />
@@ -1064,30 +1064,30 @@ export function CompetitionRulesReader() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-7 p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="lg:col-span-7 p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold uppercase text-amber-500 block">
+                    <span className="text-xs font-bold uppercase text-zinc-500 block">
                       {ruleT.scoring.gamjeomTitle}
                     </span>
-                    <span className="text-[11px] font-mono text-brand-red font-bold">5 Gam-Jeoms = Round Loss</span>
+                    <span className="text-[11px] text-brand-red font-bold">5 Gam-Jeoms = Round Loss</span>
                   </div>
 
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 max-h-96 overflow-y-auto">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead className="sticky top-0 bg-zinc-100 dark:bg-zinc-800">
-                        <tr className="text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                        <tr className="text-zinc-900 dark:text-white uppercase text-[11px]">
                           <th className="p-2.5">{ruleT.scoring.colCode}</th>
                           <th className="p-2.5">{ruleT.scoring.colInfraction}</th>
                           <th className="p-2.5">{ruleT.scoring.colPenalty}</th>
                           <th className="p-2.5">{ruleT.scoring.colExplanation}</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                         {gamjeomRules.map((g, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                            <td className="p-2.5 font-mono font-bold text-zinc-500">{g.code}</td>
+                            <td className="p-2.5 font-bold text-zinc-500">{g.code}</td>
                             <td className="p-2.5 font-bold text-zinc-900 dark:text-white">{g.infraction}</td>
-                            <td className="p-2.5 font-mono text-amber-500 font-bold whitespace-nowrap">{g.penalty}</td>
+                            <td className="p-2.5 text-zinc-500 font-bold whitespace-nowrap">{g.penalty}</td>
                             <td className="p-2.5 text-zinc-500">{g.explanation}</td>
                           </tr>
                         ))}
@@ -1098,11 +1098,11 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Categorized Prohibited Acts Breakdown */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   {ruleT.scoring.gamjeomTitle}
                 </h4>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
                   {prohibitedCategories.map((cat, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <strong className={`${cat.color} block font-bold text-xs`}>{cat.title}</strong>
@@ -1122,7 +1122,7 @@ export function CompetitionRulesReader() {
           {kyorugiSubCategory === 'safety' && (
             <div className="space-y-6 animate-fade-in">
               {/* Concussion Safety & Mandatory Suspensions */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Shield className="w-5 h-5 text-brand-red" />
@@ -1130,17 +1130,17 @@ export function CompetitionRulesReader() {
                       Knock Down, Concussion Protocols &amp; Mandatory Suspensions (Articles 17–18)
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red text-white uppercase">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-red text-white uppercase">
                     Mandatory SCAT5 Protocol
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase text-xs">
                       1. Knock Down Mandatory 8-Count
                     </strong>
-                    <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Center referee counts aloud from &quot;Ha-nah&quot; (1) to &quot;Yeol&quot; (10). The count <strong>must reach &quot;Yeo-dul&quot; (8)</strong> before resuming match, even if the athlete indicates readiness earlier.
                     </p>
                   </div>
@@ -1149,7 +1149,7 @@ export function CompetitionRulesReader() {
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase text-xs">
                       2. Retrospective Video Review
                     </strong>
-                    <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       WT Medical Committee may retrospectively review head injury footage within <strong>30 days</strong> and override on-site medical decisions to enforce mandatory suspension periods.
                     </p>
                   </div>
@@ -1159,13 +1159,13 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Division / Occurrence</th>
                         <th className="p-3 text-brand-red">Mandatory Non-Reducible Suspension</th>
                         <th className="p-3">Return to Play Conditions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Senior Contestants</td>
                         <td className="p-3 text-brand-red font-bold">30 Days Mandatory Suspension</td>
@@ -1183,12 +1183,12 @@ export function CompetitionRulesReader() {
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">2nd Concussion within 90 Days</td>
-                        <td className="p-3 text-purple-500 font-bold">90 Days Mandatory Suspension</td>
+                        <td className="p-3 text-zinc-500 font-bold">90 Days Mandatory Suspension</td>
                         <td className="p-3 text-zinc-500">Requires comprehensive neurological clearance</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">3rd Concussion within 180 Days</td>
-                        <td className="p-3 text-purple-500 font-bold">180 Days Mandatory Suspension</td>
+                        <td className="p-3 text-zinc-500 font-bold">180 Days Mandatory Suspension</td>
                         <td className="p-3 text-zinc-500">Full medical committee review required</td>
                       </tr>
                     </tbody>
@@ -1197,15 +1197,15 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* THE YELLOW CARD PROTOCOL & SANCTION REQUEST TO CSB */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <Flag className="w-5 h-5 text-amber-500" />
+                    <Flag className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       The Yellow Card Protocol &amp; Sanction Request Hierarchy
                     </h4>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-500/10 text-amber-500 uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase self-start sm:self-auto">
                     CSB Disciplinary Mechanism
                   </span>
                 </div>
@@ -1215,15 +1215,15 @@ export function CompetitionRulesReader() {
                 </p>
 
                 {/* Yellow Card Immediate Impact Callout */}
-                <div className="grid sm:grid-cols-2 gap-3 text-xs font-mono">
-                  <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 space-y-1">
-                    <strong className="text-amber-600 dark:text-amber-400 block font-bold">1. Immediate Match Impact:</strong>
+                <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 space-y-1">
+                    <strong className="text-zinc-600 dark:text-zinc-400 block font-bold">1. Immediate Match Impact:</strong>
                     <span className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                       The coach&apos;s athlete receives a <strong>Gam-Jeom</strong> penalty point awarded to the opponent under Article 14 (Misconduct).
                     </span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-1">
-                    <strong className="text-purple-600 dark:text-purple-400 block font-bold">2. CSB Disciplinary Review:</strong>
+                  <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 space-y-1">
+                    <strong className="text-zinc-600 dark:text-zinc-400 block font-bold">2. CSB Disciplinary Review:</strong>
                     <span className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                       The CSB records the infraction, investigates with video feeds, and determines on-site or post-match sanctions.
                     </span>
@@ -1234,14 +1234,14 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Level</th>
                         <th className="p-3">Action / Measure</th>
                         <th className="p-3">Authority</th>
                         <th className="p-3 text-brand-red">Consequence</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono text-xs">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 text-xs">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Level 1</td>
                         <td className="p-3 text-zinc-700 dark:text-zinc-300">Minor Infraction (Verbal / Gam-Jeom)</td>
@@ -1249,13 +1249,13 @@ export function CompetitionRulesReader() {
                         <td className="p-3 text-brand-red">Opponent receives +1 pt; coach remains in box</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                        <td className="p-3 font-bold text-amber-500">Level 2</td>
+                        <td className="p-3 font-bold text-zinc-500">Level 2</td>
                         <td className="p-3 text-zinc-700 dark:text-zinc-300 font-bold">Yellow Card (Sanction Request)</td>
                         <td className="p-3 text-zinc-500">Center Referee &rarr; CSB</td>
                         <td className="p-3 text-brand-red">Opponent +1 pt; CSB opens active disciplinary review</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                        <td className="p-3 font-bold text-purple-500">Level 3</td>
+                        <td className="p-3 font-bold text-zinc-500">Level 3</td>
                         <td className="p-3 text-zinc-700 dark:text-zinc-300">Ejection from FOP (Revocation)</td>
                         <td className="p-3 text-zinc-500">CSB / Technical Delegate</td>
                         <td className="p-3 text-brand-red">Coach expelled from FOP; athlete must compete uncoached</td>
@@ -1267,19 +1267,19 @@ export function CompetitionRulesReader() {
                         <td className="p-3 text-brand-red font-bold">Athlete loses by DQB; all results/points nullified</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                        <td className="p-3 font-bold text-rose-600">Level 5</td>
+                        <td className="p-3 font-bold text-zinc-600">Level 5</td>
                         <td className="p-3 text-zinc-700 dark:text-zinc-300">Post-Event Sanctions &amp; Fines</td>
                         <td className="p-3 text-zinc-500">WT Disciplinary Committee</td>
-                        <td className="p-3 text-rose-600 font-bold">GAL license suspension (months/years) + $100–$5,000 fine</td>
+                        <td className="p-3 text-zinc-600 font-bold">GAL license suspension (months/years) + $100–$5,000 fine</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
                 {/* Specific Grounds for Yellow Card & DQB */}
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <strong className="text-amber-500 block font-bold text-xs uppercase">
+                    <strong className="text-zinc-500 block font-bold text-xs uppercase">
                       Yellow Card Triggers (Formal Sanction Requests)
                     </strong>
                     <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 text-[13px] list-disc pl-4 leading-relaxed">
@@ -1307,27 +1307,27 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* INSTANT VIDEO REPLAY (IVR) MASTER SYSTEM */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <Camera className="w-5 h-5 text-blue-500" />
+                    <Camera className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       Instant Video Replay (IVR) System &amp; Review Jury Protocols
                     </h4>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500 uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase self-start sm:self-auto">
                     Article 21 Specifications
                   </span>
                 </div>
 
                 {/* Coach Quota & Card Management */}
-                <div className="grid sm:grid-cols-4 gap-2.5 text-xs font-mono">
+                <div className="grid sm:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Quota:</strong>
                     <span className="text-zinc-500 text-xs">1 challenge card per match</span>
                   </div>
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
-                    <strong className="text-emerald-500 block font-bold">Retention:</strong>
+                    <strong className="text-zinc-500 block font-bold">Retention:</strong>
                     <span className="text-zinc-500 text-xs">Card kept if appeal accepted</span>
                   </div>
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
@@ -1335,7 +1335,7 @@ export function CompetitionRulesReader() {
                     <span className="text-zinc-500 text-xs">Card lost if appeal rejected</span>
                   </div>
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
-                    <strong className="text-blue-500 block font-bold">Timing Window:</strong>
+                    <strong className="text-zinc-500 block font-bold">Timing Window:</strong>
                     <span className="text-zinc-500 text-xs">Within 5s of incident</span>
                   </div>
                 </div>
@@ -1344,13 +1344,13 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Category</th>
-                        <th className="p-3 text-emerald-500">Reviewable via IVR</th>
+                        <th className="p-3 text-zinc-500">Reviewable via IVR</th>
                         <th className="p-3 text-brand-red">Non-Reviewable (Forbidden)</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono text-xs">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 text-xs">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Points</td>
                         <td className="p-3 text-zinc-600 dark:text-zinc-300">
@@ -1393,32 +1393,32 @@ export function CompetitionRulesReader() {
 
                 {/* Step-by-Step 5-Stage IVR Workflow */}
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                  <strong className="text-zinc-900 dark:text-white block font-bold text-xs uppercase font-mono">
+                  <strong className="text-zinc-900 dark:text-white block font-bold text-xs uppercase">
                     Step-by-Step IVR Procedure Workflow
                   </strong>
-                  <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs font-mono">
+                  <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
                     <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <span className="text-brand-red font-bold block text-[11px]">Step 1</span>
                       <span className="text-zinc-900 dark:text-white font-bold block text-xs">Appeal Request</span>
                       <span className="text-zinc-500 text-[11px] block">Coach raises card within 5s</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="text-blue-500 font-bold block text-[11px]">Step 2</span>
+                      <span className="text-zinc-500 font-bold block text-[11px]">Step 2</span>
                       <span className="text-zinc-900 dark:text-white font-bold block text-xs">Referee Pause</span>
                       <span className="text-zinc-500 text-[11px] block">Kal-yeo + Shi-gan declared</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="text-purple-500 font-bold block text-[11px]">Step 3</span>
+                      <span className="text-zinc-500 font-bold block text-[11px]">Step 3</span>
                       <span className="text-zinc-900 dark:text-white font-bold block text-xs">Transmission</span>
                       <span className="text-zinc-500 text-[11px] block">Signaled to Review Jury desk</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="text-amber-500 font-bold block text-[11px]">Step 4</span>
+                      <span className="text-zinc-500 font-bold block text-[11px]">Step 4</span>
                       <span className="text-zinc-900 dark:text-white font-bold block text-xs">Video Review</span>
                       <span className="text-zinc-500 text-[11px] block">3–4 angles, max 60 seconds</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="text-emerald-500 font-bold block text-[11px]">Step 5</span>
+                      <span className="text-zinc-500 font-bold block text-[11px]">Step 5</span>
                       <span className="text-zinc-900 dark:text-white font-bold block text-xs">Verdict Delivery</span>
                       <span className="text-zinc-500 text-[11px] block">Accepted (retained) / Rejected</span>
                     </div>
@@ -1426,7 +1426,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Key IVR Edge Cases */}
-                <div className="grid sm:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-brand-red block font-bold text-xs">Case 1: Prior Foul Invalidates Strike</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
@@ -1434,13 +1434,13 @@ export function CompetitionRulesReader() {
                     </span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <strong className="text-blue-500 block font-bold text-xs">Case 2: Strike Landed Out of Bounds</strong>
+                    <strong className="text-zinc-500 block font-bold text-xs">Case 2: Strike Landed Out of Bounds</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
                       If supporting foot stepped out before kick connects &rarr; <strong>Points erased, Gam-Jeom to kicker, challenging coach retains card</strong>.
                     </span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <strong className="text-purple-500 block font-bold text-xs">Case 3: Dual Action Appeal</strong>
+                    <strong className="text-zinc-500 block font-bold text-xs">Case 3: Dual Action Appeal</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
                       If appealing both missed points and foul removal &rarr; <strong>Both must be validated to keep card</strong>; if either fails, card is forfeited.
                     </span>
@@ -1448,12 +1448,12 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Technical Review Card (Hardware Appeals) */}
-                <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
                     <h5 className="text-xs font-black uppercase text-zinc-900 dark:text-white">
                       Technical Review Card (Hardware &amp; System Glitch Appeals)
                     </h5>
-                    <span className="text-[11px] text-amber-500 font-bold">System Appeals</span>
+                    <span className="text-[11px] text-zinc-500 font-bold">System Appeals</span>
                   </div>
                   <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 text-[13px] list-disc pl-4 leading-relaxed">
                     <li>Coaches may raise a Technical Card for mechanical timing malfunctions, PSS sensor issues, or operator input errors.</li>
@@ -1464,7 +1464,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* WORLD CUP TEAM HEALTH BAR SCORING SIMULATOR (150 HP Initial) */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1482,7 +1482,7 @@ export function CompetitionRulesReader() {
                       setIsPassiveChung(false)
                       setIsPassiveHong(false)
                     }}
-                    className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs font-mono font-bold flex items-center gap-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all cursor-pointer self-start sm:self-auto"
+                    className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs font-bold flex items-center gap-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all cursor-pointer self-start sm:self-auto"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     {ruleT.safety.btnReset}
@@ -1491,7 +1491,7 @@ export function CompetitionRulesReader() {
 
                 {/* Passive Alert Banner */}
                 {(isPassiveChung || isPassiveHong) && (
-                  <div className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-600 dark:text-amber-400 text-xs font-mono font-bold text-center">
+                  <div className="p-2.5 rounded-xl bg-zinc-500/15 border border-zinc-500/40 text-zinc-600 dark:text-zinc-400 text-xs font-bold text-center">
                     {ruleT.safety.passiveAlert}
                   </div>
                 )}
@@ -1500,7 +1500,7 @@ export function CompetitionRulesReader() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Chung (Blue) Health Bar */}
                   <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 space-y-2">
-                    <div className="flex justify-between items-center text-xs font-mono font-bold">
+                    <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-blue-500 uppercase">{ruleT.safety.chungLabel}</span>
                       <span className="text-blue-400">{healthBarChung} / 150 HP</span>
                     </div>
@@ -1513,8 +1513,8 @@ export function CompetitionRulesReader() {
                     <div className="flex gap-1.5 pt-1">
                       <button
                         onClick={() => setIsPassiveChung(!isPassiveChung)}
-                        className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold cursor-pointer transition-all ${
-                          isPassiveChung ? 'bg-amber-500 text-black' : 'bg-zinc-800 text-zinc-300'
+                        className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${
+                          isPassiveChung ? 'bg-zinc-500 text-black' : 'bg-zinc-800 text-zinc-300'
                         }`}
                       >
                         {ruleT.safety.btnPassive}
@@ -1524,7 +1524,7 @@ export function CompetitionRulesReader() {
 
                   {/* Hong (Red) Health Bar */}
                   <div className="p-4 rounded-xl bg-brand-red/10 border border-brand-red/30 space-y-2">
-                    <div className="flex justify-between items-center text-xs font-mono font-bold">
+                    <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-brand-red uppercase">{ruleT.safety.hongLabel}</span>
                       <span className="text-brand-red">{healthBarHong} / 150 HP</span>
                     </div>
@@ -1537,8 +1537,8 @@ export function CompetitionRulesReader() {
                     <div className="flex gap-1.5 pt-1">
                       <button
                         onClick={() => setIsPassiveHong(!isPassiveHong)}
-                        className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold cursor-pointer transition-all ${
-                          isPassiveHong ? 'bg-amber-500 text-black' : 'bg-zinc-800 text-zinc-300'
+                        className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${
+                          isPassiveHong ? 'bg-zinc-500 text-black' : 'bg-zinc-800 text-zinc-300'
                         }`}
                       >
                         {ruleT.safety.btnPassive}
@@ -1548,7 +1548,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Damage Buttons */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs font-mono">
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs">
                   {kyorugiHealthBarActions.map((hba, idx) => {
                     const dmg = parseInt(hba.deduction.replace(/[^0-9]/g, '')) || 0
                     return (
@@ -1573,7 +1573,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Doctor Chair & Medical Protocol Card */}
-              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-2">
+              <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-2">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-brand-red" />
                   <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1593,15 +1593,15 @@ export function CompetitionRulesReader() {
           {kyorugiSubCategory === 'guide' && (
             <div className="space-y-6 animate-fade-in">
               {/* Header Hero Card */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-purple-500" />
+                    <Sparkles className="w-5 h-5 text-zinc-500" />
                     <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {ruleT.guide.title}
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-500/10 text-purple-500 uppercase">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase">
                     {ruleT.previewBadge}
                   </span>
                 </div>
@@ -1611,7 +1611,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Pre-Match Preparation Checklist */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-brand-red" />
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1619,24 +1619,24 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.guide.stage1Title}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.guide.stage1Desc}
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.guide.stage2Title}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.guide.stage2Desc}
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.guide.stage3Title}</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       {ruleT.guide.stage3Desc}
                     </span>
                   </div>
@@ -1644,18 +1644,18 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Common Beginner Mistakes & Tactical Fixes */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-amber-500" />
+                    <AlertTriangle className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {ruleT.guide.title}
                     </h4>
                   </div>
-                  <span className="text-[11px] font-mono text-zinc-400">Tactical Corrections</span>
+                  <span className="text-[11px] text-zinc-400">Tactical Corrections</span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   {beginnerMistakes.map((bm, idx) => (
                     <div key={idx} className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                       <span className="text-brand-red font-bold uppercase block">&bull; {bm.title}</span>
@@ -1669,19 +1669,19 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Champion Competition Mindset */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-emerald-500" />
+                  <Shield className="w-5 h-5 text-zinc-500" />
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     Champion Competition Mindset
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs font-mono">
+                <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   {mindsetRules.map((mr, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <strong className="text-emerald-500 block font-bold">{mr.title}</strong>
-                      <span className="text-zinc-500 font-light leading-relaxed">
+                      <strong className="text-zinc-500 block font-bold">{mr.title}</strong>
+                      <span className="text-zinc-500 leading-relaxed">
                         {mr.description}
                       </span>
                     </div>
@@ -1690,30 +1690,30 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* PRACTICAL MATCH SCENARIOS & OFFICIAL RULE CASES */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <HelpCircle className="w-5 h-5 text-blue-500" />
+                    <HelpCircle className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       Practical Match Scenarios &amp; Official Rulings
                     </h4>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400">5 Case Studies</span>
+                  <span className="text-xs text-zinc-400">5 Case Studies</span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                   {kyorugiScenarios.map((sc, idx) => (
                     <div key={idx} className={`p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 ${idx === 4 ? 'md:col-span-2' : ''}`}>
                       <div className="flex items-center justify-between">
                         <strong className={`${sc.color} font-bold text-xs uppercase`}>{sc.title}</strong>
-                        <span className={`px-2 py-0.5 rounded ${sc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-blue-500/10'} text-[11px] font-bold`}>
+                        <span className={`px-2 py-0.5 rounded ${sc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-zinc-500/10'} text-[11px] font-bold`}>
                           {sc.points}
                         </span>
                       </div>
                       <p className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                         <strong>Scenario:</strong> {sc.scenario}
                       </p>
-                      <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[13px] leading-relaxed">
+                      <div className="p-2.5 rounded-lg bg-zinc-500/10 border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                         <strong>Ruling:</strong> {sc.decision}
                       </div>
                     </div>
@@ -1737,11 +1737,11 @@ export function CompetitionRulesReader() {
               onClick={() => setPoomsaeSubCategory('common')}
               className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 poomsaeSubCategory === 'common'
-                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-md border border-zinc-200 dark:border-zinc-800'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Building className="w-3.5 h-3.5 text-blue-500" />
+              <Building className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.poomsaeTabs.common}</span>
             </button>
 
@@ -1749,7 +1749,7 @@ export function CompetitionRulesReader() {
               onClick={() => setPoomsaeSubCategory('recognized')}
               className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 poomsaeSubCategory === 'recognized'
-                  ? 'bg-white dark:bg-zinc-900 text-brand-red shadow-md border border-zinc-200 dark:border-zinc-800 font-black'
+                  ? 'bg-white dark:bg-zinc-900 text-brand-red border border-zinc-200 dark:border-zinc-800 font-black'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
@@ -1761,11 +1761,11 @@ export function CompetitionRulesReader() {
               onClick={() => setPoomsaeSubCategory('freestyle')}
               className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                 poomsaeSubCategory === 'freestyle'
-                  ? 'bg-white dark:bg-zinc-900 text-amber-500 shadow-md border border-zinc-200 dark:border-zinc-800 font-black'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-500 border border-zinc-200 dark:border-zinc-800 font-black'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
               }`}
             >
-              <Zap className="w-3.5 h-3.5 text-amber-500" />
+              <Zap className="w-3.5 h-3.5 text-zinc-500" />
               <span>{ruleT.poomsaeTabs.freestyle}</span>
             </button>
           </div>
@@ -1776,15 +1776,15 @@ export function CompetitionRulesReader() {
           {poomsaeSubCategory === 'common' && (
             <div className="space-y-6 animate-fade-in">
               {/* REGULATORY GOVERNANCE, SCOPE & ANTI-DOPING COMPLIANCE */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    <span className="w-2 h-2 rounded-full bg-zinc-500" />
                     <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       1. Regulatory Governance, Scope &amp; Medical Control
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500 uppercase">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase">
                     WT Article 1 &bull; Universal Governance
                   </span>
                 </div>
@@ -1796,21 +1796,21 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Standardization of Rules:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       All participating MNAs, athletes, coaches, and international referees must strictly adhere to unified WT competition rules.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Application &amp; Amendments:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Applies to all official Poomsae events. MNAs seeking modifications must submit written justification to WT and obtain formal approval at least <strong>one (1) month prior</strong>.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Anti-Doping Compliance:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Strict compliance with WT Anti-Doping Rules. Refusal of testing or violations results in immediate <strong>disqualification, award forfeiture, and advancement of next-ranked athlete</strong>.
                     </span>
                   </div>
@@ -1818,7 +1818,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Visual 10m x 10m / 12m x 12m Court Map Diagram & Exact Station Coordinates */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-5">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1828,22 +1828,22 @@ export function CompetitionRulesReader() {
                       The Contest Area shall measure at least <strong>10m x 10m</strong> (<strong>12m x 12m for Freestyle Team Competition</strong>) on a flat surface without obstructing projections.
                     </span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500 uppercase self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500 uppercase self-start sm:self-auto">
                     10x10m (12x12m Freestyle Team)
                   </span>
                 </div>
 
                 <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white relative overflow-hidden">
                   <div className="text-center mb-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 inline-block">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-zinc-500/20 text-zinc-400 border border-zinc-500/30 inline-block">
                       Boundary Line #1 &bull; Front Judges (4 Judges: J1, J2, J3, J4 + Center Referee beside J1) &bull; Seated 1m back, 1m apart
                     </span>
                   </div>
 
                   <div className="relative mx-auto max-w-xl h-60 sm:h-72 rounded-xl bg-zinc-900 border-2 border-dashed border-zinc-700 p-4 flex flex-col justify-between">
-                    <div className="flex justify-between items-center text-[11px] font-mono text-zinc-400">
+                    <div className="flex justify-between items-center text-[11px] text-zinc-400">
                       <span>Corner #1</span>
-                      <span className="px-2.5 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-[11px]">
+                      <span className="px-2.5 py-0.5 rounded bg-zinc-800 text-zinc-200 text-[11px]">
                         10m x 10m Mat (12m x 12m Freestyle Team)
                       </span>
                       <span className="text-right">Corner #2 (C4: Coordinators 1m out)</span>
@@ -1851,30 +1851,30 @@ export function CompetitionRulesReader() {
 
                     <div className="flex flex-col items-center justify-center space-y-2">
                       <div className="p-3 rounded-xl bg-brand-red/20 border border-brand-red text-center">
-                        <span className="text-xs font-mono font-black text-brand-red block">
+                        <span className="text-xs font-black text-brand-red block">
                           [C2: Contestant Spot]
                         </span>
-                        <span className="text-[11px] font-mono text-zinc-300">
+                        <span className="text-[11px] text-zinc-300">
                           Centered laterally &bull; 2m Back From Center Point Toward Boundary #3
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center text-[11px] font-mono text-zinc-400">
+                    <div className="flex justify-between items-center text-[11px] text-zinc-400">
                       <span>Corner #4 (Inspection Desk + C3: Standby/Coach 3m out)</span>
                       <span>Corner #3 (Recorder Table: 3m Right of Referee)</span>
                     </div>
                   </div>
 
                   <div className="text-center mt-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30 inline-block">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-zinc-500/20 text-zinc-400 border border-zinc-500/30 inline-block">
                       Boundary Line #3 &bull; Back Judges (3 Judges: J5, J6, J7) &bull; Seated 1m back, 1m apart
                     </span>
                   </div>
                 </div>
 
                 {/* Exact Coordinates Specification Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Judicial Layout:</strong>
                     <div className="text-zinc-500 text-xs space-y-0.5">
@@ -1909,7 +1909,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* PERSONAL HYGIENE, GROOMING & HAIR ACCESSORIES PROTOCOL CARD */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-brand-red" />
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -1923,7 +1923,7 @@ export function CompetitionRulesReader() {
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase">
                       1. Hygiene, Nails &amp; Polish
                     </strong>
-                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light list-disc pl-4">
+                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 list-disc pl-4">
                       <li>Competitors must maintain the highest standards of personal hygiene.</li>
                       <li>Finger and toe nails must be kept cut short and filed smoothly.</li>
                       <li>Nail polish must be <strong>white or clear</strong> only.</li>
@@ -1935,7 +1935,7 @@ export function CompetitionRulesReader() {
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase">
                       2. Jewelry &amp; Head Coverings
                     </strong>
-                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light list-disc pl-4">
+                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 list-disc pl-4">
                       <li>The <strong>ONLY jewelry permitted are earrings flush to the ear</strong>.</li>
                       <li>No other jewelry or piercings may be worn on the field of play.</li>
                       <li>Inspection desk may request earring removal if safety concerns arise.</li>
@@ -1948,11 +1948,11 @@ export function CompetitionRulesReader() {
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase">
                       3. Hair Accessories Rules
                     </strong>
-                    <div className="space-y-1 font-mono text-xs">
-                      <div className="text-emerald-600 dark:text-emerald-400">
+                    <div className="space-y-1 text-xs">
+                      <div className="text-zinc-600 dark:text-zinc-400">
                         &bull; Permitted: Bobby pins &amp; hair clips <strong>shorter than 2 inches</strong>.
                       </div>
-                      <div className="text-emerald-600 dark:text-emerald-400">
+                      <div className="text-zinc-600 dark:text-zinc-400">
                         &bull; Permitted: Soft elastic hair ties.
                       </div>
                       <div className="text-brand-red">
@@ -1967,14 +1967,14 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* COMPETITION METHODS & RECOGNIZED VS FREESTYLE COMPARISON */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-zinc-500/10 text-zinc-500 border border-zinc-500/20">
                         WT Article 3 &bull; Tournament Protocols
                       </span>
-                      <span className="text-xs font-mono text-zinc-400">Quorum: Min 4 Nations / 4 Entries</span>
+                      <span className="text-xs text-zinc-400">Quorum: Min 4 Nations / 4 Entries</span>
                     </div>
                     <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       Tournament Methods, Brackets &amp; Discipline Systems
@@ -1986,28 +1986,28 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">1. Cut-off System:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Athletes perform, judges score, and top-ranked advance. Standard for major WT Championships.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">2. Single Elimination:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Head-to-head match bracket where winner advances to the next tier until final.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">3. Round-Robin:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Competitors face multiple/all athletes in group; rankings determined by cumulative points.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">4. Combination System:</strong>
-                    <span className="text-zinc-500 font-light leading-relaxed">
+                    <span className="text-zinc-500 leading-relaxed">
                       Cut-off preliminary/semi-final rounds combined with single elimination tournament finals.
                     </span>
                   </div>
@@ -2017,20 +2017,20 @@ export function CompetitionRulesReader() {
                 <div className="dark p-6 rounded-2xl bg-zinc-950 border border-zinc-800 text-white space-y-5">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
                     <div className="flex items-center gap-2">
-                      <Network className="w-4 h-4 text-emerald-400" />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-200">
+                      <Network className="w-4 h-4 text-zinc-400" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-zinc-200">
                         3.2 Cut-off System Operating Procedures
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-zinc-400">
+                    <span className="text-[11px] text-zinc-400">
                       Top 50% Round-up Rule (e.g., 13 entries &rarr; 7 advance)
                     </span>
                   </div>
 
                   {/* Flowchart Diagram */}
-                  <div className="flex flex-col items-center space-y-4 max-w-2xl mx-auto font-mono text-xs text-center">
+                  <div className="flex flex-col items-center space-y-4 max-w-2xl mx-auto text-xs text-center">
                     {/* Top Root Node */}
-                    <div className="px-5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 font-bold text-zinc-200 shadow-md">
+                    <div className="px-5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 font-bold text-zinc-200">
                       Total Contestants Registered
                     </div>
 
@@ -2045,25 +2045,25 @@ export function CompetitionRulesReader() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 w-full">
                       {/* 20-39 */}
                       <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
-                        <span className="text-xs font-bold text-blue-400 block">[ 20 to 39 Athletes ]</span>
+                        <span className="text-xs font-bold text-zinc-400 block">[ 20 to 39 Athletes ]</span>
                         <div className="p-2 rounded bg-black/40 border border-zinc-800 text-[11px] text-zinc-300">
                           Preliminary Rd: 2 Groups/Courts
                         </div>
-                        <span className="text-[11px] font-bold text-emerald-400 block">(Top 50% Advance)</span>
+                        <span className="text-[11px] font-bold text-zinc-400 block">(Top 50% Advance)</span>
                       </div>
 
                       {/* 40+ */}
                       <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
-                        <span className="text-xs font-bold text-purple-400 block">[ 40+ Athletes ]</span>
+                        <span className="text-xs font-bold text-zinc-400 block">[ 40+ Athletes ]</span>
                         <div className="p-2 rounded bg-black/40 border border-zinc-800 text-[11px] text-zinc-300">
                           Preliminary Rd: 3 Groups/Courts
                         </div>
-                        <span className="text-[11px] font-bold text-emerald-400 block">(Top 50% Advance)</span>
+                        <span className="text-[11px] font-bold text-zinc-400 block">(Top 50% Advance)</span>
                       </div>
 
                       {/* 9-19 */}
                       <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
-                        <span className="text-xs font-bold text-amber-400 block">[ 9 to 19 Athletes ]</span>
+                        <span className="text-xs font-bold text-zinc-400 block">[ 9 to 19 Athletes ]</span>
                         <div className="p-2 rounded bg-black/40 border border-zinc-800 text-[11px] text-zinc-400">
                           Direct Semi-Final
                         </div>
@@ -2075,12 +2075,12 @@ export function CompetitionRulesReader() {
                     <div className="text-zinc-600 text-sm">&darr;</div>
 
                     {/* Semi-Final Node */}
-                    <div className="w-full max-w-md p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 space-y-1">
+                    <div className="w-full max-w-md p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/30 text-zinc-300 space-y-1">
                       <strong className="block text-xs font-bold uppercase text-white">
                         Semi-Final Round (9 to 19 Contestants)
                       </strong>
                       <span className="text-[13px] block text-zinc-300">
-                        Athletes perform 2 assigned compulsory Poomsae &bull; <strong className="text-emerald-400">(Top 8 Advance)</strong>
+                        Athletes perform 2 assigned compulsory Poomsae &bull; <strong className="text-zinc-400">(Top 8 Advance)</strong>
                       </span>
                     </div>
 
@@ -2088,12 +2088,12 @@ export function CompetitionRulesReader() {
                     <div className="text-zinc-600 text-sm">&darr;</div>
 
                     {/* Final Round Node */}
-                    <div className="w-full max-w-md p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 space-y-1">
+                    <div className="w-full max-w-md p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/30 text-zinc-300 space-y-1">
                       <strong className="block text-xs font-bold uppercase text-white">
                         Final Round (8 or Fewer Contestants)
                       </strong>
                       <span className="text-[13px] block text-zinc-300">
-                        Athletes perform 2 assigned compulsory Poomsae &bull; <strong className="text-amber-400">(Top 4 Win Medals: 1 Gold, 1 Silver, 2 Bronze)</strong>
+                        Athletes perform 2 assigned compulsory Poomsae &bull; <strong className="text-zinc-400">(Top 4 Win Medals: 1 Gold, 1 Silver, 2 Bronze)</strong>
                       </span>
                     </div>
                   </div>
@@ -2102,7 +2102,7 @@ export function CompetitionRulesReader() {
                 {/* MATCH TIMING AND SCHEDULING SPECIFICATIONS */}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <span className="font-mono text-[11px] font-bold uppercase text-brand-red block">
+                    <span className="text-[11px] font-bold uppercase text-brand-red block">
                       Recognized Duration
                     </span>
                     <strong className="text-zinc-900 dark:text-white block font-bold">Within 90 Seconds</strong>
@@ -2112,7 +2112,7 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <span className="font-mono text-[11px] font-bold uppercase text-amber-500 block">
+                    <span className="text-[11px] font-bold uppercase text-zinc-500 block">
                       Freestyle Duration
                     </span>
                     <strong className="text-zinc-900 dark:text-white block font-bold">90 to 100 Seconds</strong>
@@ -2122,7 +2122,7 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <span className="font-mono text-[11px] font-bold uppercase text-emerald-500 block">
+                    <span className="text-[11px] font-bold uppercase text-zinc-500 block">
                       Rest Interval
                     </span>
                     <strong className="text-zinc-900 dark:text-white block font-bold">Min 30 Seconds</strong>
@@ -2132,7 +2132,7 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                    <span className="font-mono text-[11px] font-bold uppercase text-purple-500 block">
+                    <span className="text-[11px] font-bold uppercase text-zinc-500 block">
                       Call to FOP
                     </span>
                     <strong className="text-zinc-900 dark:text-white block font-bold">3 Calls (30 min prior)</strong>
@@ -2144,19 +2144,19 @@ export function CompetitionRulesReader() {
 
                 {/* Recognized vs Freestyle Main Difference Matrix Table */}
                 <div className="space-y-2">
-                  <span className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white block">
+                  <span className="text-xs font-bold uppercase text-zinc-900 dark:text-white block">
                     Recognized Poomsae vs Freestyle Poomsae Main Difference Matrix
                   </span>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                           <th className="p-3">Evaluation Feature</th>
                           <th className="p-3 text-brand-red">Recognized Poomsae</th>
-                          <th className="p-3 text-amber-500">Freestyle Poomsae</th>
+                          <th className="p-3 text-zinc-500">Freestyle Poomsae</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                         <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                           <td className="p-3 font-bold text-zinc-900 dark:text-white">Form Design</td>
                           <td className="p-3 text-zinc-700 dark:text-zinc-300">Fixed official WT Poomsae</td>
@@ -2184,8 +2184,8 @@ export function CompetitionRulesReader() {
                         </tr>
                         <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                           <td className="p-3 font-bold text-zinc-900 dark:text-white">Examples</td>
-                          <td className="p-3 font-mono text-brand-red">Taegeuk 1–8, Koryo, Keumgang, Taebaek, etc.</td>
-                          <td className="p-3 font-mono text-amber-500">Custom routine with jumping, spinning &amp; acrobatics</td>
+                          <td className="p-3 text-brand-red">Taegeuk 1–8, Koryo, Keumgang, Taebaek, etc.</td>
+                          <td className="p-3 text-zinc-500">Custom routine with jumping, spinning &amp; acrobatics</td>
                         </tr>
                       </tbody>
                     </table>
@@ -2195,39 +2195,39 @@ export function CompetitionRulesReader() {
 
               {/* Age Divisions & Compulsory Pools */}
               <div className="grid sm:grid-cols-2 gap-6">
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {ruleT.poomsaeCommon.divisionsTitle}
                     </h4>
-                    <span className="text-[11px] font-mono text-brand-red font-bold">Year-Based Criteria</span>
+                    <span className="text-[11px] text-brand-red font-bold">Year-Based Criteria</span>
                   </div>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white uppercase text-[11px]">
                           <th className="p-2.5">Division</th>
                           <th className="p-2.5">Age Limits</th>
                           <th className="p-2.5">Format</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                         {poomsaeAgeDivisions.map((ad, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-2.5 font-bold text-zinc-900 dark:text-white">{ad.division}</td>
-                            <td className="p-2.5 font-mono text-brand-red">{ad.ageCriteria}</td>
+                            <td className="p-2.5 text-brand-red">{ad.ageCriteria}</td>
                             <td className="p-2.5 text-zinc-500 text-xs">{ad.individual}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <span className="text-[11px] text-zinc-400 block font-mono">
+                  <span className="text-[11px] text-zinc-400 block">
                     * Note: Age limit is based on the year of championships, not the specific birth date.
                   </span>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.poomsaeCommon.poolsTitle}
                   </h4>
@@ -2235,7 +2235,7 @@ export function CompetitionRulesReader() {
                     {compulsoryPoomsaePools.map((cp, idx) => (
                       <div key={idx} className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                         <strong className="text-zinc-900 dark:text-white block font-bold">{cp.division}</strong>
-                        <span className="text-zinc-500 font-mono text-xs block">{cp.pool}</span>
+                        <span className="text-zinc-500 text-xs block">{cp.pool}</span>
                       </div>
                     ))}
                   </div>
@@ -2250,7 +2250,7 @@ export function CompetitionRulesReader() {
           {poomsaeSubCategory === 'recognized' && (
             <div className="space-y-6 animate-fade-in">
               {/* Core Scoring System: Accuracy 4.0 vs Presentation 6.0 */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-brand-red" />
@@ -2258,7 +2258,7 @@ export function CompetitionRulesReader() {
                       {ruleT.poomsaeRecognized.title}
                     </h3>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-brand-red/10 text-brand-red self-start sm:self-auto">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-brand-red/10 text-brand-red self-start sm:self-auto">
                     Total Score: 10.0 Maximum Points
                   </span>
                 </div>
@@ -2267,23 +2267,23 @@ export function CompetitionRulesReader() {
                   {ruleT.poomsaeRecognized.sub}
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   {/* Accuracy Card */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 inline-block uppercase">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20 inline-block uppercase">
                       {ruleT.poomsaeRecognized.accuracyTitle}
                     </span>
-                    <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {ruleT.poomsaeRecognized.accuracySub}
                     </p>
                   </div>
 
                   {/* Presentation Card */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 inline-block uppercase">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20 inline-block uppercase">
                       {ruleT.poomsaeRecognized.presentationTitle}
                     </span>
-                    <p className="text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {ruleT.poomsaeRecognized.presentationSub}
                     </p>
                   </div>
@@ -2291,7 +2291,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* REFEREE COMMANDS, PROCEDURES & HAND SIGNALS TABLE */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <Megaphone className="w-5 h-5 text-brand-red" />
@@ -2299,42 +2299,42 @@ export function CompetitionRulesReader() {
                       Official Referee Commands, Procedures &amp; Hand Signals
                     </h4>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400">9 Standard Ring Commands</span>
+                  <span className="text-xs text-zinc-400">9 Standard Ring Commands</span>
                 </div>
 
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Order</th>
                         <th className="p-3">Command (Korean)</th>
                         <th className="p-3">English Meaning</th>
                         <th className="p-3">Referee Hand Signal &amp; Physical Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono text-xs">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 text-xs">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">1</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Chool-jeon (출전)</td>
-                        <td className="p-3 text-blue-500">Enter the Court</td>
+                        <td className="p-3 text-zinc-500">Enter the Court</td>
                         <td className="p-3 text-zinc-500">Left hand extends toward entry boundary line, palm open, inviting competitor into ring.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">2</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Cha-ryeot (차렷)</td>
-                        <td className="p-3 text-blue-500">Attention</td>
+                        <td className="p-3 text-zinc-500">Attention</td>
                         <td className="p-3 text-zinc-500">Left arm drops down cleanly to the side of the body.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">3</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Kyeong-rye (경례)</td>
-                        <td className="p-3 text-blue-500">Bow</td>
+                        <td className="p-3 text-zinc-500">Bow</td>
                         <td className="p-3 text-zinc-500">Left arm raises to 45° angle with palm inward, signaling formal mutual bow at 30°.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">4</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Joon-bi (준비)</td>
-                        <td className="p-3 text-emerald-500 font-bold">Ready Stance</td>
+                        <td className="p-3 text-zinc-500 font-bold">Ready Stance</td>
                         <td className="p-3 text-zinc-500">Right hand raises from side to chest and slowly presses down to solar plexus into Gibon Joon-bi.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
@@ -2346,7 +2346,7 @@ export function CompetitionRulesReader() {
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">6</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Ba-ro (바로)</td>
-                        <td className="p-3 text-purple-500">Return to Ready</td>
+                        <td className="p-3 text-zinc-500">Return to Ready</td>
                         <td className="p-3 text-zinc-500">Right arm extends forward and pulls back to solar plexus; contestant returns in 1 breath.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
@@ -2358,7 +2358,7 @@ export function CompetitionRulesReader() {
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-brand-red">8</td>
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Pyo-chul (표출)</td>
-                        <td className="p-3 text-amber-500 font-bold">Display Score</td>
+                        <td className="p-3 text-zinc-500 font-bold">Display Score</td>
                         <td className="p-3 text-zinc-500">Right hand sweeps horizontally toward display monitor as official scores are posted.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
@@ -2373,7 +2373,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* KICK TECHNIQUE PROCESS & OBSERVATION FOCUS CARD */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-brand-red" />
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -2384,21 +2384,21 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Posture &gt; Flexibility:</strong>
-                    <span className="text-zinc-500 font-light">
+                    <span className="text-zinc-500">
                       Flexibility of high kick is <strong>NOT</strong> a criterion of high score. High scores reward correct body posture and kick accuracy.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Eye Gaze on Target:</strong>
-                    <span className="text-zinc-500 font-light">
+                    <span className="text-zinc-500">
                       During all kick techniques, eyes must look to the target/feet. Looking in the wrong direction incurs accuracy deductions.
                     </span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Vertical Apchagi Gaze Guide:</strong>
-                    <div className="text-zinc-500 text-[13px] font-mono space-y-0.5">
+                    <div className="text-zinc-500 text-[13px] space-y-0.5">
                       <div>&bull; Target gaze = 0.0 (Clean)</div>
                       <div>&bull; Looking straight = -0.1 (Minor)</div>
                       <div>&bull; Looking down = -0.3 (Major)</div>
@@ -2409,7 +2409,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Accuracy Deductions Detailed Matrix (-0.1 Minor / -0.3 Major / Procedural) */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Accuracy Deductions Master Matrix (-0.1 Minor / -0.3 Major / -0.6 Restart)
                 </h4>
@@ -2418,7 +2418,7 @@ export function CompetitionRulesReader() {
                   {recognizedAccuracyDeductions.map((ded) => (
                     <div key={ded.id} className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
+                        <span className="px-2.5 py-0.5 rounded text-[11px] font-bold uppercase bg-brand-red/10 text-brand-red border border-brand-red/20">
                           {ded.deduction}
                         </span>
                       </div>
@@ -2438,7 +2438,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Presentation Detailed Categories (Speed/Power, Rhythm/Tempo, Energy) */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Presentation Scoring Breakdown (6.0 Maximum Points)
                 </h4>
@@ -2447,8 +2447,8 @@ export function CompetitionRulesReader() {
                   {/* Speed and Power */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-black text-zinc-900 dark:text-white">1. Speed &amp; Power</span>
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500">0.5 – 2.0 pts</span>
+                      <span className="text-xs font-black text-zinc-900 dark:text-white">1. Speed &amp; Power</span>
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500">0.5 – 2.0 pts</span>
                     </div>
                     <p className="text-[13px] text-zinc-500 leading-relaxed">
                       Evaluated on whether techniques are performed in accordance with pertinent movement characteristics.
@@ -2469,8 +2469,8 @@ export function CompetitionRulesReader() {
                   {/* Rhythm and Tempo */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-black text-zinc-900 dark:text-white">2. Rhythm &amp; Tempo</span>
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500">0.5 – 2.0 pts</span>
+                      <span className="text-xs font-black text-zinc-900 dark:text-white">2. Rhythm &amp; Tempo</span>
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500">0.5 – 2.0 pts</span>
                     </div>
                     <p className="text-[13px] text-zinc-500 leading-relaxed">
                       Flow of power, speed control, timing connection, and pauses in between.
@@ -2491,8 +2491,8 @@ export function CompetitionRulesReader() {
                   {/* Expression of Energy & Volume */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-black text-zinc-900 dark:text-white">3. Energy &amp; Volume</span>
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-500">0.5 – 2.0 pts</span>
+                      <span className="text-xs font-black text-zinc-900 dark:text-white">3. Energy &amp; Volume</span>
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500">0.5 – 2.0 pts</span>
                     </div>
                     <p className="text-[13px] text-zinc-500 leading-relaxed">
                       Presence, eye focus, clean uniform, manners, and resonant Kihap delivery.
@@ -2513,7 +2513,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* High vs Low Presentation Comparison Table */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   High Presentation (+2.0) vs Low Presentation (0.5) Comparison Matrix
                 </h4>
@@ -2521,36 +2521,36 @@ export function CompetitionRulesReader() {
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3.5">Evaluation Dimension</th>
-                        <th className="p-3.5 text-emerald-600 dark:text-emerald-400">High Presentation Score (+2.0 Max)</th>
+                        <th className="p-3.5 text-zinc-600 dark:text-zinc-400">High Presentation Score (+2.0 Max)</th>
                         <th className="p-3.5 text-brand-red">Low Presentation Score (0.5 Min)</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3.5 font-bold text-zinc-900 dark:text-white">Combat Realism</td>
-                        <td className="p-3.5 text-emerald-600 dark:text-emerald-400">Poomsae looks like realistic fighting; movements executed with clear purpose.</td>
+                        <td className="p-3.5 text-zinc-600 dark:text-zinc-400">Poomsae looks like realistic fighting; movements executed with clear purpose.</td>
                         <td className="p-3.5 text-brand-red">Poomsae does not look like fighting; lack of intent.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3.5 font-bold text-zinc-900 dark:text-white">Balance &amp; Continuity</td>
-                        <td className="p-3.5 text-emerald-600 dark:text-emerald-400">Good balance; each technique completed; smooth flow from one to next.</td>
+                        <td className="p-3.5 text-zinc-600 dark:text-zinc-400">Good balance; each technique completed; smooth flow from one to next.</td>
                         <td className="p-3.5 text-brand-red">Poor balance; poor continuous technique; poor recovery after kicks/punches.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3.5 font-bold text-zinc-900 dark:text-white">Cadence &amp; Pauses</td>
-                        <td className="p-3.5 text-emerald-600 dark:text-emerald-400">Controlled tempo adhering to standard pauses between techniques.</td>
+                        <td className="p-3.5 text-zinc-600 dark:text-zinc-400">Controlled tempo adhering to standard pauses between techniques.</td>
                         <td className="p-3.5 text-brand-red">Too little or too much time between techniques.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3.5 font-bold text-zinc-900 dark:text-white">Kihap, Stomp &amp; Strikes</td>
-                        <td className="p-3.5 text-emerald-600 dark:text-emerald-400">Strong &amp; short Kihap, strong Jitzikgi, and crisp Pyojeok-chagi.</td>
+                        <td className="p-3.5 text-zinc-600 dark:text-zinc-400">Strong &amp; short Kihap, strong Jitzikgi, and crisp Pyojeok-chagi.</td>
                         <td className="p-3.5 text-brand-red">Soft Kihap, soft Jitzikgi/Pyojeok-chagi, mouth breathing, loud body slapping sound.</td>
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3.5 font-bold text-zinc-900 dark:text-white">Presence &amp; Composure</td>
-                        <td className="p-3.5 text-emerald-600 dark:text-emerald-400">Confident appearance, clean/neat uniform, strong eye focus, good manners.</td>
+                        <td className="p-3.5 text-zinc-600 dark:text-zinc-400">Confident appearance, clean/neat uniform, strong eye focus, good manners.</td>
                         <td className="p-3.5 text-brand-red">Nervous/scared appearance, incorrect eye focus, supporting pelvis with hand for kicks.</td>
                       </tr>
                     </tbody>
@@ -2559,26 +2559,26 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Coordinator Commands - Single Elimination Table */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Coordinator Commands Protocol (Single Elimination Matches)
                 </h4>
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Sequence Step</th>
                         <th className="p-3">Bow-In &amp; First Poomsae</th>
                         <th className="p-3">Second Poomsae Command</th>
                         <th className="p-3">Court Protocol</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-light">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                       {singleEliminationCommands.map((cmd, idx) => (
                         <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                           <td className="p-3 font-bold text-zinc-900 dark:text-white whitespace-nowrap">{cmd.step}</td>
-                          <td className="p-3 font-mono text-brand-red">{cmd.firstPoomsae}</td>
-                          <td className="p-3 font-mono text-blue-500">{cmd.secondPoomsae}</td>
+                          <td className="p-3 text-brand-red">{cmd.firstPoomsae}</td>
+                          <td className="p-3 text-zinc-500">{cmd.secondPoomsae}</td>
                           <td className="p-3 text-zinc-500">{cmd.protocol}</td>
                         </tr>
                       ))}
@@ -2588,20 +2588,20 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Slow Movements Timing Tables with * and ** markers */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Slow Movement Timing Specifications (5–8s Window vs 8s Fixed)
                 </h4>
 
                 {/* 5-8s Window */}
                 <div className="space-y-2">
-                  <span className="text-xs font-mono font-bold uppercase text-brand-red block">
+                  <span className="text-xs font-bold uppercase text-brand-red block">
                     A. Recommended 5 to 8-Second Slow Movements
                   </span>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                           <th className="p-3">Poomsae Form</th>
                           <th className="p-3">Stance (Seogi)</th>
                           <th className="p-3">Technique Movement</th>
@@ -2609,31 +2609,31 @@ export function CompetitionRulesReader() {
                           <th className="p-3">Notes</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                         {slowMovements5to8s.map((mov, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-3 font-bold text-zinc-900 dark:text-white">{mov.poomsae}</td>
-                            <td className="p-3 font-mono text-zinc-500">{mov.stance}</td>
+                            <td className="p-3 text-zinc-500">{mov.stance}</td>
                             <td className="p-3 text-zinc-700 dark:text-zinc-300">{mov.technique}</td>
-                            <td className="p-3 font-mono font-bold text-brand-red">{mov.duration}</td>
-                            <td className="p-3 text-zinc-400 font-mono text-[11px]">{mov.note}</td>
+                            <td className="p-3 font-bold text-brand-red">{mov.duration}</td>
+                            <td className="p-3 text-zinc-400 text-[11px]">{mov.note}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <span className="text-[11px] text-zinc-400 block font-mono">* = Changed from 8 seconds to 5–8 recommended seconds.</span>
+                  <span className="text-[11px] text-zinc-400 block">* = Changed from 8 seconds to 5–8 recommended seconds.</span>
                 </div>
 
                 {/* 8s Fixed Duration */}
                 <div className="space-y-2 pt-4 border-t border-zinc-100 dark:border-zinc-800">
-                  <span className="text-xs font-mono font-bold uppercase text-purple-500 block">
+                  <span className="text-xs font-bold uppercase text-zinc-500 block">
                     B. Recommended 8-Second Fixed Slow Movements
                   </span>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                           <th className="p-3">Poomsae Form</th>
                           <th className="p-3">Stance (Seogi)</th>
                           <th className="p-3">Technique Movement</th>
@@ -2641,20 +2641,20 @@ export function CompetitionRulesReader() {
                           <th className="p-3">Notes</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                         {slowMovements8s.map((mov, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-3 font-bold text-zinc-900 dark:text-white">{mov.poomsae}</td>
-                            <td className="p-3 font-mono text-zinc-500">{mov.stance}</td>
+                            <td className="p-3 text-zinc-500">{mov.stance}</td>
                             <td className="p-3 text-zinc-700 dark:text-zinc-300">{mov.technique}</td>
-                            <td className="p-3 font-mono font-bold text-purple-500">{mov.duration}</td>
-                            <td className="p-3 text-zinc-400 font-mono text-[11px]">{mov.note}</td>
+                            <td className="p-3 font-bold text-zinc-500">{mov.duration}</td>
+                            <td className="p-3 text-zinc-400 text-[11px]">{mov.note}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <span className="text-[11px] text-zinc-400 block font-mono">
+                  <span className="text-[11px] text-zinc-400 block">
                     * = Combined movements that total 8 seconds &bull; ** = Changed from 5 seconds to 8 recommended seconds.
                   </span>
                 </div>
@@ -2663,13 +2663,13 @@ export function CompetitionRulesReader() {
               {/* ============================================================ */}
               {/* 9. REFEREE SCORING GUIDELINES: TECHNIQUE ACCURACY & DEDUCTIONS (-0.1) */}
               {/* ============================================================ */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-brand-red text-white">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-brand-red text-white">
                       Section 9 &bull; Referee Guidelines
                     </span>
-                    <span className="text-xs font-mono text-zinc-400">-0.1 Minor Deduction per Technical Fault</span>
+                    <span className="text-xs text-zinc-400">-0.1 Minor Deduction per Technical Fault</span>
                   </div>
                   <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     Technique Accuracy &amp; Biomechanical Deduction Standards
@@ -2679,10 +2679,10 @@ export function CompetitionRulesReader() {
                 <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   {/* 9.1 Stances (Seogi) */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                    <strong className="text-xs font-mono font-bold text-brand-red uppercase block">
+                    <strong className="text-xs font-bold text-brand-red uppercase block">
                       9.1 Stances (Seogi) Accuracy Standards (-0.1 Faults)
                     </strong>
-                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400 font-light">
+                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
                       <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                         <strong className="text-zinc-900 dark:text-white block font-bold">Moa Seogi (Closed):</strong>
                         <span>Feet fully together, toes forward, legs straight. Deduct -0.1 if toes point outward or gap exists.</span>
@@ -2712,10 +2712,10 @@ export function CompetitionRulesReader() {
 
                   {/* 9.2 Blocks (Makki) */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                    <strong className="text-xs font-mono font-bold text-blue-500 uppercase block">
+                    <strong className="text-xs font-bold text-zinc-500 uppercase block">
                       9.2 Blocks (Makki) Technical Standards (-0.1 Faults)
                     </strong>
-                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400 font-light">
+                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
                       <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                         <strong className="text-zinc-900 dark:text-white block font-bold">Arae Makki (Low Block):</strong>
                         <span>Hammer fist from shoulder across belt, finishing 2 fists from thigh. Deduct -0.1 if bent elbow or &gt;2 fists / &lt;1 fist.</span>
@@ -2737,10 +2737,10 @@ export function CompetitionRulesReader() {
 
                   {/* 9.3 Punches & Strikes */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                    <strong className="text-xs font-mono font-bold text-amber-500 uppercase block">
+                    <strong className="text-xs font-bold text-zinc-500 uppercase block">
                       9.3 Punches &amp; Strikes Technical Standards (-0.1 Faults)
                     </strong>
-                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400 font-light">
+                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
                       <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                         <strong className="text-zinc-900 dark:text-white block font-bold">Baro &amp; Bandae Jireugi:</strong>
                         <span>Originates from hip, twisting at impact to strike solar plexus with 2 knuckles. Deduct -0.1 if off-center or flexed wrist.</span>
@@ -2758,10 +2758,10 @@ export function CompetitionRulesReader() {
 
                   {/* 9.4 Kicks (Chagi) */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                    <strong className="text-xs font-mono font-bold text-emerald-500 uppercase block">
+                    <strong className="text-xs font-bold text-zinc-500 uppercase block">
                       9.4 Kicks (Chagi) Technical Standards (-0.1 Faults)
                     </strong>
-                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400 font-light">
+                    <div className="space-y-2 text-zinc-600 dark:text-zinc-400">
                       <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                         <strong className="text-zinc-900 dark:text-white block font-bold">Ap Chagi (Front Kick):</strong>
                         <span>Chamber to chest, strike with Apchook (ball of foot) with toes pulled back, re-chamber. Deduct -0.1 if pointed toes or unbent chamber.</span>
@@ -2782,13 +2782,13 @@ export function CompetitionRulesReader() {
               {/* ============================================================ */}
               {/* 10. MASTER GLOSSARY OF RECOGNIZED TERMINOLOGY & 14 BASIC MOVES */}
               {/* ============================================================ */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-purple-500 text-white">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-zinc-500 text-white">
                       Section 10 &bull; Canonical Terminology
                     </span>
-                    <span className="text-xs font-mono text-zinc-400">Kukkiwon &bull; WT Official Nomenclature</span>
+                    <span className="text-xs text-zinc-400">Kukkiwon &bull; WT Official Nomenclature</span>
                   </div>
                   <h4 className="text-base sm:text-lg font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     Master Glossary &amp; The 14 Fundamental Basic Movements
@@ -2796,7 +2796,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Stances, Blocks, Punches 3-Col Glossary */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                   {/* 10.1 Stances */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <strong className="text-brand-red font-bold uppercase block text-xs">
@@ -2820,7 +2820,7 @@ export function CompetitionRulesReader() {
 
                   {/* 10.2 Blocks */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <strong className="text-blue-500 font-bold uppercase block text-xs">
+                    <strong className="text-zinc-500 font-bold uppercase block text-xs">
                       10.2 Blocks (Makki) — 21 Terms
                     </strong>
                     <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
@@ -2841,7 +2841,7 @@ export function CompetitionRulesReader() {
 
                   {/* 10.3 Punches & Strikes */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <strong className="text-amber-500 font-bold uppercase block text-xs">
+                    <strong className="text-zinc-500 font-bold uppercase block text-xs">
                       10.3 Strikes &amp; Thrusts — 21 Terms
                     </strong>
                     <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
@@ -2862,10 +2862,10 @@ export function CompetitionRulesReader() {
 
                 {/* 10.4 Fourteen (14) Fundamental Basic Movements Sequential Table */}
                 <div className="space-y-2">
-                  <span className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white block">
+                  <span className="text-xs font-bold uppercase text-zinc-900 dark:text-white block">
                     10.4 Fourteen (14) Fundamental Basic Movements (Kukkiwon Standard)
                   </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs font-mono">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
                     {fourteenMovements.map((mv) => (
                       <div key={mv.num} className="p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-start gap-2">
                         <span className="w-5 h-5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white flex items-center justify-center font-bold text-[11px] shrink-0">
@@ -2885,27 +2885,27 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* REFEREE & SYSTEM DEDUCTIONS / GAM-JEOM PENALTIES */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5 text-amber-500" />
+                    <AlertTriangle className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       Referee / System Deductions &amp; Gam-Jeom Penalties
                     </h4>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400">Deducted Off Final Score</span>
+                  <span className="text-xs text-zinc-400">Deducted Off Final Score</span>
                 </div>
 
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Infraction</th>
                         <th className="p-3 text-brand-red">Penalty</th>
                         <th className="p-3">Mechanism &amp; Operational Context</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-mono text-xs">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 text-xs">
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Boundary Violation</td>
                         <td className="p-3 font-bold text-brand-red">-0.3</td>
@@ -2928,7 +2928,7 @@ export function CompetitionRulesReader() {
                       </tr>
                       <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                         <td className="p-3 font-bold text-zinc-900 dark:text-white">Gam-Jeom (Major / Misconduct)</td>
-                        <td className="p-3 font-bold text-rose-600">-1.0 or Disqualification</td>
+                        <td className="p-3 font-bold text-zinc-600">-1.0 or Disqualification</td>
                         <td className="p-3 text-zinc-500">Unsportsmanlike conduct, intentional interference with officials, coach shouting audible technical instructions during form, profanity.</td>
                       </tr>
                     </tbody>
@@ -2937,30 +2937,30 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* DEEP-CHECK PRACTICAL SCENARIOS & HOW JUDGES SCORE */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <HelpCircle className="w-5 h-5 text-blue-500" />
+                    <HelpCircle className="w-5 h-5 text-zinc-500" />
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       Deep-Check Practical Scenarios &amp; Judges Scoring Rulings
                     </h4>
                   </div>
-                  <span className="text-xs font-mono text-zinc-400">5 Canonical Case Studies</span>
+                  <span className="text-xs text-zinc-400">5 Canonical Case Studies</span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                   {poomsaeCases.map((pc, idx) => (
                     <div key={idx} className={`p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2 ${idx === 4 ? 'md:col-span-2' : ''}`}>
                       <div className="flex items-center justify-between">
                         <strong className={`${pc.color} font-bold text-xs uppercase`}>{pc.title}</strong>
-                        <span className={`px-2 py-0.5 rounded ${pc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-blue-500/10'} text-[11px] font-bold`}>
+                        <span className={`px-2 py-0.5 rounded ${pc.color === 'text-brand-red' ? 'bg-brand-red/10' : 'bg-zinc-500/10'} text-[11px] font-bold`}>
                           {pc.penalty}
                         </span>
                       </div>
                       <p className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
                         <strong>Scenario:</strong> {pc.scenario}
                       </p>
-                      <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs space-y-0.5">
+                      <div className="p-2.5 rounded-lg bg-zinc-500/10 border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 text-xs space-y-0.5">
                         {pc.deductions.map((ded, dIdx) => (
                           <div key={dIdx}>&bull; {ded}</div>
                         ))}
@@ -2979,20 +2979,20 @@ export function CompetitionRulesReader() {
           {poomsaeSubCategory === 'freestyle' && (
             <div className="space-y-6 animate-fade-in">
               {/* Technical 6.0 + Presentation 4.0 Grid */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.poomsaeFreestyle.title}
                   </h3>
-                  <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-500/10 text-amber-500">
+                  <span className="px-2.5 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-500">
                     #1 to #5 Must Be Performed in Sequence
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="grid sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <span className="text-brand-red font-bold uppercase block">Technical Score: 6.0 Max</span>
-                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light list-disc pl-4">
+                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 list-disc pl-4">
                       <li>Skills #1 through #5: 1.0 pt each (executed in chronological sequence)</li>
                       <li>Skill #6: Basic Movements &amp; Practicability (1.0 pt: 0.0 to 1.0 in 0.1 increments)</li>
                       <li>Mandatory Stances: Dwitkubi, Beom, Hakdari (-0.3 per missing stance)</li>
@@ -3000,8 +3000,8 @@ export function CompetitionRulesReader() {
                   </div>
 
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                    <span className="text-purple-500 font-bold uppercase block">Presentation Score: 4.0 Max</span>
-                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 font-light list-disc pl-4">
+                    <span className="text-zinc-500 font-bold uppercase block">Presentation Score: 4.0 Max</span>
+                    <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 list-disc pl-4">
                       <li>Creativeness (1.0 pt) &bull; Harmony &amp; Sync (1.0 pt)</li>
                       <li>Expression of Energy (1.0 pt) &bull; Music &amp; Choreography (1.0 pt)</li>
                       <li>Duration: 90 to 100s strictly (-0.3 penalty for overtime/undertime)</li>
@@ -3014,14 +3014,14 @@ export function CompetitionRulesReader() {
               <FreestylePoomsaeScoreSimulator />
 
               {/* Exact Official Score Table & Evaluation Procedure */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-brand-red text-white">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold uppercase bg-brand-red text-white">
                         Official WT Evaluation Sheet
                       </span>
-                      <span className="text-xs font-mono text-zinc-400">No Run-up Step Limit</span>
+                      <span className="text-xs text-zinc-400">No Run-up Step Limit</span>
                     </div>
                     <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {activeSkill.number} {activeSkill.name} ({activeSkill.koreanName})
@@ -3034,9 +3034,9 @@ export function CompetitionRulesReader() {
                       <button
                         key={sk.id}
                         onClick={() => setActiveFreestyleSkillId(sk.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase transition-all cursor-pointer ${
                           activeFreestyleSkillId === sk.id
-                            ? 'bg-brand-red text-white shadow-brand-glow'
+                            ? 'bg-brand-red text-white'
                             : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-white'
                         }`}
                       >
@@ -3048,13 +3048,13 @@ export function CompetitionRulesReader() {
 
                 {/* EXACT OFFICIAL SCORE TABLE */}
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-inner">
-                  <table className="w-full text-center border-collapse text-xs font-mono">
+                  <table className="w-full text-center border-collapse text-xs">
                     <thead>
                       <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase font-bold text-[11px]">
                         <th colSpan={7} className="p-3 border-r border-zinc-200 dark:border-zinc-700 bg-zinc-200/60 dark:bg-zinc-800">
                           Base Score — {activeSkill.name} (0.1 to 0.7 Max)
                         </th>
-                        <th colSpan={3} className="p-3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                        <th colSpan={3} className="p-3 bg-zinc-500/10 text-zinc-600 dark:text-zinc-400">
                           Addition / Height Bonus (0.1 to 0.3 Max)
                         </th>
                       </tr>
@@ -3068,7 +3068,7 @@ export function CompetitionRulesReader() {
                         <td className="p-2.5 border-r-2 border-zinc-300 dark:border-zinc-700 font-bold text-brand-red">0.7</td>
 
                         {activeSkill.bonusTiers.map((b, idx) => (
-                          <td key={idx} className="p-2.5 font-bold text-emerald-600 dark:text-emerald-400 border-r last:border-r-0 border-zinc-200 dark:border-zinc-800">
+                          <td key={idx} className="p-2.5 font-bold text-zinc-600 dark:text-zinc-400 border-r last:border-r-0 border-zinc-200 dark:border-zinc-800">
                             {b.label} ({b.points})
                           </td>
                         ))}
@@ -3082,8 +3082,8 @@ export function CompetitionRulesReader() {
                           </strong>
                           Basic score for the performance of {activeSkill.name.toLowerCase()} ranges between <strong>0.0 and 0.7 point</strong> according to balance, power, landing, and technical accuracy of execution.
                         </td>
-                        <td colSpan={3} className="p-4 bg-emerald-500/5 leading-relaxed align-top">
-                          <strong className="text-emerald-600 dark:text-emerald-400 block font-bold mb-1">
+                        <td colSpan={3} className="p-4 bg-zinc-500/5 leading-relaxed align-top">
+                          <strong className="text-zinc-600 dark:text-zinc-400 block font-bold mb-1">
                             Height / Level Bonus Points:
                           </strong>
                           Add <strong>0.1, 0.2, 0.3 points</strong> to the given basic score according to the middle line height, rotation gradient, or quantity of execution.
@@ -3095,13 +3095,13 @@ export function CompetitionRulesReader() {
 
                 {/* 3-STEP REFEREE EVALUATION PROCEDURE */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                  <span className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white block">
+                  <span className="text-xs font-bold uppercase text-zinc-900 dark:text-white block">
                     3-Step Technical Referee Decision Protocol:
                   </span>
                   
                   <div className="grid sm:grid-cols-3 gap-3 text-xs">
                     <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-mono font-black text-[11px]">
+                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-black text-[11px]">
                         1
                       </span>
                       <strong className="text-zinc-900 dark:text-white block font-bold mt-1">
@@ -3113,7 +3113,7 @@ export function CompetitionRulesReader() {
                     </div>
 
                     <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-mono font-black text-[11px]">
+                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-black text-[11px]">
                         2
                       </span>
                       <strong className="text-zinc-900 dark:text-white block font-bold mt-1">
@@ -3125,7 +3125,7 @@ export function CompetitionRulesReader() {
                     </div>
 
                     <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
-                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-mono font-black text-[11px]">
+                      <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-black text-[11px]">
                         3
                       </span>
                       <strong className="text-zinc-900 dark:text-white block font-bold mt-1">
@@ -3142,92 +3142,92 @@ export function CompetitionRulesReader() {
               {/* Mandatory Board Breaking & Assistance Matrix Tables */}
               <div className="grid sm:grid-cols-2 gap-6">
                 {/* Board Breaking (Mixed Team Only) */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                       {ruleT.poomsaeFreestyle.breakingTitle}
                     </h4>
-                    <span className="text-[11px] font-mono text-amber-500 font-bold">5 to 9 Boards Max</span>
+                    <span className="text-[11px] text-zinc-500 font-bold">5 to 9 Boards Max</span>
                   </div>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800 font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800 uppercase text-[11px]">
                           <th className="p-2.5">Technical Skill</th>
                           <th className="p-2.5">Min Boards</th>
                           <th className="p-2.5">Max Boards</th>
                           <th className="p-2.5">Rule Protocol</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                         {boardBreakingRequirements.map((br, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-2.5 font-bold text-zinc-900 dark:text-white">{br.skill}</td>
-                            <td className="p-2.5 font-mono text-emerald-500">{br.minBoards}</td>
-                            <td className="p-2.5 font-mono text-zinc-400">{br.maxBoards}</td>
+                            <td className="p-2.5 text-zinc-500">{br.minBoards}</td>
+                            <td className="p-2.5 text-zinc-400">{br.maxBoards}</td>
                             <td className="p-2.5 text-zinc-500 text-xs">{br.totalRule}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <span className="text-[11px] text-zinc-400 block font-mono">
+                  <span className="text-[11px] text-zinc-400 block">
                     * Unsuccessful break = Base score only (no bonus). Partial breaks reduce base score -0.1 per unbroken board.
                   </span>
                 </div>
 
                 {/* Assistance Authorization Matrix */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-3">
+                <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.poomsaeFreestyle.assistanceTitle}
                   </h4>
                   <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                     <table className="w-full text-left border-collapse text-xs">
                       <thead>
-                        <tr className="bg-zinc-100 dark:bg-zinc-800 font-mono uppercase text-[11px]">
+                        <tr className="bg-zinc-100 dark:bg-zinc-800 uppercase text-[11px]">
                           <th className="p-2.5">Skill Action</th>
                           <th className="p-2.5">Individual / Pair</th>
                           <th className="p-2.5">Mixed Team</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 font-light">
+                      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                         {assistanceAuthorizationMatrix.map((as, idx) => (
                           <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                             <td className="p-2.5 font-bold text-zinc-900 dark:text-white">{as.action}</td>
-                            <td className="p-2.5 font-mono text-brand-red">{as.individualPair}</td>
-                            <td className="p-2.5 font-mono text-emerald-500">{as.mixedTeam}</td>
+                            <td className="p-2.5 text-brand-red">{as.individualPair}</td>
+                            <td className="p-2.5 text-zinc-500">{as.mixedTeam}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <span className="text-[11px] text-zinc-400 block font-mono">
+                  <span className="text-[11px] text-zinc-400 block">
                     * Board holding sticks allowed ONLY for acrobatic board breaking (max 3 poles prepared by team).
                   </span>
                 </div>
               </div>
 
               {/* 12-Point Deduction Matrix Table */}
-              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-4">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-4">
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   {ruleT.poomsaeFreestyle.deductionsTitle}
                 </h4>
                 <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white font-mono uppercase text-[11px]">
+                      <tr className="bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-white uppercase text-[11px]">
                         <th className="p-3">Violation / Fault</th>
                         <th className="p-3">Deduction Value</th>
                         <th className="p-3">Category Deducted From</th>
                         <th className="p-3">Context &amp; Rules</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 font-light">
+                    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60">
                       {freestyleDeductions.map((fd, idx) => (
                         <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
                           <td className="p-3 font-bold text-zinc-900 dark:text-white">{fd.violation}</td>
-                          <td className="p-3 font-mono font-black text-brand-red whitespace-nowrap">{fd.deduction}</td>
-                          <td className="p-3 font-mono text-zinc-700 dark:text-zinc-300">{fd.category}</td>
+                          <td className="p-3 font-black text-brand-red whitespace-nowrap">{fd.deduction}</td>
+                          <td className="p-3 text-zinc-700 dark:text-zinc-300">{fd.category}</td>
                           <td className="p-3 text-zinc-500">{fd.notes}</td>
                         </tr>
                       ))}
@@ -3247,17 +3247,17 @@ export function CompetitionRulesReader() {
       {/* ==================================================================== */}
       {masterCategory === 'hanmadang' && (
         <div className="space-y-6 animate-fade-in">
-          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 inline-block mb-1">
+                <span className="px-2.5 py-0.5 rounded text-[11px] font-bold uppercase bg-zinc-500/20 text-zinc-600 dark:text-zinc-400 border border-zinc-500/30 inline-block mb-1">
                   {ruleT.previewBadge}
                 </span>
                 <h3 className="text-lg sm:text-xl font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   {ruleT.hanmadang.title}
                 </h3>
               </div>
-              <span className="text-xs font-mono text-zinc-400">Kukkiwon Sanctioned</span>
+              <span className="text-xs text-zinc-400">Kukkiwon Sanctioned</span>
             </div>
 
             <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
@@ -3267,13 +3267,13 @@ export function CompetitionRulesReader() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {hanmadangEventsData.map((he, idx) => (
                 <div key={idx} className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
-                  <span className="text-[11px] font-mono text-zinc-400 block">{he.koreanName}</span>
+                  <span className="text-[11px] text-zinc-400 block">{he.koreanName}</span>
                   <h4 className="text-sm font-black uppercase text-zinc-900 dark:text-white">{he.eventGroup}</h4>
                   <div className="space-y-2 text-xs">
                     {he.events.map((ev, eIdx) => (
                       <div key={eIdx} className="p-2.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                         <strong className="text-zinc-900 dark:text-white block font-bold">{ev.name}</strong>
-                        <span className="text-zinc-500 font-light block">{ev.criteria}</span>
+                        <span className="text-zinc-500 block">{ev.criteria}</span>
                       </div>
                     ))}
                   </div>
@@ -3307,7 +3307,7 @@ export function CompetitionRulesReader() {
                   <h4 className="text-xs sm:text-sm font-black uppercase text-zinc-900 dark:text-white line-clamp-1">
                     {currentPdf.title}
                   </h4>
-                  <span className="text-[11px] font-mono text-zinc-400">
+                  <span className="text-[11px] text-zinc-400">
                     {currentPdf.edition} &bull; {currentPdf.inForceDate} &bull; {currentPdf.pages} {ruleT.pdfModal.pageInfo}
                   </span>
                 </div>
@@ -3322,7 +3322,7 @@ export function CompetitionRulesReader() {
                 >
                   <ZoomOut className="w-4 h-4" />
                 </button>
-                <span className="text-xs font-mono font-bold px-1.5">{pdfZoom}%</span>
+                <span className="text-xs font-bold px-1.5">{pdfZoom}%</span>
                 <button
                   onClick={() => setPdfZoom((prev) => Math.min(160, prev + 15))}
                   className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 cursor-pointer"

@@ -47,6 +47,8 @@ export const ko: Translations = {
       '세계태권도연맹(World Taekwondo) 전통 무도 정신과 현대 스포츠 과학, 시네마틱 프리스타일 트릭킹의 조화. 첫 흰띠부터 국기원(Kukkiwon) 공인 고단자까지 무한한 잠재력을 깨웁니다.',
     ctaPrimary: '수련 시작하기',
     ctaSecondary: '지도진 및 수련생',
+    pauseMotion: '로고 애니메이션 일시정지',
+    playMotion: '로고 애니메이션 재생',
   },
   // Stats Banner
   stats: {

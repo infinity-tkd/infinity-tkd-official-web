@@ -19,11 +19,7 @@ interface CtaBannerProps {
  */
 export function CtaBanner({ eyebrow, title, description, href, label, secondary }: CtaBannerProps) {
   return (
-    <div className="dark relative overflow-hidden rounded-2xl border border-brand-red/40 bg-zinc-900 p-8 sm:p-12 text-white">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-red/20 blur-[100px]"
-      />
+    <div className="dark relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 p-8 sm:p-12 text-white">
       {/* With two actions the row needs more room, so it stacks until the large breakpoint. */}
       <div
         className={cn(

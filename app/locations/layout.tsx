@@ -1,29 +1,13 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { dojangBranches } from '@/data/locations'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Dojang Branches & Training Centers',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Dojangs in Phnom Penh: Olympic Stadium & Sen Sok',
   description:
-    'Train at our Olympic-standard dojang branches in Phnom Penh: Olympic Branch (National Olympic Stadium Complex) and Kouk Khleang Branch (Sen Sok). View training schedules, maps, and amenities.',
-  alternates: {
-    canonical: '/locations',
-  },
-  openGraph: {
-    title: 'Dojang Branches & Training Centers | Infinity Taekwondo',
-    description:
-      'Explore our state-of-the-art Taekwondo facilities in Phnom Penh: Olympic Branch & Kouk Khleang Branch.',
-    url: 'https://infinitytaekwondo.com/locations',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Dojang Branches & Training Centers | Infinity Taekwondo',
-    description:
-      'Explore our state-of-the-art Taekwondo facilities in Phnom Penh: Olympic Branch & Kouk Khleang Branch.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'Train Taekwondo with Infinity Taekwondo in Phnom Penh at our Olympic Stadium HQ and Kouk Khleang (Sen Sok) dojangs: class times, maps and directions.',
+  path: '/locations',
+  keywords: ['Taekwondo near Olympic Stadium', 'Taekwondo Sen Sok', 'Taekwondo dojang Phnom Penh', 'martial arts school Phnom Penh'],
+})
 
 export default function LocationsLayout({ children }: { children: React.ReactNode }) {
   const locationsSchema = {

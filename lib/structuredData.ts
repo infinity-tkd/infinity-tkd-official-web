@@ -17,13 +17,39 @@ export function buildSiteJsonLd() {
       {
         '@type': ['SportsClub', 'EducationalOrganization'],
         '@id': ORG_ID,
-        name: 'Infinity Taekwondo Academy',
-        alternateName: ['Infinity TKD', '태권도 INFINITY', 'អ៊ីនហ្វីនីធី តេក្វាន់ដូ', '无限跆拳道'],
+        name: 'Infinity Taekwondo',
+        legalName: 'Infinity Taekwondo Academy',
+        alternateName: ['Infinity Taekwondo Academy', 'Infinity TKD', '태권도 INFINITY', 'អ៊ីនហ្វីនីធី តេក្វាន់ដូ', '无限跆拳道'],
         url: SITE_URL,
         logo: `${SITE_URL}/favicon.svg`,
         image: `${SITE_URL}/opengraph-image`,
         description:
-          'Premier World Taekwondo and Kukkiwon certified martial arts and sports biomechanics academy in Phnom Penh, Cambodia.',
+          'Infinity Taekwondo is a World Taekwondo and Kukkiwon certified Taekwondo academy in Phnom Penh, Cambodia, teaching Poomsae, kicking, self-defense and competition for all ages.',
+        sport: 'Taekwondo',
+        knowsAbout: [
+          'Taekwondo',
+          'Poomsae',
+          'Taegeuk Poomsae',
+          'Freestyle Poomsae',
+          'Kukkiwon',
+          'World Taekwondo',
+          'Taekwondo belt ranks',
+          'Taekwondo kicks',
+          'Hosinsul self-defense',
+          'Martial arts tricking',
+          'Sport science',
+        ],
+        areaServed: [
+          { '@type': 'City', name: 'Phnom Penh' },
+          { '@type': 'Country', name: 'Cambodia' },
+        ],
+        foundingDate: '2020',
+        foundingLocation: { '@type': 'Place', name: 'Phnom Penh, Cambodia' },
+        founder: [
+          { '@type': 'Person', name: 'Keo Moni', jobTitle: 'Founder & CEO' },
+          { '@type': 'Person', name: 'Chon Sovan', jobTitle: 'Co-Founder & Head Master' },
+        ],
+        location: [{ '@id': `${SITE_URL}/#olympic-branch` }, { '@id': `${SITE_URL}/#kouk-khleang-branch` }],
         telephone: PRIMARY_PHONE,
         email: siteSettings.contact.generalEmail,
         sameAs: siteSettings.socials.map((s) => s.url),
@@ -84,6 +110,9 @@ export function buildSiteJsonLd() {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: 'Infinity Taekwondo',
+        alternateName: 'Infinity TKD',
+        description:
+          'Infinity Taekwondo: Taekwondo classes in Phnom Penh, Cambodia, and a free Taekwondo library of Poomsae, kicks, stances, self-defense, history and rules.',
         publisher: { '@id': ORG_ID },
         inLanguage: ['en', 'km', 'ko', 'zh'],
       },
@@ -140,6 +169,83 @@ export function buildBreadcrumbJsonLd(crumbs: Crumb[]) {
       name: crumb.name,
       item: `${SITE_URL}${crumb.path}`,
     })),
+  }
+}
+
+const absolute = (pathOrUrl: string) => (pathOrUrl.startsWith('http') ? pathOrUrl : `${SITE_URL}${pathOrUrl}`)
+
+export interface CollectionJsonLdInput {
+  name: string
+  description: string
+  path: string
+  items: { name: string; path: string }[]
+}
+
+/** CollectionPage with its entries as an ordered list (library hub and discipline pages). */
+export function buildCollectionJsonLd({ name, description, path, items }: CollectionJsonLdInput) {
+  const url = absolute(path)
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${url}#collection`,
+    name,
+    description,
+    url,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    publisher: { '@id': ORG_ID },
+    about: { '@type': 'Thing', name: 'Taekwondo' },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        url: absolute(item.path),
+      })),
+    },
+  }
+}
+
+export interface TechniqueJsonLdInput {
+  name: string
+  alternateName?: string[]
+  description: string
+  path: string
+  image?: string
+  discipline: string
+  level?: string
+  keywords: string[]
+  collectionPath: string
+}
+
+/** A library technique: an article that is also a learning resource about Taekwondo. */
+export function buildTechniqueJsonLd(input: TechniqueJsonLdInput) {
+  const url = absolute(input.path)
+  return {
+    '@context': 'https://schema.org',
+    '@type': ['Article', 'LearningResource'],
+    '@id': `${url}#technique`,
+    headline: input.name,
+    name: input.name,
+    alternateName: input.alternateName?.filter(Boolean),
+    description: input.description,
+    url,
+    mainEntityOfPage: url,
+    image: [absolute(input.image ?? '/opengraph-image')],
+    inLanguage: 'en',
+    learningResourceType: `Taekwondo ${input.discipline} guide`,
+    educationalLevel: input.level,
+    teaches: input.name,
+    about: [
+      { '@type': 'Thing', name: 'Taekwondo' },
+      { '@type': 'Thing', name: input.discipline },
+    ],
+    keywords: input.keywords.join(', '),
+    isPartOf: { '@id': `${absolute(input.collectionPath)}#collection` },
+    author: { '@id': ORG_ID },
+    publisher: { '@id': ORG_ID },
   }
 }
 

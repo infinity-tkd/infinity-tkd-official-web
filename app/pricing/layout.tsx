@@ -1,29 +1,13 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { pricingFaqs } from '@/data/pricing'
-import { SHARE_IMAGE, TWITTER_IMAGE } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Memberships & Tuition Plans',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Class Prices & Memberships',
   description:
-    'Transparent tuition pricing, flexible monthly memberships, and family training packages at Infinity Taekwondo Phnom Penh. Start with a risk-free trial session.',
-  alternates: {
-    canonical: '/pricing',
-  },
-  openGraph: {
-    title: 'Memberships & Tuition Plans | Infinity Taekwondo',
-    description:
-      'Transparent tuition pricing, flexible monthly memberships, and family training packages in Phnom Penh.',
-    url: 'https://infinitytaekwondo.com/pricing',
-    images: [SHARE_IMAGE],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Memberships & Tuition Plans | Infinity Taekwondo',
-    description:
-      'Transparent tuition pricing, flexible monthly memberships, and family training packages in Phnom Penh.',
-    images: [TWITTER_IMAGE],
-  },
-}
+    'Infinity Taekwondo membership prices in Phnom Penh: monthly and annual plans, family discounts and a free trial class for kids, teens and adults.',
+  path: '/pricing',
+  keywords: ['Taekwondo prices Phnom Penh', 'Taekwondo membership', 'Taekwondo class fees Cambodia', 'kids martial arts prices'],
+})
 
 export default function PricingLayout({ children }: { children: React.ReactNode }) {
   const faqSchema = {

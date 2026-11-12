@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { BeltJourneyPreview } from '@/components/home/BeltJourneyPreview'
 import { ProgramPathfinder } from '@/components/ProgramPathfinder'
 import { TestimonialsSection } from '@/components/TestimonialsSection'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { HeroSection } from '@/components/home/HeroSection'
 import { StatsBanner } from '@/components/home/StatsBanner'
 import { DojangSection } from '@/components/home/DojangSection'
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="overflow-x-hidden bg-white font-sans text-zinc-900 selection:bg-brand-red selection:text-white transition-colors duration-500 dark:bg-black dark:text-white">
+    <div className="overflow-x-hidden bg-white text-zinc-900 dark:bg-black dark:text-white">
       <HeroSection />
       <StatsBanner />
       <DojangSection />
@@ -30,20 +29,15 @@ export default function HomePage() {
       <PillarsSection />
       <BranchesSection />
 
-      <section className="py-16 sm:py-20 lg:py-24 bg-white transition-colors duration-500 dark:bg-black">
+      <section className="border-t border-zinc-200 bg-white py-16 sm:py-20 lg:py-24 dark:border-zinc-900 dark:bg-black">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal direction="up">
-            <ProgramPathfinder />
-          </ScrollReveal>
+          <ProgramPathfinder />
         </div>
       </section>
 
       <RecordsSection />
       <LatestJournal />
-
-      <ScrollReveal direction="up">
-        <TestimonialsSection />
-      </ScrollReveal>
+      <TestimonialsSection />
     </div>
   )
 }

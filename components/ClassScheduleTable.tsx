@@ -43,7 +43,7 @@ export function ClassScheduleTable() {
 
         <Link
           href="/contact?subject=Free%20Trial%20Booking"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow self-start md:self-auto shrink-0 touch-press"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all self-start md:self-auto shrink-0 touch-press"
         >
           {t.schedule.bookTrial} <ArrowRight className="w-3.5 h-3.5" />
         </Link>
@@ -60,7 +60,7 @@ export function ClassScheduleTable() {
               aria-pressed={selectedDay === day}
               className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center min-h-[44px] touch-press ${
                 selectedDay === day
-                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black shadow-md'
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-black'
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800'
               }`}
             >

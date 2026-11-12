@@ -10,6 +10,8 @@ interface PostCardProps {
   featured?: boolean
   /** Mark the cover as the LCP image (first card on the page). */
   priority?: boolean
+  /** Title level: 2 when the cards sit straight under the page h1, 3 under a section h2. */
+  headingLevel?: 2 | 3
 }
 
 function CoverImage({ post, priority, sizes }: { post: BlogPostMeta; priority?: boolean; sizes: string }) {
@@ -18,9 +20,9 @@ function CoverImage({ post, priority, sizes }: { post: BlogPostMeta; priority?: 
     return (
       <div
         aria-hidden="true"
-        className="absolute inset-0 flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-red/25 via-zinc-100 to-zinc-200 dark:via-zinc-900 dark:to-black"
+        className="absolute inset-0 flex items-center justify-center overflow-hidden bg-zinc-100 dark:bg-zinc-900"
       >
-        <span className="select-none text-6xl sm:text-7xl font-black tracking-tighter text-brand-red/15">태권도</span>
+        <span className="select-none text-6xl sm:text-7xl font-black tracking-tighter text-zinc-300 dark:text-zinc-800">태권도</span>
       </div>
     )
   }
@@ -32,17 +34,18 @@ function CoverImage({ post, priority, sizes }: { post: BlogPostMeta; priority?: 
       sizes={sizes}
       priority={priority}
       quality={70}
-      className="object-cover transition-transform duration-700 group-hover:scale-105"
+      className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03] motion-reduce:transition-none"
     />
   )
 }
 
-export function PostCard({ post, featured = false, priority = false }: PostCardProps) {
+export function PostCard({ post, featured = false, priority = false, headingLevel = 3 }: PostCardProps) {
+  const Heading = headingLevel === 2 ? 'h2' : 'h3'
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 shadow-sm',
-        'transition-all duration-300 hover:border-brand-red/50 hover:shadow-xl hover:-translate-y-0.5',
+        'group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40',
+        'transition-[transform,border-color] duration-300 ease-out-expo hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
         featured ? 'grid lg:grid-cols-2' : 'flex flex-col h-full'
       )}
     >
@@ -57,7 +60,7 @@ export function PostCard({ post, featured = false, priority = false }: PostCardP
           priority={priority}
           sizes={featured ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'}
         />
-        <span className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-lg bg-brand-red text-white text-[11px] font-bold uppercase tracking-widest shadow-md">
+        <span className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-lg bg-brand-red text-white text-[11px] font-bold uppercase tracking-widest">
           {post.category}
         </span>
       </div>
@@ -72,7 +75,7 @@ export function PostCard({ post, featured = false, priority = false }: PostCardP
           </span>
         </div>
 
-        <h3
+        <Heading
           className={cn(
             'font-black uppercase tracking-tight leading-tight text-zinc-900 dark:text-white group-hover:text-brand-red transition-colors',
             featured ? 'text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4' : 'text-lg sm:text-xl mb-2'
@@ -82,11 +85,11 @@ export function PostCard({ post, featured = false, priority = false }: PostCardP
           <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">
             {post.title}
           </Link>
-        </h3>
+        </Heading>
 
         <p
           className={cn(
-            'font-light leading-relaxed text-zinc-600 dark:text-zinc-400',
+            'leading-relaxed text-zinc-600 dark:text-zinc-400',
             featured ? 'text-base sm:text-lg line-clamp-4' : 'text-sm line-clamp-3'
           )}
         >

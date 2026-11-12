@@ -39,6 +39,7 @@ import { useLanguage } from '@/context/LanguageContext'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
+import { pressable } from '@/lib/a11y'
 
 export default function CommunityPage() {
   const { t, localizeList } = useLanguage()
@@ -149,7 +150,6 @@ export default function CommunityPage() {
     <div className="bg-zinc-50 dark:bg-black text-zinc-900 dark:text-white min-h-screen pt-20 sm:pt-24 pb-20 font-sans selection:bg-brand-red selection:text-white transition-colors duration-500 overflow-x-hidden">
       {/* Hero Header */}
       <section className="relative pt-4 pb-10 sm:pb-14 px-4 sm:px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[450px] bg-gradient-to-b from-brand-red/15 via-transparent to-transparent blur-3xl rounded-full opacity-60 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-4">
@@ -180,7 +180,7 @@ export default function CommunityPage() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`px-4 sm:px-5 py-2 min-h-[44px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest transition-all duration-300 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-brand-red text-white shadow-brand-glow'
+                  ? 'bg-brand-red text-white'
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
               }`}
             >
@@ -201,7 +201,7 @@ export default function CommunityPage() {
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 {t.community.tabCoaches}{' '}
-                <span className="text-xs text-zinc-400 font-mono align-middle">
+                <span className="text-xs text-zinc-400 align-middle">
                   ({filteredCoaches.length} of {coachFaculty.length})
                 </span>
               </h2>
@@ -218,7 +218,7 @@ export default function CommunityPage() {
                   value={coachSearch}
                   onChange={(e) => setCoachSearch(e.target.value)}
                   aria-label="Search coaches and specialties"
-                  className="w-full sm:w-64 pl-9 pr-3 py-2 text-base sm:text-xs min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full sm:w-64 pl-9 pr-3 py-2 text-base lg:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
 
@@ -230,7 +230,7 @@ export default function CommunityPage() {
                     onClick={() => setSelectedCoachDivision(div.id)}
                     className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 touch-press cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedCoachDivision === div.id
-                        ? 'bg-brand-red text-white shadow-brand-glow'
+                        ? 'bg-brand-red text-white'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                     }`}
                   >
@@ -247,7 +247,7 @@ export default function CommunityPage() {
               {filteredCoaches.map((coach) => (
                 <Card3D key={coach.id} max={5} depth={4} className="h-full">
                   <div
-                    onClick={() => setSelectedCoach(coach)}
+                    {...pressable(() => setSelectedCoach(coach))}
                     className="group relative rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer h-full"
                   >
                     <div>
@@ -316,9 +316,9 @@ export default function CommunityPage() {
             /* Empty State for Coaches */
             <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
               <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                 No Coaches Found
-              </h4>
+              </h3>
               <p className="text-[13px] text-zinc-500 mb-4">
                 No faculty members match your filter criteria.
               </p>
@@ -347,7 +347,7 @@ export default function CommunityPage() {
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 {t.community.tabStudents}{' '}
-                <span className="text-xs text-zinc-400 font-mono align-middle">
+                <span className="text-xs text-zinc-400 align-middle">
                   ({filteredStudents.length} of {athleteSpotlights.length})
                 </span>
               </h2>
@@ -364,7 +364,7 @@ export default function CommunityPage() {
                   value={studentSearch}
                   onChange={(e) => setStudentSearch(e.target.value)}
                   aria-label="Search students and achievements"
-                  className="w-full sm:w-64 pl-9 pr-3 py-2 text-base sm:text-xs min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
+                  className="w-full sm:w-64 pl-9 pr-3 py-2 text-base lg:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
 
@@ -376,7 +376,7 @@ export default function CommunityPage() {
                     onClick={() => setSelectedStudentCategory(cat.id)}
                     className={`px-3 py-1.5 min-h-[38px] rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer shrink-0 snap-center whitespace-nowrap ${
                       selectedStudentCategory === cat.id
-                        ? 'bg-brand-red text-white shadow-brand-glow'
+                        ? 'bg-brand-red text-white'
                         : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800'
                     }`}
                   >
@@ -393,7 +393,7 @@ export default function CommunityPage() {
               {filteredStudents.map((student) => (
                 <Card3D key={student.id} max={5} depth={4} className="h-full">
                   <div
-                    onClick={() => setSelectedStudent(student)}
+                    {...pressable(() => setSelectedStudent(student))}
                     className="group relative rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer h-full"
                   >
                     <div>
@@ -454,9 +454,9 @@ export default function CommunityPage() {
             /* Empty State for Students */
             <div className="p-12 text-center rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
               <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />
-              <h4 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">
                 No Athletes Found
-              </h4>
+              </h3>
               <p className="text-[13px] text-zinc-500 mb-4">
                 No student profiles match your search criteria.
               </p>
@@ -484,7 +484,7 @@ export default function CommunityPage() {
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
                 {t.community.tabPromotions}{' '}
-                <span className="text-xs text-zinc-400 font-mono align-middle">
+                <span className="text-xs text-zinc-400 align-middle">
                   ({recentPromotions.length} Graduates)
                 </span>
               </h2>
@@ -499,15 +499,15 @@ export default function CommunityPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-xs font-mono font-bold text-zinc-400">{promo.date}</span>
+                      <span className="text-xs font-bold text-zinc-400">{promo.date}</span>
                       <div
                         className="w-3.5 h-3.5 rounded-full border border-black/20"
                         style={{ backgroundColor: promo.beltHex }}
                       />
                     </div>
-                    <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white">
+                    <h3 className="text-base font-black uppercase text-zinc-900 dark:text-white">
                       {promo.studentName}
-                    </h4>
+                    </h3>
                     <p className="text-xs font-bold text-brand-red uppercase mt-0.5 mb-2">
                       {promo.promotedTo}
                     </p>
@@ -738,7 +738,7 @@ export default function CommunityPage() {
                       key={i}
                       className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 text-xs text-zinc-700 dark:text-zinc-300"
                     >
-                      <Medal className="w-4 h-4 text-amber-500 shrink-0" />
+                      <Medal className="w-4 h-4 text-zinc-500 shrink-0" />
                       <span className="font-semibold">{ach}</span>
                     </div>
                   ))}
@@ -752,7 +752,7 @@ export default function CommunityPage() {
                 </span>
                 <Link
                   href={`/contact?subject=Enrollment%20inspired%20by%20${encodeURIComponent(selectedStudent.name)}`}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-brand-glow text-center flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all text-center flex items-center justify-center gap-2"
                 >
                   Start Your Journey <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

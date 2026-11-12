@@ -158,17 +158,16 @@ export function WangFloorPlanVisualizer({
   const isLine3Yang = wangFloorPlanLines?.line3Bottom?.isYang ?? trigramLines[2]
 
   return (
-    <div className={`space-y-3 font-mono ${compact ? 'text-xs' : 'text-sm'}`}>
+    <div className={`space-y-3 ${compact ? 'text-xs' : 'text-sm'}`}>
       {/* Visual Canvas Box */}
-      <div className="relative p-5 rounded-2xl bg-gradient-to-b from-zinc-950 via-zinc-900 to-black border border-zinc-800 shadow-xl overflow-hidden flex flex-col items-center">
+      <div className="dark relative p-5 rounded-2xl bg-zinc-900 text-white border border-zinc-800 overflow-hidden flex flex-col items-center">
         {/* Ambient Glow */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-brand-red/10 blur-[80px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
 
         {/* Top Header inside Visualizer */}
-        <div className="w-full flex items-center justify-between gap-2 pb-3 mb-2 border-b border-zinc-800/80 z-10 text-xs flex-wrap sm:flex-nowrap">
+        {/* Wraps in narrow columns (the dossier dialog) instead of letting the two halves overlap. */}
+        <div className="w-full flex flex-wrap items-center justify-between gap-2 pb-3 mb-2 border-b border-zinc-800/80 z-10 text-xs">
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse shrink-0" />
+            <span className="w-2 h-2 rounded-full bg-brand-red shrink-0" aria-hidden="true" />
             <span className="text-[11px] uppercase font-bold text-zinc-400 tracking-wider shrink-0">
               {t.characterWangFloor}
             </span>
@@ -180,9 +179,9 @@ export function WangFloorPlanVisualizer({
             )}
           </div>
           {trigramSymbol && (
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-brand-red text-xs font-bold shrink-0">
-              <span className="text-sm font-serif">{trigramSymbol}</span>
-              {elementName && <span className="text-[11px] text-zinc-300 font-sans">{elementName}</span>}
+            <div className="flex min-w-0 max-w-full items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 border border-white/10 text-brand-red text-xs font-bold">
+              <span className="shrink-0 text-sm font-serif">{trigramSymbol}</span>
+              {elementName && <span className="truncate text-[11px] text-zinc-300 font-sans">{elementName}</span>}
             </div>
           )}
         </div>
@@ -486,7 +485,7 @@ export function ClockCompassDial({
   ]
 
   return (
-    <div className={`p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-white font-mono ${compact ? 'text-xs' : 'text-sm'} space-y-2`}>
+    <div className={`p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-white ${compact ? 'text-xs' : 'text-sm'} space-y-2`}>
       <div className="flex items-center justify-between pb-2 border-b border-zinc-800 text-xs">
         <div className="flex items-center gap-1.5 text-zinc-300">
           <Compass className="w-3.5 h-3.5 text-brand-red" />

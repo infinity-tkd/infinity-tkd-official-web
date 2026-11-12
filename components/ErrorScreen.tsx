@@ -214,7 +214,6 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
   return (
     <div className="min-h-[85vh] flex items-center justify-center bg-white dark:bg-black text-zinc-900 dark:text-white px-4 py-20 relative overflow-hidden font-sans selection:bg-brand-red selection:text-white transition-colors duration-500">
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/10 blur-[160px] rounded-full pointer-events-none" />
 
       {/* Giant Watermark Error Code */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[26vw] font-black text-black/[0.03] dark:text-white/[0.03] select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap z-0">
@@ -223,7 +222,7 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
 
       <div className="container mx-auto max-w-2xl text-center relative z-10">
         {/* Animated Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md shadow-brand-glow">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-red/30 bg-brand-red/10 text-brand-red text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
           <Icon className="w-4 h-4" /> {displayBadge}
         </div>
 
@@ -247,14 +246,14 @@ export function ErrorScreen({ code, customTitle, customMessage, reset }: ErrorSc
           {reset ? (
             <button
               onClick={() => reset()}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 transition-all flex items-center justify-center gap-2 touch-press cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" /> Try Again
             </button>
           ) : (
             <Link
               href="/"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black transition-all shadow-brand-glow flex items-center justify-center gap-2 touch-press"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-red text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black transition-all flex items-center justify-center gap-2 touch-press"
             >
               <Home className="w-4 h-4" /> Return to Homepage
             </Link>

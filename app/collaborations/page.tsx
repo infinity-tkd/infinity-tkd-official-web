@@ -1,5 +1,5 @@
+import { pageMetadata } from '@/lib/seo'
 import * as React from 'react'
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CollaborationShowcase } from '@/components/collaborations/CollaborationShowcase'
 import { Card3D } from '@/components/ui/Card3D'
@@ -14,36 +14,13 @@ import {
   Building2,
 } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Institutional Collaborations & Global Alliances',
+export const metadata = pageMetadata({
+  title: 'Taekwondo Partners & Federations',
   description:
-    'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, national federations, sport universities, and athletic equipment innovators.',
-  alternates: {
-    canonical: '/collaborations',
-  },
-  openGraph: {
-    title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',
-    description:
-      'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, national federations, sport universities, and athletic equipment innovators.',
-    url: '/collaborations',
-    type: 'website',
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Infinity Taekwondo Collaborations',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Institutional Collaborations & Global Alliances | Infinity Taekwondo',
-    description:
-      'Explore Infinity Taekwondo’s global partnerships with World Taekwondo (WT), Kukkiwon World Headquarters, and national federations.',
-    images: ['/twitter-image'],
-  },
-}
+    'Infinity Taekwondo aligns with World Taekwondo, Kukkiwon, national federations, sport universities and gear partners to raise Taekwondo in Cambodia.',
+  path: '/collaborations',
+  keywords: ['Kukkiwon partner Cambodia', 'World Taekwondo Cambodia', 'Cambodia Taekwondo Federation'],
+})
 
 export default function CollaborationsPage() {
   return (
@@ -54,15 +31,14 @@ export default function CollaborationsPage() {
         {/* ------------------------------------------------------------------ */}
         <Card3D maxTilt={3} scale={1.008} className="mb-12">
           <div className="p-5 sm:p-8 md:p-12 lg:p-16 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 blur-[130px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl">
             <div className="flex items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-red/10 text-brand-red border border-brand-red/20">
+              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-brand-red/10 text-brand-red border border-brand-red/20">
                 Institutional Ecosystem
               </span>
               <span className="text-zinc-400">&bull;</span>
-              <span className="text-[11px] font-mono text-zinc-500">Global Alliances &amp; Governance</span>
+              <span className="text-[11px] text-zinc-500">Global Alliances &amp; Governance</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-zinc-900 dark:text-white mb-4">
@@ -74,7 +50,7 @@ export default function CollaborationsPage() {
             </p>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono pt-4 border-t border-zinc-100 dark:border-zinc-800">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-4 border-t border-zinc-100 dark:border-zinc-800">
               <div className="min-w-0">
                 <span className="text-zinc-400 block text-[11px] truncate">Governing Body</span>
                 <strong className="text-brand-red text-xs sm:text-sm font-black truncate block" title="World Taekwondo">World Taekwondo</strong>
@@ -89,7 +65,7 @@ export default function CollaborationsPage() {
               </div>
               <div className="min-w-0">
                 <span className="text-zinc-400 block text-[11px] truncate">Community Reach</span>
-                <strong className="text-emerald-500 text-xs sm:text-sm font-black truncate block" title="250+ Youths/Yr">250+ Youths/Yr</strong>
+                <strong className="text-zinc-500 text-xs sm:text-sm font-black truncate block" title="250+ Youths/Yr">250+ Youths/Yr</strong>
               </div>
             </div>
           </div>
@@ -120,7 +96,7 @@ export default function CollaborationsPage() {
 
             <Link
               href="/contact?subject=New%20Institutional%20Partnership%20Proposal"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-brand-glow text-center inline-flex items-center justify-center gap-2 touch-press shrink-0 min-h-[44px]"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all text-center inline-flex items-center justify-center gap-2 touch-press shrink-0 min-h-[44px]"
             >
               Submit Partnership Proposal <ArrowRight className="w-4 h-4" />
             </Link>

@@ -5,31 +5,19 @@ import { CtaBanner } from '@/components/ui/CtaBanner'
 import { PostCard } from '@/components/blog/PostCard'
 import { CategoryNav } from '@/components/blog/CategoryNav'
 import { getAllPostMetas, getCategories } from '@/lib/blog'
+import { pageMetadata } from '@/lib/seo'
 
-const TITLE = 'Martial Journal & Blog'
-const DESCRIPTION =
-  'Training guides, belt and grading advice, competition insights and stories from the Infinity Taekwondo dojangs in Phnom Penh.'
+const seo = pageMetadata({
+  title: 'Taekwondo Blog: Training Tips, Belts & Poomsae',
+  description:
+    'The Infinity Taekwondo blog: Taekwondo training guides, belt and grading advice, Poomsae and competition insights, and stories from our Phnom Penh dojangs.',
+  path: '/blog',
+  keywords: ['Taekwondo blog', 'Taekwondo training tips', 'Taekwondo belt test', 'Poomsae tips', 'Taekwondo for beginners'],
+})
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: {
-    canonical: '/blog',
-    types: { 'application/rss+xml': '/blog/feed.xml' },
-  },
-  openGraph: {
-    title: `${TITLE} | Infinity Taekwondo`,
-    description: DESCRIPTION,
-    url: '/blog',
-    type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Infinity Taekwondo Martial Journal' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${TITLE} | Infinity Taekwondo`,
-    description: DESCRIPTION,
-    images: ['/twitter-image'],
-  },
+  ...seo,
+  alternates: { ...seo.alternates, types: { 'application/rss+xml': '/blog/feed.xml' } },
 }
 
 export default function BlogIndexPage() {
@@ -67,7 +55,7 @@ export default function BlogIndexPage() {
 
               {lead && (
                 <div className="mb-8 sm:mb-10">
-                  <PostCard post={lead} featured priority />
+                  <PostCard post={lead} featured priority headingLevel={2} />
                 </div>
               )}
 
@@ -76,7 +64,7 @@ export default function BlogIndexPage() {
                 <ul className={`grid gap-5 sm:gap-6 sm:grid-cols-2 ${rest.length === 2 ? '' : 'lg:grid-cols-3'}`}>
                   {rest.map((post) => (
                     <li key={post.slug}>
-                      <PostCard post={post} />
+                      <PostCard post={post} headingLevel={2} />
                     </li>
                   ))}
                 </ul>

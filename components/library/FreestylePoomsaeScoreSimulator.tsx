@@ -246,12 +246,12 @@ export function FreestylePoomsaeScoreSimulator() {
     }
   }
 
-  // Grade badge color
+  // Grade badge: one accent for the top band (9.0+), then steps of neutral emphasis.
   const getScoreColorClass = (score: number) => {
-    if (score >= 9.0) return 'text-amber-500 bg-amber-500/10 border-amber-500/30'
-    if (score >= 8.0) return 'text-emerald-500 bg-emerald-500/10 border-emerald-500/30'
-    if (score >= 7.0) return 'text-blue-500 bg-blue-500/10 border-blue-500/30'
-    return 'text-zinc-500 bg-zinc-500/10 border-zinc-500/30'
+    if (score >= 9.0) return 'text-brand-red bg-brand-red/10 border-brand-red/30'
+    if (score >= 8.0) return 'text-zinc-900 dark:text-white bg-zinc-500/10 border-zinc-500/30'
+    if (score >= 7.0) return 'text-zinc-700 dark:text-zinc-300 bg-zinc-500/5 border-zinc-500/20'
+    return 'text-zinc-500 bg-transparent border-zinc-500/20'
   }
 
   return (
@@ -263,10 +263,10 @@ export function FreestylePoomsaeScoreSimulator() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-zinc-200 dark:border-zinc-800">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-brand-red text-white">
+              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-brand-red text-white">
                 {t.officialVersion}
               </span>
-              <span className="text-xs font-mono text-zinc-400">&bull; Article 9 Regulations</span>
+              <span className="text-xs text-zinc-400">&bull; Article 9 Regulations</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-white uppercase">
               {t.title}
@@ -282,7 +282,7 @@ export function FreestylePoomsaeScoreSimulator() {
               onClick={() => setShowRulesModal((p) => !p)}
               className="px-3.5 py-2 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <HelpCircle className="w-4 h-4 text-purple-500" />
+              <HelpCircle className="w-4 h-4 text-zinc-500" />
               <span>WT Article 9 Rules</span>
             </button>
 
@@ -290,7 +290,7 @@ export function FreestylePoomsaeScoreSimulator() {
               onClick={handlePrint}
               className="px-3.5 py-2 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Printer className="w-4 h-4 text-emerald-500" />
+              <Printer className="w-4 h-4 text-zinc-500" />
               <span>{t.printScoreSheet}</span>
             </button>
 
@@ -306,12 +306,12 @@ export function FreestylePoomsaeScoreSimulator() {
 
         {/* Preset Routine Selector Strip */}
         <div className="pt-4 flex flex-wrap items-center gap-2 print:hidden">
-          <span className="text-xs font-mono font-bold text-zinc-400 uppercase mr-1">
+          <span className="text-xs font-bold text-zinc-400 uppercase mr-1">
             {t.presetsTitle}
           </span>
           <button
             onClick={() => applyPreset('gold')}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 transition-all cursor-pointer"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold bg-zinc-500/10 hover:bg-zinc-500/20 text-zinc-700 dark:text-zinc-300 border border-zinc-500/30 transition-all cursor-pointer"
           >
             {t.presetGold}
           </button>
@@ -332,34 +332,34 @@ export function FreestylePoomsaeScoreSimulator() {
 
       {/* Rules Information Accordion */}
       {showRulesModal && (
-        <div className="p-6 rounded-2xl bg-purple-500/5 border border-purple-500/20 shadow-md space-y-4 animate-fade-in print:hidden">
+        <div className="p-6 rounded-2xl bg-zinc-500/5 border border-zinc-500/20 space-y-4 animate-fade-in print:hidden">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-500" />
+            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-zinc-500" />
               Official WT Freestyle Poomsae Scoring Rules (Article 9 Summary)
             </h3>
             <button
               onClick={() => setShowRulesModal(false)}
-              className="text-xs font-mono text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
+              className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
             >
               Close Guide &times;
             </button>
           </div>
           <div className="grid md:grid-cols-3 gap-4 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
-            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-purple-500/20">
-              <span className="font-bold font-mono text-purple-600 dark:text-purple-400 block mb-1">
+            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-500/20">
+              <span className="font-bold text-zinc-600 dark:text-zinc-400 block mb-1">
                 1. Foot Techniques (5.0 max)
               </span>
               All 5 kicks are compulsory. Each is scored on Basic Execution (0.0 to 0.7) + Difficulty Bonus (0.1 to 0.3). Max per technique is 1.0 point.
             </div>
-            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-purple-500/20">
-              <span className="font-bold font-mono text-purple-600 dark:text-purple-400 block mb-1">
+            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-500/20">
+              <span className="font-bold text-zinc-600 dark:text-zinc-400 block mb-1">
                 2. Mandatory Stances
               </span>
               Hakdari Seogi, Beom Seogi, and Dwitkubi must all be executed. Missing any stance triggers an automatic -0.3 technical deduction per omission.
             </div>
-            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-purple-500/20">
-              <span className="font-bold font-mono text-purple-600 dark:text-purple-400 block mb-1">
+            <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-500/20">
+              <span className="font-bold text-zinc-600 dark:text-zinc-400 block mb-1">
                 3. Timing &amp; Gam-Jeom
               </span>
               Performance duration must be between 90 to 100 seconds. Out-of-bounds line crosses (-0.3 each) and restart penalties (-0.6) are subtracted directly by the referee.
@@ -372,20 +372,19 @@ export function FreestylePoomsaeScoreSimulator() {
       {/* 2. LIVE ELECTRONIC STADIUM SCOREBOARD BANNER                         */}
       {/* ==================================================================== */}
       <div className="dark p-6 sm:p-8 rounded-2xl bg-zinc-950 text-white border border-zinc-800 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-red/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-500" aria-hidden="true" />
+              <span className="text-[11px] uppercase tracking-widest text-zinc-400 font-bold">
                 Live Referee Scoring System
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight text-zinc-100">
               {contestantInfo}
             </h2>
-            <div className="text-xs font-mono text-zinc-400 mt-1 flex items-center gap-3">
+            <div className="text-xs text-zinc-400 mt-1 flex items-center gap-3">
               <span>{courtNumber}</span>
               <span>&bull;</span>
               <span>{judgeName}</span>
@@ -398,40 +397,40 @@ export function FreestylePoomsaeScoreSimulator() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             {/* Technical Skills */}
             <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
-              <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block">
+              <span className="text-[11px] font-bold uppercase text-zinc-400 block">
                 Technical (6.0)
               </span>
-              <span className="text-xl sm:text-2xl font-mono font-black text-blue-400">
+              <span className="text-xl sm:text-2xl font-black text-zinc-400">
                 {technicalSkillsSubtotal.toFixed(2)}
               </span>
             </div>
 
             {/* Presentation */}
             <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
-              <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block">
+              <span className="text-[11px] font-bold uppercase text-zinc-400 block">
                 Presentation (4.0)
               </span>
-              <span className="text-xl sm:text-2xl font-mono font-black text-purple-400">
+              <span className="text-xl sm:text-2xl font-black text-zinc-400">
                 {presentationSubtotal.toFixed(2)}
               </span>
             </div>
 
             {/* Deductions */}
             <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
-              <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block">
+              <span className="text-[11px] font-bold uppercase text-zinc-400 block">
                 Deductions
               </span>
-              <span className="text-xl sm:text-2xl font-mono font-black text-brand-red">
+              <span className="text-xl sm:text-2xl font-black text-brand-red">
                 -{(totalTechnicalDeductions + totalRefereeDeductions).toFixed(2)}
               </span>
             </div>
 
             {/* FINAL SCORE */}
             <div className="p-3 rounded-xl bg-gradient-to-br from-brand-red to-red-800 border border-red-600 shadow-lg">
-              <span className="text-[11px] font-mono font-bold uppercase text-white/80 block">
+              <span className="text-[11px] font-bold uppercase text-white/80 block">
                 FINAL SCORE
               </span>
-              <span className="text-2xl sm:text-3xl font-mono font-black text-white tracking-wider">
+              <span className="text-2xl sm:text-3xl font-black text-white tracking-wider">
                 {finalScore.toFixed(2)}
               </span>
             </div>
@@ -441,18 +440,18 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* Stopwatch Bar */}
         <div className="mt-6 pt-5 border-t border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Timer className="w-5 h-5 text-amber-500" />
+            <Timer className="w-5 h-5 text-zinc-500" />
             <div>
-              <span className="text-xs font-mono font-bold text-zinc-300 block">
+              <span className="text-xs font-bold text-zinc-300 block">
                 {t.timerLabel}
               </span>
-              <span className="text-xs font-mono text-zinc-400">
+              <span className="text-xs text-zinc-400">
                 Current Time:{' '}
                 <span
                   className={`font-bold ${
                     stopwatchSeconds < 90 || stopwatchSeconds > 100
                       ? 'text-brand-red'
-                      : 'text-emerald-400'
+                      : 'text-zinc-400'
                   }`}
                 >
                   {formatTimer(stopwatchSeconds)} ({stopwatchSeconds}s)
@@ -466,10 +465,10 @@ export function FreestylePoomsaeScoreSimulator() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsTimerRunning((r) => !r)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 isTimerRunning
-                  ? 'bg-amber-500 text-black hover:bg-amber-400'
-                  : 'bg-emerald-600 text-white hover:bg-emerald-500'
+                  ? 'bg-zinc-500 text-black hover:bg-zinc-400'
+                  : 'bg-zinc-600 text-white hover:bg-zinc-500'
               }`}
             >
               {isTimerRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -480,7 +479,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 setIsTimerRunning(false)
                 setStopwatchSeconds(0)
               }}
-              className="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-lg text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors cursor-pointer"
             >
               {t.timerReset}
             </button>
@@ -499,7 +498,7 @@ export function FreestylePoomsaeScoreSimulator() {
               <span className="text-xs font-black uppercase text-zinc-900 dark:text-white">
                 {t.mandatoryStancesTitle}:
               </span>
-              <span className="text-xs font-mono text-zinc-500">
+              <span className="text-xs text-zinc-500">
                 (Check each when executed in routine)
               </span>
             </div>
@@ -542,14 +541,14 @@ export function FreestylePoomsaeScoreSimulator() {
               value={courtNumber}
               onChange={(e) => setCourtNumber(e.target.value)}
               placeholder="Court #"
-              className="px-3 py-1.5 rounded-lg text-base sm:text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono"
+              className="px-3 py-1.5 rounded-lg text-base lg:text-sm bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700"
             />
             <input
               type="text"
               value={contestantInfo}
               onChange={(e) => setContestantInfo(e.target.value)}
               placeholder="Contestant #"
-              className="px-3 py-1.5 rounded-lg text-base sm:text-xs bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 font-mono w-full"
+              className="px-3 py-1.5 rounded-lg text-base lg:text-sm bg-white dark:bg-black border border-zinc-300 dark:border-zinc-700 w-full"
             />
           </div>
         </div>
@@ -559,10 +558,10 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* ================================================================== */}
         <div className="border-b-2 border-zinc-900 dark:border-zinc-700">
           <div className="dark bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
-            <span className="text-xs font-black uppercase tracking-wider font-mono">
+            <span className="text-xs font-black uppercase tracking-wider">
               1. {t.technicalSkillsTitle} — {t.difficultyFootTitle} (5.0) + {t.basicMovementsTitle} (1.0)
             </span>
-            <span className="text-xs font-mono font-bold text-emerald-400">
+            <span className="text-xs font-bold text-zinc-400">
               Max: {t.technicalSkillsMax}
             </span>
           </div>
@@ -589,7 +588,7 @@ export function FreestylePoomsaeScoreSimulator() {
                           {rule.name}
                         </h4>
                       </div>
-                      <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 block mb-1">
+                      <span className="text-xs text-zinc-600 dark:text-zinc-400 block mb-1">
                         {rule.koreanName}
                       </span>
                       <p className="text-[11px] text-zinc-500 leading-snug">
@@ -599,7 +598,7 @@ export function FreestylePoomsaeScoreSimulator() {
 
                     {/* Basic Score Selection (0.0 to 0.7) */}
                     <div className="lg:col-span-4">
-                      <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-1.5">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1.5">
                         Basic Execution Score (0.0 to 0.7):
                       </span>
                       <div className="flex flex-wrap gap-1">
@@ -607,9 +606,9 @@ export function FreestylePoomsaeScoreSimulator() {
                           const isSelected = current.basicScore === val
                           let colorPill = 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                           if (val === 0.0) colorPill = 'text-zinc-400'
-                          else if (val <= 0.3) colorPill = 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-200'
-                          else if (val <= 0.5) colorPill = 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-200'
-                          else colorPill = 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-200'
+                          else if (val <= 0.3) colorPill = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                          else if (val <= 0.5) colorPill = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                          else colorPill = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
 
                           return (
                             <button
@@ -620,9 +619,9 @@ export function FreestylePoomsaeScoreSimulator() {
                                   [rule.id]: { ...prev[rule.id], basicScore: val },
                                 }))
                               }
-                              className={`px-2 py-1 rounded text-xs font-mono font-bold border transition-all cursor-pointer ${
+                              className={`px-2 py-1 rounded text-xs font-bold border transition-all cursor-pointer ${
                                 isSelected
-                                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-black border-zinc-900 dark:border-white shadow-sm ring-2 ring-emerald-500 scale-105'
+                                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-black border-zinc-900 dark:border-white shadow-sm ring-2 ring-zinc-500 scale-105'
                                   : colorPill
                               }`}
                             >
@@ -631,14 +630,14 @@ export function FreestylePoomsaeScoreSimulator() {
                           )
                         })}
                       </div>
-                      <span className="text-[11px] font-mono text-zinc-400 block mt-1">
+                      <span className="text-[11px] text-zinc-400 block mt-1">
                         0.0 (Failed) &bull; 0.1-0.3 (Poor) &bull; 0.4-0.5 (Average) &bull; 0.6-0.7 (Good)
                       </span>
                     </div>
 
                     {/* Difficulty Bonus Criteria (+0.1, +0.2, +0.3) */}
                     <div className="lg:col-span-3">
-                      <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-1.5">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1.5">
                         Difficulty Criteria (+0.1 to +0.3):
                       </span>
                       <div className="space-y-1">
@@ -656,9 +655,9 @@ export function FreestylePoomsaeScoreSimulator() {
                                 [rule.id]: { ...prev[rule.id], difficultyBonus: tier.val },
                               }))
                             }
-                            className={`w-full text-left px-2.5 py-1 rounded text-xs font-mono transition-all border flex items-center justify-between cursor-pointer ${
+                            className={`w-full text-left px-2.5 py-1 rounded text-xs transition-all border flex items-center justify-between cursor-pointer ${
                               current.difficultyBonus === tier.val
-                                ? 'bg-emerald-600 text-white border-emerald-600 font-bold shadow-sm'
+                                ? 'bg-zinc-600 text-white border-zinc-600 font-bold shadow-sm'
                                 : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:text-zinc-900 dark:hover:text-white'
                             }`}
                           >
@@ -673,10 +672,10 @@ export function FreestylePoomsaeScoreSimulator() {
 
                     {/* Item Total Display */}
                     <div className="lg:col-span-1 text-center bg-zinc-50 dark:bg-zinc-800/60 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
-                      <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                      <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-0.5">
                         Item Score
                       </span>
-                      <span className="text-base font-mono font-black text-zinc-900 dark:text-white">
+                      <span className="text-base font-black text-zinc-900 dark:text-white">
                         {itemTotal.toFixed(2)}
                       </span>
                     </div>
@@ -704,16 +703,16 @@ export function FreestylePoomsaeScoreSimulator() {
                   {[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].map((val) => {
                     const isSelected = basicMovementsScore === val
                     let pillStyle = 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                    if (val <= 0.3) pillStyle = 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-200'
-                    else if (val <= 0.5) pillStyle = 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-200'
-                    else if (val <= 0.7) pillStyle = 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-200'
+                    if (val <= 0.3) pillStyle = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                    else if (val <= 0.5) pillStyle = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                    else if (val <= 0.7) pillStyle = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
                     else pillStyle = 'bg-red-500 text-white'
 
                     return (
                       <button
                         key={val}
                         onClick={() => setBasicMovementsScore(val)}
-                        className={`px-2.5 py-1 rounded text-xs font-mono font-bold border transition-all cursor-pointer ${
+                        className={`px-2.5 py-1 rounded text-xs font-bold border transition-all cursor-pointer ${
                           isSelected
                             ? 'bg-zinc-900 dark:bg-white text-white dark:text-black border-zinc-900 dark:border-white ring-2 ring-brand-red scale-105 shadow-sm'
                             : pillStyle
@@ -727,10 +726,10 @@ export function FreestylePoomsaeScoreSimulator() {
               </div>
 
               <div className="lg:col-span-1 text-center bg-white dark:bg-zinc-800 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
-                <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-0.5">
                   Score
                 </span>
-                <span className="text-base font-mono font-black text-zinc-900 dark:text-white">
+                <span className="text-base font-black text-zinc-900 dark:text-white">
                   {basicMovementsScore.toFixed(2)}
                 </span>
               </div>
@@ -738,13 +737,13 @@ export function FreestylePoomsaeScoreSimulator() {
           </div>
 
           {/* Deductions - Technical Skills */}
-          <div className="p-5 bg-amber-500/5 border-t border-zinc-200 dark:border-zinc-700">
-            <h5 className="text-xs font-mono font-bold uppercase text-brand-red flex items-center gap-1.5 mb-3">
+          <div className="p-5 bg-zinc-500/5 border-t border-zinc-200 dark:border-zinc-700">
+            <h5 className="text-xs font-bold uppercase text-brand-red flex items-center gap-1.5 mb-3">
               <ShieldAlert className="w-4 h-4" />
               <span>{t.technicalDeductionsTitle} (Mandatory Stances, Falling, &gt;3 Acrobatic Kicks)</span>
             </h5>
 
-            <div className="grid sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div className="grid sm:grid-cols-3 gap-4 text-xs">
               {/* Missing Stances */}
               <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
                 <div>
@@ -815,11 +814,11 @@ export function FreestylePoomsaeScoreSimulator() {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs font-mono font-bold">
+            <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs font-bold">
               <span className="text-zinc-500 uppercase">
                 Sub-Total score of Technical Skills (6.0):
               </span>
-              <span className="text-lg font-black text-blue-600 dark:text-blue-400">
+              <span className="text-lg font-black text-zinc-600 dark:text-zinc-400">
                 ( {technicalSkillsSubtotal.toFixed(2)} )
               </span>
             </div>
@@ -831,10 +830,10 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* ================================================================== */}
         <div className="border-b-2 border-zinc-900 dark:border-zinc-700">
           <div className="dark bg-zinc-800 text-white px-5 py-2.5 flex items-center justify-between">
-            <span className="text-xs font-black uppercase tracking-wider font-mono">
+            <span className="text-xs font-black uppercase tracking-wider">
               2. {t.presentationTitle} (4 Criteria, 1.0 Max Each)
             </span>
-            <span className="text-xs font-mono font-bold text-purple-400">
+            <span className="text-xs font-bold text-zinc-400">
               Max: {t.presentationMax}
             </span>
           </div>
@@ -877,7 +876,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
                   <div className="lg:col-span-5">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-[11px] font-bold">
+                      <span className="w-5 h-5 rounded-full bg-zinc-600 text-white flex items-center justify-center text-[11px] font-bold">
                         P{idx + 1}
                       </span>
                       <h4 className="text-xs sm:text-sm font-black text-zinc-900 dark:text-white uppercase tracking-tight">
@@ -895,18 +894,18 @@ export function FreestylePoomsaeScoreSimulator() {
                       {[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].map((val) => {
                         const isSelected = pres.val === val
                         let colorClass = 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                        if (val <= 0.3) colorClass = 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-200'
-                        else if (val <= 0.5) colorClass = 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-200'
-                        else if (val <= 0.7) colorClass = 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-200'
+                        if (val <= 0.3) colorClass = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                        else if (val <= 0.5) colorClass = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
+                        else if (val <= 0.7) colorClass = 'bg-zinc-100 text-zinc-900 border-zinc-300 dark:bg-zinc-950/60 dark:text-zinc-200'
                         else colorClass = 'bg-red-500 text-white'
 
                         return (
                           <button
                             key={val}
                             onClick={() => pres.setVal(val)}
-                            className={`px-2.5 py-1 rounded text-xs font-mono font-bold border transition-all cursor-pointer ${
+                            className={`px-2.5 py-1 rounded text-xs font-bold border transition-all cursor-pointer ${
                               isSelected
-                                ? 'bg-purple-600 text-white border-purple-600 shadow-md ring-2 ring-purple-400 scale-105'
+                                ? 'bg-zinc-600 text-white border-zinc-600 ring-2 ring-zinc-400 scale-105'
                                 : colorClass
                             }`}
                           >
@@ -918,10 +917,10 @@ export function FreestylePoomsaeScoreSimulator() {
                   </div>
 
                   <div className="lg:col-span-1 text-center bg-zinc-50 dark:bg-zinc-800/60 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
-                    <span className="text-[11px] font-mono font-bold uppercase text-zinc-400 block mb-0.5">
+                    <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-0.5">
                       Score
                     </span>
-                    <span className="text-base font-mono font-black text-purple-600 dark:text-purple-400">
+                    <span className="text-base font-black text-zinc-600 dark:text-zinc-400">
                       {pres.val.toFixed(2)}
                     </span>
                   </div>
@@ -930,11 +929,11 @@ export function FreestylePoomsaeScoreSimulator() {
             ))}
           </div>
 
-          <div className="p-4 bg-zinc-100 dark:bg-zinc-800/60 flex items-center justify-between text-xs font-mono font-bold">
+          <div className="p-4 bg-zinc-100 dark:bg-zinc-800/60 flex items-center justify-between text-xs font-bold">
             <span className="text-zinc-500 uppercase">
               Sub-Total score of Presentation (4.0):
             </span>
-            <span className="text-lg font-black text-purple-600 dark:text-purple-400">
+            <span className="text-lg font-black text-zinc-600 dark:text-zinc-400">
               ( {presentationSubtotal.toFixed(2)} )
             </span>
           </div>
@@ -945,20 +944,20 @@ export function FreestylePoomsaeScoreSimulator() {
         {/* ================================================================== */}
         <div className="p-6 bg-zinc-50 dark:bg-zinc-900/90 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-            <span className="text-xs font-mono font-bold uppercase text-zinc-900 dark:text-white">
+            <span className="text-xs font-bold uppercase text-zinc-900 dark:text-white">
               Total Score (10.0) of (Technical Skills) + (Presentation) =
             </span>
-            <span className="text-base font-mono font-black text-zinc-900 dark:text-white">
+            <span className="text-base font-black text-zinc-900 dark:text-white">
               {rawTotalScore.toFixed(2)}
             </span>
           </div>
 
           {/* Referee Deductions Bar */}
           <div>
-            <span className="text-xs font-mono font-bold uppercase text-brand-red block mb-2">
+            <span className="text-xs font-bold uppercase text-brand-red block mb-2">
               *Referee Deductions (Time + Cross Boundary Line + Restart)
             </span>
-            <div className="grid sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div className="grid sm:grid-cols-3 gap-4 text-xs">
               {/* Time Penalty */}
               <label className="p-3 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between cursor-pointer">
                 <div>
@@ -994,7 +993,7 @@ export function FreestylePoomsaeScoreSimulator() {
                   >
                     -
                   </button>
-                  <span className="font-mono font-black text-brand-red">{boundaryCrossCount}</span>
+                  <span className="font-black text-brand-red">{boundaryCrossCount}</span>
                   <button
                     onClick={() => setBoundaryCrossCount((c) => c + 1)}
                     className="w-6 h-6 rounded bg-zinc-100 dark:bg-zinc-800 font-bold flex items-center justify-center cursor-pointer"
@@ -1027,27 +1026,27 @@ export function FreestylePoomsaeScoreSimulator() {
           {/* Final Score Banner */}
           <div className="dark p-5 rounded-xl bg-zinc-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
                 Total Score – Deductions =
               </span>
               <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight">
                 {t.finalScoreTitle}
               </h3>
-              <p className="text-[11px] font-mono text-zinc-400 mt-1">
+              <p className="text-[11px] text-zinc-400 mt-1">
                 {t.ruleNotice}
               </p>
             </div>
 
             <div className="text-center sm:text-right">
-              <span className="text-4xl sm:text-5xl font-mono font-black text-amber-400 tracking-wider">
+              <span className="text-4xl sm:text-5xl font-black text-zinc-400 tracking-wider">
                 {finalScore.toFixed(2)}
               </span>
-              <span className="text-xs font-mono text-zinc-400 block">/ 10.00 Points</span>
+              <span className="text-xs text-zinc-400 block">/ 10.00 Points</span>
             </div>
           </div>
 
           {/* Judge Verification Sign-off Box */}
-          <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             <div>
               <label className="text-[11px] uppercase text-zinc-400 block mb-1">
                 {t.judgeNameLabel}
@@ -1056,7 +1055,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeName}
                 onChange={(e) => setJudgeName(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base sm:text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base lg:text-sm"
               />
             </div>
 
@@ -1068,7 +1067,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeNation}
                 onChange={(e) => setJudgeNation(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base sm:text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans text-base lg:text-sm"
               />
             </div>
 
@@ -1080,7 +1079,7 @@ export function FreestylePoomsaeScoreSimulator() {
                 type="text"
                 value={judgeSignature}
                 onChange={(e) => setJudgeSignature(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans italic text-base sm:text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-black font-sans italic text-base lg:text-sm"
               />
             </div>
           </div>

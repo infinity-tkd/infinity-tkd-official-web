@@ -89,15 +89,15 @@ export default function AntiDopingPage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Global Standard</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Global Standard</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">100% WADA Code Alignment</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Legal Doctrine</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Legal Doctrine</span>
             <strong className="text-xs font-bold text-zinc-900 dark:text-white">Strict Liability Rule</strong>
           </div>
           <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-            <span className="text-[11px] font-mono text-zinc-400 block mb-1">Testing Authorization</span>
+            <span className="text-[11px] text-zinc-400 block mb-1">Testing Authorization</span>
             <strong className="text-xs font-bold text-brand-red">In- &amp; Out-of-Competition</strong>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function AntiDopingPage() {
         <div className="grid sm:grid-cols-2 gap-3 text-xs">
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1">
             <strong className="text-brand-red block">Banned at All Times (In &amp; Out of Competition)</strong>
-            <ul className="list-disc pl-4 space-y-1 text-zinc-600 dark:text-zinc-400 font-light">
+            <ul className="list-disc pl-4 space-y-1 text-zinc-600 dark:text-zinc-400">
               <li>Anabolic androgenic steroids (AAS)</li>
               <li>Peptide hormones &amp; growth factors (EPO, hGH)</li>
               <li>Beta-2 agonists &amp; hormone modulators</li>
@@ -135,8 +135,8 @@ export default function AntiDopingPage() {
             </ul>
           </div>
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1">
-            <strong className="text-amber-500 block">Banned In-Competition</strong>
-            <ul className="list-disc pl-4 space-y-1 text-zinc-600 dark:text-zinc-400 font-light">
+            <strong className="text-brand-red block">Banned In-Competition</strong>
+            <ul className="list-disc pl-4 space-y-1 text-zinc-600 dark:text-zinc-400">
               <li>Central nervous system stimulants (Amphetamines)</li>
               <li>Narcotics &amp; opioid analgesics</li>
               <li>Cannabinoids (natural &amp; synthetic)</li>
@@ -154,7 +154,7 @@ export default function AntiDopingPage() {
         <p>
           Under international sports law, the <strong>Strict Liability Principle</strong> applies: an athlete is strictly and personally responsible for any substance found in their body specimen, regardless of whether the ingestion was intentional, negligent, or accidental.
         </p>
-        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-zinc-800 dark:text-zinc-200">
+        <div className="p-4 rounded-xl border-l-2 border-brand-red bg-zinc-50 text-xs text-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-200">
           <strong>Key Rule for Athletes:</strong> "You are solely responsible for what goes into your body. Claiming a supplement was contaminated or recommended by a third party does not prevent sanction."
         </div>
       </section>
@@ -224,16 +224,16 @@ export default function AntiDopingPage() {
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Anti-Doping Compliance Bureau
           </div>
-          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400 font-mono">
+          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
             <div>
               <span className="text-[11px] text-zinc-400 block">Clean Sport Inquiries &amp; TUEs:</span>
-              <a href="mailto:antidoping@infinitytkd.com" className="text-brand-red font-bold hover:underline">
+              <a href="mailto:antidoping@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-brand-red font-bold hover:underline">
                 antidoping@infinitytkd.com
               </a>
             </div>
             <div>
               <span className="text-[11px] text-zinc-400 block">Confidential Whistleblower Desk:</span>
-              <a href="mailto:integrity@infinitytkd.com" className="text-zinc-900 dark:text-white font-bold hover:text-brand-red">
+              <a href="mailto:integrity@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-zinc-900 dark:text-white font-bold hover:text-brand-red">
                 integrity@infinitytkd.com
               </a>
             </div>

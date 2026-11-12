@@ -47,6 +47,8 @@ export const km: Translations = {
       'ទីកន្លែងដែលវិន័យក្បាច់គុន World Taekwondo ជួបជាមួយវិទ្យាសាស្ត្រកីឡាទំនើប និងសិល្បៈចលនាសម្តែង Freestyle Tricking។ ផ្តល់ថាមពលដល់សិស្សានុសិស្សក្នុងការបញ្ចេញសក្តានុពលគ្មានដែនកំណត់ ចាប់ពីខ្សែក្រវាត់សដំបូងរហូតដល់ខ្សែក្រវាត់ខ្មៅ Kukkiwon Dan។',
     ctaPrimary: 'ចាប់ផ្តើមហ្វឹកហាត់',
     ctaSecondary: 'គ្រូបង្វឹក & សិស្ស',
+    pauseMotion: 'ផ្អាកចលនាឡូហ្គោ',
+    playMotion: 'ចាក់ចលនាឡូហ្គោ',
   },
   // Stats Banner
   stats: {
