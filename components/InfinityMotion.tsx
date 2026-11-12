@@ -27,6 +27,11 @@ interface InfinityMotionProps {
    * highlight keeps travelling along it. loader: the outline draws and clears on a loop.
    */
   variant?: 'hero' | 'loader'
+  /**
+   * hero only. loop (default): the highlight keeps travelling while the mark is on screen.
+   * once: one pass after the mark fills, then it rests (for marks inside content).
+   */
+  highlight?: 'loop' | 'once'
   /** Accessible name. Leave it out when the mark is decorative. */
   label?: string
   className?: string
@@ -37,7 +42,7 @@ interface InfinityMotionProps {
  * the logo's own path data. Respects prefers-reduced-motion (shows the finished mark) and pauses
  * its endless highlight while it is off-screen.
  */
-export function InfinityMotion({ variant = 'hero', label, className }: InfinityMotionProps) {
+export function InfinityMotion({ variant = 'hero', highlight = 'loop', label, className }: InfinityMotionProps) {
   const ref = React.useRef<SVGSVGElement>(null)
 
   React.useEffect(() => {
@@ -55,7 +60,12 @@ export function InfinityMotion({ variant = 'hero', label, className }: InfinityM
       ref={ref}
       viewBox={INFINITY_SYMBOL.viewBox}
       xmlns="http://www.w3.org/2000/svg"
-      className={cn('infinity-motion', variant === 'loader' && 'is-loader', className)}
+      className={cn(
+        'infinity-motion',
+        variant === 'loader' && 'is-loader',
+        variant === 'hero' && highlight === 'once' && 'is-settled',
+        className
+      )}
       role={label ? 'img' : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}

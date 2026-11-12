@@ -1,16 +1,25 @@
 'use client'
 
 import * as React from 'react'
-import { Brain, Zap, Shield, Activity, Target, Sparkles, Timer, CheckCircle2, RotateCcw } from 'lucide-react'
-import { InfinityLogo } from './InfinityLogo'
+import { Zap, Shield, Activity, Target, Timer, RotateCcw } from 'lucide-react'
+import { InfinityMotion } from './InfinityMotion'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { buttonStyles } from '@/components/ui/Button'
 import { useLanguage } from '@/context/LanguageContext'
+import { cn } from '@/lib/utils'
+
+/**
+ * Region positions on an 800 x 400 grid, read as percentages of the map (x / 800, y / 400). The
+ * Infinity mark sits at the centre; the lines are drawn in measured pixels, so they always end at
+ * the region buttons, whatever the map's shape (wide on desktop, near-square on phones).
+ */
+const GRID = { w: 800, h: 400 }
 
 interface BrainNode {
   id: string
   name: string
   korean: string
   region: string
-  color: string
   x: number
   y: number
   desc: string
@@ -32,7 +41,6 @@ const brainNodes: BrainNode[] = [
     name: 'Prefrontal Cortex',
     korean: '전두엽 (前頭葉) • 전술 인지',
     region: 'Tactical Decision & Form Memory',
-    color: '#EF2F38',
     x: 200,
     y: 120,
     desc: 'Processes rapid spatial calculations, opponent pattern recognition, and rhythmic sequencing of Kukkiwon poomsae forms under tournament pressure.',
@@ -67,9 +75,8 @@ const brainNodes: BrainNode[] = [
     name: 'Motor Cortex',
     korean: '운동 피질 (運動皮質) • 순발력',
     region: 'Kinetic Firing & Aerial Tricking',
-    color: '#0042EA',
     x: 400,
-    y: 80,
+    y: 72,
     desc: 'Coordinates instantaneous neuromuscular recruitment for 540° and 720° aerial kicks, springboard momentum transfer, and explosive vertical jump velocity.',
     metricLabel: 'Angular Velocity',
     metricValue: '720°',
@@ -102,7 +109,6 @@ const brainNodes: BrainNode[] = [
     name: 'Cerebellar Core',
     korean: '소뇌 (小腦) • 중심축 평형',
     region: 'Stance Stability & Ground Axis',
-    color: '#09BB00',
     x: 600,
     y: 120,
     desc: 'Calculates center-of-mass equilibrium down to the millimeter, stabilizing the standing pivot foot during continuous spinning hook, tornado, and axe kicks.',
@@ -137,9 +143,8 @@ const brainNodes: BrainNode[] = [
     name: 'Limbic Core (Budoshim)',
     korean: '부동심 (不動心) • 불요불굴',
     region: 'The Unshakable Warrior Center',
-    color: '#FF5733',
     x: 400,
-    y: 280,
+    y: 320,
     desc: '“A mountain never shakes in the wind.” Regulates autonomic heart rate variability and breathing to maintain absolute composure and moral resolve under tournament pressure.',
     metricLabel: 'Stress Inoculation',
     metricValue: '99.8',
@@ -172,6 +177,23 @@ const brainNodes: BrainNode[] = [
 export function InfinityBrainAnimation() {
   const { language } = useLanguage()
   const [activeNodeId, setActiveNodeId] = React.useState<string>('prefrontal')
+  // The first signal waits for the lines to draw; later ones answer the click straight away.
+  const [hasChosen, setHasChosen] = React.useState(false)
+  const mapRef = React.useRef<HTMLDivElement>(null)
+  const [size, setSize] = React.useState<{ w: number; h: number } | null>(null)
+
+  React.useLayoutEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+    const measure = () =>
+      setSize((prev) =>
+        prev && prev.w === map.clientWidth && prev.h === map.clientHeight ? prev : { w: map.clientWidth, h: map.clientHeight }
+      )
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(map)
+    return () => observer.disconnect()
+  }, [])
 
   // Interactive Reflex Tester State
   const [testState, setTestState] = React.useState<'idle' | 'waiting' | 'ready' | 'result' | 'fault'>('idle')
@@ -229,278 +251,245 @@ export function InfinityBrainAnimation() {
     }
   }, [])
 
+  // Map geometry in measured pixels.
+  const toPx = (node: { x: number; y: number }) =>
+    size ? { x: (node.x / GRID.w) * size.w, y: (node.y / GRID.h) * size.h } : null
+  const hub = size ? { x: size.w / 2, y: size.h / 2 } : null
+  const activeEnd = toPx(activeNode)
+  const activeLength = hub && activeEnd ? Math.hypot(activeEnd.x - hub.x, activeEnd.y - hub.y) : 0
+  const reflexButton = testState === 'idle' || testState === 'waiting' || testState === 'ready'
+
   return (
-    <div className="dark relative rounded-2xl bg-zinc-950 border border-zinc-800/90 overflow-hidden shadow-2xl p-5 sm:p-8 md:p-10 text-white font-sans">
-      {/* Subtle Background Glow Aura */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,47,56,0.1),_transparent_70%)] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-brand-red/10 blur-[140px] rounded-full pointer-events-none" />
+    <div>
+      <SectionHeader
+        size="md"
+        eyebrowStyle="text"
+        eyebrow="Cognitive & Neurological Alignment"
+        title="The Infinity"
+        accent="Brain Architecture"
+        description="Explore the 4 cognitive neural faculties cultivated through high-performance Taekwondo biomechanics."
+      />
 
-      {/* Section Header */}
-      <div className="relative z-10 text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-brand-red/10 border border-brand-red/30 text-brand-red text-xs font-bold uppercase tracking-widest mb-3 backdrop-blur-md">
-          <Brain className="w-3.5 h-3.5" /> Cognitive &amp; Neurological Alignment
-        </div>
-        <h3 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
-          The Infinity <span className="text-brand-red">Brain Architecture</span>
-        </h3>
-        <p className="text-xs sm:text-sm text-zinc-400 font-light mt-2 max-w-lg mx-auto leading-relaxed">
-          Explore the 4 cognitive neural faculties cultivated through high-performance Taekwondo biomechanics.
-        </p>
-      </div>
-
-      {/* Main Grid Stage (14px radius cards) */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch max-w-6xl mx-auto">
-        {/* Left Column: Interactive Animated Neural Canvas */}
-        <div className="lg:col-span-7 relative flex items-center justify-center p-6 sm:p-8 bg-zinc-900/70 rounded-2xl border border-zinc-800 min-h-[360px] sm:min-h-[420px] overflow-hidden shadow-inner">
-          {/* SVG Orbit and Synapse Lines */}
-          <svg
-            viewBox="0 0 800 400"
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Pulsing orbital rings */}
-            <circle
-              cx="400"
-              cy="200"
-              r="170"
-              stroke="#EF2F38"
-              strokeWidth="1"
-              strokeDasharray="4 8"
-              opacity="0.2"
-              className="animate-[spin_40s_linear_infinite]"
-            />
-            <circle
-              cx="400"
-              cy="200"
-              r="120"
-              stroke="#FFFFFF"
-              strokeWidth="1"
-              strokeDasharray="6 12"
-              opacity="0.1"
-              className="animate-[spin_30s_linear_infinite_reverse]"
-            />
-
-            {/* Connecting Synaptic Traces */}
-            {brainNodes.map((node) => {
-              const isSelected = activeNode.id === node.id
-              return (
-                <line
-                  key={node.id}
-                  x1="400"
-                  y1="200"
-                  x2={node.x}
-                  y2={node.y}
-                  stroke={isSelected ? node.color : '#3f3f46'}
-                  strokeWidth={isSelected ? '2' : '1'}
-                  strokeDasharray={isSelected ? '6 4' : '2 4'}
-                  opacity={isSelected ? '0.85' : '0.2'}
-                  className={isSelected ? 'animate-[pulse_2s_ease-in-out_infinite]' : ''}
+      <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+        {/* Neural map: the lines draw out from the Infinity mark when the tab opens; the chosen
+            region's line turns red and carries a short signal. */}
+        <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 lg:col-span-7 dark:border-zinc-800 dark:bg-zinc-900/40">
+          <div ref={mapRef} className="relative h-[340px] sm:h-[400px] lg:h-full lg:min-h-[440px]">
+            {size && hub && (
+              <svg
+                width={size.w}
+                height={size.h}
+                viewBox={`0 0 ${size.w} ${size.h}`}
+                className="pointer-events-none absolute inset-0"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx={hub.x}
+                  cy={hub.y}
+                  r={Math.min(size.w, size.h) * 0.36}
+                  className="stroke-zinc-300 dark:stroke-zinc-700"
+                  strokeWidth={1}
+                  strokeDasharray="2 6"
                 />
-              )
-            })}
-          </svg>
+                {brainNodes.map((node, index) => {
+                  const end = toPx(node)!
+                  const isSelected = node.id === activeNode.id
+                  return (
+                    <line
+                      key={node.id}
+                      x1={hub.x}
+                      y1={hub.y}
+                      x2={end.x}
+                      y2={end.y}
+                      className={cn('bm-synapse', isSelected ? 'stroke-brand-red/60' : 'stroke-zinc-300 dark:stroke-zinc-700')}
+                      strokeWidth={isSelected ? 1.5 : 1}
+                      strokeLinecap="round"
+                      style={
+                        {
+                          '--len': Math.hypot(end.x - hub.x, end.y - hub.y),
+                          '--delay': `${0.3 + index * 0.1}s`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  )
+                })}
+                {activeEnd && (
+                  // Keyed by region, so every choice sends a fresh signal.
+                  <line
+                    key={`signal-${activeNode.id}`}
+                    x1={hub.x}
+                    y1={hub.y}
+                    x2={activeEnd.x}
+                    y2={activeEnd.y}
+                    className="bm-signal stroke-brand-red"
+                    strokeWidth={2.5}
+                    strokeLinecap="round"
+                    style={
+                      {
+                        '--len': activeLength,
+                        '--travel': -activeLength,
+                        '--signal-delay': hasChosen ? '0.1s' : '1.3s',
+                      } as React.CSSProperties
+                    }
+                  />
+                )}
+              </svg>
+            )}
 
-          {/* Centered Infinity Loop Mark */}
-          <div className="relative z-20 flex flex-col items-center pointer-events-none">
-            <div className="relative p-5 sm:p-6 rounded-full bg-black/80 border border-brand-red/40 shadow-brand-glow backdrop-blur-md">
-              <InfinityLogo variant="symbol" className="w-24 sm:w-32 h-auto text-brand-red" animated={true} />
+            {/* The Infinity mark: the belt draws itself when the tab opens, then rests. */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[88px] w-[88px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white shadow-sm sm:h-28 sm:w-28 dark:border-zinc-800 dark:bg-zinc-950 dark:shadow-none">
+              <InfinityMotion highlight="once" className="h-auto w-14 sm:w-[72px]" />
             </div>
-            <span className="text-[11px] font-black uppercase tracking-widest text-brand-red mt-2.5 bg-black/70 px-3 py-1 rounded-lg border border-brand-red/20">
-              The Eternal Loop
-            </span>
-          </div>
 
-          {/* Interactive Node Anchors */}
-          <div className="absolute inset-0 p-4 pointer-events-auto">
-            {brainNodes.map((node) => {
-              const isSelected = activeNode.id === node.id
+            {brainNodes.map((node, index) => {
+              const isSelected = node.id === activeNode.id
               const Icon = node.icon
-
               return (
                 <button
                   key={node.id}
-                  onClick={() => setActiveNodeId(node.id)}
-                  aria-label={`Select ${node.name} cognitive center`}
-                  className={`absolute transform -translate-x-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-xl border transition-all duration-300 flex items-center gap-2 cursor-pointer min-h-[44px] group ${
-                    isSelected
-                      ? 'bg-zinc-900 shadow-2xl scale-110 ring-2'
-                      : 'bg-zinc-950/90 border-zinc-800 hover:border-zinc-500 hover:scale-105'
-                  }`}
-                  style={{
-                    left: `${(node.x / 800) * 100}%`,
-                    top: `${(node.y / 400) * 100}%`,
-                    borderColor: isSelected ? node.color : undefined,
-                    boxShadow: isSelected ? `0 0 15px ${node.color}50` : undefined,
+                  type="button"
+                  onClick={() => {
+                    setActiveNodeId(node.id)
+                    setHasChosen(true)
                   }}
+                  aria-pressed={isSelected}
+                  aria-label={node.name}
+                  className={cn(
+                    'bm-node absolute z-20 flex min-h-[44px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center gap-2 rounded-xl border bg-white p-1.5 text-xs font-bold transition-colors duration-300 sm:pr-3 dark:bg-zinc-900',
+                    isSelected
+                      ? 'border-brand-red text-zinc-900 dark:text-white'
+                      : 'border-zinc-200 text-zinc-600 hover:border-zinc-400 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-white'
+                  )}
+                  style={
+                    {
+                      left: `${(node.x / GRID.w) * 100}%`,
+                      top: `${(node.y / GRID.h) * 100}%`,
+                      // Each region appears as its line reaches it.
+                      '--delay': `${0.7 + index * 0.1}s`,
+                    } as React.CSSProperties
+                  }
                 >
-                  <div
-                    className="p-1.5 rounded-lg transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: `${node.color}20`, color: node.color }}
+                  <span
+                    className={cn(
+                      'flex h-8 w-8 items-center justify-center rounded-lg transition-colors duration-300',
+                      isSelected ? 'bg-brand-red text-white' : 'bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400'
+                    )}
                   >
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <span className="hidden sm:inline-block text-[11px] font-black uppercase tracking-wider text-white">
-                    {node.name.split(' ')[0]}
+                    <Icon className="h-4 w-4" aria-hidden="true" />
                   </span>
+                  <span className="hidden sm:inline">{node.name.split(' ')[0]}</span>
                 </button>
               )
             })}
           </div>
         </div>
 
-        {/* Right Column: High-Precision Faculty Card */}
-        <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-zinc-900/80 border border-zinc-800 shadow-xl flex flex-col justify-between">
-          <div>
-            {/* Top Telemetry Header (Clean, Uncrowded Layout) */}
-            <div className="flex flex-wrap items-center justify-between gap-2.5 mb-6 pb-4 border-b border-zinc-800">
-              <div
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono font-bold uppercase tracking-wide shadow-sm"
-                style={{
-                  backgroundColor: `${activeNode.color}15`,
-                  borderColor: `${activeNode.color}40`,
-                  color: activeNode.color,
-                }}
-              >
-                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: activeNode.color }} />
-                <span>{activeNode.stats}</span>
-              </div>
-
-              <span className="text-[11px] font-mono text-zinc-400 font-bold uppercase tracking-wider">
-                {activeNode.region}
-              </span>
-            </div>
-
-            {/* Faculty Title & Korean Translation */}
-            <h4 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white mb-1 leading-none">
+        {/* The chosen region */}
+        <div
+          aria-live="polite"
+          className="flex flex-col rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 lg:col-span-5 dark:border-zinc-800 dark:bg-zinc-900/40"
+        >
+          <div key={activeNode.id} className="flex flex-1 animate-fade-in flex-col">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{activeNode.region}</p>
+            <h3 className="mt-2 text-2xl font-black uppercase leading-tight tracking-tight text-zinc-900 sm:text-3xl dark:text-white">
               {activeNode.name}
-            </h4>
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-red block mb-4">
-              {activeNode.korean}
-            </span>
+            </h3>
+            <p className="mt-2 text-xs font-bold tracking-wide text-brand-red">{activeNode.korean}</p>
+            <p className="mt-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">{activeNode.desc}</p>
 
-            {/* Metric Callout Card */}
-            <div className="grid grid-cols-2 gap-3 mb-5 p-3.5 rounded-xl bg-black/50 border border-zinc-800/80">
-              <div>
-                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
-                  {activeNode.metricLabel}
-                </span>
-                <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-xl sm:text-2xl font-black font-mono text-white">
+            <div className="mt-auto pt-6">
+              <dl className="border-t border-zinc-200 pt-5 dark:border-zinc-800">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{activeNode.metricLabel}</dt>
+                <dd className="mt-1 flex items-baseline gap-1.5">
+                  <span className="text-3xl font-black tabular-nums tracking-tight text-zinc-900 dark:text-white">
                     {activeNode.metricValue}
                   </span>
-                  <span className="text-xs font-mono font-bold text-brand-red">{activeNode.metricUnit}</span>
-                </div>
-              </div>
-              <div>
-                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block">
-                  Cognitive Channel
-                </span>
-                <span className="text-xs font-mono font-bold text-emerald-400 mt-1.5 block">
-                  Active &bull; Calibrated
-                </span>
-              </div>
-            </div>
-
-            {/* Description Paragraph */}
-            <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed mb-6">
-              {activeNode.desc}
-            </p>
-          </div>
-
-          {/* Footer Channel Status */}
-          <div className="pt-4 border-t border-zinc-800 flex items-center justify-between">
-            <span className="text-[11px] text-zinc-500 font-medium">Infinity Cognitive Framework</span>
-            <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: activeNode.color }}>
-              <span>Live Sensor</span>
-              <div className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: activeNode.color }} />
+                  <span className="text-sm font-semibold text-zinc-500">{activeNode.metricUnit}</span>
+                </dd>
+                <dd className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{activeNode.stats}</dd>
+              </dl>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ==================================================================== */}
-      {/* INTERACTIVE MILLISECOND REFLEX TESTER (Reaction Speed Mini-Lab) */}
-      {/* ==================================================================== */}
-      <div className="relative z-10 mt-8 max-w-6xl mx-auto p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-zinc-800 shadow-md">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-brand-red mb-1">
-              <Timer className="w-3.5 h-3.5" /> Interactive Neural Benchmark
+      {/* Reflex test */}
+      <div className="mt-5 flex flex-col gap-6 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 md:flex-row md:items-center md:justify-between lg:mt-6 dark:border-zinc-800 dark:bg-zinc-900/40">
+        <div className="max-w-xl">
+          <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+            <Timer className="h-3.5 w-3.5" aria-hidden="true" /> Interactive Neural Benchmark
+          </p>
+          <h3 className="mt-2 text-lg font-black uppercase tracking-tight text-zinc-900 sm:text-xl dark:text-white">
+            Test Your Millisecond <span className="text-brand-red">Neural Latency</span>
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            World Taekwondo athletes react to opponent attacks in under{' '}
+            <strong className="font-semibold text-zinc-900 dark:text-white">180 milliseconds</strong>. Tap below to measure
+            your personal motor response latency.
+          </p>
+        </div>
+
+        <div aria-live="polite" className="w-full shrink-0 md:w-auto">
+          {/* One button for start, wait and strike, so keyboard focus stays on it between steps. */}
+          {reflexButton && (
+            <button
+              type="button"
+              onClick={testState === 'idle' ? startReactionTest : handleTestClick}
+              className={cn(
+                testState === 'idle' && buttonStyles({ variant: 'primary', className: 'w-full md:w-auto' }),
+                testState === 'waiting' &&
+                  'flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl border border-zinc-300 bg-zinc-100 px-6 text-xs font-bold uppercase tracking-widest text-zinc-700 md:w-auto dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200',
+                testState === 'ready' &&
+                  'bm-pop flex min-h-[48px] w-full cursor-pointer items-center justify-center rounded-xl bg-emerald-500 px-10 text-sm font-black uppercase tracking-widest text-zinc-950 hover:bg-emerald-400 md:w-auto'
+              )}
+            >
+              {testState === 'idle' && (
+                <>
+                  <Zap className="h-4 w-4" aria-hidden="true" /> Start Reflex Test
+                </>
+              )}
+              {testState === 'waiting' && (
+                <>
+                  <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-zinc-400" />
+                  Wait for the green signal
+                </>
+              )}
+              {testState === 'ready' && 'Strike now'}
+            </button>
+          )}
+
+          {testState === 'fault' && (
+            <div
+              role="alert"
+              className="bm-pop flex min-h-[44px] w-full items-center justify-center rounded-xl border border-brand-red/30 bg-brand-red/5 px-6 text-xs font-bold uppercase tracking-wider text-brand-red md:w-auto"
+            >
+              False start — wait for green
             </div>
-            <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white">
-              Test Your Millisecond <span className="text-brand-red">Neural Latency</span>
-            </h4>
-            <p className="text-xs sm:text-sm text-zinc-400 font-light mt-1 max-w-xl leading-relaxed">
-              World Taekwondo athletes react to opponent attacks in under <strong>180 milliseconds</strong>. Tap below to measure your personal motor response latency.
-            </p>
-          </div>
+          )}
 
-          <div className="w-full md:w-auto shrink-0 flex flex-col sm:flex-row items-center gap-3">
-            {testState === 'idle' && (
+          {testState === 'result' && reactionTime !== null && (
+            <div className="flex items-center gap-4 rounded-xl border border-zinc-200 bg-zinc-50 py-2 pl-5 pr-2 dark:border-zinc-800 dark:bg-zinc-900">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Your score</p>
+                <p className="text-2xl font-black tabular-nums text-zinc-900 dark:text-white">
+                  {reactionTime} <span className="text-sm font-semibold text-zinc-500">ms</span>
+                </p>
+              </div>
+              <p className="border-l border-zinc-200 pl-4 text-sm font-semibold text-zinc-700 dark:border-zinc-700 dark:text-zinc-300">
+                {reactionTime < 200 ? 'Olympic elite reflex' : reactionTime < 270 ? 'Fast fighter reflex' : 'Trainable reflex'}
+              </p>
               <button
+                type="button"
                 onClick={startReactionTest}
-                className="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-xl bg-brand-red text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-300 shadow-brand-glow cursor-pointer flex items-center justify-center gap-2"
+                aria-label="Retry reflex test"
+                title="Retry"
+                className="ml-auto flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-zinc-600 transition-colors hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
               >
-                <Zap className="w-4 h-4" /> Start Reflex Test
+                <RotateCcw className="h-4 w-4" aria-hidden="true" />
               </button>
-            )}
-
-            {testState === 'waiting' && (
-              <button
-                onClick={handleTestClick}
-                className="w-full sm:w-auto px-8 py-3 min-h-[44px] rounded-xl bg-amber-500 text-black font-black uppercase text-xs tracking-widest animate-pulse cursor-pointer shadow-lg"
-              >
-                Wait for GREEN signal... (Clicking now faults)
-              </button>
-            )}
-
-            {testState === 'fault' && (
-              <div
-                role="alert"
-                className="w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-xl bg-red-600/20 border border-red-500/50 text-red-300 font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 animate-pulse"
-              >
-                <span>⚠️ False Start! Too early — Wait for GREEN</span>
-              </div>
-            )}
-
-            {testState === 'ready' && (
-              <button
-                onClick={handleTestClick}
-                className="w-full sm:w-auto px-10 py-4 min-h-[44px] rounded-xl bg-emerald-500 text-black font-black uppercase text-sm tracking-widest animate-bounce cursor-pointer shadow-xl"
-              >
-                STRIKE NOW! ⚡
-              </button>
-            )}
-
-            {testState === 'result' && (
-              <div className="flex items-center gap-4 bg-black/60 p-3 px-5 rounded-xl border border-zinc-700 min-h-[44px]">
-                <div className="text-left">
-                  <span className="text-[11px] uppercase font-bold text-zinc-400 block">Your Score</span>
-                  <span className="text-2xl font-black font-mono text-white">
-                    {reactionTime} <span className="text-xs text-brand-red font-bold">ms</span>
-                  </span>
-                </div>
-                <div className="pl-3 border-l border-zinc-700 text-[11px] text-zinc-300">
-                  {reactionTime! < 200 ? (
-                    <span className="text-emerald-400 font-bold">🏆 Olympic Elite Reflex</span>
-                  ) : reactionTime! < 270 ? (
-                    <span className="text-blue-400 font-bold">⚡ Fast Fighter Reflex</span>
-                  ) : (
-                    <span className="text-amber-400 font-bold">🥋 Trainable Reflex</span>
-                  )}
-                </div>
-                <button
-                  onClick={startReactionTest}
-                  className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white transition-colors cursor-pointer"
-                  title="Retry test"
-                  aria-label="Retry reflex latency test"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

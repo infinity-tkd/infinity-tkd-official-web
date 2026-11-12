@@ -331,6 +331,13 @@
   .infinity-motion .im-glint.is-reverse {
     animation-direction: normal, reverse;
   }
+  /* Settled (highlight="once"): one pass of the highlight after the mark fills, then it rests. */
+  .infinity-motion.is-settled .im-glint {
+    animation: im-glint-once 2.2s cubic-bezier(0.45, 0, 0.25, 1) 2.2s both;
+  }
+  .infinity-motion.is-settled .im-glint.is-reverse {
+    animation-direction: reverse;
+  }
   /* Loader: thicker line (the mark is small) that draws, holds, then clears, on a loop. */
   .infinity-motion.is-loader .im-line {
     stroke-width: 6;
@@ -362,6 +369,20 @@
     stroke-dashoffset: var(--travel);
   }
 }
+@keyframes im-glint-once {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: var(--travel);
+    opacity: 0;
+  }
+}
 @keyframes im-loop {
   0% {
     stroke-dashoffset: var(--len);
@@ -388,6 +409,153 @@
   }
   .infinity-motion .im-glint {
     display: none;
+  }
+}
+
+/*
+ * BorderTrace (components/ui/BorderTrace.tsx): a light that runs once around a card's inside edge
+ * when the card comes into view, and again when the pointer enters it; at rest it is invisible.
+ * A conic gradient masked to a 1.5px ring; @property lets its angle animate (browsers without
+ * @property fade a still highlight in and out instead).
+ */
+@property --trace-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@layer components {
+  .border-trace {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--trace-angle),
+      transparent 0deg 270deg,
+      rgb(239 47 56 / 0.4) 312deg,
+      #ef2f38 346deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+  }
+  .border-trace.is-tracing {
+    animation: trace-lap 2.6s cubic-bezier(0.45, 0.05, 0.25, 1) both;
+  }
+  /* On dark surfaces the beam gets a near-white tip, like the belt highlight in the hero. */
+  .dark .border-trace {
+    background: conic-gradient(
+      from var(--trace-angle),
+      transparent 0deg 270deg,
+      rgb(239 47 56 / 0.5) 312deg,
+      #ef2f38 338deg,
+      #ffd2d4 350deg,
+      transparent 360deg
+    );
+  }
+}
+@keyframes trace-lap {
+  0% {
+    --trace-angle: 0deg;
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    --trace-angle: 360deg;
+    opacity: 0;
+  }
+}
+
+/*
+ * Brain & Mind neural map (components/InfinityBrainAnimation.tsx). When the tab opens, the synapse
+ * lines draw out from the Infinity mark and the brain-region buttons fade in; each time a region is
+ * chosen, a signal runs out along its line twice, then the map rests. The component sets --len /
+ * --travel / --delay / --signal-delay (lengths in pixels).
+ */
+@layer components {
+  .bm-synapse {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: im-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) var(--delay) forwards;
+    transition:
+      stroke 0.3s ease,
+      opacity 0.3s ease;
+  }
+  .bm-signal {
+    stroke-dasharray: 18 var(--len);
+    stroke-dashoffset: 18;
+    opacity: 0;
+    animation: bm-signal 1.4s cubic-bezier(0.4, 0, 0.2, 1) var(--signal-delay, 0.1s) 2 both;
+  }
+  .bm-node {
+    animation: bm-node-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both;
+  }
+  .bm-pop {
+    animation: bm-pop 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes bm-signal {
+  0% {
+    stroke-dashoffset: 18;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  75% {
+    stroke-dashoffset: var(--travel);
+    opacity: 1;
+  }
+  85%,
+  100% {
+    stroke-dashoffset: var(--travel);
+    opacity: 0;
+  }
+}
+@keyframes bm-node-in {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes bm-pop {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-synapse {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .bm-signal {
+    display: none;
+  }
+  /* No travelling light: the featured card keeps its tinted border and badge. */
+  .border-trace {
+    display: none;
+  }
+  .bm-node,
+  .bm-pop {
+    animation: none;
   }
 }
 
