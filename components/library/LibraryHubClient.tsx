@@ -47,8 +47,7 @@ import {
   HosinsulCard,
 } from '@/components/library/TechniqueDisciplineCards'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
+import { useLibraryLocalizer } from '@/components/library/useLibraryLocalizer'
 import dynamic from 'next/dynamic'
 
 const CompetitionRulesViewer = dynamic(
@@ -91,28 +90,9 @@ export function LibraryHubClient() {
     return localizeList(libraryCategoriesMeta)
   }, [localizeList])
 
-  const localizedItems = React.useMemo(() => {
-    return libraryItems.map((item) => {
-      if (item.category === 'poomsae') {
-        return decoratePoomsaeItem(item, language)
-      }
-      if (item.category === 'kicking-fundamentals' || item.category === 'kicking-advanced') {
-        return getLocalizedKickingItem(item, language as 'en' | 'km' | 'zh' | 'ko')
-      }
-      return localize(item)
-    })
-  }, [language, localize])
-
-  const modalItem = React.useMemo(() => {
-    if (!activeItem) return null
-    if (activeItem.category === 'poomsae') {
-      return decoratePoomsaeItem(activeItem, language)
-    }
-    if (activeItem.category === 'kicking-fundamentals' || activeItem.category === 'kicking-advanced') {
-      return getLocalizedKickingItem(activeItem, language as 'en' | 'km' | 'zh' | 'ko')
-    }
-    return localize(activeItem)
-  }, [activeItem, language, localize])
+  const localizeItem = useLibraryLocalizer()
+  const localizedItems = React.useMemo(() => libraryItems.map(localizeItem), [localizeItem])
+  const modalItem = React.useMemo(() => (activeItem ? localizeItem(activeItem) : null), [activeItem, localizeItem])
 
   // Lock body scroll & Escape key listener when modal is open
   React.useEffect(() => {
@@ -156,6 +136,43 @@ export function LibraryHubClient() {
   const safeActiveVideoUrl = React.useMemo(() => {
     return activeItem ? getSafeVideoEmbedUrl(activeItem.videoUrl || activeItem.mediaUrl) : null
   }, [activeItem])
+
+  // The ~90 cards are rebuilt only when the list itself changes: opening or closing a technique's dialog must not
+  // re-render every card (that made a tap on a card take ~370ms on a slow phone). setActiveItem is stable.
+  const cardGrid = React.useMemo(
+    () => (
+      <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" isolateItems>
+        {filteredItems.map((item) => {
+          if (item.category === 'poomsae') {
+            return <PoomsaeCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'stances') {
+            return <StanceCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'kicking-fundamentals' || item.category === 'kicking-advanced') {
+            return <KickingCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'hand-techniques') {
+            return <HandCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'tricking-acrobatics') {
+            return <AcrobaticCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'history') {
+            return <HistoryCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'competition-rules') {
+            return <RuleCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          if (item.category === 'hosinsul') {
+            return <HosinsulCard key={item.id} item={item} onSelect={setActiveItem} />
+          }
+          return <PoomsaeCard key={item.id} item={item} onSelect={setActiveItem} />
+        })}
+      </SafeGrid>
+    ),
+    [filteredItems]
+  )
 
   return (
     <div className="min-h-screen overflow-x-hidden pt-20 pb-20 sm:pt-24">
@@ -316,35 +333,7 @@ export function LibraryHubClient() {
 
           {/* Compact Cards Grid (3-4 columns) */}
           {filteredItems.length > 0 ? (
-            <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" isolateItems>
-              {filteredItems.map((item) => {
-                if (item.category === 'poomsae') {
-                  return <PoomsaeCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'stances') {
-                  return <StanceCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'kicking-fundamentals' || item.category === 'kicking-advanced') {
-                  return <KickingCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'hand-techniques') {
-                  return <HandCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'tricking-acrobatics') {
-                  return <AcrobaticCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'history') {
-                  return <HistoryCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'competition-rules') {
-                  return <RuleCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                if (item.category === 'hosinsul') {
-                  return <HosinsulCard key={item.id} item={item} onSelect={setActiveItem} />
-                }
-                return <PoomsaeCard key={item.id} item={item} onSelect={setActiveItem} />
-              })}
-            </SafeGrid>
+            cardGrid
           ) : (
             <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 max-w-xl mx-auto">
               <Search className="w-8 h-8 text-zinc-400 mx-auto mb-3" />

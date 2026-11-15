@@ -40,7 +40,7 @@ export function BeltJourneyPageContent({ forms }: { forms: Record<string, BeltFo
             />
           </ScrollReveal>
 
-          <ul className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mt-10 grid grid-cols-1 gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-5">
             {disciplines.map((discipline, index) => (
               <li key={discipline.key}>
                 <ScrollReveal direction="up" delay={index * 60} className="h-full">

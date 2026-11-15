@@ -551,6 +551,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
               label="Catalog layout"
               value={viewLayout}
               onChange={setViewLayout}
+              scrollable
               className="self-start md:self-auto"
               options={[
                 {
@@ -596,7 +597,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                 </div>
                 <p className="shrink-0 text-xs font-semibold text-zinc-500">4 Age Divisions · Durations: 70s–105s</p>
               </div>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {NEW_POOMSAE_DIVISIONS.map((division) => (
                   <div
                     key={division.age}
@@ -1215,7 +1216,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
               <p className="leading-relaxed">
                 {pt.steppingLawDesc}
               </p>
-              <div className="grid sm:grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 <div className="p-2.5 rounded bg-zinc-500/10 border border-zinc-500/20 text-zinc-700 dark:text-zinc-300">
                   <span>{pt.solidYangDesc}</span>
                 </div>
@@ -1292,7 +1293,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                 </div>
 
                 {/* Interactive Wang Pattern Visualizer & 3-Line Breakdown Grid */}
-                <div className="grid lg:grid-cols-12 gap-6 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                   {/* Left Column: Interactive Floor Visualizer & 4-Point Compass Dial */}
                   <div className="lg:col-span-5 space-y-4">
                     <WangFloorPlanVisualizer
@@ -2467,7 +2468,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   </div>
 
                   {/* Core Concept & Philosophical Directive */}
-                  <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                     <div className="p-4 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1.5">
                       <span className="text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-bold block">
                         {pt.coreUniversalConceptTitle}
@@ -2530,7 +2531,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                         </span>
                       </div>
 
-                      <div className="grid lg:grid-cols-12 gap-4 items-start">
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
                         <div className="lg:col-span-5">
                           <WangFloorPlanVisualizer
                             compact
@@ -2653,7 +2654,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                         </span>
                       </div>
 
-                      <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         {/* Major Deductions */}
                         <div className="p-3 rounded-lg bg-red-950/30 border border-red-500/30 space-y-1.5">
                           <span className="text-[11px] font-bold text-red-600 dark:text-red-400 uppercase block">
@@ -2694,7 +2695,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                         <span className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider block">
                           {pt.eightPillarsCuesTitle}
                         </span>
-                        <div className="grid sm:grid-cols-2 gap-2 text-xs font-sans">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans">
                           {selectedPoomsae.taegeukPhilosophy.executionPrinciples.map((principle, idx) => (
                             <div
                               key={idx}
@@ -2892,7 +2893,7 @@ function PoomsaeMasterExplorerInner({ items }: PoomsaeMasterExplorerProps) {
                   </div>
 
                   {/* 3-Column Attribute Grid */}
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs relative z-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs relative z-10">
                     <div className="p-3.5 rounded-xl bg-zinc-900/[0.03] dark:bg-white/5 border border-zinc-900/10 dark:border-white/10 space-y-1">
                       <span className="text-[11px] text-zinc-700 dark:text-zinc-300 uppercase block font-bold">{pt.floorLineSymbolTitle}</span>
                       <strong className="text-zinc-900 dark:text-zinc-100 text-[13px] block leading-relaxed">

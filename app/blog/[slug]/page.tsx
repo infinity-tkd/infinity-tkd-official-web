@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           )}
 
           {/* Body + sticky contents */}
-          <div className="mt-10 sm:mt-14 grid gap-8 lg:gap-14 lg:grid-cols-[minmax(0,1fr)_240px]">
+          <div className="mt-10 sm:mt-14 grid grid-cols-1 gap-8 lg:gap-14 lg:grid-cols-[minmax(0,1fr)_240px]">
             {hasToc && (
               <>
                 {/* Phones/tablets: collapsed disclosure above the article */}
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <h2 id="related-heading" className="mb-6 text-2xl sm:text-3xl font-black uppercase tracking-tight">
               Keep <span className="text-brand-red">reading</span>
             </h2>
-            <ul className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (
                 <li key={item.slug}>
                   <PostCard post={item} />

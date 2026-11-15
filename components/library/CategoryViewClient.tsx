@@ -83,8 +83,7 @@ const AdvancedKickingMasterExplorer = dynamic(
 import { SafeImage } from '@/components/SafeImage'
 import { Card3D } from '@/components/ui/Card3D'
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
+import { useLibraryLocalizer } from '@/components/library/useLibraryLocalizer'
 import {
   BookOpen,
   Zap,
@@ -119,6 +118,7 @@ interface CategoryViewClientProps {
 
 export function CategoryViewClient({ category }: CategoryViewClientProps) {
   const { t, language, localize } = useLanguage()
+  const localizeItem = useLibraryLocalizer()
   const [viewMode, setViewMode] = React.useState<'detailed' | 'highlight'>('detailed')
 
   const rawCategoryMeta = libraryCategoriesMeta.find((c) => c.id === category)
@@ -306,11 +306,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                   const isHistory = rawItem.category === 'history'
                   const isKicking = rawItem.category === 'kicking-fundamentals' || rawItem.category === 'kicking-advanced'
 
-                  const item = isPoomsae
-                    ? decoratePoomsaeItem(rawItem, language)
-                    : isKicking
-                    ? getLocalizedKickingItem(rawItem, language as 'en' | 'km' | 'zh' | 'ko')
-                    : localize(rawItem)
+                  const item = localizeItem(rawItem)
 
                   const rearPercent = item.weightDistribution?.includes('70%')
                     ? 70
@@ -359,7 +355,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                           </div>
                         )}
 
-                        <div className="grid lg:grid-cols-12 gap-8 items-start relative z-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
                           {/* Left Media & Metadata Column */}
                           <div className="lg:col-span-5 space-y-4">
                             <div className="relative h-56 sm:h-64 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">
@@ -529,11 +525,7 @@ export function CategoryViewClient({ category }: CategoryViewClientProps) {
                 {items.map((rawItem) => {
                   const isPoomsae = rawItem.category === 'poomsae'
                   const isKicking = rawItem.category === 'kicking-fundamentals' || rawItem.category === 'kicking-advanced'
-                  const item = isPoomsae
-                    ? decoratePoomsaeItem(rawItem, language)
-                    : isKicking
-                    ? getLocalizedKickingItem(rawItem, language as 'en' | 'km' | 'zh' | 'ko')
-                    : localize(rawItem)
+                  const item = localizeItem(rawItem)
 
                   if (item.category === 'poomsae') {
                     return (

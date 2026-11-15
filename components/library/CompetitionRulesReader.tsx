@@ -454,7 +454,7 @@ export function CompetitionRulesReader() {
                   {ruleT.overview.govDesc}
                 </p>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.standardTitle}</strong>
                     <span className="text-zinc-500 leading-relaxed">
@@ -538,7 +538,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Environmental Technical Standards Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.overview.lightingTitle}</strong>
                     <span className="text-zinc-500 text-xs">&ge; 1,600 lux on FOP</span>
@@ -559,7 +559,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Eligibility, 36-Month Nationality Transfer & Equipment Rules */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Athlete Eligibility */}
                 <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
@@ -607,7 +607,7 @@ export function CompetitionRulesReader() {
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   {/* Octagon Shape */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <div className="flex items-center justify-between">
@@ -784,7 +784,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Olympic & Youth Olympic Divisions */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                     {ruleT.divisions.olympicMen} &amp; {ruleT.divisions.olympicWomen}
@@ -896,7 +896,7 @@ export function CompetitionRulesReader() {
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   Weigh-in Protocol, Random Selection &amp; Tolerances (Article 9)
                 </h4>
-                <div className="grid sm:grid-cols-3 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">General Weigh-in:</strong>
                     <span className="text-zinc-500 block">
@@ -1016,7 +1016,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Hand Techniques & Scoring Boundary Rules Card */}
-                <div className="grid sm:grid-cols-2 gap-4 text-xs pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                     <strong className="text-brand-red font-bold uppercase block text-xs">
                       1. Legal Hand Techniques Limitation
@@ -1108,7 +1108,7 @@ export function CompetitionRulesReader() {
                 <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
                   {ruleT.scoring.gamjeomTitle}
                 </h4>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
                   {prohibitedCategories.map((cat, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <strong className="block font-bold text-xs text-zinc-900 dark:text-white">{cat.title}</strong>
@@ -1141,7 +1141,7 @@ export function CompetitionRulesReader() {
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase text-xs">
                       1. Knock Down Mandatory 8-Count
@@ -1221,7 +1221,7 @@ export function CompetitionRulesReader() {
                 </p>
 
                 {/* Yellow Card Immediate Impact Callout */}
-                <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 space-y-1">
                     <strong className="text-zinc-600 dark:text-zinc-400 block font-bold">1. Immediate Match Impact:</strong>
                     <span className="text-zinc-600 dark:text-zinc-400 text-[13px] leading-relaxed">
@@ -1283,7 +1283,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Specific Grounds for Yellow Card & DQB */}
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <strong className="text-zinc-500 block font-bold text-xs uppercase">
                       Yellow Card Triggers (Formal Sanction Requests)
@@ -1327,7 +1327,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Coach Quota & Card Management */}
-                <div className="grid sm:grid-cols-4 gap-2.5 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-0.5">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Quota:</strong>
                     <span className="text-zinc-500 text-xs">1 challenge card per match</span>
@@ -1432,7 +1432,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Key IVR Edge Cases */}
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-brand-red block font-bold text-xs">Case 1: Prior Foul Invalidates Strike</strong>
                     <span className="text-zinc-500 text-[13px] leading-relaxed block">
@@ -1625,7 +1625,7 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">{ruleT.guide.stage1Title}</strong>
                     <span className="text-zinc-500 leading-relaxed">
@@ -1661,7 +1661,7 @@ export function CompetitionRulesReader() {
                   <span className="text-[11px] text-zinc-400">Tactical Corrections</span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   {beginnerMistakes.map((bm, idx) => (
                     <div key={idx} className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                       <span className="text-brand-red font-bold uppercase block">&bull; {bm.title}</span>
@@ -1683,7 +1683,7 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   {mindsetRules.map((mr, idx) => (
                     <div key={idx} className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <strong className="text-zinc-500 block font-bold">{mr.title}</strong>
@@ -1799,7 +1799,7 @@ export function CompetitionRulesReader() {
                   Standardizes all Poomsae competitions promoted or recognized by World Taekwondo (WT), Continental Unions (CUs), and Member National Associations (MNAs) to ensure uniform and fair tournament execution worldwide.
                 </p>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Standardization of Rules:</strong>
                     <span className="text-zinc-500 leading-relaxed">
@@ -1880,7 +1880,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Exact Coordinates Specification Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
                   <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Judicial Layout:</strong>
                     <div className="text-zinc-500 text-xs space-y-0.5">
@@ -1923,7 +1923,7 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                   {/* Hygiene & Nails */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <strong className="text-zinc-900 dark:text-white block font-bold uppercase">
@@ -1989,7 +1989,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* Quorum & 4 Tournament Formats */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">1. Cut-off System:</strong>
                     <span className="text-zinc-500 leading-relaxed">
@@ -2106,7 +2106,7 @@ export function CompetitionRulesReader() {
                 </div>
 
                 {/* MATCH TIMING AND SCHEDULING SPECIFICATIONS */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <span className="text-[11px] font-bold uppercase text-brand-red block">
                       Recognized Duration
@@ -2200,7 +2200,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Age Divisions & Compulsory Pools */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-base font-black uppercase text-zinc-900 dark:text-white tracking-tight">
@@ -2273,7 +2273,7 @@ export function CompetitionRulesReader() {
                   {ruleT.poomsaeRecognized.sub}
                 </p>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   {/* Accuracy Card */}
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-500/10 text-zinc-600 dark:text-zinc-400 border border-zinc-500/20 inline-block uppercase">
@@ -2387,7 +2387,7 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-1">
                     <strong className="text-zinc-900 dark:text-white block font-bold">Posture &gt; Flexibility:</strong>
                     <span className="text-zinc-500">
@@ -2449,7 +2449,7 @@ export function CompetitionRulesReader() {
                   Presentation Scoring Breakdown (6.0 Maximum Points)
                 </h4>
 
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* Speed and Power */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
@@ -2682,7 +2682,7 @@ export function CompetitionRulesReader() {
                   </h4>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   {/* 9.1 Stances (Seogi) */}
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-3">
                     <strong className="text-xs font-bold text-brand-red uppercase block">
@@ -2995,7 +2995,7 @@ export function CompetitionRulesReader() {
                   </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 space-y-2">
                     <span className="text-brand-red font-bold uppercase block">Technical Score: 6.0 Max</span>
                     <ul className="space-y-1 text-zinc-600 dark:text-zinc-400 list-disc pl-4">
@@ -3105,7 +3105,7 @@ export function CompetitionRulesReader() {
                     3-Step Technical Referee Decision Protocol:
                   </span>
                   
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <div className="p-3.5 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-1">
                       <span className="w-5 h-5 rounded-md bg-brand-red text-white flex items-center justify-center font-black text-[11px]">
                         1
@@ -3146,7 +3146,7 @@ export function CompetitionRulesReader() {
               </div>
 
               {/* Mandatory Board Breaking & Assistance Matrix Tables */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Board Breaking (Mixed Team Only) */}
                 <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 space-y-3">
                   <div className="flex items-center justify-between">

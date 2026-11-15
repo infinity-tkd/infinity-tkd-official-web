@@ -79,7 +79,7 @@ export function BeltJourneyPreviewContent({ forms }: { forms: Record<string, Bel
           })}
         </ol>
 
-          <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-200 sm:grid-cols-2 lg:grid-cols-5 dark:border-zinc-800 dark:bg-zinc-800">
+          <div className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-200 sm:grid-cols-2 lg:grid-cols-5 dark:border-zinc-800 dark:bg-zinc-800">
             {disciplines.map((discipline) => (
               <div key={discipline.key} className="bg-zinc-50 p-4 dark:bg-zinc-950">
                 <p className="text-sm font-bold text-zinc-900 dark:text-white">

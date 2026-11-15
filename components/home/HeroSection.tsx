@@ -36,7 +36,8 @@ export function HeroSection() {
           alt=""
           fill
           priority
-          sizes="100vw"
+          // A faded decorative backdrop (15% opacity): phones get a smaller file, which looks identical at that strength.
+          sizes="(min-width: 1024px) 100vw, 60vw"
           quality={60}
           className="object-cover opacity-15 dark:opacity-30"
         />

@@ -48,8 +48,7 @@ const PoomsaeWalkthrough = dynamic(() => import('@/components/library/PoomsaeWal
   loading: () => <div className="h-[460px] animate-pulse rounded-2xl border border-zinc-800 bg-zinc-950" aria-hidden="true" />,
 })
 import { useLanguage } from '@/context/LanguageContext'
-import { decoratePoomsaeItem } from '@/data/library/poomsae/poomsaeTranslations'
-import { getLocalizedKickingItem } from '@/data/library/kicking/kickingTranslationsDetailed'
+import { useLibraryLocalizer } from '@/components/library/useLibraryLocalizer'
 
 interface TechniqueDetailClientProps {
   item: LibraryItem
@@ -71,16 +70,9 @@ export function TechniqueDetailClient({
   const isKicking =
     rawItem.category === 'kicking-fundamentals' || rawItem.category === 'kicking-advanced'
 
-  // Decorate item based on current active language
-  const item = React.useMemo(() => {
-    if (isPoomsae) {
-      return decoratePoomsaeItem(rawItem, language)
-    }
-    if (isKicking) {
-      return getLocalizedKickingItem(rawItem, language as 'en' | 'km' | 'zh' | 'ko')
-    }
-    return localize(rawItem)
-  }, [rawItem, isPoomsae, isKicking, language, localize])
+  // The item in the visitor's language (the big Poomsae and kicking tables load only for non-English visitors).
+  const localizeItem = useLibraryLocalizer()
+  const item = React.useMemo(() => localizeItem(rawItem), [rawItem, localizeItem])
 
   const walkthrough = React.useMemo(
     () => (isPoomsae ? getWalkthrough(rawItem.id, item.steps.length) : null),
@@ -261,7 +253,7 @@ export function TechniqueDetailClient({
             </div>
 
             {/* Matrix Data Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-200 dark:border-zinc-800/80 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-200 dark:border-zinc-800/80 relative z-10">
               {/* Meaning of Name */}
               <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                 <span className="text-[11px] uppercase text-zinc-600 dark:text-zinc-400 tracking-wider block">
@@ -396,7 +388,7 @@ export function TechniqueDetailClient({
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 text-xs leading-relaxed">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs leading-relaxed">
                 <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1.5">
                   <strong className="text-zinc-900 dark:text-white uppercase font-bold block">
                     Core Philosophical Concept
@@ -441,7 +433,7 @@ export function TechniqueDetailClient({
                 <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-brand-red font-bold">
                   <Flame className="w-4 h-4" /> 8 WT Performance Principles &amp; Criteria
                 </div>
-                <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   {item.taegeukPhilosophy.executionPrinciples.map((principle, idx) => (
                     <div
                       key={idx}
@@ -502,7 +494,7 @@ export function TechniqueDetailClient({
             </div>
 
             {/* Matrix Data Grid */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-200 dark:border-zinc-800/80 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-6 border-b border-zinc-200 dark:border-zinc-800/80 relative z-10">
               {/* Competition Division */}
               <div className="p-4 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 space-y-1.5">
                 <span className="text-[11px] uppercase text-zinc-600 dark:text-zinc-400 tracking-wider block">
@@ -703,7 +695,7 @@ export function TechniqueDetailClient({
         ) : null}
 
         {/* Media & Key Telemetry Grid (Customized by Discipline) */}
-        <div className="grid md:grid-cols-12 gap-8 mb-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10 items-start">
           <div className={!isHistory && !isCompetitionRule ? 'md:col-span-6' : 'md:col-span-12'}>
             <div className="relative h-72 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
               <SafeImage src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -721,7 +713,7 @@ export function TechniqueDetailClient({
             <div className="md:col-span-6 space-y-4">
               {/* Tactical Striking Weapon & Target Surface */}
               {(item.strikingSurface || item.targetArea) && (
-                <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   {item.strikingSurface && (
                     <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
                       <span className="text-[11px] text-zinc-400 font-bold uppercase block mb-1">
@@ -864,7 +856,7 @@ export function TechniqueDetailClient({
         )}
 
         {/* Biomechanical Cues & Common Mistakes (Dynamic headings) */}
-        <div className="grid md:grid-cols-2 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {/* Cues / Evidence */}
           {item.keyDetails && item.keyDetails.length > 0 && (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8">
@@ -937,13 +929,9 @@ export function TechniqueDetailClient({
               </Link>
             </div>
 
-            <SafeGrid className="grid sm:grid-cols-2 md:grid-cols-3 gap-4" isolateItems>
+            <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" isolateItems>
               {relatedItems.map((relRaw) => {
-                const rel = isPoomsae
-                  ? decoratePoomsaeItem(relRaw, language)
-                  : isKicking
-                  ? getLocalizedKickingItem(relRaw, language as 'en' | 'km' | 'zh' | 'ko')
-                  : localize(relRaw)
+                const rel = localizeItem(relRaw)
                 return (
                   <Link
                     key={rel.id}

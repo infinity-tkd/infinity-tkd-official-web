@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { preconnect } from 'react-dom'
 
 export interface SafeImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src?: string
@@ -72,6 +73,11 @@ export function SafeImage({
   }
 
   const srcSet = unsplashSrcSet(imgSrc)
+
+  // An above-the-fold photo from Unsplash: open the connection while the page is still being parsed, so the
+  // image (often the page's largest element) does not also wait for a DNS lookup and TLS handshake. React puts
+  // the hint in <head> during the server render.
+  if (priority && imgSrc && UNSPLASH.test(imgSrc)) preconnect('https://images.unsplash.com')
 
   return (
     // A plain img on purpose: Unsplash resizes on its own CDN (the srcSet above), and the fallback swap

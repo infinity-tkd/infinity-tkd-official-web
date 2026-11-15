@@ -345,7 +345,7 @@ export function FreestylePoomsaeScoreSimulator() {
               Close Guide &times;
             </button>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
             <div className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-500/20">
               <span className="font-bold text-zinc-600 dark:text-zinc-400 block mb-1">
                 1. Foot Techniques (5.0 max)
@@ -743,7 +743,7 @@ export function FreestylePoomsaeScoreSimulator() {
               <span>{t.technicalDeductionsTitle} (Mandatory Stances, Falling, &gt;3 Acrobatic Kicks)</span>
             </h5>
 
-            <div className="grid sm:grid-cols-3 gap-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
               {/* Missing Stances */}
               <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
                 <div>
@@ -957,7 +957,7 @@ export function FreestylePoomsaeScoreSimulator() {
             <span className="text-xs font-bold uppercase text-brand-red block mb-2">
               *Referee Deductions (Time + Cross Boundary Line + Restart)
             </span>
-            <div className="grid sm:grid-cols-3 gap-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
               {/* Time Penalty */}
               <label className="p-3 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between cursor-pointer">
                 <div>

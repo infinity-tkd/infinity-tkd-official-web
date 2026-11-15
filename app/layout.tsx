@@ -7,6 +7,7 @@ import { MobileBottomNav } from '@/components/MobileBottomNav'
 import { Footer } from '@/components/Footer'
 import { ScrollNavProvider } from '@/context/ScrollNavContext'
 import { AutoErrorHandler } from '@/components/AutoErrorHandler'
+import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { BackToTop } from '@/components/ui/BackToTop'
 import { buildSiteJsonLd, jsonLdString } from '@/lib/structuredData'
@@ -103,11 +104,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/icon', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
     ],
     shortcut: '/favicon.svg',
-    apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
+  // iOS home-screen name and look (iOS 16.4+ also reads the manifest's display: standalone).
+  appleWebApp: { capable: true, title: 'Infinity TKD', statusBarStyle: 'default' },
   alternates: {
     types: { 'application/rss+xml': '/blog/feed.xml' },
   },
@@ -130,7 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Skip to Main Content Link (WCAG 2.4.1 Bypass Blocks) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-brand-red focus:text-white focus:font-bold focus:rounded-xl focus:shadow-xl focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-[calc(1rem+env(safe-area-inset-top,0px))] focus:left-[calc(1rem+env(safe-area-inset-left,0px))] focus:z-50 focus:px-4 focus:py-2.5 focus:bg-brand-red focus:text-white focus:font-bold focus:rounded-xl focus:shadow-xl focus:outline-none"
         >
           Skip to main content
         </a>
@@ -138,6 +141,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LanguageProvider>
             <ScrollNavProvider>
               <AutoErrorHandler />
+              <ServiceWorkerRegister />
               <ScrollProgressBar />
               <Navbar />
               <main

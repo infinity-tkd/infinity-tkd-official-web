@@ -37,3 +37,8 @@ next-env.d.ts
 # figma archives & local dev
 figma.archive
 .figma/
+
+# playwright
+/test-results/
+/playwright-report/
+/tests/e2e/__screenshots__/

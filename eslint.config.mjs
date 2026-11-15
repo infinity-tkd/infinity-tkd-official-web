@@ -2,6 +2,7 @@ import nextConfig from 'eslint-config-next'
 
 const eslintConfig = [
   ...nextConfig,
+  { ignores: ['playwright-report/**', 'test-results/**'] },
   {
     rules: {
       'react/no-unescaped-entities': 'off',

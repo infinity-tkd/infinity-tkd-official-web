@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>You're offline | Infinity Taekwondo</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  /* Shown by the service worker when a page cannot be loaded. Self-contained on purpose: nothing here may
+     depend on the network. Colours match the site's tokens (zinc neutrals, one red accent). */
+  :root { color-scheme: light dark; --bg: #fff; --fg: #18181b; --muted: #52525b; --brand: #ef2f38; --btn: #d0272f; --btn-hover: #b12027; }
+  :root.dark { --bg: #000; --fg: #fafafa; --muted: #a1a1aa; }
+  @media (prefers-color-scheme: dark) { :root:not(.light) { --bg: #000; --fg: #fafafa; --muted: #a1a1aa; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body {
+    min-height: 100vh; min-height: 100dvh; display: grid; place-items: center;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Khmer", "Noto Sans KR", "Noto Sans SC", sans-serif;
+  }
+  main { width: 100%; max-width: 30rem; padding: 2rem 1.25rem; text-align: center; }
+  svg { display: block; width: 9rem; height: auto; margin: 0 auto 1.5rem; fill: var(--brand); }
+  h1 { margin: 0 0 .5rem; font-size: 1.5rem; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
+  p { margin: 0 0 1.5rem; color: var(--muted); }
+  button { min-height: 44px; padding: .75rem 1.5rem; border: 0; border-radius: .75rem; background: var(--btn); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+  button:hover { background: var(--btn-hover); }
+  button:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <svg viewBox="105 260 365 170" aria-hidden="true" focusable="false"><path d="M314.368 426.839V399.227L202.77 320.88C188.5 310.862 172.151 300.641 154.899 303.161C139.836 305.401 127.327 311.902 118.107 324.264C109.401 335.966 105.719 350.656 107.875 365.082C110.091 379.253 117.807 391.977 129.348 400.491C140.897 408.878 155.287 412.37 169.395 410.219C181.521 408.332 239.123 380.933 239.123 380.933L216.688 365.401L189.328 378.006C165.599 387.836 142.179 394.741 132.373 367.43C129.466 359.375 129.998 350.479 133.843 342.828C137.608 335.224 144.401 329.557 152.557 327.216C155.674 326.305 158.316 326.097 161.483 325.849L161.654 325.835C173.352 326.93 178.761 331.828 188.04 338.479L211.187 354.635L314.368 426.839Z"/><path d="M274.673 364.366L322.305 342.276L299.87 326.398L252.583 348.834L274.673 364.366Z"/><path d="M260.177 263.234V290.847L371.775 369.194C386.045 379.212 402.394 389.433 419.646 386.913C434.709 384.672 447.218 378.172 456.438 365.81C465.144 354.107 468.826 339.417 466.67 324.991C464.454 310.821 456.738 298.097 445.197 289.582C433.647 281.196 419.258 277.704 405.15 279.855C393.024 281.742 335.422 309.14 335.422 309.14L357.857 324.673L385.217 312.068C408.946 302.237 432.366 295.333 442.172 322.644C445.079 330.699 444.547 339.595 440.702 347.245C436.937 354.85 430.144 360.517 421.988 362.858C418.87 363.769 416.229 363.976 413.062 364.225L412.891 364.238C401.192 363.144 395.784 358.246 386.505 351.595L363.358 335.439L260.177 263.234Z"/></svg>
+  <h1 id="title">You're offline</h1>
+  <p id="text">Check your internet connection, then try again.</p>
+  <button type="button" id="retry">Try again</button>
+</main>
+<script>
+(function () {
+  var copy = {
+    en: ["You're offline", "Check your internet connection, then try again.", "Try again"],
+    km: ["អ្នកគ្មានអ៊ីនធឺណិត", "សូមពិនិត្យការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក រួចព្យាយាមម្តងទៀត។", "ព្យាយាមម្តងទៀត"],
+    zh: ["您已离线", "请检查网络连接，然后重试。", "重试"],
+    ko: ["오프라인 상태입니다", "인터넷 연결을 확인한 후 다시 시도해 주세요.", "다시 시도"]
+  };
+  var lang = "en", theme = null;
+  try { lang = localStorage.getItem("infinity_tkd_lang") || "en"; theme = localStorage.getItem("theme"); } catch (e) {}
+  if (!copy[lang]) lang = "en";
+  var words = copy[lang];
+  document.documentElement.lang = lang;
+  document.title = words[0] + " | Infinity Taekwondo";
+  document.getElementById("title").textContent = words[0];
+  document.getElementById("text").textContent = words[1];
+  document.getElementById("retry").textContent = words[2];
+  if (theme === "dark" || theme === "light") document.documentElement.classList.add(theme);
+  document.getElementById("retry").addEventListener("click", function () { location.reload(); });
+  window.addEventListener("online", function () { location.reload(); });
+})();
+</script>
+</body>
+</html>

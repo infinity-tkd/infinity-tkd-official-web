@@ -25,6 +25,20 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
+    // Breakpoints in em, not px: media queries then follow the visitor's default text size, so with larger text
+    // the layout switches to its narrower variants sooner and nothing is pushed off-screen (WCAG 1.4.4, 1.4.10).
+    // At the default 16px these are exactly the usual 640 / 768 / 1024 / 1280 / 1536.
+    screens: {
+      sm: '40em',
+      md: '48em',
+      lg: '64em',
+      xl: '80em',
+      '2xl': '96em',
+    },
+    // `container` keeps its pixel widths exactly as before; only the breakpoint utilities follow the text size.
+    container: {
+      screens: { sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px' },
+    },
     borderRadius: {
       none: '0px',
       sm: '2px',

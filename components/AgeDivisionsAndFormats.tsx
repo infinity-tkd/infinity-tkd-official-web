@@ -62,7 +62,7 @@ export function AgeDivisionsAndFormats() {
           id="age-panel"
           role="tabpanel"
           aria-labelledby={`age-tab-${activeAge.id}`}
-          className="mt-6 grid animate-fade-in items-center gap-8 rounded-2xl border border-zinc-200 bg-white p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 dark:border-zinc-800 dark:bg-zinc-900/40"
+          className="mt-6 grid grid-cols-1 animate-fade-in items-center gap-8 rounded-2xl border border-zinc-200 bg-white p-5 sm:p-8 lg:grid-cols-12 lg:gap-12 dark:border-zinc-800 dark:bg-zinc-900/40"
         >
           <div className="lg:col-span-5">
             <div className="aspect-[4/3] overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
@@ -81,7 +81,7 @@ export function AgeDivisionsAndFormats() {
             <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{activeAge.developmentFocus}</p>
 
             <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Core age-calibrated syllabus</p>
-            <ul className="mt-3 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+            <ul className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2">
               {activeAge.keyCurriculum.map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-700 dark:text-zinc-300">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
