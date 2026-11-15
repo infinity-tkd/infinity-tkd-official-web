@@ -102,11 +102,19 @@ const nextConfig = {
         source: '/(.*)',
         headers: securityHeaders,
       },
+      {
+        // The service worker script must never be served from a cache, or a fixed worker could not reach visitors.
+        source: '/sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+          { key: 'Content-Type', value: 'application/javascript; charset=utf-8' },
+        ],
+      },
     ]
   },
   async rewrites() {
-    // Browsers, link previews and crawlers still ask for /favicon.ico by default; answer with the generated PNG icon.
-    return [{ source: '/favicon.ico', destination: '/icon' }]
+    // Browsers, link previews and crawlers still ask for /favicon.ico by default; answer with the PNG icon.
+    return [{ source: '/favicon.ico', destination: '/icons/favicon-32.png' }]
   },
 }
 

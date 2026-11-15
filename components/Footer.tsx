@@ -107,11 +107,12 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 pt-8 text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row">
+        {/* On phones the side padding keeps these lines clear of the floating back-to-top button at the page end. */}
+        <div className="flex flex-col items-center justify-between gap-3 px-14 pt-8 text-center text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row sm:px-0 sm:text-left">
           <p>
             © {new Date().getFullYear()} Infinity Taekwondo. {t.footer.copyright}
           </p>
-          <p className="flex items-center gap-2 text-[11px] text-zinc-500">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 text-[11px] text-zinc-500">
             <span>Kukkiwon Dan Certified</span>
             <span aria-hidden="true">&bull;</span>
             <span>World Taekwondo Standard</span>

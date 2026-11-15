@@ -93,7 +93,7 @@ export function HistoryTimetable() {
           {filteredData.map((item, idx) => (
             <div
               key={item.id}
-              className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 grid md:grid-cols-12 gap-6 items-center group"
+              className="p-5 sm:p-7 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 grid grid-cols-1 md:grid-cols-12 gap-6 items-center group"
             >
               {/* Left Column: Contextual Historical Photography */}
               <div className="md:col-span-4 relative h-44 sm:h-52 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner">

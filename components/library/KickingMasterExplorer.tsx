@@ -150,7 +150,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
             </p>
 
             {/* 3 Core Tenets Cards */}
-            <div className="grid sm:grid-cols-3 gap-4 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               {overview.coreTenets.map((tenet, idx) => (
                 <div
                   key={idx}
@@ -219,7 +219,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
       {/* ==================================================================== */}
       {/* 3. 10 FUNDAMENTAL KICKS SELECTION GRID                              */}
       {/* ==================================================================== */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {filteredKicks.map((kick) => {
           const localizedKick = getLocalizedKickingItem(kick, lang)
           const isSelected = kick.id === activeKickId
@@ -473,7 +473,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                     <span>{t.corePrinciples}</span>
                   </h3>
 
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {activeKick.corePrinciples.map((principle, idx) => (
                       <div
                         key={idx}
@@ -504,7 +504,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                     <span>{t.prerequisites}</span>
                   </h3>
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* Physical */}
                     <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                       <h4 className="text-xs font-bold uppercase text-brand-red mb-3 flex items-center gap-1.5">
@@ -739,7 +739,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 <span>{t.drillingMethods}</span>
               </h3>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Isolation Drills */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                   <h4 className="text-xs font-bold uppercase text-brand-red mb-3">
@@ -839,7 +839,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 {activeKick.commonMistakesAndCorrections.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60 grid sm:grid-cols-2 gap-4 items-center"
+                    className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center"
                   >
                     {/* Mistake */}
                     <div className="flex items-start gap-3">
@@ -882,7 +882,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 <span>{t.performanceTitle}</span>
               </h3>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Kyorugi & Poomsae */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                   <h4 className="text-xs font-bold uppercase text-brand-red mb-2">
@@ -948,7 +948,7 @@ export function KickingMasterExplorer({ items }: KickingMasterExplorerProps) {
                 <span>{t.recoveryTitle}</span>
               </h3>
 
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Flexibility */}
                 <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                   <h4 className="text-xs font-bold uppercase text-brand-red mb-3">

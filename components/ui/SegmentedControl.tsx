@@ -28,6 +28,11 @@ interface SegmentedControlProps<T extends string> {
   activeTextClassName?: string
   /** A long row scrolls sideways on narrow screens and keeps the chosen option in view. */
   scrollable?: boolean
+  /**
+   * For a short row that must stay fully visible on a narrow phone: when the labels are wider than the control,
+   * they shrink and wrap onto a second line instead of being cut off. Nothing changes while they fit.
+   */
+  wrap?: boolean
   className?: string
 }
 
@@ -56,6 +61,7 @@ export function SegmentedControl<T extends string>({
   thumbClassName = 'bg-zinc-900 dark:bg-white',
   activeTextClassName = 'text-white dark:text-zinc-900',
   scrollable = false,
+  wrap = false,
   className,
 }: SegmentedControlProps<T>) {
   const groupRef = React.useRef<HTMLDivElement>(null)
@@ -138,7 +144,8 @@ export function SegmentedControl<T extends string>({
             onClick={() => onChange(option.value)}
             onKeyDown={(event) => handleKeyDown(event, index)}
             className={cn(
-              'relative z-10 flex min-h-[40px] shrink-0 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300',
+              'relative z-10 flex min-h-[40px] cursor-pointer items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300',
+              wrap ? 'min-w-0 flex-wrap justify-center whitespace-normal text-center leading-tight' : 'shrink-0 whitespace-nowrap',
               isSelected ? activeTextClassName : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white',
               // Until the highlight is measured, the chosen option carries the fill itself.
               isSelected && !thumb && thumbClassName

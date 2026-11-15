@@ -192,7 +192,7 @@ export default function EqualityPage() {
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Diversity &amp; Inclusion Bureau
           </div>
-          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
             <div>
               <span className="text-[11px] text-zinc-400 block">General Inclusion Inquiries:</span>
               <a href="mailto:equality@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-brand-red font-bold hover:underline">

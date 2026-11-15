@@ -50,7 +50,7 @@ export function PostCard({ post, featured = false, priority = false, headingLeve
       className={cn(
         'group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40',
         'transition-[transform,border-color] duration-300 ease-out-expo hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
-        featured ? 'grid lg:grid-cols-2' : 'flex flex-col h-full'
+        featured ? 'grid grid-cols-1 lg:grid-cols-2' : 'flex flex-col h-full'
       )}
     >
       <div

@@ -74,7 +74,7 @@ export function MobileBottomNav() {
     <nav
       aria-label="Mobile navigation"
       className={cn(
-        'lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-zinc-200/70 dark:border-white/[0.06] bg-white/85 dark:bg-black/80 backdrop-blur-xl backdrop-saturate-150 pb-[env(safe-area-inset-bottom,0px)] transition-transform duration-300 ease-out-expo',
+        'lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-zinc-200/70 dark:border-white/[0.06] bg-white/85 dark:bg-black/80 backdrop-blur-xl backdrop-saturate-150 pb-[env(safe-area-inset-bottom,0px)] pl-[env(safe-area-inset-left,0px)] pr-[env(safe-area-inset-right,0px)] transition-transform duration-300 ease-out-expo',
         isNavVisible ? 'translate-y-0' : 'translate-y-full'
       )}
     >

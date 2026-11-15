@@ -166,7 +166,7 @@ export function CollaborationShowcase() {
           </button>
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPartners.map((partner) => {
             const partnerName =
               language === 'km' && partner.translations?.km?.name
@@ -465,7 +465,7 @@ export function CollaborationShowcase() {
                 <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
                   <Award className="w-3.5 h-3.5 text-zinc-500" /> Active Joint Initiatives &amp; Delegations
                 </h5>
-                <div className="grid sm:grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                   {activeModalPartner.activeInitiatives.map((prog, idx) => (
                     <div
                       key={idx}

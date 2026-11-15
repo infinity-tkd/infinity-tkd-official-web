@@ -23,6 +23,7 @@ const triggerClass =
 export function Navbar() {
   const { isNavVisible, isScrolled, isMobileMenuOpen, setIsMobileMenuOpen } = useScrollNavContext()
   const [openMenu, setOpenMenu] = React.useState<NavGroup['id'] | null>(null)
+  const menuWasOpenOnTouch = React.useRef(true)
   const pathname = usePathname()
   const { t, localizeList } = useLanguage()
 
@@ -42,14 +43,16 @@ export function Navbar() {
         setIsMobileMenuOpen(false)
       }
     }
-    const onResize = () => {
-      if (window.innerWidth >= 1024) setIsMobileMenuOpen(false)
+    // The same breakpoint as Tailwind's `lg` (64em), so the drawer closes exactly when the desktop header appears.
+    const desktop = window.matchMedia('(min-width: 64em)')
+    const onBreakpoint = () => {
+      if (desktop.matches) setIsMobileMenuOpen(false)
     }
     window.addEventListener('keydown', onKeyDown)
-    window.addEventListener('resize', onResize, { passive: true })
+    desktop.addEventListener('change', onBreakpoint)
     return () => {
       window.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('resize', onResize)
+      desktop.removeEventListener('change', onBreakpoint)
     }
   }, [setIsMobileMenuOpen])
 
@@ -112,7 +115,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top,0px)] border-b transition-[background-color,border-color,transform] duration-300 ease-out-expo',
+        'fixed inset-x-0 top-0 z-50 pl-[env(safe-area-inset-left,0px)] pr-[env(safe-area-inset-right,0px)] pt-[env(safe-area-inset-top,0px)] border-b transition-[background-color,border-color,transform] duration-300 ease-out-expo',
         isScrolled
           ? 'border-zinc-200/70 dark:border-white/[0.06] bg-white/80 dark:bg-black/75 backdrop-blur-xl backdrop-saturate-150'
           : 'border-transparent bg-gradient-to-b from-white/70 to-transparent dark:from-black/40 dark:via-black/10',
@@ -159,6 +162,16 @@ export function Navbar() {
                     prefetch={prefetchFor(group.href)}
                     aria-expanded={isOpen}
                     aria-haspopup="true"
+                    // Touch screens wide enough for this header (iPads, large tablets) have no hover. A tap fires
+                    // an emulated hover (which opens the menu) and then the click: the first tap must only open
+                    // the menu, and a second tap on the title follows the link. Mouse and keyboard are unaffected.
+                    onPointerDown={(event) => {
+                      if (event.pointerType === 'touch') menuWasOpenOnTouch.current = openMenu === group.id
+                    }}
+                    onClick={(event) => {
+                      if (!menuWasOpenOnTouch.current) event.preventDefault()
+                      menuWasOpenOnTouch.current = true
+                    }}
                     className={cn(
                       triggerClass,
                       active ? 'font-black text-brand-red' : 'text-zinc-700 dark:text-zinc-300'
@@ -298,7 +311,7 @@ export function Navbar() {
           ref={drawerRef}
           id="mobile-menu"
           tabIndex={-1}
-          className="fixed inset-x-0 top-16 z-50 h-[calc(100dvh-4rem)] animate-fade-in overflow-y-auto border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black pb-28 touch-scroll lg:hidden"
+          className="fixed inset-x-0 top-[calc(4rem+env(safe-area-inset-top,0px))] z-50 h-[calc(100dvh-4rem-env(safe-area-inset-top,0px))] animate-fade-in overflow-y-auto border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-black pb-28 pl-[env(safe-area-inset-left,0px)] pr-[env(safe-area-inset-right,0px)] touch-scroll lg:hidden"
         >
           <nav aria-label="Mobile" className="container mx-auto space-y-6 px-4 py-6">
             <div className="divide-y divide-zinc-100 dark:divide-zinc-900">

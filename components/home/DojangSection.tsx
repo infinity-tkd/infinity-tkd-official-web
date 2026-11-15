@@ -17,7 +17,7 @@ export function DojangSection() {
   return (
     <section id="dojang" className="scroll-mt-20 bg-white py-16 sm:py-20 lg:py-24 dark:bg-black">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
           <div className="order-2 md:order-1">
             <SectionHeader
               align="left"

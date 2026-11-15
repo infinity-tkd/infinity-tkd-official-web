@@ -107,13 +107,15 @@ export default function PricingPage() {
         description={t.pricing.heroSubtitle}
       >
         {/* Billing and membership switches: the highlight slides to the chosen option. */}
-        <div className="flex w-full max-w-xl flex-col items-center gap-3">
-          <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="flex w-full flex-col items-center gap-3">
+          {/* Both switches share a row where they fit (about 760px of controls) and wrap onto two rows where they do not; on a phone each fills the width and its labels wrap. They used to overflow both edges and be cut off. */}
+          <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <SegmentedControl
               label="Billing period"
               value={billingCycle}
               onChange={setBillingCycle}
-              className="w-full justify-center sm:w-auto"
+              wrap
+              className="w-full max-w-xl justify-center sm:w-auto sm:max-w-full"
               options={[
                 { value: 'monthly', label: t.common.monthly },
                 // The annual label already states the saving in every language.
@@ -124,7 +126,8 @@ export default function PricingPage() {
               label="Membership type"
               value={membershipType}
               onChange={setMembershipType}
-              className="w-full justify-center sm:w-auto"
+              wrap
+              className="w-full max-w-xl justify-center sm:w-auto sm:max-w-full"
               options={[
                 { value: 'individual', label: 'Single Student' },
                 {
@@ -141,7 +144,7 @@ export default function PricingPage() {
             />
           </div>
           {/* The line keeps its height when empty, so switching never moves the plans. */}
-          <p aria-live="polite" className="flex min-h-[1.5rem] items-center justify-center gap-1.5 text-sm text-zinc-500">
+          <p aria-live="polite" className="flex min-h-[1.5rem] max-w-xl items-center justify-center gap-1.5 text-sm text-zinc-500">
             {savingsNote && (
               <>
                 <Check className="h-4 w-4 shrink-0 text-brand-red" aria-hidden="true" />
@@ -261,7 +264,7 @@ export default function PricingPage() {
         </div>
 
         {/* Membership assurances */}
-        <ul className="mt-6 grid gap-6 rounded-2xl border border-zinc-200 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 dark:border-zinc-800">
+        <ul className="mt-6 grid grid-cols-1 gap-6 rounded-2xl border border-zinc-200 p-6 sm:grid-cols-2 sm:p-8 lg:grid-cols-4 dark:border-zinc-800">
           {assurances.map(({ icon: Icon, title, text }) => (
             <li key={title} className="flex gap-3">
               <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-red" aria-hidden="true" />

@@ -852,7 +852,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* Techniques Grid (14px Radius) */}
-          <SafeGrid className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" isolateItems>
+          <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" isolateItems>
             {filteredItems.map((item) => {
               const trans = lang === 'en' ? undefined : item.translations?.[lang as 'km' | 'zh' | 'ko']
               const displayName = trans?.name || item.name
@@ -942,7 +942,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {foundations.etymology.characters.map((char) => (
                 <div
                   key={char.hanja}
@@ -983,7 +983,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {foundations.ilgyeokPilsal.pillars.map((pillar, idx) => (
                 <div
                   key={idx}
@@ -1012,7 +1012,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {foundations.fourPillars.pillars.map((pillar, idx) => (
                 <div
                   key={idx}
@@ -1054,7 +1054,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {foundations.hapkidoConnection.points.map((point, idx) => (
                 <div
                   key={idx}
@@ -1088,7 +1088,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* 2-Column Comparison: Linear Hard vs Circular Soft */}
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Column 1: Linear / Hard Techniques */}
             <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
               <div>
@@ -1279,7 +1279,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
           </div>
 
           {/* Interactive Vital Points Explorer */}
-          <div className="grid lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Column: Target Selector Cards */}
             <div className="lg:col-span-5 space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
@@ -1385,7 +1385,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               {vitalPointsGuide.legalFramework.title}
             </h3>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {vitalPointsGuide.legalFramework.stages.map((stage) => (
                 <div
                   key={stage.step}
@@ -1458,7 +1458,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               </p>
 
               {/* Anatomical Targets Bar */}
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {activeTechnique.strikingSurface && (
                   <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800">
                     <span className="text-[11px] font-bold uppercase text-zinc-400 block mb-1">
@@ -1599,7 +1599,7 @@ export function HosinsulMasterExplorer({ items }: HosinsulMasterExplorerProps) {
               )}
 
               {/* Key Details & Mistakes Grid */}
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {activeTechnique.keyDetails && activeTechnique.keyDetails.length > 0 && (
                   <div className="p-5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
                     <h4 className="text-xs font-bold uppercase text-zinc-400 mb-2 flex items-center gap-1.5">

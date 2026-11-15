@@ -569,7 +569,7 @@ export default function PoomsaeWalkthrough({ formName, stepTexts, walkthrough }:
         </div>
       </header>
 
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px]">
         {/* Diagram + controls */}
         <div className="border-b border-zinc-800 p-4 sm:p-6 lg:border-b-0 lg:border-r">
           <div

@@ -627,7 +627,7 @@ export default function AboutPage() {
         {/* ================================================================== */}
         {activeTab === 'story' && (
           <div className="animate-fade-in space-y-24 sm:space-y-32">
-            <section className="grid items-center gap-10 md:grid-cols-12 md:gap-14">
+            <section className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-14">
               <div className="md:col-span-5">
                 <div className="flex flex-col items-center rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-10 text-center dark:border-zinc-800 dark:bg-zinc-900/40">
                   <InfinityLogo variant="seal" className="h-44 w-44 sm:h-52 sm:w-52" />
@@ -659,7 +659,7 @@ export default function AboutPage() {
                     bridges traditional martial arts philosophy with minimalist modern design.
                   </p>
                 </div>
-                <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+                <dl className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="rounded-xl border border-zinc-200 p-5 dark:border-zinc-800">
                     <dt className="flex items-center gap-2 text-sm font-bold text-zinc-900 dark:text-white">
                       <span className="h-3 w-3 rounded-full bg-brand-red" aria-hidden="true" />
@@ -682,7 +682,7 @@ export default function AboutPage() {
             {/* The mark, built from its own parts. */}
             <section>
               <SectionHeader size="md" eyebrowStyle="text" eyebrow="Design Anatomy" title="The Visual" accent="Equation" />
-              <div className="mt-10 grid items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 sm:p-8 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-5 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <div className="mt-10 grid grid-cols-1 items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 sm:p-8 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-5 dark:border-zinc-800 dark:bg-zinc-900/40">
                 <EquationTerm label="Taekwondo Belt Knot" note="Traditional Root">
                   <LogoParts parts={['knot']} viewBox="248 322 78 46" />
                 </EquationTerm>
@@ -790,7 +790,7 @@ export default function AboutPage() {
                 accent="Martial Mind"
                 description="True mastery starts in the mind. At Infinity Taekwondo, physical strikes are merely the outer expression of inner psychological focus, emotional control, and scientific strategy."
               />
-              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:gap-6">
+              <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
                 {brainPrinciples.map((item) => (
                   <InfoCard
                     key={item.number}
@@ -821,7 +821,7 @@ export default function AboutPage() {
               accent="Goal & Dream"
               description="Our comprehensive directional framework driving every class, coach, curriculum, and athlete at Infinity Taekwondo."
             />
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:gap-6">
+            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:gap-6">
               {quadPillars.map((pillar) => (
                 <InfoCard
                   key={pillar.id}
@@ -852,7 +852,7 @@ export default function AboutPage() {
               accent={t.about.valuesTitle2}
               description={t.about.valuesSubtitle}
             />
-            <div className="mt-10 grid gap-5 md:grid-cols-3 lg:gap-6">
+            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:gap-6">
               {coreValues.map((val) => (
                 <InfoCard
                   key={val.title}
@@ -985,7 +985,7 @@ export default function AboutPage() {
 
                     <div
                       key={currentM.year}
-                      className="grid animate-fade-in gap-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 md:grid-cols-12 dark:border-zinc-800 dark:bg-zinc-900/40"
+                      className="grid grid-cols-1 animate-fade-in gap-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 md:grid-cols-12 dark:border-zinc-800 dark:bg-zinc-900/40"
                     >
                       <div className="md:col-span-7">
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -1160,7 +1160,7 @@ export default function AboutPage() {
             </Link>
           </div>
 
-          <SafeGrid className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" isolateItems>
+          <SafeGrid className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" isolateItems>
             {collaborationsData.slice(0, 4).map((partner) => (
               <Link
                 key={partner.id}

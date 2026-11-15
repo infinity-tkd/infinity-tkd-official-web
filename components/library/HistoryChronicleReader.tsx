@@ -192,7 +192,7 @@ export function HistoryChronicleReader() {
       {/* TAB 1: EDITORIAL ARTICLE VIEW (14px radius) */}
       {/* -------------------------------------------------------------------- */}
       {activeTab === 'article' && (
-        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl grid lg:grid-cols-12 gap-8 items-start relative overflow-hidden">
+        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative overflow-hidden">
           {/* Left Column: Image & Citations */}
           <div className="lg:col-span-5 space-y-4">
             <div className="relative h-60 sm:h-72 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">

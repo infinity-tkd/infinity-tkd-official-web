@@ -108,7 +108,7 @@ export default function AntiDopingPage() {
         <p>
           Infinity Taekwondo enforces the official annual <em>WADA Prohibited List</em>. Substances and methods are banned under three universal criteria: (1) it enhances sports performance, (2) it poses an actual or potential health risk to the athlete, and (3) it violates the spirit of sport.
         </p>
-        <div className="grid sm:grid-cols-2 gap-3 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 space-y-1">
             <strong className="text-brand-red block">Banned at All Times (In &amp; Out of Competition)</strong>
             <ul className="list-disc pl-4 space-y-1 text-zinc-600 dark:text-zinc-400">
@@ -208,7 +208,7 @@ export default function AntiDopingPage() {
           <div className="flex items-center gap-2 font-bold text-zinc-900 dark:text-white text-sm">
             <Mail className="w-4 h-4 text-brand-red" /> Infinity TKD Anti-Doping Compliance Bureau
           </div>
-          <div className="grid sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-zinc-600 dark:text-zinc-400">
             <div>
               <span className="text-[11px] text-zinc-400 block">Clean Sport Inquiries &amp; TUEs:</span>
               <a href="mailto:antidoping@infinitytkd.com" className="inline-flex min-h-[32px] items-center text-brand-red font-bold hover:underline">

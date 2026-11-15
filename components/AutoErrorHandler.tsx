@@ -175,7 +175,7 @@ export function AutoErrorHandler() {
   return (
     <div
       aria-live="polite"
-      className="fixed top-20 sm:top-24 right-4 left-4 sm:left-auto sm:max-w-md z-[100] flex flex-col gap-2 pointer-events-none transition-all duration-300"
+      className="fixed top-[calc(5rem+env(safe-area-inset-top,0px))] sm:top-[calc(6rem+env(safe-area-inset-top,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] left-[calc(1rem+env(safe-area-inset-left,0px))] sm:left-auto sm:max-w-md z-[100] flex flex-col gap-2 pointer-events-none transition-all duration-300"
     >
       {notices.map((notice) => (
         <div

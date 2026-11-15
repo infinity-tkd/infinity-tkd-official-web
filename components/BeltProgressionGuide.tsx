@@ -525,7 +525,7 @@ export function BeltProgressionGuide({ forms = {}, syncHash = false, hideIntro =
                 {hangulWord(beltProgression[selectedIndex].koreanName)}
               </span>
 
-              <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-start relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start relative z-10">
                 {/* Left column: belt info & philosophy */}
                 <div className="lg:col-span-5 space-y-5 sm:space-y-6">
                   <div className="flex items-center gap-4">

@@ -46,10 +46,10 @@ export function BackToTop() {
       aria-label="Back to top of page"
       tabIndex={isVisible ? 0 : -1}
       className={cn(
-        'group fixed bottom-[calc(5rem+env(safe-area-inset-bottom,0px))] right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full',
+        'group fixed bottom-[calc(5rem+env(safe-area-inset-bottom,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] z-40 flex h-11 w-11 items-center justify-center rounded-full',
         'border border-zinc-200 bg-white/85 shadow-lg backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/85',
         'transition-[opacity,transform] duration-300 ease-out-expo touch-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red',
-        'lg:bottom-8 lg:right-8',
+        'lg:bottom-8 lg:right-[calc(2rem+env(safe-area-inset-right,0px))]',
         isVisible ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
       )}
     >

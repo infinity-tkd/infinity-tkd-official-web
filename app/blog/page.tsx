@@ -61,7 +61,7 @@ export default function BlogIndexPage() {
 
               {rest.length > 0 && (
                 // Two leftover posts fill a 2-column grid instead of leaving an empty third column.
-                <ul className={`grid gap-5 sm:gap-6 sm:grid-cols-2 ${rest.length === 2 ? '' : 'lg:grid-cols-3'}`}>
+                <ul className={`grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 ${rest.length === 2 ? '' : 'lg:grid-cols-3'}`}>
                   {rest.map((post) => (
                     <li key={post.slug}>
                       <PostCard post={post} headingLevel={2} />
