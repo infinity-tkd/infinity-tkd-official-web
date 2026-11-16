@@ -24,10 +24,11 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import matter from 'gray-matter'
+import { findMarkdownLinks, readPost, slugify, splitFrontMatter } from '@/lib/blogParse'
 import { describeImage } from '@/lib/imageUrl'
 import { MAX_UPLOAD_BYTES } from '@/lib/keystatic/prepareUpload'
 import { unsupportedMarkdocTags } from '@/lib/markdocTables'
+import { isSafeHref } from '@/lib/safeHref'
 
 const root = process.cwd()
 const errors: string[] = []
@@ -215,25 +216,31 @@ const BLOG_FIELDS = new Set(['title', 'description', 'date', 'updated', 'author'
 const slugs = new Set<string>()
 for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   const slug = path.basename(file, '.md')
-  let data: Record<string, unknown>
-  let body: string
-  try {
-    const parsed = matter(readFileSync(file, 'utf8'))
-    data = parsed.data
-    body = parsed.content
-  } catch (err) {
-    error(`${rel(file)}: front matter could not be read (${(err as Error).message.split('\n')[0]}). Quote values that contain ":"`)
+  if (slug !== slugify(slug)) error(`${rel(file)}: the file name must be a lowercase web address (letters, numbers, dashes). The website skips this post`)
+
+  // The same reader the website uses (lib/blogParse.ts), so "passes here" means "shows up on the site".
+  // It refuses front matter that would run code, files over 300 KB, and anything missing a required field or date.
+  const raw = readFileSync(file, 'utf8')
+  const front = splitFrontMatter(raw)
+  if (!front.ok) {
+    error(`${rel(file)}: ${front.reason}`)
     continue
   }
+  const { data, body } = front
   if (slugs.has(slug)) error(`${rel(file)}: duplicate post slug`)
   slugs.add(slug)
-  for (const field of ['title', 'description', 'date', 'category']) {
-    if (!data[field]) error(`${rel(file)}: front matter is missing "${field}"`)
+  const read = readPost(slug, raw)
+  if (!read.ok) error(`${rel(file)}: ${read.reason}. The website skips this post`)
+  else {
+    const seenHeadings = new Set<string>()
+    for (const heading of read.post.headings) {
+      if (seenHeadings.has(heading.id)) warn(`${rel(file)}: two headings make the same link (#${heading.id}). "On this page" jumps to the first one`)
+      seenHeadings.add(heading.id)
+    }
   }
   for (const key of Object.keys(data)) {
     if (!BLOG_FIELDS.has(key)) warn(`${rel(file)}: front matter "${key}" is not a field the content editor knows, so it will refuse to open this post`)
   }
-  if (data.date && Number.isNaN(new Date(String(data.date)).getTime())) error(`${rel(file)}: date "${data.date}" is not a valid date`)
   const cover = typeof data.cover === 'string' ? data.cover : undefined
   if (cover?.startsWith('/') && !publicFileExists(cover)) error(`${rel(file)}: cover "${cover}" is not in public/`)
   if (cover?.startsWith('/uploads/')) usedUploads.add(cover)
@@ -242,12 +249,17 @@ for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
     if (problem) error(`${rel(file)}: cover is not a usable picture link. ${problem}`)
   }
 
-  // Pictures inside the text: ![description](address)
-  for (const [, address] of body.matchAll(/!\[[^\]]*\]\(\s*<?([^)\s>]+)/g)) {
-    if (address.startsWith('/uploads/')) usedUploads.add(address)
-    if (address.startsWith('/') && ASSET.test(address) && !publicFileExists(address)) error(`${rel(file)}: picture "${address}" is not in public/`)
-    const problem = describeImage(address).problem
-    if (problem) error(`${rel(file)}: picture "${address.slice(0, 60)}" is not a usable picture link. ${problem}`)
+  // Pictures inside the text: ![description](address), and links: [text](address)
+  for (const { image, address, line } of findMarkdownLinks(body)) {
+    if (image) {
+      if (address.startsWith('/uploads/')) usedUploads.add(address)
+      if (address.startsWith('/') && ASSET.test(address) && !publicFileExists(address)) error(`${rel(file)}: picture "${address}" is not in public/`)
+      const problem = describeImage(address).problem
+      if (problem) error(`${rel(file)}: picture "${address.slice(0, 60)}" is not a usable picture link. ${problem}`)
+    } else if (!isSafeHref(address)) {
+      // Not dangerous (the website shows it as plain text), but the reader would find text where they expected a link.
+      warn(`${rel(file)}: line ${line}: the link "${address.slice(0, 60)}" is not allowed, so it shows as plain text. Links start with https://, mailto:, tel: or /`)
+    }
   }
 
   // The editor writes tables as Markdoc tags (the blog turns them into tables); other tags would show as plain text.
@@ -260,10 +272,18 @@ for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
 // 6. Pictures uploaded through the content editor (public/uploads)
 // ---------------------------------------------------------------------------------------------
 const publicDir = path.join(root, 'public')
+const UPLOAD_PICTURE_TYPES = new Set(['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif'])
 let uploadCount = 0
 for (const file of listFiles(path.join(publicDir, 'uploads'), '')) {
+  // Folder placeholders and the files Windows and macOS leave behind are not uploads.
+  if (/^(\.|Thumbs\.db$|desktop\.ini$)/i.test(path.basename(file))) continue
   uploadCount += 1
   const url = `/${path.relative(publicDir, file).replaceAll('\\', '/')}`
+  const extension = path.extname(file).slice(1).toLowerCase()
+  // Only pictures belong here. The website sends every file in this folder with a policy that stops it running
+  // anything when opened directly (config/uploadsPolicy.mjs), but an HTML or script file is still a mistake.
+  if (extension === 'svg') warn(`${url} is an SVG. An SVG can carry scripts and cannot be shrunk; the website shows it safely, but a PNG or JPG is better.`)
+  else if (!UPLOAD_PICTURE_TYPES.has(extension)) error(`${url} is not a picture (.${extension || 'no extension'}). Only JPG, PNG, WebP, GIF and AVIF pictures belong in public/uploads: delete it.`)
   const size = statSync(file).size
   const megabytes = (size / 1_000_000).toFixed(1)
   if (size > MAX_UPLOAD_BYTES * 3) error(`${url} is ${megabytes} MB. Every picture stays in the repository for good: shrink it, or use a link instead.`)

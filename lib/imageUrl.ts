@@ -399,6 +399,17 @@ export function resolveImageUrl(input: string | null | undefined): string {
   return describeImage(input).url ?? (input ?? '').trim()
 }
 
+/**
+ * The address to put in a link preview (og:image, twitter:image) or in structured data: a direct https address, or a
+ * path on this website. undefined when the picture cannot serve there, so the caller falls back to the site's own
+ * image: a link that cannot work (Facebook, a folder, a file on someone's computer...) would only put junk in the
+ * page's <head>, and a picture embedded in the text (data:) would put the whole file into it.
+ */
+export function metadataImageUrl(input: string | null | undefined): string | undefined {
+  const source = describeImage(input)
+  return source.url && source.kind !== 'data' ? source.url : undefined
+}
+
 // ---------------------------------------------------------------------------------------------
 // What to try, in what order
 // ---------------------------------------------------------------------------------------------

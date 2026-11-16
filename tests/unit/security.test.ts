@@ -3,7 +3,10 @@
  */
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
+import { NextRequest } from 'next/server.js'
 import nextConfig from '../../next.config.mjs'
+import { UPLOADS_CONTENT_SECURITY_POLICY } from '../../config/uploadsPolicy.mjs'
+import { proxy } from '@/proxy'
 import { buildCspHeader, editorContentSecurityPolicy } from '@/config/siteSettings'
 import { isEditorPath } from '@/lib/editorPath'
 import { EDITOR_SETTINGS, missingEditorSettings } from '@/lib/editorSetup'
@@ -44,9 +47,43 @@ describe('public pages: Content-Security-Policy', () => {
 
   it('is the same policy next.config.mjs sends for static files (the two lists must not drift apart)', async () => {
     const rules = await nextConfig.headers()
-    const sent = rules.flatMap((rule) => rule.headers).find((header) => header.key === 'Content-Security-Policy')
-    assert.ok(sent, 'next.config.mjs sets no Content-Security-Policy')
+    const siteWide = rules.find((rule) => rule.source === '/(.*)')
+    const sent = siteWide?.headers.find((header) => header.key === 'Content-Security-Policy')
+    assert.ok(sent, 'next.config.mjs sets no site-wide Content-Security-Policy')
     assert.deepEqual(directives(sent.value), csp)
+  })
+})
+
+describe('pictures saved through the editor (/uploads): opened directly, they may run nothing', () => {
+  const csp = directives(UPLOADS_CONTENT_SECURITY_POLICY)
+
+  it('has a policy that forbids scripts, frames and requests, and sandboxes the page', () => {
+    assert.deepEqual(csp['default-src'], ["'none'"])
+    assert.deepEqual(csp.sandbox, [], 'sandbox must list nothing: any allow-... would loosen it')
+    assert.ok(!UPLOADS_CONTENT_SECURITY_POLICY.includes('allow-'))
+    assert.ok(!UPLOADS_CONTENT_SECURITY_POLICY.includes('script-src'))
+  })
+
+  it('is sent by next.config.mjs after the site-wide policy, so that it is the one that applies', async () => {
+    const rules = await nextConfig.headers()
+    const index = rules.findIndex((rule) => rule.source === '/uploads/:path*')
+    assert.ok(index > rules.findIndex((rule) => rule.source === '/(.*)'), 'the /uploads rule must come after the site-wide rule')
+    assert.deepEqual(rules[index].headers, [{ key: 'Content-Security-Policy', value: UPLOADS_CONTENT_SECURITY_POLICY }])
+  })
+
+  it('is also sent by the proxy, which sees the file types the server does not hand out itself (.html, .avif...)', () => {
+    for (const file of ['/uploads/blog/x.html', '/uploads/x.avif', '/uploads/a/b/c.svg', '/uploads/blog/x.png']) {
+      const response = proxy(new NextRequest(`http://localhost${file}`))
+      assert.equal(response.headers.get('content-security-policy'), UPLOADS_CONTENT_SECURITY_POLICY, file)
+    }
+  })
+
+  it('does not weaken any page: the proxy still sends the normal policy everywhere else', () => {
+    for (const page of ['/', '/blog', '/blog/uploads', '/uploadsx/a.html', '/keystatic']) {
+      const header = proxy(new NextRequest(`http://localhost${page}`)).headers.get('content-security-policy') ?? ''
+      assert.notEqual(header, UPLOADS_CONTENT_SECURITY_POLICY, page)
+      assert.match(header, /script-src 'self'/, page)
+    }
   })
 })
 

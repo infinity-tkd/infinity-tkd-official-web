@@ -1,5 +1,6 @@
 import { collection, fields } from '@keystatic/core'
 import { optionalText, picture, requiredText } from './fields'
+import { insertedPictureName } from './prepareUpload'
 
 /**
  * content/blog/<slug>.md: the blog posts. Same file format the site has always used (front matter + Markdown),
@@ -45,7 +46,16 @@ export const posts = collection({
       options: {
         heading: [2, 3],
         codeBlock: false,
-        image: { directory: 'public/uploads/blog', publicPath: '/uploads/blog/' },
+        image: {
+          directory: 'public/uploads/blog',
+          publicPath: '/uploads/blog/',
+          // Safe, never-clashing file names (the editor's Image button would keep the original one).
+          transformFilename: (original) => insertedPictureName(original),
+          schema: {
+            alt: fields.text({ label: 'Picture description', description: 'Says what is in the picture, for people who cannot see it.' }),
+            title: fields.text({ label: 'Caption (optional)', description: 'Shown in small text under the picture.' }),
+          },
+        },
       },
     }),
   },

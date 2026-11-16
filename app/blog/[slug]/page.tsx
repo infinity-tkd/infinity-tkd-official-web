@@ -8,7 +8,7 @@ import { ShareButtons } from '@/components/blog/ShareButtons'
 import { TableOfContents } from '@/components/blog/TableOfContents'
 import { CtaBanner } from '@/components/ui/CtaBanner'
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
-import { resolveImageUrl } from '@/lib/imageUrl'
+import { metadataImageUrl } from '@/lib/imageUrl'
 import { formatPostDate, getAllPosts, getPostBySlug, getRelatedPosts, toMeta } from '@/lib/blog'
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, jsonLdString } from '@/lib/structuredData'
 import { fitTitle, titleForms } from '@/lib/seo'
@@ -31,8 +31,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   if (!post) return { title: 'Article not found' }
 
   const path = `/blog/${post.slug}`
-  // Link previews and search engines need the direct picture address, not a Drive/Dropbox share page.
-  const image = post.cover ? resolveImageUrl(post.cover.src) : '/opengraph-image'
+  // Link previews and search engines need the direct picture address, not a Drive/Dropbox share page. A cover that
+  // cannot serve there (a link that does not work, a picture embedded in the text) falls back to the site's own image.
+  const coverImage = post.cover ? metadataImageUrl(post.cover.src) : undefined
+  const image = coverImage ?? '/opengraph-image'
 
   return {
     // Long post titles drop the brand suffix rather than being cut off in search results.
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       authors: [post.author],
       section: post.category,
       tags: post.tags,
-      images: [{ url: image, alt: post.cover?.alt ?? post.title }],
+      images: [{ url: image, alt: coverImage ? (post.cover?.alt ?? post.title) : post.title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -77,7 +79,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       title: post.title,
       description: post.description,
       path,
-      image: post.cover ? resolveImageUrl(post.cover.src) : undefined,
+      image: post.cover ? metadataImageUrl(post.cover.src) : undefined,
       publishedAt: post.date,
       updatedAt: post.updated,
       author: post.author,

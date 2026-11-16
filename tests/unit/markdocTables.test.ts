@@ -65,6 +65,38 @@ describe('markdocTablesToGfm', () => {
   it('ignores attributes on the table tag', () => {
     assert.equal(markdocTablesToGfm('{% table width="100%" %}\n- A\n---\n- 1\n{% /table %}'), '| A |\n| --- |\n| 1 |')
   })
+
+  it('leaves a table that is never closed as it is', () => {
+    const text = 'Intro\n\n{% table %}\n- A\n---\n- 1\n\nMore text'
+    assert.equal(markdocTablesToGfm(text), text)
+  })
+
+  it('removes a table with no rows', () => {
+    assert.equal(markdocTablesToGfm('a\n{% table %}\n{% /table %}\nb'), 'a\n\nb')
+  })
+
+  // A regular expression over the whole text got quadratically slower with every unclosed tag: this much text took
+  // about 8 seconds, so a hostile or broken post could keep the build busy for minutes. Reading line by line is linear.
+  it('stays fast on a post made of tags that are never closed', () => {
+    const text = '{% table %}\n'.repeat(25_000) // about 300 KB, the biggest post the website reads
+    for (const run of [() => markdocTablesToGfm(text), () => unsupportedMarkdocTags(text)]) {
+      const start = process.hrtime.bigint()
+      run()
+      const ms = Number(process.hrtime.bigint() - start) / 1e6
+      assert.ok(ms < 1000, `took ${ms.toFixed(0)} ms`)
+    }
+  })
+
+  it('stays fast on very long lines and on many closed tables', () => {
+    const longLine = `{% table ${'x '.repeat(100_000)}%}\n- A\n{% /table %}`
+    const many = '{% table %}\n- A\n---\n- 1\n{% /table %}\n'.repeat(5_000)
+    for (const text of [longLine, many, `{% ${'%} '.repeat(50_000)}`]) {
+      const start = process.hrtime.bigint()
+      markdocTablesToGfm(text)
+      const ms = Number(process.hrtime.bigint() - start) / 1e6
+      assert.ok(ms < 1000, `took ${ms.toFixed(0)} ms`)
+    }
+  })
 })
 
 describe('unsupportedMarkdocTags', () => {

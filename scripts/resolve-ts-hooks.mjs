@@ -25,5 +25,9 @@ export async function resolve(specifier, context, nextResolve) {
     const file = findFile(base)
     if (file) return nextResolve(pathToFileURL(file).href, context)
   }
+  // Next.js's bundler finds "next/server" without an extension; Node's own resolution needs the ".js" (proxy.ts is tested).
+  if (/^next\/[\w-]+$/.test(specifier) && isFile(path.join(projectRoot, 'node_modules', `${specifier}.js`))) {
+    return nextResolve(`${specifier}.js`, context)
+  }
   return nextResolve(specifier, context)
 }

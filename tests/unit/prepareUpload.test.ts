@@ -4,7 +4,7 @@
  */
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { MAX_EDGE, MAX_UPLOAD_BYTES, UPLOAD_ACCEPT, formatBytes, safeUploadName, scaledSize, uploadExtension } from '@/lib/keystatic/prepareUpload'
+import { MAX_EDGE, MAX_UPLOAD_BYTES, UPLOAD_ACCEPT, formatBytes, insertedPictureName, safeUploadName, scaledSize, uploadExtension } from '@/lib/keystatic/prepareUpload'
 
 describe('uploadExtension', () => {
   it('accepts the picture types the website can show, in any letter case', () => {
@@ -55,6 +55,27 @@ describe('safeUploadName', () => {
     for (const original of ['../../etc/passwd.jpg', 'a b c.jpg', 'C:\\x\\y.jpg', 'a/b.jpg']) {
       assert.match(safeUploadName(original, 'jpg'), /^[a-z0-9]+(-[a-z0-9]+)*\.jpg$/, original)
     }
+  })
+})
+
+describe('insertedPictureName (pictures added inside a post)', () => {
+  it('makes the same safe, never-clashing name as the picture fields', () => {
+    assert.equal(insertedPictureName('My Photo (1).PNG', '3fa9c1'), 'my-photo-1-3fa9c1.png')
+    assert.equal(insertedPictureName('IMG_0001.jpeg', 'aaaaaa'), 'img-0001-aaaaaa.jpg')
+  })
+
+  it('gives two photos with the same name different names, so the second never replaces the first', () => {
+    assert.notEqual(insertedPictureName('team.jpg'), insertedPictureName('team.jpg'))
+  })
+
+  it('never contains a path, a space or a dot except the ending', () => {
+    for (const original of ['../../etc/passwd.png', 'a b c.jpg', 'C:\\x\\y.gif', '.htaccess', 'evil.php.png', 'noextension']) {
+      assert.match(insertedPictureName(original), /^[a-z0-9]+(-[a-z0-9]+)*\.[a-z0-9]{1,5}$/, original)
+    }
+  })
+
+  it('keeps an SVG ending, so the build check can report it (an SVG cannot be shrunk and may carry scripts)', () => {
+    assert.match(insertedPictureName('logo.svg', 'bbbbbb'), /^logo-bbbbbb\.svg$/)
   })
 })
 

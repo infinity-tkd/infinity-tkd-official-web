@@ -7,6 +7,9 @@
  * nothing else needs to change. The files can be written by hand or saved by the content
  * editor at /keystatic (lib/keystatic/blog.tsx lists the same front matter fields).
  *
+ * Reading ONE post (the front matter fields, the safety limits) is lib/blogParse.ts. It has no file access, so
+ * `npm run check:data` and the unit tests run exactly the code the website runs.
+ *
  * Front matter:
  *   title        (required) Post title
  *   description  (required) 1-2 sentence summary, used for cards and SEO (aim for <= 160 chars)
@@ -24,156 +27,12 @@
 import 'server-only'
 import fs from 'node:fs'
 import path from 'node:path'
-import matter from 'gray-matter'
-import { markdocTablesToGfm } from '@/lib/markdocTables'
+import { readPost, slugify, type BlogPost, type BlogPostMeta, type BlogCategory } from '@/lib/blogParse'
+
+export { slugify }
+export type { BlogHeading, BlogPost, BlogPostMeta, BlogCategory } from '@/lib/blogParse'
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
-const DEFAULT_AUTHOR = 'Infinity Taekwondo Coaching Team'
-const WORDS_PER_MINUTE = 200
-
-export interface BlogHeading {
-  id: string
-  text: string
-  level: 2 | 3
-}
-
-export interface BlogPostMeta {
-  slug: string
-  title: string
-  description: string
-  /** ISO date (YYYY-MM-DD) */
-  date: string
-  updated?: string
-  author: string
-  category: string
-  categorySlug: string
-  tags: string[]
-  cover?: { src: string; alt: string }
-  featured: boolean
-  readingMinutes: number
-}
-
-export interface BlogPost extends BlogPostMeta {
-  content: string
-  headings: BlogHeading[]
-}
-
-export interface BlogCategory {
-  name: string
-  slug: string
-  count: number
-}
-
-/** URL-safe slug. Shared by heading ids, the table of contents and category routes. */
-export function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9ក-៿぀-ヿ㐀-鿿가-힯]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-function stripInlineMarkdown(text: string): string {
-  return text
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-    .replace(/[*_`~]/g, '')
-    .trim()
-}
-
-function extractHeadings(markdown: string): BlogHeading[] {
-  const headings: BlogHeading[] = []
-  let inFence = false
-  for (const line of markdown.split(/\r?\n/)) {
-    if (/^\s*(```|~~~)/.test(line)) {
-      inFence = !inFence
-      continue
-    }
-    if (inFence) continue
-    const match = /^(#{2,3})\s+(.+?)\s*#*\s*$/.exec(line)
-    if (!match) continue
-    const text = stripInlineMarkdown(match[2])
-    const id = slugify(text)
-    if (id) headings.push({ id, text, level: match[1].length as 2 | 3 })
-  }
-  return headings
-}
-
-function readingMinutes(markdown: string): number {
-  const plain = markdown.replace(/```[\s\S]*?```/g, ' ').replace(/[#>*_`|-]/g, ' ')
-  const latinWords = plain.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length
-  const cjkChars = (plain.match(/[㐀-鿿가-힯ក-៿]/g) ?? []).length
-  // ~500 CJK/Khmer characters per minute vs 200 Latin words.
-  return Math.max(1, Math.round(latinWords / WORDS_PER_MINUTE + cjkChars / 500))
-}
-
-const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
-
-function toIsoDate(value: unknown): string | null {
-  // gray-matter parses unquoted YAML dates into Date objects.
-  const iso = value instanceof Date ? value.toISOString().slice(0, 10) : typeof value === 'string' ? value.trim() : ''
-  return ISO_DATE.test(iso) && !Number.isNaN(Date.parse(iso)) ? iso : null
-}
-
-function nonEmptyString(value: unknown): string | null {
-  return typeof value === 'string' && value.trim() ? value.trim() : null
-}
-
-function parsePost(slug: string, raw: string): { post: BlogPost; draft: boolean } | null {
-  let parsed: ReturnType<typeof matter>
-  try {
-    parsed = matter(raw)
-  } catch (err) {
-    const reason = err instanceof Error ? (err as Error & { reason?: string }).reason ?? err.message : String(err)
-    console.error(
-      `[blog] Skipping "${slug}.md": invalid YAML front matter (${reason}). ` +
-        'Tip: wrap any title or description that contains a colon (:) in double quotes.'
-    )
-    return null
-  }
-  const { data } = parsed
-  // The content editor saves tables as Markdoc tags; the page reads pipe tables (see lib/markdocTables.ts).
-  const content = markdocTablesToGfm(parsed.content)
-
-  const title = nonEmptyString(data.title)
-  const description = nonEmptyString(data.description)
-  const category = nonEmptyString(data.category)
-  const date = toIsoDate(data.date)
-  const missing = [
-    !title && 'title',
-    !description && 'description',
-    !category && 'category',
-    !date && 'date (YYYY-MM-DD)',
-  ].filter(Boolean)
-
-  if (missing.length > 0 || !title || !description || !category || !date) {
-    console.error(`[blog] Skipping "${slug}.md": missing or invalid front matter -> ${missing.join(', ')}`)
-    return null
-  }
-
-  const cover = nonEmptyString(data.cover)
-
-  return {
-    draft: data.draft === true,
-    post: {
-      slug,
-      title,
-      description,
-      date,
-      updated: toIsoDate(data.updated) ?? undefined,
-      author: nonEmptyString(data.author) ?? DEFAULT_AUTHOR,
-      category,
-      categorySlug: slugify(category),
-      tags: Array.isArray(data.tags) ? data.tags.filter((t): t is string => typeof t === 'string') : [],
-      cover: cover ? { src: cover, alt: nonEmptyString(data.coverAlt) ?? title } : undefined,
-      featured: data.featured === true,
-      readingMinutes: readingMinutes(content),
-      content,
-      headings: extractHeadings(content),
-    },
-  }
-}
 
 function loadAllPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return []
@@ -190,10 +49,13 @@ function loadAllPosts(): BlogPost[] {
     }
 
     try {
-      const parsed = parsePost(slug, fs.readFileSync(path.join(BLOG_DIR, file), 'utf8'))
-      if (!parsed) continue
-      if (parsed.draft && !includeDrafts) continue
-      posts.push(parsed.post)
+      const result = readPost(slug, fs.readFileSync(path.join(BLOG_DIR, file), 'utf8'))
+      if (!result.ok) {
+        console.error(`[blog] Skipping "${file}": ${result.reason}`)
+        continue
+      }
+      if (result.draft && !includeDrafts) continue
+      posts.push(result.post)
     } catch (err) {
       console.error(`[blog] Failed to read "${file}":`, err)
     }

@@ -1,17 +1,9 @@
 import { getAllPostMetas } from '@/lib/blog'
+import { escapeXml } from '@/lib/xml'
 import { siteSettings } from '@/config/siteSettings'
 
 // Generated at build time; redeploying publishes new posts to the feed.
 export const dynamic = 'force-static'
-
-function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;')
-}
 
 export function GET() {
   const baseUrl = siteSettings.brand.canonicalDomain

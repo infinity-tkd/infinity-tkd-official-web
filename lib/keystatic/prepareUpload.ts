@@ -83,6 +83,16 @@ export function safeUploadName(original: string, extension: string, random: stri
   return `${base || 'picture'}-${random}.${extension}`
 }
 
+/**
+ * The name for a picture added inside a post's text (the editor's own "Image" button keeps the original file name
+ * and does not go through prepareUpload). Same safe name as the picture fields, so "My Photo (1).PNG" becomes
+ * "my-photo-1-3fa9c1.png" and a second photo with the same name can never replace the first one.
+ */
+export function insertedPictureName(original: string, random?: string): string {
+  const extension = /\.([A-Za-z0-9]{1,5})$/.exec(original)?.[1]?.toLowerCase() ?? 'jpg'
+  return safeUploadName(original, extension === 'jpeg' ? 'jpg' : extension, random)
+}
+
 function randomSuffix(): string {
   const bytes = new Uint8Array(3)
   crypto.getRandomValues(bytes)

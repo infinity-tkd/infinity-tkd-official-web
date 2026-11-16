@@ -16,6 +16,7 @@ import {
   describeImage,
   imageAttempts,
   isOptimizableUrl,
+  metadataImageUrl,
   optimizedImageUrl,
   resolveImageUrl,
 } from '@/lib/imageUrl'
@@ -342,6 +343,34 @@ describe('ordinary addresses', () => {
     for (const text of ['%', 'http://', 'https://%zz', '://', '\u0000', 'a'.repeat(5000), 'https://exa mple.com/a.jpg']) {
       assert.doesNotThrow(() => describeImage(text), text.slice(0, 20))
     }
+  })
+})
+
+describe('metadataImageUrl (link previews and structured data)', () => {
+  it('gives the direct address for a share link, and a path on this website unchanged', () => {
+    assert.equal(metadataImageUrl(`https://drive.google.com/file/d/${DRIVE_ID}/view?usp=sharing`), DRIVE_THUMBNAIL)
+    assert.equal(metadataImageUrl('/uploads/blog/cover-3fa9c1.jpg'), '/uploads/blog/cover-3fa9c1.jpg')
+    assert.equal(metadataImageUrl('https://i.imgur.com/AbCdE12.jpg'), 'https://i.imgur.com/AbCdE12.jpg')
+  })
+
+  it('gives nothing for a picture that cannot serve there, so the site falls back to its own image', () => {
+    for (const link of [
+      'https://www.instagram.com/p/abc/', // a site that blocks other websites
+      'https://drive.google.com/drive/folders/abc123', // a folder
+      'C:\\Users\\me\\photo.jpg', // a file on someone\'s computer
+      'javascript:alert(1)',
+      'hello there',
+      '',
+      '   ',
+      null,
+      undefined,
+    ]) {
+      assert.equal(metadataImageUrl(link), undefined, String(link))
+    }
+  })
+
+  it('gives nothing for a picture embedded in the text: it would put the whole file into every page', () => {
+    assert.equal(metadataImageUrl(`data:image/png;base64,${'A'.repeat(5000)}`), undefined)
   })
 })
 

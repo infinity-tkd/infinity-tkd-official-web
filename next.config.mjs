@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 import path from 'path'
 import { OPTIMIZED_IMAGE_REMOTE_PATTERNS } from './config/imageHosts.mjs'
+import { UPLOADS_CONTENT_SECURITY_POLICY } from './config/uploadsPolicy.mjs'
 
 const isFigma = Boolean(process.env.FIGMA)
 
@@ -93,6 +94,12 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        // Pictures saved through the content editor are only ever shown inside <img>. Opening one directly must not be
+        // able to run anything, even if it is an SVG or HTML file committed by hand (later rule wins over the one above).
+        source: '/uploads/:path*',
+        headers: [{ key: 'Content-Security-Policy', value: UPLOADS_CONTENT_SECURITY_POLICY }],
       },
       {
         // The service worker script must never be served from a cache, or a fixed worker could not reach visitors.
