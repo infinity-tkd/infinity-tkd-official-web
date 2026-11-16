@@ -14,9 +14,14 @@
  * Content edited in the content editor (/keystatic) is covered too. Every data module reads its content/*.json
  * file and checks it as it loads (lib/content/validate.ts), so a wrong value shows up here as "could not be
  * loaded" with the file and field named. On top of that:
- *   - picture links that cannot work (Facebook, Instagram, a folder, a web page...) in any `image` or `cover`
- *   - blog front matter the editor does not know, and Markdoc tags the website cannot show
- *   - uploaded pictures (public/uploads) that are too big, or that nothing uses any more (warning only)
+ *   - picture links that cannot work (Facebook, Instagram, a folder, a web page...) in any `image`, `cover` or `socialImage`
+ *   - blog posts the website would skip (front matter that runs code or cannot be read, missing fields, a date that is not
+ *     YYYY-MM-DD, a file over 300 KB), front matter the editor does not know, and "read next" choices that do not exist
+ *   - content blocks that cannot work: a tag that is not closed or not known, a video with no YouTube link, a button
+ *     without a usable address, a question with no question (errors); options the website ignores (warning only)
+ *   - links in a post that are not allowed and would show as plain text (warning only)
+ *   - uploaded pictures (public/uploads): files that are not pictures or are far too big (errors), pictures that are
+ *     too big, SVG files, or that nothing uses any more (warnings)
  *   - an award that names a student ID with no matching student (warning only)
  *
  * `npm run build` runs this first, so a bad edit stops the build and the previous live site stays up.

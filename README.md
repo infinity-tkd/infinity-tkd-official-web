@@ -63,7 +63,7 @@ content/                 Content the team edits: blog/*.md and *.json (coaches, 
 context/                 Language + scroll-nav providers
 data/                    Typed modules the pages import (they read content/*.json), plus code-only content (courses, locations, library ...)
   translations/          UI strings: en.ts (source of truth), km.ts, zh.ts, ko.ts
-docs/                    editing-guide.md (for the team) and editor-setup.md (one-time setup for the owner)
+docs/                    editing-guide.md (for the team), editor-setup.md (one-time setup for the owner), blog-security.md
 hooks/, lib/             Hooks and server/client utilities (lib/keystatic = editor forms, lib/imageUrl.ts = picture links)
 keystatic.config.tsx     The content editor at /keystatic (Keystatic: local files under `npm run dev`, GitHub on the live site)
 proxy.ts                 Request filtering + security headers (Next.js 16 "proxy", formerly middleware)
@@ -145,16 +145,25 @@ category: Training
 tags: [poomsae, kids]
 cover: /blog/my-photo.jpg            # optional; a file in public/ or any picture link (Google Drive, Dropbox, Imgur, https://...)
 coverAlt: Describe the photo
+coverCaption: Photo by the team      # optional line under the cover
 featured: false                      # true pins it as the lead story on /blog
 draft: false                         # true hides it in production (visible in `npm run dev`)
+unlisted: false                      # true keeps it out of the list, categories, sitemap and feed (not private: the link still works)
+tableOfContents: auto                # auto (3+ headings) | show | hide
+related: [other-post-slug]           # up to 3 posts to suggest at the bottom
+seoTitle: Title for Google           # optional overrides for search results and link previews
+seoDescription: Description for Google
+socialImage: /blog/share.jpg         # optional picture for link previews (default: the cover)
 ---
 
 Your article in Markdown. Use `##` and `###` headings; they build the table of contents.
+Content blocks (callout, YouTube video, button, pull quote, question and answer) are Markdoc tags that the editor
+inserts for you; see `lib/blogBlocks.ts` for how they are written.
 ```
 
-Posts automatically appear on `/blog`, in their category archive, on the homepage teaser, in `sitemap.xml` and in the RSS feed (`/blog/feed.xml`). A post with invalid front matter is skipped and the reason is printed in the terminal/build log. Publishing = commit + deploy.
+Posts automatically appear on `/blog`, in their category archive, on the homepage teaser, in `sitemap.xml` and in the RSS feed (`/blog/feed.xml`). A post with invalid front matter is skipped and the reason is printed in the terminal/build log (and `npm run check:data` stops the build). Publishing = commit + deploy.
 
-`lib/blog.ts` is the only file that knows posts come from Markdown. To move to a CMS or database later, re-implement `loadAllPosts()` there; pages and components do not change.
+`lib/blog.ts` loads the files and `lib/blogParse.ts` reads one post; they are the only files that know posts come from Markdown. To move to a CMS or database later, re-implement `loadAllPosts()` there; pages and components do not change. Posts are read as untrusted text: see `docs/blog-security.md`.
 
 ---
 
