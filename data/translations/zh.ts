@@ -352,6 +352,18 @@ export const zh: Translations = {
     viewTrophyWall: '查看完整荣誉奖杯墙',
     recentGraduates: '最新晋级学员',
   },
+  // News Page and the home page news section
+  news: {
+    badge: '新闻与公告',
+    heroTitle1: '最新',
+    heroTitle2: '动态',
+    heroSubtitle: '来自金边 Infinity 跆拳道馆的升带考核、赛事活动、课程调整和最新消息。',
+    homeTitle: '道馆新鲜事',
+    viewAll: '全部新闻',
+    opensInNewTab: '（在新标签页打开）',
+    emptyTitle: '暂时没有公告',
+    emptyText: '请稍后再来查看升带考核、赛事活动和道馆的最新消息。',
+  },
   // Achievements Page
   achievements: {
     badge: '荣誉殿堂与奖牌榜',
@@ -456,6 +468,7 @@ export const zh: Translations = {
   },
   // Footer
   footer: {
+    news: '新闻与公告',
     tagline:
       '提供融合运动科学与自由式跆拳道艺术的世界级训练，赋能学员实现无限潜能。',
     colAcademy: '学院与训练',

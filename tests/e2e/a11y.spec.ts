@@ -17,6 +17,8 @@ const PAGES = [
   '/pricing',
   '/contact',
   '/community',
+  '/achievements',
+  '/news',
   '/blog',
   '/blog/poomsae-vs-kyorugi',
   '/incubator',

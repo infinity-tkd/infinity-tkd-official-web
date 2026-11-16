@@ -3,6 +3,7 @@ import { achievements } from '@/lib/keystatic/achievements'
 import { ageGroups } from '@/lib/keystatic/ageGroups'
 import { posts } from '@/lib/keystatic/blog'
 import { coaches } from '@/lib/keystatic/coaches'
+import { news } from '@/lib/keystatic/news'
 import { pricing } from '@/lib/keystatic/pricing'
 import { BrandMark } from '@/lib/keystatic/BrandMark'
 import { schedule } from '@/lib/keystatic/schedule'
@@ -31,11 +32,11 @@ export default config({
   ui: {
     brand: { name: 'Infinity Taekwondo', mark: () => <BrandMark /> },
     navigation: {
-      Writing: ['posts'],
+      Writing: ['posts', 'news'],
       People: ['coaches', 'students', 'achievements'],
       'Memberships and classes': ['pricing', 'ageGroups', 'schedule'],
     },
   },
   collections: { posts },
-  singletons: { coaches, students, achievements, schedule, pricing, ageGroups },
+  singletons: { news, coaches, students, achievements, schedule, pricing, ageGroups },
 })

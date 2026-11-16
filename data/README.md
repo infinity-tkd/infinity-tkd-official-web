@@ -4,7 +4,7 @@ Site content lives in three places. There is no database: changing content means
 
 | Kind | Where | Edited with |
 | --- | --- | --- |
-| **Content the team edits** (blog, coaches, students, achievements, schedule, pricing, age groups and class types) | `content/` (JSON and Markdown), read by small typed modules in this folder | The content editor at `/keystatic` (see [`docs/editing-guide.md`](../docs/editing-guide.md)), or by hand |
+| **Content the team edits** (blog, news, coaches, students, achievements, schedule, pricing, age groups and class types) | `content/` (JSON and Markdown), read by small typed modules in this folder | The content editor at `/keystatic` (see [`docs/editing-guide.md`](../docs/editing-guide.md)), or by hand |
 | **Curriculum library** (poomsae, kicks, hosinsul, history, rules) | `data/library/`, typed TypeScript | Code |
 | **Everything else** (courses, locations, belts, team, collaborations, navigation, interface text) | `data/*.ts`, `config/`, `data/translations/` | Code |
 
@@ -23,7 +23,8 @@ npm run test:unit    # fast tests: picture links, upload helpers, Markdown table
 
 | Page | Content |
 | --- | --- |
-| Home | `belts.ts` (Road to Black Belt), `content/achievements.json` (records), `locations.ts` (branches), latest posts from `content/blog/` |
+| Home | `belts.ts` (Road to Black Belt), `content/achievements.json` (records), `locations.ts` (branches), latest posts from `content/blog/`, latest announcements from `content/news.json` |
+| `/news` | `content/news.json` |
 | `/academy` | `academy.ts` (programs), `content/ageDivisions.json` (age groups and class formats, via `ageDivisions.ts`), `content/schedule.json` (timetable) |
 | `/pricing` (the "Memberships" page) | `content/pricing.json`, `content/ageDivisions.json` |
 | `/locations` | `locations.ts` |
@@ -145,6 +146,14 @@ the picture:
   button, pull quote, question and answer) are Markdoc tags too, read by `lib/blogBlocks.ts` and shown by
   `components/blog/PostBody.tsx`. `npm run check:data` stops the build for a block that cannot work.
 - Blog security (JavaScript front matter refused, link rules, the `/uploads` policy...): `docs/blog-security.md`.
-- Every person shown on the site (students, promotions, award winners) needs `permissionToPublish` ticked in the editor
-  (a parent's or guardian's for a child). The build stops on an entry without it.
+- **Students are short entries**: a first name or initials, a photo, a belt and a short note. No surname, age or story
+  is stored or shown (`data/students.ts`, `data/achievements.ts`); `npm run check:data` warns about a name that looks
+  like a full name.
+- Every person shown on the site (students, promotions, award winners) needs `permissionToPublish` in the editor
+  (a parent's or guardian's for a child), see `lib/content/permission.ts`. It is `"confirmed"` when ticked, or
+  `"to-confirm"` for the entries that were live before permission was recorded: those stay live, nothing says they were
+  confirmed, and `check:data` counts them on every build. An entry with neither stops the build.
+- **News** (`content/news.json`, read by `lib/news.ts` and `data/news.ts`): short announcements for the home page
+  (latest three, hidden when there are none) and `/news`. Picture links go through the picture helper (Google Drive
+  share links work); the link must pass `lib/safeHref.ts`; Khmer, Chinese and Korean versions fall back to English.
 - Use a database only for data that users create: form submissions, bookings, memberships, payments.

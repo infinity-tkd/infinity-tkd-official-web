@@ -18,7 +18,31 @@ The first time, someone has to finish a one-time setup so that you can log in. T
 3. Change it, then click **Save** (top right).
 4. Wait. The website updates **by itself in about 2 to 5 minutes**. You do not have to do anything else.
 
-Every Save is kept in GitHub as a saved version. Nothing is ever lost, and a developer can bring back an old version.
+**There is no "publish" step and no preview.** Save goes straight to the live website (read "How a change goes live"
+below). Every Save is kept in GitHub as a saved version. Nothing is ever lost, and a developer can bring back an old
+version.
+
+> **Still to do by the owner: students' permission.** The 25 students who were already on the website
+> (6 spotlights, 4 promotions and 15 medal winners) are still shown, now as short entries with a first name only. Nobody
+> has confirmed their permission to publish yet. See **Students** below for what to do.
+
+---
+
+## How a change goes live
+
+You save **straight to the main version of the website**. There is no second copy to approve first.
+
+1. You click **Save**. The editor saves your change in the website's GitHub project.
+2. Vercel (the company that hosts the website) notices the change and **builds the website again**.
+3. Before anything goes live, the build **checks** your change: a content check (required fields, valid choices,
+   pictures, links, blocks, student permission) and a type check. This takes part of the build, so it is automatic.
+4. **If the checks pass**, the new website replaces the old one. This takes **a few minutes** (usually 2 to 5). Refresh
+   the page to see it.
+5. **If a check fails**, nothing goes live: **the old website stays online**, exactly as it was. Vercel sends a failure
+   message that names the file and the field to fix. Fix it in the editor and Save again.
+
+So a wrong edit can delay a change, but it cannot break the live website. To see what is happening, open the project
+on Vercel and look at **Deployments**: a green dot is live, a red one is a failed check with the reason.
 
 ---
 
@@ -27,8 +51,9 @@ Every Save is kept in GitHub as a saved version. Nothing is ever lost, and a dev
 | Menu | What you change | Where visitors see it |
 | --- | --- | --- |
 | **Writing > Blog posts** | Articles | Blog page, home page, search engines |
+| **Writing > News** | Short announcements: a grading date, a closure, an event | News page, home page |
 | **People > Coaches and team** | Coach photos and details | Community page |
-| **People > Students** | Student spotlights and recent promotions | Community page |
+| **People > Students** | Student spotlights and recent promotions (short entries) | Community page |
 | **People > Achievements and medals** | Headline numbers, medals and awards | Achievements page, home page |
 | **Memberships and classes > Pricing and membership plans** | Plans, prices, comparison table, questions | Memberships page (`/pricing`) |
 | **Memberships and classes > Age groups and class types** | The age groups (Little Tigers, Cadets...) and class types | Memberships page and Academy page |
@@ -166,22 +191,55 @@ Each coach has a name, role, rank, team, years of experience, a **photo**, a sho
 **specialties** and **certifications**, a **philosophy** quote and optional social media addresses.
 The **ID** is made from the name: do not change it after the coach is published.
 
+### News
+
+Short announcements: a grading date, a holiday closure, a tournament, a new class. Not articles (for those, write a
+blog post). The newest **three** are shown on the home page and **all** of them on the **News** page. If there are none,
+the home page shows no news section and the News page says there is nothing right now.
+
+Click **Add** for a new announcement.
+
+| Field | What it means |
+| --- | --- |
+| **Headline** | A few words, up to 100 characters. |
+| **Date** | The date of the announcement. The newest date is shown first, whatever order the list is in. |
+| **Short text** | One to three sentences, up to 400 characters. Line breaks are kept. |
+| **Picture (optional)** | Upload one, or paste a link. A **Google Drive share link works**: see "Pictures" above. |
+| **Link (optional)** | Where "Read more" goes: a page of this website like `/contact` or `/blog/my-post`, a full address (`https://...`), `mailto:` or `tel:`. |
+| **Link words (optional)** | The words on the link. Empty shows "Read more". |
+| **Translations (optional)** | Khmer, Chinese and Korean versions of the headline, text and link words. Anything left empty is shown in English. |
+
+**Remove an announcement when it is out of date** (the bin icon): nothing removes it by itself.
+
 ### Students
 
-Two lists: **Student spotlights** (the big cards) and **Recent promotions**.
+Two lists: **Student spotlights** (cards) and **Recent promotions**. Entries are **short on purpose**:
 
-**Permission to publish.** Every student shown on the website needs this tick, and the editor will not save an
+- **Name to show**: a **first name or initials only** (*Sophea*, or *Sophea P.* if two students share a first name).
+  **Never a full name for anyone under 18.** For an adult, a full name only if they agree.
+- **A photo**, the **belt** and, for a spotlight, a **short note** (one or two sentences, under 200 characters).
+- No surname, no age, no school and no story are shown. The website no longer has a "Read story" window.
+
+The same goes for **Students who won** under *Achievements and medals*: a first name or initials, with the belt and
+the result.
+
+**Permission to publish.** Every student shown on the website needs this tick, and the editor will not save a **new**
 entry without it. Tick it only when you have **written permission** to show that person's name and picture: from a
-**parent or guardian** if the student is under 18, or from the student. The tick itself is not shown on the website.
-If it is missing, the list says so next to the name.
+**parent or guardian** if the student is under 18, or from the student. The tick is not shown on the website.
 
-For children, it is best to use a first name or initials only.
+**Still to do by the owner: confirm the permission of the 25 students who were already on the website**
+(6 spotlights, 4 promotions and 15 medal winners). They are shown, as short entries, because they were live before the
+tick existed, but **nobody has confirmed their permission yet**, and nothing in the project says they were confirmed.
+In the editor their names carry the mark *(!) permission still to confirm*. For each one: ask the parent or guardian
+(or the student, if an adult), and when you have a yes, open the entry and **tick Permission to publish**. If you do
+not get a yes, **remove the entry**. Every website update also lists how many are still waiting, so it is not forgotten.
 
 ### Achievements and medals
 
 - **Headline numbers**: the four big numbers (for example *200+ Total Competitions*).
 - **Medals and awards**: one item per result. **The first ones are shown on the home page**, so keep the best at the
-  top. Inside each award, **Students who won** lists the athletes (each needs **Permission to publish**).
+  top. Inside each award, **Students who won** lists the athletes by a first name or initials (each needs
+  **Permission to publish**; see **Students** above for the 25 that still need confirming).
 
 ### Age groups and class types
 
@@ -208,11 +266,13 @@ One item per class: **Day**, **Time** (write it like `4:30 PM - 5:30 PM`), **Cla
 ## Your edits are checked
 
 Before the website is updated, a computer checks every edit: that required fields are filled in, that choices are
-valid, that pictures and links make sense, and that no student is missing the permission tick.
+valid, that pictures and links make sense, that blocks in a post are finished, and that no **new** student entry is
+missing the permission tick. (A student whose name looks like a full name only gets a warning, not a stop, because an
+adult may agree to be named.)
 
 **If something is wrong, the new version is not published and the old website stays online.** Vercel (the company
 that hosts the site) sends a message saying the update failed. The message says which file and which field to fix.
-Fix it in the editor and Save again.
+Fix it in the editor and Save again. (See "How a change goes live" above.)
 
 ---
 

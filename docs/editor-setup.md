@@ -128,9 +128,10 @@ The easiest way is to use your password manager's generator (choose 40 character
 
 ## Straight to the website, or check first?
 
-The editor can save in two ways. **Please decide which one the team will use.**
+The editor can save in two ways. **The owner has chosen Option A: straight to the website.** Nothing extra has to be
+set up for it. Option B stays available if the team ever wants a check-first step.
 
-### Option A: straight to the website (simplest)
+### Option A: straight to the website (chosen)
 
 Each **Save** goes to the main version of the website, and the site updates by itself in 2 to 5 minutes.
 
@@ -158,8 +159,9 @@ To **force** everyone to use Option B, turn on a rule on GitHub: project **Setti
 (or **Branches > Branch protection rules**) for the main branch, with **Require a pull request before merging**.
 The editor then tells people to make a new branch when they save.
 
-Our suggestion: start with **Option A**. Switch to B later if the team grows or if changes become more risky.
-You can change your mind at any time. No code change is needed.
+The team starts with **Option A**. Switch to B later if the team grows or if changes become more risky.
+You can change your mind at any time. No code change is needed. (With Option A a post in the editor has no
+**Preview** button: a preview needs a branch, which is Option B.)
 
 ---
 

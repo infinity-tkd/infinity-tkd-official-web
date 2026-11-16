@@ -352,6 +352,18 @@ export const ko: Translations = {
     viewTrophyWall: '전체 트로피 월 보기',
     recentGraduates: '최근 유단자 및 승급자',
   },
+  // News Page and the home page news section
+  news: {
+    badge: '소식 및 공지',
+    heroTitle1: '최신',
+    heroTitle2: '소식',
+    heroSubtitle: '프놈펜 인피니티 태권도 도장의 승급 심사, 행사, 수업 일정 변경과 최신 소식을 전해 드립니다.',
+    homeTitle: '도장의 새로운 소식',
+    viewAll: '전체 소식',
+    opensInNewTab: '(새 탭에서 열림)',
+    emptyTitle: '아직 공지가 없습니다',
+    emptyText: '승급 심사, 행사, 도장 소식은 곧 이곳에서 확인하실 수 있습니다.',
+  },
   // Achievements Page
   achievements: {
     badge: '명예의 전당 및 메달 기록',
@@ -456,6 +468,7 @@ export const ko: Translations = {
   },
   // Footer
   footer: {
+    news: '소식 및 공지',
     tagline:
       '운동 과학과 자유품새 예술이 결합된 세계적 수준의 무도 교육을 제공하여, 수련생들이 신체적·정신적 한계를 넘어 무한한 잠재력을 실현하도록 돕습니다.',
     colAcademy: '교육 및 수련 과정',

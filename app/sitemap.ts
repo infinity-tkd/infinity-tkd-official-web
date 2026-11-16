@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { libraryItems, libraryCategoriesMeta } from '@/data/library'
 import { siteSettings } from '@/config/siteSettings'
+import { newsItems } from '@/data/news'
 import { getAllPostMetas, getCategories } from '@/lib/blog'
 
 type Entry = MetadataRoute.Sitemap[number]
@@ -35,6 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/join-team', 0.7, 'monthly'),
     entry('/contact', 0.8, 'yearly'),
     entry('/blog', 0.85, 'weekly', latestPostDate),
+    // The newest announcement's date, when there is one.
+    entry('/news', 0.7, 'weekly', newsItems[0]?.date),
     entry('/safeguarding', 0.6, 'yearly'),
     entry('/anti-doping', 0.6, 'yearly'),
     entry('/equality', 0.6, 'yearly'),
