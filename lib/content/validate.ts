@@ -9,6 +9,7 @@
  *
  * `npm run check:data` loads every data module, so it runs these checks too.
  */
+import { permissionStateOf } from './permission'
 
 /** A content file is wrong. The message is plain English and says where. */
 export class ContentError extends Error {
@@ -114,11 +115,12 @@ export class Node {
   }
 
   /**
-   * Every person shown on the website needs permission to publish (a parent's or guardian's for a child). The editor
-   * will not save an entry without the tick; this stops a hand-edited file from putting one live without it.
+   * Every person shown on the website needs permission to publish (a parent's or guardian's for a child), see
+   * lib/content/permission.ts. The editor will not save a new entry without the tick; this stops a hand-edited file
+   * from putting one live without it. An entry marked "to-confirm" (live before permission was recorded) is allowed.
    */
   requirePermission(): void {
-    if (!this.get('permissionToPublish').bool()) {
+    if (permissionStateOf(this.get('permissionToPublish').value) === null) {
       this.fail('has no "Permission to publish" tick. Tick it in the editor, or remove this entry, before it can go on the website')
     }
   }

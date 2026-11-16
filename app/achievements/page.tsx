@@ -866,7 +866,6 @@ export default function AchievementsPage() {
                       style={{ backgroundColor: selectedCompetitor.beltHex }}
                     />
                     <span>{selectedCompetitor.beltRank}</span>
-                    {selectedCompetitor.age && <span>• Age {selectedCompetitor.age}</span>}
                   </div>
                 </div>
               </div>

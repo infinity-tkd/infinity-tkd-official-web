@@ -8,7 +8,7 @@ import {
   TROPHY_CATEGORIES,
   TROPHY_MEDALS,
 } from '@/lib/content/options'
-import { NEEDS_PERMISSION, optionalText, options, permissionToPublish, picture, requiredText, textList, translations } from './fields'
+import { SHORT_NAME_HELP, optionalText, options, permissionMark, permissionToPublish, picture, requiredText, textList, translations } from './fields'
 
 /** content/achievements.json, read by data/achievements.ts (the numbers and medals on /achievements and the home page). */
 export const achievements = singleton({
@@ -54,7 +54,7 @@ export const achievements = singleton({
         image: picture('achievements', 'Picture (optional)'),
         competitors: fields.array(
           fields.object({
-            name: requiredText('Name'),
+            name: requiredText('Name to show', { description: SHORT_NAME_HELP }),
             permissionToPublish: permissionToPublish(),
             studentId: optionalText('Student ID (optional)', {
               description: 'The ID of this person on the Students page, if they have an entry there.',
@@ -67,7 +67,6 @@ export const achievements = singleton({
               options: BELT_COLOURS.map(({ label, value }) => ({ label, value })),
               defaultValue: '#000000',
             }),
-            age: fields.integer({ label: 'Age (optional)', validation: { min: 3, max: 99 } }),
             score: optionalText('Score (optional)'),
             highlight: optionalText('Highlight (optional)', { multiline: true }),
             image: picture('achievements', 'Photo (optional)'),
@@ -79,7 +78,8 @@ export const achievements = singleton({
           }),
           {
             label: 'Students who won',
-            itemLabel: (props) => `${props.fields.name.value || 'New student'}${props.fields.permissionToPublish.value ? '' : NEEDS_PERMISSION}`,
+            description: 'Show a first name or initials only, with the belt and the result. No surname or age.',
+            itemLabel: (props) => `${props.fields.name.value || 'New student'}${permissionMark(props.fields.permissionToPublish.value)}`,
           }
         ),
         translations: translations({

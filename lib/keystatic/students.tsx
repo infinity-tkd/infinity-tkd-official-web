@@ -1,6 +1,6 @@
 import { fields, singleton } from '@keystatic/core'
 import { BELT_COLOURS, STUDENT_CATEGORIES } from '@/lib/content/options'
-import { NEEDS_PERMISSION, namedItem, optionalText, options, permissionToPublish, picture, requiredText, textList, translations } from './fields'
+import { SHORT_NAME_HELP, namedItem, optionalText, options, permissionMark, permissionToPublish, picture, requiredText, translations } from './fields'
 
 const beltColour = () =>
   fields.select({
@@ -9,7 +9,10 @@ const beltColour = () =>
     defaultValue: '#FFFFFF',
   })
 
-/** content/students.json, read by data/students.ts (the student spotlights and recent promotions on /community). */
+/**
+ * content/students.json, read by data/students.ts (the student spotlights and recent promotions on /community).
+ * Entries are short on purpose: a first name or initials, a photo and a short note. No surname, age or story.
+ */
 export const students = singleton({
   label: 'Students',
   path: 'content/students',
@@ -17,43 +20,33 @@ export const students = singleton({
   schema: {
     spotlights: fields.array(
       fields.object({
-        name: namedItem('Name shown on the website'),
+        name: namedItem('Name to show', SHORT_NAME_HELP),
         permissionToPublish: permissionToPublish(),
-        age: fields.integer({ label: 'Age', validation: { isRequired: true, min: 3, max: 99 } }),
         beltRank: requiredText('Belt rank', { description: 'For example 2nd Dan Black Belt, or Red Belt' }),
         beltHex: beltColour(),
-        joinedYear: fields.text({
-          label: 'Year joined',
-          validation: { isRequired: true, pattern: { regex: /^\d{4}$/, message: 'Write a year like 2021' } },
-        }),
         category: fields.select({ label: 'Group', options: options(STUDENT_CATEGORIES), defaultValue: 'Athlete of the Month' }),
         image: picture('students', 'Photo', { isRequired: true }),
-        title: requiredText('Headline', { description: 'One line that sums up the story.' }),
-        story: requiredText('Story', { multiline: true }),
-        quote: requiredText('Quote', { multiline: true }),
-        achievements: textList('Achievements', 'Achievement'),
-        favoriteTechnique: optionalText('Favourite technique (optional)'),
-        trainingGoal: optionalText('Training goal (optional)'),
+        note: fields.text({
+          label: 'Short note',
+          description: 'One or two short sentences about this student, under 200 characters. No surname, age or school.',
+          multiline: true,
+          validation: { isRequired: true, length: { max: 200 } },
+        }),
         translations: translations({
           beltRank: optionalText('Belt rank'),
-          title: optionalText('Headline'),
-          story: optionalText('Story', { multiline: true }),
-          quote: optionalText('Quote', { multiline: true }),
-          achievements: textList('Achievements', 'Achievement'),
-          favoriteTechnique: optionalText('Favourite technique'),
-          trainingGoal: optionalText('Training goal'),
+          note: optionalText('Short note', { multiline: true }),
         }),
       }),
       {
         label: 'Student spotlights',
-        description: 'The order here is the order on the website. Drag to change it.',
+        description: 'Short entries: a first name or initials, a photo and a short note. The order here is the order on the website. Drag to change it.',
         slugField: 'name',
-        itemLabel: (props) => `${props.fields.name.value.name || 'New student'}${props.fields.permissionToPublish.value ? '' : NEEDS_PERMISSION}`,
+        itemLabel: (props) => `${props.fields.name.value.name || 'New student'}${permissionMark(props.fields.permissionToPublish.value)}`,
       }
     ),
     promotions: fields.array(
       fields.object({
-        studentName: requiredText('Student name'),
+        studentName: requiredText('Name to show', { description: SHORT_NAME_HELP }),
         permissionToPublish: permissionToPublish(),
         promotedTo: requiredText('New belt', { description: 'For example Blue Belt (Oh Jang)' }),
         beltHex: beltColour(),
@@ -65,7 +58,7 @@ export const students = singleton({
         label: 'Recent promotions',
         description: 'Newest first.',
         itemLabel: (props) =>
-          `${props.fields.studentName.value || 'New promotion'}${props.fields.promotedTo.value ? `: ${props.fields.promotedTo.value}` : ''}${props.fields.permissionToPublish.value ? '' : NEEDS_PERMISSION}`,
+          `${props.fields.studentName.value || 'New promotion'}${props.fields.promotedTo.value ? `: ${props.fields.promotedTo.value}` : ''}${permissionMark(props.fields.permissionToPublish.value)}`,
       }
     ),
   },

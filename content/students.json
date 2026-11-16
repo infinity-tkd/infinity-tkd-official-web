@@ -2,159 +2,87 @@
   "spotlights": [
     {
       "name": {
-        "name": "Sokha Rith",
+        "name": "Sokha",
         "slug": "spotlight-1"
       },
-      "permissionToPublish": true,
-      "age": 19,
+      "permissionToPublish": "to-confirm",
       "beltRank": "2nd Dan Black Belt",
       "beltHex": "#000000",
-      "joinedYear": "2019",
       "category": "Athlete of the Month",
       "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2864&auto=format&fit=crop",
-      "title": "From Timid Beginner to National Team Poomsae Medalist",
-      "story": "Sokha joined Infinity Taekwondo as a quiet 14-year-old with zero athletic background. Through 5 years of relentless daily dedication, he mastered all 8 Taegeuk forms and Koryo, going on to earn Gold at the Cambodia National Championships. He now assists Master Sovan in coaching the junior poomsae squad.",
-      "quote": "The Dojang taught me that failure is simply data. Every missed kick is a chance to refine your angle and balance.",
-      "achievements": [
-        "National Gold Medalist (Recognized Poomsae 2025)",
-        "Certified 2nd Dan Kukkiwon Black Belt",
-        "Junior Team Assistant Coach",
-        "Over 600+ Mat Training Hours Logged"
-      ],
-      "favoriteTechnique": "Koryo Poomsae & Double Side Kick (Yeop Chagi)",
-      "trainingGoal": "Qualify for the Asian Taekwondo Championships 2027",
+      "note": "From Timid Beginner to National Team Poomsae Medalist",
       "translations": []
     },
     {
       "name": {
-        "name": "Chanthy Chea",
+        "name": "Chanthy",
         "slug": "spotlight-2"
       },
-      "permissionToPublish": true,
-      "age": 11,
+      "permissionToPublish": "to-confirm",
       "beltRank": "Red Belt",
       "beltHex": "#EF2F38",
-      "joinedYear": "2021",
       "category": "Junior Champion",
       "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2787&auto=format&fit=crop",
-      "title": "Junior Champions Team Captain & 540 Kick Pioneer",
-      "story": "At just 11 years old, Chanthy has become one of the youngest students at Infinity TKD to cleanly land a 540 kick on the spring floor. Her academic focus at school and leadership among younger white belt students make her a standout role model in our Little Warriors program.",
-      "quote": "I love breaking boards with flying kicks because it shows that anything is possible if you practice hard!",
-      "achievements": [
-        "Youth Games Gold Medalist (Junior Sparring -32kg)",
-        "Top Academic Honor Student at School",
-        "Infinity Demonstration Team Lead Aerialist",
-        "Perfect 100% Dojang Attendance Record 2025"
-      ],
-      "favoriteTechnique": "540 Kick & Flying Side Kick",
-      "trainingGoal": "Earn 1st Poom Black Belt before age 12",
+      "note": "Junior Champions Team Captain & 540 Kick Pioneer",
       "translations": []
     },
     {
       "name": {
-        "name": "Dara Chan",
+        "name": "Dara",
         "slug": "spotlight-3"
       },
-      "permissionToPublish": true,
-      "age": 24,
+      "permissionToPublish": "to-confirm",
       "beltRank": "1st Dan Black Belt",
       "beltHex": "#000000",
-      "joinedYear": "2020",
       "category": "Black Belt Graduate",
       "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop",
-      "title": "Action Cinema Stunt Performer & Tricking Specialist",
-      "story": "Dara leveraged Infinity Taekwondo’s Creative Studio and acrobatic training to transition into professional stunt work, performing in high-profile martial arts short films and commercial campaigns across Southeast Asia.",
-      "quote": "Infinity TKD gives you both the authentic traditional discipline and the modern stage to share your artistry with the world.",
-      "achievements": [
-        "Lead Action Stunt Performer in 3 Southeast Asian Film Projects",
-        "1st Dan Kukkiwon Certified Black Belt",
-        "Over 1.5M+ Collective Views on Martial Action Shorts",
-        "Regional Tricking Battle Runner-Up"
-      ],
-      "favoriteTechnique": "Corkscrew Twist & Aerial Hook Kick",
-      "trainingGoal": "Direct Cambodia’s first international martial arts action series",
+      "note": "Action Cinema Stunt Performer & Tricking Specialist",
       "translations": []
     },
     {
       "name": {
-        "name": "Leakhena Sin",
+        "name": "Leakhena",
         "slug": "spotlight-4"
       },
-      "permissionToPublish": true,
-      "age": 16,
+      "permissionToPublish": "to-confirm",
       "beltRank": "1st Poom Black Belt",
       "beltHex": "#000000",
-      "joinedYear": "2022",
       "category": "Athlete of the Month",
       "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=2662&auto=format&fit=crop",
-      "title": "Freestyle Musical Poomsae Champion",
-      "story": "Leakhena blends classical World Taekwondo stances with dynamic musical choreography. Her synchronized routines in national tournaments have earned high praise from international referees.",
-      "quote": "When you perform Poomsae to music, every block and kick becomes poetry in motion.",
-      "achievements": [
-        "Gold Medalist - National Youth Freestyle Poomsae 2025",
-        "1st Poom Kukkiwon Certificate",
-        "Team Cambodia Youth Squad Representative",
-        "Captain of the Youth Creative Demo Team"
-      ],
-      "favoriteTechnique": "720 Tornado Kick into Butterfly Twist",
-      "trainingGoal": "Compete in the World Taekwondo Poomsae Championships",
+      "note": "Freestyle Musical Poomsae Champion",
       "translations": []
     },
     {
       "name": {
-        "name": "Rathana Sam",
+        "name": "Rathana",
         "slug": "spotlight-5"
       },
-      "permissionToPublish": true,
-      "age": 29,
+      "permissionToPublish": "to-confirm",
       "beltRank": "Blue Belt",
       "beltHex": "#0042EA",
-      "joinedYear": "2023",
       "category": "Transformation",
       "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2787&auto=format&fit=crop",
-      "title": "Tech Executive to Dojang Warrior: 25kg Transformation",
-      "story": "Working long hours in front of a computer left Rathana feeling drained and out of shape. Enrolling in adult evening classes at our Kouk Khleang branch, he rebuilt his cardiovascular stamina, lost 25kg, and developed lifelong mental resilience.",
-      "quote": "Martial arts gave me my life and clarity back. Stepping onto the mats resets my mind completely after intense workdays.",
-      "achievements": [
-        "25kg Weight Loss & Tendon Health Transformation",
-        "Graduated White to Blue Belt with Honors",
-        "Completed 150 Consecutive Dojang Training Sessions",
-        "Kouk Khleang Adult Cohort Class Representative"
-      ],
-      "favoriteTechnique": "Taegeuk 5 (Oh Jang) & Roundhouse Kick (Dollyo Chagi)",
-      "trainingGoal": "Earn 1st Dan Black Belt by 2027",
+      "note": "Tech Executive to Dojang Warrior: 25kg Transformation",
       "translations": []
     },
     {
       "name": {
-        "name": "Vannak Seng",
+        "name": "Vannak",
         "slug": "spotlight-6"
       },
-      "permissionToPublish": true,
-      "age": 8,
+      "permissionToPublish": "to-confirm",
       "beltRank": "Green Belt",
       "beltHex": "#09BB00",
-      "joinedYear": "2024",
       "category": "Junior Champion",
       "image": "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=2787&auto=format&fit=crop",
-      "title": "Little Warriors Discipline & Focus Honor Award",
-      "story": "Vannak joined the Little Warriors program with excess energy and difficulty focusing in school. Under the patient guidance of Instructor Sothea, he channeled his energy into martial precision and now leads class warm-ups with pride.",
-      "quote": "I bow to my teacher and my parents because respect makes you strong!",
-      "achievements": [
-        "Little Warriors Honor Roll Award 2025",
-        "Fastest Belt Promotion from Yellow to Green Belt",
-        "Junior Sparring Friendship Cup Gold",
-        "100% Respect & Etiquette Score in Testing"
-      ],
-      "favoriteTechnique": "Axe Kick (Naeryeo Chagi) & Board Break",
-      "trainingGoal": "Become a Black Belt like Master Keo Moni",
+      "note": "Little Warriors Discipline & Focus Honor Award",
       "translations": []
     }
   ],
   "promotions": [
     {
-      "studentName": "Vanna Meas",
-      "permissionToPublish": true,
+      "studentName": "Vanna",
+      "permissionToPublish": "to-confirm",
       "promotedTo": "1st Dan Black Belt",
       "beltHex": "#000000",
       "date": "March 2026",
@@ -162,8 +90,8 @@
       "poomsaeDemonstrated": "Taegeuk 1-8 & Koryo"
     },
     {
-      "studentName": "Sophea Pich",
-      "permissionToPublish": true,
+      "studentName": "Sophea",
+      "permissionToPublish": "to-confirm",
       "promotedTo": "Red Belt (Pal Jang)",
       "beltHex": "#EF2F38",
       "date": "March 2026",
@@ -171,8 +99,8 @@
       "poomsaeDemonstrated": "Taegeuk 7 & 8"
     },
     {
-      "studentName": "Kimleang Seng",
-      "permissionToPublish": true,
+      "studentName": "Kimleang",
+      "permissionToPublish": "to-confirm",
       "promotedTo": "Blue Belt (Oh Jang)",
       "beltHex": "#0042EA",
       "date": "February 2026",
@@ -180,8 +108,8 @@
       "poomsaeDemonstrated": "Taegeuk 5 & 6"
     },
     {
-      "studentName": "Borey Kem",
-      "permissionToPublish": true,
+      "studentName": "Borey K.",
+      "permissionToPublish": "to-confirm",
       "promotedTo": "Green Belt (Sam Jang)",
       "beltHex": "#09BB00",
       "date": "February 2026",

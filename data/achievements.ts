@@ -3,8 +3,9 @@
  * content/achievements.json, which the content editor (/keystatic) saves; this module checks that file and hands
  * the pages the same lists as always. The first awards in the list are the ones the home page features.
  *
- * Every student named under an award needs "Permission to publish" (a parent's or guardian's for a child): an entry
- * without the tick stops the build, so it can never go live by accident.
+ * Every student named under an award needs "Permission to publish" (a parent's or guardian's for a child), see
+ * lib/content/permission.ts: an entry with no tick at all stops the build, so it can never go live by accident. A
+ * student is shown by a first name or initials only, with no surname or age.
  */
 import raw from '../content/achievements.json' with { type: 'json' }
 import { ACHIEVEMENT_TYPES, MEDALS, TROPHY_CATEGORIES, TROPHY_MEDALS } from '@/lib/content/options'
@@ -12,13 +13,13 @@ import { compact, file, translationsOf } from '@/lib/content/validate'
 
 export interface StudentCompetitor {
   id?: string
+  /** A first name or initials only, never a full name. */
   name: string
   studentId?: string
   medal: 'Gold' | 'Silver' | 'Bronze' | 'Special Honor' | 'Finalist'
   division: string
   beltRank: string
   beltHex: string
-  age?: number
   score?: string
   highlight?: string
   image?: string
@@ -92,7 +93,6 @@ export const tournamentAchievements: TrophyRecord[] = content
           division: student.get('division').text(),
           beltRank: student.get('beltRank').text(),
           beltHex: student.get('beltHex').colour(),
-          age: student.get('age').optionalNumber(),
           score: student.get('score').optionalText(),
           highlight: student.get('highlight').optionalText(),
           image: student.get('image').optionalText(),

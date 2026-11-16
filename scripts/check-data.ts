@@ -23,6 +23,8 @@
  *   - uploaded pictures (public/uploads): files that are not pictures or are far too big (errors), pictures that are
  *     too big, SVG files, or that nothing uses any more (warnings)
  *   - an award that names a student ID with no matching student (warning only)
+ *   - a student shown by what looks like a full name, and how many student entries still have their "Permission to
+ *     publish" to confirm (warnings only)
  *
  * `npm run build` runs this first, so a bad edit stops the build and the previous live site stays up.
  */
@@ -31,6 +33,8 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { collectBlocks } from '@/lib/blogBlocks'
 import { BLOG_FIELDS, findMarkdownLinks, readPost, slugify, splitFrontMatter } from '@/lib/blogParse'
+import { looksLikeFullName } from '@/lib/content/names'
+import { countToConfirm } from '@/lib/content/permission'
 import { describeImage } from '@/lib/imageUrl'
 import { MAX_UPLOAD_BYTES } from '@/lib/keystatic/prepareUpload'
 import { isSafeHref } from '@/lib/safeHref'
@@ -330,6 +334,30 @@ for (const award of modules.has('data/students.ts') ? awards : []) {
       warn(`award "${award.year} ${award.tournament}": ${student.name} points at student ID "${student.studentId}", which is not on the Students page`)
     }
   }
+}
+
+// ---------------------------------------------------------------------------------------------
+// 8. Students: short names only, and permission still to confirm
+// ---------------------------------------------------------------------------------------------
+// A student is shown by a first name or initials ("Sophea", "Borey K."), never a full name: a child must not be
+// identifiable by name. This only warns, because an adult may agree to be named in full.
+const shownNames: { where: string; name: string }[] = [
+  ...((modules.get('data/students.ts') as { athleteSpotlights?: { name: string }[]; recentPromotions?: { studentName: string }[] } | undefined)?.athleteSpotlights ?? []).map((student) => ({ where: 'Students > spotlights', name: student.name })),
+  ...((modules.get('data/students.ts') as { recentPromotions?: { studentName: string }[] } | undefined)?.recentPromotions ?? []).map((promotion) => ({ where: 'Students > promotions', name: promotion.studentName })),
+  ...awards.flatMap((award) => (award.studentCompetitors ?? []).map((student) => ({ where: `Achievements > "${award.year} ${award.tournament}"`, name: student.name }))),
+]
+for (const { where, name } of shownNames) {
+  if (looksLikeFullName(name)) warn(`${where}: "${name}" looks like a full name. Show a first name or initials only, and never a full name for anyone under 18`)
+}
+
+// Entries that were on the website before permission was recorded stay live, but nobody has confirmed them yet.
+let toConfirm = 0
+for (const name of ['students', 'achievements']) {
+  const path = `content/${name}.json`
+  if (existsSync(path)) toConfirm += countToConfirm(JSON.parse(readFileSync(path, 'utf8')))
+}
+if (toConfirm > 0) {
+  warn(`${toConfirm} student entries (spotlights, promotions and award winners) are live but their "Permission to publish" is still to confirm. The owner has to confirm it with each parent, guardian or adult, then tick the box (docs/editing-guide.md)`)
 }
 
 // ---------------------------------------------------------------------------------------------

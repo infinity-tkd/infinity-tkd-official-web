@@ -2,8 +2,13 @@
  * The student spotlights and recent promotions (/community). They live in content/students.json, which the content
  * editor (/keystatic) saves; this module checks that file and hands the pages the same lists as always.
  *
- * Every person listed needs "Permission to publish" (a parent's or guardian's for a child). The tick is saved with
- * the entry and checked here: an entry without it stops the build, so it can never go live by accident.
+ * Entries are short on purpose: a first name or initials, a photo and a short note. The website shows no surname, age
+ * or story, so a child is never identifiable by name (docs/editing-guide.md says how to write a name).
+ *
+ * Every person listed needs "Permission to publish" (a parent's or guardian's for a child), see
+ * lib/content/permission.ts: an entry with no tick at all stops the build, so it can never go live by accident. An
+ * entry that was live before permission was recorded is marked "to-confirm" and `npm run check:data` reminds
+ * everyone how many are still waiting.
  */
 import raw from '../content/students.json' with { type: 'json' }
 import { STUDENT_CATEGORIES } from '@/lib/content/options'
@@ -11,19 +16,13 @@ import { compact, file, translationsOf } from '@/lib/content/validate'
 
 export interface StudentSpotlight {
   id: string
+  /** A first name or initials only, never a full name. */
   name: string
-  age: number
   beltRank: string
   beltHex: string
-  joinedYear: string
-  title: string
-  story: string
-  quote: string
-  achievements: string[]
+  note: string
   image: string
   category: 'Athlete of the Month' | 'Black Belt Graduate' | 'Junior Champion' | 'Transformation'
-  favoriteTechnique?: string
-  trainingGoal?: string
   translations?: {
     km?: Partial<Omit<StudentSpotlight, 'id' | 'translations'>>
     zh?: Partial<Omit<StudentSpotlight, 'id' | 'translations'>>
@@ -33,6 +32,7 @@ export interface StudentSpotlight {
 
 export interface StudentMilestone {
   id: string
+  /** A first name or initials only, never a full name. */
   studentName: string
   promotedTo: string
   beltHex: string
@@ -51,26 +51,14 @@ export const athleteSpotlights: StudentSpotlight[] = content
     return compact({
       id: student.get('name').get('slug').text(),
       name: student.get('name').get('name').text(),
-      age: student.get('age').number(),
       beltRank: student.get('beltRank').text(),
       beltHex: student.get('beltHex').colour(),
-      joinedYear: student.get('joinedYear').text(),
-      title: student.get('title').text(),
-      story: student.get('story').text(),
-      quote: student.get('quote').text(),
-      achievements: student.get('achievements').textList(),
+      note: student.get('note').text(),
       image: student.get('image').text(),
       category: student.get('category').oneOf(STUDENT_CATEGORIES),
-      favoriteTechnique: student.get('favoriteTechnique').optionalText(),
-      trainingGoal: student.get('trainingGoal').optionalText(),
       translations: translationsOf(student.get('translations'), {
         beltRank: 'text',
-        title: 'text',
-        story: 'text',
-        quote: 'text',
-        achievements: 'list',
-        favoriteTechnique: 'text',
-        trainingGoal: 'text',
+        note: 'text',
       }) as StudentSpotlight['translations'],
     })
   })

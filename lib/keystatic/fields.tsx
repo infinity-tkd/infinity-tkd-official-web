@@ -62,34 +62,61 @@ export const textList = (label: string, itemLabel: string, description?: string)
     itemLabel: (props) => props.value || itemLabel,
   })
 
+/** Help for every field that shows a student's name: short names only. */
+export const SHORT_NAME_HELP =
+  'A first name or initials only, for example Sophea or Sophea P. Never a full name for anyone under 18. For an adult, use a full name only if they agree.'
+
 /** Added to an entry's name in the list while its "Permission to publish" tick is missing, so the problem is visible. */
 export const NEEDS_PERMISSION = '  (!) permission to publish not ticked: cannot be saved'
+/** Added to an entry that was live before permission was recorded and has not been confirmed yet. */
+export const TO_CONFIRM = '  (!) permission still to confirm'
+
+/** The mark to add to an entry's name in the list for the state of its permission tick. */
+export const permissionMark = (state: string) => (state === 'confirmed' ? '' : state === 'to-confirm' ? TO_CONFIRM : NEEDS_PERMISSION)
 
 /**
- * "Permission to publish": every entry that shows a person's name or picture must have it, so it cannot be saved
- * without the tick (and the website build refuses an entry without it). For a child, the permission is the parent's
- * or guardian's. Not shown on the website.
+ * "Permission to publish": every entry that shows a person's name or picture must have it, so a new entry cannot be
+ * saved without the tick (and the website build refuses an entry without it). For a child, the permission is the
+ * parent's or guardian's. Not shown on the website.
+ *
+ * Saved as "confirmed" when ticked. An entry that was live before permission was recorded is saved as "to-confirm":
+ * it stays as it is until someone ticks the box, and nothing says it was confirmed (lib/content/permission.ts).
  */
 export const permissionToPublish = () => {
   const label = 'Permission to publish'
-  const base = fields.checkbox({ label, defaultValue: false })
+  // A plain form field to build on (a text field would carry the extras of a slug field). Every part is replaced below.
+  const base = fields.checkbox({ label })
+  const parse = (value: unknown): string => {
+    if (value === true) return 'confirmed'
+    return value === 'confirmed' || value === 'to-confirm' ? value : ''
+  }
   return {
     ...base,
-    validate(value: boolean) {
-      if (!value) throw new Error(`${label}: tick the box to confirm we have permission`)
+    defaultValue: () => '',
+    parse,
+    serialize: (value: string) => ({ value: value === '' ? undefined : value }),
+    reader: { parse },
+    validate(value: string) {
+      if (value !== 'confirmed' && value !== 'to-confirm') throw new Error(`${label}: tick the box to confirm we have permission`)
       return value
     },
-    Input(props: { value: boolean; onChange(value: boolean): void; forceValidation: boolean }) {
+    Input(props: { value: string; onChange(value: string): void; forceValidation: boolean }) {
       return (
         <Flex direction="column" gap="regular">
-          <Checkbox isSelected={props.value} onChange={props.onChange}>
+          <Checkbox isSelected={props.value === 'confirmed'} onChange={(ticked) => props.onChange(ticked ? 'confirmed' : '')}>
             {label}
           </Checkbox>
           <Text size="small" color="neutral">
             Tick only if we have written permission to show this person's name and picture on the website: from a parent or guardian
             if they are under 18, or from the person themselves. Not shown on the website.
           </Text>
-          {props.forceValidation && !props.value && <FieldMessage>Tick the box to confirm we have permission, or remove this entry.</FieldMessage>}
+          {props.value === 'to-confirm' && (
+            <FieldMessage>
+              Permission not confirmed yet. This person was on the website before permission was recorded here. Ask the parent or
+              guardian (or the person, if an adult), then tick the box. Until then the entry stays on the website as it is.
+            </FieldMessage>
+          )}
+          {props.forceValidation && props.value === '' && <FieldMessage>Tick the box to confirm we have permission, or remove this entry.</FieldMessage>}
         </Flex>
       )
     },
@@ -100,9 +127,9 @@ export const permissionToPublish = () => {
  * The name field of an item that other parts of the website point at (a coach, a plan, an award). It also makes the
  * ID the website uses inside: filled in automatically from the name, and never to be changed once published.
  */
-export const namedItem = (label: string) =>
+export const namedItem = (label: string, description?: string) =>
   fields.slug({
-    name: { label, validation: { isRequired: true } },
+    name: { label, description, validation: { isRequired: true } },
     slug: {
       label: 'ID (used inside the website)',
       description: 'Made from the name. Do not change it after the item is published: other parts of the website refer to it.',
