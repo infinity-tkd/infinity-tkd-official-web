@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { slugify } from '@/lib/blog'
+import { SafeImage } from '@/components/SafeImage'
 
 /** Flattens React children to plain text so headings can derive their anchor id. */
 function textOf(node: React.ReactNode): string {
@@ -102,13 +103,11 @@ const components: Components = {
       {children}
     </pre>
   ),
+  // SafeImage understands share links (Google Drive, Dropbox, Imgur...), so a link pasted into a post shows the picture.
   img: ({ src, alt }) => (
-    // eslint-disable-next-line @next/next/no-img-element -- intrinsic size is unknown for inline content images
-    <img
+    <SafeImage
       src={typeof src === 'string' ? src : undefined}
       alt={alt ?? ''}
-      loading="lazy"
-      decoding="async"
       className="my-8 w-full rounded-2xl border border-zinc-200 dark:border-zinc-800"
     />
   ),

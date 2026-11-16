@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ChevronRight, Clock, UserRound } from 'lucide-react'
 import { MarkdownContent } from '@/components/blog/MarkdownContent'
@@ -8,6 +7,8 @@ import { PostCard } from '@/components/blog/PostCard'
 import { ShareButtons } from '@/components/blog/ShareButtons'
 import { TableOfContents } from '@/components/blog/TableOfContents'
 import { CtaBanner } from '@/components/ui/CtaBanner'
+import { OptimizedImage } from '@/components/ui/OptimizedImage'
+import { resolveImageUrl } from '@/lib/imageUrl'
 import { formatPostDate, getAllPosts, getPostBySlug, getRelatedPosts, toMeta } from '@/lib/blog'
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, jsonLdString } from '@/lib/structuredData'
 import { fitTitle, titleForms } from '@/lib/seo'
@@ -30,7 +31,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   if (!post) return { title: 'Article not found' }
 
   const path = `/blog/${post.slug}`
-  const image = post.cover?.src ?? '/opengraph-image'
+  // Link previews and search engines need the direct picture address, not a Drive/Dropbox share page.
+  const image = post.cover ? resolveImageUrl(post.cover.src) : '/opengraph-image'
 
   return {
     // Long post titles drop the brand suffix rather than being cut off in search results.
@@ -75,7 +77,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       title: post.title,
       description: post.description,
       path,
-      image: post.cover?.src,
+      image: post.cover ? resolveImageUrl(post.cover.src) : undefined,
       publishedAt: post.date,
       updatedAt: post.updated,
       author: post.author,
@@ -143,7 +145,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Cover */}
           {post.cover && (
             <div className="relative mt-8 sm:mt-10 aspect-[16/9] overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-900">
-              <Image
+              <OptimizedImage
                 src={post.cover.src}
                 alt={post.cover.alt}
                 fill

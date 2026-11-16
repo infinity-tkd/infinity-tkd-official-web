@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { preconnect } from 'react-dom'
+import { describeImage, imageAttempts } from '@/lib/imageUrl'
 
 export interface SafeImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src?: string
@@ -41,9 +42,35 @@ function unsplashSrcSet(src: string | undefined) {
   }
 }
 
+/** One address to try. `remote` pictures come from another website that this site does not control. */
+interface Attempt {
+  src: string | undefined
+  srcSet?: string
+  remote: boolean
+}
+
+/**
+ * The addresses to try for `src`, best first (lib/imageUrl.ts has the details). Files on this site, Unsplash
+ * photos and YouTube thumbnails are shown exactly as they always were. A share link (Google Drive, Dropbox, Imgur...)
+ * becomes its direct picture address and goes through the image optimizer first, then straight from its own host.
+ * A link that cannot work (Facebook, a folder...) has no attempts, so the fallback photo shows without a request.
+ */
+function attemptsFor(src: string | undefined): Attempt[] {
+  const source = describeImage(src)
+  if (source.kind === 'empty') return [{ src, remote: false }]
+  if (!source.url) return []
+  if (source.kind === 'local' || source.kind === 'data' || source.kind === 'unsplash' || source.kind === 'youtube') {
+    return [{ src, remote: false }]
+  }
+  return imageAttempts(source).map((attempt) => ({ src: attempt.src, srcSet: attempt.srcSet, remote: true }))
+}
+
 /**
  * SafeImage: resilient image with an automatic fallback.
- * - Swaps to `fallbackSrc` if the photo or its CDN fails, so no broken-image icon shows.
+ * - Understands the links editors paste (Google Drive, Dropbox, Imgur, OneDrive...) and shows the picture itself.
+ *   Those pictures are resized and cached by the server when their host is on the allow-list (config/imageHosts.mjs),
+ *   and loaded straight from their own host, without a referrer and in a box that does not jump, when it is not.
+ * - Swaps to the next address, and finally to `fallbackSrc`, if the photo or its host fails, so no broken-image icon shows.
  * - Lazy-loads by default; `priority` loads eagerly for above-the-fold (LCP) images.
  * - Unsplash photos get a responsive srcSet. Pass `sizes` (e.g. "48px" for a thumbnail) when the
  *   image is not roughly full width on phones and half width on desktop.
@@ -55,36 +82,43 @@ export function SafeImage({
   className,
   priority = false,
   sizes,
+  style,
+  referrerPolicy,
   ...props
 }: SafeImageProps) {
-  const [imgSrc, setImgSrc] = React.useState<string | undefined>(src)
-  const [hasError, setHasError] = React.useState<boolean>(false)
+  const attempts = React.useMemo(() => attemptsFor(src), [src])
+  const [attempt, setAttempt] = React.useState(0)
 
   React.useEffect(() => {
-    setImgSrc(src)
-    setHasError(false)
+    setAttempt(0)
   }, [src])
 
+  // After the last address has failed, the fallback photo (when there is one).
+  const last = attempts.length - 1
+  const current: Attempt =
+    attempt < attempts.length ? attempts[attempt] : fallbackSrc ? { src: fallbackSrc, remote: false } : (attempts[last] ?? { src: undefined, remote: false })
+
   const handleError = () => {
-    if (!hasError && fallbackSrc && imgSrc !== fallbackSrc) {
-      setHasError(true)
-      setImgSrc(fallbackSrc)
-    }
+    if (attempt < attempts.length && (attempt < last || fallbackSrc)) setAttempt(attempt + 1)
   }
 
-  const srcSet = unsplashSrcSet(imgSrc)
+  const srcSet = current.srcSet ?? unsplashSrcSet(current.src)
 
   // An above-the-fold photo from Unsplash: open the connection while the page is still being parsed, so the
   // image (often the page's largest element) does not also wait for a DNS lookup and TLS handshake. React puts
   // the hint in <head> during the server render.
-  if (priority && imgSrc && UNSPLASH.test(imgSrc)) preconnect('https://images.unsplash.com')
+  if (priority && current.src && UNSPLASH.test(current.src)) preconnect('https://images.unsplash.com')
+
+  // A picture from another website has an unknown shape: until it loads, hold a 4:3 box (then the real shape),
+  // so the page does not jump. Ignored when the caller sets the size itself.
+  const reservesSpace = current.remote && props.width === undefined && props.height === undefined && style?.aspectRatio === undefined
 
   return (
     // A plain img on purpose: Unsplash resizes on its own CDN (the srcSet above), and the fallback swap
     // needs the element's own error event.
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={imgSrc}
+      src={current.src}
       srcSet={srcSet}
       sizes={srcSet ? (sizes ?? DEFAULT_SIZES) : sizes}
       alt={alt}
@@ -92,6 +126,8 @@ export function SafeImage({
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}
       decoding="async"
+      referrerPolicy={current.remote ? 'no-referrer' : referrerPolicy}
+      style={reservesSpace ? { aspectRatio: 'auto 4 / 3', ...style } : style}
       className={className}
       {...props}
     />

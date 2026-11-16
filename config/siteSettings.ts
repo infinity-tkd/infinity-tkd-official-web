@@ -255,7 +255,13 @@ export const siteSettings: SiteSettings = {
         scriptSrc: ["'self'", ...(process.env.NODE_ENV === 'production' ? [] : ["'unsafe-eval'"]), "'unsafe-inline'"],
         // Fonts: Montserrat/Kantumruy are self-hosted by next/font; only Pretendard (Korean) comes from jsDelivr.
         styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
-        imgSrc: ["'self'", 'data:', 'blob:', 'https://images.unsplash.com', 'https://source.unsplash.com', 'https://i.ytimg.com', 'https://img.youtube.com'],
+        // Pictures: any https address. Editors paste links from Google Drive, Dropbox, Imgur and other sites
+        // (see lib/imageUrl.ts), and no list of hosts could keep up with that. What this gives up: if a script
+        // ever ran on a page, it could send data out in a picture request to any host. Nothing in the content
+        // can add HTML or scripts (Markdown is rendered without raw HTML), `connect-src` below stays closed to
+        // other hosts, and pictures from hosts that are not on config/imageHosts.mjs are loaded by the visitor's
+        // own browser with no referrer. Keep this list the same as the img-src in next.config.mjs.
+        imgSrc: ["'self'", 'data:', 'blob:', 'https:'],
         fontSrc: ["'self'", 'https://cdn.jsdelivr.net', 'data:'],
         connectSrc: ["'self'", 'https://cdn.jsdelivr.net'],
         frameSrc: ["'self'", 'https://www.youtube-nocookie.com', 'https://www.youtube.com', 'https://www.google.com', 'https://maps.google.com'],
