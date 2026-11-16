@@ -72,6 +72,10 @@ const nextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  // `next build` type-checks the whole project. Keep it on: together with `npm run check:data` (run first by
+  // `npm run build`) it is what stops a bad content edit from going live, because Vercel keeps the previous
+  // deployment when a build fails.
+  typescript: { ignoreBuildErrors: false },
   images: {
     // Qualities that <Image quality={...}> may request. Values not listed here are coerced to 75.
     qualities: [60, 65, 70, 75],
