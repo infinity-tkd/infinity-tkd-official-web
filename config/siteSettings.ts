@@ -361,9 +361,22 @@ export const siteSettings: SiteSettings = {
 export const getHeadquartersFullAddress = () =>
   `${siteSettings.contact.headquartersAddress.street}, ${siteSettings.contact.headquartersAddress.district}, ${siteSettings.contact.headquartersAddress.city}, ${siteSettings.contact.headquartersAddress.country}`
 
-/** Build formatted CSP header string */
-export function buildCspHeader(isFigma = Boolean(process.env.FIGMA)): string {
+/**
+ * What the content editor (/keystatic) needs on top of the public policy: its own font from Google Fonts, the
+ * GitHub API it saves through, and permission to preview whatever image link an editor pastes. The public pages
+ * never get these.
+ */
+export const editorContentSecurityPolicy = {
+  styleSrc: ['https://fonts.googleapis.com'],
+  fontSrc: ['https://fonts.gstatic.com'],
+  imgSrc: ['https:'],
+  connectSrc: ['https://api.github.com'],
+}
+
+/** Build formatted CSP header string. `editor` adds what the content editor needs (see above). */
+export function buildCspHeader(isFigma = Boolean(process.env.FIGMA), { editor = false }: { editor?: boolean } = {}): string {
   const csp = siteSettings.security.headers.contentSecurityPolicy
+  const extra = editor ? editorContentSecurityPolicy : { styleSrc: [], fontSrc: [], imgSrc: [], connectSrc: [] }
   const frameAncestors = isFigma
     ? ["'self'", 'https://*.figma.com', 'https://figma.com']
     : csp.frameAncestors
@@ -371,10 +384,10 @@ export function buildCspHeader(isFigma = Boolean(process.env.FIGMA)): string {
   return [
     `default-src ${csp.defaultSrc.join(' ')}`,
     `script-src ${csp.scriptSrc.join(' ')}`,
-    `style-src ${csp.styleSrc.join(' ')}`,
-    `img-src ${csp.imgSrc.join(' ')}`,
-    `font-src ${csp.fontSrc.join(' ')}`,
-    `connect-src ${csp.connectSrc.join(' ')}`,
+    `style-src ${[...csp.styleSrc, ...extra.styleSrc].join(' ')}`,
+    `img-src ${[...csp.imgSrc, ...extra.imgSrc].join(' ')}`,
+    `font-src ${[...csp.fontSrc, ...extra.fontSrc].join(' ')}`,
+    `connect-src ${[...csp.connectSrc, ...extra.connectSrc].join(' ')}`,
     `frame-src ${csp.frameSrc.join(' ')}`,
     `frame-ancestors ${frameAncestors.join(' ')}`,
     `base-uri ${csp.baseUri.join(' ')}`,

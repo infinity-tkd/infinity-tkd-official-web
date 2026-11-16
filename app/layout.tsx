@@ -5,6 +5,7 @@ import { LanguageProvider } from '@/context/LanguageContext'
 import { Navbar } from '@/components/Navbar'
 import { MobileBottomNav } from '@/components/MobileBottomNav'
 import { Footer } from '@/components/Footer'
+import { SiteChrome } from '@/components/SiteChrome'
 import { ScrollNavProvider } from '@/context/ScrollNavContext'
 import { AutoErrorHandler } from '@/components/AutoErrorHandler'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
@@ -140,19 +141,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <LanguageProvider>
             <ScrollNavProvider>
-              <AutoErrorHandler />
-              <ServiceWorkerRegister />
-              <ScrollProgressBar />
-              <Navbar />
-              <main
-                id="main-content"
-                className="flex-grow min-h-screen pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0"
+              <SiteChrome
+                before={
+                  <>
+                    <AutoErrorHandler />
+                    <ServiceWorkerRegister />
+                    <ScrollProgressBar />
+                    <Navbar />
+                  </>
+                }
+                after={
+                  <>
+                    <Footer />
+                    <MobileBottomNav />
+                    <BackToTop />
+                  </>
+                }
               >
                 {children}
-              </main>
-              <Footer />
-              <MobileBottomNav />
-              <BackToTop />
+              </SiteChrome>
             </ScrollNavProvider>
           </LanguageProvider>
         </ThemeProvider>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { siteSettings, buildCspHeader } from '@/config/siteSettings'
+import { isEditorPath } from '@/lib/editorPath'
 
 // Compile regex patterns from siteSettings
 const BLOCKED_PATH_PATTERNS = siteSettings.security.blockedPathPatterns.map(
@@ -208,7 +209,7 @@ export function proxy(request: NextRequest) {
   const secHeaders = siteSettings.security.headers
   const isFigma = Boolean(process.env.FIGMA)
 
-  response.headers.set('Content-Security-Policy', buildCspHeader(isFigma))
+  response.headers.set('Content-Security-Policy', buildCspHeader(isFigma, { editor: isEditorPath(pathname) }))
   if (!isFigma) {
     response.headers.set('X-Frame-Options', secHeaders.xFrameOptions)
   }
