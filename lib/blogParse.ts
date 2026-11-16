@@ -30,6 +30,34 @@ export interface BlogHeading {
   level: 2 | 3
 }
 
+/** Every field a post's front matter may have. The content editor (lib/keystatic/blog.tsx) offers exactly these; a test keeps the two lists equal. */
+export const BLOG_FIELDS = [
+  'title',
+  'description',
+  'date',
+  'updated',
+  'author',
+  'category',
+  'tags',
+  'cover',
+  'coverAlt',
+  'coverCaption',
+  'featured',
+  'draft',
+  'unlisted',
+  'tableOfContents',
+  'related',
+  'seoTitle',
+  'seoDescription',
+  'socialImage',
+] as const
+
+export const TABLE_OF_CONTENTS_MODES = ['auto', 'show', 'hide'] as const
+export type TableOfContentsMode = (typeof TABLE_OF_CONTENTS_MODES)[number]
+
+/** The most posts a post can suggest by hand under "Keep reading". */
+export const MAX_RELATED_POSTS = 3
+
 export interface BlogPostMeta {
   slug: string
   title: string
@@ -41,8 +69,19 @@ export interface BlogPostMeta {
   category: string
   categorySlug: string
   tags: string[]
-  cover?: { src: string; alt: string }
+  cover?: { src: string; alt: string; caption?: string }
   featured: boolean
+  /** Kept out of the blog list, categories, sitemap, feed and "keep reading"; still reachable by its link (and not indexed). */
+  unlisted: boolean
+  /** auto: shown from 3 headings up; show: from 1; hide: never. */
+  tableOfContents: TableOfContentsMode
+  /** Slugs of posts chosen by hand for "Keep reading". */
+  related: string[]
+  /** Replace the page title and description search engines and link previews see. */
+  seoTitle?: string
+  seoDescription?: string
+  /** The picture link previews show instead of the cover. */
+  socialImage?: string
   readingMinutes: number
 }
 
@@ -207,6 +246,11 @@ export function readPost(slug: string, raw: string): ReadPostResult {
   }
 
   const cover = nonEmptyString(data.cover)
+  const coverCaption = nonEmptyString(data.coverCaption)
+  const tableOfContents = TABLE_OF_CONTENTS_MODES.find((mode) => mode === data.tableOfContents) ?? 'auto'
+  const related = Array.isArray(data.related)
+    ? [...new Set(data.related.flatMap((item) => (typeof item === 'string' && item.trim() ? [item.trim()] : [])))].slice(0, MAX_RELATED_POSTS)
+    : []
 
   return {
     ok: true,
@@ -221,8 +265,14 @@ export function readPost(slug: string, raw: string): ReadPostResult {
       category,
       categorySlug: slugify(category),
       tags: Array.isArray(data.tags) ? data.tags.filter((t): t is string => typeof t === 'string') : [],
-      cover: cover ? { src: cover, alt: nonEmptyString(data.coverAlt) ?? title } : undefined,
+      cover: cover ? { src: cover, alt: nonEmptyString(data.coverAlt) ?? title, ...(coverCaption ? { caption: coverCaption } : {}) } : undefined,
       featured: data.featured === true,
+      unlisted: data.unlisted === true,
+      tableOfContents,
+      related,
+      seoTitle: nonEmptyString(data.seoTitle) ?? undefined,
+      seoDescription: nonEmptyString(data.seoDescription) ?? undefined,
+      socialImage: nonEmptyString(data.socialImage) ?? undefined,
       readingMinutes: readingMinutes(content),
       content,
       headings: extractHeadings(content),

@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ChevronRight, Clock, UserRound } from 'lucide-react'
-import { MarkdownContent } from '@/components/blog/MarkdownContent'
+import { PostBody } from '@/components/blog/PostBody'
 import { PostCard } from '@/components/blog/PostCard'
 import { ShareButtons } from '@/components/blog/ShareButtons'
 import { TableOfContents } from '@/components/blog/TableOfContents'
 import { CtaBanner } from '@/components/ui/CtaBanner'
 import { OptimizedImage } from '@/components/ui/OptimizedImage'
 import { metadataImageUrl } from '@/lib/imageUrl'
-import { formatPostDate, getAllPosts, getPostBySlug, getRelatedPosts, toMeta } from '@/lib/blog'
+import { formatPostDate, getAllPostSlugs, getPostBySlug, getRelatedPosts, toMeta } from '@/lib/blog'
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, jsonLdString } from '@/lib/structuredData'
 import { fitTitle, titleForms } from '@/lib/seo'
 import { siteSettings } from '@/config/siteSettings'
@@ -22,7 +22,8 @@ interface BlogPostPageProps {
 }
 
 export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }))
+  // Every published post, the ones hidden from the blog list too: they still have their own page.
+  return getAllPostSlugs().map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
@@ -31,21 +32,27 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   if (!post) return { title: 'Article not found' }
 
   const path = `/blog/${post.slug}`
-  // Link previews and search engines need the direct picture address, not a Drive/Dropbox share page. A cover that
-  // cannot serve there (a link that does not work, a picture embedded in the text) falls back to the site's own image.
-  const coverImage = post.cover ? metadataImageUrl(post.cover.src) : undefined
-  const image = coverImage ?? '/opengraph-image'
+  // Link previews and search engines need the direct picture address, not a Drive/Dropbox share page. The picture
+  // chosen for sharing wins over the cover; one that cannot serve there (a link that does not work, a picture
+  // embedded in the text) falls back to the next, and finally to the site's own image.
+  const sharedImage = shareImageUrl(post)
+  const image = sharedImage ?? '/opengraph-image'
+  // What search engines and link previews show can be set apart from what the page shows.
+  const searchTitle = post.seoTitle ?? post.title
+  const searchDescription = post.seoDescription ?? post.description
 
   return {
     // Long post titles drop the brand suffix rather than being cut off in search results.
-    title: { absolute: fitTitle(titleForms(post.title)) },
-    description: post.description,
+    title: { absolute: fitTitle(titleForms(searchTitle)) },
+    description: searchDescription,
     authors: [{ name: post.author }],
     keywords: post.tags,
     alternates: { canonical: path },
+    // A post hidden from the blog list is also kept out of search engines (it is not secret: anyone with the link can open it).
+    ...(post.unlisted ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
-      title: `${post.title} | Infinity Taekwondo`,
-      description: post.description,
+      title: `${searchTitle} | Infinity Taekwondo`,
+      description: searchDescription,
       url: path,
       type: 'article',
       publishedTime: post.date,
@@ -53,15 +60,20 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       authors: [post.author],
       section: post.category,
       tags: post.tags,
-      images: [{ url: image, alt: coverImage ? (post.cover?.alt ?? post.title) : post.title }],
+      images: [{ url: image, alt: sharedImage ? (post.cover?.alt ?? post.title) : post.title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
+      title: searchTitle,
+      description: searchDescription,
       images: [image],
     },
   }
+}
+
+/** The picture for link previews and structured data: the one picked for sharing, else the cover, if it can serve there. */
+function shareImageUrl(post: { socialImage?: string; cover?: { src: string } }): string | undefined {
+  return (post.socialImage ? metadataImageUrl(post.socialImage) : undefined) ?? (post.cover ? metadataImageUrl(post.cover.src) : undefined)
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -77,9 +89,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const jsonLd = [
     buildArticleJsonLd({
       title: post.title,
-      description: post.description,
+      description: post.seoDescription ?? post.description,
       path,
-      image: post.cover ? metadataImageUrl(post.cover.src) : undefined,
+      image: shareImageUrl(post),
       publishedAt: post.date,
       updatedAt: post.updated,
       author: post.author,
@@ -93,7 +105,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ]),
   ]
 
-  const hasToc = post.headings.length >= 3
+  // "On this page": automatic from 3 headings up, or always / never when the editor says so.
+  const hasToc = post.tableOfContents === 'hide' ? false : post.headings.length >= (post.tableOfContents === 'show' ? 1 : 3)
 
   return (
     <div className="bg-white dark:bg-black text-zinc-900 dark:text-white">
@@ -146,17 +159,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Cover */}
           {post.cover && (
-            <div className="relative mt-8 sm:mt-10 aspect-[16/9] overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-900">
-              <OptimizedImage
-                src={post.cover.src}
-                alt={post.cover.alt}
-                fill
-                priority
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                quality={75}
-                className="object-cover"
-              />
-            </div>
+            <figure className="mt-8 sm:mt-10">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-900">
+                <OptimizedImage
+                  src={post.cover.src}
+                  alt={post.cover.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 1024px, 100vw"
+                  quality={75}
+                  className="object-cover"
+                />
+              </div>
+              {post.cover.caption && <figcaption className="mt-3 text-sm text-zinc-500 dark:text-zinc-400">{post.cover.caption}</figcaption>}
+            </figure>
           )}
 
           {/* Body + sticky contents */}
@@ -177,7 +193,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             )}
 
             <div className={hasToc ? 'lg:col-start-1 lg:row-start-1 min-w-0' : 'lg:col-span-2 max-w-3xl min-w-0'}>
-              <MarkdownContent>{post.content}</MarkdownContent>
+              <PostBody>{post.content}</PostBody>
 
               {post.tags.length > 0 && (
                 <ul className="mt-10 flex flex-wrap gap-2" aria-label="Tags">

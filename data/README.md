@@ -139,9 +139,12 @@ the picture:
 
 - `id`: unique, lowercase-with-dashes, never changed once published (other data and URLs point to it).
 - Dates in blog front matter: `YYYY-MM-DD`. Quote any front-matter value that contains `:`.
-- Blog files saved by the editor use the same front matter (fields in `lib/keystatic/blog.tsx`); the editor refuses a
-  post with a field it does not know. Tables it saves are Markdoc tags, which `lib/markdocTables.ts` turns back into
-  Markdown tables.
+- Blog files saved by the editor use the same front matter (fields in `lib/keystatic/blog.tsx`, listed in `BLOG_FIELDS`
+  in `lib/blogParse.ts`); the editor refuses a post with a field it does not know. Tables it saves are Markdoc tags,
+  which `lib/markdocTables.ts` turns back into Markdown tables. The other blocks it can insert (callout, YouTube video,
+  button, pull quote, question and answer) are Markdoc tags too, read by `lib/blogBlocks.ts` and shown by
+  `components/blog/PostBody.tsx`. `npm run check:data` stops the build for a block that cannot work.
+- Blog security (JavaScript front matter refused, link rules, the `/uploads` policy...): `docs/blog-security.md`.
 - Every person shown on the site (students, promotions, award winners) needs `permissionToPublish` ticked in the editor
   (a parent's or guardian's for a child). The build stops on an entry without it.
 - Use a database only for data that users create: form submissions, bookings, memberships, payments.

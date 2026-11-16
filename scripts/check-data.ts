@@ -24,10 +24,10 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { findMarkdownLinks, readPost, slugify, splitFrontMatter } from '@/lib/blogParse'
+import { collectBlocks } from '@/lib/blogBlocks'
+import { BLOG_FIELDS, findMarkdownLinks, readPost, slugify, splitFrontMatter } from '@/lib/blogParse'
 import { describeImage } from '@/lib/imageUrl'
 import { MAX_UPLOAD_BYTES } from '@/lib/keystatic/prepareUpload'
-import { unsupportedMarkdocTags } from '@/lib/markdocTables'
 import { isSafeHref } from '@/lib/safeHref'
 
 const root = process.cwd()
@@ -211,9 +211,11 @@ if (english) {
 // 5. Blog posts (content/blog/*.md)
 // ---------------------------------------------------------------------------------------------
 // The fields the content editor knows (lib/keystatic/blog.tsx). It refuses to open a post with any other.
-const BLOG_FIELDS = new Set(['title', 'description', 'date', 'updated', 'author', 'category', 'tags', 'cover', 'coverAlt', 'featured', 'draft'])
+const KNOWN_BLOG_FIELDS = new Set<string>(BLOG_FIELDS)
 
 const slugs = new Set<string>()
+const postState = new Map<string, { draft: boolean; unlisted: boolean }>()
+const relatedChoices: { file: string; slug: string; target: string }[] = []
 for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   const slug = path.basename(file, '.md')
   if (slug !== slugify(slug)) error(`${rel(file)}: the file name must be a lowercase web address (letters, numbers, dashes). The website skips this post`)
@@ -232,21 +234,36 @@ for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   const read = readPost(slug, raw)
   if (!read.ok) error(`${rel(file)}: ${read.reason}. The website skips this post`)
   else {
+    postState.set(slug, { draft: read.draft, unlisted: read.post.unlisted })
     const seenHeadings = new Set<string>()
     for (const heading of read.post.headings) {
       if (seenHeadings.has(heading.id)) warn(`${rel(file)}: two headings make the same link (#${heading.id}). "On this page" jumps to the first one`)
       seenHeadings.add(heading.id)
     }
+    for (const target of read.post.related) relatedChoices.push({ file, slug, target })
+    if (read.post.seoTitle && read.post.seoTitle.length > 70) warn(`${rel(file)}: the title for Google is ${read.post.seoTitle.length} characters; Google usually shows about 60`)
+    if (read.post.seoDescription && read.post.seoDescription.length > 170) warn(`${rel(file)}: the description for Google is ${read.post.seoDescription.length} characters; Google usually shows about 160`)
+
+    // Content blocks (callout, video, button, pull quote, question): known, closed, and with usable options.
+    // Counted on the text the website reads (tables already turned into tables), so line numbers can drift by a few after a table.
+    for (const problem of collectBlocks(read.post.content).problems) {
+      const message = `${rel(file)}: around line ${problem.line} of the text: ${problem.message}`
+      if (problem.level === 'error') error(message)
+      else warn(message)
+    }
   }
   for (const key of Object.keys(data)) {
-    if (!BLOG_FIELDS.has(key)) warn(`${rel(file)}: front matter "${key}" is not a field the content editor knows, so it will refuse to open this post`)
+    if (!KNOWN_BLOG_FIELDS.has(key)) warn(`${rel(file)}: front matter "${key}" is not a field the content editor knows, so it will refuse to open this post`)
   }
-  const cover = typeof data.cover === 'string' ? data.cover : undefined
-  if (cover?.startsWith('/') && !publicFileExists(cover)) error(`${rel(file)}: cover "${cover}" is not in public/`)
-  if (cover?.startsWith('/uploads/')) usedUploads.add(cover)
-  if (cover) {
-    const problem = describeImage(cover).problem
-    if (problem) error(`${rel(file)}: cover is not a usable picture link. ${problem}`)
+  // The cover and the picture for sharing: a file that exists, or a link that can work.
+  for (const field of ['cover', 'socialImage'] as const) {
+    const value = typeof data[field] === 'string' ? data[field] : undefined
+    if (value?.startsWith('/') && !publicFileExists(value)) error(`${rel(file)}: ${field} "${value}" is not in public/`)
+    if (value?.startsWith('/uploads/')) usedUploads.add(value)
+    if (value) {
+      const problem = describeImage(value).problem
+      if (problem) error(`${rel(file)}: ${field} is not a usable picture link. ${problem}`)
+    }
   }
 
   // Pictures inside the text: ![description](address), and links: [text](address)
@@ -262,10 +279,15 @@ for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
     }
   }
 
-  // The editor writes tables as Markdoc tags (the blog turns them into tables); other tags would show as plain text.
-  for (const tag of unsupportedMarkdocTags(body)) {
-    error(`${rel(file)}: the tag {% ${tag} %} is not supported by the website and would show as plain text. Remove it.`)
-  }
+}
+
+// "Read next" choices must be posts that exist, and ones visitors can reach.
+for (const { file, slug, target } of relatedChoices) {
+  const state = postState.get(target)
+  if (target === slug) error(`${rel(file)}: "Read next" lists the post itself`)
+  else if (!slugs.has(target)) error(`${rel(file)}: "Read next" lists "${target}", which is not a post (it may have been renamed or deleted)`)
+  else if (state?.draft) warn(`${rel(file)}: "Read next" lists "${target}", which is a draft, so it is left out on the live website`)
+  else if (state?.unlisted) warn(`${rel(file)}: "Read next" lists "${target}", which is hidden from the blog list, so it is left out`)
 }
 
 // ---------------------------------------------------------------------------------------------

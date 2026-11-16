@@ -48,15 +48,18 @@ A *GitHub App* is the permission slip that lets the editor save changes to the p
 | **Callback URL** | `https://infinitytaekwondo.com/api/keystatic/github/oauth/callback` (copy it exactly) |
 | **Request user authorization (OAuth) during installation** | **Tick it** |
 | **Webhook > Active** | **Untick it** |
-| **Repository permissions > Contents** | **Read and write** |
+| **Repository permissions > Contents** | **Read & write** (the option that lets the App save changes) |
 | **Repository permissions > Metadata** | Read-only (it is chosen for you) |
 | **Repository permissions > Pull requests** | **Read-only** |
 | **Where can this GitHub App be installed?** | **Any account** (this is what Keystatic's own setup uses; it only means the app *can* be installed. You will install it on your project only, in Step 4.) |
 
 4. Click **Create GitHub App**.
 
-If your website is also opened as `https://www.infinitytaekwondo.com`, click **Add Callback URL** and add the same
+If your website is also opened as `https://www.infinitytaekwondo.com`, click **Add callback URL** and add the same
 address with `www.` in front. The address you type in your browser must be in the list.
+
+Leave **Expire user authorization tokens** ticked (it is the default). Logins then expire after a few hours and the editor
+renews them by itself while people work. If it ever says you are logged out, click **Log in with GitHub** again.
 
 ---
 
@@ -95,7 +98,9 @@ The easiest way is to use your password manager's generator (choose 40 character
 
 1. Open the website's project on Vercel, then **Settings**, then **Environment Variables**.
 2. Add the four values, one at a time. For each: write the **Key** (the name), paste the **Value**, choose the
-   environment **Production**, and click **Save**. Switch on **Sensitive** for the secret ones (value 2 and value 4).
+   environment **Production**, and click **Save**. For the secret ones (value 2 and value 4), choose the **Secret**
+   type, or switch on **Sensitive**: Vercel's screen has used both names. A secret value cannot be read again after it
+   is saved, so keep your own copy in your password manager.
 
 | Key | Value |
 | --- | --- |
@@ -104,8 +109,10 @@ The easiest way is to use your password manager's generator (choose 40 character
 | `KEYSTATIC_SECRET` | value 4 |
 | `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | value 3 |
 
-3. Go to **Deployments**, open the latest deployment, click the **...** menu and choose **Redeploy**.
-   (You must redeploy once, because Vercel only reads new settings when it builds.)
+3. Go to **Deployments**, open the latest deployment, click the **...** menu and choose **Redeploy**. In the box that
+   opens, **untick "Use existing Build Cache"** and confirm.
+   (You must redeploy once, because Vercel only reads new settings when it builds, and one of the values is built into
+   the website's pages.)
 
 ---
 
@@ -141,7 +148,8 @@ How it works:
 1. In the editor, use the **branch menu** at the top to make a new branch (its name starts with `content/`).
 2. Edit and **Save** as usual. The changes go to the branch, not to the live website.
 3. Click **Create pull request** (it appears at the top when you are on a branch). GitHub opens.
-4. Vercel adds a comment with a **Preview link**. Open it and check the change.
+4. Vercel usually adds a comment with a **Preview link** (if it does not, open the **Deployments** page on Vercel and
+   find the deployment for the branch). Open it and check the change.
 5. When it looks right, click **Merge pull request** on GitHub. The live website updates in a few minutes.
 
 You cannot log in to the editor *from* the preview link (only from the live address), but you can look at it.
@@ -170,10 +178,10 @@ the current terms at <https://vercel.com/legal/terms> (or ask Vercel's support),
 | What you see | What to do |
 | --- | --- |
 | "The content editor is not set up yet" | One of the four values is missing in Vercel (the page lists which). Add it (Step 6) and redeploy. |
-| GitHub says **redirect_uri is not associated with this application** | The callback address in the GitHub App must match the address in your browser exactly. Add it under **Callback URL** (Step 2). |
+| GitHub says **redirect_uri is not associated with this application** | The callback address in the GitHub App must match the address in your browser exactly. Add it under **Callback URL** (Step 2), including the `www.` version if you use it. |
 | You can log in, but Save says you have no access or the resource is not accessible | The App is not installed on the project (Step 4), or the person does not have **Write** access (Step 1). |
 | Save works, but the website does not change | Look at **Deployments** on Vercel. A red failed deployment shows which file and field to fix. The old site stays online meanwhile. |
-| You changed a value in Vercel and nothing happened | Redeploy once. Vercel reads settings only when it builds. |
+| You changed a value in Vercel and nothing happened | Redeploy once, with **"Use existing Build Cache"** unticked. Vercel reads settings only when it builds. |
 | You think a secret leaked | On GitHub, open the App, generate a new client secret, delete the old one, update it in Vercel, and redeploy. Change `KEYSTATIC_SECRET` too. |
 
 ## For developers

@@ -52,6 +52,26 @@ Image dialog) now shows as a small caption under the picture.
 - **The editor itself** (`/keystatic`) is closed on the live site until its four GitHub settings exist, cannot be framed
   by another website, and is not in the sitemap or search results. See `docs/editor-setup.md`.
 
+## Blocks and options added after the first review
+
+The same rules were applied to everything the editor can add to a post since:
+
+- **Video.** Only a YouTube link is accepted (`youtubeVideoId()` in `lib/imageUrl.ts`); anything else shows nothing and
+  stops the build. The page shows the video's picture, and YouTube's player (from `youtube-nocookie.com`, which the
+  page policy already allows) is loaded only when the visitor presses play. Before that, the only request to YouTube is
+  for the small picture.
+- **Button.** Its address goes through the same link rules as every link in a post (`lib/safeHref.ts`). A button that
+  fails them shows its label as plain text, and `npm run check:data` stops the build, so it cannot go live.
+- **Callout, pull quote, question and answer.** Their text is Markdown rendered by the same reader as the rest of the
+  post (no HTML); their headings, sources and questions are plain text.
+- **Reading the blocks** (`lib/blogBlocks.ts`) takes time in proportion to the length of the post however it is
+  written: thousands of unclosed tags are a test case. A tag the website does not know, or one that is never closed,
+  stays visible as text and stops the build, so a half-written block never reaches visitors.
+- **Hide from the blog list** keeps a post out of lists, the feed and the sitemap and asks search engines to skip it,
+  but **it is not private**: the file is in the GitHub repository and the page opens for anyone with the link.
+- **Title, description and picture for sharing** are read as plain text; the picture goes through `metadataImageUrl()`
+  like the cover.
+
 ## Accepted trade-offs
 
 - **Pictures may come from any https address.** Editors paste links from Google Drive, Dropbox and Imgur, so the
@@ -81,6 +101,9 @@ Image dialog) now shows as a small caption under the picture.
 - Serving it: `config/uploadsPolicy.mjs`, `next.config.mjs` and `proxy.ts`.
 - A new front matter field: read it as text only (`nonEmptyString`), add it to `BLOG_FIELDS` in `scripts/check-data.ts`
   and to the editor's schema, and never put it into the page as HTML.
-- Tests: `npm run test:unit` (`blogParse`, `safeHref`, `xml`, `markdocTables`, `imageUrl`, `prepareUpload`, `security`) and
-  `npx playwright test tests/e2e/blog-security.logic.spec.tsx --project=e2e`.
+- A new block: add it to `BLOCKS` in `lib/blogBlocks.ts` (name, kind, options), to the editor in `lib/keystatic/blocks.tsx`
+  and to `components/blog/PostBody.tsx`. `tests/e2e/blog-schema.logic.spec.ts` fails until the editor and the website agree.
+  Treat every option as text, check links with `isSafeHref`, and never insert an option as HTML.
+- Tests: `npm run test:unit` (`blogParse`, `blogBlocks`, `blogQuery`, `safeHref`, `xml`, `markdocTables`, `imageUrl`,
+  `prepareUpload`, `security`) and `npx playwright test tests/e2e/blog-security.logic.spec.tsx tests/e2e/blog-blocks.logic.spec.tsx tests/e2e/blog-schema.logic.spec.ts --project=e2e`.
 - Found something? Add a test next to the existing ones, then fix it.

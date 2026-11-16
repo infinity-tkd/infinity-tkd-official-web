@@ -283,6 +283,13 @@ function youTubeId(url: URL, host: string): string | null {
   return id && /^[\w-]{11}$/.test(id) ? id : null
 }
 
+/** The 11-character id of a YouTube video link (watch, youtu.be, shorts, embed, live), or null for anything else. */
+export function youtubeVideoId(input: string | null | undefined): string | null {
+  const url = parseWebAddress((input ?? '').trim())
+  if (!url || (url.protocol !== 'https:' && url.protocol !== 'http:')) return null
+  return youTubeId(url, url.hostname.toLowerCase())
+}
+
 function fromYouTube(input: string, url: URL, host: string): ImageSource | null {
   if (host === 'i.ytimg.com' || host === 'img.youtube.com') return finish(input, 'youtube', 'YouTube thumbnail', url.toString())
   const id = youTubeId(url, host)

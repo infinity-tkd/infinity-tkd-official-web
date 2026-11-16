@@ -102,7 +102,10 @@ Anything you leave empty is shown in English. You can add one language now and t
 
 ### Blog posts
 
-Click a post to change it, or **Create** for a new one.
+Click a post to change it, or **Create** for a new one. The details of the post are on the right and the text is on
+the left (on a phone: the details first, then the text).
+
+**The basics**
 
 | Field | What it means |
 | --- | --- |
@@ -116,13 +119,46 @@ Click a post to change it, or **Create** for a new one.
 | **Tags** | Short words about the topic (optional). |
 | **Cover picture** | The big picture at the top and on the post's card. |
 | **Cover picture description** | Says what is in the picture, for people who cannot see it. |
+| **Cover picture caption** | A short line under the cover picture, such as who took the photo (optional). |
 | **Feature this post** | Shows it as the big lead story on the Blog page. |
 | **Draft** | A draft is saved but **not shown** on the live website. Untick it to publish. |
-| **Post** | The text. Use the bar above it: headings, bold, lists, links, quotes, tables and pictures. |
 
-Tips for the text: use **Heading 2** for the main parts and **Heading 3** inside them. Pictures inside the text
-must be uploaded (links work for the cover picture, and for the pictures of coaches, students, awards and age groups).
-Big photos inside the text are not shrunk automatically, so shrink them first, or use the cover picture instead.
+**How it looks and where it is shown (all optional)**
+
+| Field | What it means |
+| --- | --- |
+| **Hide from the blog list** | Leaves the post out of the blog list, the categories, the feed and the sitemap, and asks search engines to skip it. **It is not private**: anyone who has the link can open it. Never use it for private information. |
+| **Table of contents** | The "On this page" list. *Automatic* shows it when the post has 3 headings or more; or choose *Always show* or *Hide*. |
+| **Read next** | Pick up to 3 posts to suggest at the bottom of this one. Leave empty and the website picks similar posts. |
+| **Title for Google** | Replaces the title in Google and in link previews. About 50 to 60 characters is shown in full. |
+| **Description for Google** | Replaces the short summary in Google and in link previews. About 150 to 160 characters is shown in full. |
+| **Picture for sharing** | The picture shown when the post is shared on Facebook, Telegram or WhatsApp. Leave empty to use the cover picture. |
+
+**The text**
+
+Use the bar above the text for headings, bold, lists, links, quotes, tables and pictures. To add one of the **blocks**
+below, press the **+** button in that bar, or type **/** on an empty line and choose from the list.
+
+| Block | What it is for |
+| --- | --- |
+| **Callout** | A highlighted box: *Note*, *Tip*, *Warning* or *Safety first*. Warning and safety boxes are red. Type your text in the box. Click **Edit** on the block to change its style or give it a heading. |
+| **YouTube video** | Paste a YouTube link. The page shows the video's picture with a play button, and YouTube's player is loaded only when someone presses play. |
+| **Button** | A button for the next step, such as *Book a free trial*. The link is a page of this website (start with `/`, like `/contact`), a full address (`https://...`), `mailto:` or `tel:`. |
+| **Pull quote** | A large quotation that stands out, with who said it (optional). |
+| **Question and answer** | A question that opens to show its answer. Questions that follow each other become one list: handy for a "Frequently asked questions" part. |
+
+Click **Edit** on a block to fill in its options. A block that cannot work (a video with no link, a button with no
+text, a question with no question) **stops the website update**, and the message names the post and the block, so
+nothing half-finished goes live. Blocks can sit inside other blocks (a callout inside an answer), up to three levels.
+
+**Pictures in the text.** Click **Image** in the bar and choose a file. Fill in **Picture description**, and a
+**Caption** if you like: it is shown in small text under the picture. The editor gives the file a safe name, so two
+photos called `photo.jpg` never replace each other. These pictures are **not shrunk automatically**: shrink big photos
+first (the website update warns above 1 MB and stops above 3 MB), or use a link for the cover picture instead.
+
+Tips for the text: use **Heading 2** for the main parts and **Heading 3** inside them. Only pictures can be uploaded
+inside the text; links work for the cover picture, the picture for sharing, and the pictures of coaches, students,
+awards and age groups.
 
 ### Coaches and team
 
