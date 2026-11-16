@@ -4,7 +4,8 @@
  * Posts are Markdown files in `content/blog/<slug>.md` with YAML front matter. This module is
  * the ONLY place that knows where posts come from; pages and components consume the typed
  * results. To move to a headless CMS or database later, re-implement `loadAllPosts()` and
- * nothing else needs to change.
+ * nothing else needs to change. The files can be written by hand or saved by the content
+ * editor at /keystatic (lib/keystatic/blog.tsx lists the same front matter fields).
  *
  * Front matter:
  *   title        (required) Post title
@@ -24,6 +25,7 @@ import 'server-only'
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
+import { markdocTablesToGfm } from '@/lib/markdocTables'
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
 const DEFAULT_AUTHOR = 'Infinity Taekwondo Coaching Team'
@@ -130,7 +132,9 @@ function parsePost(slug: string, raw: string): { post: BlogPost; draft: boolean 
     )
     return null
   }
-  const { data, content } = parsed
+  const { data } = parsed
+  // The content editor saves tables as Markdoc tags; the page reads pipe tables (see lib/markdocTables.ts).
+  const content = markdocTablesToGfm(parsed.content)
 
   const title = nonEmptyString(data.title)
   const description = nonEmptyString(data.description)
