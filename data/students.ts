@@ -1,3 +1,14 @@
+/**
+ * The student spotlights and recent promotions (/community). They live in content/students.json, which the content
+ * editor (/keystatic) saves; this module checks that file and hands the pages the same lists as always.
+ *
+ * Every person listed needs "Permission to publish" (a parent's or guardian's for a child). The tick is saved with
+ * the entry and checked here: an entry without it stops the build, so it can never go live by accident.
+ */
+import raw from '../content/students.json' with { type: 'json' }
+import { STUDENT_CATEGORIES } from '@/lib/content/options'
+import { compact, file, translationsOf } from '@/lib/content/validate'
+
 export interface StudentSpotlight {
   id: string
   name: string
@@ -30,182 +41,52 @@ export interface StudentMilestone {
   poomsaeDemonstrated: string
 }
 
-export const athleteSpotlights: StudentSpotlight[] = [
-  {
-    id: 'spotlight-1',
-    name: 'Sokha Rith',
-    age: 19,
-    beltRank: '2nd Dan Black Belt',
-    beltHex: '#000000',
-    joinedYear: '2019',
-    title: 'From Timid Beginner to National Team Poomsae Medalist',
-    story:
-      'Sokha joined Infinity Taekwondo as a quiet 14-year-old with zero athletic background. Through 5 years of relentless daily dedication, he mastered all 8 Taegeuk forms and Koryo, going on to earn Gold at the Cambodia National Championships. He now assists Master Sovan in coaching the junior poomsae squad.',
-    quote:
-      'The Dojang taught me that failure is simply data. Every missed kick is a chance to refine your angle and balance.',
-    achievements: [
-      'National Gold Medalist (Recognized Poomsae 2025)',
-      'Certified 2nd Dan Kukkiwon Black Belt',
-      'Junior Team Assistant Coach',
-      'Over 600+ Mat Training Hours Logged',
-    ],
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2864&auto=format&fit=crop',
-    category: 'Athlete of the Month',
-    favoriteTechnique: 'Koryo Poomsae & Double Side Kick (Yeop Chagi)',
-    trainingGoal: 'Qualify for the Asian Taekwondo Championships 2027',
-  },
-  {
-    id: 'spotlight-2',
-    name: 'Chanthy Chea',
-    age: 11,
-    beltRank: 'Red Belt',
-    beltHex: '#EF2F38',
-    joinedYear: '2021',
-    title: 'Junior Champions Team Captain & 540 Kick Pioneer',
-    story:
-      'At just 11 years old, Chanthy has become one of the youngest students at Infinity TKD to cleanly land a 540 kick on the spring floor. Her academic focus at school and leadership among younger white belt students make her a standout role model in our Little Warriors program.',
-    quote:
-      'I love breaking boards with flying kicks because it shows that anything is possible if you practice hard!',
-    achievements: [
-      'Youth Games Gold Medalist (Junior Sparring -32kg)',
-      'Top Academic Honor Student at School',
-      'Infinity Demonstration Team Lead Aerialist',
-      'Perfect 100% Dojang Attendance Record 2025',
-    ],
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2787&auto=format&fit=crop',
-    category: 'Junior Champion',
-    favoriteTechnique: '540 Kick & Flying Side Kick',
-    trainingGoal: 'Earn 1st Poom Black Belt before age 12',
-  },
-  {
-    id: 'spotlight-3',
-    name: 'Dara Chan',
-    age: 24,
-    beltRank: '1st Dan Black Belt',
-    beltHex: '#000000',
-    joinedYear: '2020',
-    title: 'Action Cinema Stunt Performer & Tricking Specialist',
-    story:
-      'Dara leveraged Infinity Taekwondo’s Creative Studio and acrobatic training to transition into professional stunt work, performing in high-profile martial arts short films and commercial campaigns across Southeast Asia.',
-    quote:
-      'Infinity TKD gives you both the authentic traditional discipline and the modern stage to share your artistry with the world.',
-    achievements: [
-      'Lead Action Stunt Performer in 3 Southeast Asian Film Projects',
-      '1st Dan Kukkiwon Certified Black Belt',
-      'Over 1.5M+ Collective Views on Martial Action Shorts',
-      'Regional Tricking Battle Runner-Up',
-    ],
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop',
-    category: 'Black Belt Graduate',
-    favoriteTechnique: 'Corkscrew Twist & Aerial Hook Kick',
-    trainingGoal: 'Direct Cambodia’s first international martial arts action series',
-  },
-  {
-    id: 'spotlight-4',
-    name: 'Leakhena Sin',
-    age: 16,
-    beltRank: '1st Poom Black Belt',
-    beltHex: '#000000',
-    joinedYear: '2022',
-    title: 'Freestyle Musical Poomsae Champion',
-    story:
-      'Leakhena blends classical World Taekwondo stances with dynamic musical choreography. Her synchronized routines in national tournaments have earned high praise from international referees.',
-    quote:
-      'When you perform Poomsae to music, every block and kick becomes poetry in motion.',
-    achievements: [
-      'Gold Medalist - National Youth Freestyle Poomsae 2025',
-      '1st Poom Kukkiwon Certificate',
-      'Team Cambodia Youth Squad Representative',
-      'Captain of the Youth Creative Demo Team',
-    ],
-    image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=2662&auto=format&fit=crop',
-    category: 'Athlete of the Month',
-    favoriteTechnique: '720 Tornado Kick into Butterfly Twist',
-    trainingGoal: 'Compete in the World Taekwondo Poomsae Championships',
-  },
-  {
-    id: 'spotlight-5',
-    name: 'Rathana Sam',
-    age: 29,
-    beltRank: 'Blue Belt',
-    beltHex: '#0042EA',
-    joinedYear: '2023',
-    title: 'Tech Executive to Dojang Warrior: 25kg Transformation',
-    story:
-      'Working long hours in front of a computer left Rathana feeling drained and out of shape. Enrolling in adult evening classes at our Kouk Khleang branch, he rebuilt his cardiovascular stamina, lost 25kg, and developed lifelong mental resilience.',
-    quote:
-      'Martial arts gave me my life and clarity back. Stepping onto the mats resets my mind completely after intense workdays.',
-    achievements: [
-      '25kg Weight Loss & Tendon Health Transformation',
-      'Graduated White to Blue Belt with Honors',
-      'Completed 150 Consecutive Dojang Training Sessions',
-      'Kouk Khleang Adult Cohort Class Representative',
-    ],
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2787&auto=format&fit=crop',
-    category: 'Transformation',
-    favoriteTechnique: 'Taegeuk 5 (Oh Jang) & Roundhouse Kick (Dollyo Chagi)',
-    trainingGoal: 'Earn 1st Dan Black Belt by 2027',
-  },
-  {
-    id: 'spotlight-6',
-    name: 'Vannak Seng',
-    age: 8,
-    beltRank: 'Green Belt',
-    beltHex: '#09BB00',
-    joinedYear: '2024',
-    title: 'Little Warriors Discipline & Focus Honor Award',
-    story:
-      'Vannak joined the Little Warriors program with excess energy and difficulty focusing in school. Under the patient guidance of Instructor Sothea, he channeled his energy into martial precision and now leads class warm-ups with pride.',
-    quote:
-      'I bow to my teacher and my parents because respect makes you strong!',
-    achievements: [
-      'Little Warriors Honor Roll Award 2025',
-      'Fastest Belt Promotion from Yellow to Green Belt',
-      'Junior Sparring Friendship Cup Gold',
-      '100% Respect & Etiquette Score in Testing',
-    ],
-    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=2787&auto=format&fit=crop',
-    category: 'Junior Champion',
-    favoriteTechnique: 'Axe Kick (Naeryeo Chagi) & Board Break',
-    trainingGoal: 'Become a Black Belt like Master Keo Moni',
-  },
-]
+const content = file('content/students.json', raw)
 
-export const recentPromotions: StudentMilestone[] = [
-  {
-    id: 'prom-1',
-    studentName: 'Vanna Meas',
-    promotedTo: '1st Dan Black Belt',
-    beltHex: '#000000',
-    date: 'March 2026',
-    examiningMaster: 'Master Chon Sovan (5th Dan)',
-    poomsaeDemonstrated: 'Taegeuk 1-8 & Koryo',
-  },
-  {
-    id: 'prom-2',
-    studentName: 'Sophea Pich',
-    promotedTo: 'Red Belt (Pal Jang)',
-    beltHex: '#EF2F38',
-    date: 'March 2026',
-    examiningMaster: 'Master Keo Moni',
-    poomsaeDemonstrated: 'Taegeuk 7 & 8',
-  },
-  {
-    id: 'prom-3',
-    studentName: 'Kimleang Seng',
-    promotedTo: 'Blue Belt (Oh Jang)',
-    beltHex: '#0042EA',
-    date: 'February 2026',
-    examiningMaster: 'Instructor Vichea Sothea',
-    poomsaeDemonstrated: 'Taegeuk 5 & 6',
-  },
-  {
-    id: 'prom-4',
-    studentName: 'Borey Kem',
-    promotedTo: 'Green Belt (Sam Jang)',
-    beltHex: '#09BB00',
-    date: 'February 2026',
-    examiningMaster: 'Master Chon Sovan',
-    poomsaeDemonstrated: 'Taegeuk 3 & 4',
-  },
-]
+export const athleteSpotlights: StudentSpotlight[] = content
+  .get('spotlights')
+  .items()
+  .map((student): StudentSpotlight => {
+    student.requirePermission()
+    return compact({
+      id: student.get('name').get('slug').text(),
+      name: student.get('name').get('name').text(),
+      age: student.get('age').number(),
+      beltRank: student.get('beltRank').text(),
+      beltHex: student.get('beltHex').colour(),
+      joinedYear: student.get('joinedYear').text(),
+      title: student.get('title').text(),
+      story: student.get('story').text(),
+      quote: student.get('quote').text(),
+      achievements: student.get('achievements').textList(),
+      image: student.get('image').text(),
+      category: student.get('category').oneOf(STUDENT_CATEGORIES),
+      favoriteTechnique: student.get('favoriteTechnique').optionalText(),
+      trainingGoal: student.get('trainingGoal').optionalText(),
+      translations: translationsOf(student.get('translations'), {
+        beltRank: 'text',
+        title: 'text',
+        story: 'text',
+        quote: 'text',
+        achievements: 'list',
+        favoriteTechnique: 'text',
+        trainingGoal: 'text',
+      }) as StudentSpotlight['translations'],
+    })
+  })
+
+export const recentPromotions: StudentMilestone[] = content
+  .get('promotions')
+  .items()
+  .map((promotion, index): StudentMilestone => {
+    promotion.requirePermission()
+    return {
+      id: `prom-${index + 1}`,
+      studentName: promotion.get('studentName').text(),
+      promotedTo: promotion.get('promotedTo').text(),
+      beltHex: promotion.get('beltHex').colour(),
+      date: promotion.get('date').text(),
+      examiningMaster: promotion.get('examiningMaster').text(),
+      poomsaeDemonstrated: promotion.get('poomsaeDemonstrated').text(),
+    }
+  })

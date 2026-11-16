@@ -1,4 +1,8 @@
 import { fields, type ComponentSchema } from '@keystatic/core'
+import { Checkbox } from '@keystar/ui/checkbox'
+import { FieldMessage } from '@keystar/ui/field'
+import { Flex } from '@keystar/ui/layout'
+import { Text } from '@keystar/ui/typography'
 import { LANGUAGE_LABELS } from '@/lib/content/options'
 import { imageOrLink } from './imageField'
 
@@ -57,6 +61,40 @@ export const textList = (label: string, itemLabel: string, description?: string)
     description,
     itemLabel: (props) => props.value || itemLabel,
   })
+
+/** Added to an entry's name in the list while its "Permission to publish" tick is missing, so the problem is visible. */
+export const NEEDS_PERMISSION = '  (!) permission to publish not ticked: cannot be saved'
+
+/**
+ * "Permission to publish": every entry that shows a person's name or picture must have it, so it cannot be saved
+ * without the tick (and the website build refuses an entry without it). For a child, the permission is the parent's
+ * or guardian's. Not shown on the website.
+ */
+export const permissionToPublish = () => {
+  const label = 'Permission to publish'
+  const base = fields.checkbox({ label, defaultValue: false })
+  return {
+    ...base,
+    validate(value: boolean) {
+      if (!value) throw new Error(`${label}: tick the box to confirm we have permission`)
+      return value
+    },
+    Input(props: { value: boolean; onChange(value: boolean): void; forceValidation: boolean }) {
+      return (
+        <Flex direction="column" gap="regular">
+          <Checkbox isSelected={props.value} onChange={props.onChange}>
+            {label}
+          </Checkbox>
+          <Text size="small" color="neutral">
+            Tick only if we have written permission to show this person's name and picture on the website: from a parent or guardian
+            if they are under 18, or from the person themselves. Not shown on the website.
+          </Text>
+          {props.forceValidation && !props.value && <FieldMessage>Tick the box to confirm we have permission, or remove this entry.</FieldMessage>}
+        </Flex>
+      )
+    },
+  }
+}
 
 /**
  * The name field of an item that other parts of the website point at (a coach, a plan, an award). It also makes the

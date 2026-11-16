@@ -1,7 +1,10 @@
 import { config } from '@keystatic/core'
+import { achievements } from '@/lib/keystatic/achievements'
 import { posts } from '@/lib/keystatic/blog'
+import { coaches } from '@/lib/keystatic/coaches'
 import { pricing } from '@/lib/keystatic/pricing'
 import { schedule } from '@/lib/keystatic/schedule'
+import { students } from '@/lib/keystatic/students'
 
 /**
  * The content editor at /keystatic. Every content type is described once in lib/keystatic/<type>.tsx; the files it
@@ -14,9 +17,10 @@ export default config({
     brand: { name: 'Infinity Taekwondo' },
     navigation: {
       Writing: ['posts'],
+      People: ['coaches', 'students', 'achievements'],
       Website: ['schedule', 'pricing'],
     },
   },
   collections: { posts },
-  singletons: { schedule, pricing },
+  singletons: { coaches, students, achievements, schedule, pricing },
 })

@@ -49,6 +49,26 @@ export const ACHIEVEMENT_TYPE_LABELS: Record<(typeof ACHIEVEMENT_TYPES)[number],
   community_honor: 'Community honour',
 }
 
+/** Belt colours, as the pages draw them (the same colours as data/belts.ts). */
+export const BELT_COLOURS = [
+  { label: 'White belt', value: '#FFFFFF' },
+  { label: 'Yellow belt', value: '#FFD505' },
+  { label: 'Green belt', value: '#09BB00' },
+  { label: 'Blue belt', value: '#0042EA' },
+  { label: 'Brown belt', value: '#A05B00' },
+  { label: 'Red belt', value: '#EF2F38' },
+  { label: 'Black belt', value: '#000000' },
+] as const
+
+/** Colours of the medal badge on an achievement. */
+export const BADGE_COLOURS = [
+  { label: 'Gold', value: '#FFD505' },
+  { label: 'Silver', value: '#D0D0D0' },
+  { label: 'Bronze', value: '#A05B00' },
+  { label: 'Red', value: '#EF2F38' },
+  { label: 'Black', value: '#000000' },
+] as const
+
 /** Languages besides English, as the editor shows them. */
 export const LANGUAGE_LABELS = {
   km: 'Khmer (ភាសាខ្មែរ)',

@@ -10,11 +10,24 @@
  *   - belt translations missing a field or with a different number of list items (warning only)
  *   - blog posts with missing front matter or a missing cover image
  *   - UI dictionary keys present in English but missing in km / zh / ko (warning only)
+ *
+ * Content edited in the content editor (/keystatic) is covered too. Every data module reads its content/*.json
+ * file and checks it as it loads (lib/content/validate.ts), so a wrong value shows up here as "could not be
+ * loaded" with the file and field named. On top of that:
+ *   - picture links that cannot work (Facebook, Instagram, a folder, a web page...) in any `image` or `cover`
+ *   - blog front matter the editor does not know, and Markdoc tags the website cannot show
+ *   - uploaded pictures (public/uploads) that are too big, or that nothing uses any more (warning only)
+ *   - an award that names a student ID with no matching student (warning only)
+ *
+ * `npm run build` runs this first, so a bad edit stops the build and the previous live site stays up.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import matter from 'gray-matter'
+import { describeImage } from '@/lib/imageUrl'
+import { MAX_UPLOAD_BYTES } from '@/lib/keystatic/prepareUpload'
+import { unsupportedMarkdocTags } from '@/lib/markdocTables'
 
 const root = process.cwd()
 const errors: string[] = []
@@ -63,6 +76,7 @@ for (const file of dataFiles) {
 
 const visited = new Set<object>() // shared, so data re-exported by a barrel is only scanned once
 const missingAssets = new Map<string, string[]>() // file path -> where it is used
+const usedUploads = new Set<string>() // "/uploads/..." pictures that some content points at
 for (const [file, exports] of modules) {
   for (const [name, value] of Object.entries(exports)) {
     if (typeof value === 'function') continue
@@ -80,6 +94,12 @@ for (const [file, exports] of modules) {
       name,
       (text, at) => {
         if (ASSET.test(text) && !publicFileExists(text)) missingAssets.set(text, [...(missingAssets.get(text) ?? []), `${file}: ${at}`])
+        if (text.startsWith('/uploads/')) usedUploads.add(text)
+        // A picture link the website cannot show (Facebook, a folder, a web page...). Same rules as the editor's picture field.
+        if (/\.(image|cover)$/.test(at) && text.trim()) {
+          const problem = describeImage(text).problem
+          if (problem) error(`${file}: ${at} is not a usable picture link. ${problem}`)
+        }
       },
       visited
     )
@@ -189,12 +209,18 @@ if (english) {
 // ---------------------------------------------------------------------------------------------
 // 5. Blog posts (content/blog/*.md)
 // ---------------------------------------------------------------------------------------------
+// The fields the content editor knows (lib/keystatic/blog.tsx). It refuses to open a post with any other.
+const BLOG_FIELDS = new Set(['title', 'description', 'date', 'updated', 'author', 'category', 'tags', 'cover', 'coverAlt', 'featured', 'draft'])
+
 const slugs = new Set<string>()
 for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   const slug = path.basename(file, '.md')
   let data: Record<string, unknown>
+  let body: string
   try {
-    data = matter(readFileSync(file, 'utf8')).data
+    const parsed = matter(readFileSync(file, 'utf8'))
+    data = parsed.data
+    body = parsed.content
   } catch (err) {
     error(`${rel(file)}: front matter could not be read (${(err as Error).message.split('\n')[0]}). Quote values that contain ":"`)
     continue
@@ -204,13 +230,63 @@ for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   for (const field of ['title', 'description', 'date', 'category']) {
     if (!data[field]) error(`${rel(file)}: front matter is missing "${field}"`)
   }
+  for (const key of Object.keys(data)) {
+    if (!BLOG_FIELDS.has(key)) warn(`${rel(file)}: front matter "${key}" is not a field the content editor knows, so it will refuse to open this post`)
+  }
   if (data.date && Number.isNaN(new Date(String(data.date)).getTime())) error(`${rel(file)}: date "${data.date}" is not a valid date`)
   const cover = typeof data.cover === 'string' ? data.cover : undefined
   if (cover?.startsWith('/') && !publicFileExists(cover)) error(`${rel(file)}: cover "${cover}" is not in public/`)
+  if (cover?.startsWith('/uploads/')) usedUploads.add(cover)
+  if (cover) {
+    const problem = describeImage(cover).problem
+    if (problem) error(`${rel(file)}: cover is not a usable picture link. ${problem}`)
+  }
+
+  // Pictures inside the text: ![description](address)
+  for (const [, address] of body.matchAll(/!\[[^\]]*\]\(\s*<?([^)\s>]+)/g)) {
+    if (address.startsWith('/uploads/')) usedUploads.add(address)
+    if (address.startsWith('/') && ASSET.test(address) && !publicFileExists(address)) error(`${rel(file)}: picture "${address}" is not in public/`)
+    const problem = describeImage(address).problem
+    if (problem) error(`${rel(file)}: picture "${address.slice(0, 60)}" is not a usable picture link. ${problem}`)
+  }
+
+  // The editor writes tables as Markdoc tags (the blog turns them into tables); other tags would show as plain text.
+  for (const tag of unsupportedMarkdocTags(body)) {
+    error(`${rel(file)}: the tag {% ${tag} %} is not supported by the website and would show as plain text. Remove it.`)
+  }
 }
 
 // ---------------------------------------------------------------------------------------------
-console.log(`Checked ${modules.size} data modules and ${slugs.size} blog posts.`)
+// 6. Pictures uploaded through the content editor (public/uploads)
+// ---------------------------------------------------------------------------------------------
+const publicDir = path.join(root, 'public')
+let uploadCount = 0
+for (const file of listFiles(path.join(publicDir, 'uploads'), '')) {
+  uploadCount += 1
+  const url = `/${path.relative(publicDir, file).replaceAll('\\', '/')}`
+  const size = statSync(file).size
+  const megabytes = (size / 1_000_000).toFixed(1)
+  if (size > MAX_UPLOAD_BYTES * 3) error(`${url} is ${megabytes} MB. Every picture stays in the repository for good: shrink it, or use a link instead.`)
+  else if (size > MAX_UPLOAD_BYTES) warn(`${url} is ${megabytes} MB (the editor keeps uploads under 1 MB). Consider shrinking it.`)
+  if (!usedUploads.has(url)) warn(`${url} is not used by any content. It can be deleted.`)
+}
+
+// ---------------------------------------------------------------------------------------------
+// 7. References between content
+// ---------------------------------------------------------------------------------------------
+const spotlightIds = new Set(((modules.get('data/students.ts') as { athleteSpotlights?: { id: string }[] } | undefined)?.athleteSpotlights ?? []).map((student) => student.id))
+const awards = (modules.get('data/achievements.ts') as { tournamentAchievements?: { tournament: string; year: string; studentCompetitors?: { name: string; studentId?: string }[] }[] } | undefined)?.tournamentAchievements ?? []
+// (Skipped when either file could not be loaded: that is already reported above, and every ID would look unknown.)
+for (const award of modules.has('data/students.ts') ? awards : []) {
+  for (const student of award.studentCompetitors ?? []) {
+    if (student.studentId && !spotlightIds.has(student.studentId)) {
+      warn(`award "${award.year} ${award.tournament}": ${student.name} points at student ID "${student.studentId}", which is not on the Students page`)
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+console.log(`Checked ${modules.size} data modules, ${slugs.size} blog posts and ${uploadCount} uploaded picture(s).`)
 for (const message of warnings) console.log(`  warning  ${message}`)
 for (const message of errors) console.log(`  ERROR    ${message}`)
 if (errors.length) {

@@ -43,10 +43,12 @@ export class Node {
     throw new ContentError(`${this.where}: ${message}`)
   }
 
-  /** The value stored under `key` (missing is allowed: it reads as nothing). */
+  /** The value stored under `key` (missing is allowed: it reads as nothing). A missing group reads as an empty group. */
   get(key: string): Node {
-    if (!this.value || typeof this.value !== 'object' || Array.isArray(this.value)) this.fail('should be a group of fields')
-    return new Node(this.file, this.path ? `${this.path}.${key}` : key, (this.value as Record<string, unknown>)[key])
+    const at = this.path ? `${this.path}.${key}` : key
+    if (this.value === undefined || this.value === null) return new Node(this.file, at, undefined)
+    if (typeof this.value !== 'object' || Array.isArray(this.value)) this.fail('should be a group of fields')
+    return new Node(this.file, at, (this.value as Record<string, unknown>)[key])
   }
 
   /** True when there is something stored here. */
@@ -102,6 +104,23 @@ export class Node {
     const value = this.text()
     if (!(options as readonly string[]).includes(value)) this.fail(`"${value}" is not one of: ${options.join(', ')}`)
     return value as T
+  }
+
+  /** A colour like #EF2F38. */
+  colour(): string {
+    const value = this.text()
+    if (!/^#[0-9a-fA-F]{6}$/.test(value)) this.fail(`"${value}" is not a colour like #EF2F38`)
+    return value
+  }
+
+  /**
+   * Every person shown on the website needs permission to publish (a parent's or guardian's for a child). The editor
+   * will not save an entry without the tick; this stops a hand-edited file from putting one live without it.
+   */
+  requirePermission(): void {
+    if (!this.get('permissionToPublish').bool()) {
+      this.fail('has no "Permission to publish" tick. Tick it in the editor, or remove this entry, before it can go on the website')
+    }
   }
 
   /** A list of texts; blank ones are dropped. */
