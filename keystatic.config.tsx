@@ -1,5 +1,6 @@
 import { config } from '@keystatic/core'
 import { achievements } from '@/lib/keystatic/achievements'
+import { ageGroups } from '@/lib/keystatic/ageGroups'
 import { posts } from '@/lib/keystatic/blog'
 import { coaches } from '@/lib/keystatic/coaches'
 import { pricing } from '@/lib/keystatic/pricing'
@@ -31,9 +32,9 @@ export default config({
     navigation: {
       Writing: ['posts'],
       People: ['coaches', 'students', 'achievements'],
-      Website: ['schedule', 'pricing'],
+      'Memberships and classes': ['pricing', 'ageGroups', 'schedule'],
     },
   },
   collections: { posts },
-  singletons: { coaches, students, achievements, schedule, pricing },
+  singletons: { coaches, students, achievements, schedule, pricing, ageGroups },
 })

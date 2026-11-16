@@ -69,6 +69,24 @@ export const BADGE_COLOURS = [
   { label: 'Black', value: '#000000' },
 ] as const
 
+/** Accent colours of the age groups and class types (the colours the pages already use). */
+export const ACCENT_COLOURS = [
+  { label: 'Red', value: '#EF2F38' },
+  { label: 'Yellow', value: '#FFD505' },
+  { label: 'Green', value: '#09BB00' },
+  { label: 'Blue', value: '#0042EA' },
+  { label: 'Purple', value: '#A855F7' },
+  { label: 'Black', value: '#000000' },
+] as const
+
+/** The small icon on a class type card. */
+export const CLASS_FORMAT_ICONS = ['Users', 'Smile', 'Target'] as const
+export const CLASS_FORMAT_ICON_LABELS: Record<(typeof CLASS_FORMAT_ICONS)[number], string> = {
+  Users: 'A group of people',
+  Smile: 'A smiling face',
+  Target: 'A target',
+}
+
 /** Languages besides English, as the editor shows them. */
 export const LANGUAGE_LABELS = {
   km: 'Khmer (ភាសាខ្មែរ)',

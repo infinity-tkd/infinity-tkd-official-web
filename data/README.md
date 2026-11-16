@@ -4,9 +4,9 @@ Site content lives in three places. There is no database: changing content means
 
 | Kind | Where | Edited with |
 | --- | --- | --- |
-| **Content the team edits** (blog, coaches, students, achievements, schedule, pricing) | `content/` (JSON and Markdown), read by small typed modules in this folder | The content editor at `/keystatic` (see [`docs/editing-guide.md`](../docs/editing-guide.md)), or by hand |
+| **Content the team edits** (blog, coaches, students, achievements, schedule, pricing, age groups and class types) | `content/` (JSON and Markdown), read by small typed modules in this folder | The content editor at `/keystatic` (see [`docs/editing-guide.md`](../docs/editing-guide.md)), or by hand |
 | **Curriculum library** (poomsae, kicks, hosinsul, history, rules) | `data/library/`, typed TypeScript | Code |
-| **Everything else** (courses, locations, belts, team, collaborations, age groups, navigation, interface text) | `data/*.ts`, `config/`, `data/translations/` | Code |
+| **Everything else** (courses, locations, belts, team, collaborations, navigation, interface text) | `data/*.ts`, `config/`, `data/translations/` | Code |
 
 TypeScript catches wrong field names and types. `npm run check:data` catches the rest: duplicate ids,
 broken file paths, invalid values in `content/`, picture links that cannot work, blog front matter and
@@ -24,8 +24,8 @@ npm run test:unit    # fast tests: picture links, upload helpers, Markdown table
 | Page | Content |
 | --- | --- |
 | Home | `belts.ts` (Road to Black Belt), `content/achievements.json` (records), `locations.ts` (branches), latest posts from `content/blog/` |
-| `/academy` | `academy.ts` (programs), `ageDivisions.ts` (age groups and class formats), `content/schedule.json` (timetable) |
-| `/pricing` | `content/pricing.json`, `ageDivisions.ts` |
+| `/academy` | `academy.ts` (programs), `content/ageDivisions.json` (age groups and class formats, via `ageDivisions.ts`), `content/schedule.json` (timetable) |
+| `/pricing` (the "Memberships" page) | `content/pricing.json`, `content/ageDivisions.json` |
 | `/locations` | `locations.ts` |
 | `/achievements` | `content/achievements.json` |
 | `/community` | `content/coaches.json`, `content/students.json` |

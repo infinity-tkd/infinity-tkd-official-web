@@ -30,8 +30,9 @@ Every Save is kept in GitHub as a saved version. Nothing is ever lost, and a dev
 | **People > Coaches and team** | Coach photos and details | Community page |
 | **People > Students** | Student spotlights and recent promotions | Community page |
 | **People > Achievements and medals** | Headline numbers, medals and awards | Achievements page, home page |
-| **Website > Class schedule** | The weekly timetable | Academy page |
-| **Website > Pricing and membership plans** | Plans, prices, comparison table, questions | Pricing page |
+| **Memberships and classes > Pricing and membership plans** | Plans, prices, comparison table, questions | Memberships page (`/pricing`) |
+| **Memberships and classes > Age groups and class types** | The age groups (Little Tigers, Cadets...) and class types | Memberships page and Academy page |
+| **Memberships and classes > Class schedule** | The weekly timetable | Academy page |
 
 Some pages show a **list** (for example the coaches). To change the list:
 
@@ -120,7 +121,8 @@ Click a post to change it, or **Create** for a new one.
 | **Post** | The text. Use the bar above it: headings, bold, lists, links, quotes, tables and pictures. |
 
 Tips for the text: use **Heading 2** for the main parts and **Heading 3** inside them. Pictures inside the text
-must be uploaded (links work for the cover picture, the coaches, the students and the awards).
+must be uploaded (links work for the cover picture, and for the pictures of coaches, students, awards and age groups).
+Big photos inside the text are not shrunk automatically, so shrink them first, or use the cover picture instead.
 
 ### Coaches and team
 
@@ -144,6 +146,13 @@ For children, it is best to use a first name or initials only.
 - **Headline numbers**: the four big numbers (for example *200+ Total Competitions*).
 - **Medals and awards**: one item per result. **The first ones are shown on the home page**, so keep the best at the
   top. Inside each award, **Students who won** lists the athletes (each needs **Permission to publish**).
+
+### Age groups and class types
+
+Two lists. **Age groups** are the cards from *Little Tigers* to *Golden Masters*: name, ages, a **picture**, what the group
+develops, key lessons, class length and safety. **Class types** are the cards *General Group Classes*, *Kids & Cadets*
+and *Private 1-on-1*: subtitle, icon, colour, a small badge, who it is for and the benefits. The order is the order on
+the website. The **ID** is made from the name: do not change it after it is published.
 
 ### Class schedule
 

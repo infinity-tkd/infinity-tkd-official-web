@@ -125,8 +125,8 @@ Conventions used across the shell, home page and blog:
 | :--- | :--- | :--- |
 | Navigation menus + footer links | `config/navigation.ts` | Edit one list; menus and footer update together |
 | Brand, SEO defaults, phone/email, social links | `config/siteSettings.ts` | Edit values |
-| Blog, coaches, students, achievements, class schedule, pricing | `content/` | **The content editor at `/keystatic`** (see `docs/editing-guide.md`), or edit the files by hand. `data/README.md` explains how they are read and checked |
-| Courses, branches, belts, team, age groups, locations | `data/*.ts` | Edit typed records (each file is documented in `data/index.ts`) |
+| Blog, coaches, students, achievements, class schedule, pricing and memberships, age groups | `content/` | **The content editor at `/keystatic`** (see `docs/editing-guide.md`), or edit the files by hand. `data/README.md` explains how they are read and checked |
+| Courses, branches, belts, team, locations | `data/*.ts` | Edit typed records (each file is documented in `data/index.ts`) |
 | Curriculum encyclopedia (poomsae, kicks, hosinsul ...) | `data/library/*` | Edit typed records |
 | UI text (buttons, headings, labels) | `data/translations/{en,km,zh,ko}.ts` | Add the key to `en.ts` first; the other files fail to compile if a key is missing |
 | Delivery of form submissions | Environment variables | See `.env.example` |
