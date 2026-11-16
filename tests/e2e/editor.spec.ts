@@ -22,6 +22,14 @@ test.describe('content editor', () => {
     await expect(page.getByText(/not set up yet|Log in with GitHub/).first()).toBeVisible()
   })
 
+  test('carries the Infinity Taekwondo logo', async ({ page }) => {
+    await page.goto('/keystatic')
+    const logo = page.getByRole('img', { name: 'Infinity Taekwondo' }).first()
+    await expect(logo).toBeVisible()
+    const box = await logo.boundingBox()
+    expect(box?.width, 'the mark is drawn at a visible size').toBeGreaterThanOrEqual(20)
+  })
+
   test('has an API that offers and accepts nothing without a login', async ({ request, baseURL }) => {
     // 503 = not set up, 404 = GitHub mode (there is no file API at all): never 200.
     for (const path of ['/api/keystatic/tree', '/api/keystatic/blob/abc/content/pricing.json']) {

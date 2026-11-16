@@ -4,6 +4,7 @@ import { ageGroups } from '@/lib/keystatic/ageGroups'
 import { posts } from '@/lib/keystatic/blog'
 import { coaches } from '@/lib/keystatic/coaches'
 import { pricing } from '@/lib/keystatic/pricing'
+import { BrandMark } from '@/lib/keystatic/BrandMark'
 import { schedule } from '@/lib/keystatic/schedule'
 import { students } from '@/lib/keystatic/students'
 
@@ -28,7 +29,7 @@ export default config({
         }
       : { kind: 'local' },
   ui: {
-    brand: { name: 'Infinity Taekwondo' },
+    brand: { name: 'Infinity Taekwondo', mark: () => <BrandMark /> },
     navigation: {
       Writing: ['posts'],
       People: ['coaches', 'students', 'achievements'],
