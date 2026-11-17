@@ -3,7 +3,7 @@
 You can change the text and pictures of the website yourself. You do not need to know how to code.
 Everything is done in the **content editor**, a web page for the team.
 
-- **Live site:** `https://infinitytaekwondo.com/keystatic`
+- **Live site:** `https://infinitytaekwondo.com/keystatic` (or the project's `.vercel.app` address, until the domain points at the new website)
 - **On a computer** (for people who work on the code): run `npm run dev`, then open `http://localhost:3000/keystatic`
 
 The first time, someone has to finish a one-time setup so that you can log in. The steps are in

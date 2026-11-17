@@ -8,6 +8,11 @@ When someone saves, the editor sends the change to the website's GitHub project.
 website) then rebuilds the site by itself. To do this safely, GitHub needs to know that the editor is allowed to
 save changes, and the editor needs four secret values. You will make those values in GitHub and give them to Vercel.
 
+**Which address?** The steps use `https://infinitytaekwondo.com`. When this guide was written, that domain pointed at
+another web host, not at Vercel, so the new website may not be live there yet. Until it is, use the address Vercel
+gives the project (it ends in `.vercel.app`) wherever a step asks for the website's address, and add the real domain
+as well once it points at Vercel (Step 2 says where).
+
 **Until you finish, nothing is broken.** The website works as normal. The editor page only says
 "The content editor is not set up yet".
 
@@ -56,7 +61,10 @@ A *GitHub App* is the permission slip that lets the editor save changes to the p
 4. Click **Create GitHub App**.
 
 If your website is also opened as `https://www.infinitytaekwondo.com`, click **Add callback URL** and add the same
-address with `www.` in front. The address you type in your browser must be in the list.
+address with `www.` in front. The address you type in your browser must be in the list. The same goes for the
+project's `.vercel.app` address (the short, steady one, not the long address of a single build): add `https://`, then
+that address, then `/api/keystatic/github/oauth/callback`. The real domain's address can be added now or later, but it
+must be in the list before anyone logs in there.
 
 Leave **Expire user authorization tokens** ticked (it is the default). Logins then expire after a few hours and the editor
 renews them by itself while people work. If it ever says you are logged out, click **Log in with GitHub** again.
@@ -117,14 +125,16 @@ The easiest way is to use your password manager's generator (choose 40 character
    Git Repository** must show `infinity-tkd/infinity-tkd-official-web`, and **Production Branch** must be `main`.
    This matters: a Save in the editor is a change on `main`, and the website only updates if Vercel builds that
    change by itself. When this guide was written, GitHub showed no Vercel deployment, status or comment on this
-   project at all (none on `main`, none on any of its ten pull requests), so please look. If it is not connected, connect it here
+   project at all (none on `main`, none on any of its ten pull requests), so please look. The domain `infinitytaekwondo.com` also pointed at another web host, not at Vercel, so the new website
+   may not have been deployed from this project yet. If it is not connected, import the project into Vercel (**Add New >
+   Project**) or connect it here
    (Vercel's page: <https://vercel.com/docs/git>). Step 7 then proves it.
 
 ---
 
 ## Step 7. Try it
 
-1. Open `https://infinitytaekwondo.com/keystatic`.
+1. Open `/keystatic` on the website's address: `https://infinitytaekwondo.com/keystatic`, or the project's `.vercel.app` address.
 2. Click **Log in with GitHub** and allow the App.
 3. You should see the dashboard with the menu on the left. If GitHub says the App is not installed, do Step 4 again.
 4. Open **Class schedule**, change one word, click **Save**, and watch the **Deployments** page on Vercel build the
