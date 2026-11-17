@@ -344,6 +344,24 @@ describe('ordinary addresses', () => {
       assert.doesNotThrow(() => describeImage(text), text.slice(0, 20))
     }
   })
+
+  it('never throw for a very long OneDrive link either (its address is encoded character by character)', () => {
+    for (const text of [`https://1drv.ms/i/s!${'A'.repeat(200_000)}`, `https://onedrive.live.com/?id=${'A'.repeat(300_000)}`]) {
+      assert.doesNotThrow(() => describeImage(text), text.slice(0, 24))
+      assert.equal(describeImage(text).kind, 'onedrive')
+    }
+  })
+
+  it('do not treat a path with a backslash as a file on this website', () => {
+    // A browser reads "/\" as "//", so "/\evil.example/a.jpg" would really be a picture from another website.
+    for (const text of ['/\\evil.example/a.jpg', '/uploads\\..\\x.jpg']) {
+      const result = describeImage(text)
+      assert.equal(result.kind, 'invalid', text)
+      assert.equal(result.url, null, text)
+      assert.ok(result.problem, text)
+    }
+    assert.equal(describeImage('/uploads/news/a.jpg').kind, 'local')
+  })
 })
 
 describe('metadataImageUrl (link previews and structured data)', () => {
@@ -414,6 +432,8 @@ describe('the image optimizer allow-list', () => {
       'https://images.unsplash.com.evil.example/a.jpg',
       'https://notdrive.google.com/thumbnail?id=1',
       'https://drive.google.com/thumbnail/extra?id=1',
+      'https://drive.google.com:8443/thumbnail?id=1', // another port than the default: refused (patterns set `port: ''`)
+      'https://drive.google.com:443/thumbnail?id=1', // the default port written out is the same address
     ]
     for (const address of addresses) {
       const url = new URL(address)

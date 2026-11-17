@@ -91,6 +91,8 @@ export function isOptimizableUrl(url: string): boolean {
     return false
   }
   if (parsed.protocol !== 'https:') return false
+  // Only the default port: config/imageHosts.mjs sets `port: ''` on every pattern (Next ignores the port otherwise).
+  if (parsed.port) return false
   // The optimizer refuses SVG files (they can carry scripts); those are shown straight from their host.
   if (/\.svg$/i.test(parsed.pathname)) return false
   const host = parsed.hostname.toLowerCase()
@@ -245,11 +247,13 @@ function fromImgur(input: string, url: URL, host: string): ImageSource | null {
   return broken(input, 'page', 'Imgur', 'This Imgur link is an album or gallery page. Open one picture, right-click it, choose "Copy image address" and paste that.')
 }
 
-const base64Url = (text: string) =>
-  btoa(String.fromCharCode(...new TextEncoder().encode(text)))
-    .replace(/=+$/, '')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
+const base64Url = (text: string) => {
+  // One character at a time: String.fromCharCode(...bytes) throws a RangeError for a very long pasted link, and
+  // describeImage() must never throw (the editor calls it on every key press).
+  let binary = ''
+  for (const byte of new TextEncoder().encode(text)) binary += String.fromCharCode(byte)
+  return btoa(binary).replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_')
+}
 
 function fromOneDrive(input: string, url: URL, host: string): ImageSource | null {
   if (host === 'api.onedrive.com') return finish(input, 'onedrive', 'OneDrive', url.toString())
@@ -369,7 +373,11 @@ export function describeImage(input: string | null | undefined): ImageSource {
   const raw = (input ?? '').trim().replace(/^<(.*)>$/, '$1').replace(/^(["'])(.*)\1$/, '$2').trim()
 
   if (!raw) return finish('', 'empty', 'No picture', null)
-  if (raw.startsWith('/') && !raw.startsWith('//')) return finish(raw, 'local', 'File on this website', raw)
+  if (raw.startsWith('/') && !raw.startsWith('//')) {
+    // "/\evil.example/a.jpg": a browser reads the backslash as a slash, so this would be an address on another website.
+    if (raw.includes('\\')) return broken(raw, 'invalid', 'Not a web address', 'That does not look like a picture link. A link starts with https://')
+    return finish(raw, 'local', 'File on this website', raw)
+  }
   if (/^[a-zA-Z]:[\\/]/.test(raw) || raw.startsWith('\\\\') || /^file:/i.test(raw)) {
     return broken(raw, 'invalid', 'File on your computer', 'That is a file on your computer, which visitors cannot see. Use the Upload button instead.')
   }

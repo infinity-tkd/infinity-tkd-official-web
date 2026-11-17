@@ -39,6 +39,8 @@ export const OPTIMIZED_IMAGE_HOSTS = [
 
 /**
  * The same list in the shape Next.js wants for `images.remotePatterns`.
- * @type {Array<{ protocol: 'https', hostname: string, pathname?: string }>}
+ * `port: ''` means the default port only. Without it Next accepts any port on an allowed host, so the optimizer could be
+ * asked to fetch from an odd port of Imgur or Google; there is no reason to allow that.
+ * @type {Array<{ protocol: 'https', port: '', hostname: string, pathname?: string }>}
  */
-export const OPTIMIZED_IMAGE_REMOTE_PATTERNS = OPTIMIZED_IMAGE_HOSTS.map((host) => ({ protocol: /** @type {const} */ ('https'), ...host }))
+export const OPTIMIZED_IMAGE_REMOTE_PATTERNS = OPTIMIZED_IMAGE_HOSTS.map((host) => ({ protocol: /** @type {const} */ ('https'), port: /** @type {const} */ (''), ...host }))
