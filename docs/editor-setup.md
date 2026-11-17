@@ -122,7 +122,7 @@ The easiest way is to use your password manager's generator (choose 40 character
 2. Click **Log in with GitHub** and allow the App.
 3. You should see the dashboard with the menu on the left. If GitHub says the App is not installed, do Step 4 again.
 4. Open **Class schedule**, change one word, click **Save**, and watch the **Deployments** page on Vercel build the
-   change. Change the word back and Save again.
+   change. Change the word back and Save again. Ask each other editor to do this test once with their own login, so you know their Saves go live too.
 
 ---
 
@@ -137,7 +137,7 @@ Each **Save** goes to the main version of the website, and the site updates by i
 
 - Good: nothing else to learn.
 - Safe enough: every edit is **checked before it is published**. If the check fails, the old website stays online
-  and Vercel sends a failure message that names the problem.
+  and the failed build on Vercel names the problem.
 
 ### Option B: check first, then publish
 
@@ -172,6 +172,15 @@ The Terms do not say exactly what "commercial" means, and Vercel may disable Hob
 A website that advertises a business's classes and prices may well count as commercial. Please check
 the current terms at <https://vercel.com/legal/terms> (or ask Vercel's support), and think about the paid **Pro** plan
 (at the time of writing, $20 per month for each person who can deploy; people who only look are free).
+
+**Who is allowed to publish.** Each Save in the editor is a change made by the editor's own GitHub account, and Vercel
+builds it. Vercel's documentation describes a check of *who* made the change only for **private** GitHub projects. For
+those, on the Hobby plan only the owner of the Vercel account can deploy (and a private project that belongs to a
+GitHub organization cannot deploy to Hobby at all). On Pro, the person who saves must be a member of the Vercel team,
+which is a paid seat. The GitHub project is **public** at the time of writing, and the documentation describes no such
+limit for public projects. If the project is ever made private, or if a colleague's Save does not go live, open the
+**Deployments** page on Vercel and the change on GitHub, and look for a message about the commit author. Vercel
+explains the rules at <https://vercel.com/docs/git> (section "Deploying private Git repositories").
 
 ---
 

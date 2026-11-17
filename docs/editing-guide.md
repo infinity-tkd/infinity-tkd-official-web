@@ -18,7 +18,7 @@ The first time, someone has to finish a one-time setup so that you can log in. T
 3. Change it, then click **Save** (top right).
 4. Wait. The website updates **by itself in about 2 to 5 minutes**. You do not have to do anything else.
 
-**There is no "publish" step and no preview.** Save goes straight to the live website (read "How a change goes live"
+**There is no "publish" step and no Preview button.** Save goes straight to the live website (read "How a change goes live"
 below). Every Save is kept in GitHub as a saved version. Nothing is ever lost, and a developer can bring back an old
 version.
 
@@ -35,11 +35,11 @@ You save **straight to the main version of the website**. There is no second cop
 1. You click **Save**. The editor saves your change in the website's GitHub project.
 2. Vercel (the company that hosts the website) notices the change and **builds the website again**.
 3. Before anything goes live, the build **checks** your change: a content check (required fields, valid choices,
-   pictures, links, blocks, student permission) and a type check. This takes part of the build, so it is automatic.
+   pictures, links, blocks, student permission) and a type check. This is part of the build, so it happens by itself.
 4. **If the checks pass**, the new website replaces the old one. This takes **a few minutes** (usually 2 to 5). Refresh
    the page to see it.
-5. **If a check fails**, nothing goes live: **the old website stays online**, exactly as it was. Vercel sends a failure
-   message that names the file and the field to fix. Fix it in the editor and Save again.
+5. **If a check fails**, nothing goes live: **the old website stays online**, exactly as it was. The failed build on Vercel names
+   the file and the field to fix (Vercel may also send an email). Fix it in the editor and Save again.
 
 So a wrong edit can delay a change, but it cannot break the live website. To see what is happening, open the project
 on Vercel and look at **Deployments**: a green dot is live, a red one is a failed check with the reason.
@@ -217,7 +217,7 @@ Two lists: **Student spotlights** (cards) and **Recent promotions**. Entries are
 
 - **Name to show**: a **first name or initials only** (*Sophea*, or *Sophea P.* if two students share a first name).
   **Never a full name for anyone under 18.** For an adult, a full name only if they agree.
-- **A photo**, the **belt** and, for a spotlight, a **short note** (one or two sentences, under 200 characters).
+- **A photo**, the **belt** and, for a spotlight, a **short note** (one or two sentences, up to 200 characters).
 - No surname, no age, no school and no story are shown. The website no longer has a "Read story" window.
 
 The same goes for **Students who won** under *Achievements and medals*: a first name or initials, with the belt and
@@ -229,10 +229,11 @@ entry without it. Tick it only when you have **written permission** to show that
 
 **Still to do by the owner: confirm the permission of the 25 students who were already on the website**
 (6 spotlights, 4 promotions and 15 medal winners). They are shown, as short entries, because they were live before the
-tick existed, but **nobody has confirmed their permission yet**, and nothing in the project says they were confirmed.
+tick existed, but **nobody has confirmed their permission yet**, and nothing in the project says they were confirmed. The pictures on these entries are stock photos from Unsplash, not photos of the students: if an entry was only ever a sample, remove it instead of asking for permission.
 In the editor their names carry the mark *(!) permission still to confirm*. For each one: ask the parent or guardian
 (or the student, if an adult), and when you have a yes, open the entry and **tick Permission to publish**. If you do
-not get a yes, **remove the entry**. Every website update also lists how many are still waiting, so it is not forgotten.
+not get a yes, **remove the entry**. The website build also prints how many are still waiting (in the build log on
+Vercel).
 
 ### Achievements and medals
 
@@ -270,8 +271,8 @@ valid, that pictures and links make sense, that blocks in a post are finished, a
 missing the permission tick. (A student whose name looks like a full name only gets a warning, not a stop, because an
 adult may agree to be named.)
 
-**If something is wrong, the new version is not published and the old website stays online.** Vercel (the company
-that hosts the site) sends a message saying the update failed. The message says which file and which field to fix.
+**If something is wrong, the new version is not published and the old website stays online.** The failed build on Vercel (the company
+that hosts the site) says which file and which field to fix, and Vercel may also send an email.
 Fix it in the editor and Save again. (See "How a change goes live" above.)
 
 ---
