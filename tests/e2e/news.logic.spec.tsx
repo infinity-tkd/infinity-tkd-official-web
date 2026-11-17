@@ -47,6 +47,15 @@ test.describe('the card', () => {
     expect(markup).toContain(encodeURIComponent('https://drive.google.com/thumbnail?id=1a2B3c4D5e6F7g8H9i0JkLmNoPqRsTuVw&sz=w1600'))
   })
 
+  test('a picture link that can never work leaves the picture box out, so the card is simply text', () => {
+    for (const image of ['https://www.facebook.com/photo/?fbid=1', 'https://drive.google.com/drive/folders/abc123', 'C:\\Users\\me\\a.jpg']) {
+      const markup = card({ image })
+      expect(markup, image).not.toContain('<img')
+      expect(markup, image).not.toContain('aspect-[16/10]')
+      expect(markup, image).toContain('Grading day')
+    }
+  })
+
   test('a page of this website is a normal link with the default words', () => {
     const markup = card({ linkUrl: '/contact?subject=Free%20Trial' })
     expect(markup).toContain('href="/contact?subject=Free%20Trial"')

@@ -9,6 +9,11 @@ export interface SafeImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageEl
   fallbackSrc?: string
   alt: string
   priority?: boolean
+  /**
+   * Called once when every address has failed and there is no fallback photo to show (`fallbackSrc=""`), so the caller can
+   * leave the empty box out. A link that cannot work at all has no address to fail: check `describeImage(src).url` first.
+   */
+  onExhausted?: () => void
 }
 
 const UNSPLASH = /^https:\/\/images\.unsplash\.com\//
@@ -84,6 +89,7 @@ export function SafeImage({
   sizes,
   style,
   referrerPolicy,
+  onExhausted,
   ...props
 }: SafeImageProps) {
   const attempts = React.useMemo(() => attemptsFor(src), [src])
@@ -100,6 +106,7 @@ export function SafeImage({
 
   const handleError = () => {
     if (attempt < attempts.length && (attempt < last || fallbackSrc)) setAttempt(attempt + 1)
+    else onExhausted?.()
   }
 
   const srcSet = current.srcSet ?? unsplashSrcSet(current.src)

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, ExternalLink } from 'lucide-react'
-import { SafeImage } from '@/components/SafeImage'
+import { NewsPicture } from '@/components/news/NewsPicture'
 import type { NewsItem } from '@/lib/news'
 import { isInternalHref, isSafeHref } from '@/lib/safeHref'
 
@@ -46,18 +46,8 @@ export function NewsCard({ item, dateLabel, readMore, newTab, headingLevel = 3 }
       id={item.id}
       className="flex h-full scroll-mt-28 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/40"
     >
-      {item.image && (
-        <div className="relative aspect-[16/10] overflow-hidden bg-zinc-200 dark:bg-zinc-800">
-          {/* Decorative: the headline right below says what this is about. A link that cannot work simply leaves the box empty. */}
-          <SafeImage
-            src={item.image}
-            alt=""
-            fallbackSrc=""
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="h-full w-full object-cover"
-          />
-        </div>
-      )}
+      {/* Decorative: the headline right below says what this is about. A picture that cannot be shown leaves no box (NewsPicture). */}
+      {item.image && <NewsPicture key={item.image} src={item.image} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />}
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <time dateTime={item.date} className="mb-3 text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
