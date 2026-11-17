@@ -13,7 +13,7 @@ save changes, and the editor needs four secret values. You will make those value
 
 **You need:**
 
-- A GitHub account that is an **owner or admin** of the `infinity-tkd` GitHub organisation (or of the website project).
+- The GitHub account that owns the website project (`infinity-tkd`). If the project is ever moved into a GitHub organisation, an **owner** of that organisation.
 - Access to the website's project on **Vercel** as an **owner or admin**.
 
 **Never send these secret values by email or chat, and never put them in the code.** They go only into GitHub
@@ -26,8 +26,8 @@ and into Vercel's settings page.
 Only people with **Write** access to the website's GitHub project can log in to the editor.
 
 1. Open the project: `https://github.com/infinity-tkd/infinity-tkd-official-web`
-2. Click **Settings**, then **Collaborators and teams**, then **Add people**.
-3. Add each person by their GitHub name or email and give them the role **Write**.
+2. Click **Settings**, then **Collaborators** (it says **Collaborators and teams** if the project belongs to an organisation), then **Add people**.
+3. Add each person by their GitHub name or email. If GitHub asks for a role, choose **Write**.
 
 Each person needs their own free GitHub account. To remove someone later, remove them here.
 
@@ -37,7 +37,7 @@ Each person needs their own free GitHub account. To remove someone later, remove
 
 A *GitHub App* is the permission slip that lets the editor save changes to the project.
 
-1. On GitHub, open the **organisation's** settings page (click your picture, then the organisation, then **Settings**).
+1. On GitHub, open the settings of the account that owns the project: click your picture, then **Settings**. (If the project belongs to an organisation, click your picture, then the organisation, then **Settings**.)
 2. In the left menu, scroll down to **Developer settings**, then **GitHub Apps**, then click **New GitHub App**.
 3. Fill in the form like this. Leave everything else as it is.
 
@@ -79,7 +79,7 @@ You are now on the App's settings page.
 ## Step 4. Install the App on the website project only
 
 1. On the App's settings page, click **Install App** in the left menu.
-2. Next to the `infinity-tkd` organisation, click **Install**.
+2. Next to the `infinity-tkd` account, click **Install**.
 3. Choose **Only select repositories**, pick `infinity-tkd-official-web`, and click **Install**.
 
 Now the editor can change this one project, and nothing else.
@@ -113,6 +113,12 @@ The easiest way is to use your password manager's generator (choose 40 character
    opens, **untick "Use existing Build Cache"** and confirm.
    (You must redeploy once, because Vercel only reads new settings when it builds, and one of the values is built into
    the website's pages.)
+4. **Check that Vercel builds from GitHub.** In the same Vercel project, open **Settings**, then **Git**. **Connected
+   Git Repository** must show `infinity-tkd/infinity-tkd-official-web`, and **Production Branch** must be `main`.
+   This matters: a Save in the editor is a change on `main`, and the website only updates if Vercel builds that
+   change by itself. When this guide was written, GitHub showed no Vercel deployment, status or comment on this
+   project at all (none on `main`, none on any of its ten pull requests), so please look. If it is not connected, connect it here
+   (Vercel's page: <https://vercel.com/docs/git>). Step 7 then proves it.
 
 ---
 
