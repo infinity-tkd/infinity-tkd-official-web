@@ -14,7 +14,8 @@ gives the project (it ends in `.vercel.app`) wherever a step asks for the websit
 as well once it points at Vercel (Step 2 says where).
 
 **Until you finish, nothing is broken.** The website works as normal. The editor page only says
-"The content editor is not set up yet".
+"The content editor is not set up yet", or "A content editor setting looks wrong" when a value in Vercel cannot work
+(it names the setting and says what to change, and never shows the value).
 
 **You need:**
 
@@ -76,11 +77,16 @@ renews them by itself while people work. If it ever says you are logged out, cli
 You are now on the App's settings page.
 
 1. **Client ID**: near the top. Copy it. This is value 1: `KEYSTATIC_GITHUB_CLIENT_ID`.
+   **Careful: the page shows two ids.** The **App ID** is only digits (like `1234567`): do **not** use that one.
+   The **Client ID** starts with `Iv` (like `Iv23liAbCd...`): that is the one you need. With the App ID, GitHub shows a
+   **404** page when someone clicks **Log in with GitHub**.
 2. **Client secrets**: click **Generate a new client secret**. **Copy it straight away: GitHub shows it only once.**
    This is value 2: `KEYSTATIC_GITHUB_CLIENT_SECRET`.
 3. **The App's short name (the "slug")**: click **Public page** (or look at the address of this page). The address is
    `https://github.com/apps/the-short-name`. The last part, `the-short-name`, is value 3:
-   `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
+   `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. It is all lowercase, with hyphens where the App's name has spaces (an App
+   called `Infinity TKD Editor` has the short name `infinity-tkd-editor`). It is **not** the App's name: with capital
+   letters or underscores, the **Install** button in the editor leads to a GitHub **404** page.
 
 ---
 
@@ -110,23 +116,25 @@ The easiest way is to use your password manager's generator (choose 40 character
    type, or switch on **Sensitive**: Vercel's screen has used both names. A secret value cannot be read again after it
    is saved, so keep your own copy in your password manager.
 
-| Key | Value |
-| --- | --- |
-| `KEYSTATIC_GITHUB_CLIENT_ID` | value 1 |
-| `KEYSTATIC_GITHUB_CLIENT_SECRET` | value 2 |
-| `KEYSTATIC_SECRET` | value 4 |
-| `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | value 3 |
+| Key | Value | Where it comes from, and what it looks like |
+| --- | --- | --- |
+| `KEYSTATIC_GITHUB_CLIENT_ID` | value 1 | Step 3, the **Client ID**. Starts with `Iv`. Never only digits (that is the App ID). |
+| `KEYSTATIC_GITHUB_CLIENT_SECRET` | value 2 | Step 3, **Client secrets**. A long string of letters and digits, shown only once. |
+| `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` | value 3 | Step 3, the address of the App's **Public page**. Lowercase with hyphens, like `infinity-tkd-editor`. |
+| `KEYSTATIC_SECRET` | value 4 | Step 5. You make it: 32 or more random characters. It does not come from GitHub. |
 
 3. Go to **Deployments**, open the latest deployment, click the **...** menu and choose **Redeploy**. In the box that
    opens, **untick "Use existing Build Cache"** and confirm.
    (You must redeploy once, because Vercel only reads new settings when it builds, and one of the values is built into
    the website's pages.)
+   Then open `/keystatic`. If a value cannot work, the page says which setting looks wrong (it never shows the value
+   itself): fix it in Vercel and redeploy again.
 4. **Check that Vercel builds from GitHub.** In the same Vercel project, open **Settings**, then **Git**. **Connected
    Git Repository** must show `infinity-tkd/infinity-tkd-official-web`, and **Production Branch** must be `main`.
    This matters: a Save in the editor is a change on `main`, and the website only updates if Vercel builds that
-   change by itself. When this guide was written, GitHub showed no Vercel deployment, status or comment on this
-   project at all (none on `main`, none on any of its ten pull requests), so please look. The domain `infinitytaekwondo.com` also pointed at another web host, not at Vercel, so the new website
-   may not have been deployed from this project yet. If it is not connected, import the project into Vercel (**Add New >
+   change by itself. On 18 November 2026 GitHub showed Vercel's "Deployment has completed" status on the change that
+   added the editor, so this project is connected. The domain `infinitytaekwondo.com` also pointed at another web host,
+   not at Vercel, so use the project's `.vercel.app` address until it moves. If the project is ever not connected, import it into Vercel (**Add New >
    Project**) or connect it here
    (Vercel's page: <https://vercel.com/docs/git>). Step 7 then proves it.
 
@@ -135,7 +143,8 @@ The easiest way is to use your password manager's generator (choose 40 character
 ## Step 7. Try it
 
 1. Open `/keystatic` on the website's address: `https://infinitytaekwondo.com/keystatic`, or the project's `.vercel.app` address.
-2. Click **Log in with GitHub** and allow the App.
+2. Click **Log in with GitHub** and allow the App. (A GitHub **404** page here means a value in Vercel is wrong: see
+   **If something goes wrong** below.)
 3. You should see the dashboard with the menu on the left. If GitHub says the App is not installed, do Step 4 again.
 4. Open **Class schedule**, change one word, click **Save**, and watch the **Deployments** page on Vercel build the
    change. Change the word back and Save again. Ask each other editor to do this test once with their own login, so you know their Saves go live too.
@@ -205,6 +214,10 @@ explains the rules at <https://vercel.com/docs/git> (section "Deploying private 
 | What you see | What to do |
 | --- | --- |
 | "The content editor is not set up yet" | One of the four values is missing in Vercel (the page lists which). Add it (Step 6) and redeploy. |
+| "A content editor setting looks wrong" | The page names the setting and says what is wrong with it. Change that value in Vercel (Step 6) and redeploy. It never shows the value itself. |
+| You click **Log in with GitHub** and GitHub shows a **404** page | The Client ID in Vercel is wrong. Most often it is the **App ID** (only digits). Use the **Client ID**, which starts with `Iv` (Step 3). The editor page now says so by itself. |
+| The **Install** button in the editor leads to a GitHub **404** page | The App's short name in Vercel (`NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`) is wrong. Use the last part of the App's **Public page** address, in lowercase with hyphens (Step 3). |
+| After you allow the App, the page says **Authorization failed** | The client secret in Vercel is wrong, or it was copied with a space. Generate a new client secret (Step 3), update `KEYSTATIC_GITHUB_CLIENT_SECRET`, and redeploy. Also check that **Expire user authorization tokens** is still ticked (Step 2). |
 | GitHub says **redirect_uri is not associated with this application** | The callback address in the GitHub App must match the address in your browser exactly. Add it under **Callback URL** (Step 2), including the `www.` version if you use it. |
 | You can log in, but Save says you have no access or the resource is not accessible | The App is not installed on the project (Step 4), or the person does not have **Write** access (Step 1). |
 | Save works, but the website does not change | Look at **Deployments** on Vercel. A red failed deployment shows which file and field to fix. The old site stays online meanwhile. |
@@ -217,7 +230,10 @@ explains the rules at <https://vercel.com/docs/git> (section "Deploying private 
   `npm run dev`. The switch is in `keystatic.config.tsx` (`NODE_ENV`). Local mode has **no login** and must never be
   used on a server: that is why the live site never uses it.
 - Without the four settings Keystatic itself stops the build, so `app/api/keystatic/[...params]/route.ts` and
-  `app/keystatic/layout.tsx` only start it when `lib/editorSetup.ts` says all four are present.
+  `app/keystatic/layout.tsx` only start it when `lib/editorSetup.ts` says all four are present and none looks wrong
+  (`editorSettingProblems`: the App ID where the Client ID goes, a short name that is not lowercase letters, digits and
+  hyphens, a `KEYSTATIC_SECRET` under 32 characters, a pasted space or quote mark). These checks never ask GitHub, flag
+  only values that can never work, and show only names and hints (`app/keystatic/SettingsNotice.tsx`), never a value.
 - `engines.node` in `package.json` is `22.x`, so Vercel builds with Node 22 whatever the project setting says
   (`npm run check:data` needs Node 22.6 or newer).
 - Branches made in the editor are limited to the `content/` prefix (`branchPrefix` in the config).
