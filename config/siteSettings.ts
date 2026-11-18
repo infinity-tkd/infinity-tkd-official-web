@@ -369,14 +369,16 @@ export const getHeadquartersFullAddress = () =>
 
 /**
  * What the content editor (/keystatic) needs on top of the public policy: its own font from Google Fonts, the
- * GitHub API it saves through, and permission to preview whatever image link an editor pastes. The public pages
- * never get these.
+ * GitHub API it saves through, raw.githubusercontent.com (where it READS the project's files while the GitHub
+ * project is public: without it every page that opens a file says "Failed to fetch"; tests/unit/security.test.ts
+ * checks this list against the addresses Keystatic's own code uses), and permission to preview whatever image
+ * link an editor pastes. The public pages never get these.
  */
 export const editorContentSecurityPolicy = {
   styleSrc: ['https://fonts.googleapis.com'],
   fontSrc: ['https://fonts.gstatic.com'],
   imgSrc: ['https:'],
-  connectSrc: ['https://api.github.com'],
+  connectSrc: ['https://api.github.com', 'https://raw.githubusercontent.com'],
 }
 
 /** Build formatted CSP header string. `editor` adds what the content editor needs (see above). */
