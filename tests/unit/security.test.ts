@@ -99,6 +99,26 @@ describe('content editor: Content-Security-Policy', () => {
     assert.ok(csp['img-src'].includes('https:'))
   })
 
+  it('may read the project files from raw.githubusercontent.com (Keystatic does that while the GitHub project is public)', () => {
+    assert.ok(csp['connect-src'].includes('https://raw.githubusercontent.com'), 'without it every editor page that opens a file says "Failed to fetch"')
+  })
+
+  it("allows every address Keystatic's own browser code fetches from (a list kept by hand went wrong once: raw.githubusercontent.com was missing)", () => {
+    const file = path.join(process.cwd(), 'node_modules', '@keystatic', 'core', 'dist', 'keystatic-core-ui.js')
+    const hosts = new Set<string>()
+    for (const line of readFileSync(file, 'utf8').split('\n')) {
+      if (!/\bfetch\(|\burl:/.test(line)) continue
+      for (const match of line.matchAll(/https:\/\/([a-z0-9.-]+)/gi)) hosts.add(match[1])
+    }
+    assert.ok(
+      hosts.has('raw.githubusercontent.com') && hosts.has('api.github.com'),
+      `the scan of Keystatic's code no longer finds the addresses it knew (found: ${[...hosts].join(', ') || 'none'}): check how Keystatic reads files now and update this test`
+    )
+    for (const host of hosts) {
+      assert.ok(csp['connect-src'].includes(`https://${host}`), `Keystatic's editor fetches from ${host}, but connect-src does not allow it: editor pages would say "Failed to fetch"`)
+    }
+  })
+
   it('is still closed to being framed, and to forms and plugins from elsewhere', () => {
     assert.deepEqual(csp['frame-ancestors'], ["'none'"])
     assert.deepEqual(csp['form-action'], ["'self'"])

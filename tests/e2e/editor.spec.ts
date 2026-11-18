@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Route } from '@playwright/test'
 
 /**
  * The content editor at /keystatic is for the team only. It must stay out of search results and the sitemap,
@@ -44,8 +44,24 @@ test.describe('content editor', () => {
     const home = (await request.get(`${baseURL}/`)).headers()['content-security-policy'] ?? ''
     expect(editor).toContain('connect-src')
     expect(editor).toContain('https://api.github.com')
+    expect(editor).toContain('https://raw.githubusercontent.com')
     expect(home).not.toContain('https://api.github.com')
+    expect(home).not.toContain('raw.githubusercontent.com')
     expect(home).toContain("img-src 'self' data: blob: https:")
     for (const csp of [editor, home]) expect(csp).toContain("frame-ancestors 'none'")
+  })
+
+  test('lets the editor page read the project files from GitHub in a real browser, and nothing from other hosts', async ({ page }) => {
+    // GitHub is answered by the test itself, so no real request leaves this computer. A request that the page's own
+    // security policy forbids never reaches these handlers: the fetch just fails ("Failed to fetch" in the editor).
+    const answer = (route: Route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{}' })
+    for (const host of ['raw.githubusercontent.com', 'api.github.com', 'example.org']) await page.route(`https://${host}/**`, answer)
+    await page.goto('/keystatic')
+    const status = (url: string) => page.evaluate((address) => fetch(address).then((response) => response.status, () => 'blocked'), url)
+    // While the GitHub project is public, Keystatic reads its files from raw.githubusercontent.com; saving goes through the API.
+    expect(await status('https://raw.githubusercontent.com/infinity-tkd/example/0123abc/content/schedule.json')).toBe(200)
+    expect(await status('https://api.github.com/graphql')).toBe(200)
+    expect(await status('https://example.org/anything'), 'any other host stays blocked').toBe('blocked')
   })
 })
