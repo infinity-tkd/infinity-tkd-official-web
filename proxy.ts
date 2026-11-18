@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { siteSettings, buildCspHeader } from '@/config/siteSettings'
+import { UPLOADS_CONTENT_SECURITY_POLICY } from '@/config/uploadsPolicy.mjs'
+import { isEditorPath } from '@/lib/editorPath'
 
 // Compile regex patterns from siteSettings
 const BLOCKED_PATH_PATTERNS = siteSettings.security.blockedPathPatterns.map(
@@ -208,7 +210,12 @@ export function proxy(request: NextRequest) {
   const secHeaders = siteSettings.security.headers
   const isFigma = Boolean(process.env.FIGMA)
 
-  response.headers.set('Content-Security-Policy', buildCspHeader(isFigma))
+  // Files in /uploads (editor pictures) are shown inside <img> only; opened directly they must not run anything. The
+  // proxy sees some of them (e.g. .html, .avif), so the locked-down policy is set here too, not only in next.config.mjs.
+  response.headers.set(
+    'Content-Security-Policy',
+    pathname.startsWith('/uploads/') ? UPLOADS_CONTENT_SECURITY_POLICY : buildCspHeader(isFigma, { editor: isEditorPath(pathname) })
+  )
   if (!isFigma) {
     response.headers.set('X-Frame-Options', secHeaders.xFrameOptions)
   }

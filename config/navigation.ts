@@ -15,6 +15,7 @@ import {
   Info,
   Lightbulb,
   MapPin,
+  Megaphone,
   Newspaper,
   ShoppingBag,
   Users,
@@ -138,6 +139,12 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: MapPin,
       },
       {
+        href: '/news',
+        label: (t) => t.footer.news,
+        description: 'Gradings, events & announcements from the dojang',
+        icon: Megaphone,
+      },
+      {
         href: '/blog',
         label: (t) => t.footer.blog,
         description: 'Articles, training guides & master perspectives',
@@ -209,6 +216,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { href: '/about', label: (t) => t.footer.philosophy },
       { href: '/community', label: (t) => t.footer.community },
       { href: '/achievements', label: (t) => t.footer.achievements },
+      { href: '/news', label: (t) => t.footer.news },
       { href: '/collaborations', label: (t) => t.footer.collaborations },
       { href: '/locations', label: (t) => t.footer.branchesLink },
     ],

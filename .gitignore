@@ -42,3 +42,7 @@ figma.archive
 /test-results/
 /playwright-report/
 /tests/e2e/__screenshots__/
+
+# `next dev` writes this file when it sees an AI coding agent (Next 16.4.6 and later). It is not part of the project,
+# so keep it out of commits. If you write your own AGENTS.md, remove this line.
+/AGENTS.md

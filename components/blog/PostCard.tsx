@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Clock } from 'lucide-react'
+import { OptimizedImage } from '@/components/ui/OptimizedImage'
 import { cn } from '@/lib/utils'
 import { formatPostDate, type BlogPostMeta } from '@/lib/blog'
 
@@ -31,7 +31,7 @@ function CoverImage({ post, priority, sizes }: { post: BlogPostMeta; priority?: 
     )
   }
   return (
-    <Image
+    <OptimizedImage
       src={post.cover.src}
       alt={post.cover.alt}
       fill

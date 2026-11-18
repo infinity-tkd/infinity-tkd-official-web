@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 import path from 'path'
+import { OPTIMIZED_IMAGE_REMOTE_PATTERNS } from './config/imageHosts.mjs'
+import { UPLOADS_CONTENT_SECURITY_POLICY } from './config/uploadsPolicy.mjs'
 
 const isFigma = Boolean(process.env.FIGMA)
 
@@ -8,7 +10,9 @@ const cspDirectives = [
   // 'unsafe-eval' is only needed by the dev server (React Refresh).
   process.env.NODE_ENV === 'production' ? "script-src 'self' 'unsafe-inline'" : "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-  "img-src 'self' data: blob: https://images.unsplash.com https://source.unsplash.com https://i.ytimg.com https://img.youtube.com",
+  // Any https picture: editors paste links from Google Drive, Dropbox, Imgur and other sites. Same list as
+  // config/siteSettings.ts (which proxy.ts sends); the trade-off is explained there.
+  "img-src 'self' data: blob: https:",
   "font-src 'self' https://cdn.jsdelivr.net data:",
   "connect-src 'self' https://cdn.jsdelivr.net",
   "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com",
@@ -69,29 +73,18 @@ const nextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  // `next build` type-checks the whole project. Keep it on: together with `npm run check:data` (run first by
+  // `npm run build`) it is what stops a bad content edit from going live, because Vercel keeps the previous
+  // deployment when a build fails.
+  typescript: { ignoreBuildErrors: false },
   images: {
     // Qualities that <Image quality={...}> may request. Values not listed here are coerced to 75.
     qualities: [60, 65, 70, 75],
     // Remote images are resized/re-encoded on demand; cache the results for a week.
     minimumCacheTTL: 60 * 60 * 24 * 7,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'source.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.ytimg.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img.youtube.com',
-      },
-    ],
+    // The hosts Vercel's image optimizer may fetch from. One list, shared with lib/imageUrl.ts, with NO wildcard
+    // host (that would make the site an open image proxy). See config/imageHosts.mjs before adding one.
+    remotePatterns: OPTIMIZED_IMAGE_REMOTE_PATTERNS,
   },
   env: {
     NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL || '',
@@ -101,6 +94,12 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        // Pictures saved through the content editor are only ever shown inside <img>. Opening one directly must not be
+        // able to run anything, even if it is an SVG or HTML file committed by hand (later rule wins over the one above).
+        source: '/uploads/:path*',
+        headers: [{ key: 'Content-Security-Policy', value: UPLOADS_CONTENT_SECURITY_POLICY }],
       },
       {
         // The service worker script must never be served from a cache, or a fixed worker could not reach visitors.

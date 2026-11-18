@@ -9,6 +9,7 @@ import { PillarsSection } from '@/components/home/PillarsSection'
 import { BranchesSection } from '@/components/home/BranchesSection'
 import { RecordsSection } from '@/components/home/RecordsSection'
 import { LatestJournal } from '@/components/home/LatestJournal'
+import { LatestNews } from '@/components/home/LatestNews'
 
 // Server component: owns the homepage's own canonical URL and renders the blog teaser from
 // Markdown at build time. Interactive sections below are client components.
@@ -21,6 +22,10 @@ export default function HomePage() {
     <div className="overflow-x-hidden bg-white text-zinc-900 dark:bg-black dark:text-white">
       <HeroSection />
       <StatsBanner />
+
+      {/* Short announcements; shows nothing until the first one is added in the content editor. */}
+      <LatestNews />
+
       <DojangSection />
 
       {/* All eight ranks at a glance; the full interactive guide lives at /belt-journey. */}

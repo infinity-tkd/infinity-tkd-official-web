@@ -1,8 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
-import ReactMarkdown, { type Components } from 'react-markdown'
+import ReactMarkdown, { defaultUrlTransform, type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { slugify } from '@/lib/blog'
+import { headingId } from '@/lib/blogParse'
+import { isInternalHref as isInternal, isSafeHref } from '@/lib/safeHref'
+import { SafeImage } from '@/components/SafeImage'
 
 /** Flattens React children to plain text so headings can derive their anchor id. */
 function textOf(node: React.ReactNode): string {
@@ -12,19 +14,33 @@ function textOf(node: React.ReactNode): string {
   return ''
 }
 
-function isInternal(href: string) {
-  return href.startsWith('/') || href.startsWith('#')
+type PictureProps = { src?: string | Blob; alt?: string; title?: string }
+
+// SafeImage understands share links (Google Drive, Dropbox, Imgur...), so a link pasted into a post shows the picture.
+// (An address the reader refused, such as javascript:..., arrives as "": no address at all, never an empty src.)
+const addressOf = (src: PictureProps['src']) => (typeof src === 'string' && src.trim() ? src : undefined)
+
+const contentImage = ({ src, alt }: PictureProps) => (
+  <SafeImage
+    src={addressOf(src)}
+    alt={alt ?? ''}
+    className="my-8 w-full rounded-2xl border border-zinc-200 dark:border-zinc-800"
+  />
+)
+
+/** The picture when a paragraph holds nothing else: that is how a picture on a line of its own arrives. */
+function onlyPicture(children: React.ReactNode): React.ReactElement<PictureProps> | null {
+  const items = React.Children.toArray(children).filter((child) => !(typeof child === 'string' && child.trim() === ''))
+  const [only] = items
+  return items.length === 1 && React.isValidElement<PictureProps>(only) && only.type === contentImage ? only : null
 }
 
-/** Only allow http(s), mailto, tel and relative links from content. */
-function isSafeHref(href: string) {
-  return /^(https?:|mailto:|tel:|\/|#)/i.test(href)
-}
-
+// Links in a post are text that people write and paste: only the ones lib/safeHref.ts allows become links.
+// The text is not raw HTML either: react-markdown has no HTML support here, so <script> and onclick="..." in a post are shown as plain text.
 const components: Components = {
   h2: ({ children }) => (
     <h2
-      id={slugify(textOf(children))}
+      id={headingId(textOf(children))}
       className="scroll-mt-28 mt-12 mb-5 flex items-center gap-3 text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-900 dark:text-white"
     >
       <span aria-hidden="true" className="block w-1.5 h-6 sm:h-7 rounded-full bg-brand-red shrink-0" />
@@ -33,15 +49,29 @@ const components: Components = {
   ),
   h3: ({ children }) => (
     <h3
-      id={slugify(textOf(children))}
+      id={headingId(textOf(children))}
       className="scroll-mt-28 mt-8 mb-3 text-lg sm:text-xl font-bold text-zinc-900 dark:text-white"
     >
       {children}
     </h3>
   ),
-  p: ({ children }) => (
-    <p className="mb-6 text-base sm:text-lg leading-8 font-light text-zinc-700 dark:text-zinc-300">{children}</p>
-  ),
+  p: ({ children }) => {
+    // A picture on its own line with a caption (the editor's "Caption" box, or ![alt](address "caption")) becomes a figure.
+    const picture = onlyPicture(children)
+    if (picture?.props.title) {
+      return (
+        <figure className="my-8">
+          <SafeImage
+            src={addressOf(picture.props.src)}
+            alt={picture.props.alt ?? ''}
+            className="w-full rounded-2xl border border-zinc-200 dark:border-zinc-800"
+          />
+          <figcaption className="mt-3 text-center text-sm text-zinc-500 dark:text-zinc-400">{picture.props.title}</figcaption>
+        </figure>
+      )
+    }
+    return <p className="mb-6 text-base sm:text-lg leading-8 font-light text-zinc-700 dark:text-zinc-300">{children}</p>
+  },
   a: ({ href = '', children }) => {
     // The accessible text red (5.7:1 on white, see --color-brand-text): body links are 16-18px, too small for #EF2F38.
     const className =
@@ -102,16 +132,7 @@ const components: Components = {
       {children}
     </pre>
   ),
-  img: ({ src, alt }) => (
-    // eslint-disable-next-line @next/next/no-img-element -- intrinsic size is unknown for inline content images
-    <img
-      src={typeof src === 'string' ? src : undefined}
-      alt={alt ?? ''}
-      loading="lazy"
-      decoding="async"
-      className="my-8 w-full rounded-2xl border border-zinc-200 dark:border-zinc-800"
-    />
-  ),
+  img: contentImage,
   table: ({ children }) => (
     // Focusable so keyboard users can scroll it sideways on phones.
     <div
@@ -134,6 +155,16 @@ const components: Components = {
   ),
 }
 
+/**
+ * react-markdown's own address filter (it drops javascript:, data:, vbscript: and the like) with tel: added, so
+ * "[Call us](tel:+85512345678)" works. lib/safeHref.ts has the final say on every link (see the `a` component).
+ */
+const urlTransform = (url: string) => (/^tel:/i.test(url) ? url : defaultUrlTransform(url))
+
 export function MarkdownContent({ children }: { children: string }) {
-  return <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{children}</ReactMarkdown>
+  return (
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components} urlTransform={urlTransform}>
+      {children}
+    </ReactMarkdown>
+  )
 }

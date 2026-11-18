@@ -30,11 +30,7 @@ import {
   RotateCcw,
 } from 'lucide-react'
 import { coachFaculty, type CoachProfile } from '@/data/coaches'
-import {
-  athleteSpotlights,
-  recentPromotions,
-  type StudentSpotlight,
-} from '@/data/students'
+import { athleteSpotlights, recentPromotions } from '@/data/students'
 import { useLanguage } from '@/context/LanguageContext'
 import { SafeGrid } from '@/components/SafeGrid'
 import { SafeImage } from '@/components/SafeImage'
@@ -64,23 +60,17 @@ export default function CommunityPage() {
   const [studentSearch, setStudentSearch] = React.useState('')
   const [selectedStudentCategory, setSelectedStudentCategory] = React.useState<string>('All')
 
-  // Modals
+  // Coach profile modal (student entries are short cards with nothing more to open)
   const [selectedCoach, setSelectedCoach] = React.useState<CoachProfile | null>(null)
-  const [selectedStudent, setSelectedStudent] = React.useState<StudentSpotlight | null>(null)
   const coachDialogRef = React.useRef<HTMLDivElement>(null)
-  const studentDialogRef = React.useRef<HTMLDivElement>(null)
   useDialogFocus(Boolean(selectedCoach), coachDialogRef)
-  useDialogFocus(Boolean(selectedStudent), studentDialogRef)
 
   // Body scroll lock & Escape key listener on modal open
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedCoach(null)
-        setSelectedStudent(null)
-      }
+      if (e.key === 'Escape') setSelectedCoach(null)
     }
-    if (selectedCoach || selectedStudent) {
+    if (selectedCoach) {
       document.body.style.overflow = 'hidden'
       window.addEventListener('keydown', handleKeyDown)
     } else {
@@ -90,7 +80,7 @@ export default function CommunityPage() {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [selectedCoach, selectedStudent])
+  }, [selectedCoach])
 
   // Dynamic Coach Divisions with automatic count calculation
   const coachDivisions = React.useMemo(() => {
@@ -141,11 +131,7 @@ export default function CommunityPage() {
         selectedStudentCategory === 'All' || s.category === selectedStudentCategory
       const q = studentSearch.toLowerCase().trim()
       const matchesSearch =
-        !q ||
-        s.name.toLowerCase().includes(q) ||
-        s.title.toLowerCase().includes(q) ||
-        s.story.toLowerCase().includes(q) ||
-        s.achievements.some((a) => a.toLowerCase().includes(q))
+        !q || s.name.toLowerCase().includes(q) || s.note.toLowerCase().includes(q) || s.beltRank.toLowerCase().includes(q)
       return matchesCat && matchesSearch
     })
   }, [selectedStudentCategory, studentSearch, localizedStudents])
@@ -364,10 +350,10 @@ export default function CommunityPage() {
                 <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                 <input
                   type="text"
-                  placeholder="Search student or achievement..."
+                  placeholder="Search students..."
                   value={studentSearch}
                   onChange={(e) => setStudentSearch(e.target.value)}
-                  aria-label="Search students and achievements"
+                  aria-label="Search students"
                   className="w-full sm:w-64 pl-9 pr-3 py-2 text-base lg:text-sm min-h-[44px] rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:border-brand-red transition-colors"
                 />
               </div>
@@ -395,63 +381,34 @@ export default function CommunityPage() {
           {filteredStudents.length > 0 ? (
             <SafeGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" isolateItems>
               {filteredStudents.map((student) => (
-                <Card3D key={student.id} max={5} depth={4} className="h-full">
-                  <div
-                    {...pressable(() => setSelectedStudent(student))}
-                    className="group relative rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-brand-red/50 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col justify-between cursor-pointer h-full"
-                  >
-                    <div>
-                      {/* Student Image & Belt Tag Overlay */}
-                      <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-zinc-950">
-                        <SafeImage
-                          src={student.image}
-                          alt={student.name}
-                          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <article
+                  key={student.id}
+                  className="relative rounded-2xl overflow-hidden bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 flex flex-col h-full"
+                >
+                  {/* A short entry: first name or initials, photo, belt and a short note. Nothing more is shown. */}
+                  <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-zinc-950">
+                    <SafeImage src={student.image} alt={student.name} className="w-full h-full object-cover object-top" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-                        <div className="absolute top-4 left-4 flex gap-2">
-                          <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white shadow-sm">
-                            {student.category}
-                          </span>
-                        </div>
-
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <div className="flex items-center gap-2 mb-1">
-                            <div
-                              className="w-3 h-3 rounded-full border border-white/40 shadow-sm"
-                              style={{ backgroundColor: student.beltHex }}
-                            />
-                            <span className="text-xs font-bold text-zinc-300 uppercase">
-                              {student.beltRank} • Age {student.age}
-                            </span>
-                          </div>
-                          <h3 className="text-xl font-black uppercase tracking-tight text-white group-hover:text-brand-red transition-colors">
-                            {student.name}
-                          </h3>
-                        </div>
-                      </div>
-
-                      {/* Student Content */}
-                      <div className="p-5 sm:p-6 space-y-3">
-                        <h4 className="text-xs font-bold uppercase text-brand-red tracking-wide">
-                          {student.title}
-                        </h4>
-                        <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-3">
-                          {student.story}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Card Footer */}
-                    <div className="p-5 sm:p-6 pt-0 flex items-center justify-between border-t border-zinc-200/60 dark:border-zinc-800/60 mt-4 text-xs">
-                      <span className="text-zinc-400 font-medium">Training since {student.joinedYear}</span>
-                      <span className="font-bold text-brand-red flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                        Read Story <ChevronRight className="w-3.5 h-3.5" />
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-widest bg-brand-red text-white shadow-sm">
+                        {student.category}
                       </span>
                     </div>
+
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-3 h-3 rounded-full border border-white/40 shadow-sm" style={{ backgroundColor: student.beltHex }} />
+                        <span className="text-xs font-bold text-zinc-300 uppercase">{student.beltRank}</span>
+                      </div>
+                      <h3 className="text-xl font-black uppercase tracking-tight text-white">{student.name}</h3>
+                    </div>
                   </div>
-                </Card3D>
+
+                  <div className="p-5 sm:p-6">
+                    <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{student.note}</p>
+                  </div>
+                </article>
               ))}
             </SafeGrid>
           ) : (
@@ -647,122 +604,6 @@ export default function CommunityPage() {
                   className="px-4 py-2.5 rounded-xl bg-brand-red text-white font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors"
                 >
                   Contact Dojang
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* MODAL: STUDENT SPOTLIGHT PROFILE (Responsive Sheet on Mobile, Centered on Desktop) */}
-      {selectedStudent && (
-        <div
-          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
-          onClick={() => setSelectedStudent(null)}
-          ref={studentDialogRef}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-          aria-labelledby="student-modal-title"
-        >
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-2xl" />
-
-          <div
-            className="relative w-full max-w-4xl bg-white dark:bg-zinc-950 shadow-2xl rounded-t-2xl sm:rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden max-h-[92vh] sm:max-h-[90vh] flex flex-col md:flex-row z-10 animate-fade-in-up"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedStudent(null)}
-              className="absolute top-4 right-4 z-30 p-2.5 rounded-xl bg-black/40 text-white hover:bg-brand-red transition-colors backdrop-blur-md cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Close Modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Left Col: Photo */}
-            <div className="w-full md:w-5/12 relative h-56 sm:h-64 md:h-auto min-h-[220px] md:min-h-[260px] bg-zinc-950 shrink-0">
-              <SafeImage
-                src={selectedStudent.image}
-                alt={selectedStudent.name}
-                className="w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent md:hidden" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="flex items-center gap-2 mb-1">
-                  <div
-                    className="w-3 h-3 rounded-full border border-white/40 shadow-sm"
-                    style={{ backgroundColor: selectedStudent.beltHex }}
-                  />
-                  <span className="text-xs font-bold text-zinc-300 uppercase">
-                    {selectedStudent.beltRank} • Age {selectedStudent.age}
-                  </span>
-                </div>
-                <h3 id="student-modal-title" className="text-2xl font-black uppercase tracking-tight">
-                  {selectedStudent.name}
-                </h3>
-              </div>
-            </div>
-
-            {/* Right Col: Details */}
-            <div className="w-full md:w-7/12 p-6 sm:p-8 md:p-10 overflow-y-auto space-y-6 touch-scroll">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-brand-red block mb-1">
-                  {selectedStudent.category} • Enrolled {selectedStudent.joinedYear}
-                </span>
-                <h4 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-900 dark:text-white">
-                  {selectedStudent.title}
-                </h4>
-              </div>
-
-              {/* Quote */}
-              <div className="p-4 sm:p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border-l-4 border-brand-red">
-                <div className="flex gap-2 items-start">
-                  <Quote className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                  <p className="text-[13px] sm:text-sm text-zinc-700 dark:text-zinc-300 italic leading-relaxed">
-                    &ldquo;{selectedStudent.quote}&rdquo;
-                  </p>
-                </div>
-              </div>
-
-              {/* Journey Story */}
-              <div>
-                <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">
-                  Transformation &amp; Dedication
-                </h5>
-                <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                  {selectedStudent.story}
-                </p>
-              </div>
-
-              {/* Verified Achievements */}
-              <div>
-                <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-3">
-                  Verified Honors &amp; Milestones
-                </h5>
-                <div className="space-y-2">
-                  {selectedStudent.achievements.map((ach, i) => (
-                    <div
-                      key={i}
-                      className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 text-xs text-zinc-700 dark:text-zinc-300"
-                    >
-                      <Medal className="w-4 h-4 text-zinc-500 shrink-0" />
-                      <span className="font-semibold">{ach}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Modal Footer CTA */}
-              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span className="text-xs text-zinc-500 font-medium">
-                  Student Record #{selectedStudent.id}
-                </span>
-                <Link
-                  href={`/contact?subject=Enrollment%20inspired%20by%20${encodeURIComponent(selectedStudent.name)}`}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-red text-white text-xs font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all text-center flex items-center justify-center gap-2"
-                >
-                  Start Your Journey <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>

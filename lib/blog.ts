@@ -4,172 +4,44 @@
  * Posts are Markdown files in `content/blog/<slug>.md` with YAML front matter. This module is
  * the ONLY place that knows where posts come from; pages and components consume the typed
  * results. To move to a headless CMS or database later, re-implement `loadAllPosts()` and
- * nothing else needs to change.
+ * nothing else needs to change. The files can be written by hand or saved by the content
+ * editor at /keystatic (lib/keystatic/blog.tsx lists the same front matter fields).
  *
- * Front matter:
- *   title        (required) Post title
- *   description  (required) 1-2 sentence summary, used for cards and SEO (aim for <= 160 chars)
- *   date         (required) Publish date, YYYY-MM-DD
- *   updated      (optional) Last-updated date, YYYY-MM-DD
- *   author       (optional) Defaults to "Infinity Taekwondo Coaching Team"
- *   category     (required) e.g. "Getting Started"
- *   tags         (optional) list of strings
- *   cover        (optional) image URL or /public path
- *   coverAlt     (optional) alt text for the cover (defaults to the title)
- *   featured     (optional) true to pin as the lead story on /blog
- *   draft        (optional) true to hide the post in production builds
+ * Reading ONE post (the front matter fields, the safety limits) is lib/blogParse.ts. It has no file access, so
+ * `npm run check:data` and the unit tests run exactly the code the website runs.
+ *
+ * Front matter (the list of every field is BLOG_FIELDS in lib/blogParse.ts):
+ *   title            (required) Post title
+ *   description      (required) 1-2 sentence summary, used for cards and SEO (aim for <= 160 chars)
+ *   date             (required) Publish date, YYYY-MM-DD
+ *   updated          (optional) Last-updated date, YYYY-MM-DD
+ *   author           (optional) Defaults to "Infinity Taekwondo Coaching Team"
+ *   category         (required) e.g. "Getting Started"
+ *   tags             (optional) list of strings
+ *   cover            (optional) image URL or /public path
+ *   coverAlt         (optional) alt text for the cover (defaults to the title)
+ *   coverCaption     (optional) a short line under the cover, such as a photo credit
+ *   featured         (optional) true to pin as the lead story on /blog
+ *   draft            (optional) true to hide the post in production builds
+ *   unlisted         (optional) true to leave the post out of the list, categories, sitemap and feed (it keeps its address)
+ *   tableOfContents  (optional) auto (default), show or hide the "On this page" list
+ *   related          (optional) up to 3 post slugs to suggest under "Keep reading"
+ *   seoTitle         (optional) the title search engines and link previews show
+ *   seoDescription   (optional) the description search engines and link previews show
+ *   socialImage      (optional) the picture link previews show instead of the cover
+ * The text can hold content blocks (callout, video, button, pull quote, question): see lib/blogBlocks.ts.
  */
 
 import 'server-only'
 import fs from 'node:fs'
 import path from 'node:path'
-import matter from 'gray-matter'
+import { readPost, slugify, type BlogPost, type BlogPostMeta, type BlogCategory } from '@/lib/blogParse'
+import { categoriesOf, listedPosts, relatedPosts } from '@/lib/blogQuery'
+
+export { slugify }
+export type { BlogHeading, BlogPost, BlogPostMeta, BlogCategory } from '@/lib/blogParse'
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
-const DEFAULT_AUTHOR = 'Infinity Taekwondo Coaching Team'
-const WORDS_PER_MINUTE = 200
-
-export interface BlogHeading {
-  id: string
-  text: string
-  level: 2 | 3
-}
-
-export interface BlogPostMeta {
-  slug: string
-  title: string
-  description: string
-  /** ISO date (YYYY-MM-DD) */
-  date: string
-  updated?: string
-  author: string
-  category: string
-  categorySlug: string
-  tags: string[]
-  cover?: { src: string; alt: string }
-  featured: boolean
-  readingMinutes: number
-}
-
-export interface BlogPost extends BlogPostMeta {
-  content: string
-  headings: BlogHeading[]
-}
-
-export interface BlogCategory {
-  name: string
-  slug: string
-  count: number
-}
-
-/** URL-safe slug. Shared by heading ids, the table of contents and category routes. */
-export function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9ក-៿぀-ヿ㐀-鿿가-힯]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-function stripInlineMarkdown(text: string): string {
-  return text
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-    .replace(/[*_`~]/g, '')
-    .trim()
-}
-
-function extractHeadings(markdown: string): BlogHeading[] {
-  const headings: BlogHeading[] = []
-  let inFence = false
-  for (const line of markdown.split(/\r?\n/)) {
-    if (/^\s*(```|~~~)/.test(line)) {
-      inFence = !inFence
-      continue
-    }
-    if (inFence) continue
-    const match = /^(#{2,3})\s+(.+?)\s*#*\s*$/.exec(line)
-    if (!match) continue
-    const text = stripInlineMarkdown(match[2])
-    const id = slugify(text)
-    if (id) headings.push({ id, text, level: match[1].length as 2 | 3 })
-  }
-  return headings
-}
-
-function readingMinutes(markdown: string): number {
-  const plain = markdown.replace(/```[\s\S]*?```/g, ' ').replace(/[#>*_`|-]/g, ' ')
-  const latinWords = plain.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length
-  const cjkChars = (plain.match(/[㐀-鿿가-힯ក-៿]/g) ?? []).length
-  // ~500 CJK/Khmer characters per minute vs 200 Latin words.
-  return Math.max(1, Math.round(latinWords / WORDS_PER_MINUTE + cjkChars / 500))
-}
-
-const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
-
-function toIsoDate(value: unknown): string | null {
-  // gray-matter parses unquoted YAML dates into Date objects.
-  const iso = value instanceof Date ? value.toISOString().slice(0, 10) : typeof value === 'string' ? value.trim() : ''
-  return ISO_DATE.test(iso) && !Number.isNaN(Date.parse(iso)) ? iso : null
-}
-
-function nonEmptyString(value: unknown): string | null {
-  return typeof value === 'string' && value.trim() ? value.trim() : null
-}
-
-function parsePost(slug: string, raw: string): { post: BlogPost; draft: boolean } | null {
-  let parsed: ReturnType<typeof matter>
-  try {
-    parsed = matter(raw)
-  } catch (err) {
-    const reason = err instanceof Error ? (err as Error & { reason?: string }).reason ?? err.message : String(err)
-    console.error(
-      `[blog] Skipping "${slug}.md": invalid YAML front matter (${reason}). ` +
-        'Tip: wrap any title or description that contains a colon (:) in double quotes.'
-    )
-    return null
-  }
-  const { data, content } = parsed
-
-  const title = nonEmptyString(data.title)
-  const description = nonEmptyString(data.description)
-  const category = nonEmptyString(data.category)
-  const date = toIsoDate(data.date)
-  const missing = [
-    !title && 'title',
-    !description && 'description',
-    !category && 'category',
-    !date && 'date (YYYY-MM-DD)',
-  ].filter(Boolean)
-
-  if (missing.length > 0 || !title || !description || !category || !date) {
-    console.error(`[blog] Skipping "${slug}.md": missing or invalid front matter -> ${missing.join(', ')}`)
-    return null
-  }
-
-  const cover = nonEmptyString(data.cover)
-
-  return {
-    draft: data.draft === true,
-    post: {
-      slug,
-      title,
-      description,
-      date,
-      updated: toIsoDate(data.updated) ?? undefined,
-      author: nonEmptyString(data.author) ?? DEFAULT_AUTHOR,
-      category,
-      categorySlug: slugify(category),
-      tags: Array.isArray(data.tags) ? data.tags.filter((t): t is string => typeof t === 'string') : [],
-      cover: cover ? { src: cover, alt: nonEmptyString(data.coverAlt) ?? title } : undefined,
-      featured: data.featured === true,
-      readingMinutes: readingMinutes(content),
-      content,
-      headings: extractHeadings(content),
-    },
-  }
-}
 
 function loadAllPosts(): BlogPost[] {
   if (!fs.existsSync(BLOG_DIR)) return []
@@ -186,10 +58,13 @@ function loadAllPosts(): BlogPost[] {
     }
 
     try {
-      const parsed = parsePost(slug, fs.readFileSync(path.join(BLOG_DIR, file), 'utf8'))
-      if (!parsed) continue
-      if (parsed.draft && !includeDrafts) continue
-      posts.push(parsed.post)
+      const result = readPost(slug, fs.readFileSync(path.join(BLOG_DIR, file), 'utf8'))
+      if (!result.ok) {
+        console.error(`[blog] Skipping "${file}": ${result.reason}`)
+        continue
+      }
+      if (result.draft && !includeDrafts) continue
+      posts.push(result.post)
     } catch (err) {
       console.error(`[blog] Failed to read "${file}":`, err)
     }
@@ -201,14 +76,28 @@ function loadAllPosts(): BlogPost[] {
 
 let productionCache: BlogPost[] | null = null
 
-/** All published posts, newest first. Cached in production; re-read on every call in dev for live editing. */
-export function getAllPosts(): BlogPost[] {
+/** Every published post, newest first, including the ones hidden from the list. Cached in production; re-read on every call in dev for live editing. */
+function getEveryPost(): BlogPost[] {
   if (process.env.NODE_ENV !== 'production') return loadAllPosts()
   return (productionCache ??= loadAllPosts())
 }
 
+/**
+ * The posts that appear in the blog list, categories, sitemap, feed and "keep reading", newest first.
+ * Posts marked "Hide from the blog list" are left out: they only exist at their own address (see getPostBySlug).
+ */
+export function getAllPosts(): BlogPost[] {
+  return listedPosts(getEveryPost())
+}
+
+/** Every address a post page must be built for: all published posts, the hidden-from-the-list ones too. */
+export function getAllPostSlugs(): string[] {
+  return getEveryPost().map((post) => post.slug)
+}
+
+/** A post by its address, including one that is hidden from the list. */
 export function getPostBySlug(slug: string): BlogPost | null {
-  return getAllPosts().find((post) => post.slug === slug) ?? null
+  return getEveryPost().find((post) => post.slug === slug) ?? null
 }
 
 /** Strips the markdown body so list pages never serialise full article text. */
@@ -222,29 +111,16 @@ export function getAllPostMetas(): BlogPostMeta[] {
 }
 
 export function getCategories(): BlogCategory[] {
-  const byCategory = new Map<string, BlogCategory>()
-  for (const post of getAllPosts()) {
-    const existing = byCategory.get(post.categorySlug)
-    if (existing) existing.count += 1
-    else byCategory.set(post.categorySlug, { name: post.category, slug: post.categorySlug, count: 1 })
-  }
-  return [...byCategory.values()].sort((a, b) => a.name.localeCompare(b.name))
+  return categoriesOf(getAllPosts())
 }
 
 export function getPostsByCategory(categorySlug: string): BlogPostMeta[] {
   return getAllPostMetas().filter((post) => post.categorySlug === categorySlug)
 }
 
-/** Related posts: same category first, then shared tags, then most recent. */
+/** Posts to suggest after this one: the ones chosen by hand first, then similar ones (see lib/blogQuery.ts). */
 export function getRelatedPosts(post: BlogPostMeta, limit = 3): BlogPostMeta[] {
-  const score = (candidate: BlogPostMeta) =>
-    (candidate.categorySlug === post.categorySlug ? 10 : 0) +
-    candidate.tags.filter((tag) => post.tags.includes(tag)).length
-
-  return getAllPostMetas()
-    .filter((candidate) => candidate.slug !== post.slug)
-    .sort((a, b) => score(b) - score(a) || b.date.localeCompare(a.date))
-    .slice(0, limit)
+  return relatedPosts(post, getAllPostMetas(), limit)
 }
 
 export function formatPostDate(iso: string, locale = 'en-GB'): string {

@@ -9,7 +9,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/error/', '/api/'],
+        // /keystatic is the content editor: for the team only (it is also marked noindex).
+        disallow: ['/error/', '/api/', '/keystatic'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

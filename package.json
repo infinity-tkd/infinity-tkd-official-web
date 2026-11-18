@@ -2,12 +2,17 @@
   "name": "infinity-tkd-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run check:data && next build",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "check:data": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-ts.mjs scripts/check-data.ts",
+    "test:unit": "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/register-ts.mjs --test --test-reporter=spec \"tests/unit/*.test.ts\"",
     "test:e2e": "playwright test --project=e2e",
     "test:visual": "playwright test --project=visual",
     "test:visual:update": "playwright test --project=visual --update-snapshots",
@@ -16,6 +21,9 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@headlessui/react": "^2.2.0",
+    "@keystar/ui": "^0.10.0",
+    "@keystatic/core": "^0.6.9",
+    "@keystatic/next": "^5.0.5",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "gsap": "^3.15.1",

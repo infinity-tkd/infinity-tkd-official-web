@@ -1,0 +1,120 @@
+{
+  "spotlights": [
+    {
+      "name": {
+        "name": "Sokha",
+        "slug": "spotlight-1"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "2nd Dan Black Belt",
+      "beltHex": "#000000",
+      "category": "Athlete of the Month",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2864&auto=format&fit=crop",
+      "note": "From Timid Beginner to National Team Poomsae Medalist",
+      "translations": []
+    },
+    {
+      "name": {
+        "name": "Chanthy",
+        "slug": "spotlight-2"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "Red Belt",
+      "beltHex": "#EF2F38",
+      "category": "Junior Champion",
+      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2787&auto=format&fit=crop",
+      "note": "Junior Champions Team Captain & 540 Kick Pioneer",
+      "translations": []
+    },
+    {
+      "name": {
+        "name": "Dara",
+        "slug": "spotlight-3"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "1st Dan Black Belt",
+      "beltHex": "#000000",
+      "category": "Black Belt Graduate",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop",
+      "note": "Action Cinema Stunt Performer & Tricking Specialist",
+      "translations": []
+    },
+    {
+      "name": {
+        "name": "Leakhena",
+        "slug": "spotlight-4"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "1st Poom Black Belt",
+      "beltHex": "#000000",
+      "category": "Athlete of the Month",
+      "image": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=2662&auto=format&fit=crop",
+      "note": "Freestyle Musical Poomsae Champion",
+      "translations": []
+    },
+    {
+      "name": {
+        "name": "Rathana",
+        "slug": "spotlight-5"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "Blue Belt",
+      "beltHex": "#0042EA",
+      "category": "Transformation",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2787&auto=format&fit=crop",
+      "note": "Tech Executive to Dojang Warrior: 25kg Transformation",
+      "translations": []
+    },
+    {
+      "name": {
+        "name": "Vannak",
+        "slug": "spotlight-6"
+      },
+      "permissionToPublish": "to-confirm",
+      "beltRank": "Green Belt",
+      "beltHex": "#09BB00",
+      "category": "Junior Champion",
+      "image": "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=2787&auto=format&fit=crop",
+      "note": "Little Warriors Discipline & Focus Honor Award",
+      "translations": []
+    }
+  ],
+  "promotions": [
+    {
+      "studentName": "Vanna",
+      "permissionToPublish": "to-confirm",
+      "promotedTo": "1st Dan Black Belt",
+      "beltHex": "#000000",
+      "date": "March 2026",
+      "examiningMaster": "Master Chon Sovan (5th Dan)",
+      "poomsaeDemonstrated": "Taegeuk 1-8 & Koryo"
+    },
+    {
+      "studentName": "Sophea",
+      "permissionToPublish": "to-confirm",
+      "promotedTo": "Red Belt (Pal Jang)",
+      "beltHex": "#EF2F38",
+      "date": "March 2026",
+      "examiningMaster": "Master Keo Moni",
+      "poomsaeDemonstrated": "Taegeuk 7 & 8"
+    },
+    {
+      "studentName": "Kimleang",
+      "permissionToPublish": "to-confirm",
+      "promotedTo": "Blue Belt (Oh Jang)",
+      "beltHex": "#0042EA",
+      "date": "February 2026",
+      "examiningMaster": "Instructor Vichea Sothea",
+      "poomsaeDemonstrated": "Taegeuk 5 & 6"
+    },
+    {
+      "studentName": "Borey K.",
+      "permissionToPublish": "to-confirm",
+      "promotedTo": "Green Belt (Sam Jang)",
+      "beltHex": "#09BB00",
+      "date": "February 2026",
+      "examiningMaster": "Master Chon Sovan",
+      "poomsaeDemonstrated": "Taegeuk 3 & 4"
+    }
+  ]
+}

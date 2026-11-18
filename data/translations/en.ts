@@ -354,6 +354,18 @@ export const en = {
     viewTrophyWall: 'View Full Trophy Wall',
     recentGraduates: 'Recent Belt Graduates',
   },
+  // News Page and the home page news section
+  news: {
+    badge: 'News & Announcements',
+    heroTitle1: 'Latest',
+    heroTitle2: 'News',
+    heroSubtitle: 'Gradings, events, schedule changes and updates from the Infinity Taekwondo dojangs in Phnom Penh.',
+    homeTitle: "What's new at the dojang",
+    viewAll: 'All news',
+    opensInNewTab: '(opens in a new tab)',
+    emptyTitle: 'No announcements right now',
+    emptyText: 'Check back soon for gradings, events and updates from the dojang.',
+  },
   // Achievements Page
   achievements: {
     badge: 'Hall of Honors & Medals',
@@ -458,6 +470,7 @@ export const en = {
   },
   // Footer
   footer: {
+    news: 'News & Announcements',
     tagline:
       'To provide world-class training that blends athletic science with the artistry of freestyle Taekwondo, empowering students to achieve limitless potential.',
     colAcademy: 'Academy & Training',

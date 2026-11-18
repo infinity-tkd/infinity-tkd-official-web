@@ -21,17 +21,19 @@ Official website and digital martial-arts encyclopedia for **Infinity Taekwondo*
 
 ## Quick start
 
-Requires **Node.js 20.9+** (required by Next.js 16).
+Requires **Node.js 22** (`engines` in `package.json`; Vercel builds with it too, and `check:data` needs 22.6+).
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev          # http://localhost:3000   (content editor: http://localhost:3000/keystatic)
 ```
 
 ```bash
-npx tsc --noEmit     # typecheck
+npm run typecheck    # TypeScript
 npm run lint         # ESLint (flat config)
-npm run build        # production build (also typechecks)
+npm run check:data   # content checks (picture links, ids, content/*.json, blog front matter ...)
+npm run test:unit    # fast unit tests (picture links, upload helpers, Markdown tables, security headers)
+npm run build        # check:data, then the production build (which also typechecks)
 npm run start        # serve the production build
 ```
 
@@ -57,11 +59,13 @@ components/
 config/
   navigation.ts          ONE source for the header menus, mobile drawer and footer links
   siteSettings.ts        Brand, SEO, contact details, social links, security headers
-content/blog/            Blog posts (Markdown)
+content/                 Content the team edits: blog/*.md and *.json (coaches, students, achievements, schedule, pricing)
 context/                 Language + scroll-nav providers
-data/                    Page content as typed TypeScript (courses, pricing, locations, coaches, library ...)
+data/                    Typed modules the pages import (they read content/*.json), plus code-only content (courses, locations, library ...)
   translations/          UI strings: en.ts (source of truth), km.ts, zh.ts, ko.ts
-hooks/, lib/             Hooks and server/client utilities
+docs/                    editing-guide.md (for the team), editor-setup.md (one-time setup for the owner), blog-security.md
+hooks/, lib/             Hooks and server/client utilities (lib/keystatic = editor forms, lib/imageUrl.ts = picture links)
+keystatic.config.tsx     The content editor at /keystatic (Keystatic: local files under `npm run dev`, GitHub on the live site)
 proxy.ts                 Request filtering + security headers (Next.js 16 "proxy", formerly middleware)
 ```
 
@@ -121,15 +125,15 @@ Conventions used across the shell, home page and blog:
 | :--- | :--- | :--- |
 | Navigation menus + footer links | `config/navigation.ts` | Edit one list; menus and footer update together |
 | Brand, SEO defaults, phone/email, social links | `config/siteSettings.ts` | Edit values |
-| Courses, pricing, branches, coaches, achievements, schedule | `data/*.ts` | Edit typed records (each file is documented in `data/index.ts`) |
+| Blog, coaches, students, achievements, class schedule, pricing and memberships, age groups | `content/` | **The content editor at `/keystatic`** (see `docs/editing-guide.md`), or edit the files by hand. `data/README.md` explains how they are read and checked |
+| Courses, branches, belts, team, locations | `data/*.ts` | Edit typed records (each file is documented in `data/index.ts`) |
 | Curriculum encyclopedia (poomsae, kicks, hosinsul ...) | `data/library/*` | Edit typed records |
 | UI text (buttons, headings, labels) | `data/translations/{en,km,zh,ko}.ts` | Add the key to `en.ts` first; the other files fail to compile if a key is missing |
-| Blog articles | `content/blog/*.md` | Add/edit a Markdown file |
 | Delivery of form submissions | Environment variables | See `.env.example` |
 
 ### Blog
 
-Each post is `content/blog/<slug>.md` (the file name is the URL slug: lowercase letters, numbers, hyphens):
+Posts can be written in the content editor at `/keystatic` or by hand. Each post is `content/blog/<slug>.md` (the file name is the URL slug: lowercase letters, numbers, hyphens):
 
 ```md
 ---
@@ -139,18 +143,27 @@ date: 2026-11-20                     # YYYY-MM-DD
 author: Infinity Taekwondo Coaching Team
 category: Training
 tags: [poomsae, kids]
-cover: /blog/my-photo.jpg            # optional; put images in public/blog/ or use an https URL
+cover: /blog/my-photo.jpg            # optional; a file in public/ or any picture link (Google Drive, Dropbox, Imgur, https://...)
 coverAlt: Describe the photo
+coverCaption: Photo by the team      # optional line under the cover
 featured: false                      # true pins it as the lead story on /blog
 draft: false                         # true hides it in production (visible in `npm run dev`)
+unlisted: false                      # true keeps it out of the list, categories, sitemap and feed (not private: the link still works)
+tableOfContents: auto                # auto (3+ headings) | show | hide
+related: [other-post-slug]           # up to 3 posts to suggest at the bottom
+seoTitle: Title for Google           # optional overrides for search results and link previews
+seoDescription: Description for Google
+socialImage: /blog/share.jpg         # optional picture for link previews (default: the cover)
 ---
 
 Your article in Markdown. Use `##` and `###` headings; they build the table of contents.
+Content blocks (callout, YouTube video, button, pull quote, question and answer) are Markdoc tags that the editor
+inserts for you; see `lib/blogBlocks.ts` for how they are written.
 ```
 
-Posts automatically appear on `/blog`, in their category archive, on the homepage teaser, in `sitemap.xml` and in the RSS feed (`/blog/feed.xml`). A post with invalid front matter is skipped and the reason is printed in the terminal/build log. Publishing = commit + deploy.
+Posts automatically appear on `/blog`, in their category archive, on the homepage teaser, in `sitemap.xml` and in the RSS feed (`/blog/feed.xml`). A post with invalid front matter is skipped and the reason is printed in the terminal/build log (and `npm run check:data` stops the build). Publishing = commit + deploy.
 
-`lib/blog.ts` is the only file that knows posts come from Markdown. To move to a CMS or database later, re-implement `loadAllPosts()` there; pages and components do not change.
+`lib/blog.ts` loads the files and `lib/blogParse.ts` reads one post; they are the only files that know posts come from Markdown. To move to a CMS or database later, re-implement `loadAllPosts()` there; pages and components do not change. Posts are read as untrusted text: see `docs/blog-security.md`.
 
 ---
 
@@ -173,7 +186,7 @@ The contact form, coaching application and student-incubator pitch POST to `/api
 
 ## Security
 
-Headers and the Content-Security-Policy are applied by `proxy.ts` (values from `config/siteSettings.ts`) and, for static assets, `next.config.mjs`. Keep the two lists consistent when you change either. `'unsafe-eval'` is only allowed in development. Form endpoints reject cross-site requests, and `proxy.ts` blocks common scanner paths and user agents.
+Headers and the Content-Security-Policy are applied by `proxy.ts` (values from `config/siteSettings.ts`) and, for static assets, `next.config.mjs`. Keep the two lists consistent when you change either (a unit test checks `img-src`). `'unsafe-eval'` is only allowed in development. Pictures (`img-src`) may come from any `https` address, because editors paste links from Google Drive, Dropbox, Imgur and other sites; scripts, frames and `connect-src` stay closed to other hosts. The content editor (`/keystatic`) gets a few extra sources, GitHub's API and Google Fonts, and only on its own pages. Form endpoints reject cross-site requests, and `proxy.ts` blocks common scanner paths and user agents.
 
 ---
 

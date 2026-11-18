@@ -10,11 +10,34 @@
  *   - belt translations missing a field or with a different number of list items (warning only)
  *   - blog posts with missing front matter or a missing cover image
  *   - UI dictionary keys present in English but missing in km / zh / ko (warning only)
+ *
+ * Content edited in the content editor (/keystatic) is covered too. Every data module reads its content/*.json
+ * file and checks it as it loads (lib/content/validate.ts), so a wrong value shows up here as "could not be
+ * loaded" with the file and field named. On top of that:
+ *   - picture links that cannot work (Facebook, Instagram, a folder, a web page...) in any `image`, `cover` or `socialImage`
+ *   - blog posts the website would skip (front matter that runs code or cannot be read, missing fields, a date that is not
+ *     YYYY-MM-DD, a file over 300 KB), front matter the editor does not know, and "read next" choices that do not exist
+ *   - content blocks that cannot work: a tag that is not closed or not known, a video with no YouTube link, a button
+ *     without a usable address, a question with no question (errors); options the website ignores (warning only)
+ *   - links in a post that are not allowed and would show as plain text (warning only)
+ *   - uploaded pictures (public/uploads): files that are not pictures or are far too big (errors), pictures that are
+ *     too big, SVG files, or that nothing uses any more (warnings)
+ *   - an award that names a student ID with no matching student (warning only)
+ *   - a student shown by what looks like a full name, and how many student entries still have their "Permission to
+ *     publish" to confirm (warnings only)
+ *
+ * `npm run build` runs this first, so a bad edit stops the build and the previous live site stays up.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import matter from 'gray-matter'
+import { collectBlocks } from '@/lib/blogBlocks'
+import { BLOG_FIELDS, findMarkdownLinks, readPost, slugify, splitFrontMatter } from '@/lib/blogParse'
+import { looksLikeFullName } from '@/lib/content/names'
+import { countToConfirm } from '@/lib/content/permission'
+import { describeImage } from '@/lib/imageUrl'
+import { MAX_UPLOAD_BYTES } from '@/lib/keystatic/prepareUpload'
+import { isSafeHref } from '@/lib/safeHref'
 
 const root = process.cwd()
 const errors: string[] = []
@@ -63,6 +86,7 @@ for (const file of dataFiles) {
 
 const visited = new Set<object>() // shared, so data re-exported by a barrel is only scanned once
 const missingAssets = new Map<string, string[]>() // file path -> where it is used
+const usedUploads = new Set<string>() // "/uploads/..." pictures that some content points at
 for (const [file, exports] of modules) {
   for (const [name, value] of Object.entries(exports)) {
     if (typeof value === 'function') continue
@@ -80,6 +104,12 @@ for (const [file, exports] of modules) {
       name,
       (text, at) => {
         if (ASSET.test(text) && !publicFileExists(text)) missingAssets.set(text, [...(missingAssets.get(text) ?? []), `${file}: ${at}`])
+        if (text.startsWith('/uploads/')) usedUploads.add(text)
+        // A picture link the website cannot show (Facebook, a folder, a web page...). Same rules as the editor's picture field.
+        if (/\.(image|cover)$/.test(at) && text.trim()) {
+          const problem = describeImage(text).problem
+          if (problem) error(`${file}: ${at} is not a usable picture link. ${problem}`)
+        }
       },
       visited
     )
@@ -189,28 +219,149 @@ if (english) {
 // ---------------------------------------------------------------------------------------------
 // 5. Blog posts (content/blog/*.md)
 // ---------------------------------------------------------------------------------------------
+// The fields the content editor knows (lib/keystatic/blog.tsx). It refuses to open a post with any other.
+const KNOWN_BLOG_FIELDS = new Set<string>(BLOG_FIELDS)
+
 const slugs = new Set<string>()
+const postState = new Map<string, { draft: boolean; unlisted: boolean }>()
+const relatedChoices: { file: string; slug: string; target: string }[] = []
 for (const file of listFiles(path.join(root, 'content', 'blog'), '.md')) {
   const slug = path.basename(file, '.md')
-  let data: Record<string, unknown>
-  try {
-    data = matter(readFileSync(file, 'utf8')).data
-  } catch (err) {
-    error(`${rel(file)}: front matter could not be read (${(err as Error).message.split('\n')[0]}). Quote values that contain ":"`)
+  if (slug !== slugify(slug)) error(`${rel(file)}: the file name must be a lowercase web address (letters, numbers, dashes). The website skips this post`)
+
+  // The same reader the website uses (lib/blogParse.ts), so "passes here" means "shows up on the site".
+  // It refuses front matter that would run code, files over 300 KB, and anything missing a required field or date.
+  const raw = readFileSync(file, 'utf8')
+  const front = splitFrontMatter(raw)
+  if (!front.ok) {
+    error(`${rel(file)}: ${front.reason}`)
     continue
   }
+  const { data, body } = front
   if (slugs.has(slug)) error(`${rel(file)}: duplicate post slug`)
   slugs.add(slug)
-  for (const field of ['title', 'description', 'date', 'category']) {
-    if (!data[field]) error(`${rel(file)}: front matter is missing "${field}"`)
+  const read = readPost(slug, raw)
+  if (!read.ok) error(`${rel(file)}: ${read.reason}. The website skips this post`)
+  else {
+    postState.set(slug, { draft: read.draft, unlisted: read.post.unlisted })
+    const seenHeadings = new Set<string>()
+    for (const heading of read.post.headings) {
+      if (seenHeadings.has(heading.id)) warn(`${rel(file)}: two headings make the same link (#${heading.id}). "On this page" jumps to the first one`)
+      seenHeadings.add(heading.id)
+    }
+    for (const target of read.post.related) relatedChoices.push({ file, slug, target })
+    if (read.post.seoTitle && read.post.seoTitle.length > 70) warn(`${rel(file)}: the title for Google is ${read.post.seoTitle.length} characters; Google usually shows about 60`)
+    if (read.post.seoDescription && read.post.seoDescription.length > 170) warn(`${rel(file)}: the description for Google is ${read.post.seoDescription.length} characters; Google usually shows about 160`)
+
+    // Content blocks (callout, video, button, pull quote, question): known, closed, and with usable options.
+    // Counted on the text the website reads (tables already turned into tables), so line numbers can drift by a few after a table.
+    for (const problem of collectBlocks(read.post.content).problems) {
+      const message = `${rel(file)}: around line ${problem.line} of the text: ${problem.message}`
+      if (problem.level === 'error') error(message)
+      else warn(message)
+    }
   }
-  if (data.date && Number.isNaN(new Date(String(data.date)).getTime())) error(`${rel(file)}: date "${data.date}" is not a valid date`)
-  const cover = typeof data.cover === 'string' ? data.cover : undefined
-  if (cover?.startsWith('/') && !publicFileExists(cover)) error(`${rel(file)}: cover "${cover}" is not in public/`)
+  for (const key of Object.keys(data)) {
+    if (!KNOWN_BLOG_FIELDS.has(key)) warn(`${rel(file)}: front matter "${key}" is not a field the content editor knows, so it will refuse to open this post`)
+  }
+  // The cover and the picture for sharing: a file that exists, or a link that can work.
+  for (const field of ['cover', 'socialImage'] as const) {
+    const value = typeof data[field] === 'string' ? data[field] : undefined
+    if (value?.startsWith('/') && !publicFileExists(value)) error(`${rel(file)}: ${field} "${value}" is not in public/`)
+    if (value?.startsWith('/uploads/')) usedUploads.add(value)
+    if (value) {
+      const problem = describeImage(value).problem
+      if (problem) error(`${rel(file)}: ${field} is not a usable picture link. ${problem}`)
+    }
+  }
+
+  // Pictures inside the text: ![description](address), and links: [text](address)
+  for (const { image, address, line } of findMarkdownLinks(body)) {
+    if (image) {
+      if (address.startsWith('/uploads/')) usedUploads.add(address)
+      if (address.startsWith('/') && ASSET.test(address) && !publicFileExists(address)) error(`${rel(file)}: picture "${address}" is not in public/`)
+      const problem = describeImage(address).problem
+      if (problem) error(`${rel(file)}: picture "${address.slice(0, 60)}" is not a usable picture link. ${problem}`)
+    } else if (!isSafeHref(address)) {
+      // Not dangerous (the website shows it as plain text), but the reader would find text where they expected a link.
+      warn(`${rel(file)}: line ${line}: the link "${address.slice(0, 60)}" is not allowed, so it shows as plain text. Links start with https://, mailto:, tel: or /`)
+    }
+  }
+
+}
+
+// "Read next" choices must be posts that exist, and ones visitors can reach.
+for (const { file, slug, target } of relatedChoices) {
+  const state = postState.get(target)
+  if (target === slug) error(`${rel(file)}: "Read next" lists the post itself`)
+  else if (!slugs.has(target)) error(`${rel(file)}: "Read next" lists "${target}", which is not a post (it may have been renamed or deleted)`)
+  else if (state?.draft) warn(`${rel(file)}: "Read next" lists "${target}", which is a draft, so it is left out on the live website`)
+  else if (state?.unlisted) warn(`${rel(file)}: "Read next" lists "${target}", which is hidden from the blog list, so it is left out`)
 }
 
 // ---------------------------------------------------------------------------------------------
-console.log(`Checked ${modules.size} data modules and ${slugs.size} blog posts.`)
+// 6. Pictures uploaded through the content editor (public/uploads)
+// ---------------------------------------------------------------------------------------------
+const publicDir = path.join(root, 'public')
+const UPLOAD_PICTURE_TYPES = new Set(['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif'])
+let uploadCount = 0
+for (const file of listFiles(path.join(publicDir, 'uploads'), '')) {
+  // Folder placeholders and the files Windows and macOS leave behind are not uploads.
+  if (/^(\.|Thumbs\.db$|desktop\.ini$)/i.test(path.basename(file))) continue
+  uploadCount += 1
+  const url = `/${path.relative(publicDir, file).replaceAll('\\', '/')}`
+  const extension = path.extname(file).slice(1).toLowerCase()
+  // Only pictures belong here. The website sends every file in this folder with a policy that stops it running
+  // anything when opened directly (config/uploadsPolicy.mjs), but an HTML or script file is still a mistake.
+  if (extension === 'svg') warn(`${url} is an SVG. An SVG can carry scripts and cannot be shrunk; the website shows it safely, but a PNG or JPG is better.`)
+  else if (!UPLOAD_PICTURE_TYPES.has(extension)) error(`${url} is not a picture (.${extension || 'no extension'}). Only JPG, PNG, WebP, GIF and AVIF pictures belong in public/uploads: delete it.`)
+  const size = statSync(file).size
+  const megabytes = (size / 1_000_000).toFixed(1)
+  if (size > MAX_UPLOAD_BYTES * 3) error(`${url} is ${megabytes} MB. Every picture stays in the repository for good: shrink it, or use a link instead.`)
+  else if (size > MAX_UPLOAD_BYTES) warn(`${url} is ${megabytes} MB (the editor keeps uploads under 1 MB). Consider shrinking it.`)
+  if (!usedUploads.has(url)) warn(`${url} is not used by any content. It can be deleted.`)
+}
+
+// ---------------------------------------------------------------------------------------------
+// 7. References between content
+// ---------------------------------------------------------------------------------------------
+const spotlightIds = new Set(((modules.get('data/students.ts') as { athleteSpotlights?: { id: string }[] } | undefined)?.athleteSpotlights ?? []).map((student) => student.id))
+const awards = (modules.get('data/achievements.ts') as { tournamentAchievements?: { tournament: string; year: string; studentCompetitors?: { name: string; studentId?: string }[] }[] } | undefined)?.tournamentAchievements ?? []
+// (Skipped when either file could not be loaded: that is already reported above, and every ID would look unknown.)
+for (const award of modules.has('data/students.ts') ? awards : []) {
+  for (const student of award.studentCompetitors ?? []) {
+    if (student.studentId && !spotlightIds.has(student.studentId)) {
+      warn(`award "${award.year} ${award.tournament}": ${student.name} points at student ID "${student.studentId}", which is not on the Students page`)
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// 8. Students: short names only, and permission still to confirm
+// ---------------------------------------------------------------------------------------------
+// A student is shown by a first name or initials ("Sophea", "Borey K."), never a full name: a child must not be
+// identifiable by name. This only warns, because an adult may agree to be named in full.
+const shownNames: { where: string; name: string }[] = [
+  ...((modules.get('data/students.ts') as { athleteSpotlights?: { name: string }[]; recentPromotions?: { studentName: string }[] } | undefined)?.athleteSpotlights ?? []).map((student) => ({ where: 'Students > spotlights', name: student.name })),
+  ...((modules.get('data/students.ts') as { recentPromotions?: { studentName: string }[] } | undefined)?.recentPromotions ?? []).map((promotion) => ({ where: 'Students > promotions', name: promotion.studentName })),
+  ...awards.flatMap((award) => (award.studentCompetitors ?? []).map((student) => ({ where: `Achievements > "${award.year} ${award.tournament}"`, name: student.name }))),
+]
+for (const { where, name } of shownNames) {
+  if (looksLikeFullName(name)) warn(`${where}: "${name}" looks like a full name. Show a first name or initials only, and never a full name for anyone under 18`)
+}
+
+// Entries that were on the website before permission was recorded stay live, but nobody has confirmed them yet.
+let toConfirm = 0
+for (const name of ['students', 'achievements']) {
+  const path = `content/${name}.json`
+  if (existsSync(path)) toConfirm += countToConfirm(JSON.parse(readFileSync(path, 'utf8')))
+}
+if (toConfirm > 0) {
+  warn(`${toConfirm} student entries (spotlights, promotions and award winners) are live but their "Permission to publish" is still to confirm. The owner has to confirm it with each parent, guardian or adult, then tick the box (docs/editing-guide.md)`)
+}
+
+// ---------------------------------------------------------------------------------------------
+console.log(`Checked ${modules.size} data modules, ${slugs.size} blog posts and ${uploadCount} uploaded picture(s).`)
 for (const message of warnings) console.log(`  warning  ${message}`)
 for (const message of errors) console.log(`  ERROR    ${message}`)
 if (errors.length) {
